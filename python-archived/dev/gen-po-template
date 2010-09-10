@@ -1,0 +1,21 @@
+#!/bin/bash
+# Gummi translation template generation script
+# Wei-Ning Huang
+# Version: 0.1
+
+# run this script either in source root directory or dev directory
+
+if [ "${0%%/*}" == '.' ]; then # in dev
+  cd ../po
+else # in source root
+  cd po
+fi
+
+svn_revision=`svn info | grep 'Revision' | cut -d ' ' -f 2`
+
+intltool-update -p
+rm template-*
+sed 's/CHARSET/utf-8/' untitled.pot > template-$svn_revision.po
+rm untitled.pot
+
+echo "template-$svn_revision.po created."

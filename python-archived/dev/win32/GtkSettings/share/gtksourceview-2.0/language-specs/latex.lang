@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<!--
+
+ Author: Marco Barisione <barisione@gmail.com>
+ Copyright (C) 2005-2007 Marco Barisione <barisione@gmail.com>
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ Boston, MA 02111-1307, USA.
+
+-->
+<language id="latex" _name="LaTeX" version="2.0" _section="Markup">
+  <metadata>
+    <property name="mimetypes">text/x-tex</property>
+    <property name="globs">*.tex;*.ltx;*.sty;*.cls;*.dtx;*.ins;*.bbl</property>
+    <property name="line-comment-start">%</property>
+  </metadata>
+
+  <styles>
+    <style id="comment"            _name="Comment"    map-to="def:comment"/>
+    <style id="documentclass"      _name="Comment"    map-to="def:keyword"/>
+    <style id="usepackage"         _name="Comment"    map-to="def:keyword"/>
+    <style id="newcommand"         _name="Comment"    map-to="def:keyword"/>
+    <style id="display-math"       _name="Math Mode"/>
+    <style id="inline-math"        _name="Inline Math Mode" map-to="latex:display-math"/>
+    <style id="structure"          _name="Inline Math Mode"/>
+    <style id="section"            _name="Inline Math Mode"/>
+    <style id="math"               _name="Math Mode" map-to="latex:display-math"/>
+    <style id="math-bound"         _name="math-bound" map-to="latex:display-math"/>
+    <style id="include"            _name="Include"    map-to="def:keyword"/>
+    <style id="common-commands"    _name="Command"    map-to="def:keyword"/>
+    <style id="command"            _name="Command"    map-to="def:keyword"/>
+    <style id="verbatim"           _name="Verbatim"   map-to="def:comment"/>
+  </styles>
+
+  <definitions>
+        <context id="common-commands" style-ref="common-commands" class="no-spell-check">
+            <prefix>\\</prefix>
+            <!-- We need to special case "_" since it is not considered a
+              boundary but it is allowed in latex -->
+            <suffix>(\b|(?=_))</suffix>
+            <keyword>Alpha</keyword>
+            <keyword>Beta</keyword>
+            <keyword>Chi</keyword>
+            <keyword>Delta</keyword>
+            <keyword>Epsilon</keyword>
+            <keyword>Eta</keyword>
+            <keyword>Gamma</keyword>
+            <keyword>Iota</keyword>
+            <keyword>Kappa</keyword>
+            <keyword>Lambda</keyword>
+            <keyword>Leftarrow</keyword>
+            <keyword>Leftrightarrow</keyword>
+            <keyword>Mu</keyword>
+            <keyword>Nu</keyword>
+            <keyword>Omega</keyword>
+            <keyword>Phi</keyword>
+            <keyword>Pi</keyword>
+            <keyword>Psi</keyword>
+            <keyword>Rho</keyword>
+            <keyword>Rightarrow</keyword>
+            <keyword>Sigma</keyword>
+            <keyword>Tau</keyword>
+            <keyword>Zeta</keyword>
+            <keyword>alpha</keyword>
+            <keyword>appendix</keyword>
+            <keyword>begin</keyword>
+            <keyword>beta</keyword>
+            <keyword>bigcap</keyword>
+            <keyword>bigcup</keyword>
+            <keyword>cap</keyword>
+            <keyword>cdot</keyword>
+            <keyword>chapter</keyword>
+            <keyword>chi</keyword>
+            <keyword>cup</keyword>
+            <keyword>delta</keyword>
+            <keyword>documentclass</keyword>
+            <keyword>end</keyword>
+            <keyword>enumi</keyword>
+            <keyword>enumii</keyword>
+            <keyword>enumiii</keyword>
+            <keyword>enumiv</keyword>
+            <keyword>epsilon</keyword>
+            <keyword>equation</keyword>
+            <keyword>eta</keyword>
+            <keyword>exists</keyword>
+            <keyword>figure</keyword>
+            <keyword>footnote</keyword>
+            <keyword>footnotemark</keyword>
+            <keyword>footnotetext</keyword>
+            <keyword>forall</keyword>
+            <keyword>gamma</keyword>
+            <keyword>geq</keyword>
+            <keyword>in</keyword>
+            <keyword>int</keyword>
+            <keyword>iota</keyword>
+            <keyword>kappa</keyword>
+            <keyword>label</keyword>
+            <keyword>lambda</keyword>
+            <keyword>ldots</keyword>
+            <keyword>leftarrow</keyword>
+            <keyword>leq</keyword>
+            <keyword>mpfootnote</keyword>
+            <keyword>mu</keyword>
+            <keyword>neq</keyword>
+            <keyword>newcommand</keyword>
+            <keyword>newenvironment</keyword>
+            <keyword>newfont</keyword>
+            <keyword>newtheorem</keyword>
+            <keyword>not</keyword>
+            <keyword>notin</keyword>
+            <keyword>nu</keyword>
+            <keyword>omega</keyword>
+            <keyword>onecolumn</keyword>
+            <keyword>page</keyword>
+            <keyword>pageref</keyword>
+            <keyword>paragraph</keyword>
+            <keyword>part</keyword>
+            <keyword>phi</keyword>
+            <keyword>pi</keyword>
+            <keyword>prod</keyword>
+            <keyword>psi</keyword>
+            <keyword>qquad</keyword>
+            <keyword>quad</keyword>
+            <keyword>ref</keyword>
+            <keyword>rho</keyword>
+            <keyword>rightarrow</keyword>
+            <keyword>section</keyword>
+            <keyword>setminus</keyword>
+            <keyword>sigma</keyword>
+            <keyword>subparagraph</keyword>
+            <keyword>subsection</keyword>
+            <keyword>subset</keyword>
+            <keyword>subseteq</keyword>
+            <keyword>subsetneq</keyword>
+            <keyword>subsubsection</keyword>
+            <keyword>subsubsubsection</keyword>
+            <keyword>sum</keyword>
+            <keyword>supset</keyword>
+            <keyword>supseteq</keyword>
+            <keyword>supsetneq</keyword>
+            <keyword>table</keyword>
+            <keyword>tau</keyword>
+            <keyword>times</keyword>
+            <keyword>twocolumn</keyword>
+            <keyword>varepsilon</keyword>
+            <keyword>varphi</keyword>
+            <keyword>zeta</keyword>
+        </context>
+
+        <context id="specials-symbol" style-ref="command" class="no-spell-check">
+            <prefix>\\</prefix>
+            <suffix></suffix>
+
+            <keyword>\$</keyword>
+            <keyword>&amp;</keyword>
+            <keyword>%</keyword>
+            <keyword>#</keyword>
+            <keyword>_</keyword>
+            <keyword>\{</keyword>
+            <keyword>\}</keyword>
+            <keyword>~</keyword>
+            <keyword>\^</keyword>
+            <keyword>\\</keyword>
+        </context>
+
+        <context id="command" style-ref="command" class="no-spell-check">
+            <match>\\[a-zA-Z]+</match>
+        </context>
+
+        <context id="in-math" class="no-spell-check">
+            <include>
+                <context ref="common-commands"/>
+                <context ref="specials-symbol"/>
+                <context ref="command"/>
+            </include>
+        </context>
+
+        <context id="in-inline-math" class="no-spell-check">
+            <include>
+                <context ref="common-commands"/>
+                <context ref="specials-symbol"/>
+                <context ref="command"/>
+            </include>
+        </context>
+
+        <context id="latex">
+            <include>
+
+                <context id="comment" style-ref="comment">
+                    <start>%</start>
+                    <end>$</end>
+                    <include>
+                        <context ref="def:in-comment"/>
+                    </include>
+                </context>
+
+                <context id="verbatim-comment" style-ref="comment" class="no-spell-check">
+                    <start>\\begin\{comment\}</start>
+                    <end>\\end\{comment\}</end>
+                    <include>
+                        <context ref="def:in-comment"/>
+                    </include>
+                </context>
+
+                <context id="math-1" style-ref="math" class="no-spell-check">
+                    <start>\$\$</start>
+                    <end>\$\$</end>
+                    <include>
+                        <context sub-pattern="0" where="start" style-ref="math-bound"/>
+                        <context sub-pattern="0" where="end" style-ref="math-bound"/>
+                        <context ref="in-math"/>
+                    </include>
+                </context>
+
+                <context id="math-2" style-ref="math" class="no-spell-check">
+                    <start>\\\[</start>
+                    <end>\\\]</end>
+                    <include>
+                        <context sub-pattern="0" where="start" style-ref="math-bound"/>
+                        <context sub-pattern="0" where="end" style-ref="math-bound"/>
+                        <context ref="in-math"/>
+                    </include>
+                </context>
+
+                <context id="inline-math-1" style-ref="inline-math" class="no-spell-check">
+                    <start>\$</start>
+                    <end>\$</end>
+                    <include>
+                        <context sub-pattern="0" where="start" style-ref="math-bound"/>
+                        <context sub-pattern="0" where="end" style-ref="math-bound"/>
+                        <context ref="in-inline-math"/>
+                    </include>
+                </context>
+
+                <context id="inline-math-2" style-ref="inline-math" class="no-spell-check">
+                    <start>\\\(</start>
+                    <end>\\\)</end>
+                    <include>
+                        <context sub-pattern="0" where="start" style-ref="math-bound"/>
+                        <context sub-pattern="0" where="end" style-ref="math-bound"/>
+                        <context ref="in-inline-math"/>
+                    </include>
+                </context>
+
+                <context id="verbatim-env" style-ref="verbatim" class-disabled="no-spell-check">
+                    <start extended="true">
+                        \\begin\{
+                            (
+                                verbatim\*?|
+                                lstlisting|
+                                alltt
+                            )
+                        \}
+                    </start>
+                    <end>\\end\{\%{1@start}\}</end>
+                    <include>
+                      <context sub-pattern="0" where="start" class="no-spell-check"/>
+                      <context sub-pattern="0" where="end" class="no-spell-check"/>
+                    </include>
+                </context>
+
+                <context id="verbatim-inline" style-ref="verbatim" class-disabled="no-spell-check">
+                    <start>\\(verb\*?|lstinline)(\S)</start>
+                    <end>\%{2@start}</end>
+                    <include>
+                      <context sub-pattern="0" where="start" class="no-spell-check"/>
+                      <context sub-pattern="0" where="end" class="no-spell-check"/>
+                    </include>
+                </context>
+
+                <context id="include" style-ref="include" class="no-spell-check">
+                    <prefix>\\</prefix>
+
+                    <keyword>input</keyword>
+                    <keyword>include</keyword>
+                    <keyword>includeonly</keyword>
+                    <keyword>usepackage</keyword>
+                </context>
+
+                <context ref="common-commands"/>
+                <context ref="specials-symbol"/>
+                <context ref="command"/>
+            </include>
+        </context>
+  </definitions>
+</language>
