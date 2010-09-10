@@ -1,0 +1,705 @@
+# Gummi Translation for zh_TW
+# Copyright (C) AZ Huang 2010
+# This file is distributed under the same license as the Gummi package.
+# AZ Huang <aitjcize@gmail.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"PO-Revision-Date: 2010-05-21 22:11+0800\n"
+"Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/gummi.glade.h:1
+msgid "        "
+msgstr "        "
+
+#: ../data/gummi.glade.h:2
+msgid ".."
+msgstr ".."
+
+#: ../data/gummi.glade.h:3
+msgid "0"
+msgstr "0"
+
+#: ../data/gummi.glade.h:5
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../data/gummi.glade.h:7
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../data/gummi.glade.h:9
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../data/gummi.glade.h:11
+#, no-c-format
+msgid "200%"
+msgstr "200%"
+
+#: ../data/gummi.glade.h:13
+#, no-c-format
+msgid "300%"
+msgstr "300%"
+
+#: ../data/gummi.glade.h:15
+#, no-c-format
+msgid "400%"
+msgstr "400%"
+
+#: ../data/gummi.glade.h:17
+#, no-c-format
+msgid "50%"
+msgstr "50%"
+
+#: ../data/gummi.glade.h:19
+#, no-c-format
+msgid "70%"
+msgstr "70%"
+
+#: ../data/gummi.glade.h:21
+#, no-c-format
+msgid "85%"
+msgstr "85%"
+
+#: ../data/gummi.glade.h:22
+msgid "Align center"
+msgstr "置中"
+
+#: ../data/gummi.glade.h:23
+msgid "Align left"
+msgstr "向左對齊"
+
+#: ../data/gummi.glade.h:24
+msgid "Align right"
+msgstr "向右對齊"
+
+#: ../data/gummi.glade.h:25
+msgid ""
+"Alignment of the\n"
+"cell content."
+msgstr "表格的對齊方式"
+
+#: ../data/gummi.glade.h:27
+msgid "Article"
+msgstr "文章"
+
+#: ../data/gummi.glade.h:28
+msgid "Best Fit"
+msgstr "最適合大小"
+
+#: ../data/gummi.glade.h:29
+msgid "Bibliography"
+msgstr "參考文獻"
+
+#: ../data/gummi.glade.h:30
+msgid "Bold text"
+msgstr "粗體"
+
+#: ../data/gummi.glade.h:31
+msgid "Book"
+msgstr "書本"
+
+#: ../data/gummi.glade.h:32
+msgid "Border all cells"
+msgstr "完整邊框"
+
+#: ../data/gummi.glade.h:33
+msgid "Border outline"
+msgstr "外層邊框"
+
+#: ../data/gummi.glade.h:34
+msgid "Braces"
+msgstr "大括弧"
+
+#: ../data/gummi.glade.h:35
+msgid "Bracket:"
+msgstr "括弧:"
+
+#: ../data/gummi.glade.h:36
+msgid "Brackets"
+msgstr "方括弧"
+
+#: ../data/gummi.glade.h:37
+msgid "Caption:"
+msgstr "標題:"
+
+#: ../data/gummi.glade.h:38
+msgid "Center text"
+msgstr "置中"
+
+#: ../data/gummi.glade.h:39
+msgid "Check _Updates"
+msgstr "檢查更新(_U)"
+
+#: ../data/gummi.glade.h:40
+msgid "Columns:"
+msgstr "行:"
+
+#: ../data/gummi.glade.h:41
+msgid "Compile"
+msgstr "編譯"
+
+#: ../data/gummi.glade.h:42
+msgid "Create a new document"
+msgstr "建立新文件"
+
+#: ../data/gummi.glade.h:43
+msgid "Create new document.."
+msgstr "建立新文件.."
+
+#: ../data/gummi.glade.h:44
+msgid ""
+"Determines whether the\n"
+"cells have line borders. "
+msgstr "設定表格格線"
+
+#: ../data/gummi.glade.h:46
+msgid "Double line"
+msgstr "雙線"
+
+#: ../data/gummi.glade.h:47
+msgid "Error output"
+msgstr "錯誤輸出"
+
+#: ../data/gummi.glade.h:48
+msgid ""
+"Error status for\n"
+"active document"
+msgstr ""
+"目前文件的錯誤輸出\n"
+" "
+
+#: ../data/gummi.glade.h:50
+msgid "Export to PDF"
+msgstr "匯出為PDF"
+
+#: ../data/gummi.glade.h:51
+msgid "File:"
+msgstr "檔案:"
+
+#: ../data/gummi.glade.h:52
+msgid "Filename:"
+msgstr "檔名:"
+
+#: ../data/gummi.glade.h:53
+msgid "Find"
+msgstr "搜尋"
+
+#: ../data/gummi.glade.h:54
+msgid "Find Ne_xt"
+msgstr "找下一個(_X)"
+
+#: ../data/gummi.glade.h:55
+msgid "Find Pre_vious"
+msgstr "找前一個(_V)"
+
+#: ../data/gummi.glade.h:56
+msgid "Fit Page Width"
+msgstr "符合頁寬"
+
+#: ../data/gummi.glade.h:57
+msgid "Gummi - LaTeX Editor"
+msgstr "Gummi - LaTex 編輯器"
+
+#: ../data/gummi.glade.h:58
+msgid "Image"
+msgstr "影像"
+
+#: ../data/gummi.glade.h:59
+msgid "Italic text"
+msgstr "斜體"
+
+#: ../data/gummi.glade.h:60
+msgid "Label:"
+msgstr "標籤"
+
+#: ../data/gummi.glade.h:61
+msgid "Letter"
+msgstr "信件"
+
+#: ../data/gummi.glade.h:62
+msgid "Load a file"
+msgstr "載入檔案"
+
+#: ../data/gummi.glade.h:63
+msgid "Match case"
+msgstr "區分大小寫"
+
+#: ../data/gummi.glade.h:64
+msgid "Match entire word only"
+msgstr "只配對此單字"
+
+#: ../data/gummi.glade.h:65
+msgid "Matrix"
+msgstr "矩陣"
+
+#: ../data/gummi.glade.h:66 ../src/gui.c:653
+msgid "N/A"
+msgstr "無"
+
+#: ../data/gummi.glade.h:67
+msgid "New from _Template"
+msgstr "從模版新增(_T)"
+
+#: ../data/gummi.glade.h:68
+msgid "Next"
+msgstr "下一個"
+
+#: ../data/gummi.glade.h:69
+msgid "No borders"
+msgstr "無邊框"
+
+#: ../data/gummi.glade.h:70
+msgid "Open"
+msgstr "開啟"
+
+#: ../data/gummi.glade.h:71
+msgid "Parentheses"
+msgstr "括號"
+
+#: ../data/gummi.glade.h:72
+msgid "Preview Pane"
+msgstr "預覽"
+
+#: ../data/gummi.glade.h:73
+msgid "Previous"
+msgstr "前一個"
+
+#: ../data/gummi.glade.h:74
+msgid "References:"
+msgstr "參考:"
+
+#: ../data/gummi.glade.h:75
+msgid "Replace _All"
+msgstr "全部取代(_A)"
+
+#: ../data/gummi.glade.h:76
+msgid "Replace with:"
+msgstr "取代為:"
+
+#: ../data/gummi.glade.h:77
+msgid "Report"
+msgstr "報告"
+
+#: ../data/gummi.glade.h:78
+msgid "Rows:"
+msgstr "列:"
+
+#: ../data/gummi.glade.h:79
+msgid "Save"
+msgstr "儲存"
+
+#: ../data/gummi.glade.h:80
+msgid "Save _As..."
+msgstr "另存新檔...(_A)"
+
+#: ../data/gummi.glade.h:81
+msgid "Save the current file"
+msgstr "儲存目前檔案"
+
+#: ../data/gummi.glade.h:82
+msgid "Scale:"
+msgstr "縮放:"
+
+#: ../data/gummi.glade.h:83
+msgid "Search backwards"
+msgstr "向後搜尋"
+
+#: ../data/gummi.glade.h:84
+msgid "Search for:"
+msgstr "尋找:"
+
+#: ../data/gummi.glade.h:85
+msgid "Single line"
+msgstr "單線"
+
+#: ../data/gummi.glade.h:86
+msgid "Table"
+msgstr "表格"
+
+#: ../data/gummi.glade.h:87
+msgid "Template options:"
+msgstr "模版選項:"
+
+#: ../data/gummi.glade.h:88
+msgid "Unbracketed"
+msgstr "無括弧"
+
+#: ../data/gummi.glade.h:89
+msgid "Underline text"
+msgstr "底線"
+
+#: ../data/gummi.glade.h:90
+msgid "_Autocheck Spelling"
+msgstr "拼字檢查(_A)"
+
+#: ../data/gummi.glade.h:91
+msgid "_Compile Bibliography"
+msgstr "編譯參考文獻(_C)"
+
+#: ../data/gummi.glade.h:92
+msgid "_Document Statistics"
+msgstr "文件資訊(_D)"
+
+#: ../data/gummi.glade.h:93
+msgid "_Edit"
+msgstr "編輯(_E)"
+
+#: ../data/gummi.glade.h:94
+msgid "_Export to PDF"
+msgstr "匯出為PDF"
+
+#: ../data/gummi.glade.h:95
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: ../data/gummi.glade.h:96
+msgid "_Fullscreen"
+msgstr "全螢幕(_T)"
+
+#: ../data/gummi.glade.h:97
+msgid "_Help"
+msgstr "幫助(_H)"
+
+#: ../data/gummi.glade.h:98
+msgid "_Insert Bibliography"
+msgstr "插入參考文獻(_I)"
+
+#: ../data/gummi.glade.h:99
+msgid "_Open..."
+msgstr "開啟...(_O)"
+
+#: ../data/gummi.glade.h:100
+msgid "_Replace"
+msgstr "取代"
+
+#: ../data/gummi.glade.h:101
+msgid "_Right Pane"
+msgstr "右側欄"
+
+#: ../data/gummi.glade.h:102
+msgid "_Search"
+msgstr "搜尋(_S)"
+
+#: ../data/gummi.glade.h:103
+msgid "_Statusbar"
+msgstr "狀態列(_S)"
+
+#: ../data/gummi.glade.h:104
+msgid "_Toolbar"
+msgstr "工具列(_T)"
+
+#: ../data/gummi.glade.h:105
+msgid "_Tools"
+msgstr "工具(_T)"
+
+#: ../data/gummi.glade.h:106
+msgid "_View"
+msgstr "檢視(_V)"
+
+#: ../data/gummi.glade.h:107
+msgid "filter:"
+msgstr "篩選:"
+
+#: ../data/gummi.glade.h:108 ../src/gui.c:651
+msgid "no bibliography file detected"
+msgstr "無法找到參考文獻"
+
+#: ../data/gummi.glade.h:109 ../src/gui.c:652
+msgid "none"
+msgstr "無"
+
+#: ../data/gummi.glade.h:110
+msgid "of 0"
+msgstr "/ 0"
+
+#: ../data/gummi.glade.h:111
+msgid "shouldnotseeme"
+msgstr "shouldnotseeme"
+
+#: ../data/gummi.glade.h:112
+msgid "toolbutton1"
+msgstr "toolbutton1"
+
+#: ../data/gummi.glade.h:113
+msgid "toolbutton2"
+msgstr "toolbutton2"
+
+#: ../data/gummi.glade.h:114
+msgid "toolbutton3"
+msgstr "toolbutton3"
+
+#: ../data/gummi.glade.h:115
+msgid "toolbutton5"
+msgstr "toolbutton5"
+
+#: ../data/gummi.glade.h:116
+msgid "toolbutton6"
+msgstr "toolbutton6"
+
+#: ../data/gummi.glade.h:117
+msgid "toolbutton7"
+msgstr "toolbutton7"
+
+#: ../data/prefs.glade.h:1
+msgid "Changes will become active on next start"
+msgstr "設定會在下一次啟動生效"
+
+#: ../data/prefs.glade.h:2
+msgid "Default Text"
+msgstr "預設文字"
+
+#: ../data/prefs.glade.h:3
+msgid "Display line numbers"
+msgstr "顯示行號"
+
+#: ../data/prefs.glade.h:4
+msgid "Do not split words over two lines"
+msgstr "換行時不將字詞拆開"
+
+#: ../data/prefs.glade.h:5
+msgid "Editor"
+msgstr "編輯器"
+
+#: ../data/prefs.glade.h:6
+msgid "Editor font:"
+msgstr "編輯器字體:"
+
+#: ../data/prefs.glade.h:7
+msgid "Enable text wrapping"
+msgstr "啟用文字換行"
+
+#: ../data/prefs.glade.h:8
+msgid "File saving:"
+msgstr "存檔:"
+
+#: ../data/prefs.glade.h:9
+msgid "Gummi Preferences"
+msgstr "Gummi 偏好設定"
+
+#: ../data/prefs.glade.h:10
+msgid "Highlight current line"
+msgstr "標示當前的行"
+
+#: ../data/prefs.glade.h:11
+msgid "Highlighting:"
+msgstr "高亮:"
+
+#: ../data/prefs.glade.h:12
+msgid "Line numbers:"
+msgstr "行號:"
+
+#: ../data/prefs.glade.h:13
+msgid "None"
+msgstr "無"
+
+#: ../data/prefs.glade.h:14
+msgid "PDF Compiling"
+msgstr "PDF編譯"
+
+#: ../data/prefs.glade.h:15
+msgid "PDF Compiling:"
+msgstr "PDF編譯:"
+
+#: ../data/prefs.glade.h:16
+msgid "Spell check language:"
+msgstr "拼字檢查語言:"
+
+#: ../data/prefs.glade.h:17
+msgid "Text wrapping:"
+msgstr "文字換行:"
+
+#: ../data/prefs.glade.h:18
+msgid "Typesetter command:"
+msgstr "排版指令:"
+
+#: ../data/prefs.glade.h:19
+msgid "View"
+msgstr "檢示"
+
+#: ../data/prefs.glade.h:20
+msgid "_Autosave files every"
+msgstr "自動儲存間隔(A)"
+
+#: ../data/prefs.glade.h:21
+msgid "_Reset defaults"
+msgstr "重設為預設(_R)"
+
+#: ../data/prefs.glade.h:22
+msgid "compile every"
+msgstr "自動編譯間隔"
+
+#: ../data/prefs.glade.h:23
+msgid "compile when idle for "
+msgstr "自動編譯: 當閒罝"
+
+#: ../data/prefs.glade.h:24
+msgid "minutes"
+msgstr "分鐘"
+
+#: ../data/prefs.glade.h:25
+msgid "pdflatex"
+msgstr "pdflatex"
+
+#: ../data/prefs.glade.h:26
+msgid "seconds"
+msgstr "秒"
+
+#: ../data/prefs.glade.h:27
+msgid "xelatex"
+msgstr "xelatex"
+
+#: ../src/editor.c:375
+msgid "Top reached, search from bottom?"
+msgstr "已達頁首, 從頁尾開始尋找?"
+
+#: ../src/editor.c:382
+msgid "Bottom reached, search from top?"
+msgstr "已達頁尾, 從頁首開始尋找?"
+
+#: ../src/gui.c:223
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "載入最近使用文件時發生錯誤: %s"
+
+#: ../src/gui.c:614
+msgid "Compiling bibliography file..."
+msgstr "正在編譯參考文獻..."
+
+#: ../src/gui.c:616
+msgid "bibliography compiled without errors"
+msgstr "參考文獻已成功編譯"
+
+#: ../src/gui.c:618
+msgid "Error compiling bibliography file or none detected..."
+msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
+
+#: ../src/gui.c:621
+msgid "error compiling bibliography file"
+msgstr "編譯參考文獻過程發生錯誤"
+
+#: ../src/gui.c:645
+#, c-format
+msgid "%s loaded"
+msgstr "已載入%s"
+
+#: ../src/gui.c:1074
+msgid "Do you want to save the changes you have made?"
+msgstr "是否儲存變更?"
+
+#: ../src/gui.c:1083
+msgid "Open File..."
+msgstr "開啟..."
+
+#: ../src/gui.c:1105
+msgid "Save File..."
+msgstr "儲存檔案..."
+
+#: ../src/importer.c:122
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr "%s: 找不到此檔案或目錄\n"
+
+#: ../src/iofunctions.c:94
+#, c-format
+msgid "Saving %s..."
+msgstr "儲存%s中..."
+
+#: ../src/iofunctions.c:107
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+"%s\n"
+"請稍後重試."
+
+#: ../src/iofunctions.c:146
+msgid "Can not convert text to UTF-8!\n"
+msgstr "無法轉換文字為UTF-8格式!\n"
+
+#: ../src/iofunctions.c:176
+#, c-format
+msgid "Autosaving file %s"
+msgstr "正在儲存%s"
+
+#: ../src/updatecheck.c:113
+#, c-format
+msgid ""
+"Currently installed:\n"
+"%s\n"
+"\n"
+"Currently available:\n"
+"%s"
+msgstr ""
+"安裝版本:\n"
+"%s\n"
+"\n"
+"最新版本:\n"
+"%s"
+
+#: ../src/utils.c:88
+#, c-format
+msgid ""
+"\n"
+"Gummi has encountered a serious error and require restart, your can find "
+"your file in the %s directory\n"
+msgstr ""
+"\n"
+"Gummi發生了嚴重的錯誤而必需關閉, 你可以在%s資料夾裡找到未儲存的檔案\n"
+
+#: ../src/utils.c:128
+msgid "Confirmation"
+msgstr "確認"
+
+#~ msgid "Save?"
+#~ msgstr "是否儲存?"
+
+#~ msgid "Currently installed:\n"
+#~ msgstr "安裝版本:\n"
+
+#~ msgid ""
+#~ "PDF-Preview could not initialize.\n"
+#~ "\n"
+#~ "It appears your LaTeX document contains errors or\n"
+#~ "the program `%s' was not installed.\n"
+#~ "Additional information is available on the Error Output tab.\n"
+#~ "Please correct the listed errors and click this area\n"
+#~ "to reload the preview panel."
+#~ msgstr ""
+#~ "無法啟動PDF預覽.\n"
+#~ "\n"
+#~ "您的LaTex文件中包含錯誤或是%s未被案裝.\n"
+#~ "更多的訊息請參照錯誤輸出欄.\n"
+#~ "請在更正錯誤後點選此區域\n"
+#~ "來更新預覽."
+
+#~ msgid "Update Check"
+#~ msgstr "檢查更新"
+
+#~ msgid ""
+#~ "The server could not be contacted.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "無法連接到伺服器.\n"
+#~ "\n"
+
+#~ msgid "This function requires an active\n"
+#~ msgstr "此功能需要可用的\n"
+
+#~ msgid "internet connection."
+#~ msgstr "網路連線."
+
+#~ msgid "Error"
+#~ msgstr "錯誤"

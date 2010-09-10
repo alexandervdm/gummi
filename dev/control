@@ -1,0 +1,13 @@
+Source: gummi-beta
+Section: misc
+Priority: extra
+Maintainer: Wei-Ning Huang (AZ) <aitjcize@gmail.com>
+Build-Depends: cdbs, debhelper (>= 7), autotools-dev, libgtk2.0-dev, libglib2.0-dev, libpoppler-dev, libpoppler-glib-dev, libgtksourceview2.0-dev, libgtkspell-dev
+Standards-Version: 3.8.3
+Homepage: http://gummi.midnightcoding.org/
+
+Package: gummi-beta
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgtk2.0-0, libglib2.0-0, libgtksourceview2.0-0, libgtkspell0, libpoppler5, libpoppler-glib4
+Description: Simple LaTeX editor for Linux
+ Gummi is a simple light-weight LaTeX editor for GTK+ users written in C.

@@ -1,0 +1,708 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.4.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"PO-Revision-Date: 2010-05-23 23:05+0100\n"
+"Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
+"Language-Team: Jack Olsen jackolsendk@gmail.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/gummi.glade.h:1
+msgid "        "
+msgstr "        "
+
+#: ../data/gummi.glade.h:2
+msgid ".."
+msgstr ".."
+
+#: ../data/gummi.glade.h:3
+msgid "0"
+msgstr "0"
+
+#: ../data/gummi.glade.h:5
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../data/gummi.glade.h:7
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../data/gummi.glade.h:9
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../data/gummi.glade.h:11
+#, no-c-format
+msgid "200%"
+msgstr "200%"
+
+#: ../data/gummi.glade.h:13
+#, no-c-format
+msgid "300%"
+msgstr "300%"
+
+#: ../data/gummi.glade.h:15
+#, no-c-format
+msgid "400%"
+msgstr "400%"
+
+#: ../data/gummi.glade.h:17
+#, no-c-format
+msgid "50%"
+msgstr "50%"
+
+#: ../data/gummi.glade.h:19
+#, no-c-format
+msgid "70%"
+msgstr "70%"
+
+#: ../data/gummi.glade.h:21
+#, no-c-format
+msgid "85%"
+msgstr "85%"
+
+#: ../data/gummi.glade.h:22
+msgid "Align center"
+msgstr "Centrer"
+
+#: ../data/gummi.glade.h:23
+msgid "Align left"
+msgstr "Ventrestil"
+
+#: ../data/gummi.glade.h:24
+msgid "Align right"
+msgstr "Højrestil"
+
+#: ../data/gummi.glade.h:25
+msgid ""
+"Alignment of the\n"
+"cell content."
+msgstr "Justering af celleindhold"
+
+#: ../data/gummi.glade.h:27
+msgid "Article"
+msgstr "Artikel"
+
+#: ../data/gummi.glade.h:28
+msgid "Best Fit"
+msgstr "Optimal tilpasning"
+
+#: ../data/gummi.glade.h:29
+msgid "Bibliography"
+msgstr "Bibliografi"
+
+#: ../data/gummi.glade.h:30
+msgid "Bold text"
+msgstr "Fremhævet tekst"
+
+#: ../data/gummi.glade.h:31
+msgid "Book"
+msgstr "Bog"
+
+#: ../data/gummi.glade.h:32
+msgid "Border all cells"
+msgstr "Ramme omkring alle celler"
+
+#: ../data/gummi.glade.h:33
+msgid "Border outline"
+msgstr "Ramme omkring"
+
+#: ../data/gummi.glade.h:34
+msgid "Braces"
+msgstr "Tuborgklammer"
+
+#: ../data/gummi.glade.h:35
+msgid "Bracket:"
+msgstr "Firkantparantes:"
+
+#: ../data/gummi.glade.h:36
+msgid "Brackets"
+msgstr "Firkantparantes"
+
+#: ../data/gummi.glade.h:37
+msgid "Caption:"
+msgstr "Billedtekst:"
+
+#: ../data/gummi.glade.h:38
+msgid "Center text"
+msgstr "Centrer tekst"
+
+#: ../data/gummi.glade.h:39
+msgid "Check _Updates"
+msgstr "Check _Opdateringer"
+
+#: ../data/gummi.glade.h:40
+msgid "Columns:"
+msgstr "Kolonner:"
+
+#: ../data/gummi.glade.h:41
+msgid "Compile"
+msgstr "Kompiler"
+
+#: ../data/gummi.glade.h:42
+msgid "Create a new document"
+msgstr "Opret et nyt dokument"
+
+#: ../data/gummi.glade.h:43
+msgid "Create new document.."
+msgstr "Opret nyt dokument.."
+
+#: ../data/gummi.glade.h:44
+msgid ""
+"Determines whether the\n"
+"cells have line borders. "
+msgstr ""
+"Afgør om cellerne\n"
+"har liniekant. "
+
+#: ../data/gummi.glade.h:46
+msgid "Double line"
+msgstr "Dobbeltlinie"
+
+#: ../data/gummi.glade.h:47
+msgid "Error output"
+msgstr "Fejlbeskeder"
+
+#: ../data/gummi.glade.h:48
+msgid ""
+"Error status for\n"
+"active document"
+msgstr ""
+"Fejlstatus for\n"
+"aktivt dokument"
+
+#: ../data/gummi.glade.h:50
+msgid "Export to PDF"
+msgstr ""
+
+#: ../data/gummi.glade.h:51
+msgid "File:"
+msgstr "Fil:"
+
+#: ../data/gummi.glade.h:52
+msgid "Filename:"
+msgstr "Filnavn:"
+
+#: ../data/gummi.glade.h:53
+msgid "Find"
+msgstr "Find"
+
+#: ../data/gummi.glade.h:54
+msgid "Find Ne_xt"
+msgstr "Find N_æste"
+
+#: ../data/gummi.glade.h:55
+msgid "Find Pre_vious"
+msgstr "Find For_rige"
+
+#: ../data/gummi.glade.h:56
+msgid "Fit Page Width"
+msgstr "Tilpas til sidestørrelse"
+
+#: ../data/gummi.glade.h:57
+msgid "Gummi - LaTeX Editor"
+msgstr "Gummi - LaTeX Editor"
+
+#: ../data/gummi.glade.h:58
+msgid "Image"
+msgstr "Billede"
+
+#: ../data/gummi.glade.h:59
+msgid "Italic text"
+msgstr "Kursiv skrift"
+
+#: ../data/gummi.glade.h:60
+msgid "Label:"
+msgstr "Label:"
+
+#: ../data/gummi.glade.h:61
+msgid "Letter"
+msgstr "Brev"
+
+#: ../data/gummi.glade.h:62
+msgid "Load a file"
+msgstr "Åben en fil"
+
+#: ../data/gummi.glade.h:63
+msgid "Match case"
+msgstr "Forskel på store/små bogstaver"
+
+#: ../data/gummi.glade.h:64
+msgid "Match entire word only"
+msgstr "Find kun blandt hele ord"
+
+#: ../data/gummi.glade.h:65
+msgid "Matrix"
+msgstr "Matrice"
+
+#: ../data/gummi.glade.h:66 ../src/gui.c:653
+msgid "N/A"
+msgstr "N/A"
+
+#: ../data/gummi.glade.h:67
+msgid "New from _Template"
+msgstr "Ny fra _Skabelon"
+
+#: ../data/gummi.glade.h:68
+msgid "Next"
+msgstr "Næste"
+
+#: ../data/gummi.glade.h:69
+msgid "No borders"
+msgstr "Ingen rammer"
+
+#: ../data/gummi.glade.h:70
+msgid "Open"
+msgstr "Åben"
+
+#: ../data/gummi.glade.h:71
+msgid "Parentheses"
+msgstr "Paranteser"
+
+#: ../data/gummi.glade.h:72
+msgid "Preview Pane"
+msgstr "Fremvisningspanel"
+
+#: ../data/gummi.glade.h:73
+msgid "Previous"
+msgstr "Forrige"
+
+#: ../data/gummi.glade.h:74
+msgid "References:"
+msgstr "Referencer:"
+
+#: ../data/gummi.glade.h:75
+msgid "Replace _All"
+msgstr ""
+
+#: ../data/gummi.glade.h:76
+msgid "Replace with:"
+msgstr ""
+
+#: ../data/gummi.glade.h:77
+msgid "Report"
+msgstr "Rapport"
+
+#: ../data/gummi.glade.h:78
+msgid "Rows:"
+msgstr "Rækker:"
+
+#: ../data/gummi.glade.h:79
+msgid "Save"
+msgstr "Gem"
+
+#: ../data/gummi.glade.h:80
+msgid "Save _As..."
+msgstr "Gem _som..."
+
+#: ../data/gummi.glade.h:81
+msgid "Save the current file"
+msgstr "Gem denne fil"
+
+#: ../data/gummi.glade.h:82
+msgid "Scale:"
+msgstr "Skala:"
+
+#: ../data/gummi.glade.h:83
+msgid "Search backwards"
+msgstr "Søg bagud"
+
+#: ../data/gummi.glade.h:84
+msgid "Search for:"
+msgstr "Søg efter:"
+
+#: ../data/gummi.glade.h:85
+msgid "Single line"
+msgstr "Enkelt linie"
+
+#: ../data/gummi.glade.h:86
+msgid "Table"
+msgstr "Tabel"
+
+#: ../data/gummi.glade.h:87
+msgid "Template options:"
+msgstr "Skabelonvalgmuligheder"
+
+#: ../data/gummi.glade.h:88
+msgid "Unbracketed"
+msgstr "Uden firkantparantes"
+
+#: ../data/gummi.glade.h:89
+msgid "Underline text"
+msgstr "Understreget tekst"
+
+#: ../data/gummi.glade.h:90
+msgid "_Autocheck Spelling"
+msgstr "Kontroller stavning _automatisk"
+
+#: ../data/gummi.glade.h:91
+msgid "_Compile Bibliography"
+msgstr "_Kompiler Bibliografi"
+
+#: ../data/gummi.glade.h:92
+msgid "_Document Statistics"
+msgstr ""
+
+#: ../data/gummi.glade.h:93
+msgid "_Edit"
+msgstr "R_et"
+
+#: ../data/gummi.glade.h:94
+msgid "_Export to PDF"
+msgstr ""
+
+#: ../data/gummi.glade.h:95
+msgid "_File"
+msgstr "_Fil"
+
+#: ../data/gummi.glade.h:96
+msgid "_Fullscreen"
+msgstr "_Fuldskærm"
+
+#: ../data/gummi.glade.h:97
+msgid "_Help"
+msgstr "_Hjælp"
+
+#: ../data/gummi.glade.h:98
+msgid "_Insert Bibliography"
+msgstr "_Indsæt Bibliografi"
+
+#: ../data/gummi.glade.h:99
+msgid "_Open..."
+msgstr "_Åben"
+
+#: ../data/gummi.glade.h:100
+msgid "_Replace"
+msgstr ""
+
+#: ../data/gummi.glade.h:101
+msgid "_Right Pane"
+msgstr ""
+
+#: ../data/gummi.glade.h:102
+msgid "_Search"
+msgstr "_Søg"
+
+#: ../data/gummi.glade.h:103
+msgid "_Statusbar"
+msgstr "_Statuslinie"
+
+#: ../data/gummi.glade.h:104
+msgid "_Toolbar"
+msgstr "_Værktøjslinie"
+
+#: ../data/gummi.glade.h:105
+msgid "_Tools"
+msgstr "_Værktøjer"
+
+#: ../data/gummi.glade.h:106
+msgid "_View"
+msgstr "_Vis"
+
+#: ../data/gummi.glade.h:107
+msgid "filter:"
+msgstr "filtrer:"
+
+#: ../data/gummi.glade.h:108 ../src/gui.c:651
+msgid "no bibliography file detected"
+msgstr "ingen bibliografi-fil fundet"
+
+#: ../data/gummi.glade.h:109 ../src/gui.c:652
+msgid "none"
+msgstr "ingen"
+
+#: ../data/gummi.glade.h:110
+msgid "of 0"
+msgstr "af 0"
+
+#: ../data/gummi.glade.h:111
+msgid "shouldnotseeme"
+msgstr "skulleikkesemig"
+
+#: ../data/gummi.glade.h:112
+msgid "toolbutton1"
+msgstr "værktøjsknap1"
+
+#: ../data/gummi.glade.h:113
+msgid "toolbutton2"
+msgstr "værktøjsknap2"
+
+#: ../data/gummi.glade.h:114
+msgid "toolbutton3"
+msgstr "værktøjsknap3"
+
+#: ../data/gummi.glade.h:115
+msgid "toolbutton5"
+msgstr "værktøjsknap5"
+
+#: ../data/gummi.glade.h:116
+msgid "toolbutton6"
+msgstr "værktøjsknap6"
+
+#: ../data/gummi.glade.h:117
+msgid "toolbutton7"
+msgstr "værktøjsknap7"
+
+#: ../data/prefs.glade.h:1
+msgid "Changes will become active on next start"
+msgstr "Ændringerne vil træde i kraft efter genstart"
+
+#: ../data/prefs.glade.h:2
+msgid "Default Text"
+msgstr "Standardtekst"
+
+#: ../data/prefs.glade.h:3
+msgid "Display line numbers"
+msgstr "Vis linienumre"
+
+#: ../data/prefs.glade.h:4
+msgid "Do not split words over two lines"
+msgstr "Opdel ikke ord over to linier"
+
+#: ../data/prefs.glade.h:5
+msgid "Editor"
+msgstr "Editor"
+
+#: ../data/prefs.glade.h:6
+msgid "Editor font:"
+msgstr "Editor skrifttype:"
+
+#: ../data/prefs.glade.h:7
+msgid "Enable text wrapping"
+msgstr "Aktiver tekstombrydning"
+
+#: ../data/prefs.glade.h:8
+msgid "File saving:"
+msgstr "Fil gemmes:"
+
+#: ../data/prefs.glade.h:9
+msgid "Gummi Preferences"
+msgstr "Gummi Indstillinger"
+
+#: ../data/prefs.glade.h:10
+msgid "Highlight current line"
+msgstr "Fremhæv den nuværende linie"
+
+#: ../data/prefs.glade.h:11
+msgid "Highlighting:"
+msgstr "Fremhævning:"
+
+#: ../data/prefs.glade.h:12
+msgid "Line numbers:"
+msgstr "Linienumre:"
+
+#: ../data/prefs.glade.h:13
+msgid "None"
+msgstr "Ingen"
+
+#: ../data/prefs.glade.h:14
+msgid "PDF Compiling"
+msgstr "PDF-kompilering"
+
+#: ../data/prefs.glade.h:15
+msgid "PDF Compiling:"
+msgstr "PDF kompilerer:"
+
+#: ../data/prefs.glade.h:16
+msgid "Spell check language:"
+msgstr "Stavekontrolsprog:"
+
+#: ../data/prefs.glade.h:17
+msgid "Text wrapping:"
+msgstr "Tekstombrydning:"
+
+#: ../data/prefs.glade.h:18
+msgid "Typesetter command:"
+msgstr "Skriftvalgskommando:"
+
+#: ../data/prefs.glade.h:19
+msgid "View"
+msgstr "Vis"
+
+#: ../data/prefs.glade.h:20
+msgid "_Autosave files every"
+msgstr "Gem _automatisk hvert"
+
+#: ../data/prefs.glade.h:21
+msgid "_Reset defaults"
+msgstr "_Nulstil til standardinstilling"
+
+#: ../data/prefs.glade.h:22
+#, fuzzy
+msgid "compile every"
+msgstr "Kompiler _automatisk hvert"
+
+#: ../data/prefs.glade.h:23
+#, fuzzy
+msgid "compile when idle for "
+msgstr "Kompiler _automatisk hvert"
+
+#: ../data/prefs.glade.h:24
+msgid "minutes"
+msgstr "minutter"
+
+#: ../data/prefs.glade.h:25
+msgid "pdflatex"
+msgstr "pdflatex"
+
+#: ../data/prefs.glade.h:26
+msgid "seconds"
+msgstr "sekunder"
+
+#: ../data/prefs.glade.h:27
+msgid "xelatex"
+msgstr "xelatex"
+
+#: ../src/editor.c:375
+msgid "Top reached, search from bottom?"
+msgstr ""
+
+#: ../src/editor.c:382
+msgid "Bottom reached, search from top?"
+msgstr ""
+
+#: ../src/gui.c:223
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Fejl ved indlæsning af nyere fil: "
+
+#: ../src/gui.c:614
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Kompilerer bibliografi-filen"
+
+#: ../src/gui.c:616
+msgid "bibliography compiled without errors"
+msgstr "bibliografien kompilerede uden fejl"
+
+#: ../src/gui.c:618
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
+
+#: ../src/gui.c:621
+msgid "error compiling bibliography file"
+msgstr "fejl ved kompilering af bibliografi-filen"
+
+#: ../src/gui.c:645
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui.c:1074
+msgid "Do you want to save the changes you have made?"
+msgstr "Ønsker du at gemme dine ændringer?"
+
+#: ../src/gui.c:1083
+msgid "Open File..."
+msgstr "Åben Fil..."
+
+#: ../src/gui.c:1105
+msgid "Save File..."
+msgstr "Gem Fil..."
+
+#: ../src/importer.c:122
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr ""
+
+#: ../src/iofunctions.c:94
+#, fuzzy, c-format
+msgid "Saving %s..."
+msgstr "Gem _som..."
+
+#: ../src/iofunctions.c:107
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+
+#: ../src/iofunctions.c:146
+msgid "Can not convert text to UTF-8!\n"
+msgstr ""
+
+#: ../src/iofunctions.c:176
+#, fuzzy, c-format
+msgid "Autosaving file %s"
+msgstr "Gemmer fil "
+
+#: ../src/updatecheck.c:113
+#, fuzzy, c-format
+msgid ""
+"Currently installed:\n"
+"%s\n"
+"\n"
+"Currently available:\n"
+"%s"
+msgstr ""
+"\n"
+"\n"
+"Installeret i øjeblikket:\n"
+
+#: ../src/utils.c:88
+#, c-format
+msgid ""
+"\n"
+"Gummi has encountered a serious error and require restart, your can find "
+"your file in the %s directory\n"
+msgstr ""
+
+#: ../src/utils.c:128
+#, fuzzy
+msgid "Confirmation"
+msgstr "Billedtekst:"
+
+#~ msgid "Save?"
+#~ msgstr "Gem?"
+
+#~ msgid "Currently installed:\n"
+#~ msgstr "Installeret i øjeblikket:\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "PDF-Preview could not initialize.\n"
+#~ "\n"
+#~ "It appears your LaTeX document contains errors or\n"
+#~ "the program `%s' was not installed.\n"
+#~ "Additional information is available on the Error Output tab.\n"
+#~ "Please correct the listed errors and click this area\n"
+#~ "to reload the preview panel."
+#~ msgstr ""
+#~ "PDF-fremviser kunne ikke starte.\n"
+#~ "\n"
+#~ "Der ser ud til at være fejl i dit LaTeX-miljø.\n"
+#~ "Yderligere information er tilgængelig på fanebladet for fejlbeskeder.\n"
+#~ "Ret venligst de viste fejl og klik på dette område\n"
+#~ "for at genindlæse fremvisningspanelet."
+
+#~ msgid "Update Check"
+#~ msgstr "Opdateringskontrol"
+
+#~ msgid ""
+#~ "The server could not be contacted.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Der kunne ikke opnås forbindelse til serveren.\n"
+#~ "\n"
+
+#~ msgid "This function requires an active\n"
+#~ msgstr "Denne funktion kræver en aktiv\n"
+
+#~ msgid "internet connection."
+#~ msgstr "internetforbindelse."
+
+#~ msgid "Error"
+#~ msgstr "Fejl"

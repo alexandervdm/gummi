@@ -1,0 +1,9 @@
+# List of source files which contain translatable strings.
+data/gummi.glade
+data/prefs.glade
+src/editor.c
+src/gui.c
+src/importer.c
+src/iofunctions.c
+src/updatecheck.c
+src/utils.c
