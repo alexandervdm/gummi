@@ -1,9 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# # Gummi Translation for DA
+# # Copyright (C) Jack Olsen 2010
+# # This file is distributed under the same license as the Gummi package.
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Jack Olsen"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"

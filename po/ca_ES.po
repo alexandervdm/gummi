@@ -2,8 +2,11 @@
 # # Copyright (C) Marc Vinyals 2010
 # # This file is distributed under the same license as the Gummi package.
 # # Marc Vinyals <marcvinyals@velodius.com>, 2010.
-# Marc Vinyals <marcvinyals@velodius.com>, 2010.
-#
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Marc Vinyals"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"

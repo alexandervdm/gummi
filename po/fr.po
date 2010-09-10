@@ -1,9 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Gummi Translation for French
+# Copyright (C) Yvan Duron 2010
+# This file is distributed under the same license as the Gummi package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Yvan Duron"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"

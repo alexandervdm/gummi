@@ -2,7 +2,11 @@
 # Copyright (C) AZ Huang 2010
 # This file is distributed under the same license as the Gummi package.
 # AZ Huang <aitjcize@gmail.com>, 2010.
-#
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Wei-Ning Huang"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"

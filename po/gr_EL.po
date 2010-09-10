@@ -3,6 +3,11 @@
 # This file is distributed under the same license as the Gummi package.
 # Dimitris Leventeas <mydimle@gmail.com>, 2010.
 #
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Dimitris Leventeas"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"

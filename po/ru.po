@@ -2,6 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # kruvalig <kruvalig@gmail.com>, 2010.
+
+# Add your name to msgstr to have it included in the credits:
+msgid "translator"
+msgstr "Kruvalig"
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
