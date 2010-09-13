@@ -467,6 +467,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Danish: Jack Olsen\n"
         "Dutch: Alexander van der Mey\n"
         "French: Yvan Duron & Olivier Brousse\n"
+        "German: Thomas Niederprüm\n"
         "Greek: Dimitris Leventeas\n"
         "Italian: Salvatore Vassallo\n" 
         "Russian: Kruvalig\n"
