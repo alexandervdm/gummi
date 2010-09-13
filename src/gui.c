@@ -237,7 +237,6 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
 void on_menu_open_activate(GtkWidget *widget, void* user) {
     gchar *filename = NULL;
     gint ret = check_for_save();
-    gint i = 0;
 
     if (GTK_RESPONSE_YES == ret)
         on_menu_save_activate(NULL, NULL);  
@@ -247,22 +246,24 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
     if (filename != NULL) {
         iofunctions_load_file(gummi->editor, filename); 
         gummi_create_environment(gummi, filename);
-
-        /* add to recent list */
-        g_free(gummi->gui->recent_list[2]);
-        for (i = 1; i >= 0; --i)
-            gummi->gui->recent_list[i + 1] = gummi->gui->recent_list[i];
-        gummi->gui->recent_list[0] = g_strdup(filename);
-        display_recent_files(gummi->gui);
+        add_to_recent_list(filename);
     }
 }
 
 void on_menu_save_activate(GtkWidget *widget, void* user) {
     gchar* filename = NULL;
+    gboolean new = FALSE;
+
     if (!gummi->finfo->filename) {
         if ((filename = get_save_filename(FILTER_LATEX))) {
+            if (strcmp(filename + strlen(filename) -4, ".tex")) {
+                filename = g_strdup_printf("%s.tex", filename);
+                new = TRUE;
+            }
             fileinfo_set_filename(gummi->finfo, filename);
             iofunctions_write_file(gummi->editor, filename); 
+            add_to_recent_list(filename);
+            if (new) g_free(filename);
         }
     } else
         iofunctions_write_file(gummi->editor, gummi->finfo->filename); 
@@ -271,11 +272,16 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
 
 void on_menu_saveas_activate(GtkWidget *widget, void* user) {
     gchar* filename = NULL;
-    if (!gummi->finfo->filename)
-        filename = get_save_filename(FILTER_LATEX);
-    if (filename) {
+    gboolean new = FALSE;
+    if ((filename = get_save_filename(FILTER_LATEX))) {
+        if (strcmp(filename + strlen(filename) -4, ".tex")) {
+            filename = g_strdup_printf("%s.tex", filename);
+            new = TRUE;
+        }
         iofunctions_write_file(gummi->editor, filename); 
         gummi_create_environment(gummi, filename);
+        add_to_recent_list(filename);
+        if (new) g_free(filename);
     }
 }
 
@@ -1168,6 +1174,16 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
             break;
     }
 
+}
+
+void add_to_recent_list(gchar* filename) {
+    gint i = 0;
+    /* add to recent list */
+    g_free(gummi->gui->recent_list[2]);
+    for (i = 1; i >= 0; --i)
+        gummi->gui->recent_list[i + 1] = gummi->gui->recent_list[i];
+    gummi->gui->recent_list[0] = g_strdup(filename);
+    display_recent_files(gummi->gui);
 }
 
 void display_recent_files(GummiGui* gui) {

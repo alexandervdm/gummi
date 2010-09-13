@@ -205,6 +205,7 @@ gchar* get_save_filename(GuFilterType type);
 void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type);
 gint check_for_save(void);
 
+void add_to_recent_list(gchar* filename);
 void display_recent_files(GummiGui* gui);
 
 void errorbuffer_set_text(gchar *message);

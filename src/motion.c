@@ -126,6 +126,8 @@ void motion_update_pdffile(GuMotion* mc) {
                                       mc->b_finfo->tmpdir,
                                       mc->b_finfo->workfile);
 
+    gtk_tool_button_set_stock_id(mc->statuslight, "gtk-refresh");
+    while (gtk_events_pending()) gtk_main_iteration();
     pdata cresult = utils_popen_r(command);
     errorbuffer_set_text(cresult.data);
     mc->errorline = cresult.ret;
