@@ -44,7 +44,7 @@
 #define ec_sourceview GTK_TEXT_VIEW(ec->sourceview)
 
 typedef struct _GuEditor {
-    GtkWidget *sourceview;
+    GtkSourceView *sourceview;
     GtkSourceBuffer *sourcebuffer;
     GtkTextTag* errortag;
     GtkTextTag* searchtag;

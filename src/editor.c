@@ -66,7 +66,8 @@ GuEditor* editor_init(GtkBuilder* builder) {
                                                         (manager, "latex");
     GuEditor* ec = (GuEditor*)g_malloc(sizeof(GuEditor));
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
-    ec->sourceview = gtk_source_view_new_with_buffer(ec->sourcebuffer);
+    ec->sourceview =
+        GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));
     ec->errortag = gtk_text_tag_new("error");
     ec->searchtag = gtk_text_tag_new("search");
     ec->editortags = gtk_text_buffer_get_tag_table(ec_sourcebuffer);
@@ -75,7 +76,12 @@ GuEditor* editor_init(GtkBuilder* builder) {
     ec->cur_swap = FALSE;
     
     scroll = GTK_WIDGET (gtk_builder_get_object (builder, "editor_scroll"));
-    gtk_container_add (GTK_CONTAINER (scroll), ec->sourceview);
+    gtk_container_add (GTK_CONTAINER (scroll), GTK_WIDGET(ec->sourceview));
+
+    gtk_source_view_set_tab_width(ec->sourceview,
+            atoi(config_get_value("tabwidth")));
+    gtk_source_view_set_insert_spaces_instead_of_tabs(ec->sourceview,
+            (gboolean)config_get_value("tabs_instof_spaces"));
 
 #ifdef USE_GTKSPELL
     if (config_get_value("spelling"))
@@ -97,7 +103,7 @@ void editor_sourceview_config(GuEditor* ec) {
     const gchar* font = config_get_value("font");
     slog(L_INFO, "setting font to %s\n", font);
     PangoFontDescription* font_desc = pango_font_description_from_string(font);
-    gtk_widget_modify_font(ec->sourceview, font_desc);
+    gtk_widget_modify_font(GTK_WIDGET(ec->sourceview), font_desc);
     pango_font_description_free(font_desc);
 
     gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(ec->sourceview),
