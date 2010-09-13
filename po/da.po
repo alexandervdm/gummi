@@ -1,16 +1,8 @@
-# # Gummi Translation for DA
-# # Copyright (C) Jack Olsen 2010
-# # This file is distributed under the same license as the Gummi package.
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Jack Olsen"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:21+0800\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -249,7 +241,7 @@ msgstr "Find kun blandt hele ord"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr "N/A"
 
@@ -417,11 +409,11 @@ msgstr "_Vis"
 msgid "filter:"
 msgstr "filtrer:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "ingen bibliografi-fil fundet"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr "ingen"
 
@@ -580,38 +572,38 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr "Fejl ved indlæsning af nyere fil: "
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Kompilerer bibliografi-filen"
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 msgid "bibliography compiled without errors"
 msgstr "bibliografien kompilerede uden fejl"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 msgid "error compiling bibliography file"
 msgstr "fejl ved kompilering af bibliografi-filen"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr "Ønsker du at gemme dine ændringer?"
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 msgid "Open File..."
 msgstr "Åben Fil..."
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 msgid "Save File..."
 msgstr "Gem Fil..."
 
@@ -654,6 +646,10 @@ msgstr ""
 "\n"
 "Installeret i øjeblikket:\n"
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr "Opdateringskontrol"
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -666,6 +662,13 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Billedtekst:"
+
+# # Gummi Translation for DA
+# # Copyright (C) Jack Olsen 2010
+# # This file is distributed under the same license as the Gummi package.
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Jack Olsen"
 
 #~ msgid "Save?"
 #~ msgstr "Gem?"
@@ -689,9 +692,6 @@ msgstr "Billedtekst:"
 #~ "Yderligere information er tilgængelig på fanebladet for fejlbeskeder.\n"
 #~ "Ret venligst de viste fejl og klik på dette område\n"
 #~ "for at genindlæse fremvisningspanelet."
-
-#~ msgid "Update Check"
-#~ msgstr "Opdateringskontrol"
 
 #~ msgid ""
 #~ "The server could not be contacted.\n"

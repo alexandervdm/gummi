@@ -1,17 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Salvatore Vassallo"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:21+0800\n"
 "PO-Revision-Date: 2010-06-09 10:02+0100\n"
 "Last-Translator: Salvatore Vassallo <vassallosalvatore@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,7 +243,7 @@ msgstr "Solo parole intere"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr "N/A"
 
@@ -420,11 +411,11 @@ msgstr "Vista"
 msgid "filter:"
 msgstr "filtra:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "nessuna bibliografia trovata"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr "nessuno"
 
@@ -583,38 +574,38 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr "Errore nel caricare un file modificato di recente:"
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilazione della bibliografia..."
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 msgid "bibliography compiled without errors"
 msgstr "bibliografia compilata senza errori"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Errore compilando la bibliografia o nessun file trovato..."
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 msgid "error compiling bibliography file"
 msgstr "errore compilando la bibliografia"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr "Salvare le modifiche al documento?"
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 msgid "Open File..."
 msgstr "Apri file..."
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 msgid "Save File..."
 msgstr "Salva file..."
 
@@ -657,6 +648,10 @@ msgstr ""
 "\n"
 "Attualmente disponibile:\n"
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr "Controlla aggiornamenti"
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -669,6 +664,14 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Didascalia"
+
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Salvatore Vassallo"
 
 #~ msgid "Save?"
 #~ msgstr "Salvare?"
@@ -692,9 +695,6 @@ msgstr "Didascalia"
 #~ "Informazioni aggiuntive sono disponibili nella scheda Output di errore.\n"
 #~ "Correggere gli errori elencati e fare clic su quest'area\n"
 #~ "per caricare nuovamente l'anteprima."
-
-#~ msgid "Update Check"
-#~ msgstr "Controlla aggiornamenti"
 
 #~ msgid ""
 #~ "The server could not be contacted.\n"

@@ -414,27 +414,26 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         (DATADIR"/gummi-beta.png", 60, 60, &err);
     const gchar* authors[] = { "Alexander van der Mey\n"
         "<alexvandermey@gmail.com>",
-            "Wei-Ning Huang\n"
-                "<aitjcize@gmail.com>\n",
-            "Contributors:",
-            "Thomas van der Burgt",
-            "Cameron Grout", NULL };
+        "Wei-Ning Huang\n"
+            "<aitjcize@gmail.com>\n",
+        "Contributors:",
+        "Thomas van der Burgt",
+        "Cameron Grout", NULL };
     const gchar* artists[] = {"Template icon set from:\n"
         "http://www.fatcow.com/free-icons/",
-            "Windows version Icon set from Elemetary Project:\n"
-                "http://www.elementary-project.com/", NULL};
+        "Windows version Icon set from Elemetary Project:\n"
+        "http://www.elementary-project.com/", NULL};
                 
-    const gchar* translators[] = { "hoi\n", NULL};
-        //"Brazilian-Portugese: Fernando Cruz\n",
-        //"Catalan: Marc Vinyals",
-        //"Danish: Jack Olsen",
-        //"Dutch: Alexander van der Mey\n",
-        //"French: Yvan Duron & Olivier Brousse",
-        //"Greek: Dimitris Leventeas",
-        //"Italian: Salvatore Vassallo", 
-        //"Russian: Kruvalig",
-        //"Taiwanese: Wei-Ning Huang",
-       // NULL};
+    const gchar* translators =
+        "Brazilian-Portugese: Fernando Cruz\n"
+        "Catalan: Marc Vinyals\n"
+        "Danish: Jack Olsen\n"
+        "Dutch: Alexander van der Mey\n"
+        "French: Yvan Duron & Olivier Brousse\n"
+        "Greek: Dimitris Leventeas\n"
+        "Italian: Salvatore Vassallo\n" 
+        "Russian: Kruvalig\n"
+        "Taiwanese: Wei-Ning Huang\n";
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
     gtk_window_set_transient_for(GTK_WINDOW(dialog),
@@ -449,7 +448,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
     gtk_about_dialog_set_logo(dialog, icon);
     gtk_about_dialog_set_comments(dialog, PACKAGE_COMMENTS);
     gtk_about_dialog_set_artists(dialog, artists);
-    gtk_about_dialog_set_translator_credits(dialog, _("translator"));
+    gtk_about_dialog_set_translator_credits(dialog, translators);
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(GTK_WIDGET(dialog));
 }

@@ -1,17 +1,8 @@
-# Gummi Translation for zh_TW
-# Copyright (C) AZ Huang 2010
-# This file is distributed under the same license as the Gummi package.
-# AZ Huang <aitjcize@gmail.com>, 2010.
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Wei-Ning Huang"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:22+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -248,7 +239,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr "無"
 
@@ -416,11 +407,11 @@ msgstr "檢視(_V)"
 msgid "filter:"
 msgstr "篩選:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr "無"
 
@@ -577,36 +568,36 @@ msgstr "已達頁尾, 從頁首開始尋找?"
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 msgid "Compiling bibliography file..."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 msgid "bibliography compiled without errors"
 msgstr "參考文獻已成功編譯"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 msgid "Error compiling bibliography file or none detected..."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 msgid "error compiling bibliography file"
 msgstr "編譯參考文獻過程發生錯誤"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 msgid "Open File..."
 msgstr "開啟..."
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 msgid "Save File..."
 msgstr "儲存檔案..."
 
@@ -653,6 +644,10 @@ msgstr ""
 "最新版本:\n"
 "%s"
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr "檢查更新"
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -666,6 +661,14 @@ msgstr ""
 #: ../src/utils.c:128
 msgid "Confirmation"
 msgstr "確認"
+
+# Gummi Translation for zh_TW
+# Copyright (C) AZ Huang 2010
+# This file is distributed under the same license as the Gummi package.
+# AZ Huang <aitjcize@gmail.com>, 2010.
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Wei-Ning Huang"
 
 #~ msgid "Save?"
 #~ msgstr "是否儲存?"
@@ -688,9 +691,6 @@ msgstr "確認"
 #~ "更多的訊息請參照錯誤輸出欄.\n"
 #~ "請在更正錯誤後點選此區域\n"
 #~ "來更新預覽."
-
-#~ msgid "Update Check"
-#~ msgstr "檢查更新"
 
 #~ msgid ""
 #~ "The server could not be contacted.\n"

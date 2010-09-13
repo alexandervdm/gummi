@@ -1,17 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Alexander van der Mey"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:21+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -250,7 +241,7 @@ msgstr "Enkel complete woorden"
 msgid "Matrix"
 msgstr ""
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr ""
 
@@ -419,11 +410,11 @@ msgstr "Bekijk"
 msgid "filter:"
 msgstr ""
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr ""
 
@@ -580,40 +571,40 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compileer bibliografie"
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "Compileer bibliografie"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 msgid "Open File..."
 msgstr ""
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 #, fuzzy
 msgid "Save File..."
 msgstr "Opslaan als"
@@ -657,6 +648,10 @@ msgstr ""
 "\n"
 "Momenteel verkrijgbaar:\n"
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr "Controleer Updates"
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -669,6 +664,14 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Onderschrift:"
+
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Alexander van der Mey"
 
 #, fuzzy
 #~ msgid "Save?"
@@ -686,9 +689,6 @@ msgstr "Onderschrift:"
 #~ "Please correct the listed errors and click this area\n"
 #~ "to reload the preview panel."
 #~ msgstr "PDF preview kon niet genitialiseerd worden."
-
-#~ msgid "Update Check"
-#~ msgstr "Controleer Updates"
 
 #~ msgid ""
 #~ "The server could not be contacted.\n"

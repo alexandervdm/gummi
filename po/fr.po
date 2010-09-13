@@ -1,17 +1,8 @@
-# Gummi Translation for French
-# Copyright (C) Yvan Duron 2010
-# This file is distributed under the same license as the Gummi package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Yvan Duron"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:21+0800\n"
 "PO-Revision-Date: 2010-05-22 19:27:+UTC-2\n"
 "Last-Translator: yvand <yvan.duron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,7 +242,7 @@ msgstr "Mots entiers seulement"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr "non disponible"
 
@@ -420,11 +411,11 @@ msgstr "Affichage"
 msgid "filter:"
 msgstr "Filtre:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr "Aucun"
 
@@ -583,41 +574,41 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compiler Bibliographie"
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "Compiler Bibliographie"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 #, fuzzy
 msgid "Open File..."
 msgstr "Ouvrir"
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 msgid "Save File..."
 msgstr ""
 
@@ -657,6 +648,10 @@ msgid ""
 "%s"
 msgstr ""
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr ""
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -669,6 +664,14 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Légende:"
+
+# Gummi Translation for French
+# Copyright (C) Yvan Duron 2010
+# This file is distributed under the same license as the Gummi package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Yvan Duron"
 
 #, fuzzy
 #~ msgid "Save?"

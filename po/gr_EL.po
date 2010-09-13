@@ -1,18 +1,8 @@
-# Gummi Translation for Greek
-# Copyright (C) Dimitris Leventeas 2010
-# This file is distributed under the same license as the Gummi package.
-# Dimitris Leventeas <mydimle@gmail.com>, 2010.
-#
-
-# Add your name to msgstr to have it included in the credits:
-msgid "translator"
-msgstr "Dimitris Leventeas"
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 10:02+0800\n"
+"POT-Creation-Date: 2010-09-13 13:21+0800\n"
 "PO-Revision-Date: 2010-05-24 14:43+0200\n"
 "Last-Translator: Dimitris Leventeas <mydimle@gmail.com>\n"
 "Language-Team: EL <mydimle@gmail.com>>\n"
@@ -254,7 +244,7 @@ msgstr "Ταίριαξε ολόκληρη λέξη μόνο"
 msgid "Matrix"
 msgstr "Μητρώο"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:653
+#: ../data/gummi.glade.h:66 ../src/gui.c:665
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
@@ -422,11 +412,11 @@ msgstr "_Επισκόπιση"
 msgid "filter:"
 msgstr "φίλτρο:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:651
+#: ../data/gummi.glade.h:108 ../src/gui.c:663
 msgid "no bibliography file detected"
 msgstr "Δεν βρέθηκε αρχείο βιβλιογραφίας"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:652
+#: ../data/gummi.glade.h:109 ../src/gui.c:664
 msgid "none"
 msgstr "κανένα"
 
@@ -585,38 +575,38 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr "Σφάλμα φορτώνοντας πρόσφατο αρχείο: "
 
-#: ../src/gui.c:614
+#: ../src/gui.c:626
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../src/gui.c:616
+#: ../src/gui.c:628
 msgid "bibliography compiled without errors"
 msgstr "Η βιβλιογραφία μεταφράστηκε χωρίς λάθη"
 
-#: ../src/gui.c:618
+#: ../src/gui.c:630
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Λάθος μεταφράζοντας το αρχείο βιβλιογραφίας ή δεν βρέθηκε κάποιο"
 
-#: ../src/gui.c:621
+#: ../src/gui.c:633
 msgid "error compiling bibliography file"
 msgstr "λάθος μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../src/gui.c:645
+#: ../src/gui.c:657
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1074
+#: ../src/gui.c:1086
 msgid "Do you want to save the changes you have made?"
 msgstr "Θέλετε να αποθηκεύσετε τις αλλαγές που κάνατε;"
 
-#: ../src/gui.c:1083
+#: ../src/gui.c:1095
 msgid "Open File..."
 msgstr "Άνοιγμα Αρχείου..."
 
-#: ../src/gui.c:1105
+#: ../src/gui.c:1117
 msgid "Save File..."
 msgstr "Αποθήκευση Αρχείου..."
 
@@ -659,6 +649,10 @@ msgstr ""
 "\n"
 "Τρέχοντα διαθέσιμα:\n"
 
+#: ../src/updatecheck.c:115
+msgid "Update Check"
+msgstr "Έλεγχος Αναβάθμισης"
+
 #: ../src/utils.c:88
 #, c-format
 msgid ""
@@ -671,6 +665,15 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Λεζάντα"
+
+# Gummi Translation for Greek
+# Copyright (C) Dimitris Leventeas 2010
+# This file is distributed under the same license as the Gummi package.
+# Dimitris Leventeas <mydimle@gmail.com>, 2010.
+#
+# Add your name to msgstr to have it included in the credits:
+#~ msgid "translator"
+#~ msgstr "Dimitris Leventeas"
 
 #~ msgid "Save?"
 #~ msgstr "Αποθήκευση;"
@@ -694,9 +697,6 @@ msgstr "Λεζάντα"
 #~ "Επιπρόσθετη πληροφορία είναι διαθέσιμη στη καρτέλα Έξοδος Σφάλματος.\n"
 #~ "Παρακαλώ διορθώστε τα λάθη που παρατίθενται και κάντε κλικ σε αυτή\n"
 #~ "την περιοχή για να επαναφορτώσετε το υποπαράθυρο προεπισκόπισης."
-
-#~ msgid "Update Check"
-#~ msgstr "Έλεγχος Αναβάθμισης"
 
 #~ msgid ""
 #~ "The server could not be contacted.\n"
