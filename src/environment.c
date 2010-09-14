@@ -50,6 +50,7 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
     L_F_DEBUG;
 
     fileinfo_update(gc->finfo, filename);
+    slog(L_INFO, "\n");
     slog(L_INFO, "Environment created for:\n");
     slog(L_INFO, "TEX: %s\n", gc->finfo->filename);
     slog(L_INFO, "TMP: %s\n", gc->finfo->workfile);
