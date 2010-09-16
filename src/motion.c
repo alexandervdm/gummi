@@ -93,9 +93,9 @@ void motion_update_workfile(GuMotion* mc) {
     /* save selection */
     gtk_text_buffer_get_selection_bounds(
             GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
-    gtk_widget_set_sensitive(mc->b_editor->sourceview, FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(mc->b_editor->sourceview), FALSE);
     text = editor_grab_buffer(mc->b_editor);
-    gtk_widget_set_sensitive(mc->b_editor->sourceview, TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(mc->b_editor->sourceview), TRUE);
     
     /* restore selection */
     gtk_text_buffer_select_range(
@@ -111,7 +111,7 @@ void motion_update_workfile(GuMotion* mc) {
     g_free(text);
     fclose(fp);
     // TODO: Maybe add editorviewer grab focus line here if necessary
-    gtk_widget_grab_focus(mc->b_editor->sourceview);
+    gtk_widget_grab_focus(GTK_WIDGET(mc->b_editor->sourceview));
 }
 
 void motion_update_pdffile(GuMotion* mc) {
@@ -226,10 +226,12 @@ void motion_update_errortags(GuMotion* mc) {
 gboolean motion_updatepreview(void* user) {
     L_F_DEBUG;
     GuMotion* mc = (GuMotion*)user;
-    motion_update_workfile(mc);
-    motion_update_pdffile(mc);
-    motion_update_errortags(mc);
-    preview_refresh(mc->b_preview);
+    if (mc->modified_since_compile) {
+      motion_update_workfile(mc);
+      motion_update_pdffile(mc);
+      motion_update_errortags(mc);
+      preview_refresh(mc->b_preview);
+    }
     return 0 != strcmp(config_get_value("compile_scheme"), "on_idle");
 }
 

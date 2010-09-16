@@ -93,7 +93,6 @@ int main (int argc, char *argv[]) {
     strncat(configname, "gummi.cfg", 128 - strlen(configname) -1);
     config_init(configname);
     slog(L_INFO, "configuration file: %s\n", configname);
-    config_get_value("wtf");
 
     /* initialize gtk */
     gtk_init (&argc, &argv);

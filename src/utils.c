@@ -104,7 +104,7 @@ void slog(gint level, const gchar *fmt, ...) {
         else if (L_IS_TYPE(level, L_G_INFO))
             gtk_window_set_title(GTK_WINDOW(dialog), "Info");
 
-        gtk_dialog_run(GTK_DIALOG(dialog));      
+        gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
     }
 
