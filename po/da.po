@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-13 13:21+0800\n"
+"POT-Creation-Date: 2010-09-17 16:18+0800\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -241,7 +241,7 @@ msgstr "Find kun blandt hele ord"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:665
+#: ../data/gummi.glade.h:66 ../src/gui.c:765
 msgid "N/A"
 msgstr "N/A"
 
@@ -409,11 +409,11 @@ msgstr "_Vis"
 msgid "filter:"
 msgstr "filtrer:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:663
+#: ../data/gummi.glade.h:108 ../src/gui.c:763
 msgid "no bibliography file detected"
 msgstr "ingen bibliografi-fil fundet"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:664
+#: ../data/gummi.glade.h:109 ../src/gui.c:764
 msgid "none"
 msgstr "ingen"
 
@@ -494,116 +494,161 @@ msgid "Highlighting:"
 msgstr "Fremhævning:"
 
 #: ../data/prefs.glade.h:12
+msgid "Insert _spaces instead of tabs"
+msgstr ""
+
+#: ../data/prefs.glade.h:13
 msgid "Line numbers:"
 msgstr "Linienumre:"
 
-#: ../data/prefs.glade.h:13
+#: ../data/prefs.glade.h:14
 msgid "None"
 msgstr "Ingen"
 
-#: ../data/prefs.glade.h:14
+#: ../data/prefs.glade.h:15
 msgid "PDF Compiling"
 msgstr "PDF-kompilering"
 
-#: ../data/prefs.glade.h:15
+#: ../data/prefs.glade.h:16
 msgid "PDF Compiling:"
 msgstr "PDF kompilerer:"
 
-#: ../data/prefs.glade.h:16
+#: ../data/prefs.glade.h:17
 msgid "Spell check language:"
 msgstr "Stavekontrolsprog:"
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:18
+msgid "Tab Stops:"
+msgstr ""
+
+#: ../data/prefs.glade.h:19
+msgid "Tab width:"
+msgstr ""
+
+#: ../data/prefs.glade.h:20
 msgid "Text wrapping:"
 msgstr "Tekstombrydning:"
 
-#: ../data/prefs.glade.h:18
+#: ../data/prefs.glade.h:21
 msgid "Typesetter command:"
 msgstr "Skriftvalgskommando:"
 
-#: ../data/prefs.glade.h:19
+#: ../data/prefs.glade.h:22
 msgid "View"
 msgstr "Vis"
 
-#: ../data/prefs.glade.h:20
+#: ../data/prefs.glade.h:23
 msgid "_Autosave files every"
 msgstr "Gem _automatisk hvert"
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:24
 msgid "_Reset defaults"
 msgstr "_Nulstil til standardinstilling"
 
-#: ../data/prefs.glade.h:22
+#: ../data/prefs.glade.h:25
 #, fuzzy
 msgid "compile every"
 msgstr "Kompiler _automatisk hvert"
 
-#: ../data/prefs.glade.h:23
+#: ../data/prefs.glade.h:26
 #, fuzzy
 msgid "compile when idle for "
 msgstr "Kompiler _automatisk hvert"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:27
 msgid "minutes"
 msgstr "minutter"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:28
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:29
 msgid "seconds"
 msgstr "sekunder"
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:30
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:375
+#: ../src/editor.c:381
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:382
+#: ../src/editor.c:388
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/gui.c:223
+#: ../src/gui.c:231
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
 msgstr "Fejl ved indlæsning af nyere fil: "
 
-#: ../src/gui.c:626
+#: ../src/gui.c:430
+#, fuzzy
+msgid "Words in text"
+msgstr "Fremhævet tekst"
+
+#: ../src/gui.c:431
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui.c:432
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui.c:433
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui.c:434
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui.c:435
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui.c:436
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui.c:462
+msgid "Document Statistic"
+msgstr ""
+
+#: ../src/gui.c:725
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Kompilerer bibliografi-filen"
 
-#: ../src/gui.c:628
+#: ../src/gui.c:727
 msgid "bibliography compiled without errors"
 msgstr "bibliografien kompilerede uden fejl"
 
-#: ../src/gui.c:630
+#: ../src/gui.c:729
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
 
-#: ../src/gui.c:633
+#: ../src/gui.c:732
 msgid "error compiling bibliography file"
 msgstr "fejl ved kompilering af bibliografi-filen"
 
-#: ../src/gui.c:657
+#: ../src/gui.c:757
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1086
+#: ../src/gui.c:1239
 msgid "Do you want to save the changes you have made?"
 msgstr "Ønsker du at gemme dine ændringer?"
 
-#: ../src/gui.c:1095
+#: ../src/gui.c:1249
 msgid "Open File..."
 msgstr "Åben Fil..."
 
-#: ../src/gui.c:1117
+#: ../src/gui.c:1272
 msgid "Save File..."
 msgstr "Gem Fil..."
 

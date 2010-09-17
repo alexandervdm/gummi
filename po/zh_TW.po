@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-13 13:22+0800\n"
+"POT-Creation-Date: 2010-09-17 16:18+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -239,7 +239,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:665
+#: ../data/gummi.glade.h:66 ../src/gui.c:765
 msgid "N/A"
 msgstr "無"
 
@@ -407,11 +407,11 @@ msgstr "檢視(_V)"
 msgid "filter:"
 msgstr "篩選:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:663
+#: ../data/gummi.glade.h:108 ../src/gui.c:763
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:664
+#: ../data/gummi.glade.h:109 ../src/gui.c:764
 msgid "none"
 msgstr "無"
 
@@ -492,112 +492,159 @@ msgid "Highlighting:"
 msgstr "高亮:"
 
 #: ../data/prefs.glade.h:12
+msgid "Insert _spaces instead of tabs"
+msgstr ""
+
+#: ../data/prefs.glade.h:13
 msgid "Line numbers:"
 msgstr "行號:"
 
-#: ../data/prefs.glade.h:13
+#: ../data/prefs.glade.h:14
 msgid "None"
 msgstr "無"
 
-#: ../data/prefs.glade.h:14
+#: ../data/prefs.glade.h:15
 msgid "PDF Compiling"
 msgstr "PDF編譯"
 
-#: ../data/prefs.glade.h:15
+#: ../data/prefs.glade.h:16
 msgid "PDF Compiling:"
 msgstr "PDF編譯:"
 
-#: ../data/prefs.glade.h:16
+#: ../data/prefs.glade.h:17
 msgid "Spell check language:"
 msgstr "拼字檢查語言:"
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:18
+msgid "Tab Stops:"
+msgstr ""
+
+#: ../data/prefs.glade.h:19
+#, fuzzy
+msgid "Tab width:"
+msgstr "取代為:"
+
+#: ../data/prefs.glade.h:20
 msgid "Text wrapping:"
 msgstr "文字換行:"
 
-#: ../data/prefs.glade.h:18
+#: ../data/prefs.glade.h:21
 msgid "Typesetter command:"
 msgstr "排版指令:"
 
-#: ../data/prefs.glade.h:19
+#: ../data/prefs.glade.h:22
 msgid "View"
 msgstr "檢示"
 
-#: ../data/prefs.glade.h:20
+#: ../data/prefs.glade.h:23
 msgid "_Autosave files every"
 msgstr "自動儲存間隔(A)"
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:24
 msgid "_Reset defaults"
 msgstr "重設為預設(_R)"
 
-#: ../data/prefs.glade.h:22
+#: ../data/prefs.glade.h:25
 msgid "compile every"
 msgstr "自動編譯間隔"
 
-#: ../data/prefs.glade.h:23
+#: ../data/prefs.glade.h:26
 msgid "compile when idle for "
 msgstr "自動編譯: 當閒罝"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:27
 msgid "minutes"
 msgstr "分鐘"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:28
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:29
 msgid "seconds"
 msgstr "秒"
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:30
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:375
+#: ../src/editor.c:381
 msgid "Top reached, search from bottom?"
 msgstr "已達頁首, 從頁尾開始尋找?"
 
-#: ../src/editor.c:382
+#: ../src/editor.c:388
 msgid "Bottom reached, search from top?"
 msgstr "已達頁尾, 從頁首開始尋找?"
 
-#: ../src/gui.c:223
+#: ../src/gui.c:231
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui.c:626
+#: ../src/gui.c:430
+#, fuzzy
+msgid "Words in text"
+msgstr "粗體"
+
+#: ../src/gui.c:431
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui.c:432
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui.c:433
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui.c:434
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui.c:435
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui.c:436
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui.c:462
+#, fuzzy
+msgid "Document Statistic"
+msgstr "文件資訊(_D)"
+
+#: ../src/gui.c:725
 msgid "Compiling bibliography file..."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui.c:628
+#: ../src/gui.c:727
 msgid "bibliography compiled without errors"
 msgstr "參考文獻已成功編譯"
 
-#: ../src/gui.c:630
+#: ../src/gui.c:729
 msgid "Error compiling bibliography file or none detected..."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui.c:633
+#: ../src/gui.c:732
 msgid "error compiling bibliography file"
 msgstr "編譯參考文獻過程發生錯誤"
 
-#: ../src/gui.c:657
+#: ../src/gui.c:757
 #, c-format
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui.c:1086
+#: ../src/gui.c:1239
 msgid "Do you want to save the changes you have made?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui.c:1095
+#: ../src/gui.c:1249
 msgid "Open File..."
 msgstr "開啟..."
 
-#: ../src/gui.c:1117
+#: ../src/gui.c:1272
 msgid "Save File..."
 msgstr "儲存檔案..."
 

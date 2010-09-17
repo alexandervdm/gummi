@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-13 13:21+0800\n"
+"POT-Creation-Date: 2010-09-17 16:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -241,7 +241,7 @@ msgstr "Enkel complete woorden"
 msgid "Matrix"
 msgstr ""
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:665
+#: ../data/gummi.glade.h:66 ../src/gui.c:765
 msgid "N/A"
 msgstr ""
 
@@ -410,11 +410,11 @@ msgstr "Bekijk"
 msgid "filter:"
 msgstr ""
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:663
+#: ../data/gummi.glade.h:108 ../src/gui.c:763
 msgid "no bibliography file detected"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:664
+#: ../data/gummi.glade.h:109 ../src/gui.c:764
 msgid "none"
 msgstr ""
 
@@ -495,116 +495,163 @@ msgid "Highlighting:"
 msgstr "Markering:"
 
 #: ../data/prefs.glade.h:12
+msgid "Insert _spaces instead of tabs"
+msgstr ""
+
+#: ../data/prefs.glade.h:13
 msgid "Line numbers:"
 msgstr "Regelnummers:"
 
-#: ../data/prefs.glade.h:13
+#: ../data/prefs.glade.h:14
 msgid "None"
 msgstr ""
 
-#: ../data/prefs.glade.h:14
+#: ../data/prefs.glade.h:15
 msgid "PDF Compiling"
 msgstr "PDF Compilatie"
 
-#: ../data/prefs.glade.h:15
+#: ../data/prefs.glade.h:16
 msgid "PDF Compiling:"
 msgstr "PDF Compilatie:"
 
-#: ../data/prefs.glade.h:16
+#: ../data/prefs.glade.h:17
 msgid "Spell check language:"
 msgstr "Spell checker taal:"
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:18
+msgid "Tab Stops:"
+msgstr ""
+
+#: ../data/prefs.glade.h:19
+#, fuzzy
+msgid "Tab width:"
+msgstr "Vervangen door:"
+
+#: ../data/prefs.glade.h:20
 msgid "Text wrapping:"
 msgstr "Regelafbreking:"
 
-#: ../data/prefs.glade.h:18
+#: ../data/prefs.glade.h:21
 msgid "Typesetter command:"
 msgstr "Typesetter commando:"
 
-#: ../data/prefs.glade.h:19
+#: ../data/prefs.glade.h:22
 msgid "View"
 msgstr "Beeld"
 
-#: ../data/prefs.glade.h:20
+#: ../data/prefs.glade.h:23
 msgid "_Autosave files every"
 msgstr "Automatisch bestanden opslaan elke"
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:24
 msgid "_Reset defaults"
 msgstr "Herstel standaarden"
 
-#: ../data/prefs.glade.h:22
+#: ../data/prefs.glade.h:25
 msgid "compile every"
 msgstr "compileer elke"
 
-#: ../data/prefs.glade.h:23
+#: ../data/prefs.glade.h:26
 msgid "compile when idle for "
 msgstr "compileer wanneer idle voor"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:27
 msgid "minutes"
 msgstr "minuten"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:28
 msgid "pdflatex"
 msgstr ""
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:29
 msgid "seconds"
 msgstr "seconden"
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:30
 msgid "xelatex"
 msgstr ""
 
-#: ../src/editor.c:375
+#: ../src/editor.c:381
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:382
+#: ../src/editor.c:388
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/gui.c:223
+#: ../src/gui.c:231
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:626
+#: ../src/gui.c:430
+#, fuzzy
+msgid "Words in text"
+msgstr "Vette tekst"
+
+#: ../src/gui.c:431
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui.c:432
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui.c:433
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui.c:434
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui.c:435
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui.c:436
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui.c:462
+#, fuzzy
+msgid "Document Statistic"
+msgstr "Document statistieken"
+
+#: ../src/gui.c:725
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compileer bibliografie"
 
-#: ../src/gui.c:628
+#: ../src/gui.c:727
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui.c:630
+#: ../src/gui.c:729
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui.c:633
+#: ../src/gui.c:732
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "Compileer bibliografie"
 
-#: ../src/gui.c:657
+#: ../src/gui.c:757
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1086
+#: ../src/gui.c:1239
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1095
+#: ../src/gui.c:1249
 msgid "Open File..."
 msgstr ""
 
-#: ../src/gui.c:1117
+#: ../src/gui.c:1272
 #, fuzzy
 msgid "Save File..."
 msgstr "Opslaan als"
