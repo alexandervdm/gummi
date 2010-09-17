@@ -74,6 +74,8 @@ void motion_initial_preview(GuMotion* mc) {
     motion_update_pdffile(mc);
     motion_update_errortags(mc);
 
+    /* force the preview to refresh to trash previous document */
+    mc->modified_since_compile = TRUE;
     /* check for error and see if need to go into error mode */
     if (mc->errorline)
         motion_setup_preview_error_mode(mc);
