@@ -62,11 +62,13 @@ void template_setup() {
 }
 
 gchar* template_open_selected() {
+    gchar *bla;
+    bla = "bla";
     // get selected identifier
     // look it up in config file
     // file open and read
     // return contents of file
-    return "bla";
+    return bla;
 }
 
 
