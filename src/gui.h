@@ -47,6 +47,7 @@ typedef struct _GuPrefsGui {
     GtkCheckButton* compile_status;
     GtkSpinButton* tabwidth;
     GtkCheckButton* spaces_instof_tabs;
+    GtkCheckButton* autoindentation;
     GtkSpinButton* autosave_timer;
     GtkComboBox* combo_languages;
     GtkListStore* list_languages;

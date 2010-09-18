@@ -52,6 +52,7 @@ const gchar config_str[] =
 "wordwrapping = True\n"
 "tabwidth = 8\n"
 "spaces_instof_tabs = False\n"
+"autoindentation = True\n"
 "spelling = False\n"
 "toolbar = True\n"
 "statusbar = True\n"

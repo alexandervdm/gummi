@@ -875,6 +875,8 @@ GuPrefsGui* prefsgui_init(GummiGui* gui) {
         GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "tabwidth"));
     p->spaces_instof_tabs =
         GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "spaces_instof_tabs"));
+    p->autoindentation =
+        GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "autoindentation"));
     p->autosaving =
         GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "autosaving")); 
     p->compile_status =
@@ -983,6 +985,8 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
             (gboolean)config_get_value("compile_status"));
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefs->spaces_instof_tabs),
             (gboolean)config_get_value("spaces_instof_tabs"));
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefs->autoindentation),
+            (gboolean)config_get_value("autoindentation"));
 
     if (!config_get_value("autosaving"))
         gtk_widget_set_sensitive(GTK_WIDGET(prefs->autosave_timer), FALSE);
@@ -1095,6 +1099,13 @@ void toggle_spaces_instof_tabs(GtkWidget* widget, void* user) {
     config_set_value("spaces_instof_tabs", newval? "True": "False");
     gtk_source_view_set_insert_spaces_instead_of_tabs(
             gummi->editor->sourceview, newval);
+}
+
+void toggle_autoindentation(GtkWidget* widget, void* user) {
+    L_F_DEBUG;
+    gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+    config_set_value("autoindentation", newval? "True": "False");
+    gtk_source_view_set_auto_indent(gummi->editor->sourceview, newval);
 }
 
 void toggle_autosaving(GtkWidget* widget, void* user) {
