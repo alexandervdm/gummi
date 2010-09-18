@@ -30,46 +30,60 @@
 #ifndef GUMMI_CONFIGFILE
 #define GUMMI_CONFIGFILE
 
+#include <stdio.h>
+
 #include <glib.h>
 
-#define CONFIG_MAX 128
 #define BUF_MAX BUFSIZ / 8
 
-typedef struct _finfo {
-    gchar** pbuf;
-    int len;
-} finfo;
+/* Macros for handling configuration for both Gummi and Template */
+#define CONFIG_NAME(type) ((0 == type)?config_filename: templcfg_filename)
+
+#define config_init(NAME) configfile_init(NAME, 0)
+#define config_set_default() configfile_set_default(0)
+#define config_set_value(TERM, VALUE) configfile_set_value(0, TERM, VALUE)
+#define config_get_value(TERM) configfile_get_value(0, TERM)
+
+#define templcfg_init(NAME) configfile_init(NAME, 1)
+#define templcfg_set_default() configfile_set_default(1)
+#define templcfg_set_value(TERM, VALUE) configfile_set_value(1, TERM, VALUE)
+#define templcfg_get_value(TERM) configfile_get_value(1, TERM)
+
+typedef struct _slist {
+    gchar line[BUF_MAX];
+    struct _slist* next;
+} slist;
 
 /**
  * @brief initialize config file
  * @param filename filename of the configuration file
  */
-void config_init(const gchar* filename);
+void configfile_init(const gchar* filename, gint type);
 
 /**
  * @brief reset settings to default
  */
-void config_set_default(void);
+void configfile_set_default(gint type);
 
 /**
  * @brief get value of a setting
  * @param term the name of the setting
  * @return a pointer that points to the static gchar* of the setting value. If
- * the value type is boolean, config_get_value will return NULL for False
+ * the value type is boolean, configfile_get_value will return NULL for False
  * and non-NULL for True
  */
-const gchar* config_get_value(const gchar* term);
+const gchar* configfile_get_value(gint type, const gchar* term);
 
 /**
  * @brief set value of a setting
  * @param term the name of the setting
  * @param value the value of the setting
  */
-void config_set_value(const gchar* term, const gchar* value);
+void configfile_set_value(gint type, const gchar* term, const gchar* value);
 
 /* [Internal] */
-finfo config_load(void); 
-void config_save(finfo fin);
-int config_find_index_of(gchar** pbuf, const gchar* term);
+slist* configfile_load(gint type);
+void configfile_save(gint type, slist* head);
+slist* configfile_find_index_of(slist* head, const gchar* term);
 
 #endif /* GUMMI_CONFIGFILE */

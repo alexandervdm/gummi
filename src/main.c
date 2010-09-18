@@ -27,7 +27,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fcntl.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
@@ -35,7 +34,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>
 
 #include "configfile.h"
 #include "environment.h"
@@ -60,7 +58,7 @@ void on_window_destroy (GtkObject *object, gpointer user_data) {
 }
 
 int main (int argc, char *argv[]) {
-    gchar configname[128];
+    gchar* configname;
     GtkBuilder* builder;
     GummiGui* gui;
     GuFileInfo* finfo;
@@ -85,12 +83,8 @@ int main (int argc, char *argv[]) {
     slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
     /* set up configuration file */
-    snprintf(configname, 128, "%s%cgummi", g_get_user_config_dir(),
-            G_DIR_SEPARATOR);
-    g_mkdir_with_parents(configname,
-            S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-    strncat(configname, G_DIR_SEPARATOR_S, 128 - strlen(configname) -1);
-    strncat(configname, "gummi.cfg", 128 - strlen(configname) -1);
+    configname = g_strdup_printf("%s%cgummi%cgummi.cfg",
+            g_get_user_config_dir(), G_DIR_SEPARATOR, G_DIR_SEPARATOR);
     config_init(configname);
     slog(L_INFO, "configuration file: %s\n", configname);
 

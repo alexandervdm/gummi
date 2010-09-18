@@ -938,7 +938,6 @@ GuPrefsGui* prefsgui_init(GummiGui* gui) {
     gtk_container_remove(GTK_CONTAINER(hbox10), GTK_WIDGET(p->combo_languages));
 #endif
 
-    prefsgui_set_current_settings(p);
     gtk_builder_connect_signals(builder, NULL);
 
     return p;
@@ -946,6 +945,7 @@ GuPrefsGui* prefsgui_init(GummiGui* gui) {
 
 void prefsgui_main(void) {
     L_F_DEBUG;
+    prefsgui_set_current_settings(gummi->gui->prefsgui);
     gtk_widget_show_all(GTK_WIDGET(gummi->gui->prefsgui->prefwindow));
 }
 
@@ -961,6 +961,7 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
 
     PangoFontDescription* font_desc = pango_font_description_from_string(font);
     gtk_widget_modify_font(GTK_WIDGET(prefs->default_text), font_desc);
+    gtk_widget_modify_font(GTK_WIDGET(gummi->editor->sourceview), font_desc);
     pango_font_description_free(font_desc);
 
     /* set all checkboxs */
