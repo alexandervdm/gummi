@@ -1,9 +1,9 @@
 [Desktop Entry]
-Version=@PACKAGE_VERSION@
+Version=1.0
 Name=@PACKAGE_NAME@
 GenericName=LaTeX Editor
 Comment=Simple LaTeX Editor
-Exec=@PACKAGE@
+Exec=@PACKAGE@ %F
 Icon=@PACKAGE@
 Terminal=false
 Type=Application
