@@ -219,9 +219,9 @@ void motion_export_pdffile(GuMotion* mc, const gchar* path) {
 void motion_update_errortags(GuMotion* mc) {
     L_F_DEBUG;
     if (mc->errorline)
-        editor_apply_errortags(mc->b_editor, mc->errorline, mc->last_errorline);
+        editor_apply_errortags(mc->b_editor, mc->errorline);
     if (mc->last_errorline && !mc->errorline)
-        editor_apply_errortags(mc->b_editor, 0, mc->last_errorline);
+        editor_apply_errortags(mc->b_editor, 0);
     mc->last_errorline = mc->errorline;
 }
 
