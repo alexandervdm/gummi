@@ -276,7 +276,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
 
 void editor_apply_errortags(GuEditor* ec, gint line) {
     L_F_DEBUG;
-    GtkTextIter start, end, current;
+    GtkTextIter start, end, error;
     /* remove the tag from the table if it is in threre */
     if (gtk_text_tag_table_lookup(ec->editortags, "error"))
         gtk_text_tag_table_remove(ec->editortags, ec->errortag);
@@ -286,11 +286,12 @@ void editor_apply_errortags(GuEditor* ec, gint line) {
         gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &start, line -1);
         gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &end, line);
         gtk_text_buffer_apply_tag(ec_sourcebuffer, ec->errortag, &start, &end);
-        /* Bug #106 */
-        editor_get_current_iter(ec, &current);
-        if (line != gtk_text_iter_get_line(&current) + 1)
-            gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
-        editor_scroll_to_cursor(ec);
+        /* scroll to the error line without touching the curosr */
+        gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &error, line);
+        gtk_text_buffer_create_mark(ec_sourcebuffer, "error", &error, TRUE);
+        gtk_text_view_scroll_to_mark(ec_sourceview, 
+            gtk_text_buffer_get_mark(ec_sourcebuffer, "error"),
+            0.25, FALSE, 0.0, 0.0);
     }
 }
 
