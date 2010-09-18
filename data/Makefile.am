@@ -7,7 +7,7 @@ pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = $(PACKAGE).png
 
 imagesdir = $(datadir)/$(PACKAGE)
-images_DATA = $(PACKAGE).png icon.png article.png book.png letter.png report.png
+images_DATA = $(PACKAGE).png icon.png
 
 gladedir = $(datadir)/$(PACKAGE)
 glade_DATA = gummi.glade prefs.glade

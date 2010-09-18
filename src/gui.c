@@ -498,9 +498,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Contributors:",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };
-    const gchar* artists[] = {"Template icon set from:\n"
-        "http://www.fatcow.com/free-icons/",
-        "Windows version Icon set from Elemetary Project:\n"
+    const gchar* artists[] = {"Windows version Icon set from Elemetary Project:\n"
         "http://www.elementary-project.com/", NULL};
                 
     const gchar* translators =
