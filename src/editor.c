@@ -287,7 +287,8 @@ void editor_apply_errortags(GuEditor* ec, gint line, gint prev_line) {
         gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &end, line);
         gtk_text_buffer_apply_tag(ec_sourcebuffer, ec->errortag, &start, &end);
         /* Bug #106 */
-        if (!prev_line) gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
+        if (line != prev_line)
+          gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
         editor_scroll_to_cursor(ec);
     }
 }
