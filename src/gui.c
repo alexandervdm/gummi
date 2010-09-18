@@ -208,6 +208,7 @@ void on_menu_new_activate(GtkWidget *widget, void* user) {
 
 void on_menu_template_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
+    gtk_list_store_clear(gummi->templ->list_templates);
     template_setup(gummi->templ);
     gtk_widget_show_all(GTK_WIDGET(gummi->templ->templatewindow));
 }
@@ -617,6 +618,7 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* text, gp
     if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
         gtk_list_store_set(gummi->templ->list_templates, &iter, 0, text, -1);
     }
+    printf("TODO: move or create template file\n");
 }
 
 
