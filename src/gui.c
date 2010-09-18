@@ -574,9 +574,20 @@ void on_tool_textstyle_right_activate(GtkWidget* widget, void* user) {
     editor_set_selection_textstyle(gummi->editor, "tool_right");
 }
 
-void on_button_template_ok_clicked(GtkWidget* widget, void* user) {
+
+
+void on_button_template_add_clicked(GtkWidget* widget, void* user) {
+    gchar *doc = editor_grab_buffer(gummi->editor);
+    template_add_new_entry(gummi->templ, doc);
+}
+
+void on_button_template_remove_clicked(GtkWidget* widget, void* user) {
+    template_remove_entry(gummi->templ);
+}
+
+void on_button_template_open_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
-    const gchar* text = template_get(gummi->templ);
+    const gchar* text = template_open_selected(gummi->templ);
     if (text) {
         editor_fill_buffer(gummi->editor, text);
         gummi_create_environment(gummi, NULL);
@@ -584,10 +595,24 @@ void on_button_template_ok_clicked(GtkWidget* widget, void* user) {
     }
 }
 
-void on_button_template_cancel_clicked(GtkWidget* widget, void* user) {
+void on_button_template_close_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
 }
+
+void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* text, gpointer data) {
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    GtkTreeSelection *selection;
+    
+    model = gtk_tree_view_get_model(gummi->templ->templateview);
+    selection = gtk_tree_view_get_selection(gummi->templ->templateview);
+    
+    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+        gtk_list_store_set(gummi->templ->list_templates, &iter, 0, text, -1);
+    }
+}
+
 
 gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;

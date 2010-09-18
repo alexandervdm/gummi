@@ -31,109 +31,74 @@
 #include "template.h"
 
 #include <stdlib.h>
-
 #include <glib.h>
 #include <gtk/gtk.h>
 
 #include "environment.h"
 #include "utils.h"
 
-gchar* template_article = 
-"\\documentclass{article}\n"
-"\\author{[YOUR NAME]\\\\\n"
-"\\texttt{[YOUR EMAIL]}\n"
-"}\n"
-"\\title{[TITLE OF YOUR ARTICLE]}\n"
-"\\begin{document}\n"
-"\\maketitle\n"
-"\\dots\n"
-"\n"
-"\\end{document}\n";
-
-gchar* template_book =
-"\\documentclass[12pt]{book}\n"
-"\n"
-"\\begin{document}\n"
-"\n"
-"\\chapter*{\\Huge \\center [BOOKTITLE] }\n"
-"\\thispagestyle{empty}\n"
-"\\section*{\\huge \\center [AUTHOR]}\n"
-"\\newpage\n"
-"\n"
-"\\subsection*{\\center \\normalsize Copyright \\copyright [YEAR] [NAME]}\n"
-"\\subsection*{\\center \\normalsize All rights reserved.}\n"
-"\\subsection*{\\center \\normalsize ISBN \\dots}\n"
-"\\subsection*{\\center \\normalsize Publications}\n"
-"\n"
-"\\tableofcontents\n"
-"\n"
-"\\mainmatter\n"
-"\\chapter{[CHAPTER1-TITLE]}\n"
-"\\dots\n"
-"\\chapter{[CHAPTER2-TITLE]}\n"
-"\\dots\n"
-"\\backmatter\n"
-"\n"
-"\\end{document}\n";
-
-gchar* template_letter =
-"\\documentclass{letter}\n"
-"\n"
-"\\signature{[YOURNAME]}\n"
-"\\address{[YOURADDRESS]}\n"
-"\n"
-"\\begin{document}\n"
-"\\begin{letter}{Company name \\\\ Street\\\\ City\\\\ Country}\n"
-"\\opening{[HEADING]}\n"
-"\n"
-"\\dots\\\\\\dots\\\\\\dots\\\\\\dots\\\\\\dots\n"
-"\n"
-"\\closing{[CLOSING]}\n"
-"\\end{letter}\n"
-"\\end{document}\n";
-
-gchar* template_report =
-"\\documentclass[]{report}\n"
-"\\begin{document}\n"
-"\n"
-"\\title{[YOUR TITLE]}\n"
-"\\author{[YOUR NAME]}\n"
-"\\maketitle\n"
-"\n"
-"\\chapter{[CHAPTERTITLE]}\n"
-"\\section{Introduction}\n"
-"\\dots\n"
-"\\chapter{[CHAPTERTITLE]}\n"
-"\\section{Introduction}\n"
-"\\dots\n"
-"\\subsection{Subsection}\n"
-"\\end{document}\n";
 
 GuTemplate* template_init(GtkBuilder* builder) {
     L_F_DEBUG;
     GuTemplate* t = (GuTemplate*)g_malloc(sizeof(GuTemplate));
     t->templatewindow =
         GTK_WINDOW(gtk_builder_get_object(builder, "templatewindow"));
-    t->iconview =
-        GTK_ICON_VIEW(gtk_builder_get_object(builder, "templateicons"));
-    t->template_ok =
-        GTK_BUTTON(gtk_builder_get_object(builder, "template_ok"));
-    gtk_icon_view_set_text_column(t->iconview, 0);
-    gtk_icon_view_set_pixbuf_column(t->iconview, 1);
-    g_signal_connect(t->iconview, "selection-changed",
-            G_CALLBACK(template_update_window), t->template_ok);
+    t->templateview = 
+        GTK_TREE_VIEW(gtk_builder_get_object(builder, "template_treeview"));
+    t->list_templates =
+        GTK_LIST_STORE(gtk_builder_get_object(builder, "list_templates"));
+    
+    // TODO: Setting this from Glade file doesn't work - fix this. 
+    GtkCellRendererText* ren;
+    ren = GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
+    g_object_set(ren, "editable", TRUE, NULL);
+    
+    template_setup();
     return t;
 }
 
-void template_update_window(GdkEvent* event, void* button) {
-    L_F_DEBUG;
-    gtk_widget_set_sensitive(GTK_WIDGET(button), TRUE);
+void template_setup() {
+    // populate list store with entries from the config file.
 }
 
-const gchar* template_get(GuTemplate* templ) {
-    L_F_DEBUG;
-    const gchar* templates[] = { template_article, template_book,
-                                 template_letter, template_report };
-    GList* selection = gtk_icon_view_get_selected_items(templ->iconview);
-    return templates[atoi(gtk_tree_path_to_string(selection->data))];
+gchar* template_open_selected() {
+    // get selected identifier
+    // look it up in config file
+    // file open and read
+    // return contents of file
+    return "bla";
 }
+
+
+void template_add_new_entry(GuTemplate* t, gchar* doc) {
+    GtkTreeIter iter;
+    gtk_list_store_append(t->list_templates, &iter);
+    
+    //gchar *newname = template_iterate_available();
+    
+    gtk_list_store_set(t->list_templates, &iter, 0, "untitled", -1);
+    // sort out config thingies
+}
+
+void template_remove_entry(GuTemplate* t) {
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    GtkTreeSelection *selection;
+    
+    model = gtk_tree_view_get_model(t->templateview);
+    selection = gtk_tree_view_get_selection(t->templateview);
+    
+    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+        gtk_list_store_remove(t->list_templates, &iter);
+    }
+    // sort out config thingies
+}
+
+
+gchar template_iterate_available() {
+    // iterate the list, and return next available name
+    return "bla";
+}
+
+
+

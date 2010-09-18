@@ -36,12 +36,15 @@
 
 typedef struct _Template {
     GtkWindow* templatewindow;
-    GtkIconView* iconview;
-    GtkButton* template_ok;
+    GtkTreeView* templateview;
+    GtkListStore* list_templates;
 } GuTemplate;
 
 GuTemplate* template_init(GtkBuilder* builder);
-void template_update_window(GdkEvent* event, void* button);
-const gchar* template_get(GuTemplate* templ);
+
+void template_setup();
+void template_add_new_entry(GuTemplate* t, gchar* doc);
+void template_remove_entry(GuTemplate* t);
+gchar template_iterate_available();
 
 #endif /* GUMMI_TEMPLATE_H */
