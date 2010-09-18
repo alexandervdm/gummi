@@ -98,10 +98,10 @@ typedef struct _GummiGui {
     GtkCheckMenuItem* menu_toolbar;
     GtkCheckMenuItem* menu_statusbar;
     GtkCheckMenuItem* menu_rightpane;
-    GtkMenuItem* recent[3];
+    GtkMenuItem* recent[5];
     
     guint statusid;
-    gchar* recent_list[3];
+    gchar* recent_list[5];
 } GummiGui;
 
 typedef enum _GuFilterType {

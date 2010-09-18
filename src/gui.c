@@ -27,7 +27,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 #include "gui.h"
 
 #include <stdio.h>
@@ -92,6 +91,10 @@ GummiGui* gui_init(GtkBuilder* builder) {
         GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent2"));
     g->recent[2] =
         GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent3"));
+    g->recent[3] =
+        GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent4"));
+    g->recent[4] =
+        GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent5"));
 
     g->prefsgui = prefsgui_init(g);
     g->searchgui = searchgui_init(builder);
@@ -136,6 +139,8 @@ GummiGui* gui_init(GtkBuilder* builder) {
     g->recent_list[0] = g_strdup(config_get_value("recent1"));
     g->recent_list[1] = g_strdup(config_get_value("recent2"));
     g->recent_list[2] = g_strdup(config_get_value("recent3"));
+    g->recent_list[3] = g_strdup(config_get_value("recent4"));
+    g->recent_list[4] = g_strdup(config_get_value("recent5"));
 
     display_recent_files(g);
 
@@ -233,11 +238,11 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
         statusbar_set_message(ptr);
         g_free(ptr);
         g_free(gummi->gui->recent_list[index]);
-        while (index < 2) {
+        while (index < 4) {
             gummi->gui->recent_list[index] = gummi->gui->recent_list[index+1];
             ++index;
         }
-        gummi->gui->recent_list[2] = 0;
+        gummi->gui->recent_list[4] = 0;
     }
     display_recent_files(gummi->gui);
 }
@@ -1367,8 +1372,8 @@ void add_to_recent_list(gchar* filename) {
     L_F_DEBUG;
     gint i = 0;
     /* add to recent list */
-    g_free(gummi->gui->recent_list[2]);
-    for (i = 1; i >= 0; --i)
+    g_free(gummi->gui->recent_list[4]);
+    for (i = 3; i >= 0; --i)
         gummi->gui->recent_list[i + 1] = gummi->gui->recent_list[i];
     gummi->gui->recent_list[0] = g_strdup(filename);
     display_recent_files(gummi->gui);
@@ -1379,10 +1384,10 @@ void display_recent_files(GummiGui* gui) {
     gchar* ptr = 0;
     gint i = 0, count = 0;
 
-    for (i = 0; i < 3; ++i)
+    for (i = 0; i < 5; ++i)
         gtk_widget_hide(GTK_WIDGET(gui->recent[i]));
 
-    for (i = 0; i < 3; ++i) {
+    for (i = 0; i < 5; ++i) {
         if (gui->recent_list[i] &&
             0 != strcmp(gui->recent_list[i], "__NULL__")) {
             ptr = g_strdup_printf("%d. %s", count + 1,
@@ -1394,7 +1399,7 @@ void display_recent_files(GummiGui* gui) {
         }
     }
     /* update configuration file */
-    for (i = 0; i < 3; ++i) {
+    for (i = 0; i < 5; ++i) {
         ptr = g_strdup_printf("recent%d", i + 1);
         if (gui->recent_list[i])
             config_set_value(ptr, gui->recent_list[i]);

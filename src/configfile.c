@@ -75,6 +75,8 @@ const gchar configfile_str[] =
 "recent1 = __NULL__\n"
 "recent2 = __NULL__\n"
 "recent3 = __NULL__\n"
+"recent4 = __NULL__\n"
+"recent5 = __NULL__\n"
 "welcome = \\documentclass{article}\n"
 "	\\begin{document}\n"
 "	\\begin{center}\n"
