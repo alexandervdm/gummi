@@ -588,12 +588,13 @@ void on_button_template_remove_clicked(GtkWidget* widget, void* user) {
 void on_button_template_open_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gchar *text;
+    /*
     text = template_open_selected(gummi->templ);
     if (text) {
         editor_fill_buffer(gummi->editor, text);
         gummi_create_environment(gummi, NULL);
         gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
-    }
+    }*/
 }
 
 void on_button_template_close_clicked(GtkWidget* widget, void* user) {
