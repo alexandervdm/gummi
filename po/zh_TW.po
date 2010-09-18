@@ -699,7 +699,7 @@ msgstr "檢查更新"
 #, c-format
 msgid ""
 "\n"
-"Gummi has encountered a serious error and require restart, your can find "
+"Gummi has encountered a serious error and requires a restart, you can find "
 "your file in the %s directory\n"
 msgstr ""
 "\n"

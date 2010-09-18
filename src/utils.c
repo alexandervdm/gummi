@@ -86,7 +86,7 @@ void slog(gint level, const gchar *fmt, ...) {
         // TODO: display the tmp file name
         if (L_IS_TYPE(level, L_G_FATAL))
             out = g_strdup_printf(_("\nGummi has encountered a serious error "
-                    "and require restart, your can find your file in the %s "
+                    "and requires a restart, you can find your file in the %s "
                     "directory\n"), g_get_tmp_dir());
         else
             out = g_strdup(message);
