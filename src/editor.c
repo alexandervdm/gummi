@@ -274,7 +274,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
 }
 
-void editor_apply_errortags(GuEditor* ec, gint line) {
+void editor_apply_errortags(GuEditor* ec, gint line, gint prev_line) {
     L_F_DEBUG;
     GtkTextIter start, end;
     /* remove the tag from the table if it is in threre */
@@ -286,7 +286,8 @@ void editor_apply_errortags(GuEditor* ec, gint line) {
         gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &start, line -1);
         gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &end, line);
         gtk_text_buffer_apply_tag(ec_sourcebuffer, ec->errortag, &start, &end);
-        gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
+        /* Bug #106 */
+        if (!prev_line) gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
         editor_scroll_to_cursor(ec);
     }
 }
