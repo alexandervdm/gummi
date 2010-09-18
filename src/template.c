@@ -34,6 +34,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "configfile.h"
 #include "environment.h"
 #include "utils.h"
 
@@ -52,23 +53,48 @@ GuTemplate* template_init(GtkBuilder* builder) {
     GtkCellRendererText* ren;
     ren = GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
     g_object_set(ren, "editable", TRUE, NULL);
-    
-    template_setup();
     return t;
 }
 
-void template_setup() {
-    // populate list store with entries from the config file.
+void template_setup(GuTemplate* t) {
+    const gchar *filename;
+    gchar templatedir[128];
+    GError *error = NULL;
+    GtkTreeIter iter;
+
+    snprintf(templatedir, 128, "%s%cgummi%ctemplates", 
+    g_get_user_config_dir(), G_DIR_SEPARATOR, G_DIR_SEPARATOR);
+
+    GDir* dir = g_dir_open (templatedir, 0, &error);    
+    if (error) { // print error if directory does not exist
+        slog(L_G_ERROR, "unable to open/read template directory!\n");
+        return;
+    }
+
+    while ( (filename = g_dir_read_name(dir))) {
+        gchar filepath[128];
+        snprintf(filepath, 128, "%s%c%s", templatedir, G_DIR_SEPARATOR, filename);
+        gtk_list_store_append(t->list_templates, &iter);
+        gtk_list_store_set(t->list_templates, &iter, 0, filename, 1, filepath, -1);
+    }
 }
 
-gchar* template_open_selected() {
-    gchar *bla;
-    bla = "bla";
-    // get selected identifier
-    // look it up in config file
-    // file open and read
-    // return contents of file
-    return bla;
+gchar* template_open_selected(GuTemplate* t) {
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    GtkTreeSelection *selection;
+    gchar *filepath;
+    
+    model = gtk_tree_view_get_model(t->templateview);
+    selection = gtk_tree_view_get_selection(t->templateview);
+    
+    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+        gtk_tree_model_get (model, &iter, 1, &filepath, -1);
+    }
+
+	gchar *data;
+	g_file_get_contents(filepath, &data, NULL, NULL);
+    return data;
 }
 
 
