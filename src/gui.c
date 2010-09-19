@@ -764,7 +764,7 @@ void on_bibcolumn_clicked(GtkWidget* widget, void* user) {
         (GTK_TREE_VIEW_COLUMN(widget), id);
 }
 
-void on_bibcompile_clicked(GtkWidget* widget, void* user) {
+void on_button_biblio_compile_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gummi->biblio->progressval = 0.0;
     g_timeout_add(10, on_bibprogressbar_update, NULL);
@@ -782,7 +782,7 @@ void on_bibcompile_clicked(GtkWidget* widget, void* user) {
     check_motion_timer();
 }
 
-void on_bibrefresh_clicked(GtkWidget* widget, void* user) {
+void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gchar* text = 0;
     gchar* str = 0;

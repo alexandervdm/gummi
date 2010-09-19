@@ -34,6 +34,7 @@
 
 #include "biblio.h"
 #include "utils.h"
+#include "motion.h"
 #include "environment.h"
 
 extern Gummi* gummi;
@@ -89,6 +90,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
     motion_update_auxfile(mc);
     snprintf(command, sizeof command, "bibtex '%s'", mc->b_finfo->workfile);
     pdata res = utils_popen_r(command);
+    mc->modified_since_compile = TRUE;
+    motion_updatepreview(mc);// force a refresh
     gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
     if(strstr(res.data, "Database file #1") == NULL)
         return FALSE;

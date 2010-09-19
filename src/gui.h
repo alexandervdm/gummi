@@ -162,8 +162,8 @@ void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user);
 void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
         guint page_num, void* user);
 
-void on_bibcompile_clicked(GtkWidget* widget, void* user);
-void on_bibrefresh_clicked(GtkWidget* widget, void* user);
+void on_button_biblio_compile_clicked(GtkWidget* widget, void* user);
+void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user);
 void on_bibreference_clicked(GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user);
 gboolean on_bibprogressbar_update(void* user);
