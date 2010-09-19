@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=@PACKAGE_NAME@
+GenericName=LaTeX Editor
+Comment=Simple LaTeX Editor
+Exec=@PACKAGE@ %F
+Icon=@PACKAGE@
+Terminal=false
+Type=Application
+Categories=Office;
+StartupNotify=true
+MimeType=text/x-tex;
