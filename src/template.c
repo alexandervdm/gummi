@@ -69,7 +69,8 @@ void template_setup(GuTemplate* t) {
     
     GDir* dir = g_dir_open (dirpath, 0, &error);    
     if (error) { // print error if directory does not exist
-        slog(L_G_ERROR, "unable to open/read template directory!\n");
+        slog(L_INFO, "unable to read template directory, creating new..\n");
+        g_mkdir_with_parents(dirpath, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
         return;
     }
 
