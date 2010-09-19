@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-17 16:18+0800\n"
+"POT-Creation-Date: 2010-09-19 10:08+0800\n"
 "PO-Revision-Date: 2010-05-23 16:18+0400\n"
 "Last-Translator: kruvalig <kruvalig@gmail.com>\n"
 "Language-Team: fedora-trans-ru\n"
@@ -19,71 +19,67 @@ msgid "        "
 msgstr "        "
 
 #: ../data/gummi.glade.h:2
-msgid ".."
-msgstr ".."
-
-#: ../data/gummi.glade.h:3
 msgid "0"
 msgstr "0"
 
-#: ../data/gummi.glade.h:5
+#: ../data/gummi.glade.h:4
 #, no-c-format
 msgid "100%"
 msgstr "100%"
 
-#: ../data/gummi.glade.h:7
+#: ../data/gummi.glade.h:6
 #, no-c-format
 msgid "125%"
 msgstr "125%"
 
-#: ../data/gummi.glade.h:9
+#: ../data/gummi.glade.h:8
 #, no-c-format
 msgid "150%"
 msgstr "150%"
 
-#: ../data/gummi.glade.h:11
+#: ../data/gummi.glade.h:10
 #, no-c-format
 msgid "200%"
 msgstr "200%"
 
-#: ../data/gummi.glade.h:13
+#: ../data/gummi.glade.h:12
 #, no-c-format
 msgid "300%"
 msgstr "300%"
 
-#: ../data/gummi.glade.h:15
+#: ../data/gummi.glade.h:14
 #, no-c-format
 msgid "400%"
 msgstr "400%"
 
-#: ../data/gummi.glade.h:17
+#: ../data/gummi.glade.h:16
 #, no-c-format
 msgid "50%"
 msgstr "50%"
 
-#: ../data/gummi.glade.h:19
+#: ../data/gummi.glade.h:18
 #, no-c-format
 msgid "70%"
 msgstr "70%"
 
-#: ../data/gummi.glade.h:21
+#: ../data/gummi.glade.h:20
 #, no-c-format
 msgid "85%"
 msgstr "85%"
 
-#: ../data/gummi.glade.h:22
+#: ../data/gummi.glade.h:21
 msgid "Align center"
 msgstr "Выровнять по центру"
 
-#: ../data/gummi.glade.h:23
+#: ../data/gummi.glade.h:22
 msgid "Align left"
 msgstr "Выровнять по левому краю"
 
-#: ../data/gummi.glade.h:24
+#: ../data/gummi.glade.h:23
 msgid "Align right"
 msgstr "Выровнять по правому краю"
 
-#: ../data/gummi.glade.h:25
+#: ../data/gummi.glade.h:24
 msgid ""
 "Alignment of the\n"
 "cell content."
@@ -91,75 +87,72 @@ msgstr ""
 "Выравнивание\n"
 "содержимого ячейки."
 
-#: ../data/gummi.glade.h:27
-msgid "Article"
-msgstr "Статья"
-
-#: ../data/gummi.glade.h:28
+#: ../data/gummi.glade.h:26
 msgid "Best Fit"
 msgstr "Лучший вид"
 
-#: ../data/gummi.glade.h:29
+#: ../data/gummi.glade.h:27
 msgid "Bibliography"
 msgstr "Библиография"
 
-#: ../data/gummi.glade.h:30
+#: ../data/gummi.glade.h:28
 msgid "Bold text"
 msgstr "Жирный текст"
 
-#: ../data/gummi.glade.h:31
-msgid "Book"
-msgstr "Книга"
-
-#: ../data/gummi.glade.h:32
+#: ../data/gummi.glade.h:29
 msgid "Border all cells"
 msgstr "Обрамление всех ячеек"
 
-#: ../data/gummi.glade.h:33
+#: ../data/gummi.glade.h:30
 msgid "Border outline"
 msgstr "Обрамление контура"
 
-#: ../data/gummi.glade.h:34
+#: ../data/gummi.glade.h:31
 msgid "Braces"
 msgstr "Фигурные скобки"
 
-#: ../data/gummi.glade.h:35
+#: ../data/gummi.glade.h:32
 msgid "Bracket:"
 msgstr "Скобки:"
 
-#: ../data/gummi.glade.h:36
+#: ../data/gummi.glade.h:33
 msgid "Brackets"
 msgstr "Cкобки"
 
-#: ../data/gummi.glade.h:37
+#: ../data/gummi.glade.h:34
 msgid "Caption:"
 msgstr "Заголовок:"
 
-#: ../data/gummi.glade.h:38
+#: ../data/gummi.glade.h:35
 msgid "Center text"
 msgstr "Центрировать текст"
 
-#: ../data/gummi.glade.h:39
+#: ../data/gummi.glade.h:36
 msgid "Check _Updates"
 msgstr "Проверить _обновления"
 
-#: ../data/gummi.glade.h:40
+#: ../data/gummi.glade.h:37
 msgid "Columns:"
 msgstr "Колонки:"
 
-#: ../data/gummi.glade.h:41
+#: ../data/gummi.glade.h:38
 msgid "Compile"
 msgstr "Скомпилировать"
 
-#: ../data/gummi.glade.h:42
+#: ../data/gummi.glade.h:39
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
-#: ../data/gummi.glade.h:43
-msgid "Create new document.."
+#: ../data/gummi.glade.h:40
+#, fuzzy
+msgid "Create new document from template.."
 msgstr "Создать новый документ.."
 
-#: ../data/gummi.glade.h:44
+#: ../data/gummi.glade.h:41
+msgid "Deletes the selected template"
+msgstr ""
+
+#: ../data/gummi.glade.h:42
 msgid ""
 "Determines whether the\n"
 "cells have line borders. "
@@ -167,15 +160,15 @@ msgstr ""
 "Определить будут ли\n"
 "ячейки иметь границы. "
 
-#: ../data/gummi.glade.h:46
+#: ../data/gummi.glade.h:44
 msgid "Double line"
 msgstr "Двойная линия"
 
-#: ../data/gummi.glade.h:47
+#: ../data/gummi.glade.h:45
 msgid "Error output"
 msgstr "Вывод ошибок"
 
-#: ../data/gummi.glade.h:48
+#: ../data/gummi.glade.h:46
 msgid ""
 "Error status for\n"
 "active document"
@@ -183,93 +176,99 @@ msgstr ""
 "Предупреждения об ошибках\n"
 "активного документа"
 
-#: ../data/gummi.glade.h:50
-msgid "Export to PDF"
-msgstr ""
-
-#: ../data/gummi.glade.h:51
+#: ../data/gummi.glade.h:48
 msgid "File:"
 msgstr "Файл:"
 
-#: ../data/gummi.glade.h:52
+#: ../data/gummi.glade.h:49
 msgid "Filename:"
 msgstr "Имя файла:"
 
-#: ../data/gummi.glade.h:53
+#: ../data/gummi.glade.h:50
 msgid "Find"
 msgstr "Найти"
 
-#: ../data/gummi.glade.h:54
+#: ../data/gummi.glade.h:51
 msgid "Find Ne_xt"
 msgstr "Найти _далее"
 
-#: ../data/gummi.glade.h:55
+#: ../data/gummi.glade.h:52
 msgid "Find Pre_vious"
 msgstr "_Обратный поиск"
 
-#: ../data/gummi.glade.h:56
+#: ../data/gummi.glade.h:53
 msgid "Fit Page Width"
 msgstr "По ширине страницы"
 
-#: ../data/gummi.glade.h:57
+#: ../data/gummi.glade.h:54
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - редактор LaTeX"
 
-#: ../data/gummi.glade.h:58
+#: ../data/gummi.glade.h:55
 msgid "Image"
 msgstr "Изображение"
 
-#: ../data/gummi.glade.h:59
+#: ../data/gummi.glade.h:56
 msgid "Italic text"
 msgstr "Курсив"
 
-#: ../data/gummi.glade.h:60
+#: ../data/gummi.glade.h:57
 msgid "Label:"
 msgstr "Ярлык:"
 
-#: ../data/gummi.glade.h:61
-msgid "Letter"
-msgstr "Письмо"
-
-#: ../data/gummi.glade.h:62
+#: ../data/gummi.glade.h:58
 msgid "Load a file"
 msgstr "Открыть файл"
 
-#: ../data/gummi.glade.h:63
+#: ../data/gummi.glade.h:59
+msgid ""
+"Make a template from the \n"
+"current active document."
+msgstr ""
+
+#: ../data/gummi.glade.h:61
 msgid "Match case"
 msgstr "Учитывать регистр"
 
-#: ../data/gummi.glade.h:64
+#: ../data/gummi.glade.h:62
 msgid "Match entire word only"
 msgstr "Полное совпадения слов"
 
-#: ../data/gummi.glade.h:65
+#: ../data/gummi.glade.h:63
 msgid "Matrix"
 msgstr "Матрица"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:765
+#: ../data/gummi.glade.h:64 ../src/gui.c:798
 msgid "N/A"
 msgstr "N/A"
 
-#: ../data/gummi.glade.h:67
+#: ../data/gummi.glade.h:65
 msgid "New from _Template"
 msgstr "Документ из _шаблона"
 
-#: ../data/gummi.glade.h:68
+#: ../data/gummi.glade.h:66
 msgid "Next"
 msgstr "Далее"
 
-#: ../data/gummi.glade.h:69
+#: ../data/gummi.glade.h:67
 msgid "No borders"
 msgstr "Без границ"
 
-#: ../data/gummi.glade.h:70
+#: ../data/gummi.glade.h:68
 msgid "Open"
 msgstr "Открыть"
 
-#: ../data/gummi.glade.h:71
+#: ../data/gummi.glade.h:69
+msgid "Open the selected template"
+msgstr ""
+
+#: ../data/gummi.glade.h:70
 msgid "Parentheses"
 msgstr "Круглые скобки"
+
+#: ../data/gummi.glade.h:71
+msgid "Pause updating the preview pane."
+msgstr ""
 
 #: ../data/gummi.glade.h:72
 msgid "Preview Pane"
@@ -292,374 +291,386 @@ msgid "Replace with:"
 msgstr ""
 
 #: ../data/gummi.glade.h:77
-msgid "Report"
-msgstr "Отчет"
-
-#: ../data/gummi.glade.h:78
 msgid "Rows:"
 msgstr "Строки:"
 
-#: ../data/gummi.glade.h:79
+#: ../data/gummi.glade.h:78
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../data/gummi.glade.h:80
+#: ../data/gummi.glade.h:79
 msgid "Save _As..."
 msgstr ""
 
-#: ../data/gummi.glade.h:81
+#: ../data/gummi.glade.h:80
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: ../data/gummi.glade.h:82
+#: ../data/gummi.glade.h:81
 msgid "Scale:"
 msgstr "Масштаб:"
 
-#: ../data/gummi.glade.h:83
+#: ../data/gummi.glade.h:82
 msgid "Search backwards"
 msgstr "Поиск назад"
 
-#: ../data/gummi.glade.h:84
+#: ../data/gummi.glade.h:83
 msgid "Search for:"
 msgstr "Искать в:"
 
-#: ../data/gummi.glade.h:85
+#: ../data/gummi.glade.h:84
 msgid "Single line"
 msgstr "Однострочный"
 
-#: ../data/gummi.glade.h:86
+#: ../data/gummi.glade.h:85
 msgid "Table"
 msgstr "Таблица"
 
-#: ../data/gummi.glade.h:87
-msgid "Template options:"
-msgstr "Шаблон настроек:"
-
-#: ../data/gummi.glade.h:88
+#: ../data/gummi.glade.h:86
 msgid "Unbracketed"
 msgstr "Без скобок"
 
-#: ../data/gummi.glade.h:89
+#: ../data/gummi.glade.h:87
 msgid "Underline text"
 msgstr "Подчеркнутый текст"
 
-#: ../data/gummi.glade.h:90
+#: ../data/gummi.glade.h:88
 msgid "_Autocheck Spelling"
 msgstr "_Автопроверка орфографии"
 
-#: ../data/gummi.glade.h:91
+#: ../data/gummi.glade.h:89
 msgid "_Compile Bibliography"
 msgstr "_Скомпилировать библиографию"
 
-#: ../data/gummi.glade.h:92
+#: ../data/gummi.glade.h:90
 msgid "_Document Statistics"
 msgstr ""
 
-#: ../data/gummi.glade.h:93
+#: ../data/gummi.glade.h:91
 msgid "_Edit"
 msgstr "_Изменить"
 
-#: ../data/gummi.glade.h:94
+#: ../data/gummi.glade.h:92
 msgid "_Export to PDF"
 msgstr ""
 
-#: ../data/gummi.glade.h:95
+#: ../data/gummi.glade.h:93
 msgid "_File"
 msgstr "_Файл"
 
-#: ../data/gummi.glade.h:96
+#: ../data/gummi.glade.h:94
 msgid "_Fullscreen"
 msgstr "На _весь экран"
 
-#: ../data/gummi.glade.h:97
+#: ../data/gummi.glade.h:95
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../data/gummi.glade.h:98
+#: ../data/gummi.glade.h:96
 msgid "_Insert Bibliography"
 msgstr "_Добавить Библиографию"
 
-#: ../data/gummi.glade.h:99
+#: ../data/gummi.glade.h:97
 #, fuzzy
 msgid "_Open..."
 msgstr "Открыть"
 
-#: ../data/gummi.glade.h:100
+#: ../data/gummi.glade.h:98
 msgid "_Replace"
 msgstr ""
 
-#: ../data/gummi.glade.h:101
+#: ../data/gummi.glade.h:99
 msgid "_Right Pane"
 msgstr ""
 
-#: ../data/gummi.glade.h:102
+#: ../data/gummi.glade.h:100
 msgid "_Search"
 msgstr "П_оиск"
 
-#: ../data/gummi.glade.h:103
+#: ../data/gummi.glade.h:101
 msgid "_Statusbar"
 msgstr "_Строка состояния"
 
-#: ../data/gummi.glade.h:104
+#: ../data/gummi.glade.h:102
 msgid "_Toolbar"
 msgstr "_Инструменты"
 
-#: ../data/gummi.glade.h:105
+#: ../data/gummi.glade.h:103
 msgid "_Tools"
 msgstr "_Инструменты"
 
-#: ../data/gummi.glade.h:106
+#: ../data/gummi.glade.h:104
 msgid "_View"
 msgstr "_Вид"
 
-#: ../data/gummi.glade.h:107
+#: ../data/gummi.glade.h:105
 msgid "filter:"
 msgstr "Фильтр:"
 
-#: ../data/gummi.glade.h:108 ../src/gui.c:763
+#: ../data/gummi.glade.h:106 ../src/gui.c:796
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
-#: ../data/gummi.glade.h:109 ../src/gui.c:764
+#: ../data/gummi.glade.h:107 ../src/gui.c:797
 msgid "none"
 msgstr "отсутствует"
 
-#: ../data/gummi.glade.h:110
+#: ../data/gummi.glade.h:108
 msgid "of 0"
 msgstr "из 0"
 
-#: ../data/gummi.glade.h:111
+#: ../data/gummi.glade.h:109
 msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
-#: ../data/gummi.glade.h:112
+#: ../data/gummi.glade.h:110
 msgid "toolbutton1"
 msgstr "инструментальнаякнопка1"
 
-#: ../data/gummi.glade.h:113
+#: ../data/gummi.glade.h:111
 msgid "toolbutton2"
 msgstr "инструментальнаякнопка2"
 
-#: ../data/gummi.glade.h:114
+#: ../data/gummi.glade.h:112
 msgid "toolbutton3"
 msgstr "инструментальнаякнопка3"
 
-#: ../data/gummi.glade.h:115
+#: ../data/gummi.glade.h:113
 msgid "toolbutton5"
 msgstr "инструментальнаякнопка5"
 
-#: ../data/gummi.glade.h:116
+#: ../data/gummi.glade.h:114
 msgid "toolbutton6"
 msgstr "инструментальнаякнопка6"
 
-#: ../data/gummi.glade.h:117
+#: ../data/gummi.glade.h:115
 msgid "toolbutton7"
 msgstr "инструментальнаякнопка7"
 
 #: ../data/prefs.glade.h:1
+msgid "Automatic Indentation:"
+msgstr ""
+
+#: ../data/prefs.glade.h:2
 msgid "Changes will become active on next start"
 msgstr "Изменения будут применены при следующем запуске"
 
-#: ../data/prefs.glade.h:2
+#: ../data/prefs.glade.h:3
 msgid "Default Text"
 msgstr "Текст по умолчанию"
 
-#: ../data/prefs.glade.h:3
+#: ../data/prefs.glade.h:4
 msgid "Display line numbers"
 msgstr "Отобразить номера строк"
 
-#: ../data/prefs.glade.h:4
+#: ../data/prefs.glade.h:5
 msgid "Do not split words over two lines"
 msgstr "Не разделять слова на две строчки"
 
-#: ../data/prefs.glade.h:5
+#: ../data/prefs.glade.h:6
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../data/prefs.glade.h:6
+#: ../data/prefs.glade.h:7
 msgid "Editor font:"
 msgstr "Редактор шрифта:"
 
-#: ../data/prefs.glade.h:7
+#: ../data/prefs.glade.h:8
 msgid "Enable text wrapping"
 msgstr "Включить автоматический перенос"
 
-#: ../data/prefs.glade.h:8
+#: ../data/prefs.glade.h:9
 msgid "File saving:"
 msgstr "Файл сохраняется:"
 
-#: ../data/prefs.glade.h:9
+#: ../data/prefs.glade.h:10
 msgid "Gummi Preferences"
 msgstr "Настройки Gummi"
 
-#: ../data/prefs.glade.h:10
+#: ../data/prefs.glade.h:11
 msgid "Highlight current line"
 msgstr "Подсветить текущую строку"
 
-#: ../data/prefs.glade.h:11
+#: ../data/prefs.glade.h:12
 msgid "Highlighting:"
 msgstr "Выделение:"
 
-#: ../data/prefs.glade.h:12
+#: ../data/prefs.glade.h:13
 msgid "Insert _spaces instead of tabs"
 msgstr ""
 
-#: ../data/prefs.glade.h:13
+#: ../data/prefs.glade.h:14
 msgid "Line numbers:"
 msgstr "Номера строк:"
 
-#: ../data/prefs.glade.h:14
+#: ../data/prefs.glade.h:15
 msgid "None"
 msgstr "None"
 
-#: ../data/prefs.glade.h:15
+#: ../data/prefs.glade.h:16
 msgid "PDF Compiling"
 msgstr "Компиляция PDF"
 
-#: ../data/prefs.glade.h:16
+#: ../data/prefs.glade.h:17
 msgid "PDF Compiling:"
 msgstr "Компиляция PDF:"
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:18
 msgid "Spell check language:"
 msgstr "Проверка орфографии для зыка:"
 
-#: ../data/prefs.glade.h:18
+#: ../data/prefs.glade.h:19
 msgid "Tab Stops:"
 msgstr ""
 
-#: ../data/prefs.glade.h:19
+#: ../data/prefs.glade.h:20
 msgid "Tab width:"
 msgstr ""
 
-#: ../data/prefs.glade.h:20
+#: ../data/prefs.glade.h:21
 msgid "Text wrapping:"
 msgstr "Перенос текста:"
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:22
 #, fuzzy
 msgid "Typesetter command:"
 msgstr "Верстка команд:"
 
-#: ../data/prefs.glade.h:22
+#: ../data/prefs.glade.h:23
 msgid "View"
 msgstr "Вид"
 
-#: ../data/prefs.glade.h:23
+#: ../data/prefs.glade.h:24
 msgid "_Autosave files every"
 msgstr "Автосо_хранение файла каждые"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:25
+msgid "_Enable automatic indentation"
+msgstr ""
+
+#: ../data/prefs.glade.h:26
 msgid "_Reset defaults"
 msgstr "_Сбросить по умолчанию"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:27
 #, fuzzy
 msgid "compile every"
 msgstr "_Автосборка каждые "
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:28
 #, fuzzy
 msgid "compile when idle for "
 msgstr "_Автосборка каждые "
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:29
 msgid "minutes"
 msgstr "минут"
 
-#: ../data/prefs.glade.h:28
+#: ../data/prefs.glade.h:30
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/prefs.glade.h:29
+#: ../data/prefs.glade.h:31
 msgid "seconds"
 msgstr "секунд"
 
-#: ../data/prefs.glade.h:30
+#: ../data/prefs.glade.h:32
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:381
+#: ../src/editor.c:387
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:388
+#: ../src/editor.c:394
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/gui.c:231
+#: ../src/motion.c:247
+#, c-format
+msgid ""
+"PDF-Preview could not initialize.\n"
+"\n"
+"It appears your LaTeX document contains errors or\n"
+"the program `%s' was not installed.\n"
+"Additional information is available on the Error Output tab.\n"
+"Please correct the listed errors and click this area\n"
+"to reload the preview panel."
+msgstr ""
+
+#: ../src/gui.c:239
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:430
+#: ../src/gui.c:438
 #, fuzzy
 msgid "Words in text"
 msgstr "Жирный текст"
 
-#: ../src/gui.c:431
+#: ../src/gui.c:439
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui.c:432
+#: ../src/gui.c:440
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui.c:433
+#: ../src/gui.c:441
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui.c:434
+#: ../src/gui.c:442
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui.c:435
+#: ../src/gui.c:443
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui.c:436
+#: ../src/gui.c:444
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui.c:462
-msgid "Document Statistic"
+#: ../src/gui.c:470
+msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui.c:725
+#: ../src/gui.c:758
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui.c:727
+#: ../src/gui.c:760
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui.c:729
+#: ../src/gui.c:762
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui.c:732
+#: ../src/gui.c:765
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui.c:757
+#: ../src/gui.c:790
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1239
+#: ../src/gui.c:1284
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1249
+#: ../src/gui.c:1294
 #, fuzzy
 msgid "Open File..."
 msgstr "Открыть"
 
-#: ../src/gui.c:1272
+#: ../src/gui.c:1317
 msgid "Save File..."
 msgstr ""
 
@@ -715,6 +726,24 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Заголовок:"
+
+#~ msgid ".."
+#~ msgstr ".."
+
+#~ msgid "Article"
+#~ msgstr "Статья"
+
+#~ msgid "Book"
+#~ msgstr "Книга"
+
+#~ msgid "Letter"
+#~ msgstr "Письмо"
+
+#~ msgid "Report"
+#~ msgstr "Отчет"
+
+#~ msgid "Template options:"
+#~ msgstr "Шаблон настроек:"
 
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER

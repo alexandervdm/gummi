@@ -467,7 +467,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
             GTK_MESSAGE_INFO,
             GTK_BUTTONS_OK,
             "%s", output);
-    gtk_window_set_title(GTK_WINDOW(dialog), _("Document Statistic"));
+    gtk_window_set_title(GTK_WINDOW(dialog), _("Document Statistics"));
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
     g_free(cmd);
@@ -1374,6 +1374,11 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
 void add_to_recent_list(gchar* filename) {
     L_F_DEBUG;
     gint i = 0;
+    /* check if it already exists */
+    for (i = 0; i < 5; ++i)
+        if (0 == strcmp(filename, gummi->gui->recent_list[i]))
+            return;
+
     /* add to recent list */
     g_free(gummi->gui->recent_list[4]);
     for (i = 3; i >= 0; --i)

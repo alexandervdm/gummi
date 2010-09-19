@@ -2,6 +2,7 @@
 data/gummi.glade
 data/prefs.glade
 src/editor.c
+src/motion.c
 src/gui.c
 src/importer.c
 src/iofunctions.c
