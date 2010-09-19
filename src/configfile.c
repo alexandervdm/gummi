@@ -62,7 +62,7 @@ const gchar config_str[] =
 "\n"
 "[File]\n"
 "autosaving = False\n"
-"autosave_timer = 600\n"
+"autosave_timer = 10\n"
 "\n"
 "[Compile]\n"
 "typesetter = pdflatex\n"
