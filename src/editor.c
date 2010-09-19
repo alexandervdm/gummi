@@ -129,9 +129,9 @@ void editor_activate_spellchecking(GuEditor* ec, gboolean status) {
     const gchar* lang = config_get_value("spell_language");
     GError* err = NULL;
     GError* err2 = NULL;
+    GtkSpell* spell = 0;
     if (status) {
-        GtkSpell* spell = gtkspell_new_attach(ec_sourceview, NULL, &err);
-        if (!spell)
+        if (!(spell = gtkspell_new_attach(ec_sourceview, "en", &err)))
             slog(L_INFO, "gtkspell: %s\n", err->message);
         if (!gtkspell_set_language(spell, lang, &err2))
             slog(L_INFO, "gtkspell: %s\n", err2->message);
