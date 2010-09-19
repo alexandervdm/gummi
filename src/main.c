@@ -83,10 +83,10 @@ int main (int argc, char *argv[]) {
     slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
     /* set up configuration file */
-    configname = g_strdup_printf("%s%cgummi%cgummi.cfg",
-            g_get_user_config_dir(), G_DIR_SEPARATOR, G_DIR_SEPARATOR);
+    configname = g_build_filename(g_get_user_config_dir(),"gummi","gummi.cfg");
     config_init(configname);
     slog(L_INFO, "configuration file: %s\n", configname);
+    g_free(configname);
 
     /* initialize gtk */
     gtk_init (&argc, &argv);

@@ -39,8 +39,8 @@
 #include "environment.h"
 #include "utils.h"
 
-static const gchar* config_filename = 0;
-static const gchar* templcfg_filename = 0;
+static gchar* config_filename = 0;
+static gchar* templcfg_filename = 0;
 
 const gchar configfile_str[] =
 "[Global]\n"
@@ -109,7 +109,8 @@ void configfile_init(const gchar* filename, gint type) {
     }
     
     if (type == 0) { /* gummi.cfg */
-        config_filename = filename;
+        if (config_filename) g_free(config_filename);
+        config_filename = g_strdup(filename);
         configfile_version = configfile_get_value(type, "configfile_version");
 
         if (!configfile_version ||
@@ -120,7 +121,8 @@ void configfile_init(const gchar* filename, gint type) {
             configfile_set_default(type);
         }
     } else {
-        templcfg_filename = filename;
+        if (templcfg_filename) g_free(templcfg_filename);
+        templcfg_filename = g_strdup(filename);
         /* dummy action to check if template.cfg exist */
         configfile_get_value(type, "template");
     }
