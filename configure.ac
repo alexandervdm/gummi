@@ -2,11 +2,11 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.65)
-AC_INIT([Gummi-Beta], [0.5.0~svn429], [alexvandermey@gmail.com], [gummi-beta], [http://gummi.midnightcoding.org/])
+AC_INIT([Gummi], [0.5.0], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 # ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
-GETTEXT_PACKAGE=gummi-beta
+GETTEXT_PACKAGE=gummi
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 AC_SUBST(GETTEXT_PACKAGE)
 

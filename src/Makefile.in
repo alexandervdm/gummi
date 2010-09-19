@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = gummi-beta$(EXEEXT)
+bin_PROGRAMS = gummi$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -45,14 +45,14 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_gummi_beta_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
+am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	editor.$(OBJEXT) environment.$(OBJEXT) fileinfo.$(OBJEXT) \
 	gui.$(OBJEXT) importer.$(OBJEXT) iofunctions.$(OBJEXT) \
 	main.$(OBJEXT) motion.$(OBJEXT) preview.$(OBJEXT) \
 	template.$(OBJEXT) updatecheck.$(OBJEXT) utils.$(OBJEXT)
-gummi_beta_OBJECTS = $(am_gummi_beta_OBJECTS)
+gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
-gummi_beta_DEPENDENCIES = $(am__DEPENDENCIES_1)
+gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -61,8 +61,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(gummi_beta_SOURCES)
-DIST_SOURCES = $(gummi_beta_SOURCES)
+SOURCES = $(gummi_SOURCES)
+DIST_SOURCES = $(gummi_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -186,10 +186,10 @@ AM_CFLAGS = $(GUI_CFLAGS) \
 	    -DDATADIR=\"$(datadir)/$(PACKAGE)\" \
 	    -DLOCALEDIR=\"$(datadir)/locale\"
 
-gummi_beta_LDADD = $(GUI_LIBS) \
+gummi_LDADD = $(GUI_LIBS) \
 	      $(LIBINTL)
 
-gummi_beta_SOURCES = biblio.c  biblio.h \
+gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
@@ -276,9 +276,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-gummi-beta$(EXEEXT): $(gummi_beta_OBJECTS) $(gummi_beta_DEPENDENCIES) 
-	@rm -f gummi-beta$(EXEEXT)
-	$(LINK) $(gummi_beta_OBJECTS) $(gummi_beta_LDADD) $(LIBS)
+gummi$(EXEEXT): $(gummi_OBJECTS) $(gummi_DEPENDENCIES) 
+	@rm -f gummi$(EXEEXT)
+	$(LINK) $(gummi_OBJECTS) $(gummi_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
