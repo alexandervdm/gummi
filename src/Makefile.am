@@ -15,10 +15,9 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui.c gui.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
-		main.c main.h \
 		motion.c motion.h \
 		preview.c preview.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
-		gettext.h
+		main.c
