@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 10:08+0800\n"
+"POT-Creation-Date: 2010-09-19 20:06+0800\n"
 "PO-Revision-Date: 2010-05-22 19:27:+UTC-2\n"
 "Last-Translator: yvand <yvan.duron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,7 +232,7 @@ msgstr "Mots entiers seulement"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:64 ../src/gui.c:798
+#: ../data/gummi.glade.h:64 ../src/gui.c:813
 msgid "N/A"
 msgstr "non disponible"
 
@@ -401,11 +401,11 @@ msgstr "Affichage"
 msgid "filter:"
 msgstr "Filtre:"
 
-#: ../data/gummi.glade.h:106 ../src/gui.c:796
+#: ../data/gummi.glade.h:106 ../src/gui.c:811
 msgid "no bibliography file detected"
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../data/gummi.glade.h:107 ../src/gui.c:797
+#: ../data/gummi.glade.h:107 ../src/gui.c:812
 msgid "none"
 msgstr "Aucun"
 
@@ -591,79 +591,79 @@ msgid ""
 "to reload the preview panel."
 msgstr ""
 
-#: ../src/gui.c:239
+#: ../src/gui.c:245
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:438
+#: ../src/gui.c:444
 #, fuzzy
 msgid "Words in text"
 msgstr "Gras"
 
-#: ../src/gui.c:439
+#: ../src/gui.c:445
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui.c:440
+#: ../src/gui.c:446
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui.c:441
+#: ../src/gui.c:447
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui.c:442
+#: ../src/gui.c:448
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui.c:443
+#: ../src/gui.c:449
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui.c:444
+#: ../src/gui.c:450
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui.c:470
+#: ../src/gui.c:476
 msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui.c:758
+#: ../src/gui.c:773
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compiler Bibliographie"
 
-#: ../src/gui.c:760
+#: ../src/gui.c:775
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../src/gui.c:762
+#: ../src/gui.c:777
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Aucun fichier bibliographique détecté"
 
-#: ../src/gui.c:765
+#: ../src/gui.c:780
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "Compiler Bibliographie"
 
-#: ../src/gui.c:790
+#: ../src/gui.c:805
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1284
+#: ../src/gui.c:1298
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1294
+#: ../src/gui.c:1308
 #, fuzzy
 msgid "Open File..."
 msgstr "Ouvrir"
 
-#: ../src/gui.c:1317
+#: ../src/gui.c:1331
 msgid "Save File..."
 msgstr ""
 

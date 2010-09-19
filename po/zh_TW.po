@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 10:08+0800\n"
+"POT-Creation-Date: 2010-09-19 20:06+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -229,7 +229,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/gummi.glade.h:64 ../src/gui.c:798
+#: ../data/gummi.glade.h:64 ../src/gui.c:813
 msgid "N/A"
 msgstr "無"
 
@@ -397,11 +397,11 @@ msgstr "檢視(_V)"
 msgid "filter:"
 msgstr "篩選:"
 
-#: ../data/gummi.glade.h:106 ../src/gui.c:796
+#: ../data/gummi.glade.h:106 ../src/gui.c:811
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/gummi.glade.h:107 ../src/gui.c:797
+#: ../data/gummi.glade.h:107 ../src/gui.c:812
 msgid "none"
 msgstr "無"
 
@@ -591,73 +591,73 @@ msgstr ""
 "請在更正錯誤後點選此區域\n"
 "來更新預覽."
 
-#: ../src/gui.c:239
+#: ../src/gui.c:245
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui.c:438
+#: ../src/gui.c:444
 msgid "Words in text"
 msgstr "純文字數"
 
-#: ../src/gui.c:439
+#: ../src/gui.c:445
 msgid "Words in headers"
 msgstr "標頭內總字數"
 
-#: ../src/gui.c:440
+#: ../src/gui.c:446
 msgid "Words in float captions"
 msgstr "浮動標題內總字數"
 
-#: ../src/gui.c:441
+#: ../src/gui.c:447
 msgid "Number of headers"
 msgstr "標頭總數"
 
-#: ../src/gui.c:442
+#: ../src/gui.c:448
 msgid "Number of floats"
 msgstr "浮動元件總數"
 
-#: ../src/gui.c:443
+#: ../src/gui.c:449
 msgid "Number of math inlines"
 msgstr "行內數學式總數"
 
-#: ../src/gui.c:444
+#: ../src/gui.c:450
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
-#: ../src/gui.c:470
+#: ../src/gui.c:476
 msgid "Document Statistics"
 msgstr "文件資訊"
 
-#: ../src/gui.c:758
+#: ../src/gui.c:773
 msgid "Compiling bibliography file..."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui.c:760
+#: ../src/gui.c:775
 msgid "bibliography compiled without errors"
 msgstr "參考文獻已成功編譯"
 
-#: ../src/gui.c:762
+#: ../src/gui.c:777
 msgid "Error compiling bibliography file or none detected..."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui.c:765
+#: ../src/gui.c:780
 msgid "error compiling bibliography file"
 msgstr "編譯參考文獻過程發生錯誤"
 
-#: ../src/gui.c:790
+#: ../src/gui.c:805
 #, c-format
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui.c:1284
+#: ../src/gui.c:1298
 msgid "Do you want to save the changes you have made?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui.c:1294
+#: ../src/gui.c:1308
 msgid "Open File..."
 msgstr "開啟..."
 
-#: ../src/gui.c:1317
+#: ../src/gui.c:1331
 msgid "Save File..."
 msgstr "儲存檔案..."
 
