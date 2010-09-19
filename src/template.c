@@ -54,7 +54,9 @@ GuTemplate* template_init(GtkBuilder* builder) {
     t->template_add =
         GTK_BUTTON(gtk_builder_get_object(builder, "template_add"));
     t->template_remove =
-        GTK_BUTTON(gtk_builder_get_object(builder, "template_remove"));    
+        GTK_BUTTON(gtk_builder_get_object(builder, "template_remove"));
+    t->template_open =
+        GTK_BUTTON(gtk_builder_get_object(builder, "template_open")); 
     t->template_render =
         GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
     return t;
@@ -114,6 +116,7 @@ void template_add_new_entry(GuTemplate* t) {
     g_object_set(t->template_render, "editable", TRUE, NULL);
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), FALSE);
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_open), FALSE);
     
     col = gtk_tree_view_get_column(t->templateview, 0);
     model = gtk_tree_view_get_model(t->templateview);
@@ -154,6 +157,7 @@ void template_create_file(GuTemplate* t, gchar* filename, gchar* text) {
     g_object_set(t->template_render, "editable", FALSE, NULL);
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), TRUE);
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_open), TRUE);
 }
 
 

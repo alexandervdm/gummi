@@ -42,6 +42,7 @@ typedef struct _Template {
     GtkLabel* template_label;
     GtkButton* template_add;
     GtkButton* template_remove;
+    GtkButton* template_open;
 } GuTemplate;
 
 GuTemplate* template_init(GtkBuilder* builder);

@@ -609,6 +609,9 @@ void on_button_template_open_clicked(GtkWidget* widget, void* user) {
 
 void on_button_template_close_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
+    gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_add), TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_remove), TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_open), TRUE);
     gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
 }
 
