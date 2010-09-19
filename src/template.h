@@ -38,16 +38,20 @@ typedef struct _Template {
     GtkWindow* templatewindow;
     GtkTreeView* templateview;
     GtkListStore* list_templates;
-    GtkCellRendererText* templaterenderer;
+    GtkCellRendererText* template_render;
+    GtkLabel* template_label;
+    GtkButton* template_add;
+    GtkButton* template_remove;
 } GuTemplate;
 
 GuTemplate* template_init(GtkBuilder* builder);
 
 void template_setup();
 
-void template_add_new_entry(GuTemplate* t, gchar* doc);
+void template_add_new_entry(GuTemplate* t);
 void template_remove_entry(GuTemplate* t);
 gchar* template_open_selected(GuTemplate* t);
+void template_create_file(GuTemplate* t, gchar* filename, gchar* text);
 
 
 #endif /* GUMMI_TEMPLATE_H */

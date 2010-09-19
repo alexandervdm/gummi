@@ -589,8 +589,7 @@ void on_tool_textstyle_right_activate(GtkWidget* widget, void* user) {
 
 
 void on_button_template_add_clicked(GtkWidget* widget, void* user) {
-    gchar *doc = editor_grab_buffer(gummi->editor);
-    template_add_new_entry(gummi->templ, doc);
+    template_add_new_entry(gummi->templ);
 }
 
 void on_button_template_remove_clicked(GtkWidget* widget, void* user) {
@@ -613,7 +612,7 @@ void on_button_template_close_clicked(GtkWidget* widget, void* user) {
     gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
 }
 
-void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* text, gpointer data) {
+void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm, gpointer data) {
     GtkTreeModel *model;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
@@ -622,9 +621,10 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* text, gp
     selection = gtk_tree_view_get_selection(gummi->templ->templateview);
     
     if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
-        gtk_list_store_set(gummi->templ->list_templates, &iter, 0, text, -1);
+        gtk_list_store_set(gummi->templ->list_templates, &iter, 0, filenm, -1);
     }
-    printf("TODO: move or create template file\n");
+    gchar *text = editor_grab_buffer(gummi->editor);
+    template_create_file(gummi->templ, filenm, text);
 }
 
 

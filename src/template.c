@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
+#include <string.h>
 
 #include "configfile.h"
 #include "environment.h"
@@ -48,10 +49,14 @@ GuTemplate* template_init(GtkBuilder* builder) {
         GTK_TREE_VIEW(gtk_builder_get_object(builder, "template_treeview"));
     t->list_templates =
         GTK_LIST_STORE(gtk_builder_get_object(builder, "list_templates"));
-    // TODO: Setting this from Glade file doesn't work - fix this. 
-    GtkCellRendererText* ren;
-    ren = GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
-    g_object_set(ren, "editable", TRUE, NULL);
+    t->template_label = 
+        GTK_LABEL(gtk_builder_get_object(builder, "template_label"));
+    t->template_add =
+        GTK_BUTTON(gtk_builder_get_object(builder, "template_add"));
+    t->template_remove =
+        GTK_BUTTON(gtk_builder_get_object(builder, "template_remove"));    
+    t->template_render =
+        GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
     return t;
 }
 
@@ -95,14 +100,19 @@ gchar* template_open_selected(GuTemplate* t) {
 }
 
 
-void template_add_new_entry(GuTemplate* t, gchar* doc) {
+void template_add_new_entry(GuTemplate* t) {
     GtkTreeIter iter;
     GtkTreeModel *model;
     GtkTreePath *path;
     GtkTreeViewColumn *col;
     GList *cells;
     
+    gtk_label_set_text(t->template_label, "");
     gtk_list_store_append(t->list_templates, &iter);
+    
+    g_object_set(t->template_render, "editable", TRUE, NULL);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), FALSE);
     
     col = gtk_tree_view_get_column(t->templateview, 0);
     model = gtk_tree_view_get_model(t->templateview);
@@ -127,6 +137,22 @@ void template_remove_entry(GuTemplate* t) {
         gtk_list_store_remove(t->list_templates, &iter);
         g_remove(filepath);
     }
+}
+
+void template_create_file(GuTemplate* t, gchar* filename, gchar* text) {
+    const char *filepath = g_build_filename(g_get_user_config_dir(), 
+                           "gummi", "templates", filename, NULL);
+                           
+    if (g_file_test(filepath, G_FILE_TEST_EXISTS)) {
+        gtk_label_set_text(t->template_label, "filename already exists");
+        template_remove_entry(t);
+    }
+    else {
+        g_file_set_contents(filepath, text, strlen(text), NULL);
+    }
+    g_object_set(t->template_render, "editable", FALSE, NULL);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), TRUE);
 }
 
 
