@@ -40,11 +40,10 @@
 #include "utils.h"
 
 static gchar* config_filename = 0;
-static gchar* templcfg_filename = 0;
 
-const gchar configfile_str[] =
+const gchar config_str[] =
 "[Global]\n"
-"configfile_version = "PACKAGE_VERSION"\n"
+"config_version = "PACKAGE_VERSION"\n"
 "\n"
 "[Editor]\n"
 "line_numbers = True\n"
@@ -94,9 +93,9 @@ const gchar configfile_str[] =
 "	\\end{center}\n"
 "	\\end{document}\n\n";
 
-void configfile_init(const gchar* filename, gint type) {
+void config_init(const gchar* filename) {
     L_F_DEBUG;
-    const gchar* configfile_version = 0;
+    const gchar* config_version = 0;
     gchar* dirname = 0;
     gchar buf[BUFSIZ] = { 0 };
 
@@ -109,40 +108,31 @@ void configfile_init(const gchar* filename, gint type) {
         fgets(buf, BUFSIZ, fh);
         fclose(fh);
     }
-    
-    if (type == 0) { /* gummi.cfg */
-        if (config_filename) g_free(config_filename);
-        config_filename = g_strdup(filename);
-        configfile_version = configfile_get_value(type, "configfile_version");
 
-        if (!configfile_version ||
-                0 != strcmp(configfile_version, PACKAGE_VERSION) ||
-                0 == strcmp(buf, "[DEFAULT]\n")) {
-            slog(L_INFO, "found old configuration file, replacing it with new "
-                    "one ...\n");
-            configfile_set_default(type);
-        }
-    } else {
-        if (templcfg_filename) g_free(templcfg_filename);
-        templcfg_filename = g_strdup(filename);
-        /* dummy action to check if template.cfg exist */
-        configfile_get_value(type, "template");
+    if (config_filename) g_free(config_filename);
+    config_filename = g_strdup(filename);
+    config_version = config_get_value("config_version");
+
+    if (!config_version ||
+            0 != strcmp(config_version, PACKAGE_VERSION) ||
+            0 == strcmp(buf, "[DEFAULT]\n")) {
+        slog(L_INFO, "found old configuration file, replacing it with new "
+                "one ...\n");
+        config_set_default();
     }
 }
 
-void configfile_set_default(gint type) {
+void config_set_default(void) {
     L_F_DEBUG;
     FILE* fh = 0;
-    if (!(fh = fopen(CONFIG_NAME(type), "w")))
+    if (!(fh = fopen(config_filename, "w")))
         slog(L_FATAL, "can't open config for writing... abort\n");
 
-    if (type == 0)
-        fwrite(configfile_str, strlen(configfile_str), 1, fh);
-
+    fwrite(config_str, strlen(config_str), 1, fh);
     fclose(fh);
 }
 
-const gchar* configfile_get_value(gint type, const gchar* term) {
+const gchar* config_get_value(const gchar* term) {
     L_F_DEBUG;
     FILE* fh = 0;
     gchar buf[BUF_MAX];
@@ -152,10 +142,10 @@ const gchar* configfile_get_value(gint type, const gchar* term) {
     /* reset ret */
     ret[0] = 0;
 
-    if (!(fh = fopen(CONFIG_NAME(type), "r"))) {
+    if (!(fh = fopen(config_filename, "r"))) {
         slog(L_ERROR, "can't find configuration file, reseting to default\n");
-        configfile_set_default(type);
-        return configfile_get_value(type, term);
+        config_set_default();
+        return config_get_value(term);
     }
 
     while (fgets(buf, BUF_MAX, fh)) {
@@ -190,16 +180,16 @@ const gchar* configfile_get_value(gint type, const gchar* term) {
     return ret;
 }
 
-void configfile_set_value(gint type, const gchar* term, const gchar* value) {
+void config_set_value(const gchar* term, const gchar* value) {
     L_F_DEBUG;
     int i = 0, count = 0;
     int max = strlen(value) > BUF_MAX -1? BUF_MAX -1: strlen(value);
-    slist* head = configfile_load(type);
+    slist* head = config_load();
     slist* index = 0;
     slist* current = 0;
     gchar buf[BUF_MAX];
 
-    index = configfile_find_index_of(head, term);
+    index = config_find_index_of(head, term);
 
     index->line[strlen(term) + 3] = 0;
     for (i = 0; i < max; ++i) {
@@ -220,7 +210,7 @@ void configfile_set_value(gint type, const gchar* term, const gchar* value) {
         else break;
     }
 
-    configfile_save(type, head);
+    config_save(head);
 
     current = head;
     while (current) {
@@ -230,16 +220,16 @@ void configfile_set_value(gint type, const gchar* term, const gchar* value) {
     }
 }
 
-slist* configfile_load(gint type) {
+slist* config_load(void) {
     L_F_DEBUG;
     FILE* fh = 0;
     slist* head = g_new0(slist, 1);
     slist* current = head;
 
-    if (!(fh = fopen(CONFIG_NAME(type), "r"))) {
+    if (!(fh = fopen(config_filename, "r"))) {
         slog(L_ERROR, "can't find configuration file, reseting to default\n");
-        configfile_set_default(type);
-        return configfile_load(type);
+        config_set_default();
+        return config_load();
     }
 
     while (!feof(fh)) {
@@ -251,12 +241,12 @@ slist* configfile_load(gint type) {
     return head;
 }
 
-void configfile_save(gint type, slist* head) {
+void config_save(slist* head) {
     L_F_DEBUG;
     FILE* fh = 0;
     slist* current = head;
 
-    if (!(fh = fopen(CONFIG_NAME(type), "w")))
+    if (!(fh = fopen(config_filename, "w")))
         slog(L_FATAL, "can't open config for writing... abort\n");
 
     while (current) {
@@ -267,7 +257,7 @@ void configfile_save(gint type, slist* head) {
     fclose(fh);
 }
 
-slist* configfile_find_index_of(slist* head, const gchar* term) {
+slist* config_find_index_of(slist* head, const gchar* term) {
     /* return the index of the entry, if the entry does not exist, create a
      * new entry for it and return the new pointer. */
     L_F_DEBUG;

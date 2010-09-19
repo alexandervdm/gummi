@@ -83,7 +83,8 @@ int main (int argc, char *argv[]) {
     slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
     /* set up configuration file */
-    configname = g_build_filename(g_get_user_config_dir(),"gummi","gummi.cfg");
+    configname = g_build_filename(g_get_user_config_dir(), "gummi",
+                                  "gummi.cfg", NULL);
     config_init(configname);
     slog(L_INFO, "configuration file: %s\n", configname);
     g_free(configname);
