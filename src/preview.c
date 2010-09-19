@@ -144,24 +144,24 @@ void preview_goto_page(GuPreview* pc, int page_number) {
 
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreview* pc) {
     L_F_DEBUG;
-    /* This is line is very important, if no pdf exist, preview will fail */
+    /* This line is very important, if no pdf exist, preview fails */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return FALSE;
 
-    GtkAllocation scrollwsize;
     cairo_t* cr;
     cr = gdk_cairo_create(w->window);
     
-    gtk_widget_get_allocation(pc->scrollw, &scrollwsize);
-    double scrollw_ratio = (scrollwsize.width / scrollwsize.height);
+    double width = pc->scrollw->allocation.width;
+    double height = pc->scrollw->allocation.height;
+    double scrollw_ratio = (width / height);
     
     // TODO: STOP WITH ERROR IF PAGE RATIO OR PAGE WIDTH IS NULL!
     
     if (pc->best_fit || pc->fit_width) {
         if (scrollw_ratio < pc->page_ratio || pc->fit_width) {
-            pc->page_scale = scrollwsize.width / pc->page_width;
+            pc->page_scale = width / pc->page_width;
         }
         else {
-            pc->page_scale = scrollwsize.height / pc->page_height;
+            pc->page_scale = height / pc->page_height;
         }
     }
     
