@@ -1422,8 +1422,8 @@ active document</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Return" signal="activate"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
@@ -2057,21 +2057,31 @@ cells have line borders. </property>
                 <property name="resize_mode">queue</property>
                 <property name="shadow_type">etched-out</property>
                 <child>
-                  <object class="GtkTreeView" id="template_treeview">
-                    <property name="width_request">200</property>
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="model">list_templates</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                        <property name="title">templates</property>
+                      <object class="GtkTreeView" id="template_treeview">
+                        <property name="width_request">200</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="model">list_templates</property>
+                        <property name="headers_clickable">False</property>
+                        <property name="search_column">0</property>
                         <child>
-                          <object class="GtkCellRendererText" id="template_renderer">
-                            <signal name="edited" handler="on_template_rowitem_editted"/>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="title">templates</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="template_renderer">
+                                <signal name="edited" handler="on_template_rowitem_editted"/>
+                              </object>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
                           </object>
-                          <attributes>
-                            <attribute name="text">0</attribute>
-                          </attributes>
                         </child>
                       </object>
                     </child>
