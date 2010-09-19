@@ -628,6 +628,10 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm, 
     }
     gchar *text = editor_grab_buffer(gummi->editor);
     template_create_file(gummi->templ, filenm, text);
+  
+    gtk_list_store_clear(gummi->templ->list_templates);
+    template_setup(gummi->templ);
+
 }
 
 
