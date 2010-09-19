@@ -39,6 +39,7 @@ typedef struct _Template {
     GtkTreeView* templateview;
     GtkListStore* list_templates;
     GtkCellRendererText* template_render;
+    GtkTreeViewColumn* template_col;
     GtkLabel* template_label;
     GtkButton* template_add;
     GtkButton* template_remove;

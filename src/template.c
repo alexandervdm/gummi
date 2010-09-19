@@ -59,14 +59,18 @@ GuTemplate* template_init(GtkBuilder* builder) {
         GTK_BUTTON(gtk_builder_get_object(builder, "template_open")); 
     t->template_render = GTK_CELL_RENDERER_TEXT(
             gtk_builder_get_object(builder, "template_renderer"));
+    t->template_col = GTK_TREE_VIEW_COLUMN(
+            gtk_builder_get_object(builder, "template_column"));
+    gtk_tree_view_column_set_sort_column_id(t->template_col, 0);
     return t;
 }
 
 void template_setup(GuTemplate* t) {
     const gchar *filename;
+    char *filepath = NULL;
     GError *error = NULL;
     GtkTreeIter iter;
-    char *filepath = NULL;
+
     gchar *dirpath = g_build_filename(g_get_user_config_dir(), "gummi",
                                       "templates" , NULL);
     
