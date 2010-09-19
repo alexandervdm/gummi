@@ -57,8 +57,8 @@ GuTemplate* template_init(GtkBuilder* builder) {
         GTK_BUTTON(gtk_builder_get_object(builder, "template_remove"));
     t->template_open =
         GTK_BUTTON(gtk_builder_get_object(builder, "template_open")); 
-    t->template_render =
-        GTK_CELL_RENDERER_TEXT(gtk_builder_get_object(builder, "template_renderer"));
+    t->template_render = GTK_CELL_RENDERER_TEXT(
+            gtk_builder_get_object(builder, "template_renderer"));
     return t;
 }
 
@@ -66,22 +66,27 @@ void template_setup(GuTemplate* t) {
     const gchar *filename;
     GError *error = NULL;
     GtkTreeIter iter;
-    const char *dirpath = g_build_filename
-                (g_get_user_config_dir(), "gummi", "templates" , NULL);
+    char *filepath = NULL;
+    gchar *dirpath = g_build_filename(g_get_user_config_dir(), "gummi",
+                                      "templates" , NULL);
     
     GDir* dir = g_dir_open (dirpath, 0, &error);    
     if (error) { // print error if directory does not exist
         slog(L_INFO, "unable to read template directory, creating new..\n");
-        g_mkdir_with_parents(dirpath, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+        g_mkdir_with_parents(dirpath,
+                S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+        g_free(dirpath);
         return;
     }
 
     while ( (filename = g_dir_read_name(dir))) {
-        char *filepath;
         filepath = g_build_filename(dirpath, filename, NULL);
         gtk_list_store_append(t->list_templates, &iter);
-        gtk_list_store_set(t->list_templates, &iter, 0, filename, 1, filepath, -1);
+        gtk_list_store_set(t->list_templates, &iter, 0, filename, 1,
+                filepath, -1);
+        g_free(filepath);
     }
+    g_free(dirpath);
 }
 
 gchar* template_open_selected(GuTemplate* t) {
@@ -89,16 +94,15 @@ gchar* template_open_selected(GuTemplate* t) {
     GtkTreeIter iter;
     GtkTreeSelection *selection;
     gchar *filepath;
+    gchar *data = NULL;
     
     model = gtk_tree_view_get_model(t->templateview);
     selection = gtk_tree_view_get_selection(t->templateview);
     
     if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
+        g_file_get_contents(filepath, &data, NULL, NULL);
     }
-
-	gchar *data;
-	g_file_get_contents(filepath, &data, NULL, NULL);
     return data;
 }
 
@@ -159,7 +163,3 @@ void template_create_file(GuTemplate* t, gchar* filename, gchar* text) {
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), TRUE);
     gtk_widget_set_sensitive(GTK_WIDGET(t->template_open), TRUE);
 }
-
-
-
-

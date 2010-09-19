@@ -153,6 +153,8 @@ void on_button_template_add_clicked(GtkWidget* widget, void* user);
 void on_button_template_remove_clicked(GtkWidget* widget, void* user);
 void on_button_template_open_clicked(GtkWidget* widget, void* user);
 void on_button_template_close_clicked(GtkWidget* widget, void* user);
+void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
+        void* user);
 gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user);

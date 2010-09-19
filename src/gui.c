@@ -603,6 +603,7 @@ void on_button_template_open_clicked(GtkWidget* widget, void* user) {
     if (text) {
         editor_fill_buffer(gummi->editor, text);
         gummi_create_environment(gummi, NULL);
+        g_free(text);
         gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
     }
 }
@@ -615,23 +616,26 @@ void on_button_template_close_clicked(GtkWidget* widget, void* user) {
     gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
 }
 
-void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm, gpointer data) {
+void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
+        void* user) {
     GtkTreeModel *model;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
+    gchar *filepath = g_build_filename(g_get_user_config_dir(),
+                                       "gummi", "templates", filenm, NULL);
     
     model = gtk_tree_view_get_model(gummi->templ->templateview);
     selection = gtk_tree_view_get_selection(gummi->templ->templateview);
     
     if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
-        gtk_list_store_set(gummi->templ->list_templates, &iter, 0, filenm, -1);
+        gtk_list_store_set(gummi->templ->list_templates, &iter, 0, filenm, 1,
+                filepath, -1);
+        gchar *text = editor_grab_buffer(gummi->editor);
+        template_create_file(gummi->templ, filenm, text);
     }
-    gchar *text = editor_grab_buffer(gummi->editor);
-    template_create_file(gummi->templ, filenm, text);
-  
-    gtk_list_store_clear(gummi->templ->list_templates);
-    template_setup(gummi->templ);
-
+    //gtk_list_store_clear(gummi->templ->list_templates);
+    //template_setup(gummi->templ);
+    g_free(filepath);
 }
 
 
