@@ -118,8 +118,8 @@ gboolean biblio_check_valid_file(GuBiblio* b, gchar *filename) {
     if (utils_path_exists(filename) == TRUE) {
         b->filename = g_strdup(filename);
         if (g_path_is_absolute(filename)) {
-            b->basename = g_strdup(g_path_get_basename(filename));
-            b->dirname = g_strdup(g_path_get_dirname(filename));
+            b->basename = g_path_get_basename(filename);
+            b->dirname = g_path_get_dirname(filename);
             return TRUE;
         }
         else {

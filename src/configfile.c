@@ -97,10 +97,12 @@ const gchar configfile_str[] =
 void configfile_init(const gchar* filename, gint type) {
     L_F_DEBUG;
     const gchar* configfile_version = 0;
+    gchar* dirname = 0;
     gchar buf[BUFSIZ] = { 0 };
 
-    g_mkdir_with_parents(g_path_get_dirname(filename),
+    g_mkdir_with_parents(dirname = g_path_get_dirname(filename),
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+    g_free(dirname);
 
     FILE* fh;
     if ((fh = fopen(filename, "r"))) {

@@ -215,7 +215,13 @@ void on_menu_template_activate(GtkWidget *widget, void * user) {
 
 void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
-    gchar* filename = get_save_filename(FILTER_PDF);
+    gchar* filename = NULL;
+    gchar* path = NULL;
+
+    if (gummi->finfo->filename)
+        path = g_path_get_dirname(gummi->finfo->filename);
+    filename = get_save_filename(FILTER_PDF, path);
+    if (path) g_free(path);
     if (filename)
         motion_export_pdffile(gummi->motion, filename);
 }
@@ -273,7 +279,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     gboolean new = FALSE;
 
     if (!gummi->finfo->filename) {
-        if ((filename = get_save_filename(FILTER_LATEX))) {
+        if ((filename = get_save_filename(FILTER_LATEX, NULL))) {
             if (strcmp(filename + strlen(filename) -4, ".tex")) {
                 filename = g_strdup_printf("%s.tex", filename);
                 new = TRUE;
@@ -292,7 +298,7 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
     L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
-    if ((filename = get_save_filename(FILTER_LATEX))) {
+    if ((filename = get_save_filename(FILTER_LATEX, NULL))) {
         if (strcmp(filename + strlen(filename) -4, ".tex")) {
             filename = g_strdup_printf("%s.tex", filename);
             new = TRUE;
@@ -1123,8 +1129,7 @@ void toggle_autosaving(GtkWidget* widget, void* user) {
         gtk_widget_set_sensitive(
                 GTK_WIDGET(gummi->gui->prefsgui->autosave_timer), TRUE);
         gint time = atoi(config_get_value("autosave_timer"));
-        gtk_spin_button_set_value(gummi->gui->prefsgui->autosave_timer,
-                time);
+        gtk_spin_button_set_value(gummi->gui->prefsgui->autosave_timer, time);
         iofunctions_start_autosave(time, gummi->finfo->filename);
     } else {
         gtk_widget_set_sensitive(
@@ -1308,7 +1313,7 @@ gchar* get_open_filename(GuFilterType type) {
     return filename;
 }
 
-gchar* get_save_filename(GuFilterType type) {
+gchar* get_save_filename(GuFilterType type, gchar* default_path) {
     L_F_DEBUG;
     GtkFileChooser* chooser = NULL;
     gchar* filename = NULL;
@@ -1322,7 +1327,10 @@ gchar* get_save_filename(GuFilterType type) {
                 NULL));
 
     file_dialog_set_filter(chooser, type);
-    gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
+    if (default_path)
+        gtk_file_chooser_set_current_folder(chooser, default_path);
+    else
+        gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
 
     if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK)
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
@@ -1390,6 +1398,7 @@ void add_to_recent_list(gchar* filename) {
 void display_recent_files(GummiGui* gui) {
     L_F_DEBUG;
     gchar* ptr = 0;
+    gchar* basename = 0;
     gint i = 0, count = 0;
 
     for (i = 0; i < 5; ++i)
@@ -1399,10 +1408,11 @@ void display_recent_files(GummiGui* gui) {
         if (gui->recent_list[i] &&
             0 != strcmp(gui->recent_list[i], "__NULL__")) {
             ptr = g_strdup_printf("%d. %s", count + 1,
-                    g_path_get_basename(gui->recent_list[i]));
+                    basename = g_path_get_basename(gui->recent_list[i]));
             gtk_menu_item_set_label(gui->recent[i], ptr);
             gtk_widget_show(GTK_WIDGET(gui->recent[i]));
             g_free(ptr);
+            g_free(basename);
             ++count;
         }
     }

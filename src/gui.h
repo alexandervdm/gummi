@@ -208,7 +208,7 @@ void on_image_file_activate(void);
 
 /* misc functions */
 gchar* get_open_filename(GuFilterType type);
-gchar* get_save_filename(GuFilterType type);
+gchar* get_save_filename(GuFilterType type, gchar* default_path);
 void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type);
 gint check_for_save(void);
 
