@@ -2,9 +2,23 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
-Gummi 0.5.0 (Septembher 19th, 2010):
+Gummi 0.5.0 (September 20th, 2010):
 
-	
+	Bugs fixed:
+	* Too many to write up, see SVN revision log ;)
+
+	Features added:
+	* Complete rewrite of Gummi to the C programming language
+	* Internationalisation support
+	* Search & Replace function
+	* Custom document templates
+	* Document statistics (word count)
+	* Adjustable editor font
+	* Preview pane can now be hidden and paused
+	* New compilation interval schemes
+	* Export PDF function
+	* Tab width now configurable
+
 
 Gummi 0.4.8 (May 16th, 2010):
 
