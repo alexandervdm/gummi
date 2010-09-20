@@ -31,15 +31,12 @@
 #include <string.h> 
 #include <sys/stat.h> 
 
-
 #include "biblio.h"
 #include "utils.h"
 #include "motion.h"
 #include "environment.h"
 
-extern Gummi* gummi;
 extern GuEditor* ec;
-
 
 GuBiblio* biblio_init(GtkBuilder * builder) {
     GuBiblio* b = g_new0(GuBiblio, 1);
@@ -75,10 +72,14 @@ gboolean biblio_detect_bibliography(GuEditor* ec) {
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
             utils_path_exists(result[1])) {
             g_strfreev(result);
+            g_free(content);
+            g_match_info_free(match_info);
+            g_regex_unref(bib_regex);
             return TRUE;
         }
         g_strfreev(result);
     }
+    g_free(content);
     g_match_info_free(match_info);
     g_regex_unref(bib_regex);
     return FALSE;

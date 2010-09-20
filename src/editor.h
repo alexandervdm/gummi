@@ -63,6 +63,8 @@ void editor_sourceview_config(GuEditor* ec);
 void editor_activate_spellchecking(GuEditor* ec, gboolean status);
 #endif
 void editor_fill_buffer(GuEditor* ec, const gchar* text);
+
+/* editor_grab_buffer will return a newly allocated string */
 gchar* editor_grab_buffer(GuEditor* ec);
 void editor_insert_package(GuEditor* ec, const gchar* package);
 void editor_insert_bib(GuEditor* ec, const gchar* package);

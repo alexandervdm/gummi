@@ -621,6 +621,7 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
     GtkTreeModel *model;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
+    gchar *text;
     gchar *filepath = g_build_filename(g_get_user_config_dir(),
                                        "gummi", "templates", filenm, NULL);
     
@@ -630,9 +631,10 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
     if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
         gtk_list_store_set(gummi->templ->list_templates, &iter, 0, filenm, 1,
                 filepath, -1);
-        gchar *text = editor_grab_buffer(gummi->editor);
+        text = editor_grab_buffer(gummi->editor);
         template_create_file(gummi->templ, filenm, text);
     }
+    g_free(text);
     g_free(filepath);
 }
 
