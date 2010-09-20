@@ -137,7 +137,7 @@ char* iofunctions_decode_text(gchar* text) {
     if (!(result = g_locale_to_utf8(text, -1, &read, &written, &err))) {
         slog(L_ERROR, "failed to convert text from default locale, trying "
                 "ISO-8859-1\n");
-        size_t in_size = strlen(text), out_size = in_size * 2;
+        gsize in_size = strlen(text), out_size = in_size * 2;
         gchar* out = (gchar*)g_malloc(out_size);
         gchar* process = out;
         iconv_t cd = iconv_open("UTF-8//IGNORE", "ISO−8859-1");

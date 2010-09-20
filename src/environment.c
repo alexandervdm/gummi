@@ -34,7 +34,7 @@
 Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuImporter* im,
         GuMotion* mo, GuPreview* prev, GuBiblio* bib, GuTemplate* tpl) {
     L_F_DEBUG;
-    Gummi* g = (Gummi*)g_malloc(sizeof(Gummi));
+    Gummi* g = g_new0(Gummi, 1);
     g->gui = gu;
     g->finfo = fc;
     g->editor = ed;

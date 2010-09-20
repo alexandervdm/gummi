@@ -26,14 +26,14 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
- 
+
 #ifndef GUMMI_BIBLIO_H
 #define GUMMI_BIBLIO_H
 
 #include <gtk/gtk.h>
 
 #include "motion.h"
- 
+
 typedef struct _GuBiblio {
     GtkProgressBar* progressbar;
     GtkAdjustment* progressmon;

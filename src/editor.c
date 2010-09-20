@@ -64,7 +64,7 @@ GuEditor* editor_init(GtkBuilder* builder) {
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language
                                                         (manager, "latex");
-    GuEditor* ec = (GuEditor*)g_malloc(sizeof(GuEditor));
+    GuEditor* ec = g_new0(GuEditor, 1);
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
     ec->sourceview =
         GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));

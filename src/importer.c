@@ -43,7 +43,7 @@ const gchar bracket_type[][16] = { "matrix", "pmatrix", "bmatrix",
 
 GuImporter* importer_init(GtkBuilder* builder) {
     L_F_DEBUG;
-    GuImporter* i = (GuImporter*)g_malloc(sizeof(GuImporter));
+    GuImporter* i = g_new0(GuImporter, 1);
 
     i->import_tabs =
         GTK_NOTEBOOK(gtk_builder_get_object(builder, "import_tabs"));

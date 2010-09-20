@@ -42,7 +42,7 @@ extern GuEditor* ec;
 
 
 GuBiblio* biblio_init(GtkBuilder * builder) {
-    GuBiblio* b = (GuBiblio*)g_malloc(sizeof(GuBiblio));
+    GuBiblio* b = g_new0(GuBiblio, 1);
     b->progressbar =
         GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "bibprogressbar"));
     b->progressmon =

@@ -42,7 +42,7 @@
 
 GuTemplate* template_init(GtkBuilder* builder) {
     L_F_DEBUG;
-    GuTemplate* t = (GuTemplate*)g_malloc(sizeof(GuTemplate));
+    GuTemplate* t = g_new0(GuTemplate, 1);
     t->templatewindow =
         GTK_WINDOW(gtk_builder_get_object(builder, "templatewindow"));
     t->templateview = 

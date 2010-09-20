@@ -34,7 +34,7 @@
 
 GuFileInfo* fileinfo_init(void) {
     L_F_DEBUG;
-    GuFileInfo* f = (GuFileInfo*)g_malloc(sizeof(GuFileInfo));
+    GuFileInfo* f = g_new0(GuFileInfo, 1);
     f->workfd = -1;
     f->filename = NULL;   /* current opened file name in workspace */
     f->pdffile = NULL;

@@ -47,7 +47,7 @@
 GuMotion* motion_init(GtkBuilder* builder, GuFileInfo* fc, GuEditor* ec,
         GuPreview* pc) {
     L_F_DEBUG;
-    GuMotion* m = (GuMotion*)g_malloc(sizeof(GuMotion));
+    GuMotion* m = g_new0(GuMotion, 1);
 
     /* initialize basis */
     m->b_finfo = fc;

@@ -61,7 +61,7 @@ GummiGui* gui_init(GtkBuilder* builder) {
     GtkWidget *errortext;
     gint width = 0, height = 0;
 
-    GummiGui* g = (GummiGui*)g_malloc(sizeof(GummiGui));
+    GummiGui* g = g_new0(GummiGui, 1);
 
     errortext = GTK_WIDGET(gtk_builder_get_object(builder, "errorfield"));
     g->mainwindow =
