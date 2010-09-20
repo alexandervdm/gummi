@@ -1214,6 +1214,8 @@ void on_combo_typesetter_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint selected = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
     const gchar typesetter[][16] = { "pdflatex", "xelatex" };
+    if (0 == strcmp(config_get_value("typesetter"), "xelatex") &&
+            1 == selected) return;
     config_set_value("typesetter", typesetter[selected]);
     gtk_widget_show(GTK_WIDGET(gummi->gui->prefsgui->changeimg));
     gtk_widget_show(GTK_WIDGET(gummi->gui->prefsgui->changelabel));
