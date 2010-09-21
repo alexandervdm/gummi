@@ -202,6 +202,7 @@ void config_set_value(const gchar* term, const gchar* value) {
         if (current->line[0] == '\t')
             current->line[0] = 0;
         else break;
+        current = current->next;
     }
 
     config_save(head);
