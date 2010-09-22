@@ -1,0 +1,50 @@
+#!/bin/bash
+
+export DEBFULLNAME="Wei-Ning Huang (AZ)"
+export DEBEMAIL="aitjcize@gmail.com"
+
+PKG_DIR=.
+owd=`pwd`
+package=${owd##/*/}
+
+if [ -e configure.ac ]; then
+  version=`sed -n 's/AC_INIT([^,]*, \[\([a-zA-Z0-9.-~]*\)\], .*/\1/p' configure.ac`
+elif [ -e setup.py ]; then
+  version=`sed -n "s/.*version = '\(.*\)'.*/\1/p" setup.py`
+fi
+
+if [ "$1" == "clean" ]; then
+  rm -rf $PKG_DIR/*
+  exit 0
+fi
+
+echo "Package: $package"
+echo "Version: $version"
+
+cd ..
+cp -r $package /tmp/$package-$version
+rm -rf /tmp/$package-$version/dev
+mv /tmp/$package-$version $PKG_DIR
+cd $PKG_DIR
+
+if [ "$1" == "sdist" ]; then
+  tar -zcf ${package}-$version.tar.gz $package-$version
+  exit 0
+else
+  tar -zcf ${package}_$version.orig.tar.gz $package-$version
+fi
+
+cd $package-$version
+dh_make -s -b -p $package
+
+cp $owd/dev/rules $owd/dev/control debian
+cd debian
+rm *.ex *.EX README.*
+dch -e
+cd ..
+
+if [ "$1" == "deb" ] || [ -z "$1" ]; then
+  dpkg-buildpackage -rfakeroot
+elif [ "$1" == "ppa" ]; then
+  debuild -S
+fi
