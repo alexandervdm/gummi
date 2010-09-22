@@ -3,7 +3,9 @@
 export DEBFULLNAME="Wei-Ning Huang (AZ)"
 export DEBEMAIL="aitjcize@gmail.com"
 
-PKG_DIR=.
+PKG_DIR=$HOME/Public
+mkdir -p $PKG_DIR
+
 owd=`pwd`
 package=${owd##/*/}
 
@@ -14,7 +16,7 @@ elif [ -e setup.py ]; then
 fi
 
 if [ "$1" == "clean" ]; then
-  rm -rf $PKG_DIR/*
+  rm -rf $PKG_DIR/$package*
   exit 0
 fi
 
