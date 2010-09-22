@@ -156,6 +156,9 @@ void motion_update_pdffile(GuMotion* mc) {
 
         /* update status light */
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
+    } else if (strstr(cresult.data, "No pages of output.")) {
+        mc->errorline = -1;
+        gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
     } else
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-yes");
 }
@@ -218,7 +221,7 @@ void motion_export_pdffile(GuMotion* mc, const gchar* path) {
 
 void motion_update_errortags(GuMotion* mc) {
     L_F_DEBUG;
-    if (mc->errorline)
+    if (mc->errorline > 0)
         editor_apply_errortags(mc->b_editor, mc->errorline);
     if (mc->last_errorline && !mc->errorline)
         editor_apply_errortags(mc->b_editor, 0);
