@@ -112,21 +112,21 @@ void iofunctions_write_file(GuEditor* ec, gchar *filename) {
     g_free(text); 
 }
 
-void iofunctions_start_autosave(gint time, gchar* name) {
+void iofunctions_start_autosave(gchar* name) {
     L_F_DEBUG;
-    sid = g_timeout_add_seconds(time, iofunctions_autosave_cb, name);
+    sid = g_timeout_add_seconds(atoi(config_get_value("autosave_timer")) * 60,
+            iofunctions_autosave_cb, name);
 }
 
 void iofunctions_stop_autosave(void) {
     L_F_DEBUG;
-    if (sid > 0)
-        g_source_remove(sid);
+    if (sid > 0) g_source_remove(sid);
 }
 
 void iofunctions_reset_autosave(gchar* name) {
     L_F_DEBUG;
     iofunctions_stop_autosave();
-    iofunctions_start_autosave(atoi(config_get_value("autosave_timer")), name);
+    iofunctions_start_autosave(name);
 }
 
 char* iofunctions_decode_text(gchar* text) {

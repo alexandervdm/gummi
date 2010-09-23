@@ -36,7 +36,7 @@
 void iofunctions_load_default_text(GuEditor* ec);
 void iofunctions_load_file(GuEditor* ec, gchar *filename);
 void iofunctions_write_file(GuEditor* ec, gchar *filename);
-void iofunctions_start_autosave(gint time, gchar* name);
+void iofunctions_start_autosave(gchar* name);
 void iofunctions_stop_autosave(void);
 void iofunctions_reset_autosave(gchar* name);
 gchar* iofunctions_decode_text(gchar* text);
