@@ -81,7 +81,7 @@ GuEditor* editor_init(GtkBuilder* builder) {
     gtk_source_view_set_tab_width(ec->sourceview,
             atoi(config_get_value("tabwidth")));
     gtk_source_view_set_insert_spaces_instead_of_tabs(ec->sourceview,
-            (gboolean)config_get_value("tabs_instof_spaces"));
+            (gboolean)config_get_value("spaces_instof_tabs"));
     gtk_source_view_set_auto_indent(ec->sourceview,
             (gboolean)config_get_value("autoindentation"));
 
