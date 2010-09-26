@@ -86,12 +86,12 @@ gboolean biblio_detect_bibliography(GuEditor* ec) {
 }
 
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
-    gchar command[BUFSIZ];
+    gchar* command = g_strdup_printf("bibtex '%s'", mc->b_finfo->workfile);
     motion_update_workfile(mc);
     motion_update_auxfile(mc);
-    snprintf(command, sizeof command, "bibtex '%s'", mc->b_finfo->workfile);
     pdata res = utils_popen_r(command);
     gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
+    g_free(command);
     return !(strstr(res.data, "Database file #1") == NULL);
 }
 

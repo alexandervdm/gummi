@@ -120,13 +120,14 @@ void preview_set_pagedata(GuPreview* pc) {
     else if (pc->page_current >= pc->page_total) {
         preview_goto_page(pc, pc->page_total -1);
     }
-    char current[8];
-    snprintf(current, sizeof current, "%d", (pc->page_current+1));
-    char total[8];
-    snprintf(total, sizeof total, "of %d", pc->page_total);
+    char* current = g_strdup_printf("%d", (pc->page_current+1));
+    char* total = g_strdup_printf("of %d", pc->page_total);
 
     gtk_entry_set_text(GTK_ENTRY(pc->page_input), current);
     gtk_label_set_text(GTK_LABEL(pc->page_label), total);
+
+    g_free(current);
+    g_free(total);
 }
 
 void preview_goto_page(GuPreview* pc, int page_number) {

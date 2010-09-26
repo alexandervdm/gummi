@@ -118,15 +118,14 @@ void motion_update_workfile(GuMotion* mc) {
 
 void motion_update_pdffile(GuMotion* mc) {
     L_F_DEBUG;
-    gchar command[BUFSIZ];
-    snprintf(command, sizeof command, "%s "
-                                      "-interaction=nonstopmode "
-                                      "-file-line-error "
-                                      "-halt-on-error "
-                                      "-output-directory='%s' '%s'", \
-                                      mc->typesetter,
-                                      mc->b_finfo->tmpdir,
-                                      mc->b_finfo->workfile);
+    gchar* command = g_strdup_printf("%s "
+                                     "-interaction=nonstopmode "
+                                     "-file-line-error "
+                                     "-halt-on-error "
+                                     "-output-directory='%s' '%s'", \
+                                     mc->typesetter,
+                                     mc->b_finfo->tmpdir,
+                                     mc->b_finfo->workfile);
 
     gtk_tool_button_set_stock_id(mc->statuslight, "gtk-refresh");
     while (gtk_events_pending()) gtk_main_iteration();
@@ -161,6 +160,7 @@ void motion_update_pdffile(GuMotion* mc) {
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
     } else
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-yes");
+    g_free(command);
 }
 
 
@@ -197,26 +197,35 @@ void motion_stop_updatepreview(GuMotion* mc) {
 
 void motion_update_auxfile(GuMotion* mc) {
     L_F_DEBUG;
-    gchar command[BUFSIZ];
-    snprintf(command, sizeof command, "%s "
-                                      "--draftmode "
-                                      "-interaction=nonstopmode "
-                                      "--output-directory='%s' '%s'", \
-                                      mc->typesetter,
-                                      mc->b_finfo->tmpdir,
-                                      mc->b_finfo->workfile);
+    gchar* command = g_strdup_printf("%s "
+                                     "--draftmode "
+                                     "-interaction=nonstopmode "
+                                     "--output-directory='%s' '%s'", \
+                                     mc->typesetter,
+                                     mc->b_finfo->tmpdir,
+                                     mc->b_finfo->workfile);
     utils_popen_r(command);
+    g_free(command);
 }
 
 void motion_export_pdffile(GuMotion* mc, const gchar* path) {
     L_F_DEBUG;
-    gchar savepath[PATH_MAX];
+    gchar* savepath;
+    gint ret = 0;
 
     if (0 != strcmp(path + strlen(path) -4, ".pdf"))
-        snprintf(savepath, PATH_MAX, "%s.pdf", path);
+        savepath = g_strdup_printf("%s.pdf", path);
     else
-        strncpy(savepath, path, PATH_MAX);
+        savepath = g_strdup(path);
+    if (utils_path_exists(savepath)) {
+        ret = utils_yes_no_dialog(_("The file already exists. Overwrite?"));
+        if (GTK_RESPONSE_YES != ret) {
+            g_free(savepath);
+            return;
+        }
+    }
     utils_copy_file(mc->b_finfo->pdffile, savepath);
+    g_free(savepath);
 }
 
 void motion_update_errortags(GuMotion* mc) {

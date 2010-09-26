@@ -504,7 +504,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     GError* err = NULL;
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size
-        (DATADIR"/gummi.png", 60, 60, &err);
+        (DATADIR"/gummi.png", 80, 80, &err);
     const gchar* authors[] = { "Alexander van der Mey\n"
         "<alexvandermey@gmail.com>",
         "Wei-Ning Huang\n"
@@ -1172,34 +1172,34 @@ void on_prefs_reset_clicked(GtkWidget* widget, void* user) {
 void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar val_str[16];
+    gchar* val_str = g_strdup_printf("%d", newval);
 
-    snprintf(val_str, 16, "%d", newval);
     config_set_value("tabwidth", val_str);
     gtk_source_view_set_tab_width(gummi->editor->sourceview, newval);
+    g_free(val_str);
 }
 
 void on_autosave_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar val_str[16];
+    gchar* val_str = g_strdup_printf("%d", newval);
 
-    snprintf(val_str, 16, "%d", newval);
     config_set_value("autosave_timer", val_str);
     iofunctions_reset_autosave(gummi->finfo->filename);
+    g_free(val_str);
 }
 
 void on_compile_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar val_str[16];
+    gchar* val_str = g_strdup_printf("%d", newval);
 
-    snprintf(val_str, 16, "%d", newval);
     config_set_value("compile_timer", val_str);
     if (config_get_value("compile_status")) {
         motion_stop_updatepreview(gummi->motion);
         motion_start_updatepreview(gummi->motion);
     }
+    g_free(val_str);
 }
 
 void on_editor_font_set(GtkWidget* widget, void* user) {
@@ -1344,6 +1344,15 @@ gchar* get_save_filename(GuFilterType type, gchar* default_path) {
         gtk_file_chooser_set_current_folder(chooser, default_path);
     else
         gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
+
+    if (FILTER_PDF == type && gummi->finfo->filename) {
+        gchar* basename = g_path_get_basename(gummi->finfo->filename);
+        basename[strlen(basename) -4] = 0;
+        gchar* path = g_strdup_printf("%s.pdf", basename);
+        gtk_file_chooser_set_current_name(chooser, path);
+        g_free(path);
+        g_free(basename);
+    }
 
     if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK)
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));

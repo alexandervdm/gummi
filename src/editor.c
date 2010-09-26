@@ -168,11 +168,10 @@ gchar* editor_grab_buffer(GuEditor* ec) {
 void editor_insert_package(GuEditor* ec, const gchar* package) {
     L_F_DEBUG;
     GtkTextIter start, mstart, mend, sstart, send;
-    gchar pkgstr[BUFSIZ / 64];
+    gchar* pkgstr = g_strdup_printf("\\usepackage{%s}\n", package);
     gtk_text_buffer_get_start_iter(ec_sourcebuffer, &start);
     gtk_text_iter_forward_search(&start, (gchar*)"\\begin{document}", 0,
             &mstart, &mend, NULL);
-    snprintf(pkgstr, BUFSIZ / 64, "\\usepackage{%s}\n", package);
     if (!gtk_text_iter_backward_search(&mstart, pkgstr, 0, &sstart, &send,
                 NULL)) {
         gtk_source_buffer_begin_not_undoable_action(ec->sourcebuffer);
@@ -183,18 +182,18 @@ void editor_insert_package(GuEditor* ec, const gchar* package) {
         gtk_source_buffer_end_not_undoable_action(ec->sourcebuffer);
         gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
     }
+    g_free(pkgstr);
 }
 
 void editor_insert_bib(GuEditor* ec, const gchar* package) {
     L_F_DEBUG;
     GtkTextIter start, end, mstart, mend, sstart, send;
-    gchar pkgstr[BUFSIZ / 64];
+    gchar* pkgstr = g_strdup_printf(
+            "\\bibliography{%s}{}\n\\bibliographystyle{plain}\n", package);
     gtk_text_buffer_get_start_iter(ec_sourcebuffer, &start);
     gtk_text_buffer_get_end_iter(ec_sourcebuffer, &end);
     gtk_text_iter_backward_search(&end, (gchar*)"\\end{document}", 0,
             &mstart, &mend, NULL);
-    snprintf(pkgstr, BUFSIZ / 64,
-            "\\bibliography{%s}{}\n\\bibliographystyle{plain}\n", package);
     if (!gtk_text_iter_forward_search(&start, "\\bibliography{", 0,
                 &sstart, &send, NULL)) {
         gtk_source_buffer_begin_not_undoable_action(ec->sourcebuffer);
@@ -205,26 +204,25 @@ void editor_insert_bib(GuEditor* ec, const gchar* package) {
         gtk_source_buffer_end_not_undoable_action(ec->sourcebuffer);
         gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
     }
+    g_free(pkgstr);
 }
 
 void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     L_F_DEBUG;
     GtkTextIter start, end;
-    gint i = 0, selected = 0, outsize = 0;
+    gint i = 0, selected = 0;
     const gchar* selected_text = 0;
     gint style_size = sizeof(style) / sizeof(style[0]);
     gchar** result = 0;
     GError* error = NULL;
     GRegex* match_str = 0;
     GMatchInfo* match_info;
-    gchar* outtext = 0;
-    gchar regexbuf[BUFSIZ];
+    gchar* outtext = NULL;
+    gchar* regexbuf = NULL;
 
     /* grab selected text */
     gtk_text_buffer_get_selection_bounds(ec_sourcebuffer, &start, &end);
     selected_text = gtk_text_iter_get_text(&start, &end);
-    outsize = strlen(selected_text) + 64;
-    outtext = (gchar*)g_malloc(outsize);
 
     /* select style */
     for (i = 0; i < style_size; ++i)
@@ -234,7 +232,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
         }
 
     /* generate regex expression */
-    snprintf(regexbuf, BUFSIZ, "(.*)%s%s(.*)%s%s(.*)",
+    regexbuf = g_strdup_printf("(.*)%s%s(.*)%s%s(.*)",
             (style[selected][1][0] == '\\')? "\\": "",
             style[selected][1],
             (style[selected][2][0] == '\\')? "\\": "",
@@ -246,24 +244,18 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
         result = g_match_info_fetch_all(match_info);
         if (strlen(result[1]) == 0 && strlen(result[3]) == 0) {
             /* already applied, so we remove it */
-            strncpy(outtext, result[2], outsize);
-            outtext[strlen(result[2])] = 0;
+            outtext = g_strdup(result[2]);
         } else if (strlen(result[1]) != 0 || strlen(result[3]) != 0) {
             /* the text contains a partially styled text, remove it and apply
              * style to the whole text */
-            snprintf(outtext, outsize, "%s%s%s%s%s",
+            outtext = g_strdup_printf("%s%s%s%s%s",
                     style[selected][1], result[1], result[2], result[3],
                     style[selected][2]);
         }
     } else { /* no previous style applied */
-        snprintf(outtext, outsize, "%s%s%s",
+        outtext = g_strdup_printf("%s%s%s",
                 style[selected][1], selected_text, style[selected][2]);
     }
-
-    /* free memory */
-    g_strfreev(result);
-    g_match_info_free(match_info);
-    g_regex_unref(match_str);
 
     gtk_text_buffer_begin_user_action(ec_sourcebuffer);
     gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
@@ -272,8 +264,13 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     gtk_text_iter_backward_chars(&start, strlen(outtext));
     gtk_text_buffer_select_range(ec_sourcebuffer, &start, &end);
     gtk_text_buffer_end_user_action(ec_sourcebuffer);
-    g_free(outtext);
     gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
+
+    g_free(outtext);
+    g_free(regexbuf);
+    g_strfreev(result);
+    g_match_info_free(match_info);
+    g_regex_unref(match_str);
 }
 
 void editor_apply_errortags(GuEditor* ec, gint line) {

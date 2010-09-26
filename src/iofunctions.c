@@ -168,14 +168,15 @@ gchar* iofunctions_encode_text(gchar* text) {
 gboolean iofunctions_autosave_cb(void* name) {
     L_F_DEBUG;
     gchar* fname = (gchar*)name;
-    char buf[BUFSIZ];
+    char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
     if (fname) {
         iofunctions_write_file(gummi->editor, fname);
         gtk_text_buffer_set_modified(
                 GTK_TEXT_BUFFER(gummi->editor->sourcebuffer), FALSE);
-        snprintf(buf, BUFSIZ, _("Autosaving file %s"), fname);
         statusbar_set_message(buf);
+        g_free(buf);
         return TRUE;
     }
+    g_free(buf);
     return FALSE;
 }
