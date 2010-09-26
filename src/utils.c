@@ -73,6 +73,8 @@ void slog(gint level, const gchar *fmt, ...) {
         fprintf(stderr, "\e[1;37;41m[Fatal]\e[0m ");
     else if (L_IS_TYPE(level, L_ERROR) || L_IS_TYPE(level, L_G_ERROR))
         fprintf(stderr, "\e[1;31m[Error]\e[0m ");
+    else if (L_IS_TYPE(level, L_WARNING))
+        fprintf(stderr, "\e[1;33m[Warning]\e[0m ");
     else
         fprintf(stderr, "\e[1;34m[Info]\e[0m ");
     

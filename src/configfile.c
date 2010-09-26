@@ -265,6 +265,8 @@ slist* config_find_index_of(slist* head, const gchar* term) {
         prev = current;
         current = current->next;
     }
+    slog(L_WARNING, "can't find option `%s', creating new field for it...\n",
+           term);
     prev->next = g_new0(slist, 1);
     current = prev->next;
     strncpy(current->line, term, BUF_MAX);
