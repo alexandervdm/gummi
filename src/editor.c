@@ -149,8 +149,7 @@ void editor_fill_buffer(GuEditor* ec, const gchar* text) {
     gtk_source_buffer_begin_not_undoable_action(ec->sourcebuffer);
     gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), FALSE);
     gtk_text_buffer_set_text(ec_sourcebuffer, text, strlen(text));
-    // line is redundant and caused gtk criticals warnings:
-    //gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
+    gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
     gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), TRUE);
     gtk_source_buffer_end_not_undoable_action(ec->sourcebuffer);
     gtk_text_buffer_end_user_action(ec_sourcebuffer);
