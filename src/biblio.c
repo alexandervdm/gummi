@@ -86,13 +86,17 @@ gboolean biblio_detect_bibliography(GuEditor* ec) {
 }
 
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
-    gchar* command = g_strdup_printf("bibtex '%s'", mc->b_finfo->workfile);
-    motion_update_workfile(mc);
-    motion_update_auxfile(mc);
-    pdata res = utils_popen_r(command);
-    gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
-    g_free(command);
-    return !(strstr(res.data, "Database file #1") == NULL);
+    if (g_find_program_in_path("bibtex")) {
+        gchar* command = g_strdup_printf("bibtex '%s'", mc->b_finfo->workfile);
+        motion_update_workfile(mc);
+        motion_update_auxfile(mc);
+        pdata res = utils_popen_r(command);
+        gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
+        g_free(command);
+        return !(strstr(res.data, "Database file #1") == NULL);
+    }
+    slog(L_WARNING, "bibtex command is not present or executable.\n");
+    return FALSE;
 }
 
 gboolean biblio_setup_bibliography(GuBiblio* b, GuEditor* ec) {
