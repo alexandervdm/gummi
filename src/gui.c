@@ -473,35 +473,44 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     gint i = 0;
     gchar* str = 0;
     gchar* output = 0;
-    gchar* cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
-    pdata result = utils_popen_r(cmd);
-    gchar* terms[] = { _("Words in text"),
+    gchar* cmd;
+    
+    // check if the texcount program exists:
+    if (g_find_program_in_path("texcount")) {
+        cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
+        pdata result = utils_popen_r(cmd);
+        gchar* terms[] = { _("Words in text"),
                        _("Words in headers"),
                        _("Words in float captions"),
                        _("Number of headers"),
                        _("Number of floats"),
                        _("Number of math inlines"),
                        _("Number of math displayed")
-                     };
-    gchar* res[7];
+                       };
+        gchar* res[7];
 
-    str = strtok(result.data, ":\n");
-    while (str) {
-      str = strtok(NULL, ":\n");
-      if (strlen(str) > 10) continue;
-      res[i++] = str;
-      if (i == 7) break;
+        str = strtok(result.data, ":\n");
+        while (str) {
+          str = strtok(NULL, ":\n");
+          if (strlen(str) > 10) continue;
+          res[i++] = str;
+          if (i == 7) break;
+        }
+    
+        output = g_strconcat(terms[0], ": ", res[0], "\n",
+                             terms[1], ": ", res[1], "\n",
+                             terms[2], ": ", res[2], "\n",
+                             terms[3], ": ", res[3], "\n",
+                             terms[4], ": ", res[4], "\n",
+                             terms[4], ": ", res[5], "\n",
+                             terms[6], ": ", res[6], "\n",
+                             NULL);
     }
-
-    output = g_strconcat(terms[0], ": ", res[0], "\n",
-                         terms[1], ": ", res[1], "\n",
-                         terms[2], ": ", res[2], "\n",
-                         terms[3], ": ", res[3], "\n",
-                         terms[4], ": ", res[4], "\n",
-                         terms[4], ": ", res[5], "\n",
-                         terms[6], ": ", res[6], "\n",
-                         NULL);
-
+    else { // texcount is not detected:
+        output = g_strconcat
+            ("This function requires\nthe texcount program.\n", NULL);
+    }
+    
     dialog = gtk_message_dialog_new(GTK_WINDOW(gummi->gui->mainwindow),
             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_INFO,
