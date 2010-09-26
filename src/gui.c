@@ -59,7 +59,7 @@ GummiGui* gui_init(GtkBuilder* builder) {
     L_F_DEBUG;
     GtkWidget *hpaned;
     GtkWidget *errortext;
-    gint width = 0, height = 0;
+    gint wx = 0, wy = 0, width = 0, height = 0;
 
     GummiGui* g = g_new0(GummiGui, 1);
 
@@ -100,6 +100,17 @@ GummiGui* gui_init(GtkBuilder* builder) {
     g->prefsgui = prefsgui_init(g);
     g->searchgui = searchgui_init(builder);
     g->importgui = importgui_init(builder);
+
+    gtk_window_resize(GTK_WINDOW(g->mainwindow),
+                      atoi(config_get_value("mainwindow_w")),
+                      atoi(config_get_value("mainwindow_h")));
+
+    wx = atoi(config_get_value("mainwindow_x"));
+    wy = atoi(config_get_value("mainwindow_y"));
+    if (wx && wy)
+      gtk_window_move(GTK_WINDOW(g->mainwindow), wx, wy);
+    else
+      gtk_window_set_position(GTK_WINDOW(g->mainwindow), GTK_WIN_POS_CENTER);
 
     PangoFontDescription* font_desc = 
         pango_font_description_from_string("Monospace 8");
@@ -159,11 +170,34 @@ void gui_main(GtkBuilder* builder) {
 
 gboolean gui_quit(void) {
     L_F_DEBUG;
+    gint wx = 0, wy = 0, width = 0, height = 0;
+    gchar* wx_str = NULL;
+    gchar* wy_str = NULL;
+    gchar* width_str = NULL;
+    gchar* height_str = NULL;
     gint ret = check_for_save();
+
     if (GTK_RESPONSE_YES == ret)
         on_menu_save_activate(NULL, NULL);  
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return TRUE;
+
+    gtk_window_get_size(GTK_WINDOW(gummi->gui->mainwindow), &width, &height);
+    gtk_window_get_position(GTK_WINDOW(gummi->gui->mainwindow), &wx, &wy);
+    wx_str = g_strdup_printf("%d", wx);
+    wy_str = g_strdup_printf("%d", wy);
+    width_str = g_strdup_printf("%d", width);
+    height_str = g_strdup_printf("%d", height);
+    config_set_value("mainwindow_x", wx_str);
+    config_set_value("mainwindow_y", wy_str);
+    config_set_value("mainwindow_w", width_str);
+    config_set_value("mainwindow_h", height_str);
+
+    g_free(wx_str);
+    g_free(wy_str);
+    g_free(width_str);
+    g_free(height_str);
+
     gtk_main_quit();
 
     printf("   ___ \n"

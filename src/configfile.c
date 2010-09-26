@@ -44,6 +44,10 @@ static gchar* config_filename = 0;
 const gchar config_str[] =
 "[Global]\n"
 "config_version = "PACKAGE_VERSION"\n"
+"mainwindow_x = 0\n"
+"mainwindow_y = 0\n"
+"mainwindow_w = 792\n"
+"mainwindow_h = 558\n"
 "\n"
 "[Editor]\n"
 "line_numbers = True\n"
