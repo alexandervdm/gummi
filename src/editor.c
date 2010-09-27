@@ -113,10 +113,12 @@ void editor_sourceview_config(GuEditor* ec) {
     gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(ec->sourceview),
         (gboolean)config_get_value("highlighting"));
 
+    /* The condition 'textwrapping=False && wordwrapping=True' can't happen */
     if (config_get_value("textwrapping"))
         wrapmode += 1;
     if (config_get_value("wordwrapping"))
-        wrapmode += 2;
+        wrapmode += 1;
+
     gtk_text_view_set_wrap_mode(ec_sourceview, wrapmode);
     g_object_set(G_OBJECT(ec->errortag), "background", "red",
             "foreground", "white", NULL);
