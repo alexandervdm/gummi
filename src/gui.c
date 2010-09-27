@@ -1128,6 +1128,10 @@ void toggle_textwrapping(GtkWidget* widget, void* user) {
     } else {
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
                     gummi->gui->prefsgui->wordwrap_button), FALSE);
+        /* NOTE: gtk_text_vew_set_wrap_mode() must be placed after
+         * gtk_toggle_button_set_active() since gtk_toggle_button_set_active()
+         * will trigger the 'activate' event of the corresponding button and
+         * cause wrapmode to be changed after we set it */
         gtk_text_view_set_wrap_mode(g_e_view, GTK_WRAP_NONE);
         gtk_widget_set_sensitive(
                 GTK_WIDGET(gummi->gui->prefsgui->wordwrap_button), FALSE);
