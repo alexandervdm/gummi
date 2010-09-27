@@ -8,6 +8,6 @@ Homepage: http://gummi.midnightcoding.org/
 
 Package: gummi
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgtk2.0-0, libglib2.0-0, libgtksourceview2.0-0, libgtkspell0, libpoppler-glib4, texlive, texlive-utils-extra, texlive-latex-extra
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgtk2.0-0, libglib2.0-0, libgtksourceview2.0-0, libgtkspell0, libpoppler-glib4, texlive, texlive-extra-utils, texlive-latex-extra
 Description: Simple LaTeX editor for Linux
  Gummi is a simple light-weight LaTeX editor for GTK+ users written in C.
