@@ -307,12 +307,21 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
+    gint ret = 0;
 
     if (!gummi->finfo->filename) {
         if ((filename = get_save_filename(TYPE_LATEX))) {
             if (strcmp(filename + strlen(filename) -4, ".tex")) {
                 filename = g_strdup_printf("%s.tex", filename);
                 new = TRUE;
+            }
+            if (utils_path_exists(filename)) {
+                ret = utils_yes_no_dialog(
+                        _("The file already exists. Overwrite?"));
+                if (GTK_RESPONSE_YES != ret) {
+                    if (new) g_free(filename);
+                    return;
+                }
             }
             fileinfo_set_filename(gummi->finfo, filename);
             iofunctions_write_file(gummi->editor, filename); 
@@ -328,10 +337,20 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
     L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
+    gint ret = 0;
+
     if ((filename = get_save_filename(TYPE_LATEX_SAVEAS))) {
         if (strcmp(filename + strlen(filename) -4, ".tex")) {
             filename = g_strdup_printf("%s.tex", filename);
             new = TRUE;
+        }
+        if (utils_path_exists(filename)) {
+            ret = utils_yes_no_dialog(
+                    _("The file already exists. Overwrite?"));
+            if (GTK_RESPONSE_YES != ret) {
+                if (new) g_free(filename);
+                return;
+            }
         }
         iofunctions_write_file(gummi->editor, filename); 
         gummi_create_environment(gummi, filename);
