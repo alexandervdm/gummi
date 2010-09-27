@@ -2746,7 +2746,7 @@ _ACEOF
 
 
 
-ALL_LINGUAS="ca_ES da fr gr_EL it_IT nl_NL pt_BR ru zh_TW"
+ALL_LINGUAS="ca da fr el it nl pt_BR ru zh_TW"
 
 
 ac_config_headers="$ac_config_headers config.h"
