@@ -105,10 +105,11 @@ typedef struct _GummiGui {
 } GummiGui;
 
 typedef enum _GuFilterType {
-    FILTER_LATEX = 0,
-    FILTER_PDF,
-    FILTER_IMAGE,
-    FILTER_BIBLIO
+    TYPE_LATEX = 0,
+    TYPE_LATEX_SAVEAS,
+    TYPE_PDF,
+    TYPE_IMAGE,
+    TYPE_BIBLIO
 } GuFilterType;
 
 /* Main GUI */
@@ -210,7 +211,7 @@ void on_image_file_activate(void);
 
 /* misc functions */
 gchar* get_open_filename(GuFilterType type);
-gchar* get_save_filename(GuFilterType type, gchar* default_path);
+gchar* get_save_filename(GuFilterType type);
 void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type);
 gint check_for_save(void);
 

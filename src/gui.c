@@ -250,12 +250,8 @@ void on_menu_template_activate(GtkWidget *widget, void * user) {
 void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     gchar* filename = NULL;
-    gchar* path = NULL;
 
-    if (gummi->finfo->filename)
-        path = g_path_get_dirname(gummi->finfo->filename);
-    filename = get_save_filename(FILTER_PDF, path);
-    if (path) g_free(path);
+    filename = get_save_filename(TYPE_PDF);
     if (filename)
         motion_export_pdffile(gummi->motion, filename);
 }
@@ -299,7 +295,7 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
         on_menu_save_activate(NULL, NULL);  
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-    filename = get_open_filename(FILTER_LATEX);
+    filename = get_open_filename(TYPE_LATEX);
     if (filename != NULL) {
         iofunctions_load_file(gummi->editor, filename); 
         gummi_create_environment(gummi, filename);
@@ -313,7 +309,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     gboolean new = FALSE;
 
     if (!gummi->finfo->filename) {
-        if ((filename = get_save_filename(FILTER_LATEX, NULL))) {
+        if ((filename = get_save_filename(TYPE_LATEX))) {
             if (strcmp(filename + strlen(filename) -4, ".tex")) {
                 filename = g_strdup_printf("%s.tex", filename);
                 new = TRUE;
@@ -332,7 +328,7 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
     L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
-    if ((filename = get_save_filename(FILTER_LATEX, NULL))) {
+    if ((filename = get_save_filename(TYPE_LATEX_SAVEAS))) {
         if (strcmp(filename + strlen(filename) -4, ".tex")) {
             filename = g_strdup_printf("%s.tex", filename);
             new = TRUE;
@@ -455,7 +451,7 @@ void on_menu_findprev_activate(GtkWidget *widget, void * user) {
 void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     gchar *filename = NULL;
-    filename = get_open_filename(FILTER_BIBLIO);
+    filename = get_open_filename(TYPE_BIBLIO);
     if (biblio_check_valid_file(gummi->biblio, filename)) {
         biblio_setup_bibliography(gummi->biblio, gummi->editor);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
@@ -757,7 +753,7 @@ void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user) {
 
 void on_image_file_activate(void) {
     L_F_DEBUG;
-    const gchar* filename = get_open_filename(FILTER_IMAGE);
+    const gchar* filename = get_open_filename(TYPE_IMAGE);
     importer_imagegui_set_sensitive(gummi->importer, filename, TRUE);
 }
 
@@ -1373,7 +1369,7 @@ gchar* get_open_filename(GuFilterType type) {
     return filename;
 }
 
-gchar* get_save_filename(GuFilterType type, gchar* default_path) {
+gchar* get_save_filename(GuFilterType type) {
     L_F_DEBUG;
     GtkFileChooser* chooser = NULL;
     gchar* filename = NULL;
@@ -1387,17 +1383,23 @@ gchar* get_save_filename(GuFilterType type, gchar* default_path) {
                 NULL));
 
     file_dialog_set_filter(chooser, type);
-    if (default_path)
-        gtk_file_chooser_set_current_folder(chooser, default_path);
-    else
-        gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
+    gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
 
-    if (FILTER_PDF == type && gummi->finfo->filename) {
+    if (gummi->finfo->filename) {
+        gchar* dirname = g_path_get_dirname(gummi->finfo->filename);
         gchar* basename = g_path_get_basename(gummi->finfo->filename);
-        basename[strlen(basename) -4] = 0;
-        gchar* path = g_strdup_printf("%s.pdf", basename);
-        gtk_file_chooser_set_current_name(chooser, path);
-        g_free(path);
+
+        gtk_file_chooser_set_current_folder(chooser, dirname);
+
+        if (TYPE_PDF == type) {
+            basename[strlen(basename) -4] = 0;
+            gchar* path = g_strdup_printf("%s.pdf", basename);
+            gtk_file_chooser_set_current_name(chooser, path);
+            g_free(path);
+        } else if (TYPE_LATEX_SAVEAS == type)
+            gtk_file_chooser_set_current_name(chooser, basename);
+
+        g_free(dirname);
         g_free(basename);
     }
 
@@ -1413,7 +1415,8 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
     GtkFileFilter* filter = gtk_file_filter_new();
 
     switch (type) {
-        case FILTER_LATEX:
+        case TYPE_LATEX:
+        case TYPE_LATEX_SAVEAS:
             gtk_file_filter_set_name(filter, "LaTeX files");
             gtk_file_filter_add_pattern(filter, "*.tex");
             gtk_file_chooser_add_filter(dialog, filter);
@@ -1424,21 +1427,21 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_add_filter(dialog, filter);
             break;
 
-        case FILTER_PDF:
+        case TYPE_PDF:
             gtk_file_filter_set_name(filter, "PDF files");
             gtk_file_filter_add_pattern(filter, "*.pdf");
             gtk_file_chooser_add_filter(dialog, filter);
             gtk_file_chooser_set_filter(dialog, filter);
             break;
 
-        case FILTER_IMAGE:
+        case TYPE_IMAGE:
             gtk_file_filter_set_name(filter, "Image files");
             gtk_file_filter_add_mime_type(filter, "image/*");
             gtk_file_chooser_add_filter(dialog, filter);
             gtk_file_chooser_set_filter(dialog, filter);
             break;
 
-        case FILTER_BIBLIO:
+        case TYPE_BIBLIO:
             gtk_file_filter_set_name(filter, "Bibtex files");
             gtk_file_filter_add_pattern(filter, "*.bib");
             gtk_file_chooser_add_filter(dialog, filter);
