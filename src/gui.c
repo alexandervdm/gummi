@@ -507,6 +507,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
                              NULL);
     }
     else { // texcount is not detected:
+        cmd = NULL;
         output = g_strconcat
             ("This function requires\nthe texcount program.\n", NULL);
     }
