@@ -57,7 +57,6 @@ GuBiblio* biblio_init(GtkBuilder * builder) {
     return b;
 }
 
-
 gboolean biblio_detect_bibliography(GuEditor* ec) {
     gchar* content;
     gchar** result;
@@ -65,7 +64,7 @@ gboolean biblio_detect_bibliography(GuEditor* ec) {
     GRegex* bib_regex;
     
     content = editor_grab_buffer(ec);
-    bib_regex = g_regex_new("\\\\bibliography{([^{}]*)}", 0, 0, NULL);
+    bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
         if (result[1] &&
@@ -124,16 +123,13 @@ gboolean biblio_check_valid_file(GuBiblio* b, gchar *filename) {
             b->basename = g_path_get_basename(filename);
             b->dirname = g_path_get_dirname(filename);
             return TRUE;
-        }
-        else {
+        } else {
             b->basename = g_strdup(filename);
             b->dirname = g_strdup(g_get_current_dir());
             return TRUE;
         }
-    }
-    else {
+    } else
         return FALSE;
-    }
 }
 
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
@@ -147,8 +143,8 @@ int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
     GRegex* subregex_year;
     GRegex* regex_formatting;
 
-    gchar* author_out;
-    gchar* title_out;
+    gchar* author_out = NULL;
+    gchar* title_out = NULL;
 
     GMatchInfo *match_entry; 
     
@@ -177,25 +173,30 @@ int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
         gchar **author_res = g_regex_split(subregex_author, entry, 0);
         gchar **year_res = g_regex_split(subregex_year, entry, 0);
 
-        author_out = g_regex_replace(regex_formatting, author_res[1],
-                                     -1, 0, "", 0, 0);
-        title_out = g_regex_replace(regex_formatting, title_res[1],
-                                     -1, 0, "", 0, 0);
+        if (author_res[1])
+            author_out = g_regex_replace(regex_formatting, author_res[1],
+                                         -1, 0, "", 0, 0);
+        else author_out = NULL;
+
+        if (title_res[1])
+            title_out = g_regex_replace(regex_formatting, title_res[1],
+                                         -1, 0, "", 0, 0);
+        else title_out = NULL;
         
         gtk_list_store_append(bc->list_biblios, &iter);
         gtk_list_store_set(bc->list_biblios, &iter, 0, ident_res[1],
                                                     1, title_out,
                                                     2, author_out,
                                                     3, year_res[1], -1);
-        g_free(author_out);
-        g_free(title_out);
+        if (author_out) g_free(author_out);
+        if (title_out) g_free(title_out);
         g_strfreev(ident_res);
         g_strfreev(title_res);
         g_strfreev(author_res);
         g_strfreev(year_res);
-        
-        ++entry_total;
         g_free (entry);
+        ++entry_total;
+
         g_match_info_next (match_entry, NULL);
     }
     g_match_info_free(match_entry);
