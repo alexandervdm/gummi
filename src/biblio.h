@@ -48,10 +48,10 @@ typedef struct _GuBiblio {
 
 GuBiblio* biblio_init(GtkBuilder* builder);
 
-gboolean biblio_detect_bibliography();
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec);
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc);
-gboolean biblio_setup_bibliography();
-gboolean biblio_check_valid_file(GuBiblio* b, gchar *filename);
+gboolean biblio_setup_bibliography(GuBiblio* bc, GuEditor* ec);
+gboolean biblio_check_valid_file(GuBiblio* bc, gchar *filename);
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
 
 

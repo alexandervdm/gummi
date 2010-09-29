@@ -57,7 +57,7 @@ GuBiblio* biblio_init(GtkBuilder * builder) {
     return b;
 }
 
-gboolean biblio_detect_bibliography(GuEditor* ec) {
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec) {
     gchar* content;
     gchar** result;
     GMatchInfo *match_info;
@@ -70,6 +70,7 @@ gboolean biblio_detect_bibliography(GuEditor* ec) {
         if (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
             utils_path_exists(result[1])) {
+            biblio_check_valid_file(bc, result[1]);
             g_strfreev(result);
             g_free(content);
             g_match_info_free(match_info);
@@ -122,12 +123,11 @@ gboolean biblio_check_valid_file(GuBiblio* b, gchar *filename) {
         if (g_path_is_absolute(filename)) {
             b->basename = g_path_get_basename(filename);
             b->dirname = g_path_get_dirname(filename);
-            return TRUE;
         } else {
             b->basename = g_strdup(filename);
             b->dirname = g_strdup(g_get_current_dir());
-            return TRUE;
         }
+        return TRUE;
     } else
         return FALSE;
 }

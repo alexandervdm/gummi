@@ -854,7 +854,7 @@ void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     g_timeout_add(2, on_bibprogressbar_update, NULL);
     gtk_list_store_clear(gummi->biblio->list_biblios);
 
-    if (biblio_detect_bibliography(gummi->editor)) {
+    if (biblio_detect_bibliography(gummi->biblio, gummi->editor)) {
         biblio_setup_bibliography(gummi->biblio, gummi->editor);
         g_file_get_contents(gummi->biblio->filename, &text, NULL, &err);
         number = biblio_parse_entries(gummi->biblio, text);
