@@ -910,7 +910,6 @@ void preview_page_input_changed(GtkEntry* entry, void* user) {
         preview_goto_page(gummi->preview, newpage -1);
     } else {
         newpage = CLAMP(newpage, 1, gummi->preview->page_total);
-        printf("%d\n", newpage);
         gchar* num = g_strdup_printf("%d", newpage);
         gtk_entry_set_text(entry, num);
         g_free(num);
