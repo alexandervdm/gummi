@@ -900,6 +900,23 @@ gboolean on_bibprogressbar_update(void* user) {
     else return TRUE;
 }
 
+void preview_page_input_changed(GtkEntry* entry, void* user) {
+    L_F_DEBUG;
+    gint newpage = atoi(gtk_entry_get_text(entry));
+
+    if (0 == newpage)
+        return;
+    else if (newpage >= 1 &&  newpage <= gummi->preview->page_total) {
+        preview_goto_page(gummi->preview, newpage -1);
+    } else {
+        newpage = CLAMP(newpage, 1, gummi->preview->page_total);
+        printf("%d\n", newpage);
+        gchar* num = g_strdup_printf("%d", newpage);
+        gtk_entry_set_text(entry, num);
+        g_free(num);
+        preview_goto_page(gummi->preview, newpage -1);
+    }
+}
 
 void preview_next_page(GtkWidget* widget, void* user) {
     L_F_DEBUG;
