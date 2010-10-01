@@ -473,8 +473,8 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     gchar *filename = NULL;
     filename = get_open_filename(TYPE_BIBLIO);
     if (filename &&
-        biblio_check_valid_file(gummi->biblio, gummi->finfo, filename)) {
-        biblio_setup_bibliography(gummi->biblio, gummi->editor);
+        biblio_set_filename(gummi->biblio, gummi->finfo, filename)) {
+        editor_insert_bib(gummi->editor, gummi->biblio->filename);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
     }
 }
@@ -857,7 +857,7 @@ void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     gtk_list_store_clear(gummi->biblio->list_biblios);
 
     if (biblio_detect_bibliography(gummi->biblio, gummi->motion)) {
-        biblio_setup_bibliography(gummi->biblio, gummi->editor);
+        editor_insert_bib(gummi->editor, gummi->biblio->filename);
         g_file_get_contents(gummi->biblio->filename, &text, NULL, &err);
         number = biblio_parse_entries(gummi->biblio, text);
         gtk_label_set_text(gummi->biblio->filenm_label,

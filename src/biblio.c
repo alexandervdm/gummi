@@ -69,7 +69,7 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc) {
         result = g_match_info_fetch_all(match_info);
         state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            biblio_check_valid_file(bc, mc->b_finfo, result[1]));
+            biblio_set_filename(bc, mc->b_finfo, result[1]));
         g_strfreev(result);
     }
     g_free(content);
@@ -108,12 +108,7 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
     return FALSE;
 }
 
-gboolean biblio_setup_bibliography(GuBiblio* bc, GuEditor* ec) {
-    editor_insert_bib(ec, bc->filename);
-    return TRUE;
-}
-
-gboolean biblio_check_valid_file(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
+gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
 {
     if (bc->filename) g_free(bc->filename);
     if (bc->basename) g_free(bc->basename);
@@ -125,7 +120,7 @@ gboolean biblio_check_valid_file(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
     } else
         bc->filename = g_strdup(filename);
     bc->basename = g_path_get_basename(bc->filename);
-    slog(L_INFO, "Detected bibliography file: %s\n", bc->filename);
+    slog(L_INFO, "Found bibliography file: %s\n", bc->filename);
 
     return utils_path_exists(bc->filename);
 }
