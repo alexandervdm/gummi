@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.65)
-AC_INIT([Gummi], [0.5.1~svn503], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
+AC_INIT([Gummi], [0.5.2~svn507], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 # ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
@@ -10,7 +10,7 @@ GETTEXT_PACKAGE=gummi
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 AC_SUBST(GETTEXT_PACKAGE)
 
-ALL_LINGUAS="ca da fr el it nl pt_BR ru zh_TW"
+ALL_LINGUAS="ca da fr el it nl pt_BR ro ru zh_TW"
 
 AC_CONFIG_SRCDIR([src/environment.h])
 AC_CONFIG_HEADERS([config.h])
