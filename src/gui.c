@@ -182,6 +182,7 @@ gboolean gui_quit(void) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return TRUE;
 
+    fileinfo_destroy(gummi->finfo);
     gtk_window_get_size(GTK_WINDOW(gummi->gui->mainwindow), &width, &height);
     gtk_window_get_position(GTK_WINDOW(gummi->gui->mainwindow), &wx, &wy);
     wx_str = g_strdup_printf("%d", wx);
@@ -323,8 +324,8 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
                     return;
                 }
             }
-            fileinfo_set_filename(gummi->finfo, filename);
             iofunctions_write_file(gummi->editor, filename); 
+            gummi_create_environment(gummi, filename);
             add_to_recent_list(filename);
             if (new) g_free(filename);
         }
@@ -471,7 +472,7 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     gchar *filename = NULL;
     filename = get_open_filename(TYPE_BIBLIO);
-    if (biblio_check_valid_file(gummi->biblio, filename)) {
+    if (biblio_check_valid_file(gummi->biblio, gummi->finfo, filename)) {
         biblio_setup_bibliography(gummi->biblio, gummi->editor);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
     }
@@ -854,7 +855,7 @@ void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     g_timeout_add(2, on_bibprogressbar_update, NULL);
     gtk_list_store_clear(gummi->biblio->list_biblios);
 
-    if (biblio_detect_bibliography(gummi->biblio, gummi->editor)) {
+    if (biblio_detect_bibliography(gummi->biblio, gummi->motion)) {
         biblio_setup_bibliography(gummi->biblio, gummi->editor);
         g_file_get_contents(gummi->biblio->filename, &text, NULL, &err);
         number = biblio_parse_entries(gummi->biblio, text);

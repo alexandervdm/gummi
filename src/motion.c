@@ -91,7 +91,6 @@ void motion_update_workfile(GuMotion* mc) {
     gchar *text;
     FILE *fp;
 
-    // TODO: the following line caused hangups in python, attention!
     /* save selection */
     gtk_text_buffer_get_selection_bounds(
             GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
@@ -106,7 +105,7 @@ void motion_update_workfile(GuMotion* mc) {
     fp = fopen(mc->b_finfo->workfile, "w");
     
     if(fp == NULL) {
-        slog(L_ERROR, "unable to create workfile in tmpdir");
+        slog(L_ERROR, "unable to create workfile in tmpdir\n");
         return;
     }
     fwrite(text, strlen(text), 1, fp);
@@ -118,14 +117,18 @@ void motion_update_workfile(GuMotion* mc) {
 
 void motion_update_pdffile(GuMotion* mc) {
     L_F_DEBUG;
-    gchar* command = g_strdup_printf("%s "
+    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
+    gchar* command = g_strdup_printf("cd %s;"
+                                     "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
                                      "-halt-on-error "
-                                     "-output-directory='%s' '%s'", \
+                                     "-output-directory='%s' '%s'",
+                                     dirname,
                                      mc->typesetter,
                                      mc->b_finfo->tmpdir,
                                      mc->b_finfo->workfile);
+    g_free(dirname);
 
     gtk_tool_button_set_stock_id(mc->statuslight, "gtk-refresh");
     while (gtk_events_pending()) gtk_main_iteration();
@@ -197,13 +200,17 @@ void motion_stop_updatepreview(GuMotion* mc) {
 
 void motion_update_auxfile(GuMotion* mc) {
     L_F_DEBUG;
-    gchar* command = g_strdup_printf("%s "
+    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
+    gchar* command = g_strdup_printf("cd %s;"
+                                     "env openout_any=a %s "
                                      "--draftmode "
                                      "-interaction=nonstopmode "
-                                     "--output-directory='%s' '%s'", \
+                                     "--output-directory='%s' '%s'",
+                                     dirname,
                                      mc->typesetter,
                                      mc->b_finfo->tmpdir,
                                      mc->b_finfo->workfile);
+    g_free(dirname);
     utils_popen_r(command);
     g_free(command);
 }

@@ -34,6 +34,7 @@
 
 typedef struct _GuFileInfo {
     gint workfd;
+    gchar* fdname;
     gchar* filename;
     gchar* pdffile;
     gchar* workfile;
@@ -41,7 +42,6 @@ typedef struct _GuFileInfo {
 } GuFileInfo;
 
 GuFileInfo* fileinfo_init(void);
-void fileinfo_set_filename(GuFileInfo* fc, const gchar* name);
 void fileinfo_update(GuFileInfo* fc, const gchar* filename);
 void fileinfo_destroy(GuFileInfo* fc);
 

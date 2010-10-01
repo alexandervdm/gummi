@@ -42,16 +42,15 @@ typedef struct _GuBiblio {
     GtkLabel* refnr_label;
     gchar* filename;
     gchar* basename;
-    gchar* dirname;
     double progressval;
 } GuBiblio;
 
 GuBiblio* biblio_init(GtkBuilder* builder);
 
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec);
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc);
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc);
 gboolean biblio_setup_bibliography(GuBiblio* bc, GuEditor* ec);
-gboolean biblio_check_valid_file(GuBiblio* bc, gchar *filename);
+gboolean biblio_check_valid_file(GuBiblio* bc, GuFileInfo* fc, gchar *filename);
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
 
 

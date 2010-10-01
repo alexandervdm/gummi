@@ -29,6 +29,9 @@
 
 #include <unistd.h>
 
+#include <glib.h>
+#include <glib/gstdio.h>
+
 #include "fileinfo.h"
 #include "utils.h"
 
@@ -36,6 +39,7 @@ GuFileInfo* fileinfo_init(void) {
     L_F_DEBUG;
     GuFileInfo* f = g_new0(GuFileInfo, 1);
     f->workfd = -1;
+    f->fdname = NULL;
     f->filename = NULL;   /* current opened file name in workspace */
     f->pdffile = NULL;
     f->workfile = NULL;
@@ -43,37 +47,72 @@ GuFileInfo* fileinfo_init(void) {
     return f;
 }
 
-void fileinfo_set_filename(GuFileInfo* fc, const gchar* name) {
-    L_F_DEBUG;
-    if (fc->filename) g_free(fc->filename);
-    if (name)
-        fc->filename = g_strdup(name);
-    else
-        fc->filename = NULL;
-}
-
 void fileinfo_update(GuFileInfo* fc, const gchar* filename) {
     L_F_DEBUG;
-    gchar* tname = NULL;
 
     if (fc->workfd != -1)
         fileinfo_destroy(fc);
 
-    fileinfo_set_filename(fc, filename);
+    fc->fdname = g_build_filename(fc->tmpdir, "gummi_XXXXXX", NULL);
+    fc->workfd = g_mkstemp(fc->fdname); 
 
-    tname = g_strdup_printf("%s%cgummi_XXXXXXX", fc->tmpdir, G_DIR_SEPARATOR);
-    fc->workfd = g_mkstemp(tname); 
-
-    if (fc->workfile) g_free(fc->workfile);
-    fc->workfile = g_strdup(tname);
-
-    if (fc->pdffile) g_free(fc->pdffile);
-    fc->pdffile =  g_strdup_printf("%s.pdf", tname);
-    g_free(tname);
+    if (filename) {
+        gchar* basename = g_path_get_basename(filename);
+        gchar* dirname = g_path_get_dirname(filename);
+        fc->filename = g_strdup(filename);
+        fc->workfile = g_strdup_printf("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
+                                       basename);
+        fc->pdffile =  g_strdup_printf("%s%c.%s.pdf", fc->tmpdir,
+                                       G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        fc->workfile = g_strdup(fc->fdname);
+        fc->pdffile =  g_strdup_printf("%s.pdf", fc->fdname);
+    }
 }
 
 void fileinfo_destroy(GuFileInfo* fc) {
     L_F_DEBUG;
+    gchar* auxfile = NULL;
+    gchar* logfile = NULL;
+
+    if (fc->filename) {
+        gchar* dirname = g_path_get_dirname(fc->filename);
+        gchar* basename = g_path_get_basename(fc->filename);
+        auxfile = g_strdup_printf("%s%c.%s.aux", fc->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        logfile = g_strdup_printf("%s%c.%s.log", fc->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        gchar* dirname = g_path_get_dirname(fc->workfile);
+        gchar* basename = g_path_get_basename(fc->workfile);
+        auxfile = g_strdup_printf("%s.aux", fc->fdname);
+        logfile = g_strdup_printf("%s.log", fc->fdname);
+        g_free(basename);
+        g_free(dirname);
+    }
+
     close(fc->workfd);
-    // TODO: remove tempfiles 
+    fc->workfd = -1;
+
+    g_remove(auxfile);
+    g_remove(logfile);
+    g_remove(fc->fdname);
+    g_remove(fc->workfile);
+    g_remove(fc->pdffile);
+
+    g_free(auxfile);
+    g_free(logfile);
+    g_free(fc->fdname);
+    g_free(fc->filename);
+    g_free(fc->workfile);
+    g_free(fc->pdffile);
+
+    fc->fdname = NULL;
+    fc->filename = NULL;
+    fc->workfile = NULL;
+    fc->pdffile = NULL;
 }

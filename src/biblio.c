@@ -53,83 +53,81 @@ GuBiblio* biblio_init(GtkBuilder * builder) {
     b->progressval = 0.0;
     b->filename = NULL;
     b->basename = NULL;
-    b->dirname = NULL;
     return b;
 }
 
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec) {
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc) {
     gchar* content;
     gchar** result;
     GMatchInfo *match_info;
     GRegex* bib_regex;
+    gboolean state = FALSE;
     
-    content = editor_grab_buffer(ec);
+    content = editor_grab_buffer(mc->b_editor);
     bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
-        if (result[1] &&
+        state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            utils_path_exists(result[1])) {
-            biblio_check_valid_file(bc, result[1]);
-            g_strfreev(result);
-            g_free(content);
-            g_match_info_free(match_info);
-            g_regex_unref(bib_regex);
-            return TRUE;
-        }
-        g_strfreev(result);
+            biblio_check_valid_file(bc, mc->b_finfo, result[1]));
     }
+    g_strfreev(result);
     g_free(content);
     g_match_info_free(match_info);
     g_regex_unref(bib_regex);
-    return FALSE;
+    return state;
 }
 
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
+    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
+    gchar* auxname = NULL;
+
+    if (mc->b_finfo->filename) {
+        auxname = g_strdup(mc->b_finfo->pdffile);
+        auxname[strlen(auxname) -4] = 0;
+    } else
+        auxname = g_strdup(mc->b_finfo->fdname);
+
     if (g_find_program_in_path("bibtex")) {
-        gchar* command = g_strdup_printf("bibtex '%s'", mc->b_finfo->workfile);
+        gchar* command = g_strdup_printf("cd %s;"
+                                         "bibtex '%s'",
+                                         dirname,
+                                         auxname);
+        g_free(auxname);
         motion_update_workfile(mc);
         motion_update_auxfile(mc);
         pdata res = utils_popen_r(command);
         gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
         g_free(command);
+        g_free(dirname);
         return !(strstr(res.data, "Database file #1") == NULL);
     }
     slog(L_WARNING, "bibtex command is not present or executable.\n");
+    g_free(auxname);
+    g_free(dirname);
     return FALSE;
 }
 
-gboolean biblio_setup_bibliography(GuBiblio* b, GuEditor* ec) {
-    gchar *bibpath;
-    gchar *dst;
-    
-    dst = g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, b->basename, NULL);
-    utils_copy_file(b->filename, dst);
-    bibpath = g_strconcat(b->dirname, G_DIR_SEPARATOR_S, b->basename, NULL);
-    editor_insert_bib(ec, bibpath);
-
-    g_free(dst);
-    g_free(bibpath);
+gboolean biblio_setup_bibliography(GuBiblio* bc, GuEditor* ec) {
+    editor_insert_bib(ec, bc->filename);
     return TRUE;
 }
 
-gboolean biblio_check_valid_file(GuBiblio* b, gchar *filename) {
-    if (b->filename) g_free(b->filename);
-    if (b->basename) g_free(b->basename);
-    if (b->dirname) g_free(b->dirname);
+gboolean biblio_check_valid_file(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
+{
+    if (bc->filename) g_free(bc->filename);
+    if (bc->basename) g_free(bc->basename);
 
-    if (utils_path_exists(filename) == TRUE) {
-        b->filename = g_strdup(filename);
-        if (g_path_is_absolute(filename)) {
-            b->basename = g_path_get_basename(filename);
-            b->dirname = g_path_get_dirname(filename);
-        } else {
-            b->basename = g_strdup(filename);
-            b->dirname = g_strdup(g_get_current_dir());
-        }
-        return TRUE;
+    if (fc->filename && !g_path_is_absolute(filename)) {
+        gchar* dirname = g_path_get_dirname(fc->filename);
+        bc->filename = g_build_filename(dirname, filename, NULL);
+        g_free(dirname);
     } else
-        return FALSE;
+        bc->filename = g_strdup(filename);
+    bc->basename = g_path_get_basename(bc->filename);
+    slog(L_INFO, "Detected bibliography file: %s\n", bc->filename);
+
+    return utils_path_exists(bc->filename);
 }
 
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
