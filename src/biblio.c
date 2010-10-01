@@ -66,7 +66,6 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc) {
     content = editor_grab_buffer(mc->b_editor);
     bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
-        printf("here\n");
         result = g_match_info_fetch_all(match_info);
         state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
