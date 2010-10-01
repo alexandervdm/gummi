@@ -472,7 +472,8 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     gchar *filename = NULL;
     filename = get_open_filename(TYPE_BIBLIO);
-    if (biblio_check_valid_file(gummi->biblio, gummi->finfo, filename)) {
+    if (filename &&
+        biblio_check_valid_file(gummi->biblio, gummi->finfo, filename)) {
         biblio_setup_bibliography(gummi->biblio, gummi->editor);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
     }
