@@ -494,7 +494,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     
     // check if the texcount program exists:
     if (g_find_program_in_path("texcount")) {
-        cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
+        cmd = g_strdup_printf("texcount -q %s", gummi->finfo->workfile);
         pdata result = utils_popen_r(cmd);
         gchar* terms[] = { _("Words in text"),
                        _("Words in headers"),
