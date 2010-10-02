@@ -54,7 +54,6 @@ typedef struct _GuEditor {
     gboolean backwards;
     gboolean wholeword;
     gboolean matchcase;
-    gboolean cur_swap;
 } GuEditor;
 
 GuEditor* editor_init(GtkBuilder *builder);
@@ -72,7 +71,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type);
 void editor_apply_errortags(GuEditor* ec, gint line);
 void editor_jumpto_search_result(GuEditor* ec, gint direction);
 void editor_start_search(GuEditor* ec, const gchar* term, gboolean backwards,
-        gboolean wholeword, gboolean matchcase, gboolean cs);
+        gboolean wholeword, gboolean matchcase);
 void editor_apply_searchtag(GuEditor* ec);
 void editor_search_next(GuEditor* ec, gboolean inverse);
 void editor_start_replace_next(GuEditor* ec, const gchar* term,

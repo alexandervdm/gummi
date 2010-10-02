@@ -47,6 +47,30 @@ GuFileInfo* fileinfo_init(void) {
     return f;
 }
 
+/* FileInfo:
+ * When a TeX document includes materials from other files(image, documents,
+ * bibliography ... etc), pdflatex will try to find those files under the
+ * working directory if the include path is not absolute.
+ * Before Gummi svn505, gummi copies the TeX file to a temporarily directory
+ * and compile there, because of this, the included files can't be located if
+ * the include path is not absolute. In svn505 we copy the TeX file to the
+ * same directory as the original TeX document but named it as '.FILENAME.swp'.
+ * Since pdflatex refuses to compile TeX files with '.' prefixed, we have to
+ * set the environment variable 'openout_any=a'.
+ *
+ * For a newly created document, all files including the TeX file is stored
+ * under the temp directory. For files that are already saved, only the
+ * workfile is saved under DIRNAME(FILENAME). Other compilation-related files
+ * are located in the temp directory.
+ *
+ * P.S. pdflatex will automatically strip the suffix, so for a file named
+ * FILE.tex under /absolute/path/:
+ *
+ * filename = /absolute/path/FILE.tex
+ * workfile = /absolute/path/.FILE.tex.swp
+ * pdffile = /tmp/.FILE.tex.pdf
+ */
+
 void fileinfo_update(GuFileInfo* fc, const gchar* filename) {
     L_F_DEBUG;
 

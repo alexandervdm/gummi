@@ -712,8 +712,7 @@ void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user) {
             gtk_entry_get_text(gummi->gui->searchgui->searchentry),
             gummi->gui->searchgui->backwards,
             gummi->gui->searchgui->wholeword,
-            gummi->gui->searchgui->matchcase,
-            0
+            gummi->gui->searchgui->matchcase
             );
 }
 
@@ -1558,7 +1557,6 @@ gboolean statusbar_del_message(void* user) {
 void check_motion_timer(void) {
     L_F_DEBUG;
     gtk_text_buffer_set_modified(g_e_buffer, TRUE);
-    gummi->editor->replace_activated = FALSE;
     gummi->motion->modified_since_compile = TRUE;
     gui_update_title();
 
