@@ -110,7 +110,6 @@ void motion_update_workfile(GuMotion* mc) {
     g_free(text);
     fclose(fp);
     // TODO: Maybe add editorviewer grab focus line here if necessary
-    gtk_widget_grab_focus(GTK_WIDGET(mc->b_editor->sourceview));
 }
 
 void motion_update_pdffile(GuMotion* mc) {
