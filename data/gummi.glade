@@ -816,8 +816,8 @@ cells have line borders. </property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Return" signal="activate"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
@@ -1069,7 +1069,6 @@ cells have line borders. </property>
                       <object class="GtkMenuItem" id="menu_recent1">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
@@ -1077,7 +1076,6 @@ cells have line borders. </property>
                       <object class="GtkMenuItem" id="menu_recent2">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
@@ -1085,7 +1083,6 @@ cells have line borders. </property>
                       <object class="GtkMenuItem" id="menu_recent3">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
@@ -1093,7 +1090,6 @@ cells have line borders. </property>
                       <object class="GtkMenuItem" id="menu_recent4">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
@@ -1101,7 +1097,6 @@ cells have line borders. </property>
                       <object class="GtkMenuItem" id="menu_recent5">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <property name="use_underline">True</property>
                         <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
