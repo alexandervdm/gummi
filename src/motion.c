@@ -94,10 +94,8 @@ void motion_update_workfile(GuMotion* mc) {
     /* save selection */
     gtk_text_buffer_get_selection_bounds(
             GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
-    gtk_widget_set_sensitive(GTK_WIDGET(mc->b_editor->sourceview), FALSE);
     text = editor_grab_buffer(mc->b_editor);
-    gtk_widget_set_sensitive(GTK_WIDGET(mc->b_editor->sourceview), TRUE);
-    
+
     /* restore selection */
     gtk_text_buffer_select_range(
             GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
