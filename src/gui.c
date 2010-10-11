@@ -1385,6 +1385,7 @@ gint check_for_save(void) {
 gchar* get_open_filename(GuFilterType type) {
     L_F_DEBUG;
     GtkFileChooser* chooser = NULL;
+    static gchar* last_filename = NULL;
     gchar* filename = NULL;
 
     chooser = GTK_FILE_CHOOSER(gtk_file_chooser_dialog_new(
@@ -1396,10 +1397,18 @@ gchar* get_open_filename(GuFilterType type) {
                 NULL));
 
     file_dialog_set_filter(chooser, type);
-    gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
+    if (last_filename)
+        gtk_file_chooser_set_current_folder(chooser, last_filename);
+    else
+        gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
 
     if (gtk_dialog_run(GTK_DIALOG (chooser)) == GTK_RESPONSE_OK)
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+
+    if (filename) {
+        if (last_filename) g_free(last_filename);
+        last_filename = g_path_get_dirname(filename);
+    }
 
     gtk_widget_destroy(GTK_WIDGET(chooser));
     return filename;

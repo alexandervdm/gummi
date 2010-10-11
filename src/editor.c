@@ -161,8 +161,8 @@ gchar* editor_grab_buffer(GuEditor* ec) {
     GtkTextIter start, end;
     gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), FALSE);
     gtk_text_buffer_get_bounds(ec_sourcebuffer, &start, &end);
-    gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), TRUE);
     gchar* pstr = gtk_text_iter_get_text (&start, &end);
+    gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), TRUE);
     return pstr;
 }
 
