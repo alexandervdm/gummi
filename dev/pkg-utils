@@ -43,25 +43,25 @@ else
 fi
 
 
-if test 1 -eq $notex; then
-    mv $package-$version $package-notex-$version
-    package=$package-notex
-fi
-
 cd $package-$version
 
-dh_make -s -b -f ../${package%-notex}_$version.orig.tar.gz
+dh_make -s -b
 
 cp $owd/dev/rules $owd/dev/control debian
 cd debian
 
+rm *.ex *.EX README.*
+
+dch -e
+
 if test 1 -eq $notex; then
+    sed -i 's/Source: gummi/Source: gummi-notex/g' control
     sed -i 's/Package: gummi/Package: gummi-notex/g' control
     sed -i 's/, texlive, texlive-extra-utils, texlive-latex-extra//g' control
+    sed -i 's/gummi/gummi-notex/g' changelog
+    mv ../../${package}_$version.orig.tar.gz ../../${package}-notex_$version.orig.tar.gz
 fi
 
-rm *.ex *.EX README.*
-dch -e
 cd ..
 
 if [ "$1" == "deb" ] || [ -z "$1" ]; then
