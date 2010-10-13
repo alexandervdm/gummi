@@ -56,6 +56,7 @@ cp $owd/dev/rules $owd/dev/control debian
 cd debian
 
 if test 1 -eq $notex; then
+    sed -i 's/Package: gummi/Package: gummi-notex/g' control
     sed -i 's/, texlive, texlive-extra-utils, texlive-latex-extra//g' control
 fi
 
