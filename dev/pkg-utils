@@ -42,16 +42,18 @@ else
   tar -zcf ${package}_$version.orig.tar.gz $package-$version
 fi
 
-cd $package-$version
 
 if test 1 -eq $notex; then
+    mv $package-$version $package-notex-$version
     package=$package-notex
 fi
 
-dh_make -s -b -p $package -f ../${package%-notex}_$version.orig.tar.gz
+cd $package-$version
 
-cd debian
+dh_make -s -b -f ../${package%-notex}_$version.orig.tar.gz
+
 cp $owd/dev/rules $owd/dev/control debian
+cd debian
 
 if test 1 -eq $notex; then
     sed -i 's/, texlive, texlive-extra-utils, texlive-latex-extra//g' control
