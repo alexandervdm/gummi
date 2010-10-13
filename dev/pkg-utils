@@ -3,11 +3,17 @@
 export DEBFULLNAME="Wei-Ning Huang (AZ)"
 export DEBEMAIL="aitjcize@gmail.com"
 
+notex=0
+
 PKG_DIR=$HOME/Public
 mkdir -p $PKG_DIR
 
 owd=`pwd`
 package=${owd##/*/}
+
+if [ -n "$2" ] && [ "$2" == "notex" ]; then
+    notex=1
+fi
 
 if [ -e configure.ac ]; then
   version=`sed -n 's/AC_INIT([^,]*, \[\([a-zA-Z0-9.-~]*\)\], .*/\1/p' configure.ac`
@@ -37,10 +43,20 @@ else
 fi
 
 cd $package-$version
-dh_make -s -b -p $package
 
-cp $owd/dev/rules $owd/dev/control debian
+if test 1 -eq $notex; then
+    package=$package-notex
+fi
+
+dh_make -s -b -p $package -f ../${package%-notex}_$version.orig.tar.gz
+
 cd debian
+cp $owd/dev/rules $owd/dev/control debian
+
+if test 1 -eq $notex; then
+    sed -i 's/, texlive, texlive-extra-utils, texlive-latex-extra//g' control
+fi
+
 rm *.ex *.EX README.*
 dch -e
 cd ..
