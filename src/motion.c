@@ -115,7 +115,7 @@ void motion_update_workfile(GuMotion* mc) {
 void motion_update_pdffile(GuMotion* mc) {
     L_F_DEBUG;
     gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
-    gchar* command = g_strdup_printf("cd %s;"
+    gchar* command = g_strdup_printf("cd '%s';"
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
@@ -198,7 +198,7 @@ void motion_stop_updatepreview(GuMotion* mc) {
 void motion_update_auxfile(GuMotion* mc) {
     L_F_DEBUG;
     gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
-    gchar* command = g_strdup_printf("cd %s;"
+    gchar* command = g_strdup_printf("cd '%s';"
                                      "env openout_any=a %s "
                                      "--draftmode "
                                      "-interaction=nonstopmode "
