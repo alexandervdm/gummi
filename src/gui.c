@@ -332,6 +332,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     } else
         iofunctions_write_file(gummi->editor, gummi->finfo->filename); 
     gui_update_title();
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
 
 void on_menu_saveas_activate(GtkWidget *widget, void* user) {
