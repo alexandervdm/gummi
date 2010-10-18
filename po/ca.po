@@ -1,11 +1,15 @@
+#
+# Marc Vinyals <marcvinyals@velodius.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-27 13:51+0800\n"
-"PO-Revision-Date: 2010-05-23 14:45+0200\n"
+"PO-Revision-Date: 2010-10-17 23:13+0200\n"
 "Last-Translator: Marc Vinyals <marcvinyals@velodius.com>\n"
 "Language-Team: CA <marcvinyals@velodius.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +83,9 @@ msgstr "Alinea a la dreta"
 msgid ""
 "Alignment of the\n"
 "cell content."
-msgstr "Alineació del contingut de la cel·la"
+msgstr ""
+"Alineació del contingut\n"
+"de la cel·la"
 
 #: ../data/gummi.glade.h:26
 msgid "Best Fit"
@@ -123,7 +129,7 @@ msgstr "Text centrat"
 
 #: ../data/gummi.glade.h:36
 msgid "Check _Updates"
-msgstr "Cerca (_a)ctualitzacions"
+msgstr "Cerca _actualitzacions"
 
 #: ../data/gummi.glade.h:37
 msgid "Columns:"
@@ -134,24 +140,24 @@ msgid "Compile"
 msgstr "Compila"
 
 #: ../data/gummi.glade.h:39
-#, fuzzy
 msgid ""
 "Compile the active \n"
 "bibliography database"
-msgstr "S'està compilant la bibliografia.."
+msgstr ""
+"Compila la base de dades\n"
+"bibliogràfica activa"
 
 #: ../data/gummi.glade.h:41
 msgid "Create a new document"
 msgstr "Crea un document nou"
 
 #: ../data/gummi.glade.h:42
-#, fuzzy
 msgid "Create new document from template.."
-msgstr "Crea un document nou.."
+msgstr "Crea un document nou des d'una plantilla.."
 
 #: ../data/gummi.glade.h:43
 msgid "Deletes the selected template"
-msgstr ""
+msgstr "Esborra la plantilla seleccionada"
 
 #: ../data/gummi.glade.h:44
 msgid ""
@@ -171,7 +177,9 @@ msgstr "Errors"
 msgid ""
 "Error status for\n"
 "active document"
-msgstr "Estat d'error del document actiu"
+msgstr ""
+"Estat d'error del\n"
+"document actiu"
 
 #: ../data/gummi.glade.h:50
 msgid "File:"
@@ -187,11 +195,11 @@ msgstr "Cerca"
 
 #: ../data/gummi.glade.h:53
 msgid "Find Ne_xt"
-msgstr "Cerca la següe(_n)t"
+msgstr "Cerca la següe_nt"
 
 #: ../data/gummi.glade.h:54
 msgid "Find Pre_vious"
-msgstr "Cerca l'an(_t)erior"
+msgstr "Cerca l'an_terior"
 
 #: ../data/gummi.glade.h:55
 msgid "Fit Page Width"
@@ -222,6 +230,8 @@ msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
+"Crea una plantilla a partir\n"
+"del document actiu"
 
 #: ../data/gummi.glade.h:63
 msgid "Match case"
@@ -241,7 +251,7 @@ msgstr "N/D"
 
 #: ../data/gummi.glade.h:67
 msgid "New from _Template"
-msgstr "Nou partin(_t) d'una plantilla"
+msgstr "Nou partin_t d'una plantilla"
 
 #: ../data/gummi.glade.h:68
 msgid "Next"
@@ -257,7 +267,7 @@ msgstr "Obre"
 
 #: ../data/gummi.glade.h:71
 msgid "Open the selected template"
-msgstr ""
+msgstr "Obre la plantilla seleccionada"
 
 #: ../data/gummi.glade.h:72
 msgid "Parentheses"
@@ -265,7 +275,7 @@ msgstr "Parèntesis"
 
 #: ../data/gummi.glade.h:73
 msgid "Pause updating the preview pane."
-msgstr ""
+msgstr "Deixa d'actualitzar la previsualització."
 
 #: ../data/gummi.glade.h:74
 msgid "Preview Pane"
@@ -281,11 +291,11 @@ msgstr "Referències:"
 
 #: ../data/gummi.glade.h:77
 msgid "Replace _All"
-msgstr ""
+msgstr "Reemplaça-ho _tot"
 
 #: ../data/gummi.glade.h:78
 msgid "Replace with:"
-msgstr ""
+msgstr "Reemplaça per:"
 
 #: ../data/gummi.glade.h:79
 msgid "Rows:"
@@ -297,7 +307,7 @@ msgstr "Desa"
 
 #: ../data/gummi.glade.h:81
 msgid "Save _As..."
-msgstr "(_A)nomena i desa..."
+msgstr "_Anomena i desa..."
 
 #: ../data/gummi.glade.h:82
 msgid "Save the current file"
@@ -316,6 +326,8 @@ msgid ""
 "Search document for\n"
 "bibliography databases"
 msgstr ""
+"Cerca bases de dades\n"
+"bibliogràfiques al document"
 
 #: ../data/gummi.glade.h:87
 msgid "Search for:"
@@ -339,71 +351,71 @@ msgstr "Text subratllat"
 
 #: ../data/gummi.glade.h:92
 msgid "_Autocheck Spelling"
-msgstr "Comprova l'ortografia (_a)utomàticament"
+msgstr "Comprova l'ortografia _automàticament"
 
 #: ../data/gummi.glade.h:93
 msgid "_Compile Bibliography"
-msgstr "(_C)ompila la bibliografia"
+msgstr "_Compila la bibliografia"
 
 #: ../data/gummi.glade.h:94
 msgid "_Document Statistics"
-msgstr ""
+msgstr "Estadístiques del _document"
 
 #: ../data/gummi.glade.h:95
 msgid "_Edit"
-msgstr "(_E)dita"
+msgstr "_Edita"
 
 #: ../data/gummi.glade.h:96
 msgid "_Export to PDF"
-msgstr ""
+msgstr "_Exporta a PDF"
 
 #: ../data/gummi.glade.h:97
 msgid "_File"
-msgstr "(_F)itxer"
+msgstr "_Fitxer"
 
 #: ../data/gummi.glade.h:98
 msgid "_Fullscreen"
-msgstr "Pantalla (_s)encera"
+msgstr "Pantalla _sencera"
 
 #: ../data/gummi.glade.h:99
 msgid "_Help"
-msgstr "A(_j)uda"
+msgstr "A_juda"
 
 #: ../data/gummi.glade.h:100
 msgid "_Insert Bibliography"
-msgstr "(_I)nsereix una bibliografia"
+msgstr "_Insereix una bibliografia"
 
 #: ../data/gummi.glade.h:101
 msgid "_Open..."
-msgstr "(_O)bre..."
+msgstr "_Obre..."
 
 #: ../data/gummi.glade.h:102
 msgid "_Replace"
-msgstr ""
+msgstr "_Reemplaça"
 
 #: ../data/gummi.glade.h:103
 msgid "_Right Pane"
-msgstr ""
+msgstr "Panell _dret"
 
 #: ../data/gummi.glade.h:104
 msgid "_Search"
-msgstr "(_C)erca"
+msgstr "_Cerca"
 
 #: ../data/gummi.glade.h:105
 msgid "_Statusbar"
-msgstr "Barra d'e(_s)tat"
+msgstr "Barra d'e_stat"
 
 #: ../data/gummi.glade.h:106
 msgid "_Toolbar"
-msgstr "Barra d'(_e)ines"
+msgstr "Barra d'_eines"
 
 #: ../data/gummi.glade.h:107
 msgid "_Tools"
-msgstr "Ei(_n)es"
+msgstr "Ei_nes"
 
 #: ../data/gummi.glade.h:108
 msgid "_View"
-msgstr "(_V)isualitza"
+msgstr "_Visualitza"
 
 #: ../data/gummi.glade.h:109
 msgid "filter:"
@@ -451,11 +463,11 @@ msgstr "toolbutton7"
 
 #: ../data/prefs.glade.h:1
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: ../data/prefs.glade.h:2
 msgid "Automatic Indentation:"
-msgstr ""
+msgstr "Sangat automàtic"
 
 #: ../data/prefs.glade.h:3
 msgid "Changes will become active on next start"
@@ -503,7 +515,7 @@ msgstr "Ressaltament:"
 
 #: ../data/prefs.glade.h:14
 msgid "Insert _spaces instead of tabs"
-msgstr ""
+msgstr "Insereix _espais en lloc de tabulacions"
 
 #: ../data/prefs.glade.h:15
 msgid "Line numbers:"
@@ -511,7 +523,7 @@ msgstr "Números de línia:"
 
 #: ../data/prefs.glade.h:16
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Miscel·lània"
 
 #: ../data/prefs.glade.h:17
 msgid "None"
@@ -527,11 +539,11 @@ msgstr "Idioma per a la correcció ortogràfica:"
 
 #: ../data/prefs.glade.h:20
 msgid "Tab stops:"
-msgstr ""
+msgstr "Tabulacions:"
 
 #: ../data/prefs.glade.h:21
 msgid "Tab width:"
-msgstr ""
+msgstr "Amplada de tabulació:"
 
 #: ../data/prefs.glade.h:22
 msgid "Text wrapping:"
@@ -547,25 +559,23 @@ msgstr "Visualització"
 
 #: ../data/prefs.glade.h:25
 msgid "_Autosave files every"
-msgstr "(_D)esa els fitxers automàticament cada"
+msgstr "_Desa els fitxers automàticament cada"
 
 #: ../data/prefs.glade.h:26
 msgid "_Enable automatic indentation"
-msgstr ""
+msgstr "_Habilita el sagnat automàtic"
 
 #: ../data/prefs.glade.h:27
 msgid "_Reset defaults"
-msgstr "(_R)estaura els valors per defecte"
+msgstr "_Restaura els valors per defecte"
 
 #: ../data/prefs.glade.h:28
-#, fuzzy
 msgid "compile every"
-msgstr "(_C)ompila automàticament cada"
+msgstr "compila cada"
 
 #: ../data/prefs.glade.h:29
-#, fuzzy
 msgid "compile when idle for "
-msgstr "(_C)ompila automàticament cada"
+msgstr "compila mentre no es treballi cada"
 
 #: ../data/prefs.glade.h:30
 msgid "minutes"
@@ -585,18 +595,18 @@ msgstr "xelatex"
 
 #: ../src/editor.c:384
 msgid "Top reached, search from bottom?"
-msgstr ""
+msgstr "S'ha arribat al començament, voleu tornar al final?"
 
 #: ../src/editor.c:391
 msgid "Bottom reached, search from top?"
-msgstr ""
+msgstr "S'ha arribat al final, voleu tornar al començament?"
 
 #: ../src/motion.c:221
 msgid "The file already exists. Overwrite?"
-msgstr ""
+msgstr "El fitxer ja existeix. El voleu sobreescriure?"
 
 #: ../src/motion.c:259
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PDF-Preview could not initialize.\n"
 "\n"
@@ -608,60 +618,58 @@ msgid ""
 msgstr ""
 "No s'ha pogut inicialitzar la previsualització.\n"
 "\n"
-"El vostre document LaTeX conté errors.\n"
+"El vostre document LaTeX conté errors o bé\n"
+"el programa «%s» no està instal·lat.\n"
 "Es mostra informació addicional a la pestanya d'errors.\n"
 "Corregiu la llista d'errors i cliqueu aquesta zona\n"
 "per tornar a carregar la previsualització."
 
 #: ../src/gui.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Error loading recent file: %s"
-msgstr "S'ha produït un error mentre s'estava carregant el fitxer recent:"
+msgstr "S'ha produït un error mentre s'estava carregant el fitxer recent %s"
 
 #: ../src/gui.c:482
-#, fuzzy
 msgid "Words in text"
-msgstr "Text en negreta"
+msgstr "Paraules del text"
 
 #: ../src/gui.c:483
 msgid "Words in headers"
-msgstr ""
+msgstr "Paraules a capçaleres"
 
 #: ../src/gui.c:484
 msgid "Words in float captions"
-msgstr ""
+msgstr "Paraules a descripcions d'objectes flotants"
 
 #: ../src/gui.c:485
 msgid "Number of headers"
-msgstr ""
+msgstr "Nombre de capçaleres"
 
 #: ../src/gui.c:486
 msgid "Number of floats"
-msgstr ""
+msgstr "Nombre d'objectes flotants"
 
 #: ../src/gui.c:487
 msgid "Number of math inlines"
-msgstr ""
+msgstr "Nombre de fórmules en línia"
 
 #: ../src/gui.c:488
 msgid "Number of math displayed"
-msgstr ""
+msgstr "Nombre de fórmules a part"
 
 #: ../src/gui.c:519
 msgid "Document Statistics"
-msgstr ""
+msgstr "Estadístiques del document"
 
 #: ../src/gui.c:818
-#, fuzzy
 msgid "Compiling bibliography file..."
-msgstr "S'està compilant la bibliografia.."
+msgstr "S'està compilant la bibliografia..."
 
 #: ../src/gui.c:820
 msgid "bibliography compiled without errors"
 msgstr "s'ha compilat la bibliografia sense errors"
 
 #: ../src/gui.c:822
-#, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "S'ha produït un error mentre es compilava la bibliografia o no s'ha detectat"
@@ -673,7 +681,7 @@ msgstr "s'ha produït un error mentre es compilava la bibliografia"
 #: ../src/gui.c:850
 #, c-format
 msgid "%s loaded"
-msgstr ""
+msgstr "s'ha carregat %s"
 
 #: ../src/gui.c:1345
 msgid "Do you want to save the changes you have made?"
@@ -690,12 +698,12 @@ msgstr "Desa el fitxer..."
 #: ../src/importer.c:122
 #, c-format
 msgid "%s: No such file or directory\n"
-msgstr ""
+msgstr "No existeix el fitxer o directori %s\n"
 
 #: ../src/iofunctions.c:94
-#, fuzzy, c-format
+#, c-format
 msgid "Saving %s..."
-msgstr "(_A)nomena i desa..."
+msgstr "Desant %s..."
 
 #: ../src/iofunctions.c:107
 #, c-format
@@ -703,18 +711,20 @@ msgid ""
 "%s\n"
 "Please try again later."
 msgstr ""
+"%s\n"
+"Intenteu-ho més tard."
 
 #: ../src/iofunctions.c:146
 msgid "Can not convert text to UTF-8!\n"
-msgstr ""
+msgstr "No s'ha pogut convertir el text a UTF-8.\n"
 
 #: ../src/iofunctions.c:171
-#, fuzzy, c-format
+#, c-format
 msgid "Autosaving file %s"
-msgstr "S'està desant el fitxer"
+msgstr "S'està desant el fitxer %s automàticament"
 
 #: ../src/updatecheck.c:113
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Currently installed:\n"
 "%s\n"
@@ -722,9 +732,10 @@ msgid ""
 "Currently available:\n"
 "%s"
 msgstr ""
-"\n"
-"\n"
+"Versió instal·lada:\n"
+"%s\n"
 "Versió disponible:\n"
+"%s"
 
 #: ../src/updatecheck.c:115
 msgid "Update Check"
@@ -737,11 +748,13 @@ msgid ""
 "Gummi has encountered a serious error and requires a restart, you can find "
 "your file in the %s directory\n"
 msgstr ""
+"\n"
+"El Gummi s'ha de reiniciar per culpa d'un error greu; trobareu el fitxer al "
+"directori %s\n"
 
 #: ../src/utils.c:130
-#, fuzzy
 msgid "Confirmation"
-msgstr "Llegenda:"
+msgstr "Confirmació"
 
 #~ msgid "PDF Compiling"
 #~ msgstr "Compilació a PDF"
