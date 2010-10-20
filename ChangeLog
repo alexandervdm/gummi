@@ -2,6 +2,26 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.5.2 (TBA, 2010): (svn upto 528)
+
+   Bugs fixed:
+    * Fixed an issue with including other tex documents
+    * Fixed an issue with relative file paths for to be included files
+    * Recent files with underscore now correctly displayed
+    * Current directory of document is now remembered
+    * Autosave document now no longer has editor panel lose focus
+    * Fixed issue with manual preview page number jumping
+    * Removed redundant function call in the preview-update function
+    * Minor fixes to the regex for bibtex detection
+    * Minor memory leak in texcount function fixed
+    * Fixed a segmentation fault on texcount for some configurations
+    * Minor GUI improvements
+
+    Translation:
+    * Updated Catalan translation
+    * Added romanian translation
+
+
 Gummi 0.5.1 (September 27th, 2010):
 
 	Bugs fixed:
