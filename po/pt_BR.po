@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-27 13:51+0800\n"
+"POT-Creation-Date: 2010-10-20 20:58+0800\n"
 "PO-Revision-Date: 2010-06-27 23:14-0300\n"
 "Last-Translator: Fernando Governatore Cruz <fergc@uol.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,7 +242,7 @@ msgstr "Encontrar somente palvras completas"
 msgid "Matrix"
 msgstr "Matriz"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:858
+#: ../data/gummi.glade.h:66 ../src/gui.c:899
 msgid "N/A"
 msgstr "N/D"
 
@@ -416,11 +416,11 @@ msgstr "_Visualizar"
 msgid "filter:"
 msgstr "filtro:"
 
-#: ../data/gummi.glade.h:110 ../src/gui.c:856
+#: ../data/gummi.glade.h:110 ../src/gui.c:897
 msgid "no bibliography file detected"
 msgstr "nenhum arquivo de bibliografia encontrado"
 
-#: ../data/gummi.glade.h:111 ../src/gui.c:857
+#: ../data/gummi.glade.h:111 ../src/gui.c:898
 msgid "none"
 msgstr "nenhum"
 
@@ -590,19 +590,19 @@ msgstr "segundos"
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:384
+#: ../src/editor.c:383
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:391
+#: ../src/editor.c:390
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/motion.c:221
+#: ../src/motion.c:225 ../src/gui.c:321 ../src/gui.c:351
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
-#: ../src/motion.c:259
+#: ../src/motion.c:263
 #, fuzzy, c-format
 msgid ""
 "PDF-Preview could not initialize.\n"
@@ -620,77 +620,113 @@ msgstr ""
 "Favor corrigir os erros listados e clicar nesta area\n"
 "para recarregar o painel de pré-visulização"
 
-#: ../src/gui.c:279
+#: ../src/gui.c:276
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
 msgstr "Erro ao carregar arquivo recente:"
 
-#: ../src/gui.c:482
+#: ../src/gui.c:500
 #, fuzzy
 msgid "Words in text"
 msgstr "Negrito"
 
-#: ../src/gui.c:483
+#: ../src/gui.c:501
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui.c:484
+#: ../src/gui.c:502
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui.c:485
+#: ../src/gui.c:503
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui.c:486
+#: ../src/gui.c:504
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui.c:487
+#: ../src/gui.c:505
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui.c:488
+#: ../src/gui.c:506
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui.c:519
+#: ../src/gui.c:509
+#, fuzzy
+msgid "Words in text: ([0-9]*)"
+msgstr "Negrito"
+
+#: ../src/gui.c:510
+msgid "Words in headers: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:511
+msgid "Words in float captions: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:512
+msgid "Number of headers: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:513
+msgid "Number of floats: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:514
+msgid "Number of math inlines: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:515
+msgid "Number of math displayed: ([0-9]*)"
+msgstr ""
+
+#: ../src/gui.c:547
+#, fuzzy
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr "Esta função precisa de uma\n"
+
+#: ../src/gui.c:555
 msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui.c:818
+#: ../src/gui.c:859
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilando arquivo de bibliografia"
 
-#: ../src/gui.c:820
+#: ../src/gui.c:861
 msgid "bibliography compiled without errors"
 msgstr "Bibliografia compilada sem erros"
 
-#: ../src/gui.c:822
+#: ../src/gui.c:863
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Erro compilando arquivo de bibliografia ou nenhum arquivo encontrado..."
 
-#: ../src/gui.c:825
+#: ../src/gui.c:866
 msgid "error compiling bibliography file"
 msgstr "erro compilando arquivo de bibliografia"
 
-#: ../src/gui.c:850
+#: ../src/gui.c:891
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1345
+#: ../src/gui.c:1405
 msgid "Do you want to save the changes you have made?"
 msgstr "Deseja salvar as alterações feitas?"
 
-#: ../src/gui.c:1355
+#: ../src/gui.c:1416
 msgid "Open File..."
 msgstr "Abrir Arquivo..."
 
-#: ../src/gui.c:1378
+#: ../src/gui.c:1447
 msgid "Save File..."
 msgstr "Salvar arquivo..."
 
@@ -791,9 +827,6 @@ msgstr "Legenda"
 #~ msgstr ""
 #~ "O serivdor não pôde ser contactado\n"
 #~ "\n"
-
-#~ msgid "This function requires an active\n"
-#~ msgstr "Esta função precisa de uma\n"
 
 #~ msgid "internet connection."
 #~ msgstr "conexão à internet"
