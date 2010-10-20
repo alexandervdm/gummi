@@ -489,30 +489,48 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     GtkWidget* dialog = 0;
     gint i = 0;
-    gchar* str = 0;
     gchar* output = 0;
-    gchar* cmd;
+    gchar* cmd = 0;
+    gchar** matched = 0;
+    GError* error = 0;
+    GMatchInfo* match_info;
+    GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
+    gchar* res[TEXCOUNT_OUTPUT_LINES];
+    const gchar* terms[] = {
+        _("Words in text"),
+        _("Words in headers"),
+        _("Words in float captions"),
+        _("Number of headers"),
+        _("Number of floats"),
+        _("Number of math inlines"),
+        _("Number of math displayed")
+    };
+    const gchar* terms_regex[] = {
+        _("Words in text: ([0-9]*)"),
+        _("Words in headers: ([0-9]*)"),
+        _("Words in float captions: ([0-9]*)"),
+        _("Number of headers: ([0-9]*)"),
+        _("Number of floats: ([0-9]*)"),
+        _("Number of math inlines: ([0-9]*)"),
+        _("Number of math displayed: ([0-9]*)")
+    };
     
-    // check if the texcount program exists:
     if (g_find_program_in_path("texcount")) {
         cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
         pdata result = utils_popen_r(cmd);
-        gchar* terms[] = { _("Words in text"),
-                       _("Words in headers"),
-                       _("Words in float captions"),
-                       _("Number of headers"),
-                       _("Number of floats"),
-                       _("Number of math inlines"),
-                       _("Number of math displayed")
-                       };
-        gchar* res[7];
 
-        str = strtok(result.data, ":\n");
-        while (str) {
-          str = strtok(NULL, ":\n");
-          if (strlen(str) > 10) continue;
-          res[i++] = str;
-          if (i == 7) break;
+        for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
+            if (g_regex_match(regexs[i], result.data, 0, &match_info)) {
+                matched = g_match_info_fetch_all(match_info);
+                if (NULL == matched[1]) {
+                    slog(L_WARNING, "can't extract info: %s\n", terms[i]);
+                    res[i] = g_strdup("N/A");
+                } else {
+                    res[i] = g_strdup(matched[1]);
+                }
+                g_strfreev(matched);
+                g_match_info_free(match_info);
+            }
         }
     
         output = g_strconcat(terms[0], ": ", res[0], "\n",
@@ -524,10 +542,9 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
                              terms[6], ": ", res[6], "\n",
                              NULL);
     }
-    else { // texcount is not detected:
+    else {
         cmd = NULL;
-        output = g_strconcat
-            ("This function requires\nthe texcount program.\n", NULL);
+        output = g_strdup(_("This function requires\nthe texcount program.\n"));
     }
     
     dialog = gtk_message_dialog_new(GTK_WINDOW(gummi->gui->mainwindow),
@@ -538,6 +555,11 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     gtk_window_set_title(GTK_WINDOW(dialog), _("Document Statistics"));
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
+
+    for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
+        g_regex_unref(regexs[i]);
+        g_free(res[i]);
+    }
     g_free(cmd);
     g_free(output);
 }
