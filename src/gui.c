@@ -506,18 +506,21 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
         _("Number of math displayed")
     };
     const gchar* terms_regex[] = {
-        _("Words in text: ([0-9]*)"),
-        _("Words in headers: ([0-9]*)"),
-        _("Words in float captions: ([0-9]*)"),
-        _("Number of headers: ([0-9]*)"),
-        _("Number of floats: ([0-9]*)"),
-        _("Number of math inlines: ([0-9]*)"),
-        _("Number of math displayed: ([0-9]*)")
+        "Words in text: ([0-9]*)",
+        "Words in headers: ([0-9]*)",
+        "Words in float captions: ([0-9]*)",
+        "Number of headers: ([0-9]*)",
+        "Number of floats: ([0-9]*)",
+        "Number of math inlines: ([0-9]*)",
+        "Number of math displayed: ([0-9]*)"
     };
     
     if (g_find_program_in_path("texcount")) {
         cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
         pdata result = utils_popen_r(cmd);
+
+        for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
+            regexs[i] = g_regex_new(terms_regex[i], 0, 0, &error);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
             if (g_regex_match(regexs[i], result.data, 0, &match_info)) {
