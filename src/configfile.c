@@ -111,9 +111,8 @@ void config_init(const gchar* filename) {
     config_filename = g_strdup(filename);
     config_version = config_get_value("config_version");
 
-    if (!config_version ||
-            0 != strcmp(config_version, PACKAGE_VERSION) ||
-            0 == strcmp(buf, "[DEFAULT]\n")) {
+    /* config_version field is not in gummi.cfg before 0.5.0 */
+    if (0 == config_version[0]) {
         slog(L_INFO, "found old configuration file, replacing it with new "
                 "one ...\n");
         config_set_default();
