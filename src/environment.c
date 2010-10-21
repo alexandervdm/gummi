@@ -56,6 +56,9 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
     slog(L_INFO, "TMP: %s\n", gc->finfo->workfile);
     slog(L_INFO, "PDF: %s\n", gc->finfo->pdffile); 
 
+    /* Title will be updated in motion_update_pdffile */
+    gui_update_title();
+
     /* This is important */
     gc->motion->errorline = 1;
     motion_initial_preview(gc->motion);
@@ -65,5 +68,4 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
     if (config_get_value("autosaving"))
         iofunctions_reset_autosave(filename);
 
-    gui_update_title();
 }

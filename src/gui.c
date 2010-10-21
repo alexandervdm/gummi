@@ -260,7 +260,7 @@ void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
 void on_menu_recent_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     const gchar* name = gtk_menu_item_get_label(GTK_MENU_ITEM(widget));
-    gchar* ptr;
+    gchar* tstr;
     gint index = name[0] - '0' -1;
     gint ret = check_for_save();
 
@@ -273,16 +273,17 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
         iofunctions_load_file(gummi->editor, gummi->gui->recent_list[index]); 
         gummi_create_environment(gummi, gummi->gui->recent_list[index]);
     } else {
-        ptr = g_strdup_printf(_("Error loading recent file: %s"),
+        tstr = g_strdup_printf(_("Error loading recent file: %s"),
                 gummi->gui->recent_list[index]);
-        statusbar_set_message(ptr);
-        g_free(ptr);
+        slog(L_ERROR, "%s\n", tstr);
+        statusbar_set_message(tstr);
+        g_free(tstr);
         g_free(gummi->gui->recent_list[index]);
-        while (index < 4) {
+        while (index < RECENT_FILES_NUM -1) {
             gummi->gui->recent_list[index] = gummi->gui->recent_list[index+1];
             ++index;
         }
-        gummi->gui->recent_list[4] = 0;
+        gummi->gui->recent_list[RECENT_FILES_NUM -1] = 0;
     }
     display_recent_files(gummi->gui);
 }
@@ -302,6 +303,7 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
         gummi_create_environment(gummi, filename);
         add_to_recent_list(filename);
     }
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
 
 void on_menu_save_activate(GtkWidget *widget, void* user) {
@@ -359,6 +361,7 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
         add_to_recent_list(filename);
         if (new) g_free(filename);
     }
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
 
 void on_menu_cut_activate(GtkWidget *widget, void* user) {
@@ -1532,8 +1535,8 @@ void add_to_recent_list(gchar* filename) {
             return;
 
     /* add to recent list */
-    g_free(gummi->gui->recent_list[4]);
-    for (i = 3; i >= 0; --i)
+    g_free(gummi->gui->recent_list[RECENT_FILES_NUM -1]);
+    for (i = RECENT_FILES_NUM -2; i >= 0; --i)
         gummi->gui->recent_list[i + 1] = gummi->gui->recent_list[i];
     gummi->gui->recent_list[0] = g_strdup(filename);
     display_recent_files(gummi->gui);
@@ -1541,33 +1544,33 @@ void add_to_recent_list(gchar* filename) {
 
 void display_recent_files(GummiGui* gui) {
     L_F_DEBUG;
-    gchar* ptr = 0;
+    gchar* tstr = 0;
     gchar* basename = 0;
     gint i = 0, count = 0;
 
     for (i = 0; i < 5; ++i)
         gtk_widget_hide(GTK_WIDGET(gui->recent[i]));
 
-    for (i = 0; i < 5; ++i) {
+    for (i = 0; i < RECENT_FILES_NUM; ++i) {
         if (gui->recent_list[i] &&
             0 != strcmp(gui->recent_list[i], "__NULL__")) {
-            ptr = g_strdup_printf("%d. %s", count + 1,
+            tstr = g_strdup_printf("%d. %s", count + 1,
                     basename = g_path_get_basename(gui->recent_list[i]));
-            gtk_menu_item_set_label(gui->recent[i], ptr);
+            gtk_menu_item_set_label(gui->recent[i], tstr);
             gtk_widget_show(GTK_WIDGET(gui->recent[i]));
-            g_free(ptr);
+            g_free(tstr);
             g_free(basename);
             ++count;
         }
     }
     /* update configuration file */
-    for (i = 0; i < 5; ++i) {
-        ptr = g_strdup_printf("recent%d", i + 1);
+    for (i = 0; i < RECENT_FILES_NUM; ++i) {
+        tstr = g_strdup_printf("recent%d", i + 1);
         if (gui->recent_list[i])
-            config_set_value(ptr, gui->recent_list[i]);
+            config_set_value(tstr, gui->recent_list[i]);
         else
-            config_set_value(ptr, "__NULL__");
-        g_free(ptr);
+            config_set_value(tstr, "__NULL__");
+        g_free(tstr);
     }
 }
 

@@ -79,6 +79,7 @@ void iofunctions_load_file(GuEditor* ec, gchar *filename)
         return;
     }
     editor_fill_buffer(ec, decoded);
+    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
     g_free(decoded);
     g_free(text); 
 }
