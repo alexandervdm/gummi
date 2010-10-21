@@ -16,7 +16,7 @@ if [ -n "$2" ] && [ "$2" == "notex" ]; then
 fi
 
 if [ -e configure.ac ]; then
-  version=`sed -n 's/AC_INIT([^,]*, \[\([a-zA-Z0-9.-~]*\)\], .*/\1/p' configure.ac`
+  version=`sed -n 's/AC_INIT([^,]*, \[\([a-zA-Z0-9.~\-]*\)\], .*/\1/p' configure.ac`
 elif [ -e setup.py ]; then
   version=`sed -n "s/.*version = '\(.*\)'.*/\1/p" setup.py`
 fi

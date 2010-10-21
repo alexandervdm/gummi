@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.65)
-AC_INIT([Gummi], [0.5.2], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
+AC_INIT([Gummi], [0.5.3~svn545], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 # ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
