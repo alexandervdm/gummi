@@ -74,7 +74,7 @@ void preview_set_pdffile(GuPreview* pc, const gchar *pdffile) {
     GError *err = NULL;
     pc->page_current = 0;
     
-    if (pc->uri) g_free(pc->uri);
+    g_free(pc->uri);
     pc->uri = g_strconcat("file://", pdffile, NULL);
 
     /* clean up */

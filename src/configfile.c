@@ -107,7 +107,7 @@ void config_init(const gchar* filename) {
         fclose(fh);
     }
 
-    if (config_filename) g_free(config_filename);
+    g_free(config_filename);
     config_filename = g_strdup(filename);
     config_version = config_get_value("config_version");
 

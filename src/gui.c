@@ -255,6 +255,7 @@ void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
     filename = get_save_filename(TYPE_PDF);
     if (filename)
         motion_export_pdffile(gummi->motion, filename);
+    g_free(filename);
 }
 
 void on_menu_recent_activate(GtkWidget *widget, void * user) {
@@ -323,14 +324,14 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
                 ret = utils_yes_no_dialog(
                         _("The file already exists. Overwrite?"));
                 if (GTK_RESPONSE_YES != ret) {
-                    if (new) g_free(filename);
+                    g_free(filename);
                     return;
                 }
             }
             iofunctions_write_file(gummi->editor, filename); 
             gummi_create_environment(gummi, filename);
             add_to_recent_list(filename);
-            if (new) g_free(filename);
+            g_free(filename);
         }
     } else
         iofunctions_write_file(gummi->editor, gummi->finfo->filename); 
@@ -353,14 +354,14 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
             ret = utils_yes_no_dialog(
                     _("The file already exists. Overwrite?"));
             if (GTK_RESPONSE_YES != ret) {
-                if (new) g_free(filename);
+                g_free(filename);
                 return;
             }
         }
         iofunctions_write_file(gummi->editor, filename); 
         gummi_create_environment(gummi, filename);
         add_to_recent_list(filename);
-        if (new) g_free(filename);
+        g_free(filename);
     }
     gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
@@ -1439,7 +1440,7 @@ gchar* get_open_filename(GuFilterType type) {
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 
     if (filename) {
-        if (last_filename) g_free(last_filename);
+        g_free(last_filename);
         last_filename = g_path_get_dirname(filename);
     }
 

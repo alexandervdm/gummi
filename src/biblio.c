@@ -110,8 +110,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
 
 gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
 {
-    if (bc->filename) g_free(bc->filename);
-    if (bc->basename) g_free(bc->basename);
+    g_free(bc->filename);
+    g_free(bc->basename);
 
     if (fc->filename && !g_path_is_absolute(filename)) {
         gchar* dirname = g_path_get_dirname(fc->filename);
@@ -181,8 +181,8 @@ int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
                                                     1, title_out,
                                                     2, author_out,
                                                     3, year_res[1], -1);
-        if (author_out) g_free(author_out);
-        if (title_out) g_free(title_out);
+        g_free(author_out);
+        g_free(title_out);
         g_strfreev(ident_res);
         g_strfreev(title_res);
         g_strfreev(author_res);

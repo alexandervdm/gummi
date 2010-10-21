@@ -309,7 +309,7 @@ void editor_start_search(GuEditor* ec, const gchar* term,
     L_F_DEBUG;
     /* save options */
     if (ec->term != term) {
-        if (ec->term) g_free(ec->term);
+        g_free(ec->term);
         ec->term = g_strdup(term);
     }
 
