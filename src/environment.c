@@ -29,6 +29,7 @@
 
 #include "configfile.h"
 #include "environment.h"
+#include "gui.h"
 #include "utils.h"
 
 Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuImporter* im,

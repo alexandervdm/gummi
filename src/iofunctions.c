@@ -48,6 +48,7 @@ void iofunctions_load_default_text(GuEditor* ec) {
     L_F_DEBUG;
     gchar* str = g_strdup(config_get_value("welcome"));
     editor_fill_buffer(ec, str);
+    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
     g_free(str);
 }
 

@@ -91,7 +91,6 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
 #endif
 
     editor_sourceview_config(ec);
-
     gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
     return ec;
 }

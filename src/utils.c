@@ -187,7 +187,7 @@ pdata utils_popen_r(const gchar* cmd) {
 }
 
 /**
- * @brief Transform target to path relative to root.
+ * @brief Transforms target to path relative to root.
  * @return a newly allocated pointer to gchar* to the relative path, if target
  * isn't relative to root, target is simply duplicated and returned.
  */
