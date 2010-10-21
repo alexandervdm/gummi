@@ -43,10 +43,11 @@
 #include "environment.h"
 #include "utils.h"
 
-GuPreview* preview_init(GtkBuilder * builder) {
+GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GuPreview* p = g_new0(GuPreview, 1);
     GdkColor bg = {0,0xed00,0xec00,0xeb00};
+    p->b_finfo = finfo;
     p->preview_viewport =
         GTK_VIEWPORT(gtk_builder_get_object(builder, "preview_view"));
     p->drawarea = GTK_WIDGET(gtk_builder_get_object(builder, "preview_draw"));

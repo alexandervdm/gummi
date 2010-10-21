@@ -98,12 +98,12 @@ int main (int argc, char *argv[]) {
     /* initialize classes */
     gui = gui_init(builder);
     finfo = fileinfo_init();
-    editor = editor_init(builder);
-    importer = importer_init(builder);
-    preview = preview_init(builder);
+    editor = editor_init(builder, finfo);
+    importer = importer_init(builder, finfo);
+    preview = preview_init(builder, finfo);
     motion = motion_init(builder, finfo, editor, preview); 
-    templ = template_init(builder);
-    biblio = biblio_init(builder);
+    biblio = biblio_init(builder, finfo);
+    templ = template_init(builder, finfo);
 
     gummi = gummi_init(gui, finfo, editor, importer, motion, preview, biblio,
             templ);

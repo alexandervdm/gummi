@@ -33,9 +33,11 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "fileinfo.h"
 #include "editor.h"
 
 typedef struct _GuImporter {
+    GuFileInfo* b_finfo;
     GtkNotebook* import_tabs;
 
     GtkViewport* image_pane;
@@ -56,7 +58,7 @@ typedef struct _GuImporter {
     GtkComboBox* matrix_combobracket;
 } GuImporter;
 
-GuImporter* importer_init(GtkBuilder* builder);
+GuImporter* importer_init(GtkBuilder* builder, GuFileInfo* finfo);
 void importer_insert_table(GuImporter* ic, GuEditor* ec);
 void importer_insert_matrix(GuImporter* ic, GuEditor* ec);
 void importer_insert_image(GuImporter* ic, GuEditor* ec);

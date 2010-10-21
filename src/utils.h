@@ -59,5 +59,6 @@ gint utils_yes_no_dialog(const gchar* message);
 gboolean utils_path_exists(const gchar* path);
 void utils_copy_file(const gchar* source, const gchar* dest);
 pdata utils_popen_r(const gchar* cmd);
+gchar* utils_path_to_relative(const gchar* root, const gchar* target);
 
 #endif /* GUMMI_UTILS */

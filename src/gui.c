@@ -476,13 +476,23 @@ void on_menu_findprev_activate(GtkWidget *widget, void * user) {
 
 void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
-    gchar *filename = NULL;
+    gchar* filename = NULL;
+    gchar* root_path = NULL;
+    gchar* relative_path = NULL;
+
     filename = get_open_filename(TYPE_BIBLIO);
+    if (gummi->finfo->filename)
+        root_path = g_path_get_dirname(gummi->finfo->filename);
+
     if (filename &&
         biblio_set_filename(gummi->biblio, gummi->finfo, filename)) {
-        editor_insert_bib(gummi->editor, gummi->biblio->filename);
+        relative_path = utils_path_to_relative(root_path,
+                                               gummi->biblio->filename);
+        editor_insert_bib(gummi->editor, relative_path);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
     }
+    g_free(relative_path);
+    g_free(root_path);
     g_free(filename);
 }
 
@@ -806,7 +816,7 @@ void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user) {
 
 void on_image_file_activate(void) {
     L_F_DEBUG;
-    const gchar* filename = get_open_filename(TYPE_IMAGE);
+    gchar* filename = get_open_filename(TYPE_IMAGE);
     importer_imagegui_set_sensitive(gummi->importer, filename, TRUE);
     g_free(filename);
 }
@@ -1597,6 +1607,9 @@ gboolean statusbar_del_message(void* user) {
     return FALSE;
 }
 
+/**
+ * @brief callback for 'changed' event to update compile timer
+ */
 void check_motion_timer(void) {
     L_F_DEBUG;
     gtk_text_buffer_set_modified(g_e_buffer, TRUE);

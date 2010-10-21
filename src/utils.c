@@ -142,6 +142,9 @@ gboolean utils_path_exists(const gchar* path) {
     return result;
 }
 
+/*
+ * Platform independent file copy operation
+ */
 void utils_copy_file(const gchar* source, const gchar* dest) {
     /* I use this to copy file instead of g_file_copy or other OS dependent
      * functions */
@@ -164,7 +167,13 @@ void utils_copy_file(const gchar* source, const gchar* dest) {
     fclose(out);
 }
 
+/**
+ * @brief  Platform independent interface for calling popen() and return a
+ * static buffer
+ * @return struct _pdata
+ */
 pdata utils_popen_r(const gchar* cmd) {
+    /* TODO: Win32 support */
     FILE* fp = popen(cmd, "r");
     static gchar buf[BUFSIZ];
     gint status = 0, len = 0;
@@ -175,4 +184,18 @@ pdata utils_popen_r(const gchar* cmd) {
     buf[len] = 0;
     status = WEXITSTATUS(pclose(fp));
     return (pdata){status, buf};
+}
+
+/**
+ * @brief Transform target to path relative to root.
+ * @return a newly allocated pointer to gchar* to the relative path, if target
+ * isn't relative to root, target is simply duplicated and returned.
+ */
+gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
+    gchar* tstr = NULL;
+    if ((root != NULL) && (0 == strncmp(target, root, strlen(root))))
+        tstr = g_strdup(target + strlen(root) + 1);
+    else
+        tstr = g_strdup(target);
+    return tstr;
 }

@@ -32,9 +32,11 @@
 
 #include <gtk/gtk.h>
 
+#include "fileinfo.h"
 #include "motion.h"
 
 typedef struct _GuBiblio {
+    GuFileInfo* b_finfo;
     GtkProgressBar* progressbar;
     GtkAdjustment* progressmon;
     GtkListStore* list_biblios;
@@ -45,8 +47,7 @@ typedef struct _GuBiblio {
     double progressval;
 } GuBiblio;
 
-GuBiblio* biblio_init(GtkBuilder* builder);
-
+GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo);
 gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc);
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc);
 gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename);

@@ -58,13 +58,14 @@ const gchar style[][3][20] = {
 /* reference to global environment instance */
 extern Gummi* gummi;
 
-GuEditor* editor_init(GtkBuilder* builder) {
+GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GtkWidget *scroll;
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language
                                                         (manager, "latex");
     GuEditor* ec = g_new0(GuEditor, 1);
+    ec->b_finfo = finfo;
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
     ec->sourceview =
         GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));

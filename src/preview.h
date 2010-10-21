@@ -33,7 +33,10 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
+#include "fileinfo.h"
+
 typedef struct _GuPreview {
+    GuFileInfo* b_finfo;
     PopplerDocument* doc;
     PopplerPage* page;
     GtkViewport* preview_viewport;
@@ -56,7 +59,7 @@ typedef struct _GuPreview {
     gboolean best_fit;
 } GuPreview;
 
-GuPreview* preview_init(GtkBuilder * builder);
+GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo);
 void preview_set_pdffile(GuPreview* prev, const gchar *pdffile);
 void preview_refresh(GuPreview* prev);
 void preview_set_pagedata(GuPreview* prev);

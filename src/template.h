@@ -34,7 +34,10 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "fileinfo.h"
+
 typedef struct _Template {
+    GuFileInfo* b_finfo;
     GtkWindow* templatewindow;
     GtkTreeView* templateview;
     GtkListStore* list_templates;
@@ -46,10 +49,8 @@ typedef struct _Template {
     GtkButton* template_open;
 } GuTemplate;
 
-GuTemplate* template_init(GtkBuilder* builder);
-
+GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo);
 void template_setup();
-
 void template_add_new_entry(GuTemplate* t);
 void template_remove_entry(GuTemplate* t);
 gchar* template_open_selected(GuTemplate* t);

@@ -40,10 +40,13 @@
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourceview.h>
 
+#include "fileinfo.h"
+
 #define ec_sourcebuffer GTK_TEXT_BUFFER(ec->sourcebuffer)
 #define ec_sourceview GTK_TEXT_VIEW(ec->sourceview)
 
 typedef struct _GuEditor {
+    GuFileInfo* b_finfo;
     GtkSourceView *sourceview;
     GtkSourceBuffer *sourcebuffer;
     GtkTextTag* errortag;
@@ -56,7 +59,7 @@ typedef struct _GuEditor {
     gboolean matchcase;
 } GuEditor;
 
-GuEditor* editor_init(GtkBuilder *builder);
+GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo);
 void editor_sourceview_config(GuEditor* ec);
 #ifdef USE_GTKSPELL
 void editor_activate_spellchecking(GuEditor* ec, gboolean status);

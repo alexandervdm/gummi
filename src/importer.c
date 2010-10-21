@@ -41,10 +41,11 @@ const gchar align_type[][4] = { "l", "c", "r" };
 const gchar bracket_type[][16] = { "matrix", "pmatrix", "bmatrix",
                                   "Bmatrix", "vmatrix", "Vmatrix" };
 
-GuImporter* importer_init(GtkBuilder* builder) {
+GuImporter* importer_init(GtkBuilder* builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GuImporter* i = g_new0(GuImporter, 1);
 
+    i->b_finfo = finfo;
     i->import_tabs =
         GTK_NOTEBOOK(gtk_builder_get_object(builder, "import_tabs"));
 
@@ -229,14 +230,23 @@ const gchar* importer_generate_image(GuImporter* ic) {
     const gchar* image_file = gtk_entry_get_text(ic->image_file);
     const gchar* caption = gtk_entry_get_text(ic->image_caption);
     const gchar* label = gtk_entry_get_text(ic->image_label);
+    gchar* root_path = NULL;
+    gchar* relative_path = NULL;
     gdouble scale = gtk_adjustment_get_value(ic->scaler);
     static gchar result[BUFSIZ] = { 0 };
 
     /* clear previous data */
     result[0] = 0;
 
+    if (ic->b_finfo->filename)
+        root_path = g_path_get_dirname(ic->b_finfo->filename);
+    relative_path = utils_path_to_relative(root_path, image_file);
+
     snprintf(result, BUFSIZ, "\\begin{figure}[htp]\n\\centering\n"
         "\\includegraphics[scale=%.2f]{%s}\n\\caption{%s}\n\\label{%s}\n"
-        "\\end{figure}", scale, image_file, caption, label);
+        "\\end{figure}", scale, relative_path, caption, label);
+
+    g_free(relative_path);
+    g_free(root_path);
     return result;
 }

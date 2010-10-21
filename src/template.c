@@ -40,9 +40,10 @@
 #include "utils.h"
 
 
-GuTemplate* template_init(GtkBuilder* builder) {
+GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GuTemplate* t = g_new0(GuTemplate, 1);
+    t->b_finfo = finfo;
     t->templatewindow =
         GTK_WINDOW(gtk_builder_get_object(builder, "templatewindow"));
     t->templateview = 
