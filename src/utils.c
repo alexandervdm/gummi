@@ -149,10 +149,14 @@ void utils_copy_file(const gchar* source, const gchar* dest) {
     gchar buf[BUFSIZ];
     gint size = 0;
 
-    if (NULL == (in = fopen(source, "rb")))
-        slog(L_G_ERROR, "failed to open %s\n", source);
-    if (NULL == (out = fopen(dest, "wb")))
-        slog(L_G_ERROR, "failed to save %s\n", dest);
+    if (NULL == (in = fopen(source, "rb"))) {
+        slog(L_G_ERROR, "failed to open %s, aborting...\n", source);
+        return;
+    }
+    if (NULL == (out = fopen(dest, "wb"))) {
+        slog(L_G_ERROR, "failed to save %s, aborting...\n", dest);
+        return;
+    }
 
     while ((size = fread(buf, 1, BUFSIZ, in)) > 0)
         fwrite(buf, 1, size, out);

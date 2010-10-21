@@ -67,5 +67,4 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
         motion_start_updatepreview(gc->motion);
     if (config_get_value("autosaving"))
         iofunctions_reset_autosave(filename);
-
 }
