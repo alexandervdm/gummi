@@ -303,6 +303,7 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
         gummi_create_environment(gummi, filename);
         add_to_recent_list(filename);
     }
+    g_free(filename);
     gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
 
@@ -481,6 +482,7 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
         editor_insert_bib(gummi->editor, gummi->biblio->filename);
         gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
     }
+    g_free(filename);
 }
 
 void on_menu_bibupdate_activate(GtkWidget *widget, void * user) {
@@ -805,6 +807,7 @@ void on_image_file_activate(void) {
     L_F_DEBUG;
     const gchar* filename = get_open_filename(TYPE_IMAGE);
     importer_imagegui_set_sensitive(gummi->importer, filename, TRUE);
+    g_free(filename);
 }
 
 void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
