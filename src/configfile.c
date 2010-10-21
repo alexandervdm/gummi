@@ -116,6 +116,9 @@ void config_init(const gchar* filename) {
         slog(L_INFO, "found old configuration file, replacing it with new "
                 "one ...\n");
         config_set_default();
+    } else if (0 != strcmp(PACKAGE_VERSION, config_version)) {
+        slog(L_INFO, "updating version tag in configuration file...\n");
+        config_set_value("config_version", PACKAGE_VERSION);
     }
 }
 
