@@ -1,5 +1,5 @@
 /**
- * @file   main.c
+ * @file   gummi.c
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -37,7 +37,7 @@
 
 #include "configfile.h"
 #include "environment.h"
-#include "gui.h"
+#include "gummi-gui.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "template.h"

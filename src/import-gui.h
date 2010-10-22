@@ -1,10 +1,10 @@
 /**
- * @file    template.h
- * @brief   
+ * @file   import-gui.h
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,33 +27,27 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_TEMPLATE_H
-#define GUMMI_TEMPLATE_H
+#ifndef GUMMI_IMPORT_GUI_H
+#define GUMMI_IMPORT_GUI_H
 
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "fileinfo.h"
+typedef struct _GuImportGui {
+    GtkHBox* box_image;
+    GtkHBox* box_table;
+    GtkHBox* box_matrix;
+    GtkViewport* image_pane;
+    GtkViewport* table_pane;
+    GtkViewport* matrix_pane;
+} GuImportGui;
 
-typedef struct _Template {
-    GuFileInfo* b_finfo;
-    GtkWindow* templatewindow;
-    GtkTreeView* templateview;
-    GtkListStore* list_templates;
-    GtkCellRendererText* template_render;
-    GtkTreeViewColumn* template_col;
-    GtkLabel* template_label;
-    GtkButton* template_add;
-    GtkButton* template_remove;
-    GtkButton* template_open;
-} GuTemplate;
+GuImportGui* importgui_init(GtkBuilder* builder);
+void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
+        guint page_num, void* user);
+void on_button_import_table_apply_clicked(GtkWidget* widget, void* user);
+void on_button_import_image_apply_clicked(GtkWidget* widget, void* user);
+void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
+void on_image_file_activate(void);
 
-GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo);
-void template_setup();
-void template_add_new_entry(GuTemplate* t);
-void template_remove_entry(GuTemplate* t);
-gchar* template_open_selected(GuTemplate* t);
-void template_create_file(GuTemplate* t, gchar* filename, gchar* text);
-
-
-#endif /* GUMMI_TEMPLATE_H */
+#endif /* GUMMI_IMPORT_GUI_H */

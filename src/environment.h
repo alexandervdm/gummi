@@ -70,9 +70,10 @@
 #include <libintl.h>
 
 #include "biblio.h"
-#include "fileinfo.h"
-#include "gui.h"
 #include "editor.h"
+#include "environment.h"
+#include "fileinfo.h"
+#include "gummi-gui.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "motion.h"

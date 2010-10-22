@@ -1,5 +1,5 @@
 /**
- * @file    gui.h
+ * @file    gummi-gui.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -31,59 +31,17 @@
 #ifndef GUMMI_GUI_H
 #define GUMMI_GUI_H
 
+#include <glib.h>
 #include <gtk/gtk.h>
+
+#include "import-gui.h"
+#include "prefs-gui.h"
+#include "search-gui.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
 #define g_e_buffer GTK_TEXT_BUFFER(gummi->editor->sourcebuffer)
 #define g_e_view GTK_TEXT_VIEW(gummi->editor->sourceview)
-
-typedef struct _GuPrefsGui {
-    GtkWidget* prefwindow;
-    GtkNotebook* notebook;
-    GtkCheckButton* textwrap_button;
-    GtkCheckButton* wordwrap_button;
-    GtkCheckButton* line_numbers;
-    GtkCheckButton* highlighting;
-    GtkCheckButton* autosaving;
-    GtkCheckButton* compile_status;
-    GtkSpinButton* tabwidth;
-    GtkCheckButton* spaces_instof_tabs;
-    GtkCheckButton* autoindentation;
-    GtkSpinButton* autosave_timer;
-    GtkComboBox* combo_languages;
-    GtkListStore* list_languages;
-    GtkTextView* default_text;
-    GtkTextBuffer* default_buffer;
-    GtkComboBox* typesetter;
-    GtkFontButton* editor_font;
-    GtkComboBox* compile_scheme;
-    GtkSpinButton* compile_timer;
-    GtkImage* changeimg;
-    GtkLabel* changelabel;
-
-    GtkVBox* view_box;
-    GtkHBox* editor_box;
-    GtkHBox* compile_box;
-} GuPrefsGui;
-
-typedef struct _GuSearchGui {
-    GtkWidget* searchwindow;
-    GtkEntry* searchentry;
-    GtkEntry* replaceentry;
-    gboolean backwards;
-    gboolean matchcase;
-    gboolean wholeword;
-} GuSearchGui;
-
-typedef struct _GuImportGui {
-    GtkHBox* box_image;
-    GtkHBox* box_table;
-    GtkHBox* box_matrix;
-    GtkViewport* image_pane;
-    GtkViewport* table_pane;
-    GtkViewport* matrix_pane;
-} GuImportGui;
 
 typedef struct _GummiGui {
     GuPrefsGui* prefsgui;
@@ -162,8 +120,6 @@ gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user);
-void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
-        guint page_num, void* user);
 
 void on_button_biblio_compile_clicked(GtkWidget* widget, void* user);
 void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user);
@@ -175,42 +131,6 @@ void preview_page_input_changed(GtkEntry* entry, void* user);
 void preview_next_page(GtkWidget* widget, void* user);
 void preview_prev_page(GtkWidget* widget, void* user);
 void preview_zoom_change(GtkWidget* widget, void* user);
-
-/* Preference GUI */
-GuPrefsGui* prefsgui_init(GummiGui* gui);
-void prefsgui_main(void);
-void prefsgui_set_current_settings(GuPrefsGui* prefs);
-void toggle_linenumbers(GtkWidget* widget, void* user);
-void toggle_highlighting(GtkWidget* widget, void* user);
-void toggle_textwrapping(GtkWidget* widget, void* user);
-void toggle_wordwrapping(GtkWidget* widget, void* user);
-void toggle_compilestatus(GtkWidget* widget, void* user);
-void toggle_spaces_instof_tabs(GtkWidget* widget, void* user);
-void toggle_autosaving(GtkWidget* widget, void* user);
-void on_prefs_close_clicked(GtkWidget* widget, void* user);
-void on_prefs_reset_clicked(GtkWidget* widget, void* user);
-
-/* Search Window */
-GuSearchGui* searchgui_init(GtkBuilder* builder);
-void on_toggle_matchcase_toggled(GtkWidget* widget, void* user);
-void on_toggle_wholeword_toggled(GtkWidget* widget, void* user);
-void on_toggle_backwards_toggled(GtkWidget* widget, void* user);
-void on_searchgui_text_changed(GtkEditable* editable, void* user);
-void on_tabwidth_value_changed(GtkWidget* widget, void* user);
-void on_autosave_value_changed(GtkWidget* widget, void* user);
-void on_compile_value_changed(GtkWidget* widget, void* user);
-void on_editor_font_set(GtkWidget* widget, void* user);
-void on_combo_typesetter_changed(GtkWidget* widget, void* user);
-void on_combo_language_changed(GtkWidget* widget, void* user);
-void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
-
-/* Import GUI */
-GuImportGui* importgui_init(GtkBuilder* builder);
-void on_button_import_table_apply_clicked(GtkWidget* widget, void* user);
-void on_button_import_image_apply_clicked(GtkWidget* widget, void* user);
-void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
-void on_image_file_activate(void);
-
 
 /* misc functions */
 gchar* get_open_filename(GuFilterType type);
@@ -225,11 +145,6 @@ void errorbuffer_set_text(gchar *message);
 void statusbar_set_message(gchar* message);
 gboolean statusbar_del_message(void* user);
 
-/**
- * @brief "changed" signal callback for editor->sourcebuffer
- * Automatically check whether to start timer if buffer changed.
- * Also set_modified for buffer
- */
 void check_motion_timer(void);
 
 #endif /* GUMMI_GUI_H */

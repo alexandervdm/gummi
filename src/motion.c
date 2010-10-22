@@ -40,7 +40,6 @@
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
-#include "gui.h"
 #include "preview.h"
 #include "utils.h"
 

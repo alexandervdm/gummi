@@ -1,10 +1,10 @@
 /**
- * @file    template.h
- * @brief   
+ * @file   search-gui.h
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,33 +27,32 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_TEMPLATE_H
-#define GUMMI_TEMPLATE_H
+#ifndef GUMMI_SEARCH_GUI_H
+#define GUMMI_SEARCH_GUI_H
 
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "fileinfo.h"
+typedef struct _GuSearchGui {
+    GtkWidget* searchwindow;
+    GtkEntry* searchentry;
+    GtkEntry* replaceentry;
+    gboolean backwards;
+    gboolean matchcase;
+    gboolean wholeword;
+} GuSearchGui;
 
-typedef struct _Template {
-    GuFileInfo* b_finfo;
-    GtkWindow* templatewindow;
-    GtkTreeView* templateview;
-    GtkListStore* list_templates;
-    GtkCellRendererText* template_render;
-    GtkTreeViewColumn* template_col;
-    GtkLabel* template_label;
-    GtkButton* template_add;
-    GtkButton* template_remove;
-    GtkButton* template_open;
-} GuTemplate;
+GuSearchGui* searchgui_init(GtkBuilder* builder);
+void on_toggle_matchcase_toggled(GtkWidget* widget, void* user);
+void on_toggle_wholeword_toggled(GtkWidget* widget, void* user);
+void on_toggle_backwards_toggled(GtkWidget* widget, void* user);
+void on_searchgui_text_changed(GtkEditable* editable, void* user);
+void on_tabwidth_value_changed(GtkWidget* widget, void* user);
+void on_autosave_value_changed(GtkWidget* widget, void* user);
+void on_compile_value_changed(GtkWidget* widget, void* user);
+void on_editor_font_set(GtkWidget* widget, void* user);
+void on_combo_typesetter_changed(GtkWidget* widget, void* user);
+void on_combo_language_changed(GtkWidget* widget, void* user);
+void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
 
-GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo);
-void template_setup();
-void template_add_new_entry(GuTemplate* t);
-void template_remove_entry(GuTemplate* t);
-gchar* template_open_selected(GuTemplate* t);
-void template_create_file(GuTemplate* t, gchar* filename, gchar* text);
-
-
-#endif /* GUMMI_TEMPLATE_H */
+#endif /* GUMMI_SEARCH_GUI_H */

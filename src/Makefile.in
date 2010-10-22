@@ -47,9 +47,10 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	editor.$(OBJEXT) environment.$(OBJEXT) fileinfo.$(OBJEXT) \
-	gui.$(OBJEXT) importer.$(OBJEXT) iofunctions.$(OBJEXT) \
-	motion.$(OBJEXT) preview.$(OBJEXT) template.$(OBJEXT) \
-	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
+	gummi-gui.$(OBJEXT) importer.$(OBJEXT) import-gui.$(OBJEXT) \
+	iofunctions.$(OBJEXT) motion.$(OBJEXT) prefs-gui.$(OBJEXT) \
+	preview.$(OBJEXT) search-gui.$(OBJEXT) template.$(OBJEXT) \
+	updatecheck.$(OBJEXT) utils.$(OBJEXT) gummi.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -194,15 +195,18 @@ gummi_SOURCES = biblio.c  biblio.h \
 		editor.c editor.h \
 		environment.c environment.h \
 		fileinfo.c fileinfo.h \
-		gui.c gui.h \
+		gummi-gui.c gummi-gui.h \
 		importer.c importer.h \
+		import-gui.c import-gui.h \
 		iofunctions.c iofunctions.h \
 		motion.c motion.h \
+		prefs-gui.c prefs-gui.h \
 		preview.c preview.h \
+		search-gui.c search-gui.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
-		main.c
+		gummi.c
 
 all: all-am
 
@@ -290,12 +294,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileinfo.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gummi-gui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gummi.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/import-gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iofunctions.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/motion.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/prefs-gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/preview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/search-gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/updatecheck.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
