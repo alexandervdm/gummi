@@ -280,6 +280,7 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
         statusbar_set_message(tstr);
         g_free(tstr);
         g_free(gummi->gui->recent_list[index]);
+        gummi->gui->recent_list[index] = NULL;
         while (index < RECENT_FILES_NUM -1) {
             gummi->gui->recent_list[index] = gummi->gui->recent_list[index+1];
             ++index;
@@ -1040,6 +1041,7 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
 
 void add_to_recent_list(gchar* filename) {
     L_F_DEBUG;
+
     gint i = 0;
     /* check if it already exists */
     for (i = 0; i < 5; ++i)
