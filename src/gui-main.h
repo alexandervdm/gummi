@@ -1,5 +1,5 @@
 /**
- * @file    gummi-gui.h
+ * @file    gui-main.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -34,9 +34,9 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "import-gui.h"
-#include "prefs-gui.h"
-#include "search-gui.h"
+#include "gui-import.h"
+#include "gui-prefs.h"
+#include "gui-search.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7

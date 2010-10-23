@@ -73,7 +73,7 @@
 #include "editor.h"
 #include "environment.h"
 #include "fileinfo.h"
-#include "gummi-gui.h"
+#include "gui-main.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "motion.h"

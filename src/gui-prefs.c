@@ -1,5 +1,5 @@
 /**
- * @file   prefs-gui.c
+ * @file   gui-prefs.c
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "prefs-gui.h"
+#include "gui-prefs.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -120,6 +120,7 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
         ptr = strtok(NULL, " \n");
     }
     gtk_combo_box_set_active(p->combo_languages, 0);
+    g_free(pret.data);
 #else
     /* remove gtkspell related GUIs if not used */
     GtkHBox* hbox11 = GTK_HBOX(gtk_builder_get_object(builder, "hbox11"));

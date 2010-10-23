@@ -37,7 +37,7 @@
 
 #include "configfile.h"
 #include "environment.h"
-#include "gummi-gui.h"
+#include "gui-main.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "template.h"

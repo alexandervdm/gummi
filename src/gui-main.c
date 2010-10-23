@@ -1,5 +1,5 @@
 /**
- * @file    gummi-gui.c
+ * @file    gui-main.c
  * @brief  
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "gummi-gui.h"
+#include "gui-main.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -561,6 +561,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
                              terms[4], ": ", res[5], "\n",
                              terms[6], ": ", res[6], "\n",
                              NULL);
+        g_free(result.data);
     }
     else {
         cmd = NULL;

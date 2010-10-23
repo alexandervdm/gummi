@@ -1,5 +1,5 @@
 /**
- * @file   search-gui.c
+ * @file   gui-search.c
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "search-gui.h"
+#include "gui-search.h"
 
 #include <glib.h>
 #include <gtk/gtk.h>

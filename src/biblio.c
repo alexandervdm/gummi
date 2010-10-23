@@ -90,7 +90,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
         auxname = g_strdup(mc->b_finfo->fdname);
 
     if (g_find_program_in_path("bibtex")) {
-        gchar* command = g_strdup_printf("cd %s;"
+        gboolean success = FALSE;
+        char* command = g_strdup_printf("cd %s;"
                                          "bibtex '%s'",
                                          dirname,
                                          auxname);
@@ -101,7 +102,9 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
         gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
         g_free(command);
         g_free(dirname);
-        return !(strstr(res.data, "Database file #1") == NULL);
+        success = !(strstr(res.data, "Database file #1") == NULL);
+        g_free(res.data);
+        return success;
     }
     slog(L_WARNING, "bibtex command is not present or executable.\n");
     g_free(auxname);

@@ -1,5 +1,5 @@
 /**
- * @file   prefs-gui.h
+ * @file   gui-prefs.h
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>

@@ -1,5 +1,5 @@
 /**
- * @file   import-gui.c
+ * @file   gui-import.c
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "import-gui.h"
+#include "gui-import.h"
 
 #include <glib.h>
 #include <gtk/gtk.h>

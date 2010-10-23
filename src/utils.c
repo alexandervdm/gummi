@@ -168,22 +168,32 @@ void utils_copy_file(const gchar* source, const gchar* dest) {
 }
 
 /**
- * @brief  Platform independent interface for calling popen() and return a
- * static buffer
+ * @brief  Platform independent interface for calling popen() and returns a
+ * newly allocated pointer
  * @return struct _pdata
  */
 pdata utils_popen_r(const gchar* cmd) {
     /* TODO: Win32 support */
     FILE* fp = popen(cmd, "r");
-    static gchar buf[BUFSIZ];
+    gchar buf[BUFSIZ];
+    gchar* ret = NULL;
+    gchar* rot = NULL;
     gint status = 0, len = 0;
 
-    if (!fp)
-        slog(L_FATAL, "popen error");
-    len = fread(buf, 1, BUFSIZ, fp);
-    buf[len] = 0;
+    if (!fp) slog(L_FATAL, "popen() error\n");
+
+    while ((len = fread(buf, 1, BUFSIZ, fp))) {
+        buf[len - (len == BUFSIZ)] = 0;
+        rot = g_strdup(ret);
+        g_free(ret);
+        if (ret)
+            ret = g_strconcat(rot, buf, NULL);
+        else
+            ret = g_strdup(buf);
+        g_free(rot);
+    }
     status = WEXITSTATUS(pclose(fp));
-    return (pdata){status, buf};
+    return (pdata){status, ret};
 }
 
 /**

@@ -1,5 +1,5 @@
 /**
- * @file   search-gui.h
+ * @file   gui-import.h
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,32 +27,27 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_SEARCH_GUI_H
-#define GUMMI_SEARCH_GUI_H
+#ifndef GUMMI_IMPORT_GUI_H
+#define GUMMI_IMPORT_GUI_H
 
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuSearchGui {
-    GtkWidget* searchwindow;
-    GtkEntry* searchentry;
-    GtkEntry* replaceentry;
-    gboolean backwards;
-    gboolean matchcase;
-    gboolean wholeword;
-} GuSearchGui;
+typedef struct _GuImportGui {
+    GtkHBox* box_image;
+    GtkHBox* box_table;
+    GtkHBox* box_matrix;
+    GtkViewport* image_pane;
+    GtkViewport* table_pane;
+    GtkViewport* matrix_pane;
+} GuImportGui;
 
-GuSearchGui* searchgui_init(GtkBuilder* builder);
-void on_toggle_matchcase_toggled(GtkWidget* widget, void* user);
-void on_toggle_wholeword_toggled(GtkWidget* widget, void* user);
-void on_toggle_backwards_toggled(GtkWidget* widget, void* user);
-void on_searchgui_text_changed(GtkEditable* editable, void* user);
-void on_tabwidth_value_changed(GtkWidget* widget, void* user);
-void on_autosave_value_changed(GtkWidget* widget, void* user);
-void on_compile_value_changed(GtkWidget* widget, void* user);
-void on_editor_font_set(GtkWidget* widget, void* user);
-void on_combo_typesetter_changed(GtkWidget* widget, void* user);
-void on_combo_language_changed(GtkWidget* widget, void* user);
-void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
+GuImportGui* importgui_init(GtkBuilder* builder);
+void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
+        guint page_num, void* user);
+void on_button_import_table_apply_clicked(GtkWidget* widget, void* user);
+void on_button_import_image_apply_clicked(GtkWidget* widget, void* user);
+void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
+void on_image_file_activate(void);
 
-#endif /* GUMMI_SEARCH_GUI_H */
+#endif /* GUMMI_IMPORT_GUI_H */

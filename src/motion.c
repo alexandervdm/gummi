@@ -159,6 +159,7 @@ void motion_update_pdffile(GuMotion* mc) {
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
     } else
         gtk_tool_button_set_stock_id(mc->statuslight, "gtk-yes");
+    g_free(cresult.data);
     g_free(command);
 }
 
@@ -207,7 +208,8 @@ void motion_update_auxfile(GuMotion* mc) {
                                      mc->b_finfo->tmpdir,
                                      mc->b_finfo->workfile);
     g_free(dirname);
-    utils_popen_r(command);
+    pdata res = utils_popen_r(command);
+    g_free(res.data);
     g_free(command);
 }
 
