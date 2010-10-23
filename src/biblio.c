@@ -91,8 +91,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
 
     if (g_find_program_in_path("bibtex")) {
         gboolean success = FALSE;
-        char* command = g_strdup_printf("cd %s;"
-                                         "bibtex '%s'",
+        char* command = g_strdup_printf("cd \"%s\";"
+                                         "bibtex \"%s\"",
                                          dirname,
                                          auxname);
         g_free(auxname);
