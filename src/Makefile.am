@@ -23,4 +23,4 @@ gummi_SOURCES = biblio.c  biblio.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
-		gummi.c
+		main.c

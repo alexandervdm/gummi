@@ -50,7 +50,7 @@ am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	gui-main.$(OBJEXT) importer.$(OBJEXT) gui-import.$(OBJEXT) \
 	iofunctions.$(OBJEXT) motion.$(OBJEXT) gui-prefs.$(OBJEXT) \
 	preview.$(OBJEXT) gui-search.$(OBJEXT) template.$(OBJEXT) \
-	updatecheck.$(OBJEXT) utils.$(OBJEXT) gummi.$(OBJEXT)
+	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -206,7 +206,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
-		gummi.c
+		main.c
 
 all: all-am
 
@@ -294,15 +294,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileinfo.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gummi.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-import.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iofunctions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/motion.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/preview.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/updatecheck.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
