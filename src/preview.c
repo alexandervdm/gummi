@@ -105,7 +105,10 @@ void preview_refresh(GuPreview* pc) {
     if (pc->doc) g_object_unref(pc->doc);
 
     pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err);
-    pc->page = poppler_document_get_page(pc->doc, pc->page_current);    
+    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
+    
+    // recheck document dimensions on refresh for orientation changes:
+    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
 
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     preview_set_pagedata(pc);
