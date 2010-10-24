@@ -77,7 +77,7 @@ void motion_initial_preview(GuMotion* mc) {
     mc->modified_since_compile = TRUE;
     /* check for error and see if need to go into error mode */
     if (mc->errorline)
-        motion_setup_preview_error_mode(mc);
+        preview_start_error_mode(mc->b_preview);
     else {
         preview_set_pdffile(mc->b_preview, mc->b_finfo->pdffile);
         motion_updatepreview(mc);
@@ -249,54 +249,13 @@ gboolean motion_updatepreview(void* user) {
       motion_update_workfile(mc);
       motion_update_pdffile(mc);
       motion_update_errortags(mc);
+      if (mc->b_preview->errormode && !mc->errorline) {
+          preview_set_pdffile(mc->b_preview, mc->b_finfo->pdffile);
+          preview_stop_error_mode(mc->b_preview);
+      }
       preview_refresh(mc->b_preview);
     }
     return 0 != strcmp(config_get_value("compile_scheme"), "on_idle");
-}
-
-void motion_setup_preview_error_mode(GuMotion* mc) {
-    L_F_DEBUG;
-
-    GtkEventBox* eventbox = GTK_EVENT_BOX(gtk_event_box_new());
-    gtk_widget_set_events(GTK_WIDGET(eventbox), GDK_BUTTON_PRESS_MASK);
-    g_signal_connect(eventbox, "button-press-event",
-            G_CALLBACK(on_error_button_press), mc);
-    char* message = g_strdup_printf(_("PDF-Preview could not initialize.\n\n"
-            "It appears your LaTeX document contains errors or\n"
-            "the program `%s' was not installed.\n"
-            "Additional information is available on the Error Output tab.\n"
-            "Please correct the listed errors and click this area\n"
-            "to reload the preview panel."), mc->typesetter);
-    GtkLabel* label = GTK_LABEL(gtk_label_new(message));
-    g_free(message);
-    gtk_label_set_justify(label, GTK_JUSTIFY_CENTER);
-    gtk_container_add(GTK_CONTAINER(eventbox), GTK_WIDGET(label));
-    gtk_container_remove(GTK_CONTAINER(mc->b_preview->preview_viewport),
-            GTK_WIDGET(mc->b_preview->drawarea));
-    gtk_container_add(GTK_CONTAINER(mc->b_preview->preview_viewport),
-            GTK_WIDGET(eventbox));
-    gtk_widget_show_all(GTK_WIDGET(mc->b_preview->preview_viewport));
-}
-
-void on_error_button_press(GtkWidget* widget, GdkEventButton* event, void* m) {
-    L_F_DEBUG;
-
-    GuMotion* mc = (GuMotion*)m;
-    motion_update_workfile(mc);
-    motion_update_pdffile(mc);
-    motion_update_errortags(mc);
-
-    if (!mc->errorline) {
-        gtk_container_remove(GTK_CONTAINER(mc->b_preview->preview_viewport),
-                widget);
-        gtk_container_add(GTK_CONTAINER(mc->b_preview->preview_viewport),
-                GTK_WIDGET(mc->b_preview->drawarea));
-        if (config_get_value("compile_status") &&
-            0 == strcmp(config_get_value("compile_scheme"), "on_idle")) {
-            preview_set_pdffile(mc->b_preview, mc->b_finfo->pdffile);
-            motion_updatepreview(mc);
-        }
-    }
 }
 
 void motion_start_timer(GuMotion* mc) {

@@ -40,12 +40,13 @@ typedef struct _GuPreview {
     PopplerDocument* doc;
     PopplerPage* page;
     GtkViewport* preview_viewport;
-    GtkWidget *drawarea;
-    GtkWidget *page_next;
-    GtkWidget *page_prev;
-    GtkWidget *page_label;
-    GtkWidget *page_input;
-    GtkWidget *scrollw;
+    GtkWidget* drawarea;
+    GtkWidget* page_next;
+    GtkWidget* page_prev;
+    GtkWidget* page_label;
+    GtkWidget* page_input;
+    GtkWidget* scrollw;
+    GtkLabel* errorlabel;
 
     gchar *uri;
 
@@ -57,6 +58,7 @@ typedef struct _GuPreview {
     gdouble page_ratio;
     gboolean fit_width;
     gboolean best_fit;
+    gboolean errormode;
 } GuPreview;
 
 GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo);
@@ -64,6 +66,8 @@ void preview_set_pdffile(GuPreview* prev, const gchar *pdffile);
 void preview_refresh(GuPreview* prev);
 void preview_set_pagedata(GuPreview* prev);
 void preview_goto_page(GuPreview* prev, int page_number);
+void preview_start_error_mode(GuPreview* pc);
+void preview_stop_error_mode(GuPreview* pc);
 
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreview* prev);
 

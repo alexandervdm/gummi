@@ -101,9 +101,6 @@ void config_init(const gchar* filename) {
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
     g_free(dirname);
 
-    //if (!utils_path_exists(filename))
-    //    slog(L_FATAL, "Invalid configuration path.\n");
-
     slog(L_INFO, "configuration file: %s\n", filename);
 
     g_free(config_filename);

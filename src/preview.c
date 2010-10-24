@@ -40,13 +40,14 @@
 #include <poppler.h> 
 #include <math.h>
 
+#include "configfile.h"
 #include "environment.h"
 #include "utils.h"
 
 GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GuPreview* p = g_new0(GuPreview, 1);
-    GdkColor bg = {0,0xed00,0xec00,0xeb00};
+    GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->b_finfo = finfo;
     p->preview_viewport =
         GTK_VIEWPORT(gtk_builder_get_object(builder, "preview_view"));
@@ -65,6 +66,16 @@ GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo) {
 
     g_signal_connect(GTK_OBJECT(p->drawarea), "expose-event",
             G_CALLBACK(on_expose), p); 
+
+    char* message = g_strdup_printf(_("PDF-Preview could not initialize.\n\n"
+            "It appears your LaTeX document contains errors or\n"
+            "the program `%s' was not installed.\n"
+            "Additional information is available on the Error Output tab.\n"
+            "Please correct the listed errors to restore preview."),
+            config_get_value("typesetter"));
+    p->errorlabel = GTK_LABEL(gtk_label_new(message));
+    gtk_label_set_justify(p->errorlabel, GTK_JUSTIFY_CENTER);
+    g_free(message);
 
     slog(L_INFO, "using libpoppler %s ...\n", poppler_get_version());
     return p;
@@ -145,6 +156,27 @@ void preview_goto_page(GuPreview* pc, int page_number) {
             (page_number < (pc->page_total -1)));
     preview_refresh(pc);
     // set label info
+}
+
+void preview_start_error_mode(GuPreview* pc) {
+    L_F_DEBUG;
+    pc->errormode = TRUE;
+    gtk_container_remove(GTK_CONTAINER(pc->preview_viewport),
+            GTK_WIDGET(pc->drawarea));
+    gtk_container_add(GTK_CONTAINER(pc->preview_viewport),
+            GTK_WIDGET(pc->errorlabel));
+    gtk_widget_show_all(GTK_WIDGET(pc->preview_viewport));
+}
+
+void preview_stop_error_mode(GuPreview* pc) {
+    L_F_DEBUG;
+
+    pc->errormode = FALSE;
+    g_object_ref(pc->errorlabel);
+    gtk_container_remove(GTK_CONTAINER(pc->preview_viewport),
+            GTK_WIDGET(pc->errorlabel));
+    gtk_container_add(GTK_CONTAINER(pc->preview_viewport),
+            GTK_WIDGET(pc->drawarea));
 }
 
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreview* pc) {

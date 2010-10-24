@@ -63,9 +63,7 @@ void motion_stop_updatepreview(GuMotion* mc);
 void motion_export_pdffile(GuMotion* mc, const gchar* path);
 void motion_start_timer(GuMotion* mc);
 void motion_stop_timer(GuMotion* mc);
-void motion_setup_preview_error_mode(GuMotion* mc);
 
-void on_error_button_press(GtkWidget* widget, GdkEventButton* event, void* m);
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user);
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user);
 gboolean motion_updatepreview(void* user);
