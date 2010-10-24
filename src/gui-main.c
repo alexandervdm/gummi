@@ -862,7 +862,7 @@ gboolean on_bibprogressbar_update(void* user) {
     gtk_adjustment_set_value
         (gummi->biblio->progressmon, gummi->biblio->progressval);
     gummi->biblio->progressval += 1.0;
-    return !(gummi->biblio->progressbar > 60);
+    return !(gummi->biblio->progressval > 60);
 }
 
 void preview_page_input_changed(GtkEntry* entry, void* user) {
