@@ -2,6 +2,21 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.5.3 (October 24th, 2010):
+
+    Bugs fixed:
+    * Reduce number of I/O calls for configuration
+    * Fixed the center text latex command
+    * Document dimensions now update when document orientation changes
+    * Image and biblio imports now detect relative paths
+    * Fixed GUI lag when opening a new document
+    * Fixed titles for the file chooser windows
+    * Clicking no longer required to restore preview window on error
+    * Show tooltips with basepath for recent files
+    * Fixed issue with configuration reset on gummi update
+    * Multiple crash issues fixed
+
+
 Gummi 0.5.2 (October 20th, 2010):
 
    Bugs fixed:
