@@ -64,7 +64,7 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
     gc->motion->errorline = 1;
     motion_initial_preview(gc->motion);
 
-    if (!gc->motion->errorline && config_get_value("compile_status"))
+    if (config_get_value("compile_status"))
         motion_start_updatepreview(gc->motion);
     if (config_get_value("autosaving"))
         iofunctions_reset_autosave(filename);
