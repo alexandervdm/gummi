@@ -128,7 +128,6 @@ void on_bibreference_clicked(GtkTreeView* view, GtkTreePath* Path,
 gboolean on_bibprogressbar_update(void* user);
 
 void preview_page_input_changed(GtkEntry* entry, void* user);
-void on_page_input_scrolled(GtkEntry* entry, GdkEventScroll* event, void* data);
 void preview_next_page(GtkWidget* widget, void* user);
 void preview_prev_page(GtkWidget* widget, void* user);
 void preview_zoom_change(GtkWidget* widget, void* user);

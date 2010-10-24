@@ -882,18 +882,6 @@ void preview_page_input_changed(GtkEntry* entry, void* user) {
     }
 }
 
-void on_page_input_scrolled(GtkEntry* entry, GdkEventScroll* event, void* data)
-{
-    gint newpage = atoi(gtk_entry_get_text(entry));
-    newpage += (GDK_SCROLL_UP == event->direction) -
-               (GDK_SCROLL_DOWN == event->direction);
-    newpage = CLAMP(newpage, 1, gummi->preview->page_total);
-    gchar* num = g_strdup_printf("%d", newpage);
-    gtk_entry_set_text(entry, num);
-    g_free(num);
-    preview_goto_page(gummi->preview, newpage -1);
-}
-
 void preview_next_page(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     preview_goto_page(gummi->preview, gummi->preview->page_current + 1);
