@@ -4,6 +4,7 @@ export DEBFULLNAME="Wei-Ning Huang (AZ)"
 export DEBEMAIL="aitjcize@gmail.com"
 
 notex=0
+maverick=0
 
 PKG_DIR=$HOME/Public
 mkdir -p $PKG_DIR
@@ -13,6 +14,10 @@ package=${owd##/*/}
 
 if [ -n "$2" ] && [ "$2" == "notex" ]; then
     notex=1
+fi
+
+if [ "$2" == "maverick" ] || [ "$3" == "maverick" ]; then
+    maverick=1
 fi
 
 if [ -e configure.ac ]; then
@@ -60,6 +65,10 @@ if test 1 -eq $notex; then
     sed -i 's/, texlive, texlive-extra-utils, texlive-latex-extra//g' control
     sed -i 's/gummi/gummi-notex/g' changelog
     mv ../../${package}_$version.orig.tar.gz ../../${package}-notex_$version.orig.tar.gz
+fi
+
+if test 1 -eq $maverick; then
+    sed -i 's/libpoppler-glib4/libpoppler-glib5/g' control
 fi
 
 cd ..
