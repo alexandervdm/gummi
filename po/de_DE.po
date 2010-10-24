@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-20 20:58+0800\n"
+"POT-Creation-Date: 2010-10-24 13:26+0800\n"
 "PO-Revision-Date: 2010-06-05 11:17+0200\n"
 "Last-Translator: dubito <dubito@online.de>\n"
 "Language-Team: de_DE <LL@li.org>\n"
@@ -241,7 +241,7 @@ msgstr "Nur ganze Wörter finden"
 msgid "Matrix"
 msgstr "Matrix"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:899
+#: ../data/gummi.glade.h:66 ../src/gui-main.c:840
 msgid "N/A"
 msgstr ""
 
@@ -415,11 +415,11 @@ msgstr "_Ansicht"
 msgid "filter:"
 msgstr "Filter:"
 
-#: ../data/gummi.glade.h:110 ../src/gui.c:897
+#: ../data/gummi.glade.h:110 ../src/gui-main.c:838
 msgid "no bibliography file detected"
 msgstr "Keine Bibliographiedatei gefunden"
 
-#: ../data/gummi.glade.h:111 ../src/gui.c:898
+#: ../data/gummi.glade.h:111 ../src/gui-main.c:839
 msgid "none"
 msgstr "Keine"
 
@@ -588,28 +588,153 @@ msgstr "Sekunden"
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:383
+#: ../src/editor.c:382
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:390
+#: ../src/editor.c:389
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/motion.c:225 ../src/gui.c:321 ../src/gui.c:351
+#: ../src/gui-main.c:277
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Fehler bei laden der aktuellen Datei: "
+
+#: ../src/gui-main.c:326 ../src/gui-main.c:356 ../src/motion.c:226
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
-#: ../src/motion.c:263
+#: ../src/gui-main.c:517
+#, fuzzy
+msgid "Words in text"
+msgstr "Fett"
+
+#: ../src/gui-main.c:518
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui-main.c:519
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui-main.c:520
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui-main.c:521
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui-main.c:522
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui-main.c:523
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui-main.c:568
+#, fuzzy
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr "Diese Funktion benötigt eine\n"
+
+#: ../src/gui-main.c:576
+msgid "Document Statistics"
+msgstr ""
+
+#: ../src/gui-main.c:800
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Kompilier Bibliographiedatei"
+
+#: ../src/gui-main.c:802
+msgid "bibliography compiled without errors"
+msgstr "Bibliographie ohne Fehler kompiliert"
+
+#: ../src/gui-main.c:804
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Fehler beim Kompilieren der Bibliographiedatei oder keine gefunden.."
+
+#: ../src/gui-main.c:807
+msgid "error compiling bibliography file"
+msgstr "Fehler beim Kompilieren der Bibliographiedatei"
+
+#: ../src/gui-main.c:832
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui-main.c:924
+msgid "Do you want to save the changes you have made?"
+msgstr "Willst du die Änderungen speichern?"
+
+#: ../src/gui-main.c:935
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Neues Dokument erstellen"
+
+#: ../src/gui-main.c:938
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui-main.c:939
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "Kompilier Bibliographiedatei"
+
+#: ../src/gui-main.c:974
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Neues Dokument erstellen"
+
+#: ../src/gui-main.c:975
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Neues Dokument erstellen"
+
+#: ../src/gui-main.c:976
+msgid "Export to PDF"
+msgstr ""
+
+#: ../src/importer.c:123
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr ""
+
+#: ../src/iofunctions.c:96
+#, fuzzy, c-format
+msgid "Saving %s..."
+msgstr "Speichern _unter"
+
+#: ../src/iofunctions.c:109
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+
+#: ../src/iofunctions.c:148
+msgid "Can not convert text to UTF-8!\n"
+msgstr ""
+
+#: ../src/iofunctions.c:173
+#, fuzzy, c-format
+msgid "Autosaving file %s"
+msgstr "Speichere Datei "
+
+#: ../src/preview.c:70
 #, fuzzy, c-format
 msgid ""
-"PDF-Preview could not initialize.\n"
+"PDF Preview could not initialize.\n"
 "\n"
 "It appears your LaTeX document contains errors or\n"
 "the program `%s' was not installed.\n"
 "Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors and click this area\n"
-"to reload the preview panel."
+"Please correct the listed errors to restore preview."
 msgstr ""
 "Die PDF-Vorschau konnte nicht gestartet werden.\n"
 "\n"
@@ -617,141 +742,6 @@ msgstr ""
 "Zusätzliche Informationen finden sich in der Fehlerausgabe.\n"
 "Bitte korrigieren sie die aufgelisteten Fehler und wählen Sie\n"
 "wieder diesen Reiter um die Vorschau neu zu laden."
-
-#: ../src/gui.c:276
-#, fuzzy, c-format
-msgid "Error loading recent file: %s"
-msgstr "Fehler bei laden der aktuellen Datei: "
-
-#: ../src/gui.c:500
-#, fuzzy
-msgid "Words in text"
-msgstr "Fett"
-
-#: ../src/gui.c:501
-msgid "Words in headers"
-msgstr ""
-
-#: ../src/gui.c:502
-msgid "Words in float captions"
-msgstr ""
-
-#: ../src/gui.c:503
-msgid "Number of headers"
-msgstr ""
-
-#: ../src/gui.c:504
-msgid "Number of floats"
-msgstr ""
-
-#: ../src/gui.c:505
-msgid "Number of math inlines"
-msgstr ""
-
-#: ../src/gui.c:506
-msgid "Number of math displayed"
-msgstr ""
-
-#: ../src/gui.c:509
-#, fuzzy
-msgid "Words in text: ([0-9]*)"
-msgstr "Fett"
-
-#: ../src/gui.c:510
-msgid "Words in headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:511
-msgid "Words in float captions: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:512
-msgid "Number of headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:513
-msgid "Number of floats: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:514
-msgid "Number of math inlines: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:515
-msgid "Number of math displayed: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:547
-#, fuzzy
-msgid ""
-"This function requires\n"
-"the texcount program.\n"
-msgstr "Diese Funktion benötigt eine\n"
-
-#: ../src/gui.c:555
-msgid "Document Statistics"
-msgstr ""
-
-#: ../src/gui.c:859
-#, fuzzy
-msgid "Compiling bibliography file..."
-msgstr "Kompilier Bibliographiedatei"
-
-#: ../src/gui.c:861
-msgid "bibliography compiled without errors"
-msgstr "Bibliographie ohne Fehler kompiliert"
-
-#: ../src/gui.c:863
-#, fuzzy
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Fehler beim Kompilieren der Bibliographiedatei oder keine gefunden.."
-
-#: ../src/gui.c:866
-msgid "error compiling bibliography file"
-msgstr "Fehler beim Kompilieren der Bibliographiedatei"
-
-#: ../src/gui.c:891
-#, c-format
-msgid "%s loaded"
-msgstr ""
-
-#: ../src/gui.c:1405
-msgid "Do you want to save the changes you have made?"
-msgstr "Willst du die Änderungen speichern?"
-
-#: ../src/gui.c:1416
-msgid "Open File..."
-msgstr "Datei öffnen..."
-
-#: ../src/gui.c:1447
-msgid "Save File..."
-msgstr "Datei speichern..."
-
-#: ../src/importer.c:122
-#, c-format
-msgid "%s: No such file or directory\n"
-msgstr ""
-
-#: ../src/iofunctions.c:94
-#, fuzzy, c-format
-msgid "Saving %s..."
-msgstr "Speichern _unter"
-
-#: ../src/iofunctions.c:107
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-
-#: ../src/iofunctions.c:146
-msgid "Can not convert text to UTF-8!\n"
-msgstr ""
-
-#: ../src/iofunctions.c:171
-#, fuzzy, c-format
-msgid "Autosaving file %s"
-msgstr "Speichere Datei "
 
 #: ../src/updatecheck.c:113
 #, fuzzy, c-format
@@ -778,10 +768,20 @@ msgid ""
 "your file in the %s directory\n"
 msgstr ""
 
-#: ../src/utils.c:130
+#: ../src/utils.c:131
 #, fuzzy
 msgid "Confirmation"
 msgstr "Titel:"
+
+#, fuzzy
+#~ msgid "Words in text: ([0-9]*)"
+#~ msgstr "Fett"
+
+#~ msgid "Open File..."
+#~ msgstr "Datei öffnen..."
+
+#~ msgid "Save File..."
+#~ msgstr "Datei speichern..."
 
 #~ msgid "PDF Compiling"
 #~ msgstr "PDF Erzeugung"

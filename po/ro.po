@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-20 20:58+0800\n"
+"POT-Creation-Date: 2010-10-24 13:26+0800\n"
 "PO-Revision-Date: 2010-09-07 16:25+0200\n"
 "Last-Translator: Alexandru-Eugen Ichim <eugen@alexichim.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,7 +247,7 @@ msgstr "Potriveste doar pentru cuvantul intreg"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:899
+#: ../data/gummi.glade.h:66 ../src/gui-main.c:840
 msgid "N/A"
 msgstr "Indisponibil"
 
@@ -421,11 +421,11 @@ msgstr "_Vizualizare"
 msgid "filter:"
 msgstr "filtru:"
 
-#: ../data/gummi.glade.h:110 ../src/gui.c:897
+#: ../data/gummi.glade.h:110 ../src/gui-main.c:838
 msgid "no bibliography file detected"
 msgstr "nu a fost detectat niciun fisier de bibliografie"
 
-#: ../data/gummi.glade.h:111 ../src/gui.c:898
+#: ../data/gummi.glade.h:111 ../src/gui-main.c:839
 msgid "none"
 msgstr "deloc"
 
@@ -594,28 +594,156 @@ msgstr "secunde"
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:383
+#: ../src/editor.c:382
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:390
+#: ../src/editor.c:389
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/motion.c:225 ../src/gui.c:321 ../src/gui.c:351
+#: ../src/gui-main.c:277
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Eroare la incarcarea fisierului recent: "
+
+#: ../src/gui-main.c:326 ../src/gui-main.c:356 ../src/motion.c:226
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
-#: ../src/motion.c:263
+#: ../src/gui-main.c:517
+#, fuzzy
+msgid "Words in text"
+msgstr "Text ingrosat"
+
+#: ../src/gui-main.c:518
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui-main.c:519
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui-main.c:520
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui-main.c:521
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui-main.c:522
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui-main.c:523
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui-main.c:568
+#, fuzzy
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr "Aceasta functie necesita activarea\n"
+
+#: ../src/gui-main.c:576
+#, fuzzy
+msgid "Document Statistics"
+msgstr "Statistici _Document"
+
+#: ../src/gui-main.c:800
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Compilarea fisierului de bibliografie"
+
+#: ../src/gui-main.c:802
+msgid "bibliography compiled without errors"
+msgstr "bibliografia a fost compilata fara erori"
+
+#: ../src/gui-main.c:804
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr ""
+"Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
+"detectata.."
+
+#: ../src/gui-main.c:807
+msgid "error compiling bibliography file"
+msgstr "eroare in timpul compilarii fisierului de bibliografie"
+
+#: ../src/gui-main.c:832
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui-main.c:924
+msgid "Do you want to save the changes you have made?"
+msgstr "Doriti sa salvati modificarile facute?"
+
+#: ../src/gui-main.c:935
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Creeaza un nou document"
+
+#: ../src/gui-main.c:938
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui-main.c:939
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "Compilarea fisierului de bibliografie"
+
+#: ../src/gui-main.c:974
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Creeaza un nou document"
+
+#: ../src/gui-main.c:975
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Creeaza un nou document"
+
+#: ../src/gui-main.c:976
+msgid "Export to PDF"
+msgstr "Exporta ca PDF"
+
+#: ../src/importer.c:123
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr ""
+
+#: ../src/iofunctions.c:96
+#, fuzzy, c-format
+msgid "Saving %s..."
+msgstr "Salveaza Ca..."
+
+#: ../src/iofunctions.c:109
 #, c-format
 msgid ""
-"PDF-Preview could not initialize.\n"
+"%s\n"
+"Please try again later."
+msgstr ""
+
+#: ../src/iofunctions.c:148
+msgid "Can not convert text to UTF-8!\n"
+msgstr ""
+
+#: ../src/iofunctions.c:173
+#, fuzzy, c-format
+msgid "Autosaving file %s"
+msgstr "Salvarea fisierului "
+
+#: ../src/preview.c:70
+#, fuzzy, c-format
+msgid ""
+"PDF Preview could not initialize.\n"
 "\n"
 "It appears your LaTeX document contains errors or\n"
 "the program `%s' was not installed.\n"
 "Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors and click this area\n"
-"to reload the preview panel."
+"Please correct the listed errors to restore preview."
 msgstr ""
 "PDF-Previzualizare nu s-a putut initializa\n"
 "\n"
@@ -625,143 +753,6 @@ msgstr ""
 "Erori.\n"
 "Va rog corectati erorile mentionate si faceti click aici\n"
 "pentru a reincarca panoul de previzualizare."
-
-#: ../src/gui.c:276
-#, fuzzy, c-format
-msgid "Error loading recent file: %s"
-msgstr "Eroare la incarcarea fisierului recent: "
-
-#: ../src/gui.c:500
-#, fuzzy
-msgid "Words in text"
-msgstr "Text ingrosat"
-
-#: ../src/gui.c:501
-msgid "Words in headers"
-msgstr ""
-
-#: ../src/gui.c:502
-msgid "Words in float captions"
-msgstr ""
-
-#: ../src/gui.c:503
-msgid "Number of headers"
-msgstr ""
-
-#: ../src/gui.c:504
-msgid "Number of floats"
-msgstr ""
-
-#: ../src/gui.c:505
-msgid "Number of math inlines"
-msgstr ""
-
-#: ../src/gui.c:506
-msgid "Number of math displayed"
-msgstr ""
-
-#: ../src/gui.c:509
-msgid "Words in text: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:510
-msgid "Words in headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:511
-msgid "Words in float captions: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:512
-msgid "Number of headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:513
-msgid "Number of floats: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:514
-msgid "Number of math inlines: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:515
-msgid "Number of math displayed: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:547
-#, fuzzy
-msgid ""
-"This function requires\n"
-"the texcount program.\n"
-msgstr "Aceasta functie necesita activarea\n"
-
-#: ../src/gui.c:555
-#, fuzzy
-msgid "Document Statistics"
-msgstr "Statistici _Document"
-
-#: ../src/gui.c:859
-#, fuzzy
-msgid "Compiling bibliography file..."
-msgstr "Compilarea fisierului de bibliografie"
-
-#: ../src/gui.c:861
-msgid "bibliography compiled without errors"
-msgstr "bibliografia a fost compilata fara erori"
-
-#: ../src/gui.c:863
-#, fuzzy
-msgid "Error compiling bibliography file or none detected..."
-msgstr ""
-"Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
-"detectata.."
-
-#: ../src/gui.c:866
-msgid "error compiling bibliography file"
-msgstr "eroare in timpul compilarii fisierului de bibliografie"
-
-#: ../src/gui.c:891
-#, c-format
-msgid "%s loaded"
-msgstr ""
-
-#: ../src/gui.c:1405
-msgid "Do you want to save the changes you have made?"
-msgstr "Doriti sa salvati modificarile facute?"
-
-#: ../src/gui.c:1416
-msgid "Open File..."
-msgstr "Deschide Fisier..."
-
-#: ../src/gui.c:1447
-msgid "Save File..."
-msgstr "Salveaza Fisier..."
-
-#: ../src/importer.c:122
-#, c-format
-msgid "%s: No such file or directory\n"
-msgstr ""
-
-#: ../src/iofunctions.c:94
-#, fuzzy, c-format
-msgid "Saving %s..."
-msgstr "Salveaza Ca..."
-
-#: ../src/iofunctions.c:107
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-
-#: ../src/iofunctions.c:146
-msgid "Can not convert text to UTF-8!\n"
-msgstr ""
-
-#: ../src/iofunctions.c:171
-#, fuzzy, c-format
-msgid "Autosaving file %s"
-msgstr "Salvarea fisierului "
 
 #: ../src/updatecheck.c:113
 #, fuzzy, c-format
@@ -788,10 +779,16 @@ msgid ""
 "your file in the %s directory\n"
 msgstr ""
 
-#: ../src/utils.c:130
+#: ../src/utils.c:131
 #, fuzzy
 msgid "Confirmation"
 msgstr "Legenda:"
+
+#~ msgid "Open File..."
+#~ msgstr "Deschide Fisier..."
+
+#~ msgid "Save File..."
+#~ msgstr "Salveaza Fisier..."
 
 #~ msgid ".."
 #~ msgstr ".."
@@ -801,9 +798,6 @@ msgstr "Legenda:"
 
 #~ msgid "Book"
 #~ msgstr "Carte"
-
-#~ msgid "Export to PDF"
-#~ msgstr "Exporta ca PDF"
 
 #~ msgid "Letter"
 #~ msgstr "Scrisoare"

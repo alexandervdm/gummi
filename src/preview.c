@@ -67,7 +67,7 @@ GuPreview* preview_init(GtkBuilder * builder, GuFileInfo* finfo) {
     g_signal_connect(GTK_OBJECT(p->drawarea), "expose-event",
             G_CALLBACK(on_expose), p); 
 
-    char* message = g_strdup_printf(_("PDF-Preview could not initialize.\n\n"
+    char* message = g_strdup_printf(_("PDF Preview could not initialize.\n\n"
             "It appears your LaTeX document contains errors or\n"
             "the program `%s' was not installed.\n"
             "Additional information is available on the Error Output tab.\n"

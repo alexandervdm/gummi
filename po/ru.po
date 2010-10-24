@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-20 20:58+0800\n"
+"POT-Creation-Date: 2010-10-24 13:26+0800\n"
 "PO-Revision-Date: 2010-05-23 16:18+0400\n"
 "Last-Translator: kruvalig <kruvalig@gmail.com>\n"
 "Language-Team: fedora-trans-ru\n"
@@ -245,7 +245,7 @@ msgstr "Полное совпадения слов"
 msgid "Matrix"
 msgstr "Матрица"
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:899
+#: ../data/gummi.glade.h:66 ../src/gui-main.c:840
 msgid "N/A"
 msgstr "N/A"
 
@@ -420,11 +420,11 @@ msgstr "_Вид"
 msgid "filter:"
 msgstr "Фильтр:"
 
-#: ../data/gummi.glade.h:110 ../src/gui.c:897
+#: ../data/gummi.glade.h:110 ../src/gui-main.c:838
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
-#: ../data/gummi.glade.h:111 ../src/gui.c:898
+#: ../data/gummi.glade.h:111 ../src/gui-main.c:839
 msgid "none"
 msgstr "отсутствует"
 
@@ -595,166 +595,155 @@ msgstr "секунд"
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/editor.c:383
+#: ../src/editor.c:382
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:390
+#: ../src/editor.c:389
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/motion.c:225 ../src/gui.c:321 ../src/gui.c:351
-msgid "The file already exists. Overwrite?"
-msgstr ""
-
-#: ../src/motion.c:263
-#, c-format
-msgid ""
-"PDF-Preview could not initialize.\n"
-"\n"
-"It appears your LaTeX document contains errors or\n"
-"the program `%s' was not installed.\n"
-"Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors and click this area\n"
-"to reload the preview panel."
-msgstr ""
-
-#: ../src/gui.c:276
+#: ../src/gui-main.c:277
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:500
+#: ../src/gui-main.c:326 ../src/gui-main.c:356 ../src/motion.c:226
+msgid "The file already exists. Overwrite?"
+msgstr ""
+
+#: ../src/gui-main.c:517
 #, fuzzy
 msgid "Words in text"
 msgstr "Жирный текст"
 
-#: ../src/gui.c:501
+#: ../src/gui-main.c:518
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui.c:502
+#: ../src/gui-main.c:519
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui.c:503
+#: ../src/gui-main.c:520
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui.c:504
+#: ../src/gui-main.c:521
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui.c:505
+#: ../src/gui-main.c:522
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui.c:506
+#: ../src/gui-main.c:523
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui.c:509
-#, fuzzy
-msgid "Words in text: ([0-9]*)"
-msgstr "Жирный текст"
-
-#: ../src/gui.c:510
-msgid "Words in headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:511
-msgid "Words in float captions: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:512
-msgid "Number of headers: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:513
-msgid "Number of floats: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:514
-msgid "Number of math inlines: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:515
-msgid "Number of math displayed: ([0-9]*)"
-msgstr ""
-
-#: ../src/gui.c:547
+#: ../src/gui-main.c:568
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr ""
 
-#: ../src/gui.c:555
+#: ../src/gui-main.c:576
 msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui.c:859
+#: ../src/gui-main.c:800
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui.c:861
+#: ../src/gui-main.c:802
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui.c:863
+#: ../src/gui-main.c:804
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui.c:866
+#: ../src/gui-main.c:807
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui.c:891
+#: ../src/gui-main.c:832
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1405
+#: ../src/gui-main.c:924
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1416
+#: ../src/gui-main.c:935
 #, fuzzy
-msgid "Open File..."
-msgstr "Открыть"
+msgid "Open LaTeX document"
+msgstr "Создать новый документ"
 
-#: ../src/gui.c:1447
-msgid "Save File..."
+#: ../src/gui-main.c:938
+msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/importer.c:122
+#: ../src/gui-main.c:939
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "_Скомпилировать библиографию"
+
+#: ../src/gui-main.c:974
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Создать новый документ"
+
+#: ../src/gui-main.c:975
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Создать новый документ"
+
+#: ../src/gui-main.c:976
+msgid "Export to PDF"
+msgstr ""
+
+#: ../src/importer.c:123
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/iofunctions.c:94
+#: ../src/iofunctions.c:96
 #, c-format
 msgid "Saving %s..."
 msgstr ""
 
-#: ../src/iofunctions.c:107
+#: ../src/iofunctions.c:109
 #, c-format
 msgid ""
 "%s\n"
 "Please try again later."
 msgstr ""
 
-#: ../src/iofunctions.c:146
+#: ../src/iofunctions.c:148
 msgid "Can not convert text to UTF-8!\n"
 msgstr ""
 
-#: ../src/iofunctions.c:171
+#: ../src/iofunctions.c:173
 #, fuzzy, c-format
 msgid "Autosaving file %s"
 msgstr "Однострочный"
+
+#: ../src/preview.c:70
+#, c-format
+msgid ""
+"PDF Preview could not initialize.\n"
+"\n"
+"It appears your LaTeX document contains errors or\n"
+"the program `%s' was not installed.\n"
+"Additional information is available on the Error Output tab.\n"
+"Please correct the listed errors to restore preview."
+msgstr ""
 
 #: ../src/updatecheck.c:113
 #, c-format
@@ -778,10 +767,18 @@ msgid ""
 "your file in the %s directory\n"
 msgstr ""
 
-#: ../src/utils.c:130
+#: ../src/utils.c:131
 #, fuzzy
 msgid "Confirmation"
 msgstr "Заголовок:"
+
+#, fuzzy
+#~ msgid "Words in text: ([0-9]*)"
+#~ msgstr "Жирный текст"
+
+#, fuzzy
+#~ msgid "Open File..."
+#~ msgstr "Открыть"
 
 #~ msgid "PDF Compiling"
 #~ msgstr "Компиляция PDF"

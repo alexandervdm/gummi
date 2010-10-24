@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-27 13:51+0800\n"
+"POT-Creation-Date: 2010-10-24 13:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Matrix"
 msgstr ""
 
-#: ../data/gummi.glade.h:66 ../src/gui.c:858
+#: ../data/gummi.glade.h:66 ../src/gui-main.c:840
 msgid "N/A"
 msgstr ""
 
@@ -413,11 +413,11 @@ msgstr ""
 msgid "filter:"
 msgstr ""
 
-#: ../data/gummi.glade.h:110 ../src/gui.c:856
+#: ../data/gummi.glade.h:110 ../src/gui-main.c:838
 msgid "no bibliography file detected"
 msgstr ""
 
-#: ../data/gummi.glade.h:111 ../src/gui.c:857
+#: ../data/gummi.glade.h:111 ../src/gui-main.c:839
 msgid "none"
 msgstr ""
 
@@ -585,124 +585,145 @@ msgstr ""
 msgid "xelatex"
 msgstr ""
 
-#: ../src/editor.c:384
+#: ../src/editor.c:382
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:391
+#: ../src/editor.c:389
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/motion.c:221
-msgid "The file already exists. Overwrite?"
-msgstr ""
-
-#: ../src/motion.c:259
-#, c-format
-msgid ""
-"PDF-Preview could not initialize.\n"
-"\n"
-"It appears your LaTeX document contains errors or\n"
-"the program `%s' was not installed.\n"
-"Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors and click this area\n"
-"to reload the preview panel."
-msgstr ""
-
-#: ../src/gui.c:279
+#: ../src/gui-main.c:277
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui.c:482
+#: ../src/gui-main.c:326 ../src/gui-main.c:356 ../src/motion.c:226
+msgid "The file already exists. Overwrite?"
+msgstr ""
+
+#: ../src/gui-main.c:517
 msgid "Words in text"
 msgstr ""
 
-#: ../src/gui.c:483
+#: ../src/gui-main.c:518
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui.c:484
+#: ../src/gui-main.c:519
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui.c:485
+#: ../src/gui-main.c:520
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui.c:486
+#: ../src/gui-main.c:521
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui.c:487
+#: ../src/gui-main.c:522
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui.c:488
+#: ../src/gui-main.c:523
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui.c:519
+#: ../src/gui-main.c:568
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr ""
+
+#: ../src/gui-main.c:576
 msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui.c:818
+#: ../src/gui-main.c:800
 msgid "Compiling bibliography file..."
 msgstr ""
 
-#: ../src/gui.c:820
+#: ../src/gui-main.c:802
 msgid "bibliography compiled without errors"
 msgstr ""
 
-#: ../src/gui.c:822
+#: ../src/gui-main.c:804
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 
-#: ../src/gui.c:825
+#: ../src/gui-main.c:807
 msgid "error compiling bibliography file"
 msgstr ""
 
-#: ../src/gui.c:850
+#: ../src/gui-main.c:832
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui.c:1345
+#: ../src/gui-main.c:924
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui.c:1355
-msgid "Open File..."
+#: ../src/gui-main.c:935
+msgid "Open LaTeX document"
 msgstr ""
 
-#: ../src/gui.c:1378
-msgid "Save File..."
+#: ../src/gui-main.c:938
+msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/importer.c:122
+#: ../src/gui-main.c:939
+msgid "Select bibliography file"
+msgstr ""
+
+#: ../src/gui-main.c:974
+msgid "Save LaTeX document"
+msgstr ""
+
+#: ../src/gui-main.c:975
+msgid "Save as LaTeX document"
+msgstr ""
+
+#: ../src/gui-main.c:976
+msgid "Export to PDF"
+msgstr ""
+
+#: ../src/importer.c:123
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/iofunctions.c:94
+#: ../src/iofunctions.c:96
 #, c-format
 msgid "Saving %s..."
 msgstr ""
 
-#: ../src/iofunctions.c:107
+#: ../src/iofunctions.c:109
 #, c-format
 msgid ""
 "%s\n"
 "Please try again later."
 msgstr ""
 
-#: ../src/iofunctions.c:146
+#: ../src/iofunctions.c:148
 msgid "Can not convert text to UTF-8!\n"
 msgstr ""
 
-#: ../src/iofunctions.c:171
+#: ../src/iofunctions.c:173
 #, c-format
 msgid "Autosaving file %s"
+msgstr ""
+
+#: ../src/preview.c:70
+#, c-format
+msgid ""
+"PDF Preview could not initialize.\n"
+"\n"
+"It appears your LaTeX document contains errors or\n"
+"the program `%s' was not installed.\n"
+"Additional information is available on the Error Output tab.\n"
+"Please correct the listed errors to restore preview."
 msgstr ""
 
 #: ../src/updatecheck.c:113
@@ -727,6 +748,6 @@ msgid ""
 "your file in the %s directory\n"
 msgstr ""
 
-#: ../src/utils.c:130
+#: ../src/utils.c:131
 msgid "Confirmation"
 msgstr ""
