@@ -51,7 +51,7 @@ const gchar style[][3][20] = {
     { "tool_italic", "\\textit{", "}" },
     { "tool_unline", "\\underline{", "}" },
     { "tool_left", "\\begin{flushleft}", "\\end{flushleft}"},
-    { "tool_center", "\\begin{flushcenter}", "\\end{flushcenter}"},
+    { "tool_center", "\\begin{center}", "\\end{center}"},
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
