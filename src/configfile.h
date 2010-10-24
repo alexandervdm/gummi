@@ -34,11 +34,9 @@
 
 #include <glib.h>
 
-#define BUF_MAX BUFSIZ / 8
-
 typedef struct _slist {
-    gchar line[BUF_MAX];
     struct _slist* next;
+    gchar* line;
 } slist;
 
 /**
@@ -69,8 +67,8 @@ const gchar* config_get_value(const gchar* term);
 void config_set_value(const gchar* term, const gchar* value);
 
 /* [Internal] */
-slist* config_load(void);
-void config_save(slist* head);
+void config_load(void);
+void config_save(void);
 slist* config_find_index_of(slist* head, const gchar* term);
 
 #endif /* GUMMI_CONFIGFILE */

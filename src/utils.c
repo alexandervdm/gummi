@@ -119,6 +119,7 @@ void slog(gint level, const gchar *fmt, ...) {
 }
 
 gint utils_yes_no_dialog(const gchar* message) {
+    L_F_DEBUG;
     GtkWidget* dialog;
     gint ret = 0;
     dialog = gtk_message_dialog_new (parent, 
@@ -134,6 +135,7 @@ gint utils_yes_no_dialog(const gchar* message) {
 }
 
 gboolean utils_path_exists(const gchar* path) {
+    L_F_DEBUG;
     gboolean result = FALSE;
     if (NULL == path) return FALSE;
     GFile* file = g_file_new_for_path(path);
@@ -146,8 +148,7 @@ gboolean utils_path_exists(const gchar* path) {
  * Platform independent file copy operation
  */
 void utils_copy_file(const gchar* source, const gchar* dest) {
-    /* I use this to copy file instead of g_file_copy or other OS dependent
-     * functions */
+    L_F_DEBUG;
     FILE *in, *out;
     gchar buf[BUFSIZ];
     gint size = 0;
@@ -173,6 +174,7 @@ void utils_copy_file(const gchar* source, const gchar* dest) {
  * @return struct _pdata
  */
 pdata utils_popen_r(const gchar* cmd) {
+    L_F_DEBUG;
     /* TODO: Win32 support */
     FILE* fp = popen(cmd, "r");
     gchar buf[BUFSIZ];
@@ -202,6 +204,7 @@ pdata utils_popen_r(const gchar* cmd) {
  * isn't relative to root, target is simply duplicated and returned.
  */
 gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
+    L_F_DEBUG;
     gchar* tstr = NULL;
     if ((root != NULL) && (0 == strncmp(target, root, strlen(root))))
         tstr = g_strdup(target + strlen(root) + 1);

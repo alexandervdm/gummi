@@ -86,7 +86,7 @@ int main (int argc, char *argv[]) {
     configname = g_build_filename(g_get_user_config_dir(), "gummi",
                                   "gummi.cfg", NULL);
     config_init(configname);
-    slog(L_INFO, "configuration file: %s\n", configname);
+    config_load();
     g_free(configname);
 
     /* initialize gtk */
@@ -119,5 +119,6 @@ int main (int argc, char *argv[]) {
     }
 
     gui_main(builder);
+    config_save();
     return 0;
 }

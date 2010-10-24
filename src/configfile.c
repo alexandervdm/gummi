@@ -40,6 +40,7 @@
 #include "utils.h"
 
 static gchar* config_filename = 0;
+slist* config_head = 0;
 
 const gchar config_str[] =
 "[Global]\n"
@@ -89,26 +90,26 @@ const gchar config_str[] =
 "	I welcome your suggestions at\\\\\n"
 "	http://gummi.midnightcoding.org}\\\\\n"
 "	\\end{center}\n"
-"	\\end{document}\n\n";
+"	\\end{document}\n";
 
 void config_init(const gchar* filename) {
     L_F_DEBUG;
-    const gchar* config_version = 0;
-    gchar* dirname = 0;
-    gchar buf[BUFSIZ] = { 0 };
+    const gchar* config_version = NULL;
+    gchar* dirname = NULL;
 
     g_mkdir_with_parents(dirname = g_path_get_dirname(filename),
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
     g_free(dirname);
 
-    FILE* fh;
-    if ((fh = fopen(filename, "r"))) {
-        fgets(buf, BUFSIZ, fh);
-        fclose(fh);
-    }
+    //if (!utils_path_exists(filename))
+    //    slog(L_FATAL, "Invalid configuration path.\n");
+
+    slog(L_INFO, "configuration file: %s\n", filename);
 
     g_free(config_filename);
     config_filename = g_strdup(filename);
+
+    config_load();
     config_version = config_get_value("config_version");
 
     /* config_version field is not in gummi.cfg before 0.5.0 */
@@ -120,6 +121,7 @@ void config_init(const gchar* filename) {
         slog(L_INFO, "updating version tag in configuration file...\n");
         config_set_value("config_version", PACKAGE_VERSION);
     }
+    config_save();
 }
 
 void config_set_default(void) {
@@ -134,46 +136,10 @@ void config_set_default(void) {
 
 const gchar* config_get_value(const gchar* term) {
     L_F_DEBUG;
-    FILE* fh = 0;
-    gchar buf[BUF_MAX];
-    static gchar ret[BUF_MAX];
-    gchar* pstr;
+    gchar* ret  = NULL;
+    slist* index = config_find_index_of(config_head, term);
 
-    /* reset ret */
-    ret[0] = 0;
-
-    if (!(fh = fopen(config_filename, "r"))) {
-        slog(L_ERROR, "can't find configuration file, reseting to default\n");
-        config_set_default();
-        return config_get_value(term);
-    }
-
-    while (fgets(buf, BUF_MAX, fh)) {
-        buf[strlen(buf) -1] = 0;
-        if (NULL == (pstr = strtok(buf, "[=] ")))
-            continue;
-
-        if (0 != strcmp(pstr, term))
-            continue;
-        if (NULL == (pstr = strtok(NULL, "=")))
-            continue;
-        else {
-            strncpy(ret, pstr + 1, BUF_MAX);
-            while (!feof(fh)) {
-                fgets(buf, BUF_MAX, fh);
-                buf[strlen(buf) -1] = 0;
-                if (buf[0] == '\t') {
-                    strncat(ret, "\n", BUF_MAX - strlen(ret) -1);
-                    strncat(ret, buf + 1, BUF_MAX - strlen(ret) -1);
-                } else break;
-            }
-            break;
-        }
-    }
-    fclose(fh);
-
-    if (NULL == ret)
-        slog(L_ERROR, "can't find configuration for %s\n", term);
+    ret = index->line + strlen(term) + 3; /* strlen(" = ") = 3 */
 
     if (0 == strcmp(ret, "False"))
         return NULL;
@@ -182,50 +148,30 @@ const gchar* config_get_value(const gchar* term) {
 
 void config_set_value(const gchar* term, const gchar* value) {
     L_F_DEBUG;
-    int i = 0, count = 0;
-    int max = strlen(value) > BUF_MAX -1? BUF_MAX -1: strlen(value);
-    slist* head = config_load();
-    slist* index = 0;
-    slist* current = 0;
-    gchar buf[BUF_MAX];
+    if (!config_head)
+        slog(L_FATAL, "configuration not initialized\n");
 
-    index = config_find_index_of(head, term);
-
-    index->line[strlen(term) + 3] = 0;
-    for (i = 0; i < max; ++i) {
-        if (count == BUF_MAX -2) break;
-        buf[count++] = value[i];
-        if (value[i] == '\n')
-            buf[count++] = '\t';
-    }
-    buf[count] = 0;
-
-    strncat(index->line, buf, BUF_MAX - strlen(index->line) -2);
-    strncat(index->line, "\n", BUF_MAX - strlen(index->line) -1);
-
-    current = index->next;
-    while (current) {
-        if (current->line[0] == '\t')
-            current->line[0] = 0;
-        else break;
-        current = current->next;
-    }
-
-    config_save(head);
-
-    current = head;
-    while (current) {
-        index = current->next;
-        g_free(current);
-        current = index;
-    }
+    slist* index = config_find_index_of(config_head, term);
+    g_free(index->line);
+    index->line = g_strconcat(term, " = ", value, NULL);
 }
 
-slist* config_load(void) {
+void config_load(void) {
     L_F_DEBUG;
     FILE* fh = 0;
-    slist* head = g_new0(slist, 1);
-    slist* current = head;
+    gchar buf[BUFSIZ];
+    gchar* rot = NULL;
+    slist* current = config_head;
+    slist* prev = current;
+
+    if (config_head) {
+        while (prev) {
+            current = prev->next;
+            g_free(prev);
+            prev = current;
+        }
+        config_head = NULL;
+    }
 
     if (!(fh = fopen(config_filename, "r"))) {
         slog(L_ERROR, "can't find configuration file, reseting to default\n");
@@ -233,27 +179,55 @@ slist* config_load(void) {
         return config_load();
     }
 
-    while (!feof(fh)) {
-        fgets(current->line, BUF_MAX, fh);
+    current = config_head = prev = g_new0(slist, 1);
+
+    while (fgets(buf, BUFSIZ -1, fh)) {
+        buf[strlen(buf) -1] = 0; /* remove trailing '\n' */
+        if (buf[0] != '\t') {
+            current->line = g_strdup(buf);
+        } else {
+            rot = g_strdup(prev->line);
+            g_free(prev->line);
+            prev->line = g_strconcat(rot, "\n", buf + 1, NULL);
+            g_free(rot);
+            g_free(current);
+            current = prev;
+        }
+        prev = current;
         current->next = g_new0(slist, 1);
         current = current->next;
     }
+    g_free(current);
+    prev->next = NULL;
     fclose(fh);
-    return head;
 }
 
-void config_save(slist* head) {
+void config_save(void) {
     L_F_DEBUG;
     FILE* fh = 0;
-    slist* current = head;
+    slist* current = config_head;
+    gint i = 0, count = 0, len = 0;
+    gchar* buf = 0;
 
     if (!(fh = fopen(config_filename, "w")))
         slog(L_FATAL, "can't open config for writing... abort\n");
 
     while (current) {
-        if (strlen(current->line))
-            fputs(current->line, fh);
+        len = strlen(current->line) + 1;
+        buf = (gchar*)g_malloc(len * 2);
+        memset(buf, 0, len * 2);
+        /* replace '\n' with '\n\t' for options with multi-line content */
+        for (i = 0; i < len; ++i) {
+            if (count + 2 == len * 2) break;
+            buf[count++] = current->line[i];
+            if (i != len -2 && '\n' == current->line[i])
+                buf[count++] = '\t';
+        }
+        fputs(buf, fh);
+        fputs("\n", fh);
         current = current->next;
+        count = 0;
+        g_free(buf);
     }
     fclose(fh);
 }
@@ -275,7 +249,6 @@ slist* config_find_index_of(slist* head, const gchar* term) {
            term);
     prev->next = g_new0(slist, 1);
     current = prev->next;
-    strncpy(current->line, term, BUF_MAX);
-    strncat(current->line, " = __NULL__", BUF_MAX - strlen(current->line) - 1);
+    current->line = g_strconcat(term, " = __NULL__", NULL);
     return current;
 }
