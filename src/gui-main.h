@@ -28,8 +28,8 @@
  */
 
 
-#ifndef GUMMI_GUI_H
-#define GUMMI_GUI_H
+#ifndef GUMMI_GUI_MAIN_H
+#define GUMMI_GUI_MAIN_H
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -147,4 +147,4 @@ gboolean statusbar_del_message(void* user);
 
 void check_motion_timer(void);
 
-#endif /* GUMMI_GUI_H */
+#endif /* GUMMI_GUI_MAIN_H */

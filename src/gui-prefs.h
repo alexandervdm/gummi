@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_PREFS_GUI_H
-#define GUMMI_PREFS_GUI_H
+#ifndef GUMMI_GUI_PREFS_H
+#define GUMMI_GUI_PREFS_H
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -82,4 +82,4 @@ void on_combo_typesetter_changed(GtkWidget* widget, void* user);
 void on_combo_language_changed(GtkWidget* widget, void* user);
 void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
 
-#endif /* GUMMI_PREFS_GUI_H */
+#endif /* GUMMI_GUI_PREFS_H */
