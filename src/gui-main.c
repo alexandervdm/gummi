@@ -932,8 +932,16 @@ gchar* get_open_filename(GuFilterType type) {
     static gchar* last_filename = NULL;
     gchar* filename = NULL;
 
+    const gchar* chooser_title[] = {
+        _("Open LaTeX document"),
+        "shouldn't happen",
+        "shouldn't happen",
+        _("Select an image to insert"),
+        _("Select bibliography file")
+    };
+
     chooser = GTK_FILE_CHOOSER(gtk_file_chooser_dialog_new(
-                _("Open File..."),
+                chooser_title[type],
                 GTK_WINDOW (gummi->gui->mainwindow),
                 GTK_FILE_CHOOSER_ACTION_OPEN,
                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -963,8 +971,16 @@ gchar* get_save_filename(GuFilterType type) {
     GtkFileChooser* chooser = NULL;
     gchar* filename = NULL;
 
+    const gchar* chooser_title[] = {
+        _("Save LaTeX document"),
+        _("Save as LaTeX document"),
+        _("Export to PDF"),
+        "shouldn't happen",
+        "shouldn't happen"
+    };
+
     chooser = GTK_FILE_CHOOSER(gtk_file_chooser_dialog_new(
-                _("Save File..."),
+                chooser_title[type],
                 GTK_WINDOW (gummi->gui->mainwindow),
                 GTK_FILE_CHOOSER_ACTION_SAVE,
                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
