@@ -1072,6 +1072,8 @@ void display_recent_files(GummiGui* gui) {
             tstr = g_strdup_printf("%d. %s", count + 1,
                     basename = g_path_get_basename(gui->recent_list[i]));
             gtk_menu_item_set_label(gui->recent[i], tstr);
+            gtk_widget_set_tooltip_text(GTK_WIDGET(gui->recent[i]),
+                                        gui->recent_list[i]);
             gtk_widget_show(GTK_WIDGET(gui->recent[i]));
             g_free(tstr);
             g_free(basename);
