@@ -5199,6 +5199,7 @@ fi
 GUI_CFLAGS="$GUI_CFLAGS $poppler_CFLAGS"
 GUI_LIBS="$GUI_LIBS $poppler_LIBS"
 
+if test "$spellcheck" = yes; then
 
 pkg_failed=no
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for gtkspell" >&5
@@ -5270,8 +5271,9 @@ else
 $as_echo "yes" >&6; }
 	:
 fi
-GUI_CFLAGS="$GUI_CFLAGS $gtkspell_CFLAGS"
-GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
+    GUI_CFLAGS="$GUI_CFLAGS $gtkspell_CFLAGS"
+    GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
+fi
 
 # Checks for header files.
 ac_ext=c

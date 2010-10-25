@@ -170,7 +170,6 @@ void preview_start_error_mode(GuPreview* pc) {
 
 void preview_stop_error_mode(GuPreview* pc) {
     L_F_DEBUG;
-
     pc->errormode = FALSE;
     g_object_ref(pc->errorlabel);
     gtk_container_remove(GTK_CONTAINER(pc->preview_viewport),

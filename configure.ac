@@ -52,10 +52,12 @@ PKG_CHECK_MODULES(poppler, [poppler-glib],,
 GUI_CFLAGS="$GUI_CFLAGS $poppler_CFLAGS"
 GUI_LIBS="$GUI_LIBS $poppler_LIBS"
 
-PKG_CHECK_MODULES(gtkspell, [gtkspell-2.0],,
-	[AC_MSG_ERROR([You need GtkSpell  to build $PACKAGE])]) 
-GUI_CFLAGS="$GUI_CFLAGS $gtkspell_CFLAGS"
-GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
+if test "$spellcheck" = yes; then
+    PKG_CHECK_MODULES(gtkspell, [gtkspell-2.0],,
+	    [AC_MSG_ERROR([You need GtkSpell  to build $PACKAGE])]) 
+    GUI_CFLAGS="$GUI_CFLAGS $gtkspell_CFLAGS"
+    GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
+fi
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h locale.h netdb.h stdlib.h string.h sys/socket.h sys/time.h unistd.h fcntl.h])
