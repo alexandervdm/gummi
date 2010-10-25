@@ -277,6 +277,8 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
         tstr = g_strdup_printf(_("Error loading recent file: %s"),
                 gummi->gui->recent_list[index]);
         slog(L_ERROR, "%s\n", tstr);
+        slog(L_G_ERROR, "Could not find the file %s.\n",
+             gummi->gui->recent_list[index]);
         statusbar_set_message(tstr);
         g_free(tstr);
         g_free(gummi->gui->recent_list[index]);
@@ -285,7 +287,7 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
             gummi->gui->recent_list[index] = gummi->gui->recent_list[index+1];
             ++index;
         }
-        gummi->gui->recent_list[RECENT_FILES_NUM -1] = 0;
+        gummi->gui->recent_list[RECENT_FILES_NUM -1] = g_strdup("__NULL__");
     }
     display_recent_files(gummi->gui);
 }
@@ -1082,10 +1084,9 @@ void display_recent_files(GummiGui* gui) {
         gtk_widget_hide(GTK_WIDGET(gui->recent[i]));
 
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
-        if (gui->recent_list[i] &&
-            0 != strcmp(gui->recent_list[i], "__NULL__")) {
-            tstr = g_strdup_printf("%d. %s", count + 1,
-                    basename = g_path_get_basename(gui->recent_list[i]));
+        if (0 != strcmp(gui->recent_list[i], "__NULL__")) {
+            basename = g_path_get_basename(gui->recent_list[i]);
+            tstr = g_strdup_printf("%d. %s", count + 1, basename);
             gtk_menu_item_set_label(gui->recent[i], tstr);
             gtk_widget_set_tooltip_text(GTK_WIDGET(gui->recent[i]),
                                         gui->recent_list[i]);
@@ -1098,10 +1099,7 @@ void display_recent_files(GummiGui* gui) {
     /* update configuration file */
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
         tstr = g_strdup_printf("recent%d", i + 1);
-        if (gui->recent_list[i])
-            config_set_value(tstr, gui->recent_list[i]);
-        else
-            config_set_value(tstr, "__NULL__");
+        config_set_value(tstr, gui->recent_list[i]);
         g_free(tstr);
     }
 }
