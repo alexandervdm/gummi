@@ -33,13 +33,32 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#define g_importgui gummi->gui->importgui
+
 typedef struct _GuImportGui {
     GtkHBox* box_image;
     GtkHBox* box_table;
     GtkHBox* box_matrix;
+
+    GtkNotebook* import_tabs;
     GtkViewport* image_pane;
     GtkViewport* table_pane;
     GtkViewport* matrix_pane;
+
+    GtkEntry* image_file;
+    GtkEntry* image_caption;
+    GtkEntry* image_label;
+    GtkSpinButton* image_scale;
+    GtkAdjustment* scaler;
+
+    GtkComboBox* table_comboalign;
+    GtkComboBox* table_comboborder;
+    GtkAdjustment* table_rows;
+    GtkAdjustment* table_cols;
+
+    GtkAdjustment* matrix_rows;
+    GtkAdjustment* matrix_cols;
+    GtkComboBox* matrix_combobracket;
 } GuImportGui;
 
 GuImportGui* importgui_init(GtkBuilder* builder);
@@ -49,5 +68,6 @@ void on_button_import_table_apply_clicked(GtkWidget* widget, void* user);
 void on_button_import_image_apply_clicked(GtkWidget* widget, void* user);
 void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
 void on_image_file_activate(void);
+void importer_imagegui_set_sensitive(const gchar* name, gboolean mode);
 
 #endif /* GUMMI_GUI_IMPORT_H */

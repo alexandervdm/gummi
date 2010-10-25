@@ -38,7 +38,6 @@
 #include "configfile.h"
 #include "environment.h"
 #include "gui-main.h"
-#include "importer.h"
 #include "iofunctions.h"
 #include "template.h"
 #include "utils.h"
@@ -63,7 +62,6 @@ int main (int argc, char *argv[]) {
     GummiGui* gui;
     GuFileInfo* finfo;
     GuEditor* editor;
-    GuImporter* importer;
     GuMotion* motion;
     GuPreview* preview;
     GuTemplate* templ;
@@ -99,14 +97,12 @@ int main (int argc, char *argv[]) {
     gui = gui_init(builder);
     finfo = fileinfo_init();
     editor = editor_init(builder, finfo);
-    importer = importer_init(builder, finfo);
     preview = preview_init(builder, finfo);
     motion = motion_init(builder, finfo, editor, preview); 
     biblio = biblio_init(builder, finfo);
     templ = template_init(builder, finfo);
 
-    gummi = gummi_init(gui, finfo, editor, importer, motion, preview, biblio,
-            templ);
+    gummi = gummi_init(gui, finfo, editor, motion, preview, biblio, templ);
 
     slog_set_gui_parent(gui->mainwindow);
 

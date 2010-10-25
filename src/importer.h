@@ -36,36 +36,10 @@
 #include "fileinfo.h"
 #include "editor.h"
 
-typedef struct _GuImporter {
-    GuFileInfo* b_finfo;
-    GtkNotebook* import_tabs;
-
-    GtkViewport* image_pane;
-    GtkEntry* image_file;
-    GtkEntry* image_caption;
-    GtkEntry* image_label;
-    GtkSpinButton* image_scale;
-    GtkAdjustment* scaler;
-
-    GtkViewport* table_pane;
-    GtkComboBox* table_comboalign;
-    GtkComboBox* table_comboborder;
-    GtkAdjustment* table_rows;
-    GtkAdjustment* table_cols;
-
-    GtkAdjustment* matrix_rows;
-    GtkAdjustment* matrix_cols;
-    GtkComboBox* matrix_combobracket;
-} GuImporter;
-
-GuImporter* importer_init(GtkBuilder* builder, GuFileInfo* finfo);
-void importer_insert_table(GuImporter* ic, GuEditor* ec);
-void importer_insert_matrix(GuImporter* ic, GuEditor* ec);
-void importer_insert_image(GuImporter* ic, GuEditor* ec);
-void importer_imagegui_set_sensitive(GuImporter* ic, const gchar* name,
-        gboolean mode);
-const gchar* importer_generate_table(GuImporter* ic);
-const gchar* importer_generate_matrix(GuImporter* ic);
-const gchar* importer_generate_image(GuImporter* ic);
+const gchar* importer_generate_table(gint rows, gint cols, gint borders,
+        gint alignment);
+const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols);
+const gchar* importer_generate_image(const gchar* image_file,
+        const gchar* caption, const gchar* label, gdouble scale);
 
 #endif /* GUMMI_IMPORTER_H */

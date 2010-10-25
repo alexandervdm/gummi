@@ -32,14 +32,13 @@
 #include "gui-main.h"
 #include "utils.h"
 
-Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuImporter* im,
-        GuMotion* mo, GuPreview* prev, GuBiblio* bib, GuTemplate* tpl) {
+Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuMotion* mo,
+        GuPreview* prev, GuBiblio* bib, GuTemplate* tpl) {
     L_F_DEBUG;
     Gummi* g = g_new0(Gummi, 1);
     g->gui = gu;
     g->finfo = fc;
     g->editor = ed;
-    g->importer = im;
     g->motion = mo;
     g->preview = prev;
     g->biblio = bib;

@@ -100,15 +100,14 @@ typedef struct _Gummi {
     GummiGui* gui;
     GuFileInfo* finfo;
     GuEditor* editor;
-    GuImporter* importer;
     GuMotion* motion;
     GuPreview* preview;
     GuBiblio* biblio;
     GuTemplate* templ;
 } Gummi;
 
-Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuImporter* im,
-        GuMotion* mo, GuPreview* prev, GuBiblio* bib, GuTemplate* tpl);
+Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuMotion* mo,
+        GuPreview* prev, GuBiblio* bib, GuTemplate* tpl);
 void gummi_create_environment(Gummi* gc, gchar* filename);
 
 #endif /* GUMMI_ENVIRONMENT_H */
