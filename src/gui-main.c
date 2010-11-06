@@ -633,6 +633,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Italian: Salvatore Vassallo\n" 
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig\n"
+        "Spanish: Carlos Salas Contreras\n"
         "Taiwanese: Wei-Ning Huang\n";
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
