@@ -631,7 +631,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "German: Thomas Niederprüm\n"
         "Greek: Dimitris Leventeas\n"
         "Italian: Salvatore Vassallo\n"
-        "Polish: Hubert Powalski\n"
+        "Polish: Hubert Kowalski\n"
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig\n"
         "Spanish: Carlos Salas Contreras\n"
