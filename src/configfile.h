@@ -34,11 +34,6 @@
 
 #include <glib.h>
 
-typedef struct _slist {
-    struct _slist* next;
-    gchar* line;
-} slist;
-
 /**
  * @brief initialize config file
  * @param filename filename of the configuration file
@@ -69,6 +64,5 @@ void config_set_value(const gchar* term, const gchar* value);
 /* [Internal] */
 void config_load(void);
 void config_save(void);
-slist* config_find_index_of(slist* head, const gchar* term);
 
 #endif /* GUMMI_CONFIGFILE */

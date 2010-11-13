@@ -52,6 +52,12 @@ typedef struct _pdata {
     gchar* data;
 } pdata;
 
+typedef struct _slist {
+    struct _slist* next;
+    gchar* first;
+    gchar* second;
+} slist;
+
 void slog_init(gint debug);
 void slog_set_gui_parent(GtkWidget* p);
 void slog(gint level, const gchar *fmt, ...);
@@ -60,5 +66,6 @@ gboolean utils_path_exists(const gchar* path);
 void utils_copy_file(const gchar* source, const gchar* dest);
 pdata utils_popen_r(const gchar* cmd);
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
+slist* slist_find_index_of(slist* head, const gchar* term);
 
 #endif /* GUMMI_UTILS */

@@ -1,10 +1,10 @@
 /**
- * @file   snippet.h
- * @brief
+ * @file    configfile.h
+ * @brief   handle configuration file
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- *
+ * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -26,19 +26,49 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+ 
+#ifndef GUMMI_CONFIGFILE
+#define GUMMI_CONFIGFILE
 
-#ifndef GUMMI_SNIPPET_H
-#define GUMMI_SNIPPET_H
+#include <stdio.h>
 
 #include <glib.h>
-#include <gtk/gtk.h>
 
-#include "fileinfo.h"
-#include "editor.h"
+typedef struct _slist {
+    struct _slist* next;
+    gchar* line;
+} slist;
 
-typedef struct _GuSnippet {
-    GuFileInfo* b_finfo;
-    
-} GuSnippet
+/**
+ * @brief initialize config file
+ * @param filename filename of the configuration file
+ */
+void config_init(const gchar* filename);
 
-#endif /* GUMMI_SNIPPET_H */
+/**
+ * @brief reset settings to default
+ */
+void config_set_default(void);
+
+/**
+ * @brief get value of a setting
+ * @param term the name of the setting
+ * @return a pointer that points to the static gchar* of the setting value. If
+ * the value type is boolean, config_get_value will return NULL for False
+ * and non-NULL for True
+ */
+const gchar* config_get_value(const gchar* term);
+
+/**
+ * @brief set value of a setting
+ * @param term the name of the setting
+ * @param value the value of the setting
+ */
+void config_set_value(const gchar* term, const gchar* value);
+
+/* [Internal] */
+void config_load(void);
+void config_save(void);
+slist* config_find_index_of(slist* head, const gchar* term);
+
+#endif /* GUMMI_CONFIGFILE */

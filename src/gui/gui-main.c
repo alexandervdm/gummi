@@ -173,10 +173,7 @@ void gui_main(GtkBuilder* builder) {
 gboolean gui_quit(void) {
     L_F_DEBUG;
     gint wx = 0, wy = 0, width = 0, height = 0;
-    gchar* wx_str = NULL;
-    gchar* wy_str = NULL;
-    gchar* width_str = NULL;
-    gchar* height_str = NULL;
+    gchar buf[16];
     gint ret = check_for_save();
 
     if (GTK_RESPONSE_YES == ret)
@@ -187,19 +184,10 @@ gboolean gui_quit(void) {
     fileinfo_destroy(gummi->finfo);
     gtk_window_get_size(GTK_WINDOW(gui->mainwindow), &width, &height);
     gtk_window_get_position(GTK_WINDOW(gui->mainwindow), &wx, &wy);
-    wx_str = g_strdup_printf("%d", wx);
-    wy_str = g_strdup_printf("%d", wy);
-    width_str = g_strdup_printf("%d", width);
-    height_str = g_strdup_printf("%d", height);
-    config_set_value("mainwindow_x", wx_str);
-    config_set_value("mainwindow_y", wy_str);
-    config_set_value("mainwindow_w", width_str);
-    config_set_value("mainwindow_h", height_str);
-
-    g_free(wx_str);
-    g_free(wy_str);
-    g_free(width_str);
-    g_free(height_str);
+    config_set_value("mainwindow_x", g_ascii_dtostr(buf, 16, (double)wx));
+    config_set_value("mainwindow_y", g_ascii_dtostr(buf, 16, (double)wy));
+    config_set_value("mainwindow_w", g_ascii_dtostr(buf, 16, (double)width));
+    config_set_value("mainwindow_h", g_ascii_dtostr(buf, 16, (double)height));
 
     gtk_main_quit();
 

@@ -317,51 +317,50 @@ void toggle_autosaving(GtkWidget* widget, void* user) {
 void on_prefs_close_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     GtkTextIter start, end;
-    if (2 == gtk_notebook_get_current_page(gui->prefsgui->notebook)) {
-        gtk_text_buffer_get_start_iter(gui->prefsgui->default_buffer,
-                &start);
-        gtk_text_buffer_get_end_iter(gui->prefsgui->default_buffer,
-                &end);
-        config_set_value("welcome", gtk_text_buffer_get_text(
-                    gui->prefsgui->default_buffer, &start, &end, FALSE));
-    }
+    gchar* text = NULL;
+    gtk_text_buffer_get_start_iter(gui->prefsgui->default_buffer,
+            &start);
+    gtk_text_buffer_get_end_iter(gui->prefsgui->default_buffer,
+            &end);
+    text = gtk_text_buffer_get_text(gui->prefsgui->default_buffer, &start,
+            &end, FALSE);
+    config_set_value("welcome", text);
+    g_free(text);
     gtk_widget_hide(GTK_WIDGET(gui->prefsgui->prefwindow));
 }
 
 void on_prefs_reset_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     config_set_default();
+    config_load();
     prefsgui_set_current_settings(gui->prefsgui);
 }
 
 void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar* val_str = g_strdup_printf("%d", newval);
+    gchar buf[16];
 
-    config_set_value("tabwidth", val_str);
+    config_set_value("tabwidth", g_ascii_dtostr(buf, 16, (double)newval));
     gtk_source_view_set_tab_width(gummi->editor->sourceview, newval);
-    g_free(val_str);
 }
 
 void on_autosave_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar* val_str = g_strdup_printf("%d", newval);
+    gchar buf[16];
 
-    config_set_value("autosave_timer", val_str);
+    config_set_value("autosave_timer", g_ascii_dtostr(buf, 16, (double)newval));
     iofunctions_reset_autosave(gummi->finfo->filename);
-    g_free(val_str);
 }
 
 void on_compile_value_changed(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-    gchar* val_str = g_strdup_printf("%d", newval);
+    gchar buf[16];
 
-    config_set_value("compile_timer", val_str);
+    config_set_value("compile_timer", g_ascii_dtostr(buf, 16, (double)newval));
     previewgui_reset(gui->previewgui);
-    g_free(val_str);
 }
 
 void on_editor_font_set(GtkWidget* widget, void* user) {

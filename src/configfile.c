@@ -35,6 +35,7 @@
 #include <sys/stat.h>
 
 #include <glib.h>
+#include <assert.h>
 
 #include "environment.h"
 #include "utils.h"
@@ -134,10 +135,9 @@ void config_set_default(void) {
 const gchar* config_get_value(const gchar* term) {
     L_F_DEBUG;
     gchar* ret  = NULL;
-    slist* index = config_find_index_of(config_head, term);
+    slist* index = slist_find_index_of(config_head, term);
 
-    ret = index->line + strlen(term) + 3; /* strlen(" = ") = 3 */
-
+    ret = index->second;
     if (0 == strcmp(ret, "False"))
         return NULL;
     return ret;
@@ -148,9 +148,9 @@ void config_set_value(const gchar* term, const gchar* value) {
     if (!config_head)
         slog(L_FATAL, "configuration not initialized\n");
 
-    slist* index = config_find_index_of(config_head, term);
-    g_free(index->line);
-    index->line = g_strconcat(term, " = ", value, NULL);
+    slist* index = slist_find_index_of(config_head, term);
+    g_free(index->second);
+    index->second = g_strdup(value);
 }
 
 void config_load(void) {
@@ -158,6 +158,7 @@ void config_load(void) {
     FILE* fh = 0;
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
+    gchar* seg = NULL;
     slist* current = config_head;
     slist* prev = current;
 
@@ -178,14 +179,17 @@ void config_load(void) {
 
     current = config_head = prev = g_new0(slist, 1);
 
-    while (fgets(buf, BUFSIZ -1, fh)) {
+    while (fgets(buf, BUFSIZ, fh)) {
         buf[strlen(buf) -1] = 0; /* remove trailing '\n' */
         if (buf[0] != '\t') {
-            current->line = g_strdup(buf);
+            seg = strtok(buf, " = ");
+            current->first = g_strdup((seg)? seg: "");
+            seg = strtok(NULL, " = ");
+            current->second = g_strdup(seg);
         } else {
-            rot = g_strdup(prev->line);
-            g_free(prev->line);
-            prev->line = g_strconcat(rot, "\n", buf + 1, NULL);
+            rot = g_strdup(prev->second);
+            g_free(prev->second);
+            prev->second = g_strconcat(rot, "\n", buf + 1, NULL);
             g_free(rot);
             g_free(current);
             current = prev;
@@ -210,42 +214,25 @@ void config_save(void) {
         slog(L_FATAL, "can't open config for writing... abort\n");
 
     while (current) {
-        len = strlen(current->line) + 1;
-        buf = (gchar*)g_malloc(len * 2);
-        memset(buf, 0, len * 2);
-        /* replace '\n' with '\n\t' for options with multi-line content */
-        for (i = 0; i < len; ++i) {
-            if (count + 2 == len * 2) break;
-            buf[count++] = current->line[i];
-            if (i != len -2 && '\n' == current->line[i])
-                buf[count++] = '\t';
+        fputs(current->first, fh);
+        fputs(" = ", fh);
+        if (current->second) {
+            len = strlen(current->second) + 1;
+            buf = (gchar*)g_malloc(len * 2);
+            memset(buf, 0, len * 2);
+            /* replace '\n' with '\n\t' for options with multi-line content */
+            for (i = 0; i < len; ++i) {
+                if (count + 2 == len * 2) break;
+                buf[count++] = current->second[i];
+                if (i != len -2 && '\n' == current->second[i])
+                    buf[count++] = '\t';
+            }
+            fputs(buf, fh);
+            g_free(buf);
         }
-        fputs(buf, fh);
         fputs("\n", fh);
         current = current->next;
         count = 0;
-        g_free(buf);
     }
     fclose(fh);
-}
-
-slist* config_find_index_of(slist* head, const gchar* term) {
-    /* return the index of the entry, if the entry does not exist, create a
-     * new entry for it and return the new pointer. */
-    L_F_DEBUG;
-    slist* current = head;
-    slist* prev = 0;
-
-    while (current) {
-        if (0 == strncmp(current->line, term, strlen(term)))
-            return current;
-        prev = current;
-        current = current->next;
-    }
-    slog(L_WARNING, "can't find option `%s', creating new field for it...\n",
-           term);
-    prev->next = g_new0(slist, 1);
-    current = prev->next;
-    current->line = g_strconcat(term, " = __NULL__", NULL);
-    return current;
 }

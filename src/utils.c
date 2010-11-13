@@ -212,3 +212,25 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
         tstr = g_strdup(target);
     return tstr;
 }
+
+slist* slist_find_index_of(slist* head, const gchar* term) {
+    /* return the index of the entry, if the entry does not exist, create a
+     * new entry for it and return the new pointer. */
+    L_F_DEBUG;
+    slist* current = head;
+    slist* prev = 0;
+
+    while (current) {
+        if (0 == strcmp(current->first, term))
+            return current;
+        prev = current;
+        current = current->next;
+    }
+    slog(L_WARNING, "can't find option `%s', creating new field for it...\n",
+           term);
+    prev->next = g_new0(slist, 1);
+    current = prev->next;
+    current->first = g_strdup(term);
+    current->second = g_strdup("__NULL__");
+    return current;
+}
