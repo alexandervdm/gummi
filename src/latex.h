@@ -1,5 +1,5 @@
 /**
- * @file    biblio.h
+ * @file    latex.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,31 +27,31 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_BIBLIO_H
-#define GUMMI_BIBLIO_H
+#ifndef GUMMI_LATEX_H
+#define GUMMI_LATEX_H
 
-#include <gtk/gtk.h>
+#include <glib.h>
 
+#include "editor.h"
 #include "fileinfo.h"
-#include "latex.h"
+#include "gui/gui-preview.h"
 
-typedef struct _GuBiblio {
+typedef struct _GuLatex {
     GuFileInfo* b_finfo;
-    GtkProgressBar* progressbar;
-    GtkAdjustment* progressmon;
-    GtkListStore* list_biblios;
-    GtkLabel* filenm_label;
-    GtkLabel* refnr_label;
-    gchar* filename;
-    gchar* basename;
-    double progressval;
-} GuBiblio;
+    GuEditor* b_editor;
 
-GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo);
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename);
-int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
+    gchar* typesetter;
+    gint errorline;
+    gint prev_errorline;
+    gchar* errormessage;
+    gboolean modified_since_compile;
+} GuLatex;
 
+GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec);
+void latex_update_workfile(GuLatex* mc);
+void latex_update_pdffile(GuLatex* mc);
+void latex_update_auxfile(GuLatex* mc);
+void latex_export_pdffile(GuLatex* mc, const gchar* path);
 
-#endif /* GUMMI_BIBLIO_H */
+#endif /* GUMMI_LATEX_H */
+

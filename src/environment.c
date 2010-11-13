@@ -29,24 +29,22 @@
 
 #include "configfile.h"
 #include "environment.h"
-#include "gui-main.h"
 #include "utils.h"
 
-Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuMotion* mo,
-        GuPreview* prev, GuBiblio* bib, GuTemplate* tpl) {
+Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
+        GuBiblio* bib, GuTemplate* tpl) {
     L_F_DEBUG;
     Gummi* g = g_new0(Gummi, 1);
-    g->gui = gu;
     g->finfo = fc;
     g->editor = ed;
     g->motion = mo;
-    g->preview = prev;
+    g->latex = latex;
     g->biblio = bib;
     g->templ = tpl;
     return g;
 }
 
-void gummi_create_environment(Gummi* gc, gchar* filename) {
+void gummi_new_environment(Gummi* gc, const gchar* filename) {
     L_F_DEBUG;
 
     fileinfo_update(gc->finfo, filename);
@@ -55,16 +53,5 @@ void gummi_create_environment(Gummi* gc, gchar* filename) {
     slog(L_INFO, "TEX: %s\n", gc->finfo->filename);
     slog(L_INFO, "TMP: %s\n", gc->finfo->workfile);
     slog(L_INFO, "PDF: %s\n", gc->finfo->pdffile); 
-
-    /* Title will be updated in motion_update_pdffile */
-    gui_update_title();
-
-    /* This is important */
-    gc->motion->errorline = 1;
-    motion_initial_preview(gc->motion);
-
-    if (config_get_value("compile_status"))
-        motion_start_updatepreview(gc->motion);
-    if (config_get_value("autosaving"))
-        iofunctions_reset_autosave(filename);
+    iofunctions_reset_autosave(filename);
 }

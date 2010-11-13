@@ -195,14 +195,14 @@ gummi_SOURCES = biblio.c  biblio.h \
 		editor.c editor.h \
 		environment.c environment.h \
 		fileinfo.c fileinfo.h \
-		gui-main.c gui-main.h \
+		gui-main.c gui/gui-main.h \
 		importer.c importer.h \
-		gui-import.c gui-import.h \
+		gui-import.c gui/gui-import.h \
 		iofunctions.c iofunctions.h \
-		motion.c motion.h \
-		gui-prefs.c gui-prefs.h \
-		preview.c preview.h \
-		gui-search.c gui-search.h \
+		motion.c latex.h \
+		gui-prefs.c gui/gui-prefs.h \
+		preview.c latex.h \
+		gui-search.c gui/gui-search.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \

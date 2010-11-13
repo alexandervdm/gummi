@@ -55,9 +55,6 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-/* reference to global environment instance */
-extern Gummi* gummi;
-
 GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     L_F_DEBUG;
     GtkWidget *scroll;

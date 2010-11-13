@@ -791,17 +791,17 @@ active document</property>
                       <object class="GtkVBox" id="vbox7">
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkScrolledWindow" id="preview_scroll">
+                          <object class="GtkScrolledWindow" id="previewgui_scroll">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="hscrollbar_policy">automatic</property>
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="window_placement_set">True</property>
                             <child>
-                              <object class="GtkViewport" id="preview_view">
+                              <object class="GtkViewport" id="previewgui_view">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkDrawingArea" id="preview_draw">
+                                  <object class="GtkDrawingArea" id="previewgui_draw">
                                     <property name="visible">True</property>
                                   </object>
                                 </child>
@@ -813,7 +813,7 @@ active document</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToolbar" id="preview_toolbar">
+                          <object class="GtkToolbar" id="previewgui_toolbar">
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkToolButton" id="page_prev">
@@ -822,7 +822,7 @@ active document</property>
                                 <property name="label" translatable="yes">Previous</property>
                                 <property name="use_underline">True</property>
                                 <property name="stock_id">gtk-go-back</property>
-                                <signal name="clicked" handler="preview_prev_page" swapped="no"/>
+                                <signal name="clicked" handler="previewgui_prev_page" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -836,7 +836,7 @@ active document</property>
                                 <property name="label" translatable="yes">Next</property>
                                 <property name="use_underline">True</property>
                                 <property name="stock_id">gtk-go-forward</property>
-                                <signal name="clicked" handler="preview_next_page" swapped="no"/>
+                                <signal name="clicked" handler="previewgui_next_page" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -867,7 +867,7 @@ active document</property>
                                         <property name="width_chars">6</property>
                                         <property name="text" translatable="yes">0</property>
                                         <property name="xalign">0.5</property>
-                                        <signal name="changed" handler="preview_page_input_changed" swapped="no"/>
+                                        <signal name="changed" handler="previewgui_page_input_changed" swapped="no"/>
                                       </object>
                                       <packing>
                                         <property name="position">0</property>
@@ -898,15 +898,15 @@ active document</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolItem" id="preview_zoomtool">
+                              <object class="GtkToolItem" id="previewgui_zoomtool">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkComboBox" id="preview_zoomcombo">
+                                  <object class="GtkComboBox" id="previewgui_zoomcombo">
                                     <property name="width_request">125</property>
                                     <property name="visible">True</property>
                                     <property name="model">zoomcombo_model</property>
                                     <property name="active">1</property>
-                                    <signal name="changed" handler="preview_zoom_change" swapped="no"/>
+                                    <signal name="changed" handler="previewgui_zoom_change" swapped="no"/>
                                     <child>
                                       <object class="GtkCellRendererText" id="cellrenderertext3"/>
                                       <attributes>
@@ -929,7 +929,7 @@ active document</property>
                       </object>
                     </child>
                     <child type="tab">
-                      <object class="GtkLabel" id="preview_label">
+                      <object class="GtkLabel" id="previewgui_label">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Preview Pane</property>
                       </object>

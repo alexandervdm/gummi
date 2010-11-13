@@ -1,5 +1,5 @@
 /**
- * @file   motion.c
+ * @file   preview.c
  * @brief  
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "motion.h"
+#include "latex.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -40,222 +40,28 @@
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
-#include "preview.h"
+#include "latex.h"
 #include "utils.h"
+#include "gui/gui-main.h"
 
-GuMotion* motion_init(GtkBuilder* builder, GuFileInfo* fc, GuEditor* ec,
-        GuPreview* pc) {
+extern Gummi* gummi;
+extern GummiGui* gui;
+
+GuMotion* motion_init(GuEditor* ec) {
     L_F_DEBUG;
     GuMotion* m = g_new0(GuMotion, 1);
-
-    /* initialize basis */
-    m->b_finfo = fc;
-    m->b_editor = ec;
-    m->b_preview = pc;
-
-    /* initialize members */
-    m->statuslight =
-        GTK_TOOL_BUTTON(gtk_builder_get_object(builder, "tool_statuslight"));
-    const gchar* typesetter = config_get_value("typesetter");
-    m->typesetter = (gchar*)g_malloc(strlen(typesetter) + 1);
-    strncpy(m->typesetter, typesetter, strlen(typesetter) + 1);
-    m->errorline = 0;
-    m->last_errorline = 0;
-    m->update = 0;
     m->timer = 0;
-    m->modified_since_compile = FALSE;
+    g_signal_connect(ec->sourceview, "key-press-event",
+            G_CALLBACK(on_key_press_cb), m);
+    g_signal_connect(ec->sourceview, "key-release-event",
+            G_CALLBACK(on_key_release_cb), m);
     return m;
 }
 
-void motion_initial_preview(GuMotion* mc) {
-    L_F_DEBUG;
-    motion_update_workfile(mc);
-    motion_update_pdffile(mc);
-    motion_update_errortags(mc);
-
-    /* force the preview to refresh to trash previous document */
-    mc->modified_since_compile = TRUE;
-    /* check for error and see if need to go into error mode */
-    if (mc->errorline)
-        preview_start_error_mode(mc->b_preview);
-    else {
-        preview_set_pdffile(mc->b_preview, mc->b_finfo->pdffile);
-        motion_updatepreview(mc);
-    }
-}
-
-void motion_update_workfile(GuMotion* mc) {
-    L_F_DEBUG;
-    GtkTextIter start, end;
-    gchar *text;
-    FILE *fp;
-
-    /* save selection */
-    gtk_text_buffer_get_selection_bounds(
-            GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
-    text = editor_grab_buffer(mc->b_editor);
-
-    /* restore selection */
-    gtk_text_buffer_select_range(
-            GTK_TEXT_BUFFER(mc->b_editor->sourcebuffer), &start, &end);
-    
-    fp = fopen(mc->b_finfo->workfile, "w");
-    
-    if(fp == NULL) {
-        slog(L_ERROR, "unable to create workfile in tmpdir\n");
-        return;
-    }
-    fwrite(text, strlen(text), 1, fp);
-    g_free(text);
-    fclose(fp);
-    // TODO: Maybe add editorviewer grab focus line here if necessary
-}
-
-void motion_update_pdffile(GuMotion* mc) {
-    L_F_DEBUG;
-    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
-    gchar* command = g_strdup_printf("cd \"%s\";"
-                                     "env openout_any=a %s "
-                                     "-interaction=nonstopmode "
-                                     "-file-line-error "
-                                     "-halt-on-error "
-                                     "-output-directory=\"%s\" \"%s\"",
-                                     dirname,
-                                     mc->typesetter,
-                                     mc->b_finfo->tmpdir,
-                                     mc->b_finfo->workfile);
-    g_free(dirname);
-
-    gtk_tool_button_set_stock_id(mc->statuslight, "gtk-refresh");
-    while (gtk_events_pending()) gtk_main_iteration();
-    pdata cresult = utils_popen_r(command);
-    errorbuffer_set_text(cresult.data);
-    mc->errorline = cresult.ret;
-    mc->modified_since_compile = FALSE;
-
-    /* find error line */
-    if (cresult.ret == 1 &&
-            (strstr(cresult.data, "Fatal error") ||
-            (strstr(cresult.data, "No pages of output.")))) {
-        gchar** result = 0;
-        GError* error = NULL;
-        GRegex* match_str = 0;
-        GMatchInfo* match_info;
-        match_str = g_regex_new(":([\\d+]+):", G_REGEX_DOTALL, 0, &error);
-
-        if (g_regex_match(match_str, cresult.data, 0, &match_info)) {
-            result = g_match_info_fetch_all(match_info);
-            if (result[1])
-                mc->errorline = atoi(result[1]);
-            g_strfreev(result);
-        }
-        g_match_info_free(match_info);
-        g_regex_unref(match_str);
-
-        /* update status light */
-        gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
-    } else if (strstr(cresult.data, "No pages of output.")) {
-        mc->errorline = -1;
-        gtk_tool_button_set_stock_id(mc->statuslight, "gtk-no");
-    } else
-        gtk_tool_button_set_stock_id(mc->statuslight, "gtk-yes");
-    g_free(cresult.data);
-    g_free(command);
-}
-
-
-void motion_start_updatepreview(GuMotion* mc) {
-    L_F_DEBUG;
-    if (0 == strcmp(config_get_value("compile_scheme"), "on_idle")) {
-        mc->shandlers[0] = g_signal_connect(mc->b_editor->sourceview,
-                                            "key-press-event",
-                                            G_CALLBACK(on_key_press_cb),
-                                            (void*)mc);
-        mc->shandlers[1] = g_signal_connect(mc->b_editor->sourceview,
-                                            "key-release-event",
-                                            G_CALLBACK(on_key_release_cb),
-                                            (void*)mc);
-        motion_start_timer(mc);
-    } else  {
-        mc->update = g_timeout_add_seconds(
-                atoi(config_get_value("compile_timer")),
-                motion_updatepreview, (void*)mc);
-    }
-}
-
-void motion_stop_updatepreview(GuMotion* mc) {
-    L_F_DEBUG;
-    if (0 == strcmp(config_get_value("compile_scheme"), "on_idle")) {
-        g_signal_handler_disconnect(mc->b_editor->sourceview, mc->shandlers[0]);
-        g_signal_handler_disconnect(mc->b_editor->sourceview, mc->shandlers[1]);
-        motion_stop_timer(mc);
-    } else if (mc->update > 0) {
-        g_source_remove(mc->update);
-        mc->update = 0;
-    }
-}
-
-void motion_update_auxfile(GuMotion* mc) {
-    L_F_DEBUG;
-    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
-    gchar* command = g_strdup_printf("cd \"%s\";"
-                                     "env openout_any=a %s "
-                                     "--draftmode "
-                                     "-interaction=nonstopmode "
-                                     "--output-directory=\"%s\" \"%s\"",
-                                     dirname,
-                                     mc->typesetter,
-                                     mc->b_finfo->tmpdir,
-                                     mc->b_finfo->workfile);
-    g_free(dirname);
-    pdata res = utils_popen_r(command);
-    g_free(res.data);
-    g_free(command);
-}
-
-void motion_export_pdffile(GuMotion* mc, const gchar* path) {
-    L_F_DEBUG;
-    gchar* savepath;
-    gint ret = 0;
-
-    if (0 != strcmp(path + strlen(path) -4, ".pdf"))
-        savepath = g_strdup_printf("%s.pdf", path);
-    else
-        savepath = g_strdup(path);
-    if (utils_path_exists(savepath)) {
-        ret = utils_yes_no_dialog(_("The file already exists. Overwrite?"));
-        if (GTK_RESPONSE_YES != ret) {
-            g_free(savepath);
-            return;
-        }
-    }
-    utils_copy_file(mc->b_finfo->pdffile, savepath);
-    g_free(savepath);
-}
-
-void motion_update_errortags(GuMotion* mc) {
-    L_F_DEBUG;
-    if (mc->errorline > 0)
-        editor_apply_errortags(mc->b_editor, mc->errorline);
-    if (mc->last_errorline && !mc->errorline)
-        editor_apply_errortags(mc->b_editor, 0);
-    mc->last_errorline = mc->errorline;
-}
-
-gboolean motion_updatepreview(void* user) {
-    L_F_DEBUG;
-    GuMotion* mc = (GuMotion*)user;
-    if (mc->modified_since_compile) {
-      motion_update_workfile(mc);
-      motion_update_pdffile(mc);
-      motion_update_errortags(mc);
-      if (mc->b_preview->errormode && !mc->errorline) {
-          preview_set_pdffile(mc->b_preview, mc->b_finfo->pdffile);
-          preview_stop_error_mode(mc->b_preview);
-      }
-      preview_refresh(mc->b_preview);
-    }
-    return 0 != strcmp(config_get_value("compile_scheme"), "on_idle");
+gboolean motion_idle_cb(void* user) {
+    if (gui->previewgui->preview_on_idle)
+        previewgui_update_preview(gui->previewgui);
+    return TRUE;
 }
 
 void motion_start_timer(GuMotion* mc) {
@@ -263,7 +69,7 @@ void motion_start_timer(GuMotion* mc) {
     motion_stop_timer(mc);
     mc->timer = g_timeout_add_seconds(
             atoi(config_get_value("compile_timer")),
-            motion_updatepreview, (void*)mc);
+            motion_idle_cb, mc);
 }
 
 void motion_stop_timer(GuMotion* mc) {
@@ -282,8 +88,6 @@ gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
 
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     L_F_DEBUG;
-    GuMotion* mc = (GuMotion*)user;
-    if (mc->modified_since_compile)
-        motion_start_timer(mc);
+    motion_start_timer((GuMotion*)user);
     return FALSE;
 }

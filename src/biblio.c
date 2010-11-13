@@ -33,7 +33,7 @@
 
 #include "biblio.h"
 #include "utils.h"
-#include "motion.h"
+#include "latex.h"
 #include "environment.h"
 
 extern GuEditor* ec;
@@ -57,20 +57,20 @@ GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
     return b;
 }
 
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc) {
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
     gchar* content;
     gchar** result;
     GMatchInfo *match_info;
     GRegex* bib_regex;
     gboolean state = FALSE;
     
-    content = editor_grab_buffer(mc->b_editor);
+    content = editor_grab_buffer(pc->b_editor);
     bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
         state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            biblio_set_filename(bc, mc->b_finfo, result[1]));
+            biblio_set_filename(bc, pc->b_finfo, result[1]));
         g_strfreev(result);
     }
     g_free(content);
@@ -79,15 +79,15 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuMotion* mc) {
     return state;
 }
 
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
-    gchar* dirname = g_path_get_dirname(mc->b_finfo->workfile);
+gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
+    gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
     gchar* auxname = NULL;
 
-    if (mc->b_finfo->filename) {
-        auxname = g_strdup(mc->b_finfo->pdffile);
+    if (lc->b_finfo->filename) {
+        auxname = g_strdup(lc->b_finfo->pdffile);
         auxname[strlen(auxname) -4] = 0;
     } else
-        auxname = g_strdup(mc->b_finfo->fdname);
+        auxname = g_strdup(lc->b_finfo->fdname);
 
     if (g_find_program_in_path("bibtex")) {
         gboolean success = FALSE;
@@ -96,8 +96,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuMotion* mc) {
                                          dirname,
                                          auxname);
         g_free(auxname);
-        motion_update_workfile(mc);
-        motion_update_auxfile(mc);
+        latex_update_workfile(lc);
+        latex_update_auxfile(lc);
         pdata res = utils_popen_r(command);
         gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
         g_free(command);

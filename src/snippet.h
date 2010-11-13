@@ -1,10 +1,10 @@
 /**
- * @file    biblio.h
- * @brief   
+ * @file   snippet.h
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,31 +27,18 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_BIBLIO_H
-#define GUMMI_BIBLIO_H
+#ifndef GUMMI_SNIPPET_H
+#define GUMMI_SNIPPET_H
 
+#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "fileinfo.h"
-#include "latex.h"
+#include "editor.h"
 
-typedef struct _GuBiblio {
+typedef struct _GuSnippet {
     GuFileInfo* b_finfo;
-    GtkProgressBar* progressbar;
-    GtkAdjustment* progressmon;
-    GtkListStore* list_biblios;
-    GtkLabel* filenm_label;
-    GtkLabel* refnr_label;
-    gchar* filename;
-    gchar* basename;
-    double progressval;
-} GuBiblio;
+    
+} GuSnippet
 
-GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo);
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename);
-int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
-
-
-#endif /* GUMMI_BIBLIO_H */
+#endif /* GUMMI_SNIPPET_H */

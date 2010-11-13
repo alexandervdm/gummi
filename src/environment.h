@@ -71,22 +71,20 @@
 
 #include "biblio.h"
 #include "editor.h"
-#include "environment.h"
 #include "fileinfo.h"
-#include "gui-main.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "motion.h"
-#include "preview.h"
+#include "latex.h"
 #include "template.h"
 
 #define _(T) gettext(T)
 
 /* Gummi Class Hierarchy
  *
- * GuEditor GuFileInfo GuPreview          GuPrefsGui GuImportGui GuSearchGui
+ * GuEditor GuFileInfo GuLatex          GuPrefsGui GuImportGui GuSearchGui
  *   |\     /    |      |  /                    \          |          /
- *   | `---+- GuMotion -+-`                      `----- GummiGui ----`
+ *   | `---+- GuLatex -+-`                      `----- GummiGui ----`
  *   |     |            |                                  |
  *   |     |            |   GuImporter GuTemplate GuBiblio |
  *   |     |            |        |          |        |     |
@@ -97,17 +95,16 @@
  */
 
 typedef struct _Gummi {
-    GummiGui* gui;
     GuFileInfo* finfo;
     GuEditor* editor;
     GuMotion* motion;
-    GuPreview* preview;
+    GuLatex* latex;
     GuBiblio* biblio;
     GuTemplate* templ;
 } Gummi;
 
-Gummi* gummi_init(GummiGui* gu, GuFileInfo* fc, GuEditor* ed, GuMotion* mo,
-        GuPreview* prev, GuBiblio* bib, GuTemplate* tpl);
-void gummi_create_environment(Gummi* gc, gchar* filename);
+Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
+        GuBiblio* bib, GuTemplate* tpl);
+void gummi_new_environment(Gummi* gc, const gchar* filename);
 
 #endif /* GUMMI_ENVIRONMENT_H */

@@ -35,16 +35,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "gui/gui-main.h"
+#include "biblio.h"
 #include "configfile.h"
 #include "environment.h"
-#include "gui-main.h"
 #include "iofunctions.h"
+#include "motion.h"
 #include "template.h"
 #include "utils.h"
-#include "biblio.h"
 
 static int debug = 0;
 Gummi* gummi = 0;
+GummiGui* gui = 0;
 
 static GOptionEntry entries[] = {
     { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE, &debug, 
@@ -59,11 +61,10 @@ void on_window_destroy (GtkObject *object, gpointer user_data) {
 int main (int argc, char *argv[]) {
     gchar* configname;
     GtkBuilder* builder;
-    GummiGui* gui;
     GuFileInfo* finfo;
     GuEditor* editor;
     GuMotion* motion;
-    GuPreview* preview;
+    GuLatex* latex;
     GuTemplate* templ;
     GuBiblio* biblio;
 
@@ -97,21 +98,21 @@ int main (int argc, char *argv[]) {
     gui = gui_init(builder);
     finfo = fileinfo_init();
     editor = editor_init(builder, finfo);
-    preview = preview_init(builder, finfo);
-    motion = motion_init(builder, finfo, editor, preview); 
+    latex = latex_init(finfo, editor); 
     biblio = biblio_init(builder, finfo);
     templ = template_init(builder, finfo);
+    motion = motion_init(editor);
 
-    gummi = gummi_init(gui, finfo, editor, motion, preview, biblio, templ);
+    gummi = gummi_init(finfo, editor, motion, latex, biblio, templ);
 
     slog_set_gui_parent(gui->mainwindow);
 
     if (argc != 2) {
         iofunctions_load_default_text(editor);
-        gummi_create_environment(gummi, NULL);
+        gui_new_environment(NULL);
     } else {
         iofunctions_load_file(editor, argv[1]);
-        gummi_create_environment(gummi, argv[1]);
+        gui_new_environment(argv[1]);
     }
 
     gui_main(builder);

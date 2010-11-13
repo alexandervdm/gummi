@@ -1,5 +1,5 @@
 /**
- * @file    motion.h
+ * @file    latex.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -33,40 +33,17 @@
 #include <glib.h>
 
 #include "editor.h"
-#include "fileinfo.h"
-#include "preview.h"
 
 typedef struct _GuMotion {
-    GuFileInfo* b_finfo;
-    GuEditor* b_editor;
-    GuPreview* b_preview;
-
-    gchar* typesetter;
-    GtkToolButton* statuslight;
-    gint errorline;
-    gint last_errorline;
-    guint update;
-    guint timer;
-    guint shandlers[2];
-    gboolean modified_since_compile;
+    gint timer;
 } GuMotion;
 
-GuMotion* motion_init(GtkBuilder* builder, GuFileInfo* fc, GuEditor* ec,
-        GuPreview* pc);
-void motion_initial_preview(GuMotion* mc);
-void motion_update_workfile(GuMotion* mc);
-void motion_update_pdffile(GuMotion* mc);
-void motion_update_auxfile(GuMotion* mc);
-void motion_update_errortags(GuMotion* mc);
-void motion_start_updatepreview(GuMotion* mc);
-void motion_stop_updatepreview(GuMotion* mc);
-void motion_export_pdffile(GuMotion* mc, const gchar* path);
+GuMotion* motion_init(GuEditor* ec);
+gboolean motion_idle_cb(void* user);
 void motion_start_timer(GuMotion* mc);
 void motion_stop_timer(GuMotion* mc);
-
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user);
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user);
-gboolean motion_updatepreview(void* user);
 
 #endif /* GUMMI_MOTION_H */
 

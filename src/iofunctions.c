@@ -38,7 +38,7 @@
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
-#include "gui-main.h"
+#include "gui/gui-main.h"
 #include "utils.h"
 
 extern Gummi* gummi;
@@ -114,10 +114,16 @@ void iofunctions_write_file(GuEditor* ec, gchar *filename) {
     g_free(text); 
 }
 
-void iofunctions_start_autosave(gchar* name) {
+void iofunctions_start_autosave(const gchar* name) {
     L_F_DEBUG;
+    static gchar* filename = NULL;
+    if (filename) {
+        g_free(filename);
+        filename = NULL;
+    }
+    filename = g_strdup(name);
     sid = g_timeout_add_seconds(atoi(config_get_value("autosave_timer")) * 60,
-            iofunctions_autosave_cb, name);
+            iofunctions_autosave_cb, filename);
 }
 
 void iofunctions_stop_autosave(void) {
@@ -125,10 +131,11 @@ void iofunctions_stop_autosave(void) {
     if (sid > 0) g_source_remove(sid);
 }
 
-void iofunctions_reset_autosave(gchar* name) {
+void iofunctions_reset_autosave(const gchar* name) {
     L_F_DEBUG;
     iofunctions_stop_autosave();
-    iofunctions_start_autosave(name);
+    if (config_get_value("autosaving"))
+        iofunctions_start_autosave(name);
 }
 
 char* iofunctions_decode_text(gchar* text) {
@@ -167,9 +174,9 @@ gchar* iofunctions_encode_text(gchar* text) {
     return result;
 }
 
-gboolean iofunctions_autosave_cb(void* name) {
+gboolean iofunctions_autosave_cb(gpointer name) {
     L_F_DEBUG;
-    gchar* fname = (gchar*)name;
+    char* fname = (char*)name;
     char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
     if (fname) {
         iofunctions_write_file(gummi->editor, fname);
