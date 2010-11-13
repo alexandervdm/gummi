@@ -47,10 +47,11 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	editor.$(OBJEXT) environment.$(OBJEXT) fileinfo.$(OBJEXT) \
-	gui-main.$(OBJEXT) importer.$(OBJEXT) gui-import.$(OBJEXT) \
-	iofunctions.$(OBJEXT) motion.$(OBJEXT) gui-prefs.$(OBJEXT) \
-	preview.$(OBJEXT) gui-search.$(OBJEXT) template.$(OBJEXT) \
-	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
+	gui-import.$(OBJEXT) gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) \
+	gui-preview.$(OBJEXT) gui-search.$(OBJEXT) importer.$(OBJEXT) \
+	iofunctions.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
+	template.$(OBJEXT) updatecheck.$(OBJEXT) utils.$(OBJEXT) \
+	main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -195,14 +196,15 @@ gummi_SOURCES = biblio.c  biblio.h \
 		editor.c editor.h \
 		environment.c environment.h \
 		fileinfo.c fileinfo.h \
-		gui-main.c gui/gui-main.h \
+		gui/gui-import.c gui/gui-import.h \
+		gui/gui-main.c gui/gui-main.h \
+		gui/gui-prefs.c gui/gui-prefs.h \
+		gui/gui-preview.c gui/gui-preview.h \
+		gui/gui-search.c gui/gui-search.h \
 		importer.c importer.h \
-		gui-import.c gui/gui-import.h \
 		iofunctions.c iofunctions.h \
+		latex.c latex.h \
 		motion.c latex.h \
-		gui-prefs.c gui/gui-prefs.h \
-		preview.c latex.h \
-		gui-search.c gui/gui-search.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
@@ -297,12 +299,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-import.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-preview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iofunctions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/latex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/motion.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/preview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/updatecheck.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
@@ -320,6 +323,76 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+gui-import.o: gui/gui-import.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-import.o -MD -MP -MF $(DEPDIR)/gui-import.Tpo -c -o gui-import.o `test -f 'gui/gui-import.c' || echo '$(srcdir)/'`gui/gui-import.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-import.Tpo $(DEPDIR)/gui-import.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-import.c' object='gui-import.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-import.o `test -f 'gui/gui-import.c' || echo '$(srcdir)/'`gui/gui-import.c
+
+gui-import.obj: gui/gui-import.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-import.obj -MD -MP -MF $(DEPDIR)/gui-import.Tpo -c -o gui-import.obj `if test -f 'gui/gui-import.c'; then $(CYGPATH_W) 'gui/gui-import.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-import.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-import.Tpo $(DEPDIR)/gui-import.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-import.c' object='gui-import.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-import.obj `if test -f 'gui/gui-import.c'; then $(CYGPATH_W) 'gui/gui-import.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-import.c'; fi`
+
+gui-main.o: gui/gui-main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-main.o -MD -MP -MF $(DEPDIR)/gui-main.Tpo -c -o gui-main.o `test -f 'gui/gui-main.c' || echo '$(srcdir)/'`gui/gui-main.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-main.Tpo $(DEPDIR)/gui-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-main.c' object='gui-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-main.o `test -f 'gui/gui-main.c' || echo '$(srcdir)/'`gui/gui-main.c
+
+gui-main.obj: gui/gui-main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-main.obj -MD -MP -MF $(DEPDIR)/gui-main.Tpo -c -o gui-main.obj `if test -f 'gui/gui-main.c'; then $(CYGPATH_W) 'gui/gui-main.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-main.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-main.Tpo $(DEPDIR)/gui-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-main.c' object='gui-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-main.obj `if test -f 'gui/gui-main.c'; then $(CYGPATH_W) 'gui/gui-main.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-main.c'; fi`
+
+gui-prefs.o: gui/gui-prefs.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-prefs.o -MD -MP -MF $(DEPDIR)/gui-prefs.Tpo -c -o gui-prefs.o `test -f 'gui/gui-prefs.c' || echo '$(srcdir)/'`gui/gui-prefs.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-prefs.Tpo $(DEPDIR)/gui-prefs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-prefs.c' object='gui-prefs.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-prefs.o `test -f 'gui/gui-prefs.c' || echo '$(srcdir)/'`gui/gui-prefs.c
+
+gui-prefs.obj: gui/gui-prefs.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-prefs.obj -MD -MP -MF $(DEPDIR)/gui-prefs.Tpo -c -o gui-prefs.obj `if test -f 'gui/gui-prefs.c'; then $(CYGPATH_W) 'gui/gui-prefs.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-prefs.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-prefs.Tpo $(DEPDIR)/gui-prefs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-prefs.c' object='gui-prefs.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-prefs.obj `if test -f 'gui/gui-prefs.c'; then $(CYGPATH_W) 'gui/gui-prefs.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-prefs.c'; fi`
+
+gui-preview.o: gui/gui-preview.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-preview.o -MD -MP -MF $(DEPDIR)/gui-preview.Tpo -c -o gui-preview.o `test -f 'gui/gui-preview.c' || echo '$(srcdir)/'`gui/gui-preview.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-preview.Tpo $(DEPDIR)/gui-preview.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-preview.c' object='gui-preview.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-preview.o `test -f 'gui/gui-preview.c' || echo '$(srcdir)/'`gui/gui-preview.c
+
+gui-preview.obj: gui/gui-preview.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-preview.obj -MD -MP -MF $(DEPDIR)/gui-preview.Tpo -c -o gui-preview.obj `if test -f 'gui/gui-preview.c'; then $(CYGPATH_W) 'gui/gui-preview.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-preview.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-preview.Tpo $(DEPDIR)/gui-preview.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-preview.c' object='gui-preview.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-preview.obj `if test -f 'gui/gui-preview.c'; then $(CYGPATH_W) 'gui/gui-preview.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-preview.c'; fi`
+
+gui-search.o: gui/gui-search.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-search.o -MD -MP -MF $(DEPDIR)/gui-search.Tpo -c -o gui-search.o `test -f 'gui/gui-search.c' || echo '$(srcdir)/'`gui/gui-search.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-search.Tpo $(DEPDIR)/gui-search.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-search.c' object='gui-search.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-search.o `test -f 'gui/gui-search.c' || echo '$(srcdir)/'`gui/gui-search.c
+
+gui-search.obj: gui/gui-search.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-search.obj -MD -MP -MF $(DEPDIR)/gui-search.Tpo -c -o gui-search.obj `if test -f 'gui/gui-search.c'; then $(CYGPATH_W) 'gui/gui-search.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-search.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-search.Tpo $(DEPDIR)/gui-search.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-search.c' object='gui-search.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-search.obj `if test -f 'gui/gui-search.c'; then $(CYGPATH_W) 'gui/gui-search.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-search.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
