@@ -512,6 +512,10 @@ void on_menu_bibupdate_activate(GtkWidget *widget, void * user) {
     biblio_compile_bibliography(gummi->biblio, gummi->latex);
 }
 
+void on_menu_pdfcompile_activate(GtkWidget *widget, void* user) {
+    previewgui_update_preview(gui->previewgui);
+}
+
 void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     GtkWidget* dialog = 0;
@@ -643,7 +647,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig\n"
         "Spanish: Carlos Salas Contreras\n"
-        "Taiwanese: Wei-Ning Huang\n";
+        "Chinese(Traditional): Wei-Ning Huang\n";
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
     gtk_window_set_transient_for(GTK_WINDOW(dialog),
@@ -668,7 +672,10 @@ void on_tool_previewoff_toggled(GtkWidget *widget, void * user) {
     gboolean value =
         gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(widget));
     config_set_value("compile_status", (!value)? "True": "False");
-    previewgui_reset(gui->previewgui);
+    if (value)
+        previewgui_stop_preview(gui->previewgui);
+    else
+        previewgui_start_preview(gui->previewgui);
 }
 
 void on_tool_textstyle_bold_activate(GtkWidget* widget, void* user) {
@@ -872,56 +879,6 @@ gboolean on_bibprogressbar_update(void* user) {
         (gummi->biblio->progressmon, gummi->biblio->progressval);
     gummi->biblio->progressval += 1.0;
     return !(gummi->biblio->progressval > 60);
-}
-
-void previewgui_page_input_changed(GtkEntry* entry, void* user) {
-    L_F_DEBUG;
-    gint newpage = atoi(gtk_entry_get_text(entry));
-
-    if (0 == newpage)
-        return;
-    else if (newpage >= 1 &&  newpage <= gui->previewgui->page_total) {
-        previewgui_goto_page(gui->previewgui, newpage -1);
-    } else {
-        newpage = CLAMP(newpage, 1, gui->previewgui->page_total);
-        gchar* num = g_strdup_printf("%d", newpage);
-        gtk_entry_set_text(entry, num);
-        g_free(num);
-        previewgui_goto_page(gui->previewgui, newpage -1);
-    }
-}
-
-void previewgui_next_page(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current + 1);
-}
-
-void previewgui_prev_page(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current - 1);
-}
-
-void previewgui_zoom_change(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-    double opts[9] = {0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0}; 
-
-    if (index < 0) slog(L_ERROR, "preview zoom level is < 0.\n");
-
-    gui->previewgui->fit_width = gui->previewgui->best_fit = FALSE;
-    if (index < 2) {
-        if (index == 0) {
-            gui->previewgui->best_fit = TRUE;
-        }
-        else if (index == 1) {
-            gui->previewgui->fit_width = TRUE;
-        }
-    }
-    else {
-        gui->previewgui->page_scale = opts[index-2];
-    }
-
-    gtk_widget_queue_draw(gui->previewgui->drawarea);
 }
 
 gint check_for_save(void) {

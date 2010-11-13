@@ -75,6 +75,10 @@ void previewgui_reset(GuPreviewGui* pc);
 gboolean previewgui_update_preview(gpointer user);
 void previewgui_start_preview(GuPreviewGui* pc);
 void previewgui_stop_preview(GuPreviewGui* pc);
+void previewgui_page_input_changed(GtkEntry* entry, void* user);
+void previewgui_next_page(GtkWidget* widget, void* user);
+void previewgui_prev_page(GtkWidget* widget, void* user);
+void previewgui_zoom_change(GtkWidget* widget, void* user);
 
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
 

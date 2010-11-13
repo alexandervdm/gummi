@@ -1,11 +1,132 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="zoomcombo_model">
+    <columns>
+      <!-- column-name choices -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Best Fit</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Fit Page Width</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">50%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">70%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">85%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">100%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">125%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">150%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">200%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">300%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">400%</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_tableborder">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">No borders</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Border outline</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Border all cells</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_tablealign">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Align left</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Align center</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Align right</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_matrixbracket">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Unbracketed</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Parentheses</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Brackets</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Braces</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Single line</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Double line</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_biblios">
+    <columns>
+      <!-- column-name ident -->
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name author -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="list_templates">
+    <columns>
+      <!-- column-name ident -->
+      <column type="gchararray"/>
+      <!-- column-name location -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="title" translatable="yes">Gummi - LaTeX Editor</property>
     <property name="icon">icon.png</property>
-    <signal name="delete-event" handler="gui_quit" swapped="no"/>
+    <signal name="delete_event" handler="gui_quit"/>
     <child>
       <object class="GtkVBox" id="mainbox">
         <property name="visible">True</property>
@@ -27,7 +148,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="n" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_new_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_new_activate"/>
                       </object>
                     </child>
                     <child>
@@ -37,7 +158,7 @@
                         <property name="use_underline">True</property>
                         <property name="image">image7</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menu_template_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_template_activate"/>
                       </object>
                     </child>
                     <child>
@@ -48,7 +169,7 @@
                         <property name="image">image4</property>
                         <property name="use_stock">False</property>
                         <accelerator key="o" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_open_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_open_activate"/>
                       </object>
                     </child>
                     <child>
@@ -63,7 +184,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="s" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_save_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_save_activate"/>
                       </object>
                     </child>
                     <child>
@@ -74,7 +195,7 @@
                         <property name="image">image5</property>
                         <property name="use_stock">False</property>
                         <accelerator key="s" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_saveas_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_saveas_activate"/>
                       </object>
                     </child>
                     <child>
@@ -85,7 +206,7 @@
                         <property name="image">image9</property>
                         <property name="use_stock">False</property>
                         <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_exportpdf_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_exportpdf_activate"/>
                       </object>
                     </child>
                     <child>
@@ -97,35 +218,35 @@
                       <object class="GtkMenuItem" id="menu_recent1">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_recent2">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_recent3">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_recent4">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkMenuItem" id="menu_recent5">
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
-                        <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_recent_activate"/>
                       </object>
                     </child>
                     <child>
@@ -140,7 +261,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="gui_quit" swapped="no"/>
+                        <signal name="activate" handler="gui_quit"/>
                       </object>
                     </child>
                   </object>
@@ -162,7 +283,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="z" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_undo_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_undo_activate"/>
                       </object>
                     </child>
                     <child>
@@ -172,7 +293,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="z" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_redo_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_redo_activate"/>
                       </object>
                     </child>
                     <child>
@@ -188,7 +309,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="x" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_cut_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_cut_activate"/>
                       </object>
                     </child>
                     <child>
@@ -198,7 +319,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_copy_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_copy_activate"/>
                       </object>
                     </child>
                     <child>
@@ -208,7 +329,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="v" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_paste_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_paste_activate"/>
                       </object>
                     </child>
                     <child>
@@ -217,7 +338,7 @@
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_menu_delete_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_delete_activate"/>
                       </object>
                     </child>
                     <child>
@@ -232,7 +353,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="a" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_selectall_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_selectall_activate"/>
                       </object>
                     </child>
                     <child>
@@ -246,7 +367,7 @@
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_menu_preferences_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_preferences_activate"/>
                       </object>
                     </child>
                   </object>
@@ -266,7 +387,7 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Statusbar</property>
                         <property name="use_underline">True</property>
-                        <signal name="toggled" handler="on_menu_statusbar_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_menu_statusbar_toggled"/>
                       </object>
                     </child>
                     <child>
@@ -274,7 +395,7 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Toolbar</property>
                         <property name="use_underline">True</property>
-                        <signal name="toggled" handler="on_menu_toolbar_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_menu_toolbar_toggled"/>
                       </object>
                     </child>
                     <child>
@@ -282,7 +403,7 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Right Pane</property>
                         <property name="use_underline">True</property>
-                        <signal name="toggled" handler="on_menu_rightpane_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_menu_rightpane_toggled"/>
                       </object>
                     </child>
                     <child>
@@ -296,7 +417,7 @@
                         <property name="label" translatable="yes">_Fullscreen</property>
                         <property name="use_underline">True</property>
                         <accelerator key="F11" signal="activate"/>
-                        <signal name="toggled" handler="on_menu_fullscreen_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_menu_fullscreen_toggled"/>
                       </object>
                     </child>
                   </object>
@@ -318,7 +439,7 @@
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <accelerator key="f" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_find_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_find_activate"/>
                       </object>
                     </child>
                     <child>
@@ -327,7 +448,7 @@
                         <property name="label" translatable="yes">Find Ne_xt</property>
                         <property name="use_underline">True</property>
                         <accelerator key="g" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_findnext_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_findnext_activate"/>
                       </object>
                     </child>
                     <child>
@@ -336,7 +457,7 @@
                         <property name="label" translatable="yes">Find Pre_vious</property>
                         <property name="use_underline">True</property>
                         <accelerator key="g" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
-                        <signal name="activate" handler="on_menu_findprev_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_findprev_activate"/>
                       </object>
                     </child>
                   </object>
@@ -358,7 +479,7 @@
                         <property name="use_underline">True</property>
                         <property name="image">image8</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menu_bibload_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_bibload_activate"/>
                       </object>
                     </child>
                     <child>
@@ -368,7 +489,25 @@
                         <property name="use_underline">True</property>
                         <property name="image">image3</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_button_biblio_compile_clicked" swapped="no"/>
+                        <signal name="activate" handler="on_button_biblio_compile_clicked"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="menuitem4">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_pdfcompile">
+                        <property name="label" translatable="yes">Compile _PDF</property>
+                        <property name="visible">True</property>
+                        <property name="tooltip_text" translatable="yes">Compile LaTeX document
+and update preview.</property>
+                        <property name="use_underline">True</property>
+                        <property name="image">image10</property>
+                        <property name="use_stock">False</property>
+                        <accelerator key="F9" signal="activate"/>
+                        <signal name="activate" handler="on_menu_pdfcompile_activate"/>
                       </object>
                     </child>
                     <child>
@@ -383,7 +522,7 @@
                         <property name="use_underline">True</property>
                         <property name="image">image6</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menu_docstat_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_docstat_activate"/>
                       </object>
                     </child>
                     <child>
@@ -396,7 +535,7 @@
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">_Autocheck Spelling</property>
                         <property name="use_underline">True</property>
-                        <signal name="toggled" handler="on_menu_spelling_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_menu_spelling_toggled"/>
                       </object>
                     </child>
                   </object>
@@ -418,7 +557,7 @@
                         <property name="use_underline">True</property>
                         <property name="image">image1</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="on_menu_update_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_update_activate"/>
                       </object>
                     </child>
                     <child>
@@ -427,7 +566,7 @@
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_menu_about_activate" swapped="no"/>
+                        <signal name="activate" handler="on_menu_about_activate"/>
                       </object>
                     </child>
                   </object>
@@ -455,7 +594,7 @@
                     <property name="label" translatable="yes">toolbutton1</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-new</property>
-                    <signal name="clicked" handler="on_menu_new_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_menu_new_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -470,7 +609,7 @@
                     <property name="label" translatable="yes">Open</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-open</property>
-                    <signal name="clicked" handler="on_menu_open_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_menu_open_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -485,7 +624,7 @@
                     <property name="label" translatable="yes">Save</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-save</property>
-                    <signal name="clicked" handler="on_menu_save_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_menu_save_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -508,7 +647,7 @@
                     <property name="label" translatable="yes">toolbutton5</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-text-bold</property>
-                    <signal name="clicked" handler="on_tool_textstyle_bold_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_bold_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -522,7 +661,7 @@
                     <property name="label" translatable="yes">toolbutton6</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-text-italic</property>
-                    <signal name="clicked" handler="on_tool_textstyle_italic_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_italic_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -536,7 +675,7 @@
                     <property name="label" translatable="yes">toolbutton7</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-text-underline</property>
-                    <signal name="clicked" handler="on_tool_textstyle_underline_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_underline_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -559,7 +698,7 @@
                     <property name="label" translatable="yes">toolbutton1</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-justify-left</property>
-                    <signal name="clicked" handler="on_tool_textstyle_left_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_left_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -573,7 +712,7 @@
                     <property name="label" translatable="yes">toolbutton2</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-justify-center</property>
-                    <signal name="clicked" handler="on_tool_textstyle_center_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_center_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -587,7 +726,7 @@
                     <property name="label" translatable="yes">toolbutton3</property>
                     <property name="use_underline">True</property>
                     <property name="icon_name">format-justify-right</property>
-                    <signal name="clicked" handler="on_tool_textstyle_right_activate" swapped="no"/>
+                    <signal name="clicked" handler="on_tool_textstyle_right_activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -621,7 +760,7 @@
                     <property name="label" translatable="yes">toolbutton2</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-media-pause</property>
-                    <signal name="toggled" handler="on_tool_previewoff_toggled" swapped="no"/>
+                    <signal name="toggled" handler="on_tool_previewoff_toggled"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -685,7 +824,7 @@ active document</property>
                     <property name="tab_hborder">5</property>
                     <property name="tab_vborder">0</property>
                     <property name="homogeneous">True</property>
-                    <signal name="switch-page" handler="on_import_tabs_switch_page" swapped="no"/>
+                    <signal name="switch_page" handler="on_import_tabs_switch_page"/>
                     <child>
                       <object class="GtkHBox" id="box_minimize">
                         <property name="visible">True</property>
@@ -822,7 +961,7 @@ active document</property>
                                 <property name="label" translatable="yes">Previous</property>
                                 <property name="use_underline">True</property>
                                 <property name="stock_id">gtk-go-back</property>
-                                <signal name="clicked" handler="previewgui_prev_page" swapped="no"/>
+                                <signal name="clicked" handler="previewgui_prev_page"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -836,7 +975,7 @@ active document</property>
                                 <property name="label" translatable="yes">Next</property>
                                 <property name="use_underline">True</property>
                                 <property name="stock_id">gtk-go-forward</property>
-                                <signal name="clicked" handler="previewgui_next_page" swapped="no"/>
+                                <signal name="clicked" handler="previewgui_next_page"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -863,11 +1002,11 @@ active document</property>
                                         <property name="width_request">50</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">●</property>
+                                        <property name="invisible_char">&#x25CF;</property>
                                         <property name="width_chars">6</property>
                                         <property name="text" translatable="yes">0</property>
                                         <property name="xalign">0.5</property>
-                                        <signal name="changed" handler="previewgui_page_input_changed" swapped="no"/>
+                                        <signal name="changed" handler="previewgui_page_input_changed"/>
                                       </object>
                                       <packing>
                                         <property name="position">0</property>
@@ -906,7 +1045,7 @@ active document</property>
                                     <property name="visible">True</property>
                                     <property name="model">zoomcombo_model</property>
                                     <property name="active">1</property>
-                                    <signal name="changed" handler="previewgui_zoom_change" swapped="no"/>
+                                    <signal name="changed" handler="previewgui_zoom_change"/>
                                     <child>
                                       <object class="GtkCellRendererText" id="cellrenderertext3"/>
                                       <attributes>
@@ -1049,7 +1188,7 @@ active document</property>
                                         <property name="tooltip_text" translatable="yes">Search document for
 bibliography databases</property>
                                         <property name="use_stock">True</property>
-                                        <signal name="clicked" handler="on_button_biblio_refresh_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_button_biblio_refresh_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1066,7 +1205,7 @@ bibliography databases</property>
                                         <property name="tooltip_text" translatable="yes">Compile the active 
 bibliography database</property>
                                         <property name="image">image2</property>
-                                        <signal name="clicked" handler="on_button_biblio_compile_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_button_biblio_compile_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1121,7 +1260,7 @@ bibliography database</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="model">list_biblios</property>
-                                    <signal name="row-activated" handler="on_bibreference_clicked" swapped="no"/>
+                                    <signal name="row_activated" handler="on_bibreference_clicked"/>
                                     <child>
                                       <object class="GtkTreeViewColumn" id="bibtitle_column">
                                         <property name="resizable">True</property>
@@ -1131,7 +1270,7 @@ bibliography database</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
-                                        <signal name="clicked" handler="on_bibcolumn_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_bibcolumn_clicked"/>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                                           <attributes>
@@ -1149,7 +1288,7 @@ bibliography database</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
-                                        <signal name="clicked" handler="on_bibcolumn_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_bibcolumn_clicked"/>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
                                           <attributes>
@@ -1166,7 +1305,7 @@ bibliography database</property>
                                         <property name="title">year</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
-                                        <signal name="clicked" handler="on_bibcolumn_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_bibcolumn_clicked"/>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext7"/>
                                           <attributes>
@@ -1200,7 +1339,7 @@ bibliography database</property>
                                   <object class="GtkEntry" id="entry1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="invisible_char">•</property>
+                                    <property name="invisible_char">&#x2022;</property>
                                   </object>
                                   <packing>
                                     <property name="padding">5</property>
@@ -1273,9 +1412,9 @@ bibliography database</property>
     <property name="skip_pager_hint">True</property>
     <property name="transient_for">mainwindow</property>
     <accelerator key="Escape" signal="activate-default"/>
-    <signal name="destroy-event" handler="on_button_searchwindow_close_clicked" swapped="no"/>
-    <signal name="activate-default" handler="on_button_searchwindow_close_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_button_searchwindow_close_clicked" swapped="no"/>
+    <signal name="destroy_event" handler="on_button_searchwindow_close_clicked"/>
+    <signal name="activate_default" handler="on_button_searchwindow_close_clicked"/>
+    <signal name="delete_event" handler="on_button_searchwindow_close_clicked"/>
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
@@ -1298,11 +1437,11 @@ bibliography database</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="has_focus">True</property>
-                <property name="invisible_char">•</property>
+                <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
+                <accelerator key="Return" signal="activate"/>
+                <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -1331,7 +1470,7 @@ bibliography database</property>
               <object class="GtkEntry" id="replaceentry">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">●</property>
+                <property name="invisible_char">&#x25CF;</property>
                 <property name="primary_icon_stock">gtk-find-and-replace</property>
               </object>
               <packing>
@@ -1351,7 +1490,7 @@ bibliography database</property>
             <property name="receives_default">False</property>
             <property name="active">True</property>
             <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_matchcase_toggled" swapped="no"/>
+            <signal name="toggled" handler="on_toggle_matchcase_toggled"/>
           </object>
           <packing>
             <property name="position">2</property>
@@ -1364,7 +1503,7 @@ bibliography database</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_wholeword_toggled" swapped="no"/>
+            <signal name="toggled" handler="on_toggle_wholeword_toggled"/>
           </object>
           <packing>
             <property name="position">3</property>
@@ -1377,7 +1516,7 @@ bibliography database</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_backwards_toggled" swapped="no"/>
+            <signal name="toggled" handler="on_toggle_backwards_toggled"/>
           </object>
           <packing>
             <property name="position">4</property>
@@ -1395,7 +1534,7 @@ bibliography database</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_close_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_close_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1410,7 +1549,7 @@ bibliography database</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_find_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1425,7 +1564,7 @@ bibliography database</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_replace_next_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_replace_next_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1440,7 +1579,7 @@ bibliography database</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_replace_all_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_replace_all_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1463,23 +1602,23 @@ bibliography database</property>
     <property name="icon_name">system-software-update</property>
   </object>
   <object class="GtkAdjustment" id="image_scaler">
+    <property name="value">1</property>
     <property name="lower">0.10000000000000001</property>
     <property name="upper">3</property>
-    <property name="value">1</property>
     <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="table_rows">
+    <property name="value">3</property>
     <property name="lower">1</property>
     <property name="upper">100</property>
-    <property name="value">3</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="table_cols">
+    <property name="value">3</property>
     <property name="lower">1</property>
     <property name="upper">100</property>
-    <property name="value">3</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -1520,7 +1659,7 @@ bibliography database</property>
           <object class="GtkSpinButton" id="spinbutton1">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="invisible_char">•</property>
+            <property name="invisible_char">&#x2022;</property>
             <property name="xalign">0.5</property>
             <property name="adjustment">table_rows</property>
           </object>
@@ -1535,7 +1674,7 @@ bibliography database</property>
           <object class="GtkSpinButton" id="spinbutton2">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="invisible_char">•</property>
+            <property name="invisible_char">&#x2022;</property>
             <property name="xalign">0.5</property>
             <property name="adjustment">table_cols</property>
           </object>
@@ -1601,7 +1740,7 @@ cells have line borders. </property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_stock">True</property>
-            <signal name="clicked" handler="on_button_import_table_apply_clicked" swapped="no"/>
+            <signal name="clicked" handler="on_button_import_table_apply_clicked"/>
           </object>
           <packing>
             <property name="left_attach">3</property>
@@ -1674,7 +1813,7 @@ cells have line borders. </property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">•</property>
+                <property name="invisible_char">&#x2022;</property>
                 <property name="xalign">0.5</property>
               </object>
               <packing>
@@ -1689,7 +1828,7 @@ cells have line borders. </property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">•</property>
+                <property name="invisible_char">&#x2022;</property>
                 <property name="xalign">0.5</property>
               </object>
               <packing>
@@ -1703,10 +1842,10 @@ cells have line borders. </property>
               <object class="GtkEntry" id="image_file">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">•</property>
+                <property name="invisible_char">&#x2022;</property>
                 <property name="secondary_icon_name">fileopen</property>
                 <property name="secondary_icon_activatable">True</property>
-                <signal name="icon-press" handler="on_image_file_activate" swapped="no"/>
+                <signal name="icon_press" handler="on_image_file_activate"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1729,7 +1868,7 @@ cells have line borders. </property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
-                <property name="invisible_char">•</property>
+                <property name="invisible_char">&#x2022;</property>
                 <property name="xalign">0.5</property>
                 <property name="adjustment">image_scaler</property>
                 <property name="digits">2</property>
@@ -1755,7 +1894,7 @@ cells have line borders. </property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_import_image_apply_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_import_image_apply_clicked"/>
               </object>
               <packing>
                 <property name="top_attach">2</property>
@@ -1814,7 +1953,7 @@ cells have line borders. </property>
           <object class="GtkSpinButton" id="spinbutton3">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="invisible_char">•</property>
+            <property name="invisible_char">&#x2022;</property>
             <property name="xalign">0.5</property>
             <property name="adjustment">matrix_rows</property>
           </object>
@@ -1829,7 +1968,7 @@ cells have line borders. </property>
           <object class="GtkSpinButton" id="spinbutton4">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="invisible_char">•</property>
+            <property name="invisible_char">&#x2022;</property>
             <property name="xalign">0.5</property>
             <property name="adjustment">matrix_cols</property>
           </object>
@@ -1872,7 +2011,7 @@ cells have line borders. </property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_stock">True</property>
-            <signal name="clicked" handler="on_button_import_matrix_apply_clicked" swapped="no"/>
+            <signal name="clicked" handler="on_button_import_matrix_apply_clicked"/>
           </object>
           <packing>
             <property name="left_attach">3</property>
@@ -1921,8 +2060,8 @@ cells have line borders. </property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">mainwindow</property>
     <accelerator key="Escape" signal="activate-default"/>
-    <signal name="destroy-event" handler="on_button_template_close_clicked" swapped="no"/>
-    <signal name="delete-event" handler="on_button_template_close_clicked" swapped="no"/>
+    <signal name="destroy_event" handler="on_button_template_close_clicked"/>
+    <signal name="delete_event" handler="on_button_template_close_clicked"/>
     <child>
       <object class="GtkHBox" id="hbox8">
         <property name="visible">True</property>
@@ -1953,7 +2092,7 @@ cells have line borders. </property>
                             <property name="title">templates</property>
                             <child>
                               <object class="GtkCellRendererText" id="template_renderer">
-                                <signal name="edited" handler="on_template_rowitem_editted" swapped="no"/>
+                                <signal name="edited" handler="on_template_rowitem_editted"/>
                               </object>
                               <attributes>
                                 <attribute name="text">0</attribute>
@@ -2000,7 +2139,7 @@ cells have line borders. </property>
                 <property name="tooltip_text" translatable="yes">Make a template from the 
 current active document.</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_template_add_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_template_add_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2018,7 +2157,7 @@ current active document.</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Deletes the selected template</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_template_remove_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_template_remove_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2044,7 +2183,7 @@ current active document.</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Open the selected template</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_template_open_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_template_open_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2059,7 +2198,7 @@ current active document.</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_template_close_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_template_close_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2074,127 +2213,6 @@ current active document.</property>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="zoomcombo_model">
-    <columns>
-      <!-- column-name choices -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Best Fit</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Fit Page Width</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">50%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">70%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">85%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">100%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">125%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">150%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">200%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">300%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">400%</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_tableborder">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">No borders</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Border outline</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Border all cells</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_tablealign">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Align left</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Align center</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Align right</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_matrixbracket">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Unbracketed</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Parentheses</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Brackets</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Braces</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Single line</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Double line</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_biblios">
-    <columns>
-      <!-- column-name ident -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name author -->
-      <column type="gchararray"/>
-      <!-- column-name year -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="list_templates">
-    <columns>
-      <!-- column-name ident -->
-      <column type="gchararray"/>
-      <!-- column-name location -->
-      <column type="gchararray"/>
-    </columns>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
@@ -2232,5 +2250,9 @@ current active document.</property>
   <object class="GtkImage" id="image6">
     <property name="visible">True</property>
     <property name="stock">gtk-info</property>
+  </object>
+  <object class="GtkImage" id="image10">
+    <property name="visible">True</property>
+    <property name="stock">gtk-refresh</property>
   </object>
 </interface>

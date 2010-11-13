@@ -290,3 +290,53 @@ void previewgui_stop_preview(GuPreviewGui* pc) {
     if (pc->update_timer != 0) g_source_remove(pc->update_timer);
     pc->update_timer = 0;
 }
+
+void previewgui_page_input_changed(GtkEntry* entry, void* user) {
+    L_F_DEBUG;
+    gint newpage = atoi(gtk_entry_get_text(entry));
+
+    if (0 == newpage)
+        return;
+    else if (newpage >= 1 &&  newpage <= gui->previewgui->page_total) {
+        previewgui_goto_page(gui->previewgui, newpage -1);
+    } else {
+        newpage = CLAMP(newpage, 1, gui->previewgui->page_total);
+        gchar* num = g_strdup_printf("%d", newpage);
+        gtk_entry_set_text(entry, num);
+        g_free(num);
+        previewgui_goto_page(gui->previewgui, newpage -1);
+    }
+}
+
+void previewgui_next_page(GtkWidget* widget, void* user) {
+    L_F_DEBUG;
+    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current + 1);
+}
+
+void previewgui_prev_page(GtkWidget* widget, void* user) {
+    L_F_DEBUG;
+    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current - 1);
+}
+
+void previewgui_zoom_change(GtkWidget* widget, void* user) {
+    L_F_DEBUG;
+    gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+    double opts[9] = {0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0}; 
+
+    if (index < 0) slog(L_ERROR, "preview zoom level is < 0.\n");
+
+    gui->previewgui->fit_width = gui->previewgui->best_fit = FALSE;
+    if (index < 2) {
+        if (index == 0) {
+            gui->previewgui->best_fit = TRUE;
+        }
+        else if (index == 1) {
+            gui->previewgui->fit_width = TRUE;
+        }
+    }
+    else {
+        gui->previewgui->page_scale = opts[index-2];
+    }
+
+    gtk_widget_queue_draw(gui->previewgui->drawarea);
+}
