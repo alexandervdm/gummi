@@ -215,8 +215,8 @@ void config_save(void) {
 
     while (current) {
         fputs(current->first, fh);
-        fputs(" = ", fh);
         if (current->second) {
+            fputs(" = ", fh);
             len = strlen(current->second) + 1;
             buf = (gchar*)g_malloc(len * 2);
             memset(buf, 0, len * 2);

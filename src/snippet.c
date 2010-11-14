@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "configfile.h"
+#include "snippet.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,24 +51,10 @@ void snippet_init(const gchar* filename) {
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
     g_free(dirname);
 
-    slog(L_INFO, "configuration file: %s\n", filename);
+    slog(L_INFO, "snippets : %s\n", filename);
 
     g_free(snippet_filename);
     snippet_filename = g_strdup(filename);
-
-    snippet_load();
-    snippet_version = snippet_get_value("snippet_version");
-
-    /* snippet_version field is not in gummi.cfg before 0.5.0 */
-    if (0 == snippet_version[0]) {
-        slog(L_INFO, "found old configuration file, replacing it with new "
-                "one ...\n");
-        snippet_set_default();
-    } else if (0 != strcmp(PACKAGE_VERSION, snippet_version)) {
-        slog(L_INFO, "updating version tag in configuration file...\n");
-        snippet_set_value("snippet_version", PACKAGE_VERSION);
-    }
-    snippet_save();
 }
 
 void snippet_set_default(void) {
@@ -79,28 +65,6 @@ void snippet_set_default(void) {
 
     fwrite(snippet_str, strlen(snippet_str), 1, fh);
     fclose(fh);
-}
-
-const gchar* snippet_get_value(const gchar* term) {
-    L_F_DEBUG;
-    gchar* ret  = NULL;
-    slist* index = snippet_find_index_of(snippet_head, term);
-
-    ret = index->line + strlen(term) + 3; /* strlen(" = ") = 3 */
-
-    if (0 == strcmp(ret, "False"))
-        return NULL;
-    return ret;
-}
-
-void snippet_set_value(const gchar* term, const gchar* value) {
-    L_F_DEBUG;
-    if (!snippet_head)
-        slog(L_FATAL, "configuration not initialized\n");
-
-    slist* index = snippet_find_index_of(snippet_head, term);
-    g_free(index->line);
-    index->line = g_strconcat(term, " = ", value, NULL);
 }
 
 void snippet_load(void) {
@@ -177,25 +141,4 @@ void snippet_save(void) {
         g_free(buf);
     }
     fclose(fh);
-}
-
-slist* snippet_find_index_of(slist* head, const gchar* term) {
-    /* return the index of the entry, if the entry does not exist, create a
-     * new entry for it and return the new pointer. */
-    L_F_DEBUG;
-    slist* current = head;
-    slist* prev = 0;
-
-    while (current) {
-        if (0 == strncmp(current->line, term, strlen(term)))
-            return current;
-        prev = current;
-        current = current->next;
-    }
-    slog(L_WARNING, "can't find option `%s', creating new field for it...\n",
-           term);
-    prev->next = g_new0(slist, 1);
-    current = prev->next;
-    current->line = g_strconcat(term, " = __NULL__", NULL);
-    return current;
 }
