@@ -38,6 +38,7 @@ typedef struct _GuFileInfo {
     gchar* filename;
     gchar* pdffile;
     gchar* workfile;
+    gchar* bibfile;
     const gchar* tmpdir;
 } GuFileInfo;
 

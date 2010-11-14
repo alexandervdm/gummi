@@ -42,7 +42,6 @@ typedef struct _GuBiblio {
     GtkListStore* list_biblios;
     GtkLabel* filenm_label;
     GtkLabel* refnr_label;
-    gchar* filename;
     gchar* basename;
     double progressval;
 } GuBiblio;
@@ -50,7 +49,7 @@ typedef struct _GuBiblio {
 GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo);
 gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* lc);
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename);
+gboolean biblio_set_filename(GuBiblio* bc, gchar *filename);
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
 
 

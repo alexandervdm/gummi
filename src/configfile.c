@@ -41,7 +41,7 @@
 #include "utils.h"
 
 static gchar* config_filename = 0;
-slist* config_head = 0;
+static slist* config_head = 0;
 
 const gchar config_str[] =
 "[Global]\n"
@@ -160,8 +160,8 @@ void config_load(void) {
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
     gchar* seg = NULL;
-    slist* current = config_head;
-    slist* prev = current;
+    slist* current = NULL;
+    slist* prev = NULL;
 
     if (config_head)
         config_clean_up();

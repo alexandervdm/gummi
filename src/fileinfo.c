@@ -43,6 +43,7 @@ GuFileInfo* fileinfo_init(void) {
     f->filename = NULL;   /* current opened file name in workspace */
     f->pdffile = NULL;
     f->workfile = NULL;
+    f->bibfile = NULL;
     f->tmpdir = g_get_tmp_dir();
     return f;
 }

@@ -476,22 +476,22 @@ void on_menu_findprev_activate(GtkWidget *widget, void * user) {
 void on_menu_bibload_activate(GtkWidget *widget, void * user) {
     L_F_DEBUG;
     gchar* filename = NULL;
+    gchar* basename = NULL;
     gchar* root_path = NULL;
     gchar* relative_path = NULL;
 
     filename = get_open_filename(TYPE_BIBLIO);
-    if (gummi->finfo->filename)
-        root_path = g_path_get_dirname(gummi->finfo->filename);
-
-    if (filename &&
-        biblio_set_filename(gummi->biblio, gummi->finfo, filename)) {
-        relative_path = utils_path_to_relative(root_path,
-                                               gummi->biblio->filename);
+    if (filename) {
+        if (gummi->finfo->filename)
+            root_path = g_path_get_dirname(gummi->finfo->filename);
+        relative_path = utils_path_to_relative(root_path, filename);
         editor_insert_bib(gummi->editor, relative_path);
-        gtk_label_set_text(gummi->biblio->filenm_label,gummi->biblio->basename);
+        basename = g_path_get_basename(filename);
+        gtk_label_set_text(gummi->biblio->filenm_label, basename);
+        g_free(relative_path);
+        g_free(root_path);
+        g_free(basename);
     }
-    g_free(relative_path);
-    g_free(root_path);
     g_free(filename);
 }
 
@@ -817,6 +817,7 @@ void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gchar* text = 0;
     gchar* str = 0;
+    gchar* basename = 0;
     GError* err = NULL;
     gint number = 0;
 
@@ -825,16 +826,17 @@ void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
     gtk_list_store_clear(gummi->biblio->list_biblios);
 
     if (biblio_detect_bibliography(gummi->biblio, gummi->latex)) {
-        editor_insert_bib(gummi->editor, gummi->biblio->filename);
-        g_file_get_contents(gummi->biblio->filename, &text, NULL, &err);
+        editor_insert_bib(gummi->editor, gummi->finfo->bibfile);
+        g_file_get_contents(gummi->finfo->bibfile, &text, NULL, &err);
         number = biblio_parse_entries(gummi->biblio, text);
-        gtk_label_set_text(gummi->biblio->filenm_label,
-                gummi->biblio->basename);
+        basename = g_path_get_basename(gummi->finfo->bibfile);
+        gtk_label_set_text(gummi->biblio->filenm_label, basename);
         str = g_strdup_printf("%d", number);
         gtk_label_set_text(gummi->biblio->refnr_label, str);
         g_free(str);
-        str = g_strdup_printf(_("%s loaded"), gummi->biblio->basename);
+        str = g_strdup_printf(_("%s loaded"), basename);
         gtk_progress_bar_set_text(gummi->biblio->progressbar, str);
+        g_free(basename);
         g_free(str);
     }
     else {

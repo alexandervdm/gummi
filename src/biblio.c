@@ -52,8 +52,6 @@ GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
     b->refnr_label = 
         GTK_LABEL(gtk_builder_get_object(builder, "bibrefnr"));
     b->progressval = 0.0;
-    b->filename = NULL;
-    b->basename = NULL;
     return b;
 }
 
@@ -70,7 +68,8 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
         result = g_match_info_fetch_all(match_info);
         state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            biblio_set_filename(bc, pc->b_finfo, result[1]));
+            biblio_set_filename(bc, result[1]));
+        slog(L_INFO, "Detect bibliography file: %s\n", bc->b_finfo->bibfile);
         g_strfreev(result);
     }
     g_free(content);
@@ -112,21 +111,17 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
     return FALSE;
 }
 
-gboolean biblio_set_filename(GuBiblio* bc, GuFileInfo* fc, gchar *filename)
+gboolean biblio_set_filename(GuBiblio* bc, gchar *filename)
 {
-    g_free(bc->filename);
-    g_free(bc->basename);
+    g_free(bc->b_finfo->bibfile);
 
-    if (fc->filename && !g_path_is_absolute(filename)) {
-        gchar* dirname = g_path_get_dirname(fc->filename);
-        bc->filename = g_build_filename(dirname, filename, NULL);
+    if (bc->b_finfo->filename && !g_path_is_absolute(filename)) {
+        gchar* dirname = g_path_get_dirname(bc->b_finfo->filename);
+        bc->b_finfo->bibfile = g_build_filename(dirname, filename, NULL);
         g_free(dirname);
     } else
-        bc->filename = g_strdup(filename);
-    bc->basename = g_path_get_basename(bc->filename);
-    slog(L_INFO, "Found bibliography file: %s\n", bc->filename);
-
-    return utils_path_exists(bc->filename);
+        bc->b_finfo->bibfile = g_strdup(filename);
+    return utils_path_exists(bc->b_finfo->bibfile);
 }
 
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
