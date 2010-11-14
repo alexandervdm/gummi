@@ -34,15 +34,7 @@
 
 #include <glib.h>
 
-/**
- * @brief initialize config file
- * @param filename filename of the configuration file
- */
 void config_init(const gchar* filename);
-
-/**
- * @brief reset settings to default
- */
 void config_set_default(void);
 
 /**
@@ -61,8 +53,8 @@ const gchar* config_get_value(const gchar* term);
  */
 void config_set_value(const gchar* term, const gchar* value);
 
-/* [Internal] */
 void config_load(void);
 void config_save(void);
+void config_clean_up(void);
 
 #endif /* GUMMI_CONFIGFILE */

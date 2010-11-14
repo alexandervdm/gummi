@@ -117,5 +117,6 @@ int main (int argc, char *argv[]) {
 
     gui_main(builder);
     config_save();
+    config_clean_up();
     return 0;
 }

@@ -332,7 +332,6 @@ void on_prefs_close_clicked(GtkWidget* widget, void* user) {
 void on_prefs_reset_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     config_set_default();
-    config_load();
     prefsgui_set_current_settings(gui->prefsgui);
 }
 

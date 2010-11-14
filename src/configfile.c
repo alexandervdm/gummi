@@ -130,6 +130,7 @@ void config_set_default(void) {
 
     fwrite(config_str, strlen(config_str), 1, fh);
     fclose(fh);
+    config_load();
 }
 
 const gchar* config_get_value(const gchar* term) {
@@ -162,14 +163,8 @@ void config_load(void) {
     slist* current = config_head;
     slist* prev = current;
 
-    if (config_head) {
-        while (prev) {
-            current = prev->next;
-            g_free(prev);
-            prev = current;
-        }
-        config_head = NULL;
-    }
+    if (config_head)
+        config_clean_up();
 
     if (!(fh = fopen(config_filename, "r"))) {
         slog(L_ERROR, "can't find configuration file, reseting to default\n");
@@ -182,10 +177,11 @@ void config_load(void) {
     while (fgets(buf, BUFSIZ, fh)) {
         buf[strlen(buf) -1] = 0; /* remove trailing '\n' */
         if (buf[0] != '\t') {
-            seg = strtok(buf, " = ");
+            seg = strtok(buf, " =");
             current->first = g_strdup((seg)? seg: "");
-            seg = strtok(NULL, " = ");
-            current->second = g_strdup(seg);
+            /* prevent strtok() from cutting string after '=' */
+            seg = strtok(NULL, "=");
+            current->second = g_strdup((seg)? seg + 1: NULL);
         } else {
             rot = g_strdup(prev->second);
             g_free(prev->second);
@@ -235,4 +231,16 @@ void config_save(void) {
         count = 0;
     }
     fclose(fh);
+}
+
+void config_clean_up(void) {
+    L_F_DEBUG;
+    slist* prev = config_head;
+    slist* current;
+    while (prev) {
+        current = prev->next;
+        g_free(prev);
+        prev = current;
+    }
+    config_head = NULL;
 }
