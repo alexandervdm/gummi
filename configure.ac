@@ -82,7 +82,7 @@ AC_CONFIG_FILES([Makefile
 AC_OUTPUT
 
 echo
-echo gummi...................................... : Version $VERSION
+echo gummi...................................... : Version $PACKAGE_VERSION
 echo
 echo spellcheck support......................... : $spellcheck
 echo
