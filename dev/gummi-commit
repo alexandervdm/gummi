@@ -32,11 +32,11 @@ svn status
 
 echo -ne "Continue to commit? "
 read CONTINUE
-if [ $CONTINUE != y ]; then
+if [ "$CONTINUE" != y ]; then
 	exit 0;
 fi
 
-dev/chver.sh svn$NEWVERSION
+$GUMMISVNPATH/dev/chver.sh svn$NEWVERSION
 
 svn commit -m "$1"
 svn up
