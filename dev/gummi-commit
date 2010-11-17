@@ -1,0 +1,43 @@
+#!/bin/sh
+# gummi-commit-0.1
+
+# set this to your local gummi svn trunk:
+GUMMISVNPATH=""
+
+if [ ! -d $GUMMISVNPATH ]; then
+	echo "gummi svn path not set or removed";
+	exit 0;
+fi
+
+# abort this script if no commit message specified
+if [[ -z $1 ]]; then 
+	echo "no commit message, aborting.."; 
+	exit 0; 
+fi
+
+cd $GUMMISVNPATH
+SVNCHANGES=$(svn status)
+LASTVERSION=$(svn info | sed -rn 's/Revision\: (.*)$/\1/p')
+NEWVERSION=$(( LASTVERSION + 1 ))
+
+# abort this script if there are no changes to sourcecode:
+if [[ -z $SVNCHANGES ]]; then
+	echo "no svn changes, aborting..";
+	exit 0;
+fi
+
+svn status
+
+echo -ne "Continue to commit? "
+read CONTINUE
+if [ $CONTINUE != y ]; then
+	exit 0;
+fi
+
+sed -e "1,30s/PACKAGE_VERSION='[0-9]*'/PACKAGE_VERSION='$NEWVERSION'/g" configure > configure.new
+mv configure.new configure
+
+svn commit -m "$1"
+svn up
+
+

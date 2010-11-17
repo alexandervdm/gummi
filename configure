@@ -20,7 +20,7 @@
 # Identity of this package.
 PACKAGE_NAME='Gummi'
 PACKAGE_TARNAME='gummi'
-PACKAGE_VERSION='571'
+PACKAGE_VERSION='587'
 PACKAGE_STRING='Gummi '$PACKAGE_VERSION
 PACKAGE_BUGREPORT='alexvandermey@gmail.com'
 PACKAGE_URL='http://gummi.midnightcoding.org/'
