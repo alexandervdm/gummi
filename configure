@@ -21,7 +21,7 @@
 PACKAGE='gummi'
 PACKAGE_NAME='Gummi'
 PACKAGE_TARNAME='gummi'
-PACKAGE_VERSION='590'
+PACKAGE_VERSION='591'
 PACKAGE_STRING='Gummi '$PACKAGE_VERSION
 PACKAGE_BUGREPORT='alexvandermey@gmail.com'
 PACKAGE_URL='http://gummi.midnightcoding.org/'
