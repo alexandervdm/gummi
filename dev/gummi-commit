@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 # gummi-commit-0.2
 
 # set this to your local gummi svn trunk:
-GUMMISVNPATH=""
+PROJECT=gummi
+pwd=`pwd`
+GUMMISVNPATH=${pwd%$PROJECT*}$PROJECT
 
 if [ ! -d $GUMMISVNPATH ]; then
 	echo "gummi svn path not set or removed";
@@ -34,12 +36,7 @@ if [ $CONTINUE != y ]; then
 	exit 0;
 fi
 
-sed -e "1,30s/PACKAGE_VERSION='[0-9]*'/PACKAGE_VERSION='$NEWVERSION'/g" configure > configure.new
-mv configure.new configure
-sed -e "1,15s/AC\_INIT(\[Gummi\], \[[0-9]*\]/AC\_INIT(\[Gummi\], \[$NEWVERSION\]/g" configure.ac > configure.ac.new
-mv configure.ac.new configure.ac
+dev/chver.sh svn$NEWVERSION
 
 svn commit -m "$1"
 svn up
-
-

@@ -107,7 +107,7 @@ void latex_update_pdffile(GuLatex* lc) {
  
     g_free(lc->errormessage);
     pdata cresult = utils_popen_r(command);
-    lc->errorline = cresult.ret;
+    lc->errorline = - cresult.ret;
     lc->errormessage = cresult.data;
     lc->modified_since_compile = FALSE;
 
@@ -119,7 +119,7 @@ void latex_update_pdffile(GuLatex* lc) {
         GError* error = NULL;
         GRegex* match_str = 0;
         GMatchInfo* match_info;
-        match_str = g_regex_new(":([\\d+]+):", G_REGEX_DOTALL, 0, &error);
+        match_str = g_regex_new(":(\\d+):", G_REGEX_DOTALL, 0, &error);
 
         if (g_regex_match(match_str, cresult.data, 0, &match_info)) {
             result = g_match_info_fetch_all(match_info);
@@ -133,7 +133,6 @@ void latex_update_pdffile(GuLatex* lc) {
         /* update status light */
         previewgui_update_statuslight("gtk-no");
     } else if (strstr(cresult.data, "No pages of output.")) {
-        lc->errorline = -1;
         previewgui_update_statuslight("gtk-no");
     } else
         previewgui_update_statuslight("gtk-yes");
