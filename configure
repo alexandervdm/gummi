@@ -16,6 +16,16 @@
 ## M4sh Initialization. ##
 ## -------------------- ##
 
+
+# Identity of this package.
+PACKAGE_NAME='Gummi'
+PACKAGE_TARNAME='gummi'
+PACKAGE_VERSION='571'
+PACKAGE_STRING='Gummi '$PACKAGE_VERSION
+PACKAGE_BUGREPORT='alexvandermey@gmail.com'
+PACKAGE_URL='http://gummi.midnightcoding.org/'
+
+
 # Be more Bourne compatible
 DUALCASE=1; export DUALCASE # for MKS sh
 if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then :
@@ -548,14 +558,6 @@ cross_compiling=no
 subdirs=
 MFLAGS=
 MAKEFLAGS=
-
-# Identity of this package.
-PACKAGE_NAME='Gummi'
-PACKAGE_TARNAME='gummi'
-PACKAGE_VERSION='571'
-PACKAGE_STRING='Gummi 571'
-PACKAGE_BUGREPORT='alexvandermey@gmail.com'
-PACKAGE_URL='http://gummi.midnightcoding.org/'
 
 ac_unique_file="src/environment.h"
 # Factoring default headers for most tests.
