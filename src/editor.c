@@ -341,7 +341,7 @@ void editor_apply_searchtag(GuEditor* ec) {
 void editor_search_next(GuEditor* ec, gboolean inverse) {
     L_F_DEBUG;
     GtkTextIter current, start, end, mstart, mend;
-    gboolean ret = FALSE, response = FALSE;
+    gboolean ret = FALSE;
 
     editor_get_current_iter(ec, &current);
 
@@ -369,19 +369,11 @@ void editor_search_next(GuEditor* ec, gboolean inverse) {
 
     if (!ret) {
         if (ec->backwards ^ inverse) {
-            response = utils_yes_no_dialog(
-                    _("Top reached, search from bottom?"));
-            if (GTK_RESPONSE_YES == response) {
-                gtk_text_buffer_place_cursor(ec_sourcebuffer, &end);
-                editor_search_next(ec, inverse);
-            }
+            gtk_text_buffer_place_cursor(ec_sourcebuffer, &end);
+            editor_search_next(ec, inverse);
         } else {
-            response = utils_yes_no_dialog(
-                    _("Bottom reached, search from top?"));
-            if (GTK_RESPONSE_YES == response) {
-                gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
-                editor_search_next(ec, inverse);
-            }
+            gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
+            editor_search_next(ec, inverse);
         }
     }
 }

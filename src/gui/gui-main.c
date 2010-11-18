@@ -457,10 +457,7 @@ void on_menu_rightpane_toggled(GtkWidget *widget, void * user) {
 
 void on_menu_find_activate(GtkWidget *widget, void* user) {
     L_F_DEBUG;
-    gtk_entry_set_text(gui->searchgui->searchentry, "");
-    gtk_entry_set_text(gui->searchgui->replaceentry, "");
-    gtk_widget_grab_focus(GTK_WIDGET(gui->searchgui->searchentry));
-    gtk_widget_show_all(GTK_WIDGET(gui->searchgui->searchwindow));
+    searchgui_main(gui->searchgui);
 }
 
 void on_menu_findnext_activate(GtkWidget *widget, void * user) {
@@ -747,45 +744,6 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
     }
     g_free(text);
     g_free(filepath);
-}
-
-
-gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    gtk_widget_hide(GTK_WIDGET(gui->searchgui->searchwindow));
-    return TRUE;
-}
-
-void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    editor_start_search(gummi->editor,
-            gtk_entry_get_text(gui->searchgui->searchentry),
-            gui->searchgui->backwards,
-            gui->searchgui->wholeword,
-            gui->searchgui->matchcase
-            );
-}
-
-void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user)
-{
-    editor_start_replace_next(gummi->editor,
-            gtk_entry_get_text(gui->searchgui->searchentry),
-            gtk_entry_get_text(gui->searchgui->replaceentry),
-            gui->searchgui->backwards,
-            gui->searchgui->wholeword,
-            gui->searchgui->matchcase
-            );
-}
-
-void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
-    editor_start_replace_all(gummi->editor,
-            gtk_entry_get_text(gui->searchgui->searchentry),
-            gtk_entry_get_text(gui->searchgui->replaceentry),
-            gui->searchgui->backwards,
-            gui->searchgui->wholeword,
-            gui->searchgui->matchcase
-            );
 }
 
 void on_bibcolumn_clicked(GtkWidget* widget, void* user) {

@@ -40,19 +40,19 @@ typedef struct _GuSearchGui {
     gboolean backwards;
     gboolean matchcase;
     gboolean wholeword;
+    gchar* prev_search;
+    gchar* prev_replace;
 } GuSearchGui;
 
 GuSearchGui* searchgui_init(GtkBuilder* builder);
+void searchgui_main(GuSearchGui* gc);
 void on_toggle_matchcase_toggled(GtkWidget* widget, void* user);
 void on_toggle_wholeword_toggled(GtkWidget* widget, void* user);
 void on_toggle_backwards_toggled(GtkWidget* widget, void* user);
 void on_searchgui_text_changed(GtkEditable* editable, void* user);
-void on_tabwidth_value_changed(GtkWidget* widget, void* user);
-void on_autosave_value_changed(GtkWidget* widget, void* user);
-void on_compile_value_changed(GtkWidget* widget, void* user);
-void on_editor_font_set(GtkWidget* widget, void* user);
-void on_combo_typesetter_changed(GtkWidget* widget, void* user);
-void on_combo_language_changed(GtkWidget* widget, void* user);
-void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
+gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user);
+void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user);
+void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user);
+void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user);
 
 #endif /* GUMMI_GUI_SEARCH_H */
