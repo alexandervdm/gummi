@@ -248,7 +248,7 @@ void previewgui_reset(GuPreviewGui* pc) {
     previewgui_stop_preview(pc);
     previewgui_update_preview(pc);
 
-    if (!pc->errormode && gummi->latex->errorline)
+    if (!pc->errormode && gummi->latex->errorlines[0])
         previewgui_start_error_mode(pc);
     else
         previewgui_set_pdffile(pc, gummi->finfo->pdffile);
@@ -262,9 +262,9 @@ gboolean previewgui_update_preview(gpointer user) {
     GuPreviewGui* pc = (GuPreviewGui*)user;
     latex_update_workfile(gummi->latex);
     latex_update_pdffile(gummi->latex);
-    editor_apply_errortags(gummi->editor, gummi->latex->errorline);
+    editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
     errorbuffer_set_text(gummi->latex->errormessage);
-    if (!gummi->latex->errorline && pc->errormode) {
+    if (!gummi->latex->errorlines[0] && pc->errormode) {
         previewgui_stop_error_mode(pc);
         previewgui_set_pdffile(pc, gummi->finfo->pdffile);
     }

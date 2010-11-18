@@ -41,8 +41,8 @@ typedef struct _GuLatex {
     GuEditor* b_editor;
 
     gchar* typesetter;
-    gint errorline;
-    gint prev_errorline;
+    /* use fixed size for errorlines in consider of performance */
+    gint errorlines[BUFSIZ];
     gchar* errormessage;
     gboolean modified_since_compile;
 } GuLatex;

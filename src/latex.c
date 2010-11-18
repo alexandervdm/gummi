@@ -53,8 +53,7 @@ GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec) {
     l->b_editor = ec;
 
     /* initialize members */
-    l->errorline = 0;
-    l->prev_errorline = 0;
+    l->errormessage = NULL;
     l->modified_since_compile = FALSE;
     return l;
 }
@@ -101,7 +100,6 @@ void latex_update_pdffile(GuLatex* lc) {
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
-                                     "-halt-on-error "
                                      "%s "
                                      "-output-directory=\"%s\" \"%s\"",
                                      dirname,
@@ -114,26 +112,30 @@ void latex_update_pdffile(GuLatex* lc) {
     previewgui_update_statuslight("gtk-refresh");
  
     g_free(lc->errormessage);
+
     pdata cresult = utils_popen_r(command);
-    lc->errorline = - cresult.ret;
+    memset(lc->errorlines, 0, BUFSIZ);
     lc->errormessage = cresult.data;
     lc->modified_since_compile = FALSE;
 
     /* find error line */
-    if (cresult.ret == 1 &&
-            (strstr(cresult.data, "Fatal error") ||
-            (strstr(cresult.data, "No pages of output.")))) {
-        gchar** result = 0;
+    if (cresult.ret) {
+        gchar* result = NULL;
         GError* error = NULL;
-        GRegex* match_str = 0;
+        GRegex* match_str = NULL;
         GMatchInfo* match_info;
+
         match_str = g_regex_new(":(\\d+):", G_REGEX_DOTALL, 0, &error);
 
         if (g_regex_match(match_str, cresult.data, 0, &match_info)) {
-            result = g_match_info_fetch_all(match_info);
-            if (result[1])
-                lc->errorline = atoi(result[1]);
-            g_strfreev(result);
+            gint count = 0;
+            while (g_match_info_matches(match_info)) {
+                if (count + 1== BUFSIZ) break;
+                result = g_match_info_fetch(match_info, 1);
+                lc->errorlines[count++] = atoi(result);
+                g_free(result);
+                g_match_info_next(match_info, NULL);
+            }
         }
         g_match_info_free(match_info);
         g_regex_unref(match_str);

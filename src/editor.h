@@ -71,7 +71,7 @@ gchar* editor_grab_buffer(GuEditor* ec);
 void editor_insert_package(GuEditor* ec, const gchar* package);
 void editor_insert_bib(GuEditor* ec, const gchar* package);
 void editor_set_selection_textstyle(GuEditor* ec, const gchar* type);
-void editor_apply_errortags(GuEditor* ec, gint line);
+void editor_apply_errortags(GuEditor* ec, gint* lines);
 void editor_jumpto_search_result(GuEditor* ec, gint direction);
 void editor_start_search(GuEditor* ec, const gchar* term, gboolean backwards,
         gboolean wholeword, gboolean matchcase);

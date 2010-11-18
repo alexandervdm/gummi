@@ -271,18 +271,20 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     g_regex_unref(match_str);
 }
 
-void editor_apply_errortags(GuEditor* ec, gint line) {
+void editor_apply_errortags(GuEditor* ec, gint* lines) {
     L_F_DEBUG;
     GtkTextIter start, end;
+    gint count = 0;
     /* remove the tag from the table if it is in threre */
     if (gtk_text_tag_table_lookup(ec->editortags, "error"))
         gtk_text_tag_table_remove(ec->editortags, ec->errortag);
 
-    if (line) {
-        gtk_text_tag_table_add(ec->editortags, ec->errortag);
-        gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &start, line -1);
-        gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &end, line);
+    gtk_text_tag_table_add(ec->editortags, ec->errortag);
+    while (lines[count]) {
+        gtk_text_buffer_get_iter_at_line(ec_sourcebuffer,&start,lines[count]-1);
+        gtk_text_buffer_get_iter_at_line(ec_sourcebuffer, &end, lines[count]);
         gtk_text_buffer_apply_tag(ec_sourcebuffer, ec->errortag, &start, &end);
+        ++count;
     }
 }
 
