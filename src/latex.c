@@ -46,18 +46,17 @@
 
 GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec) {
     L_F_DEBUG;
-    GuLatex* m = g_new0(GuLatex, 1);
+    GuLatex* l = g_new0(GuLatex, 1);
 
     /* initialize basis */
-    m->b_finfo = fc;
-    m->b_editor = ec;
+    l->b_finfo = fc;
+    l->b_editor = ec;
 
     /* initialize members */
-    m->typesetter = g_strdup(config_get_value("typesetter"));
-    m->errorline = 0;
-    m->prev_errorline = 0;
-    m->modified_since_compile = FALSE;
-    return m;
+    l->errorline = 0;
+    l->prev_errorline = 0;
+    l->modified_since_compile = FALSE;
+    return l;
 }
 
 void latex_update_workfile(GuLatex* lc) {
@@ -90,15 +89,24 @@ void latex_update_workfile(GuLatex* lc) {
 void latex_update_pdffile(GuLatex* lc) {
     L_F_DEBUG;
     if (!lc->modified_since_compile) return;
+
+    const gchar* typesetter = config_get_value("typesetter");
+    if (!g_find_program_in_path(typesetter)) {
+        slog(L_G_ERROR, "Typesetter command `%s' not found, setting to "
+                "pdflatex.\n", typesetter);
+        config_set_value("typesetter", "pdflatex");
+    }
     gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
     gchar* command = g_strdup_printf("cd \"%s\";"
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
                                      "-halt-on-error "
+                                     "%s "
                                      "-output-directory=\"%s\" \"%s\"",
                                      dirname,
-                                     lc->typesetter,
+                                     config_get_value("typesetter"),
+                                     config_get_value("extra_flags"),
                                      lc->b_finfo->tmpdir,
                                      lc->b_finfo->workfile);
     g_free(dirname);
@@ -148,7 +156,7 @@ void latex_update_auxfile(GuLatex* lc) {
                                      "-interaction=nonstopmode "
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
-                                     lc->typesetter,
+                                     config_get_value("typesetter"),
                                      lc->b_finfo->tmpdir,
                                      lc->b_finfo->workfile);
     g_free(dirname);

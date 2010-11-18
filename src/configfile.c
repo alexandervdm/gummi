@@ -72,6 +72,7 @@ const gchar config_str[] =
 "\n"
 "[Compile]\n"
 "typesetter = pdflatex\n"
+"extrafags = \n"
 "compile_status = True\n"
 "compile_scheme = on_idle\n"
 "compile_timer = 1\n"

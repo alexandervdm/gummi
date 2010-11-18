@@ -61,14 +61,13 @@ GuMotion* motion_init(GuEditor* ec) {
 gboolean motion_idle_cb(void* user) {
     if (gui->previewgui->preview_on_idle)
         previewgui_update_preview(gui->previewgui);
-    return TRUE;
+    return FALSE;
 }
 
 void motion_start_timer(GuMotion* mc) {
     L_F_DEBUG;
     motion_stop_timer(mc);
-    mc->timer = g_timeout_add_seconds(
-            atoi(config_get_value("compile_timer")),
+    mc->timer = g_timeout_add_seconds(atoi(config_get_value("compile_timer")),
             motion_idle_cb, mc);
 }
 

@@ -231,6 +231,6 @@ slist* slist_find_index_of(slist* head, const gchar* term) {
     prev->next = g_new0(slist, 1);
     current = prev->next;
     current->first = g_strdup(term);
-    current->second = g_strdup("__NULL__");
+    current->second = g_strdup("");
     return current;
 }
