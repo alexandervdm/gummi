@@ -514,7 +514,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     GError* error = 0;
     GMatchInfo* match_info;
     GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
-    gchar* res[TEXCOUNT_OUTPUT_LINES];
+    gchar* res[TEXCOUNT_OUTPUT_LINES] = { 0 };
     const gchar* terms[] = {
         _("Words in text"),
         _("Words in headers"),
@@ -535,7 +535,9 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     };
     
     if (g_find_program_in_path("texcount")) {
-        cmd = g_strdup_printf("texcount %s", gummi->finfo->workfile);
+        /* XXX: texcount can't find file containing spaces, see bug #162 */
+        cmd = g_strdup_printf("texcount '%s'", gummi->finfo->workfile);
+        printf("%s\n", cmd);
         pdata result = utils_popen_r(cmd);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
