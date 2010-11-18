@@ -537,7 +537,6 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     if (g_find_program_in_path("texcount")) {
         /* XXX: texcount can't find file containing spaces, see bug #162 */
         cmd = g_strdup_printf("texcount '%s'", gummi->finfo->workfile);
-        printf("%s\n", cmd);
         pdata result = utils_popen_r(cmd);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
