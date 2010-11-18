@@ -140,9 +140,6 @@ void latex_update_pdffile(GuLatex* lc) {
         g_match_info_free(match_info);
         g_regex_unref(match_str);
 
-        /* update status light */
-        previewgui_update_statuslight("gtk-no");
-    } else if (strstr(cresult.data, "No pages of output.")) {
         previewgui_update_statuslight("gtk-no");
     } else
         previewgui_update_statuslight("gtk-yes");

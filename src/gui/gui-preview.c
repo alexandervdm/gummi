@@ -101,7 +101,6 @@ void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
     GError *err = NULL;
     pc->page_current = 0;
     
-    g_free(pc->uri);
     pc->uri = g_strconcat("file://", pdffile, NULL);
 
     /* clean up */
@@ -244,14 +243,16 @@ gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* pc) {
 
 void previewgui_reset(GuPreviewGui* pc) {
     L_F_DEBUG;
+    /* reset uri */
+    g_free(pc->uri);
+    pc->uri = NULL;
+
     gummi->latex->modified_since_compile = TRUE;
     previewgui_stop_preview(pc);
     previewgui_update_preview(pc);
 
     if (!pc->errormode && gummi->latex->errorlines[0])
         previewgui_start_error_mode(pc);
-    else
-        previewgui_set_pdffile(pc, gummi->finfo->pdffile);
 
     if (config_get_value("compile_status"))
         previewgui_start_preview(pc);
@@ -260,15 +261,19 @@ void previewgui_reset(GuPreviewGui* pc) {
 gboolean previewgui_update_preview(gpointer user) {
     L_F_DEBUG;
     GuPreviewGui* pc = (GuPreviewGui*)user;
+
     latex_update_workfile(gummi->latex);
     latex_update_pdffile(gummi->latex);
     editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
     errorbuffer_set_text(gummi->latex->errormessage);
-    if (!gummi->latex->errorlines[0] && pc->errormode) {
+
+    if (!gummi->latex->errorlines[0] && pc->errormode)
         previewgui_stop_error_mode(pc);
+
+    if (!pc->uri)
         previewgui_set_pdffile(pc, gummi->finfo->pdffile);
-    }
     previewgui_refresh(pc);
+
     return (0 == strcmp(config_get_value("compile_scheme"), "real_time"));
 }
 

@@ -199,6 +199,7 @@ gboolean gui_quit(void) {
 }
 
 void gui_new_environment(const gchar* filename) {
+    L_F_DEBUG;
     gummi_new_environment(gummi, filename);
     add_to_recent_list(filename);
     gui_update_title();
