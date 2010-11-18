@@ -1418,6 +1418,7 @@ bibliography database</property>
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
+        <property name="spacing">8</property>
         <child>
           <object class="GtkHBox" id="hbox2">
             <property name="visible">True</property>
@@ -1439,8 +1440,8 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
@@ -1483,43 +1484,52 @@ bibliography database</property>
           </packing>
         </child>
         <child>
-          <object class="GtkCheckButton" id="toggle_matchcase">
-            <property name="label" translatable="yes">Match case</property>
+          <object class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="active">True</property>
-            <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_matchcase_toggled"/>
+            <property name="border_width">6</property>
+            <property name="spacing">3</property>
+            <child>
+              <object class="GtkCheckButton" id="toggle_wholeword">
+                <property name="label" translatable="yes">Match entire word only</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="on_toggle_wholeword_toggled"/>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="toggle_backwards">
+                <property name="label" translatable="yes">Search backwards</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="on_toggle_backwards_toggled"/>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="toggle_matchcase">
+                <property name="label" translatable="yes">Match case</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="on_toggle_matchcase_toggled"/>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="toggle_wholeword">
-            <property name="label" translatable="yes">Match entire word only</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_wholeword_toggled"/>
-          </object>
-          <packing>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="toggle_backwards">
-            <property name="label" translatable="yes">Search backwards</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-            <signal name="toggled" handler="on_toggle_backwards_toggled"/>
-          </object>
-          <packing>
-            <property name="position">4</property>
           </packing>
         </child>
         <child>
@@ -1591,7 +1601,7 @@ bibliography database</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">5</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
