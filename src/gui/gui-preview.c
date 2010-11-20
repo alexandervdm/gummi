@@ -132,7 +132,7 @@ void previewgui_refresh(GuPreviewGui* pc) {
     pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err);
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
     
-    // recheck document dimensions on refresh for orientation changes:
+    /* recheck document dimensions on refresh for orientation changes */
     poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
 
     pc->page_total = poppler_document_get_n_pages(pc->doc);
@@ -267,13 +267,16 @@ gboolean previewgui_update_preview(gpointer user) {
     editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
     errorbuffer_set_text(gummi->latex->errormessage);
 
-    if (!gummi->latex->errorlines[0] && pc->errormode)
-        previewgui_stop_error_mode(pc);
+    if (gummi->latex->errorlines[0]) goto ret;
 
-    if (!pc->uri)
-        previewgui_set_pdffile(pc, gummi->finfo->pdffile);
+    if (pc->errormode) previewgui_stop_error_mode(pc);
+    if (!pc->uri) previewgui_set_pdffile(pc, gummi->finfo->pdffile);
+
+ret:
+    /* We need to refresh preview even if PDF compilation fails, because
+     * the previous PDF file is now(possibly) replaced with a new one, so
+     * the previous FD is invalidized */
     previewgui_refresh(pc);
-
     return (0 == strcmp(config_get_value("compile_scheme"), "real_time"));
 }
 
