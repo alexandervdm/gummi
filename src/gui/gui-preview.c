@@ -267,12 +267,11 @@ gboolean previewgui_update_preview(gpointer user) {
     editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
     errorbuffer_set_text(gummi->latex->errormessage);
 
-    if (gummi->latex->errorlines[0]) goto ret;
+    if (!gummi->latex->errorlines[0]) {
+        if (pc->errormode) previewgui_stop_error_mode(pc);
+        if (!pc->uri) previewgui_set_pdffile(pc, gummi->finfo->pdffile);
+    }
 
-    if (pc->errormode) previewgui_stop_error_mode(pc);
-    if (!pc->uri) previewgui_set_pdffile(pc, gummi->finfo->pdffile);
-
-ret:
     /* We need to refresh preview even if PDF compilation fails, because
      * the previous PDF file is now(possibly) replaced with a new one, so
      * the previous FD is invalidized */
