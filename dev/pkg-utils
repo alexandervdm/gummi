@@ -31,8 +31,10 @@ if [ "$1" == "clean" ]; then
   exit 0
 fi
 
-echo "Package: $package"
-echo "Version: $version"
+echo "Package  : $package"
+echo "Version  : $version"
+echo "NoTeX    : $notex"
+echo "Maverick : $maverick"
 
 cd ..
 cp -r $package /tmp/$package-$version
