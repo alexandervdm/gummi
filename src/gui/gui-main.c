@@ -167,6 +167,15 @@ void gui_main(GtkBuilder* builder) {
     g_signal_connect(g_e_buffer, "changed",
             G_CALLBACK(check_preview_timer), NULL);
     gtk_widget_show_all(gui->mainwindow);
+    
+    
+    // TODO: SVN NOTICE 23 NOVEMBER - REMOVE ON 0.6.0 RELEASE
+    if (atoi(config_get_value("svnpopup")) != 1) {
+        GtkWidget *tmp;
+        tmp = gtk_builder_get_object(builder, "svnpopup"); 
+        gtk_widget_show(tmp);
+    }
+    
     gtk_main();
 }
 
