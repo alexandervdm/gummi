@@ -110,13 +110,14 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
 
     /* list available style schemes */
     GList* schemes = editor_list_style_scheme_sorted(gummi->editor);
+    GList* schemes_iter = schemes;
     GtkTreeIter iter;
-    while (schemes) {
+    while (schemes_iter) {
         gtk_list_store_append(p->list_styleschemes, &iter);
         gtk_list_store_set(p->list_styleschemes, &iter,
-                0, gtk_source_style_scheme_get_name(schemes->data),
-                1, gtk_source_style_scheme_get_id(schemes->data), -1);
-        schemes = g_list_next(schemes);
+                0, gtk_source_style_scheme_get_name(schemes_iter->data),
+                1, gtk_source_style_scheme_get_id(schemes_iter->data), -1);
+        schemes_iter = g_list_next(schemes_iter);
     }
     g_list_free(schemes);
 
@@ -253,9 +254,9 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
     GList* schemes_iter = schemes;
     gint column = 0;
     GtkTreePath* treepath;
-    while (schemes) {
-        if (0 == strcmp(gtk_source_style_scheme_get_id(schemes->data), scheme))
-        {
+    while (schemes_iter) {
+        if (0 == strcmp(gtk_source_style_scheme_get_id(schemes_iter->data),
+                    scheme)) {
             gchar* path = g_strdup_printf("%d", column);
             treepath = gtk_tree_path_new_from_string(path);
             gtk_tree_view_set_cursor(prefs->styleschemes_treeview, treepath,

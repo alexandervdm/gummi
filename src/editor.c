@@ -88,7 +88,6 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
 
     const gchar* style_scheme = config_get_value("style_scheme");
     editor_set_style_scheme_by_id(ec, style_scheme);
-    slog(L_INFO, "setting styles scheme to %s\n", style_scheme);
 
 #ifdef USE_GTKSPELL
     if (config_get_value("spelling"))
@@ -492,8 +491,16 @@ void editor_redo_change(GuEditor* ec) {
 }
 
 void editor_set_style_scheme_by_id(GuEditor* ec, const gchar* id) {
-    gtk_source_buffer_set_style_scheme(ec->sourcebuffer,
-            gtk_source_style_scheme_manager_get_scheme(ec->stylemanager, id));
+    GtkSourceStyleScheme* scheme =
+        gtk_source_style_scheme_manager_get_scheme(ec->stylemanager, id);
+    slog(L_INFO, "setting styles scheme to %s\n", id);
+
+    if (!scheme) {
+        slog(L_ERROR, "no style scheme %s found, setting to classic\n", id);
+        scheme = gtk_source_style_scheme_manager_get_scheme(ec->stylemanager,
+                "classic");
+    }
+    gtk_source_buffer_set_style_scheme(ec->sourcebuffer, scheme);
 }
 
 /* The following functions are taken from gedit and partially modified */
