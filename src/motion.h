@@ -1,5 +1,5 @@
 /**
- * @file    latex.h
+ * @file   motion.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>

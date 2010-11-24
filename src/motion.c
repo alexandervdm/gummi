@@ -1,5 +1,5 @@
 /**
- * @file   preview.c
+ * @file   motion.c
  * @brief  
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
