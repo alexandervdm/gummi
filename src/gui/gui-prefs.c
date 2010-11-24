@@ -270,7 +270,7 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
     }
     g_list_free(schemes);
 
-    if (!schemes_iter) {
+    if (schemes && !schemes_iter) {
         treepath = gtk_tree_path_new_from_string("0");
         gtk_tree_view_set_cursor(prefs->styleschemes_treeview, treepath, NULL,
                 FALSE);
@@ -485,5 +485,4 @@ void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user)
     gtk_tree_model_get(model, &iter, 0, &name, 1, &id, -1);
     editor_set_style_scheme_by_id(gummi->editor, id);
     config_set_value("style_scheme", id);
-    slog(L_INFO, "style scheme set to %s\n", name);
 }
