@@ -50,6 +50,8 @@ extern GummiGui* gui;
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     L_F_DEBUG;
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
     GuPreviewGui* p = g_new0(GuPreviewGui, 1);
     GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->previewgui_viewport =

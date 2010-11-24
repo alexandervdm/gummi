@@ -39,6 +39,9 @@
 extern GuEditor* ec;
 
 GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
+    L_F_DEBUG;
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
     GuBiblio* b = g_new0(GuBiblio, 1);
     b->b_finfo = finfo;
     b->progressbar =
@@ -56,6 +59,7 @@ GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
 }
 
 gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
+    L_F_DEBUG;
     gchar* content;
     gchar** result;
     GMatchInfo *match_info;
@@ -79,6 +83,7 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
 }
 
 gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
+    L_F_DEBUG;
     gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
     gchar* auxname = NULL;
 
@@ -111,8 +116,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
     return FALSE;
 }
 
-gboolean biblio_set_filename(GuBiblio* bc, gchar *filename)
-{
+gboolean biblio_set_filename(GuBiblio* bc, gchar *filename) {
+    L_F_DEBUG;
     g_free(bc->b_finfo->bibfile);
 
     if (bc->b_finfo->filename && !g_path_is_absolute(filename)) {
@@ -125,6 +130,7 @@ gboolean biblio_set_filename(GuBiblio* bc, gchar *filename)
 }
 
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
+    L_F_DEBUG;
     int entry_total = 0;
     
     GtkTreeIter iter;

@@ -38,6 +38,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 
 #include "fileinfo.h"
@@ -49,6 +50,7 @@ typedef struct _GuEditor {
     GuFileInfo* b_finfo;
     GtkSourceView *sourceview;
     GtkSourceBuffer *sourcebuffer;
+    GtkSourceStyleSchemeManager* stylemanager;
     GtkTextTag* errortag;
     GtkTextTag* searchtag;
     GtkTextTagTable* editortags;
@@ -87,5 +89,8 @@ void editor_get_current_iter(GuEditor* ec, GtkTextIter* current);
 inline void editor_scroll_to_cursor(GuEditor* ec);
 void editor_undo_change(GuEditor* ec);
 void editor_redo_change(GuEditor* ec);
+void editor_set_style_scheme_by_id(GuEditor* ec, const gchar* id);
+gint schemes_compare (gconstpointer a, gconstpointer b);
+GList* editor_list_style_scheme_sorted(GuEditor* ec);
 
 #endif /* GUMMI_EDITOR_H */

@@ -58,6 +58,8 @@ extern GummiGui* gui;
 
 GummiGui* gui_init(GtkBuilder* builder) {
     L_F_DEBUG;
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
     GtkWidget *hpaned;
     GtkWidget *errortext;
     gint wx = 0, wy = 0, width = 0, height = 0;

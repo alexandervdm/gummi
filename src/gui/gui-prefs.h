@@ -48,6 +48,8 @@ typedef struct _GuPrefsGui {
     GtkSpinButton* autosave_timer;
     GtkComboBox* combo_languages;
     GtkListStore* list_languages;
+    GtkTreeView* styleschemes_treeview;
+    GtkListStore* list_styleschemes;
     GtkTextView* default_text;
     GtkTextBuffer* default_buffer;
     GtkComboBox* typesetter;
@@ -82,5 +84,6 @@ void on_editor_font_set(GtkWidget* widget, void* user);
 void on_combo_typesetter_changed(GtkWidget* widget, void* user);
 void on_combo_language_changed(GtkWidget* widget, void* user);
 void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
+void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user);
 
 #endif /* GUMMI_GUI_PREFS_H */

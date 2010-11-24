@@ -96,7 +96,6 @@ int main (int argc, char *argv[]) {
     gtk_builder_set_translation_domain(builder, PACKAGE);
 
     /* initialize classes */
-    gui = gui_init(builder);
     finfo = fileinfo_init();
     editor = editor_init(builder, finfo);
     latex = latex_init(finfo, editor); 
@@ -105,6 +104,7 @@ int main (int argc, char *argv[]) {
     motion = motion_init(editor);
 
     gummi = gummi_init(finfo, editor, motion, latex, biblio, templ);
+    gui = gui_init(builder);
 
     slog_set_gui_parent(gui->mainwindow);
 

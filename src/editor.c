@@ -36,6 +36,7 @@
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 #ifdef USE_GTKSPELL
 #   include <gtkspell/gtkspell.h>
@@ -57,6 +58,8 @@ const gchar style[][3][20] = {
 
 GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     L_F_DEBUG;
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
     GtkWidget *scroll;
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language
@@ -66,6 +69,7 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
     ec->sourceview =
         GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));
+    ec->stylemanager = gtk_source_style_scheme_manager_get_default();
     ec->errortag = gtk_text_tag_new("error");
     ec->searchtag = gtk_text_tag_new("search");
     ec->editortags = gtk_text_buffer_get_tag_table(ec_sourcebuffer);
@@ -81,6 +85,10 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
             (gboolean)config_get_value("spaces_instof_tabs"));
     gtk_source_view_set_auto_indent(ec->sourceview,
             (gboolean)config_get_value("autoindentation"));
+
+    const gchar* style_scheme = config_get_value("style_scheme");
+    editor_set_style_scheme_by_id(ec, style_scheme);
+    slog(L_INFO, "setting styles scheme to %s\n", style_scheme);
 
 #ifdef USE_GTKSPELL
     if (config_get_value("spelling"))
@@ -481,4 +489,43 @@ void editor_redo_change(GuEditor* ec) {
         editor_scroll_to_cursor(ec);
         gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
     }
+}
+
+void editor_set_style_scheme_by_id(GuEditor* ec, const gchar* id) {
+    gtk_source_buffer_set_style_scheme(ec->sourcebuffer,
+            gtk_source_style_scheme_manager_get_scheme(ec->stylemanager, id));
+}
+
+/* The following functions are taken from gedit and partially modified */
+
+gint schemes_compare (gconstpointer a, gconstpointer b) {
+    GtkSourceStyleScheme *scheme_a = (GtkSourceStyleScheme *)a;
+    GtkSourceStyleScheme *scheme_b = (GtkSourceStyleScheme *)b;
+
+    const gchar *name_a = gtk_source_style_scheme_get_name(scheme_a);
+    const gchar *name_b = gtk_source_style_scheme_get_name(scheme_b);
+
+    return g_utf8_collate(name_a, name_b);
+}
+
+GList* editor_list_style_scheme_sorted(GuEditor* ec) {
+    L_F_DEBUG;
+    const gchar * const * scheme_ids;
+    GList *schemes = NULL;
+
+    scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids(
+            ec->stylemanager);
+
+    while (*scheme_ids != NULL) {
+        GtkSourceStyleScheme *scheme;
+        scheme = gtk_source_style_scheme_manager_get_scheme(ec->stylemanager,
+                *scheme_ids);
+        schemes = g_list_prepend(schemes, scheme);
+        ++scheme_ids;
+    }
+
+    if (schemes != NULL)
+        schemes = g_list_sort(schemes, (GCompareFunc)schemes_compare);
+
+    return schemes;
 }

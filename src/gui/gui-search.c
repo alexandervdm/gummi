@@ -42,6 +42,8 @@ extern GummiGui* gui;
 
 GuSearchGui* searchgui_init(GtkBuilder* builder) {
     L_F_DEBUG;
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
     GuSearchGui* s = g_new0(GuSearchGui, 1);
     s->searchwindow =
         GTK_WIDGET(gtk_builder_get_object(builder, "searchwindow"));

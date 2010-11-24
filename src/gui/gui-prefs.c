@@ -45,7 +45,8 @@ extern GummiGui* gui;
 
 GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
     L_F_DEBUG;
-    GuPrefsGui* p = (GuPrefsGui*)g_malloc(sizeof(GuPrefsGui));
+
+    GuPrefsGui* p = g_new0(GuPrefsGui, 1);
     GtkBuilder* builder = gtk_builder_new();
     gtk_builder_add_from_file(builder, DATADIR"/prefs.glade", NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
@@ -78,6 +79,10 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
         GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_languages"));
     p->list_languages =
         GTK_LIST_STORE(gtk_builder_get_object(builder, "list_languages"));
+    p->styleschemes_treeview =
+        GTK_TREE_VIEW(gtk_builder_get_object(builder, "styleschemes_treeview"));
+    p->list_styleschemes =
+        GTK_LIST_STORE(gtk_builder_get_object(builder, "list_styleschemes"));
     p->default_text =
         GTK_TEXT_VIEW(gtk_builder_get_object(builder, "default_text"));
     p->default_buffer = 
@@ -102,6 +107,18 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
 
     gtk_window_set_transient_for(GTK_WINDOW(p->prefwindow), 
             GTK_WINDOW(mainwindow));
+
+    /* list available style schemes */
+    GList* schemes = editor_list_style_scheme_sorted(gummi->editor);
+    GtkTreeIter iter;
+    while (schemes) {
+        gtk_list_store_append(p->list_styleschemes, &iter);
+        gtk_list_store_set(p->list_styleschemes, &iter,
+                0, gtk_source_style_scheme_get_name(schemes->data),
+                1, gtk_source_style_scheme_get_id(schemes->data), -1);
+        schemes = g_list_next(schemes);
+    }
+    g_list_free(schemes);
 
 #ifdef USE_GTKSPELL
     /* list available languages */
@@ -198,6 +215,7 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
             config_get_value("welcome"), strlen(config_get_value("welcome")));
 
     /* set combo boxes */
+    /* typesetter */
     const gchar* typesetter = config_get_value("typesetter");
     gtk_widget_hide(GTK_WIDGET(gui->prefsgui->commandbox));
     if (0 == strcmp(typesetter, "pdflatex"))
@@ -210,6 +228,7 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
         gtk_combo_box_set_active(prefs->typesetter, 2);
     }
 
+    /* compile scheme */
     if (0 == strcmp(config_get_value("compile_scheme"), "real_time"))
         gtk_combo_box_set_active(prefs->compile_scheme, 1);
 
@@ -226,6 +245,36 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
         }
         ++count;
         valid = gtk_tree_model_iter_next(combo_lang, &iter);
+    }
+
+    /* set style scheme */
+    const gchar* scheme = config_get_value("style_scheme");
+    GList* schemes = editor_list_style_scheme_sorted(gummi->editor);
+    GList* schemes_iter = schemes;
+    gint column = 0;
+    GtkTreePath* treepath;
+    while (schemes) {
+        if (0 == strcmp(gtk_source_style_scheme_get_id(schemes->data), scheme))
+        {
+            gchar* path = g_strdup_printf("%d", column);
+            treepath = gtk_tree_path_new_from_string(path);
+            gtk_tree_view_set_cursor(prefs->styleschemes_treeview, treepath,
+                    NULL, FALSE);
+            gtk_tree_path_free(treepath);
+            g_free(path);
+            break;
+        }
+        ++column;
+        schemes_iter = g_list_next(schemes_iter);
+    }
+    g_list_free(schemes);
+
+    if (!schemes_iter) {
+        treepath = gtk_tree_path_new_from_string("0");
+        gtk_tree_view_set_cursor(prefs->styleschemes_treeview, treepath, NULL,
+                FALSE);
+        gtk_tree_path_free(treepath);
+        editor_set_style_scheme_by_id(gummi->editor, "classic");
     }
 
     /* set extra flags */
@@ -420,4 +469,20 @@ void on_combo_compilescheme_changed(GtkWidget* widget, void* user) {
     slog(L_INFO, "compile scheme set to %s\n", scheme[selected]);
     config_set_value("compile_scheme", scheme[selected]);
     previewgui_reset(gui->previewgui);
+}
+
+void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user)
+{
+    L_F_DEBUG;
+    GtkTreeIter iter;
+    gchar* name;
+    gchar* id;
+    GtkTreeModel* model = GTK_TREE_MODEL(gtk_tree_view_get_model(treeview));
+    GtkTreeSelection* selection = gtk_tree_view_get_selection(treeview);
+
+    gtk_tree_selection_get_selected(selection, &model, &iter);
+    gtk_tree_model_get(model, &iter, 0, &name, 1, &id, -1);
+    editor_set_style_scheme_by_id(gummi->editor, id);
+    config_set_value("style_scheme", id);
+    slog(L_INFO, "style scheme set to %s\n", name);
 }

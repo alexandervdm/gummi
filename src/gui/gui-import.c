@@ -43,7 +43,9 @@ extern GummiGui* gui;
 
 GuImportGui* importgui_init(GtkBuilder* builder) {
     L_F_DEBUG;
-    GuImportGui* i = (GuImportGui*)g_malloc(sizeof(GuImportGui));
+    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+
+    GuImportGui* i = g_new0(GuImportGui, 1);
     i->box_image =
         GTK_HBOX(gtk_builder_get_object(builder, "box_image"));
     i->box_table =
