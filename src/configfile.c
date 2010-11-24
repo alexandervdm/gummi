@@ -73,7 +73,7 @@ const gchar config_str[] =
 "\n"
 "[Compile]\n"
 "typesetter = pdflatex\n"
-"extrafags = \n"
+"extra_flags = \n"
 "compile_status = True\n"
 "compile_scheme = on_idle\n"
 "compile_timer = 1\n"
@@ -141,7 +141,7 @@ const gchar* config_get_value(const gchar* term) {
     slist* index = slist_find_index_of(config_head, term);
 
     ret = index->second;
-    if (0 == strcmp(ret, "False"))
+    if (ret && 0 == strcmp(ret, "False"))
         return NULL;
     return ret;
 }
