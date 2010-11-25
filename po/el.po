@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-24 13:26+0800\n"
+"POT-Creation-Date: 2010-11-25 20:23+0800\n"
 "PO-Revision-Date: 2010-05-24 14:43+0200\n"
 "Last-Translator: Dimitris Leventeas <mydimle@gmail.com>\n"
 "Language-Team: EL <mydimle@gmail.com>>\n"
@@ -137,26 +137,43 @@ msgid "Compile"
 msgstr "Μετάφραση"
 
 #: ../data/gummi.glade.h:39
+msgid ""
+"Compile LaTeX document\n"
+"and update preview."
+msgstr ""
+
+#: ../data/gummi.glade.h:41
+#, fuzzy
+msgid "Compile _PDF"
+msgstr "Μετάφραση"
+
+#: ../data/gummi.glade.h:42
 #, fuzzy
 msgid ""
 "Compile the active \n"
 "bibliography database"
 msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../data/gummi.glade.h:41
+#: ../data/gummi.glade.h:44
 msgid "Create a new document"
 msgstr "Δημιουργία νέου έγγράφου"
 
-#: ../data/gummi.glade.h:42
+#: ../data/gummi.glade.h:45
 #, fuzzy
 msgid "Create new document from template.."
 msgstr "Δημιουργία νέου κειμένου"
 
-#: ../data/gummi.glade.h:43
+#: ../data/gummi.glade.h:46
 msgid "Deletes the selected template"
 msgstr ""
 
-#: ../data/gummi.glade.h:44
+#: ../data/gummi.glade.h:47
+msgid ""
+"Detect mention of a bibtex\n"
+"file in the current document"
+msgstr ""
+
+#: ../data/gummi.glade.h:49
 msgid ""
 "Determines whether the\n"
 "cells have line borders. "
@@ -164,15 +181,15 @@ msgstr ""
 "Αποφάσισε αν τα\n"
 "κελιά έχουν γραμμές συνόρων. "
 
-#: ../data/gummi.glade.h:46
+#: ../data/gummi.glade.h:51
 msgid "Double line"
 msgstr "Διπλή γραμμή"
 
-#: ../data/gummi.glade.h:47
+#: ../data/gummi.glade.h:52
 msgid "Error output"
 msgstr "Έξοδος σφαλμάτων"
 
-#: ../data/gummi.glade.h:48
+#: ../data/gummi.glade.h:53
 msgid ""
 "Error status for\n"
 "active document"
@@ -180,279 +197,277 @@ msgstr ""
 "Κατάσταση σφάλματος γις\n"
 "ενεργό έγγραφο"
 
-#: ../data/gummi.glade.h:50
+#: ../data/gummi.glade.h:55
 msgid "File:"
 msgstr "Αρχείο:"
 
-#: ../data/gummi.glade.h:51
+#: ../data/gummi.glade.h:56
 msgid "Filename:"
 msgstr "Όνομα αρχείου:"
 
-#: ../data/gummi.glade.h:52
+#: ../data/gummi.glade.h:57
 msgid "Find"
 msgstr "Εύρεση"
 
-#: ../data/gummi.glade.h:53
+#: ../data/gummi.glade.h:58
 msgid "Find Ne_xt"
 msgstr "Εύρεση Επο_μένου"
 
-#: ../data/gummi.glade.h:54
+#: ../data/gummi.glade.h:59
 msgid "Find Pre_vious"
 msgstr "Εύρεση Προη_γούμενου"
 
-#: ../data/gummi.glade.h:55
+#: ../data/gummi.glade.h:60
 msgid "Fit Page Width"
 msgstr "Χώρεσε σε Μήκος Σελίδας"
 
-#: ../data/gummi.glade.h:56
+#: ../data/gummi.glade.h:61
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - Επεξεργαστής LaTeX"
 
-#: ../data/gummi.glade.h:57
+#: ../data/gummi.glade.h:62
+msgid "Hello svn user!"
+msgstr ""
+
+#: ../data/gummi.glade.h:63
 msgid "Image"
 msgstr "Εικόνα"
 
-#: ../data/gummi.glade.h:58
+#: ../data/gummi.glade.h:64
 msgid "Italic text"
 msgstr "Πλάγιο κείμενο"
 
-#: ../data/gummi.glade.h:59
+#: ../data/gummi.glade.h:65
 msgid "Label:"
 msgstr "Ετικέτα:"
 
-#: ../data/gummi.glade.h:60
+#: ../data/gummi.glade.h:66
 msgid "Load a file"
 msgstr "Φόρτωσε ένα αρχείο"
 
-#: ../data/gummi.glade.h:61
+#: ../data/gummi.glade.h:67
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
 
-#: ../data/gummi.glade.h:63
+#: ../data/gummi.glade.h:69
 msgid "Match case"
 msgstr "Ταίριαξε κεφαλαία πεζά"
 
-#: ../data/gummi.glade.h:64
+#: ../data/gummi.glade.h:70
 msgid "Match entire word only"
 msgstr "Ταίριαξε ολόκληρη λέξη μόνο"
 
-#: ../data/gummi.glade.h:65
+#: ../data/gummi.glade.h:71
 msgid "Matrix"
 msgstr "Μητρώο"
 
-#: ../data/gummi.glade.h:66 ../src/gui-main.c:840
+#: ../data/gummi.glade.h:72 ../src/gui/gui-main.c:825
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
-#: ../data/gummi.glade.h:67
+#: ../data/gummi.glade.h:73
 msgid "New from _Template"
 msgstr "Νέο από _Πρώτυπο"
 
-#: ../data/gummi.glade.h:68
+#: ../data/gummi.glade.h:74
 msgid "Next"
 msgstr "Επόμενο"
 
-#: ../data/gummi.glade.h:69
+#: ../data/gummi.glade.h:75
 msgid "No borders"
 msgstr "Χωρίς σύνορα"
 
-#: ../data/gummi.glade.h:70
+#: ../data/gummi.glade.h:76
 msgid "Open"
 msgstr "Άνοιξε"
 
-#: ../data/gummi.glade.h:71
+#: ../data/gummi.glade.h:77
 msgid "Open the selected template"
 msgstr ""
 
-#: ../data/gummi.glade.h:72
+#: ../data/gummi.glade.h:78
 msgid "Parentheses"
 msgstr "Παρενθέσεις"
 
-#: ../data/gummi.glade.h:73
+#: ../data/gummi.glade.h:79
 msgid "Pause updating the preview pane."
 msgstr ""
 
-#: ../data/gummi.glade.h:74
+#: ../data/gummi.glade.h:80
 msgid "Preview Pane"
 msgstr "Υποπαράθυρο προεπισκόπισης"
 
-#: ../data/gummi.glade.h:75
+#: ../data/gummi.glade.h:81
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: ../data/gummi.glade.h:76
+#: ../data/gummi.glade.h:82
 msgid "References:"
 msgstr "Αναφορές:"
 
-#: ../data/gummi.glade.h:77
+#: ../data/gummi.glade.h:83
 msgid "Replace _All"
 msgstr ""
 
-#: ../data/gummi.glade.h:78
+#: ../data/gummi.glade.h:84
 msgid "Replace with:"
 msgstr ""
 
-#: ../data/gummi.glade.h:79
+#: ../data/gummi.glade.h:85
 msgid "Rows:"
 msgstr "Σειρές:"
 
-#: ../data/gummi.glade.h:80
+#: ../data/gummi.glade.h:86
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: ../data/gummi.glade.h:81
+#: ../data/gummi.glade.h:87
 msgid "Save _As..."
 msgstr "Αποθήκευση _Ως..."
 
-#: ../data/gummi.glade.h:82
+#: ../data/gummi.glade.h:88
 msgid "Save the current file"
 msgstr "Αποθήκευση τρέχοντος αρχείου"
 
-#: ../data/gummi.glade.h:83
+#: ../data/gummi.glade.h:89
 msgid "Scale:"
 msgstr "Κλίμακα:"
 
-#: ../data/gummi.glade.h:84
+#: ../data/gummi.glade.h:90
 msgid "Search backwards"
 msgstr "Αναζήτης προς τα πίσω"
 
-#: ../data/gummi.glade.h:85
-msgid ""
-"Search document for\n"
-"bibliography databases"
-msgstr ""
-
-#: ../data/gummi.glade.h:87
+#: ../data/gummi.glade.h:91
 msgid "Search for:"
 msgstr "Αναζήτηση για:"
 
-#: ../data/gummi.glade.h:88
+#: ../data/gummi.glade.h:92
 msgid "Single line"
 msgstr "Μοναδική γραμμή"
 
-#: ../data/gummi.glade.h:89
+#: ../data/gummi.glade.h:93
 msgid "Table"
 msgstr "Πίνακας"
 
-#: ../data/gummi.glade.h:90
+#: ../data/gummi.glade.h:94
 msgid "Unbracketed"
 msgstr "Χωρίς αγκύλες"
 
-#: ../data/gummi.glade.h:91
+#: ../data/gummi.glade.h:95
 msgid "Underline text"
 msgstr "Υπογράμμισε κείμενο"
 
-#: ../data/gummi.glade.h:92
+#: ../data/gummi.glade.h:96
 msgid "_Autocheck Spelling"
 msgstr "_Αυτόματος Έλεγχος Ορθογραφίας"
 
-#: ../data/gummi.glade.h:93
+#: ../data/gummi.glade.h:97
 msgid "_Compile Bibliography"
 msgstr "_Μετάφρασε τη Βιβλιογραφία"
 
-#: ../data/gummi.glade.h:94
+#: ../data/gummi.glade.h:98
 msgid "_Document Statistics"
 msgstr ""
 
-#: ../data/gummi.glade.h:95
+#: ../data/gummi.glade.h:99
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: ../data/gummi.glade.h:96
+#: ../data/gummi.glade.h:100
 msgid "_Export to PDF"
 msgstr ""
 
-#: ../data/gummi.glade.h:97
+#: ../data/gummi.glade.h:101
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: ../data/gummi.glade.h:98
+#: ../data/gummi.glade.h:102
 msgid "_Fullscreen"
 msgstr "_Πλήρης Οθόνη"
 
-#: ../data/gummi.glade.h:99
+#: ../data/gummi.glade.h:103
 msgid "_Help"
 msgstr "_Αναζήτηση"
 
-#: ../data/gummi.glade.h:100
+#: ../data/gummi.glade.h:104
 msgid "_Insert Bibliography"
 msgstr "_Εισαγωγή Βιβλιογραφίας"
 
-#: ../data/gummi.glade.h:101
+#: ../data/gummi.glade.h:105
 msgid "_Open..."
 msgstr "_Άνοιγμα"
 
-#: ../data/gummi.glade.h:102
+#: ../data/gummi.glade.h:106
 msgid "_Replace"
 msgstr ""
 
-#: ../data/gummi.glade.h:103
+#: ../data/gummi.glade.h:107
 msgid "_Right Pane"
 msgstr ""
 
-#: ../data/gummi.glade.h:104
+#: ../data/gummi.glade.h:108
 msgid "_Search"
 msgstr "_Αναζήτηση"
 
-#: ../data/gummi.glade.h:105
+#: ../data/gummi.glade.h:109
 msgid "_Statusbar"
 msgstr "_Γραμμή προόδου"
 
-#: ../data/gummi.glade.h:106
+#: ../data/gummi.glade.h:110
 msgid "_Toolbar"
 msgstr "Γ_ραμμή Εργαλείων"
 
-#: ../data/gummi.glade.h:107
+#: ../data/gummi.glade.h:111
 msgid "_Tools"
 msgstr "_Εργαλεία"
 
-#: ../data/gummi.glade.h:108
+#: ../data/gummi.glade.h:112
 msgid "_View"
 msgstr "_Επισκόπιση"
 
-#: ../data/gummi.glade.h:109
+#: ../data/gummi.glade.h:113
 msgid "filter:"
 msgstr "φίλτρο:"
 
-#: ../data/gummi.glade.h:110 ../src/gui-main.c:838
+#: ../data/gummi.glade.h:114 ../src/gui/gui-main.c:823
 msgid "no bibliography file detected"
 msgstr "Δεν βρέθηκε αρχείο βιβλιογραφίας"
 
-#: ../data/gummi.glade.h:111 ../src/gui-main.c:839
+#: ../data/gummi.glade.h:115 ../src/gui/gui-main.c:824
 msgid "none"
 msgstr "κανένα"
 
-#: ../data/gummi.glade.h:112
+#: ../data/gummi.glade.h:116
 msgid "of 0"
 msgstr "από 0"
 
-#: ../data/gummi.glade.h:113
+#: ../data/gummi.glade.h:117
 msgid "shouldnotseeme"
 msgstr "δενπρέπειναμεδεις"
 
-#: ../data/gummi.glade.h:114
+#: ../data/gummi.glade.h:118
 msgid "toolbutton1"
 msgstr "κουμπίεργαλείου1"
 
-#: ../data/gummi.glade.h:115
+#: ../data/gummi.glade.h:119
 msgid "toolbutton2"
 msgstr "κουμπίεργαλείου2"
 
-#: ../data/gummi.glade.h:116
+#: ../data/gummi.glade.h:120
 msgid "toolbutton3"
 msgstr "κουμπίεργαλείου3"
 
-#: ../data/gummi.glade.h:117
+#: ../data/gummi.glade.h:121
 msgid "toolbutton5"
 msgstr "κουμπίεργαλείου5"
 
-#: ../data/gummi.glade.h:118
+#: ../data/gummi.glade.h:122
 msgid "toolbutton6"
 msgstr "κουμπίεργαλείου6"
 
-#: ../data/gummi.glade.h:119
+#: ../data/gummi.glade.h:123
 msgid "toolbutton7"
 msgstr "κουμπίεργαλείου7"
 
@@ -461,289 +476,158 @@ msgid "   "
 msgstr ""
 
 #: ../data/prefs.glade.h:2
-msgid "Automatic Indentation:"
+msgid "Automatic Indentation"
 msgstr ""
 
 #: ../data/prefs.glade.h:3
-msgid "Changes will become active on next start"
-msgstr "Οι αλλαγές θα ενεργοποιηθούν στην επόμενη εκκίνηση"
+msgid "Color Scheme"
+msgstr ""
 
 #: ../data/prefs.glade.h:4
+msgid "Command: "
+msgstr ""
+
+#: ../data/prefs.glade.h:5
+#, fuzzy
+msgid "Customize"
+msgstr "Μετάφραση"
+
+#: ../data/prefs.glade.h:6
 msgid "Default Text"
 msgstr "Προεπιλεγμένο Κείμενο"
 
-#: ../data/prefs.glade.h:5
+#: ../data/prefs.glade.h:7
 msgid "Display line numbers"
 msgstr "Εμφάνιση αριθμών γράμμων"
 
-#: ../data/prefs.glade.h:6
+#: ../data/prefs.glade.h:8
 msgid "Do not split words over two lines"
 msgstr "Μη διαχωρίζεις λέξεις σε δύο γραμμές"
 
-#: ../data/prefs.glade.h:7
+#: ../data/prefs.glade.h:9
 msgid "Editor"
 msgstr "Επεξεργαστής"
 
-#: ../data/prefs.glade.h:8
-msgid "Editor font:"
+#: ../data/prefs.glade.h:10
+#, fuzzy
+msgid "Editor font"
 msgstr "Γραμματοσειρά Επεξεργαστή:"
 
-#: ../data/prefs.glade.h:9
+#: ../data/prefs.glade.h:11
 msgid "Enable text wrapping"
 msgstr "Ενεργοποίηση αναδίπλωσης κειμένου"
 
-#: ../data/prefs.glade.h:10
-msgid "File saving:"
-msgstr "Αποθήκευση αρχείου:"
-
-#: ../data/prefs.glade.h:11
-msgid "Gummi Preferences"
-msgstr "Προτιμήσεις Gummi"
-
 #: ../data/prefs.glade.h:12
-msgid "Highlight current line"
-msgstr "Τόνισε την τρέχουσα γραμμή"
+msgid "Extra flags:"
+msgstr ""
 
 #: ../data/prefs.glade.h:13
-msgid "Highlighting:"
-msgstr "Τονίζοντας:"
+#, fuzzy
+msgid "File saving"
+msgstr "Αποθήκευση αρχείου:"
 
 #: ../data/prefs.glade.h:14
-msgid "Insert _spaces instead of tabs"
+msgid "Font & Colors"
 msgstr ""
 
 #: ../data/prefs.glade.h:15
-msgid "Line numbers:"
-msgstr "Αριθμοί γραμμών:"
+msgid "Gummi Preferences"
+msgstr "Προτιμήσεις Gummi"
 
 #: ../data/prefs.glade.h:16
+msgid "Highlight current line"
+msgstr "Τόνισε την τρέχουσα γραμμή"
+
+#: ../data/prefs.glade.h:17
+#, fuzzy
+msgid "Highlighting"
+msgstr "Τονίζοντας:"
+
+#: ../data/prefs.glade.h:18
+msgid "Insert _spaces instead of tabs"
+msgstr ""
+
+#: ../data/prefs.glade.h:19
+#, fuzzy
+msgid "Line numbers"
+msgstr "Αριθμοί γραμμών:"
+
+#: ../data/prefs.glade.h:20
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:21
 msgid "None"
 msgstr "Κανένα"
 
-#: ../data/prefs.glade.h:18
-msgid "PDF Compiling:"
-msgstr "Μετάφραση PDF:"
+#: ../data/prefs.glade.h:22
+msgid "PDF Compiling"
+msgstr "Μετάφραση PDF"
 
-#: ../data/prefs.glade.h:19
-msgid "Spell check language:"
+#: ../data/prefs.glade.h:23
+#, fuzzy
+msgid "Spell check language"
 msgstr "Ορθογραφικός έλεγχος γλώσσας:"
 
-#: ../data/prefs.glade.h:20
-msgid "Tab stops:"
+#: ../data/prefs.glade.h:24
+msgid "Tab stops"
 msgstr ""
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:25
 msgid "Tab width:"
 msgstr ""
 
-#: ../data/prefs.glade.h:22
-msgid "Text wrapping:"
+#: ../data/prefs.glade.h:26
+#, fuzzy
+msgid "Text wrapping"
 msgstr "Αναδίπλωση κειμένου:"
 
-#: ../data/prefs.glade.h:23
-msgid "Typesetter command:"
+#: ../data/prefs.glade.h:27
+#, fuzzy
+msgid "Typesetter command"
 msgstr "Εντολή στοιχειοθέτησης:"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:28
 msgid "View"
 msgstr "Επισκόπηση"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:29
 msgid "_Autosave files every"
 msgstr "_Αυτόματη αποθήκευση κάθε"
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:30
 msgid "_Enable automatic indentation"
 msgstr ""
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:31
 msgid "_Reset defaults"
 msgstr "_Επαναφορά προεπιλογών"
 
-#: ../data/prefs.glade.h:28
+#: ../data/prefs.glade.h:32
 #, fuzzy
 msgid "compile every"
 msgstr "_Αυτόματη μετάφραση κάθε"
 
-#: ../data/prefs.glade.h:29
+#: ../data/prefs.glade.h:33
 #, fuzzy
 msgid "compile when idle for "
 msgstr "_Αυτόματη μετάφραση κάθε"
 
-#: ../data/prefs.glade.h:30
+#: ../data/prefs.glade.h:34
 msgid "minutes"
 msgstr "λεπτά"
 
-#: ../data/prefs.glade.h:31
+#: ../data/prefs.glade.h:35
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/prefs.glade.h:32
+#: ../data/prefs.glade.h:36
 msgid "seconds"
 msgstr "δευτερόλεπτα"
 
-#: ../data/prefs.glade.h:33
+#: ../data/prefs.glade.h:37
 msgid "xelatex"
 msgstr "xelatex"
-
-#: ../src/editor.c:382
-msgid "Top reached, search from bottom?"
-msgstr ""
-
-#: ../src/editor.c:389
-msgid "Bottom reached, search from top?"
-msgstr ""
-
-#: ../src/gui-main.c:277
-#, fuzzy, c-format
-msgid "Error loading recent file: %s"
-msgstr "Σφάλμα φορτώνοντας πρόσφατο αρχείο: "
-
-#: ../src/gui-main.c:326 ../src/gui-main.c:356 ../src/motion.c:226
-msgid "The file already exists. Overwrite?"
-msgstr ""
-
-#: ../src/gui-main.c:517
-#, fuzzy
-msgid "Words in text"
-msgstr "Έντονο κείμενο"
-
-#: ../src/gui-main.c:518
-msgid "Words in headers"
-msgstr ""
-
-#: ../src/gui-main.c:519
-msgid "Words in float captions"
-msgstr ""
-
-#: ../src/gui-main.c:520
-msgid "Number of headers"
-msgstr ""
-
-#: ../src/gui-main.c:521
-msgid "Number of floats"
-msgstr ""
-
-#: ../src/gui-main.c:522
-msgid "Number of math inlines"
-msgstr ""
-
-#: ../src/gui-main.c:523
-msgid "Number of math displayed"
-msgstr ""
-
-#: ../src/gui-main.c:568
-#, fuzzy
-msgid ""
-"This function requires\n"
-"the texcount program.\n"
-msgstr "Αυτή η λειτουργία απαιτεί μια ενεργή\n"
-
-#: ../src/gui-main.c:576
-msgid "Document Statistics"
-msgstr ""
-
-#: ../src/gui-main.c:800
-#, fuzzy
-msgid "Compiling bibliography file..."
-msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
-
-#: ../src/gui-main.c:802
-msgid "bibliography compiled without errors"
-msgstr "Η βιβλιογραφία μεταφράστηκε χωρίς λάθη"
-
-#: ../src/gui-main.c:804
-#, fuzzy
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Λάθος μεταφράζοντας το αρχείο βιβλιογραφίας ή δεν βρέθηκε κάποιο"
-
-#: ../src/gui-main.c:807
-msgid "error compiling bibliography file"
-msgstr "λάθος μεταφράζοντας το αρχείο βιβλιογραφίας"
-
-#: ../src/gui-main.c:832
-#, c-format
-msgid "%s loaded"
-msgstr ""
-
-#: ../src/gui-main.c:924
-msgid "Do you want to save the changes you have made?"
-msgstr "Θέλετε να αποθηκεύσετε τις αλλαγές που κάνατε;"
-
-#: ../src/gui-main.c:935
-#, fuzzy
-msgid "Open LaTeX document"
-msgstr "Δημιουργία νέου έγγράφου"
-
-#: ../src/gui-main.c:938
-msgid "Select an image to insert"
-msgstr ""
-
-#: ../src/gui-main.c:939
-#, fuzzy
-msgid "Select bibliography file"
-msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
-
-#: ../src/gui-main.c:974
-#, fuzzy
-msgid "Save LaTeX document"
-msgstr "Δημιουργία νέου έγγράφου"
-
-#: ../src/gui-main.c:975
-#, fuzzy
-msgid "Save as LaTeX document"
-msgstr "Δημιουργία νέου έγγράφου"
-
-#: ../src/gui-main.c:976
-msgid "Export to PDF"
-msgstr ""
-
-#: ../src/importer.c:123
-#, c-format
-msgid "%s: No such file or directory\n"
-msgstr ""
-
-#: ../src/iofunctions.c:96
-#, fuzzy, c-format
-msgid "Saving %s..."
-msgstr "Αποθήκευση _Ως..."
-
-#: ../src/iofunctions.c:109
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-
-#: ../src/iofunctions.c:148
-msgid "Can not convert text to UTF-8!\n"
-msgstr ""
-
-#: ../src/iofunctions.c:173
-#, fuzzy, c-format
-msgid "Autosaving file %s"
-msgstr "Αποθηκεύοντας το αρχείο"
-
-#: ../src/preview.c:70
-#, fuzzy, c-format
-msgid ""
-"PDF Preview could not initialize.\n"
-"\n"
-"It appears your LaTeX document contains errors or\n"
-"the program `%s' was not installed.\n"
-"Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors to restore preview."
-msgstr ""
-"Η Προεπισκόπιση PDF δεν μπόρεσε να αρχικοποιηθεί.\n"
-"\n"
-"Φαίνεται πως το έγγραφο LaTeX περιέχει σφάλματα.\n"
-"Επιπρόσθετη πληροφορία είναι διαθέσιμη στη καρτέλα Έξοδος Σφάλματος.\n"
-"Παρακαλώ διορθώστε τα λάθη που παρατίθενται και κάντε κλικ σε αυτή\n"
-"την περιοχή για να επαναφορτώσετε το υποπαράθυρο προεπισκόπισης."
 
 #: ../src/updatecheck.c:113
 #, fuzzy, c-format
@@ -762,6 +646,31 @@ msgstr ""
 msgid "Update Check"
 msgstr "Έλεγχος Αναβάθμισης"
 
+#: ../src/latex.c:177 ../src/gui/gui-main.c:340 ../src/gui/gui-main.c:369
+msgid "The file already exists. Overwrite?"
+msgstr ""
+
+#: ../src/iofunctions.c:95
+#, fuzzy, c-format
+msgid "Saving %s..."
+msgstr "Αποθήκευση _Ως..."
+
+#: ../src/iofunctions.c:108
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+
+#: ../src/iofunctions.c:154
+msgid "Can not convert text to UTF-8!\n"
+msgstr ""
+
+#: ../src/iofunctions.c:179
+#, fuzzy, c-format
+msgid "Autosaving file %s"
+msgstr "Αποθηκεύοντας το αρχείο"
+
 #: ../src/utils.c:90
 #, c-format
 msgid ""
@@ -775,6 +684,134 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Λεζάντα"
 
+#: ../src/gui/gui-preview.c:81
+#, fuzzy, c-format
+msgid ""
+"PDF Preview could not initialize.\n"
+"\n"
+"It appears your LaTeX document contains errors or\n"
+"the program `%s' was not installed.\n"
+"Additional information is available on the Error Output tab.\n"
+"Please correct the listed errors to restore preview."
+msgstr ""
+"Η Προεπισκόπιση PDF δεν μπόρεσε να αρχικοποιηθεί.\n"
+"\n"
+"Φαίνεται πως το έγγραφο LaTeX περιέχει σφάλματα.\n"
+"Επιπρόσθετη πληροφορία είναι διαθέσιμη στη καρτέλα Έξοδος Σφάλματος.\n"
+"Παρακαλώ διορθώστε τα λάθη που παρατίθενται και κάντε κλικ σε αυτή\n"
+"την περιοχή για να επαναφορτώσετε το υποπαράθυρο προεπισκόπισης."
+
+#: ../src/gui/gui-import.c:170
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr ""
+
+#: ../src/gui/gui-main.c:290
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Σφάλμα φορτώνοντας πρόσφατο αρχείο: "
+
+#: ../src/gui/gui-main.c:531
+#, fuzzy
+msgid "Words in text"
+msgstr "Έντονο κείμενο"
+
+#: ../src/gui/gui-main.c:532
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui/gui-main.c:533
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui/gui-main.c:534
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui/gui-main.c:535
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui/gui-main.c:536
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui/gui-main.c:537
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui/gui-main.c:583
+#, fuzzy
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr "Αυτή η λειτουργία απαιτεί μια ενεργή\n"
+
+#: ../src/gui/gui-main.c:591
+msgid "Document Statistics"
+msgstr ""
+
+#: ../src/gui/gui-main.c:783
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
+
+#: ../src/gui/gui-main.c:785
+msgid "bibliography compiled without errors"
+msgstr "Η βιβλιογραφία μεταφράστηκε χωρίς λάθη"
+
+#: ../src/gui/gui-main.c:787
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Λάθος μεταφράζοντας το αρχείο βιβλιογραφίας ή δεν βρέθηκε κάποιο"
+
+#: ../src/gui/gui-main.c:790
+msgid "error compiling bibliography file"
+msgstr "λάθος μεταφράζοντας το αρχείο βιβλιογραφίας"
+
+#: ../src/gui/gui-main.c:816
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui/gui-main.c:859
+msgid "Do you want to save the changes you have made?"
+msgstr "Θέλετε να αποθηκεύσετε τις αλλαγές που κάνατε;"
+
+#: ../src/gui/gui-main.c:870
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Δημιουργία νέου έγγράφου"
+
+#: ../src/gui/gui-main.c:873
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui/gui-main.c:874
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
+
+#: ../src/gui/gui-main.c:909
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Δημιουργία νέου έγγράφου"
+
+#: ../src/gui/gui-main.c:910
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Δημιουργία νέου έγγράφου"
+
+#: ../src/gui/gui-main.c:911
+msgid "Export to PDF"
+msgstr ""
+
+#~ msgid "Changes will become active on next start"
+#~ msgstr "Οι αλλαγές θα ενεργοποιηθούν στην επόμενη εκκίνηση"
+
+#~ msgid "PDF Compiling:"
+#~ msgstr "Μετάφραση PDF:"
+
 #, fuzzy
 #~ msgid "Words in text: ([0-9]*)"
 #~ msgstr "Έντονο κείμενο"
@@ -784,9 +821,6 @@ msgstr "Λεζάντα"
 
 #~ msgid "Save File..."
 #~ msgstr "Αποθήκευση Αρχείου..."
-
-#~ msgid "PDF Compiling"
-#~ msgstr "Μετάφραση PDF"
 
 #~ msgid ".."
 #~ msgstr ".."
