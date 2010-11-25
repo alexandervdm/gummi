@@ -433,9 +433,11 @@ void on_menu_rightpane_toggled(GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget))) {
         gtk_widget_show(GTK_WIDGET(gui->rightpane));
         config_set_value("rightpane", "True");
+        gtk_toggle_tool_button_set_active(gui->previewoff, FALSE);
     } else {
         gtk_widget_hide(GTK_WIDGET(gui->rightpane));
         config_set_value("rightpane", "False");
+        gtk_toggle_tool_button_set_active(gui->previewoff, TRUE);
     }
 }
 
