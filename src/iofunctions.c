@@ -52,8 +52,7 @@ void iofunctions_load_default_text(GuEditor* ec) {
     g_free(str);
 }
 
-void iofunctions_load_file(GuEditor* ec, gchar *filename)
-{
+void iofunctions_load_file(GuEditor* ec, gchar *filename) {
     GError* err = NULL;
     gchar* status;
     gchar* text;
@@ -62,7 +61,7 @@ void iofunctions_load_file(GuEditor* ec, gchar *filename)
 
     slog(L_INFO, "loading %s ...\n", filename);
 
-    /* add Loading message to status bar and  ensure GUI is current */
+    /* add Loading message to status bar and ensure GUI is current */
     status = g_strdup_printf ("Loading %s...", filename);
     statusbar_set_message(status);
     g_free(status);

@@ -721,12 +721,17 @@ void on_button_template_remove_clicked(GtkWidget* widget, void* user) {
 
 void on_button_template_open_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
-    gchar *text;
-    text = template_open_selected(gummi->templ);
-    if (text) {
-        editor_fill_buffer(gummi->editor, text);
+    gchar* status;
+    templdata template = template_open_selected(gummi->templ);
+    
+    if (template.itemdata) {
+        /* add Loading message to status bar */
+        status = g_strdup_printf ("Loading template %s...", template.itemname);
+        statusbar_set_message(status);
+        g_free(status);
+        
+        editor_fill_buffer(gummi->editor, template.itemdata);
         gui_new_environment(NULL);
-        g_free(text);
         gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
     }
 }
