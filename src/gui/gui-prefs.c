@@ -111,13 +111,18 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
     /* list available style schemes */
     GList* schemes = editor_list_style_scheme_sorted(gummi->editor);
     GList* schemes_iter = schemes;
+    gchar* desc = NULL;
     GtkTreeIter iter;
     while (schemes_iter) {
+        desc = g_markup_printf_escaped("<b>%s</b> - %s",
+                gtk_source_style_scheme_get_name(schemes_iter->data),
+                gtk_source_style_scheme_get_description(schemes_iter->data));
         gtk_list_store_append(p->list_styleschemes, &iter);
         gtk_list_store_set(p->list_styleschemes, &iter,
-                0, gtk_source_style_scheme_get_name(schemes_iter->data),
+                0, desc,
                 1, gtk_source_style_scheme_get_id(schemes_iter->data), -1);
         schemes_iter = g_list_next(schemes_iter);
+        g_free(desc);
     }
     g_list_free(schemes);
 
