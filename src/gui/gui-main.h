@@ -122,7 +122,7 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
         void* user);
 
 void on_button_biblio_compile_clicked(GtkWidget* widget, void* user);
-void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user);
+void on_button_biblio_detect_clicked(GtkWidget* widget, void* user);
 void on_bibreference_clicked(GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user);
 gboolean on_bibprogressbar_update(void* user);

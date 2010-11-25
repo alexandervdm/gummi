@@ -787,7 +787,7 @@ void on_button_biblio_compile_clicked(GtkWidget* widget, void* user) {
     check_preview_timer();
 }
 
-void on_button_biblio_refresh_clicked(GtkWidget* widget, void* user) {
+void on_button_biblio_detect_clicked(GtkWidget* widget, void* user) {
     L_F_DEBUG;
     gchar* text = 0;
     gchar* str = 0;
