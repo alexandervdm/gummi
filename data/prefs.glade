@@ -30,6 +30,28 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="list_compileschemes">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">compile when idle for </col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">compile every</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_styleschemes">
+    <columns>
+      <!-- column-name styleschemes -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="prefwindow">
     <property name="title" translatable="yes">Gummi Preferences</property>
     <property name="resizable">False</property>
@@ -703,7 +725,7 @@
                                     <child>
                                       <object class="GtkCellRendererText" id="cellrenderertext4"/>
                                       <attributes>
-                                        <attribute name="text">0</attribute>
+                                        <attribute name="markup">0</attribute>
                                       </attributes>
                                     </child>
                                   </object>
@@ -1211,27 +1233,5 @@
     <property name="lower">1</property>
     <property name="upper">24</property>
     <property name="step_increment">1</property>
-  </object>
-  <object class="GtkListStore" id="list_compileschemes">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">compile when idle for </col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">compile every</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_styleschemes">
-    <columns>
-      <!-- column-name styleschemes -->
-      <column type="gchararray"/>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>
