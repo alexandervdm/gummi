@@ -145,24 +145,23 @@ gboolean utils_path_exists(const gchar* path) {
 /*
  * Platform independent file copy operation
  */
-void utils_copy_file(const gchar* source, const gchar* dest) {
-    FILE *in, *out;
-    gchar buf[BUFSIZ];
-    gint size = 0;
+gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
+    gchar* contents;
+    gsize length;
 
-    if (NULL == (in = fopen(source, "rb"))) {
-        slog(L_G_ERROR, "failed to open %s, aborting...\n", source);
-        return;
-    }
-    if (NULL == (out = fopen(dest, "wb"))) {
-        slog(L_G_ERROR, "failed to save %s, aborting...\n", dest);
-        return;
-    }
+    g_return_val_if_fail(source != NULL, FALSE);
+    g_return_val_if_fail(dest != NULL, FALSE);
+    g_return_val_if_fail(err == NULL || *err == NULL, FALSE);
 
-    while ((size = fread(buf, 1, BUFSIZ, in)) > 0)
-        fwrite(buf, 1, size, out);
-    fclose(in);
-    fclose(out);
+    if (!g_file_get_contents(source, &contents, &length, err))
+        return FALSE;
+
+    if (!g_file_set_contents(dest, contents, length, err))
+        return FALSE;
+
+    g_free(contents);
+
+    return TRUE;
 }
 
 /**

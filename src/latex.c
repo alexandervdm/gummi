@@ -161,7 +161,8 @@ void latex_update_auxfile(GuLatex* lc) {
 }
 
 void latex_export_pdffile(GuLatex* lc, const gchar* path) {
-    gchar* savepath;
+    gchar* savepath = NULL;
+    GError* err = NULL;
     gint ret = 0;
 
     if (0 != strcmp(path + strlen(path) -4, ".pdf"))
@@ -175,6 +176,8 @@ void latex_export_pdffile(GuLatex* lc, const gchar* path) {
             return;
         }
     }
-    utils_copy_file(lc->b_finfo->pdffile, savepath);
+    if (!utils_copy_file(lc->b_finfo->pdffile, savepath, &err))
+        slog(L_G_ERROR, "%s\n", err->message);
+    g_error_free(err);
     g_free(savepath);
 }

@@ -63,7 +63,7 @@ void slog_set_gui_parent(GtkWidget* p);
 void slog(gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog(const gchar* message);
 gboolean utils_path_exists(const gchar* path);
-void utils_copy_file(const gchar* source, const gchar* dest);
+gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
 pdata utils_popen_r(const gchar* cmd);
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
 slist* slist_find_index_of(slist* head, const gchar* term);
