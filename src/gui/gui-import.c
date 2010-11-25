@@ -42,7 +42,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuImportGui* importgui_init(GtkBuilder* builder) {
-    L_F_DEBUG;
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
     GuImportGui* i = g_new0(GuImportGui, 1);
@@ -138,7 +137,6 @@ void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
 }
 
 void on_button_import_table_apply_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     GtkTextIter current;
     gint rows = gtk_adjustment_get_value(g_importgui->table_rows);
     gint cols = gtk_adjustment_get_value(g_importgui->table_cols);
@@ -155,7 +153,6 @@ void on_button_import_table_apply_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_import_image_apply_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     GtkTextIter current;
     const gchar* imagefile = gtk_entry_get_text(g_importgui->image_file);
     const gchar* caption = gtk_entry_get_text(g_importgui->image_caption);
@@ -189,7 +186,6 @@ void on_button_import_image_apply_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     GtkTextIter current;
     gint bracket =
         gtk_combo_box_get_active(g_importgui->matrix_combobracket);
@@ -206,7 +202,6 @@ void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_image_file_activate(void) {
-    L_F_DEBUG;
     gchar* filename = get_open_filename(TYPE_IMAGE);
     importer_imagegui_set_sensitive(filename, TRUE);
     g_free(filename);

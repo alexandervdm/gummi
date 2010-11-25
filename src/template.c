@@ -41,7 +41,6 @@
 
 
 GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo) {
-    L_F_DEBUG;
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
     GuTemplate* t = g_new0(GuTemplate, 1);
     t->b_finfo = finfo;

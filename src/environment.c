@@ -33,7 +33,6 @@
 
 Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
         GuBiblio* bib, GuTemplate* tpl) {
-    L_F_DEBUG;
     Gummi* g = g_new0(Gummi, 1);
     g->finfo = fc;
     g->editor = ed;
@@ -45,7 +44,6 @@ Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
 }
 
 void gummi_new_environment(Gummi* gc, const gchar* filename) {
-    L_F_DEBUG;
 
     fileinfo_update(gc->finfo, filename);
     slog(L_INFO, "\n");

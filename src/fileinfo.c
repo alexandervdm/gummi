@@ -36,7 +36,6 @@
 #include "utils.h"
 
 GuFileInfo* fileinfo_init(void) {
-    L_F_DEBUG;
     GuFileInfo* f = g_new0(GuFileInfo, 1);
     f->workfd = -1;
     f->fdname = NULL;
@@ -73,7 +72,6 @@ GuFileInfo* fileinfo_init(void) {
  */
 
 void fileinfo_update(GuFileInfo* fc, const gchar* filename) {
-    L_F_DEBUG;
 
     if (fc->workfd != -1)
         fileinfo_destroy(fc);
@@ -98,7 +96,6 @@ void fileinfo_update(GuFileInfo* fc, const gchar* filename) {
 }
 
 void fileinfo_destroy(GuFileInfo* fc) {
-    L_F_DEBUG;
     gchar* auxfile = NULL;
     gchar* logfile = NULL;
 

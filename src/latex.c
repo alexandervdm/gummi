@@ -45,7 +45,6 @@
 #include "gui/gui-preview.h"
 
 GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec) {
-    L_F_DEBUG;
     GuLatex* l = g_new0(GuLatex, 1);
 
     /* initialize basis */
@@ -59,7 +58,6 @@ GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec) {
 }
 
 void latex_update_workfile(GuLatex* lc) {
-    L_F_DEBUG;
     GtkTextIter start, end;
     gchar *text;
     FILE *fp;
@@ -86,7 +84,6 @@ void latex_update_workfile(GuLatex* lc) {
 }
 
 void latex_update_pdffile(GuLatex* lc) {
-    L_F_DEBUG;
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value("typesetter");
@@ -147,7 +144,6 @@ void latex_update_pdffile(GuLatex* lc) {
 }
 
 void latex_update_auxfile(GuLatex* lc) {
-    L_F_DEBUG;
     gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
     gchar* command = g_strdup_printf("cd \"%s\";"
                                      "env openout_any=a %s "
@@ -165,7 +161,6 @@ void latex_update_auxfile(GuLatex* lc) {
 }
 
 void latex_export_pdffile(GuLatex* lc, const gchar* path) {
-    L_F_DEBUG;
     gchar* savepath;
     gint ret = 0;
 

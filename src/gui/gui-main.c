@@ -57,7 +57,6 @@ extern GummiGui* gui;
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
 GummiGui* gui_init(GtkBuilder* builder) {
-    L_F_DEBUG;
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
     GtkWidget *hpaned;
@@ -164,7 +163,6 @@ GummiGui* gui_init(GtkBuilder* builder) {
 }
 
 void gui_main(GtkBuilder* builder) {
-    L_F_DEBUG;
     gtk_builder_connect_signals(builder, NULL);       
     g_signal_connect(g_e_buffer, "changed",
             G_CALLBACK(check_preview_timer), NULL);
@@ -184,7 +182,6 @@ void gui_main(GtkBuilder* builder) {
 }
 
 gboolean gui_quit(void) {
-    L_F_DEBUG;
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
     gint ret = check_for_save();
@@ -212,7 +209,6 @@ gboolean gui_quit(void) {
 }
 
 void gui_new_environment(const gchar* filename) {
-    L_F_DEBUG;
     gummi_new_environment(gummi, filename);
     add_to_recent_list(filename);
     gui_update_title();
@@ -222,7 +218,6 @@ void gui_new_environment(const gchar* filename) {
 }
 
 void gui_update_title(void) {
-    L_F_DEBUG;
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
@@ -244,7 +239,6 @@ void gui_update_title(void) {
 }
 
 void on_menu_new_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gint ret = check_for_save();
     if (GTK_RESPONSE_YES == ret)
         on_menu_save_activate(NULL, NULL);  
@@ -255,14 +249,12 @@ void on_menu_new_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_template_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gtk_list_store_clear(gummi->templ->list_templates);
     template_setup(gummi->templ);
     gtk_widget_show_all(GTK_WIDGET(gummi->templ->templatewindow));
 }
 
 void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gchar* filename = NULL;
 
     filename = get_save_filename(TYPE_PDF);
@@ -272,7 +264,6 @@ void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
 }
 
 void on_menu_recent_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     const gchar* name = gtk_menu_item_get_label(GTK_MENU_ITEM(widget));
     gchar* tstr;
     gint index = name[0] - '0' -1;
@@ -306,7 +297,6 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
 }
 
 void on_menu_open_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gchar *filename = NULL;
     gint ret = check_for_save();
 
@@ -324,7 +314,6 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_save_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
     gint ret = 0;
@@ -354,7 +343,6 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_saveas_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gchar* filename = NULL;
     gboolean new = FALSE;
     gint ret = 0;
@@ -380,7 +368,6 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_cut_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     GtkClipboard     *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
@@ -388,14 +375,12 @@ void on_menu_cut_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_copy_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     GtkClipboard     *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
     gtk_text_buffer_copy_clipboard(g_e_buffer, clipboard);
 }
 void on_menu_paste_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     GtkClipboard     *clipboard;
 
     clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
@@ -403,34 +388,28 @@ void on_menu_paste_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_undo_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     editor_undo_change(gummi->editor);
 }
 
 void on_menu_redo_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     editor_redo_change(gummi->editor);
 }
 
 void on_menu_delete_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gtk_text_buffer_delete_selection(g_e_buffer, FALSE, TRUE);
 }
 
 void on_menu_selectall_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds(g_e_buffer, &start, &end);
     gtk_text_buffer_select_range(g_e_buffer, &start, &end);
 }
 
 void on_menu_preferences_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     prefsgui_main(gui->prefsgui);
 }
 
 void on_menu_statusbar_toggled(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget))) {
         gtk_widget_show(GTK_WIDGET(gui->statusbar));
         config_set_value("statusbar", "True");
@@ -441,7 +420,6 @@ void on_menu_statusbar_toggled(GtkWidget *widget, void * user) {
 }
 
 void on_menu_toolbar_toggled(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget))) {
         gtk_widget_show(GTK_WIDGET(gui->toolbar));
         config_set_value("toolbar", "True");
@@ -452,7 +430,6 @@ void on_menu_toolbar_toggled(GtkWidget *widget, void * user) {
 }
 
 void on_menu_rightpane_toggled(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget))) {
         gtk_widget_show(GTK_WIDGET(gui->rightpane));
         config_set_value("rightpane", "True");
@@ -470,22 +447,18 @@ void on_menu_rightpane_toggled(GtkWidget *widget, void * user) {
     }
 
 void on_menu_find_activate(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     searchgui_main(gui->searchgui);
 }
 
 void on_menu_findnext_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     editor_jumpto_search_result(gummi->editor, 1);
 }
 
 void on_menu_findprev_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     editor_jumpto_search_result(gummi->editor, -1);
 }
 
 void on_menu_bibload_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gchar* filename = NULL;
     gchar* basename = NULL;
     gchar* root_path = NULL;
@@ -507,7 +480,6 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
 }
 
 void on_menu_bibupdate_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     biblio_compile_bibliography(gummi->biblio, gummi->latex);
 }
 
@@ -517,7 +489,6 @@ void on_menu_pdfcompile_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_docstat_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     GtkWidget* dialog = 0;
     gint i = 0;
     gchar* output = 0;
@@ -601,7 +572,6 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
 }
 
 void on_menu_spelling_toggled(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
 #ifdef USE_GTKSPELL
     if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget))) {
         editor_activate_spellchecking(gummi->editor, TRUE);
@@ -614,14 +584,12 @@ void on_menu_spelling_toggled(GtkWidget *widget, void * user) {
 }
 
 void on_menu_update_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gboolean ret = updatecheck(GTK_WINDOW(gui->mainwindow));
     if (!ret)
         slog(L_G_ERROR, "Update check failed!\n");
 }
 
 void on_menu_about_activate(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     GError* err = NULL;
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size
         (DATADIR"/gummi.png", 80, 80, &err);
@@ -669,7 +637,6 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
 }
 
 void on_tool_previewoff_toggled(GtkWidget *widget, void * user) {
-    L_F_DEBUG;
     gboolean value =
         gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(widget));
     config_set_value("compile_status", (!value)? "True": "False");
@@ -680,32 +647,26 @@ void on_tool_previewoff_toggled(GtkWidget *widget, void * user) {
 }
 
 void on_tool_textstyle_bold_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_bold");
 }
 
 void on_tool_textstyle_italic_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_italic");
 }
 
 void on_tool_textstyle_underline_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_unline");
 }
 
 void on_tool_textstyle_left_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_left");
 }
 
 void on_tool_textstyle_center_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_center");
 }
 
 void on_tool_textstyle_right_activate(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_set_selection_textstyle(gummi->editor, "tool_right");
 }
 
@@ -720,7 +681,6 @@ void on_button_template_remove_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_template_open_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gchar* status;
     templdata template = template_open_selected(gummi->templ);
     
@@ -737,7 +697,6 @@ void on_button_template_open_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_template_close_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_add), TRUE);
     gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_remove), TRUE);
     gtk_widget_set_sensitive(GTK_WIDGET(gummi->templ->template_open), TRUE);
@@ -767,7 +726,6 @@ void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
 }
 
 void on_bibcolumn_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint id = gtk_tree_view_column_get_sort_column_id
         (GTK_TREE_VIEW_COLUMN(widget));
     gtk_tree_view_column_set_sort_column_id
@@ -775,7 +733,6 @@ void on_bibcolumn_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_biblio_compile_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gummi->biblio->progressval = 0.0;
     g_timeout_add(10, on_bibprogressbar_update, NULL);
 
@@ -793,7 +750,6 @@ void on_button_biblio_compile_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_biblio_detect_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gchar* text = 0;
     gchar* str = 0;
     gchar* basename = 0;
@@ -843,7 +799,6 @@ void on_bibreference_clicked(GtkTreeView* view, GtkTreePath* Path,
 }
 
 gboolean on_bibprogressbar_update(void* user) {
-    L_F_DEBUG;
     gtk_adjustment_set_value
         (gummi->biblio->progressmon, gummi->biblio->progressval);
     gummi->biblio->progressval += 1.0;
@@ -851,7 +806,6 @@ gboolean on_bibprogressbar_update(void* user) {
 }
 
 gint check_for_save(void) {
-    L_F_DEBUG;
     gint ret = 0;
 
     if (gtk_text_buffer_get_modified(g_e_buffer))
@@ -861,7 +815,6 @@ gint check_for_save(void) {
 }
 
 gchar* get_open_filename(GuFilterType type) {
-    L_F_DEBUG;
     GtkFileChooser* chooser = NULL;
     static gchar* last_filename = NULL;
     gchar* filename = NULL;
@@ -901,7 +854,6 @@ gchar* get_open_filename(GuFilterType type) {
 }
 
 gchar* get_save_filename(GuFilterType type) {
-    L_F_DEBUG;
     GtkFileChooser* chooser = NULL;
     gchar* filename = NULL;
 
@@ -950,7 +902,6 @@ gchar* get_save_filename(GuFilterType type) {
 }
 
 void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
-    L_F_DEBUG;
     GtkFileFilter* filter = gtk_file_filter_new();
 
     switch (type) {
@@ -991,7 +942,6 @@ void file_dialog_set_filter(GtkFileChooser* dialog, GuFilterType type) {
 }
 
 void add_to_recent_list(const gchar* filename) {
-    L_F_DEBUG;
     if (!filename) return;
     gint i = 0;
     /* check if it already exists */
@@ -1008,7 +958,6 @@ void add_to_recent_list(const gchar* filename) {
 }
 
 void display_recent_files(GummiGui* gui) {
-    L_F_DEBUG;
     gchar* tstr = 0;
     gchar* basename = 0;
     gint i = 0, count = 0;
@@ -1038,18 +987,15 @@ void display_recent_files(GummiGui* gui) {
 }
 
 void errorbuffer_set_text(gchar *message) {
-    L_F_DEBUG;
     gtk_text_buffer_set_text(gui->errorbuff, message, -1);
 }
 
 void statusbar_set_message(gchar *message) {
-    L_F_DEBUG;
     gtk_statusbar_push (GTK_STATUSBAR(gui->statusbar), gui->statusid, message);
     g_timeout_add_seconds(4, statusbar_del_message, NULL);
 }
 
 gboolean statusbar_del_message(void* user) {
-    L_F_DEBUG;
     gtk_statusbar_pop(GTK_STATUSBAR(gui->statusbar), gui->statusid);
     return FALSE;
 }
@@ -1060,7 +1006,6 @@ gboolean statusbar_del_message(void* user) {
  * Also set_modified for buffer
  */
 void check_preview_timer(void) {
-    L_F_DEBUG;
     gtk_text_buffer_set_modified(g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
     gui_update_title();

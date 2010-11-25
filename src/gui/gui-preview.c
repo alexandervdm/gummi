@@ -49,7 +49,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder) {
-    L_F_DEBUG;
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
     GuPreviewGui* p = g_new0(GuPreviewGui, 1);
@@ -93,13 +92,12 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
 }
 
 void previewgui_update_statuslight(const gchar* type) {
-    gtk_tool_button_set_stock_id(
-            GTK_TOOL_BUTTON(gui->previewgui->statuslight), type);
+    gtk_tool_button_set_stock_id(GTK_TOOL_BUTTON(gui->previewgui->statuslight),
+           type);
     while (gtk_events_pending()) gtk_main_iteration();
 }
 
 void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
-    L_F_DEBUG;
     GError *err = NULL;
     pc->page_current = 0;
     
@@ -144,7 +142,6 @@ void previewgui_refresh(GuPreviewGui* pc) {
 }
 
 void previewgui_set_pagedata(GuPreviewGui* pc) {
-    L_F_DEBUG;
     if ((pc->page_total - 1) > pc->page_current) {
         gtk_widget_set_sensitive(GTK_WIDGET(pc->page_next), TRUE);
     }
@@ -162,7 +159,6 @@ void previewgui_set_pagedata(GuPreviewGui* pc) {
 }
 
 void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
-    L_F_DEBUG;
     if (page_number < 0 || page_number >= pc->page_total)
         slog(L_ERROR, "page_number is a negative number!\n");
 
@@ -175,7 +171,6 @@ void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
 }
 
 void previewgui_start_error_mode(GuPreviewGui* pc) {
-    L_F_DEBUG;
     pc->errormode = TRUE;
     gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
             GTK_WIDGET(pc->drawarea));
@@ -185,7 +180,6 @@ void previewgui_start_error_mode(GuPreviewGui* pc) {
 }
 
 void previewgui_stop_error_mode(GuPreviewGui* pc) {
-    L_F_DEBUG;
     pc->errormode = FALSE;
     g_object_ref(pc->errorlabel);
     gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
@@ -195,7 +189,6 @@ void previewgui_stop_error_mode(GuPreviewGui* pc) {
 }
 
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* pc) {
-    L_F_DEBUG;
     /* This line is very important, if no pdf exist, preview fails */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return FALSE;
 
@@ -301,7 +294,6 @@ void previewgui_stop_preview(GuPreviewGui* pc) {
 }
 
 void previewgui_page_input_changed(GtkEntry* entry, void* user) {
-    L_F_DEBUG;
     gint newpage = atoi(gtk_entry_get_text(entry));
 
     if (0 == newpage)
@@ -318,17 +310,14 @@ void previewgui_page_input_changed(GtkEntry* entry, void* user) {
 }
 
 void previewgui_next_page(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     previewgui_goto_page(gui->previewgui, gui->previewgui->page_current + 1);
 }
 
 void previewgui_prev_page(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     previewgui_goto_page(gui->previewgui, gui->previewgui->page_current - 1);
 }
 
 void previewgui_zoom_change(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
     double opts[9] = {0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0}; 
 

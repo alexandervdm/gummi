@@ -48,7 +48,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuMotion* motion_init(GuEditor* ec) {
-    L_F_DEBUG;
     GuMotion* m = g_new0(GuMotion, 1);
     m->timer = 0;
     g_signal_connect(ec->sourceview, "key-press-event",
@@ -59,6 +58,7 @@ GuMotion* motion_init(GuEditor* ec) {
 }
 
 gboolean motion_idle_cb(void* user) {
+    L_F_DEBUG;
     if (gui->previewgui->preview_on_idle)
         previewgui_update_preview(gui->previewgui);
     return FALSE;

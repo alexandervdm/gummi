@@ -44,7 +44,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
-    L_F_DEBUG;
 
     GuPrefsGui* p = g_new0(GuPrefsGui, 1);
     GtkBuilder* builder = gtk_builder_new();
@@ -158,13 +157,11 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
 }
 
 void prefsgui_main(GuPrefsGui* prefs) {
-    L_F_DEBUG;
     prefsgui_set_current_settings(prefs);
     gtk_widget_show_all(GTK_WIDGET(prefs->prefwindow));
 }
 
 void prefsgui_set_current_settings(GuPrefsGui* prefs) {
-    L_F_DEBUG;
     /* set font */
     GtkTreeModel* combo_lang = 0;
     GtkTreeIter iter;
@@ -288,7 +285,6 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
 }
 
 void toggle_linenumbers(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
     config_set_value("line_numbers", newval? "True": "False");
@@ -297,7 +293,6 @@ void toggle_linenumbers(GtkWidget* widget, void* user) {
 }
 
 void toggle_highlighting(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
     config_set_value("highlighting", newval? "True": "False");
@@ -306,7 +301,6 @@ void toggle_highlighting(GtkWidget* widget, void* user) {
 }
 
 void toggle_textwrapping(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
     config_set_value("textwrapping", newval? "True": "False");
@@ -328,7 +322,6 @@ void toggle_textwrapping(GtkWidget* widget, void* user) {
 }
 
 void toggle_wordwrapping(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
     config_set_value("wordwrapping", newval? "True": "False");
@@ -339,7 +332,6 @@ void toggle_wordwrapping(GtkWidget* widget, void* user) {
 }
 
 void toggle_compilestatus(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("compile_status", newval? "True": "False");
     gtk_widget_set_sensitive(GTK_WIDGET(gui->prefsgui->compile_timer), newval);
@@ -347,7 +339,6 @@ void toggle_compilestatus(GtkWidget* widget, void* user) {
 }
 
 void toggle_spaces_instof_tabs(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("spaces_instof_tabs", newval? "True": "False");
     gtk_source_view_set_insert_spaces_instead_of_tabs(
@@ -355,14 +346,12 @@ void toggle_spaces_instof_tabs(GtkWidget* widget, void* user) {
 }
 
 void toggle_autoindentation(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("autoindentation", newval? "True": "False");
     gtk_source_view_set_auto_indent(gummi->editor->sourceview, newval);
 }
 
 void toggle_autosaving(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("autosaving", newval? "True": "False");
     if (newval) {
@@ -379,7 +368,6 @@ void toggle_autosaving(GtkWidget* widget, void* user) {
 }
 
 void on_prefs_close_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     GtkTextIter start, end;
     gchar* text = NULL;
     gtk_text_buffer_get_start_iter(gui->prefsgui->default_buffer, &start);
@@ -402,13 +390,11 @@ void on_prefs_close_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_prefs_reset_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     config_set_default();
     prefsgui_set_current_settings(gui->prefsgui);
 }
 
 void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
     gchar buf[16];
 
@@ -417,7 +403,6 @@ void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
 }
 
 void on_autosave_value_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
     gchar buf[16];
 
@@ -426,7 +411,6 @@ void on_autosave_value_changed(GtkWidget* widget, void* user) {
 }
 
 void on_compile_value_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint newval = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
     gchar buf[16];
 
@@ -435,7 +419,6 @@ void on_compile_value_changed(GtkWidget* widget, void* user) {
 }
 
 void on_editor_font_set(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON(widget));
     slog(L_INFO, "setting font to %s\n", font);
     config_set_value("font", font);
@@ -445,7 +428,6 @@ void on_editor_font_set(GtkWidget* widget, void* user) {
 }
 
 void on_combo_typesetter_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint selected = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
     const gchar typesetter[][16] = { "pdflatex", "xelatex", "Customize" };
     if (selected != 2) {
@@ -457,7 +439,6 @@ void on_combo_typesetter_changed(GtkWidget* widget, void* user) {
 }
 
 void on_combo_language_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
 #ifdef USE_GTKSPELL
     gchar* selected = gtk_combo_box_get_active_text(GTK_COMBO_BOX(widget));
     config_set_value("spell_language", selected);
@@ -469,7 +450,6 @@ void on_combo_language_changed(GtkWidget* widget, void* user) {
 }
 
 void on_combo_compilescheme_changed(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     gint selected = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
     const gchar scheme[][16] = { "on_idle", "real_time" };
     slog(L_INFO, "compile scheme set to %s\n", scheme[selected]);
@@ -479,7 +459,6 @@ void on_combo_compilescheme_changed(GtkWidget* widget, void* user) {
 
 void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user)
 {
-    L_F_DEBUG;
     GtkTreeIter iter;
     gchar* name;
     gchar* id;

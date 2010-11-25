@@ -45,7 +45,6 @@ extern Gummi* gummi;
 static guint sid = 0;
 
 void iofunctions_load_default_text(GuEditor* ec) {
-    L_F_DEBUG;
     gchar* str = g_strdup(config_get_value("welcome"));
     editor_fill_buffer(ec, str);
     gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
@@ -85,7 +84,6 @@ void iofunctions_load_file(GuEditor* ec, gchar *filename) {
 }
 
 void iofunctions_write_file(GuEditor* ec, gchar *filename) {
-    L_F_DEBUG;
     GError* err=NULL;
     gchar* status;
     gchar* text;
@@ -114,7 +112,6 @@ void iofunctions_write_file(GuEditor* ec, gchar *filename) {
 }
 
 void iofunctions_start_autosave(const gchar* name) {
-    L_F_DEBUG;
     static gchar* filename = NULL;
     if (filename) {
         g_free(filename);
@@ -126,12 +123,10 @@ void iofunctions_start_autosave(const gchar* name) {
 }
 
 void iofunctions_stop_autosave(void) {
-    L_F_DEBUG;
     if (sid > 0) g_source_remove(sid);
 }
 
 void iofunctions_reset_autosave(const gchar* name) {
-    L_F_DEBUG;
     iofunctions_stop_autosave();
     if (config_get_value("autosaving"))
         iofunctions_start_autosave(name);
@@ -174,7 +169,6 @@ gchar* iofunctions_encode_text(gchar* text) {
 }
 
 gboolean iofunctions_autosave_cb(gpointer name) {
-    L_F_DEBUG;
     char* fname = (char*)name;
     char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
     if (fname) {

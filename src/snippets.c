@@ -41,7 +41,6 @@
 #include "utils.h"
 
 GuSnippets* snippets_init(const gchar* filename, GuEditor* ec) {
-    L_F_DEBUG;
     GuSnippets* s = g_new0(GuSnippets, 1);
     gchar* dirname = NULL;
 
@@ -57,7 +56,6 @@ GuSnippets* snippets_init(const gchar* filename, GuEditor* ec) {
 }
 
 void snippets_set_default(GuSnippets* sc) {
-    L_F_DEBUG;
     FILE* fh = 0;
     if (!(fh = fopen(sc->filename, "w")))
         slog(L_FATAL, "can't open config for writing... abort\n");
@@ -67,7 +65,6 @@ void snippets_set_default(GuSnippets* sc) {
 }
 
 void snippets_load(GuSnippets* sc) {
-    L_F_DEBUG;
     FILE* fh = 0;
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
@@ -118,7 +115,6 @@ void snippets_load(GuSnippets* sc) {
 }
 
 void snippets_save(GuSnippets* sc) {
-    L_F_DEBUG;
     FILE* fh = 0;
     slist* current = sc->head;
     gint i = 0, count = 0, len = 0;
@@ -159,7 +155,6 @@ void snippets_save(GuSnippets* sc) {
 }
 
 void snippets_clean_up(GuSnippets* sc) {
-    L_F_DEBUG;
     slist* prev = sc->head;
     slist* current;
     while (prev) {

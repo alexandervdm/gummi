@@ -96,7 +96,6 @@ const gchar config_str[] =
 "	\\end{document}\n";
 
 void config_init(const gchar* filename) {
-    L_F_DEBUG;
     const gchar* config_version = NULL;
     gchar* dirname = NULL;
 
@@ -125,7 +124,6 @@ void config_init(const gchar* filename) {
 }
 
 void config_set_default(void) {
-    L_F_DEBUG;
     FILE* fh = 0;
     if (!(fh = fopen(config_filename, "w")))
         slog(L_FATAL, "can't open config for writing... abort\n");
@@ -136,7 +134,6 @@ void config_set_default(void) {
 }
 
 const gchar* config_get_value(const gchar* term) {
-    L_F_DEBUG;
     gchar* ret  = NULL;
     slist* index = slist_find_index_of(config_head, term);
 
@@ -147,7 +144,6 @@ const gchar* config_get_value(const gchar* term) {
 }
 
 void config_set_value(const gchar* term, const gchar* value) {
-    L_F_DEBUG;
     if (!config_head)
         slog(L_FATAL, "configuration not initialized\n");
 
@@ -157,7 +153,6 @@ void config_set_value(const gchar* term, const gchar* value) {
 }
 
 void config_load(void) {
-    L_F_DEBUG;
     FILE* fh = 0;
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
@@ -202,7 +197,6 @@ void config_load(void) {
 }
 
 void config_save(void) {
-    L_F_DEBUG;
     FILE* fh = 0;
     slist* current = config_head;
     gint i = 0, count = 0, len = 0;
@@ -236,7 +230,6 @@ void config_save(void) {
 }
 
 void config_clean_up(void) {
-    L_F_DEBUG;
     slist* prev = config_head;
     slist* current;
     while (prev) {

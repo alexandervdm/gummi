@@ -43,7 +43,6 @@ const gchar bracket_type[][16] = { "matrix", "pmatrix", "bmatrix",
 
 const gchar* importer_generate_table(gint rows, gint cols, gint borders,
         gint alignment) {
-    L_F_DEBUG;
     gint i = 0, j = 0;
     static gchar result[BUFSIZ * 2] = { 0 };
     gchar table[BUFSIZ * 2] = { 0 },
@@ -86,7 +85,6 @@ const gchar* importer_generate_table(gint rows, gint cols, gint borders,
 }
 
 const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols) {
-    L_F_DEBUG;
     gint i = 0, j = 0;
     static gchar result[BUFSIZ * 2] = { 0 };
     gchar tmp[BUFSIZ / 8];
@@ -117,7 +115,6 @@ const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols) {
 
 const gchar* importer_generate_image(const gchar* path, const gchar* caption,
         const gchar* label, gdouble scale) {
-    L_F_DEBUG;
     static gchar result[BUFSIZ] = { 0 };
 
     /* clear previous data */

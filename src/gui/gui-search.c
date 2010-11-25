@@ -41,7 +41,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuSearchGui* searchgui_init(GtkBuilder* builder) {
-    L_F_DEBUG;
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
     GuSearchGui* s = g_new0(GuSearchGui, 1);
@@ -69,33 +68,28 @@ void searchgui_main(GuSearchGui* gc) {
 }
 
 void on_toggle_matchcase_toggled(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gui->searchgui->matchcase =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     gummi->editor->replace_activated = FALSE;
 }
 
 void on_toggle_wholeword_toggled(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gui->searchgui->wholeword =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     gummi->editor->replace_activated = FALSE;
 }
 
 void on_toggle_backwards_toggled(GtkWidget *widget, void* user) {
-    L_F_DEBUG;
     gui->searchgui->backwards =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     gummi->editor->replace_activated = FALSE;
 }
 
 void on_searchgui_text_changed(GtkEditable *editable, void* user) {
-    L_F_DEBUG;
     gummi->editor->replace_activated = FALSE;
 }
 
 gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     g_free(gui->searchgui->prev_search);
     g_free(gui->searchgui->prev_replace);
     gui->searchgui->prev_search = g_strdup(gtk_entry_get_text(
@@ -107,7 +101,6 @@ gboolean on_button_searchwindow_close_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_start_search(gummi->editor,
             gtk_entry_get_text(gui->searchgui->searchentry),
             gui->searchgui->backwards,
@@ -128,7 +121,6 @@ void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user)
 }
 
 void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user) {
-    L_F_DEBUG;
     editor_start_replace_all(gummi->editor,
             gtk_entry_get_text(gui->searchgui->searchentry),
             gtk_entry_get_text(gui->searchgui->replaceentry),
