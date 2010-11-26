@@ -149,7 +149,8 @@ void config_set_value(const gchar* term, const gchar* value) {
 
     slist* index = slist_find_index_of(config_head, term);
     g_free(index->second);
-    index->second = g_strdup(value);
+
+    index->second = g_strdup(value? value: "");
 }
 
 void config_load(void) {

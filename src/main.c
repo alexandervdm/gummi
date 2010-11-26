@@ -60,15 +60,6 @@ void on_window_destroy (GtkObject *object, gpointer user_data) {
 }
 
 int main (int argc, char *argv[]) {
-    gchar* configname;
-    GtkBuilder* builder;
-    GuFileInfo* finfo;
-    GuEditor* editor;
-    GuMotion* motion;
-    GuLatex* latex;
-    GuTemplate* templ;
-    GuBiblio* biblio;
-
     /* set up i18n */
     bindtextdomain(PACKAGE, LOCALEDIR);
     setlocale(LC_ALL, "");
@@ -83,7 +74,7 @@ int main (int argc, char *argv[]) {
     slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
     /* set up configuration file */
-    configname = g_build_filename(g_get_user_config_dir(), "gummi",
+    gchar* configname = g_build_filename(g_get_user_config_dir(), "gummi",
                                   "gummi.cfg", NULL);
     config_init(configname);
     config_load();
@@ -91,17 +82,17 @@ int main (int argc, char *argv[]) {
 
     /* initialize gtk */
     gtk_init (&argc, &argv);
-    builder = gtk_builder_new();
+    GtkBuilder* builder = gtk_builder_new();
     gtk_builder_add_from_file(builder, DATADIR"/gummi.glade", NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
 
     /* initialize classes */
-    finfo = fileinfo_init();
-    editor = editor_init(builder, finfo);
-    latex = latex_init(finfo, editor); 
-    biblio = biblio_init(builder, finfo);
-    templ = template_init(builder, finfo);
-    motion = motion_init(editor);
+    GuFileInfo* finfo= fileinfo_init();
+    GuEditor* editor = editor_init(builder, finfo);
+    GuLatex* latex = latex_init(finfo, editor); 
+    GuBiblio* biblio = biblio_init(builder, finfo);
+    GuTemplate* templ = template_init(builder, finfo);
+    GuMotion* motion = motion_init(editor);
 
     gummi = gummi_init(finfo, editor, motion, latex, biblio, templ);
     gui = gui_init(builder);

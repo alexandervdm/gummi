@@ -44,12 +44,13 @@ Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
 }
 
 void gummi_new_environment(Gummi* gc, const gchar* filename) {
-
     fileinfo_update(gc->finfo, filename);
+
     slog(L_INFO, "\n");
     slog(L_INFO, "Environment created for:\n");
     slog(L_INFO, "TEX: %s\n", gc->finfo->filename);
     slog(L_INFO, "TMP: %s\n", gc->finfo->workfile);
     slog(L_INFO, "PDF: %s\n", gc->finfo->pdffile); 
+
     iofunctions_reset_autosave(filename);
 }

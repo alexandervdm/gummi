@@ -167,8 +167,7 @@ void gui_main(GtkBuilder* builder) {
     g_signal_connect(g_e_buffer, "changed",
             G_CALLBACK(check_preview_timer), NULL);
     gtk_widget_show_all(gui->mainwindow);
-    
-    
+
     // TODO: SVN NOTICE 23 NOVEMBER - REMOVE ON 0.6.0 RELEASE
     // only want to show this once, and perhaps for future instances
     if (!strlen(config_get_value("svnpopup"))) {
@@ -238,14 +237,48 @@ void gui_update_title(void) {
     g_free(title);
 }
 
+void gui_open_file(const gchar* filename) {
+    /* Check if swap file exists and try to recover from it */
+    if (filename != NULL) {
+        /* destroy previous file info context */
+        fileinfo_destroy(gummi->finfo);
+
+        gint ret = 0;
+        gchar* basename = g_path_get_basename(filename);
+        gchar* dirname = g_path_get_dirname(filename);
+        gchar* prev_workfile = g_strdup_printf("%s%c.%s.swp", dirname,
+                G_DIR_SEPARATOR, basename);
+
+        if (utils_path_exists(prev_workfile)) {
+            slog(L_WARNING, "Swap file `%s' found.\n", prev_workfile);
+            gchar* message = g_strdup_printf("Swap file exits for %s, do you "
+                    "want to recover from it?", filename);
+
+            ret = utils_yes_no_dialog(message);
+            if (GTK_RESPONSE_YES == ret)
+                iofunctions_load_file(gummi->editor, prev_workfile); 
+            g_free(message);
+        }
+
+        g_free(dirname);
+        g_free(basename);
+        g_free(prev_workfile);
+
+        if (GTK_RESPONSE_YES != ret)
+            iofunctions_load_file(gummi->editor, filename); 
+
+        gui_new_environment(filename);
+    }
+}
+
 void on_menu_new_activate(GtkWidget *widget, void* user) {
     gint ret = check_for_save();
     if (GTK_RESPONSE_YES == ret)
         on_menu_save_activate(NULL, NULL);  
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-    iofunctions_load_default_text(gummi->editor);
     gui_new_environment(NULL);
+    iofunctions_load_default_text(gummi->editor);
 }
 
 void on_menu_template_activate(GtkWidget *widget, void * user) {
@@ -275,8 +308,7 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
         return;
 
     if (utils_path_exists(gui->recent_list[index])) {
-        iofunctions_load_file(gummi->editor, gui->recent_list[index]); 
-        gui_new_environment(gui->recent_list[index]);
+        gui_open_file(gui->recent_list[index]);
     } else {
         tstr = g_strdup_printf(_("Error loading recent file: %s"),
                 gui->recent_list[index]);
@@ -304,12 +336,11 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
         on_menu_save_activate(NULL, NULL);  
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
+
     filename = get_open_filename(TYPE_LATEX);
-    if (filename != NULL) {
-        iofunctions_load_file(gummi->editor, filename); 
-        gui_new_environment(filename);
-    }
+    gui_open_file(filename);
     g_free(filename);
+
     gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
 
@@ -360,8 +391,8 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
                 return;
             }
         }
-        iofunctions_write_file(gummi->editor, filename); 
         gui_new_environment(filename);
+        iofunctions_write_file(gummi->editor, filename); 
         g_free(filename);
     }
     gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
@@ -692,8 +723,8 @@ void on_button_template_open_clicked(GtkWidget* widget, void* user) {
         statusbar_set_message(status);
         g_free(status);
         
-        editor_fill_buffer(gummi->editor, template.itemdata);
         gui_new_environment(NULL);
+        editor_fill_buffer(gummi->editor, template.itemdata);
         gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
     }
 }

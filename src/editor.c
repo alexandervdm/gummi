@@ -153,6 +153,11 @@ void editor_fill_buffer(GuEditor* ec, const gchar* text) {
     gtk_widget_set_sensitive(GTK_WIDGET(ec->sourceview), TRUE);
     gtk_source_buffer_end_not_undoable_action(ec->sourcebuffer);
     gtk_text_buffer_end_user_action(ec_sourcebuffer);
+
+    /* place cursor in the beggining of the document */
+    GtkTextIter start;
+    gtk_text_buffer_get_start_iter(ec_sourcebuffer, &start);
+    gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
 }
 
 gchar* editor_grab_buffer(GuEditor* ec) {
@@ -437,8 +442,7 @@ void editor_start_replace_all(GuEditor* ec, const gchar* term,
 }
 
 void editor_get_current_iter(GuEditor* ec, GtkTextIter* current) {
-    GtkTextMark* mark;
-    mark = gtk_text_buffer_get_insert(ec_sourcebuffer);
+    GtkTextMark* mark = gtk_text_buffer_get_insert(ec_sourcebuffer);
     gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, current, mark);
 }
 

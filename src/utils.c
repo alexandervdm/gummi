@@ -85,13 +85,16 @@ void slog(gint level, const gchar *fmt, ...) {
 
     if (L_IS_GUI(level)) {
         GtkWidget* dialog;
-        // TODO: display the tmp file name
+
         if (L_IS_TYPE(level, L_G_FATAL))
-            out = g_strdup_printf(_("\nGummi has encountered a serious error "
-                    "and requires a restart, you can find your file in the %s "
-                    "directory\n"), g_get_tmp_dir());
+            out = g_strdup_printf(_("%s has encountered a serious error and "
+                        "will require a restart. Your working data will be "
+                        "restored when you reload your document. Please "
+                        "report bugs at: http://dev.midnightcoding.org",
+                        PACKAGE_NAME));
         else
             out = g_strdup(message);
+
         dialog = gtk_message_dialog_new (parent, 
                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                 L_IS_TYPE(level,L_G_INFO)? GTK_MESSAGE_INFO: GTK_MESSAGE_ERROR,
@@ -121,6 +124,9 @@ void slog(gint level, const gchar *fmt, ...) {
 gint utils_yes_no_dialog(const gchar* message) {
     GtkWidget* dialog;
     gint ret = 0;
+
+    g_return_val_if_fail(message != NULL, 0);
+
     dialog = gtk_message_dialog_new (parent, 
                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                  GTK_MESSAGE_QUESTION,
@@ -130,6 +136,7 @@ gint utils_yes_no_dialog(const gchar* message) {
     gtk_window_set_title(GTK_WINDOW(dialog), _("Confirmation"));
     ret = gtk_dialog_run(GTK_DIALOG(dialog));      
     gtk_widget_destroy(dialog);
+
     return ret;
 }
 
@@ -170,12 +177,13 @@ gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
  * @return struct _pdata
  */
 pdata utils_popen_r(const gchar* cmd) {
-    /* TODO: Win32 support */
     FILE* fp = popen(cmd, "r");
     gchar buf[BUFSIZ];
     gchar* ret = NULL;
     gchar* rot = NULL;
     gint status = 0, len = 0;
+
+    g_assert(cmd != NULL);
 
     if (!fp) slog(L_FATAL, "popen() error\n");
 

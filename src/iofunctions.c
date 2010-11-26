@@ -51,7 +51,7 @@ void iofunctions_load_default_text(GuEditor* ec) {
     g_free(str);
 }
 
-void iofunctions_load_file(GuEditor* ec, gchar *filename) {
+void iofunctions_load_file(GuEditor* ec, const gchar* filename) {
     GError* err = NULL;
     gchar* status;
     gchar* text;
@@ -77,13 +77,15 @@ void iofunctions_load_file(GuEditor* ec, gchar *filename) {
         g_free(text); 
         return;
     }
+
     editor_fill_buffer(ec, decoded);
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
+    gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
+
     g_free(decoded);
     g_free(text); 
 }
 
-void iofunctions_write_file(GuEditor* ec, gchar *filename) {
+void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
     GError* err=NULL;
     gchar* status;
     gchar* text;
