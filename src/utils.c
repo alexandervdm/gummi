@@ -90,8 +90,8 @@ void slog(gint level, const gchar *fmt, ...) {
             out = g_strdup_printf(_("%s has encountered a serious error and "
                         "will require a restart. Your working data will be "
                         "restored when you reload your document. Please "
-                        "report bugs at: http://dev.midnightcoding.org",
-                        PACKAGE_NAME));
+                        "report bugs at: http://dev.midnightcoding.org"),
+                        PACKAGE_NAME);
         else
             out = g_strdup(message);
 
