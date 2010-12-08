@@ -116,12 +116,20 @@ const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols) {
 const gchar* importer_generate_image(const gchar* path, const gchar* caption,
         const gchar* label, gdouble scale) {
     static gchar result[BUFSIZ] = { 0 };
+    gchar scale_str[16] = { 0 };
+    gchar* loc = NULL;
 
     /* clear previous data */
     result[0] = 0;
 
+    snprintf(scale_str, 16, "%.2f", scale);
+
+    /* some locales use ',' as seperator, replace them as '.' */
+    if ((loc = strstr(scale_str, ",")))
+        *loc = '.';
+
     snprintf(result, BUFSIZ, "\\begin{figure}[htp]\n\\centering\n"
-        "\\includegraphics[scale=%.2f]{%s}\n\\caption{%s}\n\\label{%s}\n"
-        "\\end{figure}", scale, path, caption, label);
+        "\\includegraphics[scale=%s]{%s}\n\\caption{%s}\n\\label{%s}\n"
+        "\\end{figure}", scale_str, path, caption, label);
     return result;
 }
