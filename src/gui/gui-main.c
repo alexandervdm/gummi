@@ -650,16 +650,14 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "<alexvandermey@gmail.com>",
         "Wei-Ning Huang\n"
             "<aitjcize@gmail.com>\n",
-        "Contributors:",
+        "Former contributors:",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };
-    const gchar* artists[] = {
-        "Windows version Icon set from Elemetary Project:\n"
-        "http://www.elementary-project.com/", NULL};
                 
     const gchar* translators =
         "Brazilian-Portugese: Fernando Cruz\n"
         "Catalan: Marc Vinyals\n"
+        "Chinese(Traditional): Wei-Ning Huang\n"
         "Danish: Jack Olsen\n"
         "Dutch: Alexander van der Mey\n"
         "French: Yvan Duron & Olivier Brousse\n"
@@ -669,8 +667,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Polish: Hubert Kowalski\n"
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig\n"
-        "Spanish: Carlos Salas Contreras\n"
-        "Chinese(Traditional): Wei-Ning Huang\n";
+        "Spanish: Carlos Salas Contreras\n";
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
     gtk_window_set_transient_for(GTK_WINDOW(dialog),
@@ -684,7 +681,6 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
     gtk_about_dialog_set_license(dialog, PACKAGE_LICENSE);
     gtk_about_dialog_set_logo(dialog, icon);
     gtk_about_dialog_set_comments(dialog, PACKAGE_COMMENTS);
-    gtk_about_dialog_set_artists(dialog, artists);
     gtk_about_dialog_set_translator_credits(dialog, translators);
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(GTK_WIDGET(dialog));
