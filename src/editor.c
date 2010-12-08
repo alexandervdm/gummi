@@ -133,10 +133,14 @@ void editor_activate_spellchecking(GuEditor* ec, gboolean status) {
     GError* err2 = NULL;
     GtkSpell* spell = 0;
     if (status) {
-        if (!(spell = gtkspell_new_attach(ec_sourceview, "en", &err)))
-            slog(L_INFO, "gtkspell: %s\n", err->message);
-        if (!gtkspell_set_language(spell, lang, &err2))
-            slog(L_INFO, "gtkspell: %s\n", err2->message);
+        if (!(spell = gtkspell_new_attach(ec_sourceview, "en", &err))) {
+            slog(L_ERROR, "gtkspell_new_attach(): %s\n", err->message);
+            g_error_free(err);
+        }
+        if (!gtkspell_set_language(spell, lang, &err2)) {
+            slog(L_ERROR, "gtkspell_set_language(): %s\n", err2->message);
+            g_error_free(err2);
+        }
     } else {
         GtkSpell* spell = gtkspell_get_from_text_view(ec_sourceview);
         if (spell)
@@ -216,7 +220,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     const gchar* selected_text = 0;
     gint style_size = sizeof(style) / sizeof(style[0]);
     gchar** result = 0;
-    GError* error = NULL;
+    GError* err = NULL;
     GRegex* match_str = 0;
     GMatchInfo* match_info;
     gchar* outtext = NULL;
@@ -240,7 +244,11 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
             (style[selected][2][0] == '\\')? "\\": "",
             style[selected][2]);
 
-    match_str = g_regex_new(regexbuf, G_REGEX_DOTALL, 0, &error);
+    if (!(match_str = g_regex_new(regexbuf, G_REGEX_DOTALL, 0, &err))) {
+        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+        g_error_free(err);
+        goto cleanup;
+    }
 
     if (g_regex_match(match_str, selected_text, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
@@ -268,6 +276,7 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     gtk_text_buffer_end_user_action(ec_sourcebuffer);
     gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
 
+cleanup:
     g_free(outtext);
     g_free(regexbuf);
     g_strfreev(result);

@@ -118,11 +118,15 @@ void latex_update_pdffile(GuLatex* lc) {
     /* find error line */
     if (cresult.ret) {
         gchar* result = NULL;
-        GError* error = NULL;
+        GError* err = NULL;
         GRegex* match_str = NULL;
         GMatchInfo* match_info;
 
-        match_str = g_regex_new(":(\\d+):", G_REGEX_DOTALL, 0, &error);
+        if (!(match_str = g_regex_new(":(\\d+):", G_REGEX_DOTALL, 0, &err))) {
+            slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+            g_error_free(err);
+            return;
+        }
 
         if (g_regex_match(match_str, cresult.data, 0, &match_info)) {
             gint count = 0;
@@ -176,8 +180,10 @@ void latex_export_pdffile(GuLatex* lc, const gchar* path) {
             return;
         }
     }
-    if (!utils_copy_file(lc->b_finfo->pdffile, savepath, &err))
-        slog(L_G_ERROR, "%s\n", err->message);
-    g_error_free(err);
+    if (!utils_copy_file(lc->b_finfo->pdffile, savepath, &err)) {
+        slog(L_G_ERROR, "utils_copy_file(): %s\n", err->message);
+        g_error_free(err);
+    }
+
     g_free(savepath);
 }

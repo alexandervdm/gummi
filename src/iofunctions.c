@@ -68,25 +68,24 @@ void iofunctions_load_file(GuEditor* ec, const gchar* filename) {
     
     /* get the file contents */
     if (FALSE == (result = g_file_get_contents(filename, &text, NULL, &err))) {
-        slog(L_G_ERROR, "%s\n", err->message);
+        slog(L_G_ERROR, "g_file_get_contents(): %s\n", err->message);
         g_error_free(err);
         iofunctions_load_default_text(ec);
-        return;
+        goto cleanup;
     }
-    if (NULL == (decoded = iofunctions_decode_text(text))) {
-        g_free(text); 
-        return;
-    }
+    if (NULL == (decoded = iofunctions_decode_text(text)))
+        goto cleanup;
 
     editor_fill_buffer(ec, decoded);
     gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
 
+cleanup:
     g_free(decoded);
     g_free(text); 
 }
 
 void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
-    GError* err=NULL;
+    GError* err = NULL;
     gchar* status;
     gchar* text;
     gchar* encoded;
@@ -101,8 +100,12 @@ void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
     encoded = iofunctions_encode_text(text);
     
     /* set the contents of the file to the text from the buffer */
-    if (filename != NULL)    
-        result = g_file_set_contents (filename, text, -1, &err);
+    if (filename != NULL) {
+        if (!(result = g_file_set_contents (filename, text, -1, &err))) {
+            slog(L_ERROR, "g_file_set_contents(): %s\n", err->message);
+            g_error_free(err);
+        }
+    }
         
     if (result == FALSE) {
         slog(L_G_ERROR, _("%s\nPlease try again later."), err->message);
@@ -140,6 +143,7 @@ char* iofunctions_decode_text(gchar* text) {
     gsize read = 0, written = 0;
 
     if (!(result = g_locale_to_utf8(text, -1, &read, &written, &err))) {
+        g_error_free(err);
         slog(L_ERROR, "failed to convert text from default locale, trying "
                 "ISO-8859-1\n");
         gsize in_size = strlen(text), out_size = in_size * 2;
@@ -163,6 +167,7 @@ gchar* iofunctions_encode_text(gchar* text) {
     gsize read = 0, written = 0;
 
     if (!(result = g_locale_from_utf8(text, -1, &read, &written, &err))) {
+        g_error_free(err);
         slog(L_ERROR, "failed to convert text to default locale, text will "
                 "be saved in UTF-8\n");
         result = g_strdup(text);

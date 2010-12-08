@@ -107,7 +107,11 @@ void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
     if (pc->page) g_object_unref(pc->page);
     if (pc->doc) g_object_unref(pc->doc);
 
-    pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err);
+    if (!(pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err))) {
+        slog(L_ERROR, "poppler_document_new_from_file(): %s\n", err->message);
+        g_error_free(err);
+        return;
+    }
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
 
     poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
@@ -129,7 +133,11 @@ void previewgui_refresh(GuPreviewGui* pc) {
     if (pc->page) g_object_unref(pc->page);
     if (pc->doc) g_object_unref(pc->doc);
 
-    pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err);
+    if (!(pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err))) {
+        slog(L_FATAL, "poppler_document_new_from_file(): %s\n", err->message);
+        g_error_free(err);
+        return;
+    }
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
     
     /* recheck document dimensions on refresh for orientation changes */

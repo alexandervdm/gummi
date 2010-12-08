@@ -528,8 +528,8 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     gint i = 0;
     gchar* output = 0;
     gchar* cmd = 0;
-    gchar** matched = 0;
-    GError* error = 0;
+    gchar** matched = NULL;
+    GError* err = NULL;
     GMatchInfo* match_info;
     GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
     gchar* res[TEXCOUNT_OUTPUT_LINES] = { 0 };
@@ -555,19 +555,24 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     if (g_find_program_in_path("texcount")) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
-        GError* err = 0;
         gchar* tmpfile = g_strdup_printf("%s.state", gummi->finfo->fdname);
         if (!utils_copy_file(gummi->finfo->workfile, tmpfile, &err)) {
-            slog(L_G_ERROR, "%s\n", err->message);
+            slog(L_G_ERROR, "utils_copy_file(): %s\n", err->message);
             g_free(tmpfile);
-            return;
+            g_error_free(err);
+            goto cleanup;
         }
 
         cmd = g_strdup_printf("texcount '%s'", tmpfile);
         pdata result = utils_popen_r(cmd);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
-            regexs[i] = g_regex_new(terms_regex[i], 0, 0, &error);
+            if (!(regexs[i] = g_regex_new(terms_regex[i], 0, 0, &err))) {
+                slog(L_G_ERROR, "utils_copy_file(): %s\n", err->message);
+                g_free(tmpfile);
+                g_error_free(err);
+                goto cleanup;
+            }
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
             if (g_regex_match(regexs[i], result.data, 0, &match_info)) {
@@ -608,6 +613,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
 
+cleanup:
     for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
         g_regex_unref(regexs[i]);
         g_free(res[i]);
@@ -638,6 +644,8 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
     GError* err = NULL;
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size
         (DATADIR"/gummi.png", 80, 80, &err);
+    if (!icon) g_error_free(err);
+
     const gchar* authors[] = { "Alexander van der Mey\n"
         "<alexvandermey@gmail.com>",
         "Wei-Ning Huang\n"
@@ -645,7 +653,8 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Contributors:",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };
-    const gchar* artists[] = {"Windows version Icon set from Elemetary Project:\n"
+    const gchar* artists[] = {
+        "Windows version Icon set from Elemetary Project:\n"
         "http://www.elementary-project.com/", NULL};
                 
     const gchar* translators =
@@ -807,7 +816,11 @@ void on_button_biblio_detect_clicked(GtkWidget* widget, void* user) {
 
     if (biblio_detect_bibliography(gummi->biblio, gummi->latex)) {
         editor_insert_bib(gummi->editor, gummi->finfo->bibfile);
-        g_file_get_contents(gummi->finfo->bibfile, &text, NULL, &err);
+        if (!g_file_get_contents(gummi->finfo->bibfile, &text, NULL, &err)) {
+            slog(L_G_ERROR, "g_file_get_contents(): %s\n", err->message);
+            g_error_free(err);
+            return;
+        }
         number = biblio_parse_entries(gummi->biblio, text);
         basename = g_path_get_basename(gummi->finfo->bibfile);
         gtk_label_set_text(gummi->biblio->filenm_label, basename);
@@ -826,7 +839,6 @@ void on_button_biblio_detect_clicked(GtkWidget* widget, void* user) {
         gtk_label_set_text(gummi->biblio->refnr_label, _("N/A"));
     }
 }
-
 
 void on_bibreference_clicked(GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user) {
