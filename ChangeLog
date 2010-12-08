@@ -2,6 +2,27 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.5.4 (December 8th, 2010):
+
+	Bugs fixed:
+	* Fixed segfault on document statistics for filepaths with spaces
+	* Fixed segfault on accessing non-existing recent file
+	* Fixed a rare segfault that occured on opening file
+	* Set default search & replace options to clone gedit's
+	* Fixed cursor repeatedly jumping to error lines
+	* Fixed statusbar message when a document is loaded from template
+	* Multiple lines will now be tagged when they contain errors
+	* Fixed PDF preview delay
+	* Misc small bugfixes here and there
+	* Updated translations
+
+	Features added:
+	* Added editor style scheme support
+	* Added manual preview compile function
+	* Document recovery mode in case of a crash
+	* Allow custom compilation scripts and flags
+	* Added polish & spanish translations
+	
 Gummi 0.5.3 (October 24th, 2010):
 
     Bugs fixed:
