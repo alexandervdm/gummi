@@ -43,7 +43,7 @@ GuFileInfo* fileinfo_init(void) {
     f->pdffile = NULL;
     f->workfile = NULL;
     f->bibfile = NULL;
-    f->tmpdir = g_get_tmp_dir();
+    f->tmpdir = g_strdup(g_get_tmp_dir());
     return f;
 }
 

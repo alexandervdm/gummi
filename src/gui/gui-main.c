@@ -551,8 +551,17 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     };
     
     if (g_find_program_in_path("texcount")) {
-        /* XXX: texcount can't find file containing spaces, see bug #162 */
-        cmd = g_strdup_printf("texcount '%s'", gummi->finfo->workfile);
+        /* Copy workfile to /tmp to remove any spaces in filename to avoid
+         * segfaults */
+        GError* err = 0;
+        gchar* tmpfile = g_strdup_printf("%s.state", gummi->finfo->fdname);
+        if (!utils_copy_file(gummi->finfo->workfile, tmpfile, &err)) {
+            slog(L_G_ERROR, "%s\n", err->message);
+            g_free(tmpfile);
+            return;
+        }
+
+        cmd = g_strdup_printf("texcount '%s'", tmpfile);
         pdata result = utils_popen_r(cmd);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
@@ -581,6 +590,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
                              terms[6], ": ", res[6], "\n",
                              NULL);
         g_free(result.data);
+        g_free(tmpfile);
     }
     else {
         cmd = NULL;

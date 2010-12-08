@@ -41,7 +41,6 @@
 #include "gui/gui-main.h"
 #include "iofunctions.h"
 #include "motion.h"
-#include "snippets.h"
 #include "template.h"
 #include "utils.h"
 

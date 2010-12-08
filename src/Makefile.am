@@ -23,6 +23,5 @@ gummi_SOURCES = biblio.c  biblio.h \
 		motion.c motion.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
-		snippets.c snippets.h \
 		utils.c utils.h \
 		main.c
