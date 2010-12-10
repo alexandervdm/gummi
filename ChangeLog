@@ -2,6 +2,11 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.5.5 (December 10th, 2010):
+
+	Bugs fixed:
+	* Fixed critical search & replace regression.. :(
+
 Gummi 0.5.4 (December 8th, 2010):
 
 	Bugs fixed:
