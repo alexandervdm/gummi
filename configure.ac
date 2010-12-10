@@ -10,7 +10,7 @@ GETTEXT_PACKAGE=gummi
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 AC_SUBST(GETTEXT_PACKAGE)
 
-ALL_LINGUAS="ca da fr el it nl pt_BR ro ru zh_TW"
+ALL_LINGUAS="ca de da fr el es it nl pl pt_BR ro ru zh_TW"
 
 AC_CONFIG_SRCDIR([src/environment.h])
 AC_CONFIG_HEADERS([config.h])
