@@ -97,6 +97,7 @@ void latex_update_pdffile(GuLatex* lc) {
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
+                                     "-halt-on-error"
                                      "%s "
                                      "-output-directory=\"%s\" \"%s\"",
                                      dirname,
