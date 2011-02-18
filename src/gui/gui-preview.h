@@ -51,12 +51,11 @@ typedef struct _GuPreviewGui {
     gchar *uri;
     gint page_total;
     gint page_current;
+    gint page_zoommode;
     gdouble page_scale;
     gdouble page_width;
     gdouble page_height;
     gdouble page_ratio;
-    gboolean fit_width;
-    gboolean best_fit;
     gboolean errormode;
 
     gint update_timer;

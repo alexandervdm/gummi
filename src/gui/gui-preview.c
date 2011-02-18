@@ -68,8 +68,7 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     p->uri = NULL;
     p->doc = NULL;
     p->page = NULL;
-    p->fit_width = TRUE;
-    p->best_fit = FALSE;
+    p->page_zoommode = 1;
     p->update_timer = 0;
     p->preview_on_idle = FALSE;
     gtk_widget_modify_bg(p->drawarea, GTK_STATE_NORMAL, &bg); 
@@ -99,28 +98,29 @@ void previewgui_update_statuslight(const gchar* type) {
 
 void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
     GError *err = NULL;
-    pc->page_current = 0;
-    
-    pc->uri = g_strconcat("file://", pdffile, NULL);
 
-    /* clean up */
+    // clean up objects from previous document
     if (pc->page) g_object_unref(pc->page);
     if (pc->doc) g_object_unref(pc->doc);
 
+    pc->uri = g_strconcat("file://", pdffile, NULL);
     if (!(pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err))) {
         slog(L_ERROR, "poppler_document_new_from_file(): %s\n", err->message);
         g_error_free(err);
         return;
     }
-    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
-
-    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
-
     pc->page_total = poppler_document_get_n_pages(pc->doc);
-    pc->page_ratio = (pc->page_width / pc->page_height);
-    pc->page_scale = 1.0;
-    previewgui_set_pagedata(pc);
+    pc->page_current = 0;
+    
+    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
+    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
+    
+    //pc->page_total = poppler_document_get_n_pages(pc->doc);
+    //pc->page_ratio = (pc->page_width / pc->page_height);
+    //pc->page_scale = 1.0;
+    //previewgui_set_pagedata(pc);
 }
+
 
 void previewgui_refresh(GuPreviewGui* pc) {
     L_F_DEBUG;
@@ -138,14 +138,14 @@ void previewgui_refresh(GuPreviewGui* pc) {
         g_error_free(err);
         return;
     }
+    
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
     
     /* recheck document dimensions on refresh for orientation changes */
     poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
-
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     previewgui_set_pagedata(pc);
-
+    
     gtk_widget_queue_draw(pc->drawarea);
 }
 
@@ -203,34 +203,34 @@ gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* pc) {
     cairo_t* cr;
     cr = gdk_cairo_create(w->window);
     
-    double width = pc->scrollw->allocation.width;
-    double height = pc->scrollw->allocation.height;
-    double scrollw_ratio = (width / height);
+    double scrollwidth = pc->scrollw->allocation.width;
+    double scrollheight = pc->scrollw->allocation.height;
+    double scrollw_ratio = (scrollwidth / scrollheight);
     
     // TODO: STOP WITH ERROR IF PAGE RATIO OR PAGE WIDTH IS NULL!
     
-    if (pc->best_fit || pc->fit_width) {
-        if (scrollw_ratio < pc->page_ratio || pc->fit_width) {
-            pc->page_scale = width / pc->page_width;
+    if (pc->page_zoommode < 2) {
+        if (scrollw_ratio < pc->page_ratio || pc->page_zoommode == 1) {
+            pc->page_scale = scrollwidth / pc->page_width;
         }
         else {
-            pc->page_scale = height / pc->page_height;
+            pc->page_scale = scrollheight / pc->page_height;
         }
     }
     
-    if (!pc->best_fit && !pc->fit_width) {
-        gtk_widget_set_size_request(pc->drawarea, (pc->page_width *
-                    pc->page_scale), (pc->page_height * pc->page_scale));
-    }
-    else if (pc->fit_width) {
-        if (fabs(pc->page_ratio - scrollw_ratio) > 0.01) {
-            gtk_widget_set_size_request(pc->drawarea, -1,
-                    (pc->page_height*pc->page_scale));
-        }
-    }
-    else if (pc->best_fit) {
-        gtk_widget_set_size_request(pc->drawarea, -1,
-                (pc->page_height*pc->page_scale)-10);
+    // setting gtkdrawingarea dimensions
+    gint height = (int)(pc->page_height * pc->page_scale);
+    gint width = (int)(pc->page_width * pc->page_scale); 
+    switch (pc->page_zoommode) {
+        case 0: // best_fit
+            gtk_widget_set_size_request(pc->drawarea, -1, (height-10));
+            break;
+        case 1: // fit_width
+            if (fabs(pc->page_ratio - scrollw_ratio) > 0.01)
+                gtk_widget_set_size_request(pc->drawarea, -1, height);
+            break;
+        default: // percentage zoom
+            gtk_widget_set_size_request(pc->drawarea, width, height);
     }
     
     // import python lines for calculating scale here
@@ -331,17 +331,17 @@ void previewgui_zoom_change(GtkWidget* widget, void* user) {
 
     if (index < 0) slog(L_ERROR, "preview zoom level is < 0.\n");
 
-    gui->previewgui->fit_width = gui->previewgui->best_fit = FALSE;
     if (index < 2) {
         if (index == 0) {
-            gui->previewgui->best_fit = TRUE;
+            gui->previewgui->page_zoommode = 0;
         }
         else if (index == 1) {
-            gui->previewgui->fit_width = TRUE;
+            gui->previewgui->page_zoommode = 1;
         }
     }
     else {
         gui->previewgui->page_scale = opts[index-2];
+        gui->previewgui->page_zoommode = index;
     }
 
     gtk_widget_queue_draw(gui->previewgui->drawarea);
