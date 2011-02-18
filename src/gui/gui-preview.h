@@ -52,14 +52,16 @@ typedef struct _GuPreviewGui {
     gint page_total;
     gint page_current;
     gint page_zoommode;
+    gint update_timer;
     gdouble page_scale;
     gdouble page_width;
     gdouble page_height;
     gdouble page_ratio;
-    gboolean errormode;
-
-    gint update_timer;
     gboolean preview_on_idle;
+    gboolean errormode;
+    
+    cairo_surface_t *surface;
+
 } GuPreviewGui;
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder);
@@ -78,7 +80,7 @@ void previewgui_page_input_changed(GtkEntry* entry, void* user);
 void previewgui_next_page(GtkWidget* widget, void* user);
 void previewgui_prev_page(GtkWidget* widget, void* user);
 void previewgui_zoom_change(GtkWidget* widget, void* user);
-
+void my_getsize(GtkWidget *widget, GtkAllocation *allocation, void *data);
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
 
 #endif /* GUMMI_GUI_PREVIEW_H */

@@ -48,6 +48,8 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
+gdouble scrollw_lastsize;
+
 GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
@@ -75,6 +77,8 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
 
     g_signal_connect(GTK_OBJECT(p->drawarea), "expose-event",
             G_CALLBACK(on_expose), p); 
+            
+    //g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
 
     char* message = g_strdup_printf(_("PDF Preview could not initialize.\n\n"
             "It appears your LaTeX document contains errors or\n"
@@ -114,17 +118,24 @@ void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
     
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
     poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
-    
-    //pc->page_total = poppler_document_get_n_pages(pc->doc);
-    //pc->page_ratio = (pc->page_width / pc->page_height);
-    //pc->page_scale = 1.0;
-    //previewgui_set_pagedata(pc);
+    /*
+    pc->page_total = poppler_document_get_n_pages(pc->doc);
+    pc->page_ratio = (pc->page_width / pc->page_height);
+    pc->page_scale = 1.0;
+    previewgui_set_pagedata(pc);
+    */
 }
+
+/*
+void my_getsize(GtkWidget *widget, GtkAllocation *allocation, void *data) {
+    printf("width = %d, height = %d\n", allocation->width, allocation->height);
+}*/
 
 
 void previewgui_refresh(GuPreviewGui* pc) {
     L_F_DEBUG;
     GError *err = NULL;
+    cairo_t *cr;
 
     /* This is line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return;
@@ -146,10 +157,34 @@ void previewgui_refresh(GuPreviewGui* pc) {
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     previewgui_set_pagedata(pc);
     
+    
+    if (pc->surface)
+		cairo_surface_destroy (pc->surface);
+	pc->surface = NULL;
+    
+    previewgui_calc_dimensions(pc);
+    
+    gint width = (int)pc->page_width * pc->page_scale;
+	gint height = (int)pc->page_height * pc->page_scale;
+    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+							    width, height);
+    cr = cairo_create (pc->surface);
+    
+    cairo_scale(cr, pc->page_scale, pc->page_scale); 
+    cairo_save(cr);
+    poppler_page_render(pc->page, cr);
+    cairo_restore(cr);
+    
+    cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
+	cairo_set_source_rgb (cr, 1., 1., 1.);
+    cairo_paint(cr);
+    cairo_destroy(cr);
+    
     gtk_widget_queue_draw(pc->drawarea);
 }
 
 void previewgui_set_pagedata(GuPreviewGui* pc) {
+    L_F_DEBUG;
     if ((pc->page_total - 1) > pc->page_current) {
         gtk_widget_set_sensitive(GTK_WIDGET(pc->page_next), TRUE);
     }
@@ -167,6 +202,7 @@ void previewgui_set_pagedata(GuPreviewGui* pc) {
 }
 
 void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
+    L_F_DEBUG;
     if (page_number < 0 || page_number >= pc->page_total)
         slog(L_ERROR, "page_number is a negative number!\n");
 
@@ -179,6 +215,7 @@ void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
 }
 
 void previewgui_start_error_mode(GuPreviewGui* pc) {
+    L_F_DEBUG;
     pc->errormode = TRUE;
     gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
             GTK_WIDGET(pc->drawarea));
@@ -188,6 +225,7 @@ void previewgui_start_error_mode(GuPreviewGui* pc) {
 }
 
 void previewgui_stop_error_mode(GuPreviewGui* pc) {
+    
     pc->errormode = FALSE;
     g_object_ref(pc->errorlabel);
     gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
@@ -196,19 +234,34 @@ void previewgui_stop_error_mode(GuPreviewGui* pc) {
             GTK_WIDGET(pc->drawarea));
 }
 
-gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* pc) {
+gboolean on_expose(GtkWidget* area, GdkEventExpose* e, GuPreviewGui* pc) {
+    
     /* This line is very important, if no pdf exist, preview fails */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return FALSE;
-
-    cairo_t* cr;
-    cr = gdk_cairo_create(w->window);
     
+    previewgui_calc_dimensions(pc);
+    
+    cairo_t *cr;
+    cr = gdk_cairo_create (gtk_widget_get_window (area));
+    
+    double scrollwidth = pc->scrollw->allocation.width;
+    if (scrollw_lastsize != scrollwidth) {
+        previewgui_refresh(pc);
+        scrollw_lastsize = scrollwidth;
+    }
+    
+    cairo_set_source_surface (cr, pc->surface, 0, 0);
+    cairo_paint (cr);
+    cairo_destroy (cr);
+    return TRUE;
+} 
+
+void previewgui_calc_dimensions(GuPreviewGui* pc) {
     double scrollwidth = pc->scrollw->allocation.width;
     double scrollheight = pc->scrollw->allocation.height;
     double scrollw_ratio = (scrollwidth / scrollheight);
     
     // TODO: STOP WITH ERROR IF PAGE RATIO OR PAGE WIDTH IS NULL!
-    
     if (pc->page_zoommode < 2) {
         if (scrollw_ratio < pc->page_ratio || pc->page_zoommode == 1) {
             pc->page_scale = scrollwidth / pc->page_width;
@@ -232,17 +285,7 @@ gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* pc) {
         default: // percentage zoom
             gtk_widget_set_size_request(pc->drawarea, width, height);
     }
-    
-    // import python lines for calculating scale here
-    cairo_scale(cr, pc->page_scale, pc->page_scale);
-    cairo_set_source_rgb(cr, 1, 1, 1);
-    cairo_rectangle(cr, 0, 0, pc->page_width, pc->page_height);
-    cairo_fill(cr);
-    
-    poppler_page_render(pc->page, cr);
-    cairo_destroy(cr);
-    return FALSE;
-} 
+}
 
 void previewgui_reset(GuPreviewGui* pc) {
     L_F_DEBUG;
