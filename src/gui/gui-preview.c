@@ -157,17 +157,16 @@ void previewgui_refresh(GuPreviewGui* pc) {
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     previewgui_set_pagedata(pc);
     
-    
     if (pc->surface)
-		cairo_surface_destroy (pc->surface);
-	pc->surface = NULL;
+        cairo_surface_destroy (pc->surface);
+    pc->surface = NULL;
     
     previewgui_calc_dimensions(pc);
     
     gint width = (int)pc->page_width * pc->page_scale;
-	gint height = (int)pc->page_height * pc->page_scale;
-    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-							    width, height);
+    gint height = (int)pc->page_height * pc->page_scale;
+    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width,
+            height);
     cr = cairo_create (pc->surface);
     
     cairo_scale(cr, pc->page_scale, pc->page_scale); 
@@ -175,8 +174,8 @@ void previewgui_refresh(GuPreviewGui* pc) {
     poppler_page_render(pc->page, cr);
     cairo_restore(cr);
     
-    cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
-	cairo_set_source_rgb (cr, 1., 1., 1.);
+    cairo_set_operator(cr, CAIRO_OPERATOR_DEST_OVER);
+    cairo_set_source_rgb(cr, 1., 1., 1.);
     cairo_paint(cr);
     cairo_destroy(cr);
     
