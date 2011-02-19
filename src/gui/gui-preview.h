@@ -80,7 +80,7 @@ void previewgui_page_input_changed(GtkEntry* entry, void* user);
 void previewgui_next_page(GtkWidget* widget, void* user);
 void previewgui_prev_page(GtkWidget* widget, void* user);
 void previewgui_zoom_change(GtkWidget* widget, void* user);
-void my_getsize(GtkWidget *widget, GtkAllocation *allocation, void *data);
+void previewgui_calc_dimensions(GuPreviewGui* pc);
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
 
 #endif /* GUMMI_GUI_PREVIEW_H */
