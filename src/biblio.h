@@ -32,11 +32,9 @@
 
 #include <gtk/gtk.h>
 
-#include "fileinfo.h"
 #include "latex.h"
 
 typedef struct _GuBiblio {
-    GuFileInfo* b_finfo;
     GtkProgressBar* progressbar;
     GtkAdjustment* progressmon;
     GtkListStore* list_biblios;
@@ -46,10 +44,9 @@ typedef struct _GuBiblio {
     double progressval;
 } GuBiblio;
 
-GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo);
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc);
-gboolean biblio_set_filename(GuBiblio* bc, gchar *filename);
+GuBiblio* biblio_init(GtkBuilder* builder);
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec);
+gboolean biblio_compile_bibliography(GuBiblio* bc, GuEditor* ec, GuLatex* lc);
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
 
 

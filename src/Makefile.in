@@ -46,12 +46,11 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
-	editor.$(OBJEXT) environment.$(OBJEXT) fileinfo.$(OBJEXT) \
-	gui-import.$(OBJEXT) gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) \
-	gui-preview.$(OBJEXT) gui-search.$(OBJEXT) importer.$(OBJEXT) \
-	iofunctions.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
-	template.$(OBJEXT) updatecheck.$(OBJEXT) utils.$(OBJEXT) \
-	main.$(OBJEXT)
+	editor.$(OBJEXT) environment.$(OBJEXT) gui-import.$(OBJEXT) \
+	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
+	gui-search.$(OBJEXT) importer.$(OBJEXT) iofunctions.$(OBJEXT) \
+	latex.$(OBJEXT) motion.$(OBJEXT) template.$(OBJEXT) \
+	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -197,7 +196,6 @@ gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
-		fileinfo.c fileinfo.h \
 		gui/gui-import.c gui/gui-import.h \
 		gui/gui-main.c gui/gui-main.h \
 		gui/gui-prefs.c gui/gui-prefs.h \
@@ -206,7 +204,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \
-		motion.c latex.h \
+		motion.c motion.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
 		utils.c utils.h \
@@ -297,7 +295,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configfile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileinfo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-import.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@

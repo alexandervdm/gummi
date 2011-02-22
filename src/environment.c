@@ -31,10 +31,9 @@
 #include "environment.h"
 #include "utils.h"
 
-Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
-        GuBiblio* bib, GuTemplate* tpl) {
+Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+        GuTemplate* tpl) {
     Gummi* g = g_new0(Gummi, 1);
-    g->finfo = fc;
     g->editor = ed;
     g->motion = mo;
     g->latex = latex;
@@ -44,13 +43,13 @@ Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
 }
 
 void gummi_new_environment(Gummi* gc, const gchar* filename) {
-    fileinfo_update(gc->finfo, filename);
+    editor_update_fileinfo(gc->editor, filename);
 
     slog(L_INFO, "\n");
     slog(L_INFO, "Environment created for:\n");
-    slog(L_INFO, "TEX: %s\n", gc->finfo->filename);
-    slog(L_INFO, "TMP: %s\n", gc->finfo->workfile);
-    slog(L_INFO, "PDF: %s\n", gc->finfo->pdffile); 
+    slog(L_INFO, "TEX: %s\n", gc->editor->filename);
+    slog(L_INFO, "TMP: %s\n", gc->editor->workfile);
+    slog(L_INFO, "PDF: %s\n", gc->editor->pdffile); 
 
     iofunctions_reset_autosave(filename);
 }

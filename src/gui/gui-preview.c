@@ -307,14 +307,14 @@ gboolean previewgui_update_preview(gpointer user) {
     L_F_DEBUG;
     GuPreviewGui* pc = (GuPreviewGui*)user;
 
-    latex_update_workfile(gummi->latex);
-    latex_update_pdffile(gummi->latex);
+    latex_update_workfile(gummi->latex, gummi->editor);
+    latex_update_pdffile(gummi->latex, gummi->editor);
     editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
     errorbuffer_set_text(gummi->latex->errormessage);
 
     if (!gummi->latex->errorlines[0]) {
         if (pc->errormode) previewgui_stop_error_mode(pc);
-        if (!pc->uri) previewgui_set_pdffile(pc, gummi->finfo->pdffile);
+        if (!pc->uri) previewgui_set_pdffile(pc, gummi->editor->pdffile);
     }
 
     /* We need to refresh preview even if PDF compilation fails, because

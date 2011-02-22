@@ -41,13 +41,20 @@
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 
-#include "fileinfo.h"
-
 #define ec_sourcebuffer GTK_TEXT_BUFFER(ec->sourcebuffer)
 #define ec_sourceview GTK_TEXT_VIEW(ec->sourceview)
 
 typedef struct _GuEditor {
-    GuFileInfo* b_finfo;
+    /* File related members */
+    gint workfd;
+    gchar* fdname;
+    gchar* filename;
+    gchar* pdffile;
+    gchar* workfile;
+    gchar* bibfile;
+    const gchar* tmpdir;
+
+    /* GUI related members */
     GtkSourceView *sourceview;
     GtkSourceBuffer *sourcebuffer;
     GtkSourceStyleSchemeManager* stylemanager;
@@ -61,7 +68,10 @@ typedef struct _GuEditor {
     gboolean matchcase;
 } GuEditor;
 
-GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo);
+GuEditor* editor_init(GtkBuilder* builder);
+void editor_update_fileinfo(GuEditor* ec, const gchar* filename);
+gboolean editor_update_biblio(GuEditor* ec, const gchar* filename);
+void editor_destroy(GuEditor* ec);
 void editor_sourceview_config(GuEditor* ec);
 #ifdef USE_GTKSPELL
 void editor_activate_spellchecking(GuEditor* ec, gboolean status);

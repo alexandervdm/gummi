@@ -166,8 +166,8 @@ void on_button_import_image_apply_clicked(GtkWidget* widget, void* user) {
         if (!utils_path_exists(imagefile)) {
             slog(L_G_ERROR, _("%s: No such file or directory\n"), imagefile);
         } else {
-            if (gummi->finfo->filename)
-                root_path = g_path_get_dirname(gummi->finfo->filename);
+            if (gummi->editor->filename)
+                root_path = g_path_get_dirname(gummi->editor->filename);
             relative_path = utils_path_to_relative(root_path, imagefile);
             text =importer_generate_image(relative_path, caption, label, scale);
             editor_insert_package(gummi->editor, "graphicx");

@@ -33,13 +33,9 @@
 #include <glib.h>
 
 #include "editor.h"
-#include "fileinfo.h"
 #include "gui/gui-preview.h"
 
 typedef struct _GuLatex {
-    GuFileInfo* b_finfo;
-    GuEditor* b_editor;
-
     gchar* typesetter;
     /* use fixed size for errorlines in consider of performance */
     gint errorlines[BUFSIZ];
@@ -47,11 +43,11 @@ typedef struct _GuLatex {
     gboolean modified_since_compile;
 } GuLatex;
 
-GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec);
-void latex_update_workfile(GuLatex* mc);
-void latex_update_pdffile(GuLatex* mc);
-void latex_update_auxfile(GuLatex* mc);
-void latex_export_pdffile(GuLatex* mc, const gchar* path);
+GuLatex* latex_init(void);
+void latex_update_workfile(GuLatex* mc, GuEditor* ec);
+void latex_update_pdffile(GuLatex* mc, GuEditor* ec);
+void latex_update_auxfile(GuLatex* mc, GuEditor* ec);
+void latex_export_pdffile(GuLatex* mc, GuEditor* ec, const gchar* path);
 
 #endif /* GUMMI_LATEX_H */
 

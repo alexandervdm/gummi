@@ -33,8 +33,6 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
-#include "fileinfo.h"
-
 typedef struct _GuPreviewGui {
     PopplerDocument* doc;
     PopplerPage* page;

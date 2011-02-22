@@ -41,6 +41,7 @@
 #ifdef USE_GTKSPELL
 #   include <gtkspell/gtkspell.h>
 #endif
+#include <glib/gstdio.h>
 #include <gtk/gtk.h>
 
 #include "configfile.h"
@@ -56,15 +57,24 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
+GuEditor* editor_init(GtkBuilder* builder) {
+    // TODO: move GUI construction related code to elsewhere
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
-    GtkWidget *scroll;
+    GuEditor* ec = g_new0(GuEditor, 1);
+
+    /* File related member initialization */
+    ec->workfd = -1;
+    ec->fdname = NULL;
+    ec->filename = NULL;   /* current opened file name in workspace */
+    ec->pdffile = NULL;
+    ec->workfile = NULL;
+    ec->bibfile = NULL;
+    ec->tmpdir = g_strdup(g_get_tmp_dir());
+
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language
                                                         (manager, "latex");
-    GuEditor* ec = g_new0(GuEditor, 1);
-    ec->b_finfo = finfo;
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
     ec->sourceview =
         GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));
@@ -75,7 +85,10 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     ec->replace_activated = FALSE;
     ec->term = NULL;
     
-    scroll = GTK_WIDGET (gtk_builder_get_object (builder, "editor_scroll"));
+    // TODO: Move these two lines to else where, GUI construction should not
+    // be here
+    GtkWidget *scroll =
+        GTK_WIDGET(gtk_builder_get_object(builder, "editor_scroll"));
     gtk_container_add (GTK_CONTAINER (scroll), GTK_WIDGET(ec->sourceview));
 
     gtk_source_view_set_tab_width(ec->sourceview,
@@ -96,6 +109,109 @@ GuEditor* editor_init(GtkBuilder* builder, GuFileInfo* finfo) {
     editor_sourceview_config(ec);
     gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
     return ec;
+}
+
+/* FileInfo:
+ * When a TeX document includes materials from other files(image, documents,
+ * bibliography ... etc), pdflatex will try to find those files under the
+ * working directory if the include path is not absolute.
+ * Before Gummi svn505, gummi copies the TeX file to a temporarily directory
+ * and compile there, because of this, the included files can't be located if
+ * the include path is not absolute. In svn505 we copy the TeX file to the
+ * same directory as the original TeX document but named it as '.FILENAME.swp'.
+ * Since pdflatex refuses to compile TeX files with '.' prefixed, we have to
+ * set the environment variable 'openout_any=a'.
+ *
+ * For a newly created document, all files including the TeX file is stored
+ * under the temp directory. For files that are already saved, only the
+ * workfile is saved under DIRNAME(FILENAME). Other compilation-related files
+ * are located in the temp directory.
+ *
+ * P.S. pdflatex will automatically strip the suffix, so for a file named
+ * FILE.tex under /absolute/path/:
+ *
+ * filename = /absolute/path/FILE.tex
+ * workfile = /absolute/path/.FILE.tex.swp
+ * pdffile = /tmp/.FILE.tex.pdf
+ */
+void editor_update_fileinfo(GuEditor* ec, const gchar* filename) {
+
+    if (ec->workfd != -1)
+        editor_destroy(ec);
+
+    ec->fdname = g_build_filename(ec->tmpdir, "gummi_XXXXXX", NULL);
+    ec->workfd = g_mkstemp(ec->fdname); 
+
+    if (filename) {
+        gchar* basename = g_path_get_basename(filename);
+        gchar* dirname = g_path_get_dirname(filename);
+        ec->filename = g_strdup(filename);
+        ec->workfile = g_strdup_printf("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
+                                       basename);
+        ec->pdffile =  g_strdup_printf("%s%c.%s.pdf", ec->tmpdir,
+                                       G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        ec->workfile = g_strdup(ec->fdname);
+        ec->pdffile =  g_strdup_printf("%s.pdf", ec->fdname);
+    }
+}
+
+gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
+    g_free(ec->bibfile);
+
+    if (ec->filename && !g_path_is_absolute(filename)) {
+        gchar* dirname = g_path_get_dirname(ec->filename);
+        ec->bibfile = g_build_filename(dirname, filename, NULL);
+        g_free(dirname);
+    } else
+        ec->bibfile = g_strdup(filename);
+    return utils_path_exists(ec->bibfile);
+}
+
+void editor_destroy(GuEditor* ec) {
+    gchar* auxfile = NULL;
+    gchar* logfile = NULL;
+
+    if (ec->filename) {
+        gchar* dirname = g_path_get_dirname(ec->filename);
+        gchar* basename = g_path_get_basename(ec->filename);
+        auxfile = g_strdup_printf("%s%c.%s.aux", ec->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        logfile = g_strdup_printf("%s%c.%s.log", ec->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        gchar* dirname = g_path_get_dirname(ec->workfile);
+        gchar* basename = g_path_get_basename(ec->workfile);
+        auxfile = g_strdup_printf("%s.aux", ec->fdname);
+        logfile = g_strdup_printf("%s.log", ec->fdname);
+        g_free(basename);
+        g_free(dirname);
+    }
+
+    close(ec->workfd);
+    ec->workfd = -1;
+
+    g_remove(auxfile);
+    g_remove(logfile);
+    g_remove(ec->fdname);
+    g_remove(ec->workfile);
+    g_remove(ec->pdffile);
+
+    g_free(auxfile);
+    g_free(logfile);
+    g_free(ec->fdname);
+    g_free(ec->filename);
+    g_free(ec->workfile);
+    g_free(ec->pdffile);
+
+    ec->fdname = NULL;
+    ec->filename = NULL;
+    ec->workfile = NULL;
+    ec->pdffile = NULL;
 }
 
 void editor_sourceview_config(GuEditor* ec) {
@@ -125,6 +241,7 @@ void editor_sourceview_config(GuEditor* ec) {
             "foreground", "white", NULL);
     g_object_set(G_OBJECT(ec->searchtag), "background", "yellow", NULL);
 }
+
 
 #ifdef USE_GTKSPELL
 void editor_activate_spellchecking(GuEditor* ec, gboolean status) {

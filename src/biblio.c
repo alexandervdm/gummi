@@ -38,11 +38,10 @@
 
 extern GuEditor* ec;
 
-GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
+GuBiblio* biblio_init(GtkBuilder* builder) {
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
     GuBiblio* b = g_new0(GuBiblio, 1);
-    b->b_finfo = finfo;
     b->progressbar =
         GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "bibprogressbar"));
     b->progressmon =
@@ -57,21 +56,21 @@ GuBiblio* biblio_init(GtkBuilder* builder, GuFileInfo* finfo) {
     return b;
 }
 
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
+gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec) {
     gchar* content;
     gchar** result;
     GMatchInfo *match_info;
     GRegex* bib_regex;
     gboolean state = FALSE;
     
-    content = editor_grab_buffer(pc->b_editor);
+    content = editor_grab_buffer(ec);
     bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
         state = (result[1] &&
             0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            biblio_set_filename(bc, result[1]));
-        slog(L_INFO, "Detect bibliography file: %s\n", bc->b_finfo->bibfile);
+            editor_update_biblio(ec, result[1]));
+        slog(L_INFO, "Detect bibliography file: %s\n", ec->bibfile);
         g_strfreev(result);
     }
     g_free(content);
@@ -80,15 +79,15 @@ gboolean biblio_detect_bibliography(GuBiblio* bc, GuLatex* pc) {
     return state;
 }
 
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
-    gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
+gboolean biblio_compile_bibliography(GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
+    gchar* dirname = g_path_get_dirname(ec->workfile);
     gchar* auxname = NULL;
 
-    if (lc->b_finfo->filename) {
-        auxname = g_strdup(lc->b_finfo->pdffile);
+    if (ec->filename) {
+        auxname = g_strdup(ec->pdffile);
         auxname[strlen(auxname) -4] = 0;
     } else
-        auxname = g_strdup(lc->b_finfo->fdname);
+        auxname = g_strdup(ec->fdname);
 
     if (g_find_program_in_path("bibtex")) {
         gboolean success = FALSE;
@@ -97,8 +96,8 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
                                          dirname,
                                          auxname);
         g_free(auxname);
-        latex_update_workfile(lc);
-        latex_update_auxfile(lc);
+        latex_update_workfile(lc, ec);
+        latex_update_auxfile(lc, ec);
         pdata res = utils_popen_r(command);
         gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
         g_free(command);
@@ -111,18 +110,6 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuLatex* lc) {
     g_free(auxname);
     g_free(dirname);
     return FALSE;
-}
-
-gboolean biblio_set_filename(GuBiblio* bc, gchar *filename) {
-    g_free(bc->b_finfo->bibfile);
-
-    if (bc->b_finfo->filename && !g_path_is_absolute(filename)) {
-        gchar* dirname = g_path_get_dirname(bc->b_finfo->filename);
-        bc->b_finfo->bibfile = g_build_filename(dirname, filename, NULL);
-        g_free(dirname);
-    } else
-        bc->b_finfo->bibfile = g_strdup(filename);
-    return utils_path_exists(bc->b_finfo->bibfile);
 }
 
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {

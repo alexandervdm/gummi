@@ -73,7 +73,6 @@
 
 #include "biblio.h"
 #include "editor.h"
-#include "fileinfo.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "motion.h"
@@ -97,7 +96,6 @@
  */
 
 typedef struct _Gummi {
-    GuFileInfo* finfo;
     GuEditor* editor;
     GuMotion* motion;
     GuLatex* latex;
@@ -105,8 +103,8 @@ typedef struct _Gummi {
     GuTemplate* templ;
 } Gummi;
 
-Gummi* gummi_init(GuFileInfo* fc, GuEditor* ed, GuMotion* mo, GuLatex* latex,
-        GuBiblio* bib, GuTemplate* tpl);
+Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+        GuTemplate* tpl);
 void gummi_new_environment(Gummi* gc, const gchar* filename);
 
 #endif /* GUMMI_ENVIRONMENT_H */

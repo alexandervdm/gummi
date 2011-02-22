@@ -359,7 +359,7 @@ void toggle_autosaving(GtkWidget* widget, void* user) {
                 GTK_WIDGET(gui->prefsgui->autosave_timer), TRUE);
         gint time = atoi(config_get_value("autosave_timer"));
         gtk_spin_button_set_value(gui->prefsgui->autosave_timer, time);
-        iofunctions_reset_autosave(gummi->finfo->filename);
+        iofunctions_reset_autosave(gummi->editor->filename);
     } else {
         gtk_widget_set_sensitive(
                 GTK_WIDGET(gui->prefsgui->autosave_timer), FALSE);
@@ -407,7 +407,7 @@ void on_autosave_value_changed(GtkWidget* widget, void* user) {
     gchar buf[16];
 
     config_set_value("autosave_timer", g_ascii_dtostr(buf, 16, (double)newval));
-    iofunctions_reset_autosave(gummi->finfo->filename);
+    iofunctions_reset_autosave(gummi->editor->filename);
 }
 
 void on_compile_value_changed(GtkWidget* widget, void* user) {

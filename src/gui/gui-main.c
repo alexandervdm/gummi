@@ -190,7 +190,7 @@ gboolean gui_quit(void) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return TRUE;
 
-    fileinfo_destroy(gummi->finfo);
+    editor_destroy(gummi->editor);
     gtk_window_get_size(GTK_WINDOW(gui->mainwindow), &width, &height);
     gtk_window_get_position(GTK_WINDOW(gui->mainwindow), &wx, &wy);
     config_set_value("mainwindow_x", g_ascii_dtostr(buf, 16, (double)wx));
@@ -220,9 +220,9 @@ void gui_update_title(void) {
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
-    if (gummi->finfo->filename) {
-        basename = g_path_get_basename(gummi->finfo->filename);
-        dirname = g_path_get_dirname(gummi->finfo->filename);
+    if (gummi->editor->filename) {
+        basename = g_path_get_basename(gummi->editor->filename);
+        dirname = g_path_get_dirname(gummi->editor->filename);
         title = g_strdup_printf("%s%s (%s) - %s",
                 (gtk_text_buffer_get_modified(g_e_buffer)? "*": ""),
                 basename, dirname, PACKAGE_NAME);
@@ -249,7 +249,7 @@ void gui_open_file(const gchar* filename) {
      * the real_time compile scheme, the compile scheme functions can
      * access fileinfo */
     previewgui_stop_preview(gui->previewgui);
-    fileinfo_destroy(gummi->finfo);
+    editor_destroy(gummi->editor);
 
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists(prev_workfile)) {
@@ -294,7 +294,7 @@ void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
 
     filename = get_save_filename(TYPE_PDF);
     if (filename)
-        latex_export_pdffile(gummi->latex, filename);
+        latex_export_pdffile(gummi->latex, gummi->editor, filename);
     g_free(filename);
 }
 
@@ -351,7 +351,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     gboolean new = FALSE;
     gint ret = 0;
 
-    if (!gummi->finfo->filename) {
+    if (!gummi->editor->filename) {
         if ((filename = get_save_filename(TYPE_LATEX))) {
             if (strcmp(filename + strlen(filename) -4, ".tex")) {
                 filename = g_strdup_printf("%s.tex", filename);
@@ -370,7 +370,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
             g_free(filename);
         }
     } else
-        iofunctions_write_file(gummi->editor, gummi->finfo->filename); 
+        iofunctions_write_file(gummi->editor, gummi->editor->filename); 
     gui_update_title();
     gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
 }
@@ -501,8 +501,8 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
 
     filename = get_open_filename(TYPE_BIBLIO);
     if (filename) {
-        if (gummi->finfo->filename)
-            root_path = g_path_get_dirname(gummi->finfo->filename);
+        if (gummi->editor->filename)
+            root_path = g_path_get_dirname(gummi->editor->filename);
         relative_path = utils_path_to_relative(root_path, filename);
         editor_insert_bib(gummi->editor, relative_path);
         basename = g_path_get_basename(filename);
@@ -515,7 +515,7 @@ void on_menu_bibload_activate(GtkWidget *widget, void * user) {
 }
 
 void on_menu_bibupdate_activate(GtkWidget *widget, void * user) {
-    biblio_compile_bibliography(gummi->biblio, gummi->latex);
+    biblio_compile_bibliography(gummi->biblio, gummi->editor, gummi->latex);
 }
 
 void on_menu_pdfcompile_activate(GtkWidget *widget, void* user) {
@@ -555,8 +555,8 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
     if (g_find_program_in_path("texcount")) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
-        gchar* tmpfile = g_strdup_printf("%s.state", gummi->finfo->fdname);
-        if (!utils_copy_file(gummi->finfo->workfile, tmpfile, &err)) {
+        gchar* tmpfile = g_strdup_printf("%s.state", gummi->editor->fdname);
+        if (!utils_copy_file(gummi->editor->workfile, tmpfile, &err)) {
             slog(L_G_ERROR, "utils_copy_file(): %s\n", err->message);
             g_free(tmpfile);
             g_error_free(err);
@@ -786,7 +786,8 @@ void on_button_biblio_compile_clicked(GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
     g_timeout_add(10, on_bibprogressbar_update, NULL);
 
-    if (biblio_compile_bibliography(gummi->biblio, gummi->latex)) {
+    if (biblio_compile_bibliography(gummi->biblio, gummi->editor,
+                gummi->latex)) {
         statusbar_set_message(_("Compiling bibliography file..."));
         gtk_progress_bar_set_text(gummi->biblio->progressbar,
                 _("bibliography compiled without errors"));
@@ -810,15 +811,15 @@ void on_button_biblio_detect_clicked(GtkWidget* widget, void* user) {
     g_timeout_add(2, on_bibprogressbar_update, NULL);
     gtk_list_store_clear(gummi->biblio->list_biblios);
 
-    if (biblio_detect_bibliography(gummi->biblio, gummi->latex)) {
-        editor_insert_bib(gummi->editor, gummi->finfo->bibfile);
-        if (!g_file_get_contents(gummi->finfo->bibfile, &text, NULL, &err)) {
+    if (biblio_detect_bibliography(gummi->biblio, gummi->editor)) {
+        editor_insert_bib(gummi->editor, gummi->editor->bibfile);
+        if (!g_file_get_contents(gummi->editor->bibfile, &text, NULL, &err)) {
             slog(L_G_ERROR, "g_file_get_contents(): %s\n", err->message);
             g_error_free(err);
             return;
         }
         number = biblio_parse_entries(gummi->biblio, text);
-        basename = g_path_get_basename(gummi->finfo->bibfile);
+        basename = g_path_get_basename(gummi->editor->bibfile);
         gtk_label_set_text(gummi->biblio->filenm_label, basename);
         str = g_strdup_printf("%d", number);
         gtk_label_set_text(gummi->biblio->refnr_label, str);
@@ -929,9 +930,9 @@ gchar* get_save_filename(GuFilterType type) {
     file_dialog_set_filter(chooser, type);
     gtk_file_chooser_set_current_folder(chooser, g_get_home_dir());
 
-    if (gummi->finfo->filename) {
-        gchar* dirname = g_path_get_dirname(gummi->finfo->filename);
-        gchar* basename = g_path_get_basename(gummi->finfo->filename);
+    if (gummi->editor->filename) {
+        gchar* dirname = g_path_get_dirname(gummi->editor->filename);
+        gchar* basename = g_path_get_basename(gummi->editor->filename);
 
         gtk_file_chooser_set_current_folder(chooser, dirname);
 

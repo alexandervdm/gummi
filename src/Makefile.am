@@ -11,7 +11,6 @@ gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
-		fileinfo.c fileinfo.h \
 		gui/gui-import.c gui/gui-import.h \
 		gui/gui-main.c gui/gui-main.h \
 		gui/gui-prefs.c gui/gui-prefs.h \

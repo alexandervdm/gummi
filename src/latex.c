@@ -44,34 +44,28 @@
 #include "utils.h"
 #include "gui/gui-preview.h"
 
-GuLatex* latex_init(GuFileInfo* fc, GuEditor* ec) {
+GuLatex* latex_init(void) {
     GuLatex* l = g_new0(GuLatex, 1);
-
-    /* initialize basis */
-    l->b_finfo = fc;
-    l->b_editor = ec;
-
-    /* initialize members */
     l->errormessage = NULL;
     l->modified_since_compile = FALSE;
     return l;
 }
 
-void latex_update_workfile(GuLatex* lc) {
+void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
     GtkTextIter start, end;
     gchar *text;
     FILE *fp;
 
     /* save selection */
     gtk_text_buffer_get_selection_bounds(
-            GTK_TEXT_BUFFER(lc->b_editor->sourcebuffer), &start, &end);
-    text = editor_grab_buffer(lc->b_editor);
+            GTK_TEXT_BUFFER(ec->sourcebuffer), &start, &end);
+    text = editor_grab_buffer(ec);
 
     /* restore selection */
     gtk_text_buffer_select_range(
-            GTK_TEXT_BUFFER(lc->b_editor->sourcebuffer), &start, &end);
+            GTK_TEXT_BUFFER(ec->sourcebuffer), &start, &end);
     
-    fp = fopen(lc->b_finfo->workfile, "w");
+    fp = fopen(ec->workfile, "w");
     
     if(fp == NULL) {
         slog(L_ERROR, "unable to create workfile in tmpdir\n");
@@ -83,7 +77,7 @@ void latex_update_workfile(GuLatex* lc) {
     // TODO: Maybe add editorviewer grab focus line here if necessary
 }
 
-void latex_update_pdffile(GuLatex* lc) {
+void latex_update_pdffile(GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value("typesetter");
@@ -92,7 +86,7 @@ void latex_update_pdffile(GuLatex* lc) {
                 "pdflatex.\n", typesetter);
         config_set_value("typesetter", "pdflatex");
     }
-    gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
+    gchar* dirname = g_path_get_dirname(ec->workfile);
     gchar* command = g_strdup_printf("cd \"%s\";"
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
@@ -103,8 +97,8 @@ void latex_update_pdffile(GuLatex* lc) {
                                      dirname,
                                      config_get_value("typesetter"),
                                      config_get_value("extra_flags"),
-                                     lc->b_finfo->tmpdir,
-                                     lc->b_finfo->workfile);
+                                     ec->tmpdir,
+                                     ec->workfile);
     g_free(dirname);
 
     previewgui_update_statuslight("gtk-refresh");
@@ -148,8 +142,8 @@ void latex_update_pdffile(GuLatex* lc) {
     g_free(command);
 }
 
-void latex_update_auxfile(GuLatex* lc) {
-    gchar* dirname = g_path_get_dirname(lc->b_finfo->workfile);
+void latex_update_auxfile(GuLatex* lc, GuEditor* ec) {
+    gchar* dirname = g_path_get_dirname(ec->workfile);
     gchar* command = g_strdup_printf("cd \"%s\";"
                                      "env openout_any=a %s "
                                      "--draftmode "
@@ -157,15 +151,15 @@ void latex_update_auxfile(GuLatex* lc) {
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
                                      config_get_value("typesetter"),
-                                     lc->b_finfo->tmpdir,
-                                     lc->b_finfo->workfile);
+                                     ec->tmpdir,
+                                     ec->workfile);
     g_free(dirname);
     pdata res = utils_popen_r(command);
     g_free(res.data);
     g_free(command);
 }
 
-void latex_export_pdffile(GuLatex* lc, const gchar* path) {
+void latex_export_pdffile(GuLatex* lc, GuEditor* ec, const gchar* path) {
     gchar* savepath = NULL;
     GError* err = NULL;
     gint ret = 0;
@@ -181,7 +175,7 @@ void latex_export_pdffile(GuLatex* lc, const gchar* path) {
             return;
         }
     }
-    if (!utils_copy_file(lc->b_finfo->pdffile, savepath, &err)) {
+    if (!utils_copy_file(ec->pdffile, savepath, &err)) {
         slog(L_G_ERROR, "utils_copy_file(): %s\n", err->message);
         g_error_free(err);
     }
