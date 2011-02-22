@@ -90,7 +90,7 @@ int main (int argc, char *argv[]) {
     GuEditor* editor = editor_init(builder, finfo);
     GuLatex* latex = latex_init(finfo, editor); 
     GuBiblio* biblio = biblio_init(builder, finfo);
-    GuTemplate* templ = template_init(builder, finfo);
+    GuTemplate* templ = template_init(builder);
     GuMotion* motion = motion_init(editor);
 
     gummi = gummi_init(finfo, editor, motion, latex, biblio, templ);

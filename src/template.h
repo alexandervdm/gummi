@@ -33,15 +33,12 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "fileinfo.h"
-
 typedef struct _templdata {
     gchar* itemname;
     gchar* itemdata;
 } templdata;
 
 typedef struct _Template {
-    GuFileInfo* b_finfo;
     GtkWindow* templatewindow;
     GtkTreeView* templateview;
     GtkListStore* list_templates;
@@ -54,7 +51,7 @@ typedef struct _Template {
 } GuTemplate;
 
 
-GuTemplate* template_init(GtkBuilder* builder, GuFileInfo* finfo);
+GuTemplate* template_init(GtkBuilder* builder);
 void template_setup();
 void template_add_new_entry(GuTemplate* t);
 void template_remove_entry(GuTemplate* t);

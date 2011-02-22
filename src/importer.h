@@ -33,7 +33,6 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "fileinfo.h"
 #include "editor.h"
 
 const gchar* importer_generate_table(gint rows, gint cols, gint borders,

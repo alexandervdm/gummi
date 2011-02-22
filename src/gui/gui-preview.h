@@ -75,6 +75,7 @@ void previewgui_stop_error_mode(GuPreviewGui* pc);
 void previewgui_reset(GuPreviewGui* pc);
 gboolean previewgui_update_preview(gpointer user);
 void previewgui_start_preview(GuPreviewGui* pc);
+void previewgui_calc_dimensions(GuPreviewGui* pc);
 void previewgui_stop_preview(GuPreviewGui* pc);
 void previewgui_page_input_changed(GtkEntry* entry, void* user);
 void previewgui_next_page(GtkWidget* widget, void* user);
