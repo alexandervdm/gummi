@@ -35,6 +35,8 @@
 #   include "config.h"
 #endif
 
+#include "motion.h"
+
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
@@ -67,9 +69,10 @@ typedef struct _GuEditor {
     gboolean wholeword;
     gboolean matchcase;
     gboolean snippet_editing;
+    gint sigid[2];
 } GuEditor;
 
-GuEditor* editor_init(GtkBuilder* builder);
+GuEditor* editor_init(GtkBuilder* builder, GuMotion* mc);
 void editor_update_fileinfo(GuEditor* ec, const gchar* filename);
 gboolean editor_update_biblio(GuEditor* ec, const gchar* filename);
 void editor_destroy(GuEditor* ec);

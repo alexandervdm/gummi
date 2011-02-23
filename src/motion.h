@@ -31,14 +31,13 @@
 #define __GUMMI_MOTION_H__
 
 #include <glib.h>
-
-#include "editor.h"
+#include <gtk/gtk.h>
 
 typedef struct _GuMotion {
     gint timer;
 } GuMotion;
 
-GuMotion* motion_init(GuEditor* ec);
+GuMotion* motion_init(void);
 gboolean motion_idle_cb(void* user);
 void motion_start_timer(GuMotion* mc);
 void motion_stop_timer(GuMotion* mc);

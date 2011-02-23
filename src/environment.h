@@ -97,6 +97,7 @@
  */
 
 typedef struct _Gummi {
+    GList* editors;
     GuEditor* editor;
     GuMotion* motion;
     GuLatex* latex;
@@ -105,7 +106,7 @@ typedef struct _Gummi {
     //GuSnippets* snippets;
 } Gummi;
 
-Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl);//, GuSnippets* snip);
 void gummi_new_environment(Gummi* gc, const gchar* filename);
 

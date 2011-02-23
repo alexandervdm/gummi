@@ -89,15 +89,17 @@ int main (int argc, char *argv[]) {
     /* initialize classes */
     //gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
     //                              "tex.snippets", NULL);
-    GuEditor* editor = editor_init(builder);
+    GList* editors = NULL;
+    GuMotion* motion = motion_init();
     GuLatex* latex = latex_init(); 
     GuBiblio* biblio = biblio_init(builder);
     GuTemplate* templ = template_init(builder);
-    GuMotion* motion = motion_init(editor);
+    GuEditor* editor = editor_init(builder, motion);
+    editors = g_list_append(editors, editor);
     //GuSnippets* snippets = snippets_init(snippetsname);
     //g_free(snippetsname);
 
-    gummi = gummi_init(editor, motion, latex, biblio, templ);//, snippets);
+    gummi = gummi_init(editors, motion, latex, biblio, templ);//, snippets);
     gui = gui_init(builder);
 
     slog_set_gui_parent(gui->mainwindow);

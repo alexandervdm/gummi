@@ -57,7 +57,7 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-GuEditor* editor_init(GtkBuilder* builder) {
+GuEditor* editor_init(GtkBuilder* builder, GuMotion* mc) {
     // TODO: move GUI construction related code to elsewhere
     g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
 
@@ -109,7 +109,74 @@ GuEditor* editor_init(GtkBuilder* builder) {
 
     editor_sourceview_config(ec);
     gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
+
+    /* Register motion callback */
+    ec->sigid[0] = g_signal_connect(ec->sourceview, "key-press-event",
+                G_CALLBACK(on_key_press_cb), mc);
+    ec->sigid[1] = g_signal_connect(ec->sourceview, "key-release-event",
+                G_CALLBACK(on_key_release_cb), mc);
+
     return ec;
+}
+
+void editor_destroy(GuEditor* ec) {
+    gchar* auxfile = NULL;
+    gchar* logfile = NULL;
+    int i = 0;
+
+    for (i = 0; i < 2; ++i)
+        g_signal_handler_disconnect(ec, ec->sigid[i]);
+
+    if (ec->filename) {
+        gchar* dirname = g_path_get_dirname(ec->filename);
+        gchar* basename = g_path_get_basename(ec->filename);
+        auxfile = g_strdup_printf("%s%c.%s.aux", ec->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        logfile = g_strdup_printf("%s%c.%s.log", ec->tmpdir,
+                G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        gchar* dirname = g_path_get_dirname(ec->workfile);
+        gchar* basename = g_path_get_basename(ec->workfile);
+        auxfile = g_strdup_printf("%s.aux", ec->fdname);
+        logfile = g_strdup_printf("%s.log", ec->fdname);
+        g_free(basename);
+        g_free(dirname);
+    }
+
+    close(ec->workfd);
+    ec->workfd = -1;
+
+    g_remove(auxfile);
+    g_remove(logfile);
+    g_remove(ec->fdname);
+    g_remove(ec->workfile);
+    g_remove(ec->pdffile);
+
+    g_free(auxfile);
+    g_free(logfile);
+    g_free(ec->fdname);
+    g_free(ec->filename);
+    g_free(ec->workfile);
+    g_free(ec->pdffile);
+
+    ec->fdname = NULL;
+    ec->filename = NULL;
+    ec->workfile = NULL;
+    ec->pdffile = NULL;
+}
+
+gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
+    g_free(ec->bibfile);
+
+    if (ec->filename && !g_path_is_absolute(filename)) {
+        gchar* dirname = g_path_get_dirname(ec->filename);
+        ec->bibfile = g_build_filename(dirname, filename, NULL);
+        g_free(dirname);
+    } else
+        ec->bibfile = g_strdup(filename);
+    return utils_path_exists(ec->bibfile);
 }
 
 /* FileInfo:
@@ -157,62 +224,6 @@ void editor_update_fileinfo(GuEditor* ec, const gchar* filename) {
         ec->workfile = g_strdup(ec->fdname);
         ec->pdffile =  g_strdup_printf("%s.pdf", ec->fdname);
     }
-}
-
-gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
-    g_free(ec->bibfile);
-
-    if (ec->filename && !g_path_is_absolute(filename)) {
-        gchar* dirname = g_path_get_dirname(ec->filename);
-        ec->bibfile = g_build_filename(dirname, filename, NULL);
-        g_free(dirname);
-    } else
-        ec->bibfile = g_strdup(filename);
-    return utils_path_exists(ec->bibfile);
-}
-
-void editor_destroy(GuEditor* ec) {
-    gchar* auxfile = NULL;
-    gchar* logfile = NULL;
-
-    if (ec->filename) {
-        gchar* dirname = g_path_get_dirname(ec->filename);
-        gchar* basename = g_path_get_basename(ec->filename);
-        auxfile = g_strdup_printf("%s%c.%s.aux", ec->tmpdir,
-                G_DIR_SEPARATOR, basename);
-        logfile = g_strdup_printf("%s%c.%s.log", ec->tmpdir,
-                G_DIR_SEPARATOR, basename);
-        g_free(basename);
-        g_free(dirname);
-    } else {
-        gchar* dirname = g_path_get_dirname(ec->workfile);
-        gchar* basename = g_path_get_basename(ec->workfile);
-        auxfile = g_strdup_printf("%s.aux", ec->fdname);
-        logfile = g_strdup_printf("%s.log", ec->fdname);
-        g_free(basename);
-        g_free(dirname);
-    }
-
-    close(ec->workfd);
-    ec->workfd = -1;
-
-    g_remove(auxfile);
-    g_remove(logfile);
-    g_remove(ec->fdname);
-    g_remove(ec->workfile);
-    g_remove(ec->pdffile);
-
-    g_free(auxfile);
-    g_free(logfile);
-    g_free(ec->fdname);
-    g_free(ec->filename);
-    g_free(ec->workfile);
-    g_free(ec->pdffile);
-
-    ec->fdname = NULL;
-    ec->filename = NULL;
-    ec->workfile = NULL;
-    ec->pdffile = NULL;
 }
 
 void editor_sourceview_config(GuEditor* ec) {

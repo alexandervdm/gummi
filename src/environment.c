@@ -31,10 +31,11 @@
 #include "environment.h"
 #include "utils.h"
 
-Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl) {//, GuSnippets* snip) {
     Gummi* g = g_new0(Gummi, 1);
-    g->editor = ed;
+    g->editors = eds;
+    g->editor = g_list_first(eds)->data;
     g->motion = mo;
     g->latex = latex;
     g->biblio = bib;

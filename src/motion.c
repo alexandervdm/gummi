@@ -48,13 +48,9 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-GuMotion* motion_init(GuEditor* ec) {
+GuMotion* motion_init(void) {
     GuMotion* m = g_new0(GuMotion, 1);
     m->timer = 0;
-    g_signal_connect(ec->sourceview, "key-press-event",
-            G_CALLBACK(on_key_press_cb), m);
-    g_signal_connect(ec->sourceview, "key-release-event",
-            G_CALLBACK(on_key_release_cb), m);
     return m;
 }
 
