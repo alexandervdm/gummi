@@ -38,6 +38,7 @@
 #include "gui-prefs.h"
 #include "gui-preview.h"
 #include "gui-search.h"
+#include "gui-editortabs.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
@@ -49,6 +50,7 @@ typedef struct _GummiGui {
     GuSearchGui* searchgui;
     GuImportGui* importgui;
     GuPreviewGui* previewgui;
+    GuEditortabsGui* editortabsgui;
 
     GtkWidget *mainwindow;
     GtkTextBuffer *errorbuff;

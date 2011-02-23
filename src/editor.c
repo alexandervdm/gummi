@@ -57,9 +57,7 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-GuEditor* editor_init(GtkBuilder* builder, GuMotion* mc) {
-    // TODO: move GUI construction related code to elsewhere
-    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+GuEditor* editor_init(GuMotion* mc) {
 
     GuEditor* ec = g_new0(GuEditor, 1);
 
@@ -86,12 +84,6 @@ GuEditor* editor_init(GtkBuilder* builder, GuMotion* mc) {
     ec->term = NULL;
     ec->snippet_editing = FALSE;
     
-    // TODO: Move these two lines to else where, GUI construction should not
-    // be here
-    GtkWidget *scroll =
-        GTK_WIDGET(gtk_builder_get_object(builder, "editor_scroll"));
-    gtk_container_add (GTK_CONTAINER (scroll), GTK_WIDGET(ec->sourceview));
-
     gtk_source_view_set_tab_width(ec->sourceview,
             atoi(config_get_value("tabwidth")));
     gtk_source_view_set_insert_spaces_instead_of_tabs(ec->sourceview,

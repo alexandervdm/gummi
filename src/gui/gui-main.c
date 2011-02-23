@@ -99,6 +99,7 @@ GummiGui* gui_init(GtkBuilder* builder) {
     g->recent[4] =
         GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent5"));
 
+    g->editortabsgui = editortabsgui_init(builder);
     g->prefsgui = prefsgui_init(GTK_WINDOW(g->mainwindow));
     g->searchgui = searchgui_init(builder);
     g->importgui = importgui_init(builder);

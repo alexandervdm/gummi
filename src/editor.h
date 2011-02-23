@@ -72,7 +72,7 @@ typedef struct _GuEditor {
     gint sigid[2];
 } GuEditor;
 
-GuEditor* editor_init(GtkBuilder* builder, GuMotion* mc);
+GuEditor* editor_init(GuMotion* mc);
 void editor_update_fileinfo(GuEditor* ec, const gchar* filename);
 gboolean editor_update_biblio(GuEditor* ec, const gchar* filename);
 void editor_destroy(GuEditor* ec);

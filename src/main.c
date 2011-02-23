@@ -94,7 +94,8 @@ int main (int argc, char *argv[]) {
     GuLatex* latex = latex_init(); 
     GuBiblio* biblio = biblio_init(builder);
     GuTemplate* templ = template_init(builder);
-    GuEditor* editor = editor_init(builder, motion);
+    
+    GuEditor* editor = editor_init(motion);
     editors = g_list_append(editors, editor);
     //GuSnippets* snippets = snippets_init(snippetsname);
     //g_free(snippetsname);
