@@ -97,9 +97,9 @@ const gchar config_str[] =
 
 void config_init(const gchar* filename) {
     const gchar* config_version = NULL;
-    gchar* dirname = NULL;
+    gchar* dirname = g_path_get_dirname(filename);
 
-    g_mkdir_with_parents(dirname = g_path_get_dirname(filename),
+    g_mkdir_with_parents(dirname,
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
     g_free(dirname);
 
@@ -135,7 +135,7 @@ void config_set_default(void) {
 
 const gchar* config_get_value(const gchar* term) {
     gchar* ret  = NULL;
-    slist* index = slist_find_index_of(config_head, term);
+    slist* index = slist_find_index_of(config_head, term, TRUE);
 
     ret = index->second;
     if (ret && 0 == strcmp(ret, "False"))
@@ -147,7 +147,7 @@ void config_set_value(const gchar* term, const gchar* value) {
     if (!config_head)
         slog(L_FATAL, "configuration not initialized\n");
 
-    slist* index = slist_find_index_of(config_head, term);
+    slist* index = slist_find_index_of(config_head, term, TRUE);
     g_free(index->second);
 
     index->second = g_strdup(value? value: "");

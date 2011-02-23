@@ -28,8 +28,8 @@
  */
 
 
-#ifndef GUMMI_IOFUNCTIONS_H
-#define GUMMI_IOFUNCTIONS_H
+#ifndef __GUMMI_IOFUNCTIONS_H__
+#define __GUMMI_IOFUNCTIONS_H__
 
 #include "editor.h"
 
@@ -43,7 +43,4 @@ gchar* iofunctions_decode_text(gchar* text);
 gchar* iofunctions_encode_text(gchar* text);
 gboolean iofunctions_autosave_cb(gpointer name);
 
-#endif /* GUMMI_IOFUNCTIONS_H */
-
-
-
+#endif /* __GUMMI_IOFUNCTIONS_H__ */

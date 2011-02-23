@@ -84,6 +84,7 @@ GuEditor* editor_init(GtkBuilder* builder) {
     ec->editortags = gtk_text_buffer_get_tag_table(ec_sourcebuffer);
     ec->replace_activated = FALSE;
     ec->term = NULL;
+    ec->snippet_editing = FALSE;
     
     // TODO: Move these two lines to else where, GUI construction should not
     // be here
@@ -336,10 +337,10 @@ void editor_set_selection_textstyle(GuEditor* ec, const gchar* type) {
     gint i = 0, selected = 0;
     const gchar* selected_text = 0;
     gint style_size = sizeof(style) / sizeof(style[0]);
-    gchar** result = 0;
+    gchar** result = NULL;
     GError* err = NULL;
-    GRegex* match_str = 0;
-    GMatchInfo* match_info;
+    GRegex* match_str = NULL;
+    GMatchInfo* match_info = NULL;
     gchar* outtext = NULL;
     gchar* regexbuf = NULL;
 

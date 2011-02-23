@@ -41,6 +41,7 @@
 #include "gui/gui-main.h"
 #include "iofunctions.h"
 #include "motion.h"
+#include "snippets.h"
 #include "template.h"
 #include "utils.h"
 
@@ -86,13 +87,17 @@ int main (int argc, char *argv[]) {
     gtk_builder_set_translation_domain(builder, PACKAGE);
 
     /* initialize classes */
+    //gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
+    //                              "tex.snippets", NULL);
     GuEditor* editor = editor_init(builder);
     GuLatex* latex = latex_init(); 
     GuBiblio* biblio = biblio_init(builder);
     GuTemplate* templ = template_init(builder);
     GuMotion* motion = motion_init(editor);
+    //GuSnippets* snippets = snippets_init(snippetsname);
+    //g_free(snippetsname);
 
-    gummi = gummi_init(editor, motion, latex, biblio, templ);
+    gummi = gummi_init(editor, motion, latex, biblio, templ);//, snippets);
     gui = gui_init(builder);
 
     slog_set_gui_parent(gui->mainwindow);

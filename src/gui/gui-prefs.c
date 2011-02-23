@@ -129,9 +129,9 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
     /* list available languages */
     gchar* ptr = 0;
 
-    pdata pret = utils_popen_r("enchant-lsmod -list-dicts");
+    Tuple2 pret = utils_popen_r("enchant-lsmod -list-dicts");
 
-    ptr = strtok(pret.data, " \n");
+    ptr = strtok((gchar*)pret.second, " \n");
     while (ptr) {
         GtkTreeIter iter;
         if (ptr[0] != '(') {
@@ -141,7 +141,7 @@ GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
         ptr = strtok(NULL, " \n");
     }
     gtk_combo_box_set_active(p->combo_languages, 0);
-    g_free(pret.data);
+    g_free((gchar*)pret.second);
 #else
     /* remove gtkspell related GUIs if not used */
     GtkHBox* hbox11 = GTK_HBOX(gtk_builder_get_object(builder, "hbox11"));

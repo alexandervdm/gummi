@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-#ifndef GUMMI_CONFIGFILE
-#define GUMMI_CONFIGFILE
+#ifndef __GUMMI_CONFIGFILE__
+#define __GUMMI_CONFIGFILE__
 
 #include <stdio.h>
 
@@ -57,4 +57,4 @@ void config_load(void);
 void config_save(void);
 void config_clean_up(void);
 
-#endif /* GUMMI_CONFIGFILE */
+#endif /* __GUMMI_CONFIGFILE__ */

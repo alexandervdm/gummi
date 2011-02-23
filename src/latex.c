@@ -105,13 +105,13 @@ void latex_update_pdffile(GuLatex* lc, GuEditor* ec) {
  
     g_free(lc->errormessage);
 
-    pdata cresult = utils_popen_r(command);
+    Tuple2 cresult = utils_popen_r(command);
     memset(lc->errorlines, 0, BUFSIZ);
-    lc->errormessage = cresult.data;
+    lc->errormessage = (gchar*)cresult.second;
     lc->modified_since_compile = FALSE;
 
     /* find error line */
-    if (cresult.ret) {
+    if ((gint)cresult.first) {
         gchar* result = NULL;
         GError* err = NULL;
         GRegex* match_str = NULL;
@@ -123,7 +123,7 @@ void latex_update_pdffile(GuLatex* lc, GuEditor* ec) {
             return;
         }
 
-        if (g_regex_match(match_str, cresult.data, 0, &match_info)) {
+        if (g_regex_match(match_str, (gchar*)cresult.second, 0, &match_info)) {
             gint count = 0;
             while (g_match_info_matches(match_info)) {
                 if (count + 1== BUFSIZ) break;
@@ -154,8 +154,8 @@ void latex_update_auxfile(GuLatex* lc, GuEditor* ec) {
                                      ec->tmpdir,
                                      ec->workfile);
     g_free(dirname);
-    pdata res = utils_popen_r(command);
-    g_free(res.data);
+    Tuple2 res = utils_popen_r(command);
+    g_free(res.second);
     g_free(command);
 }
 

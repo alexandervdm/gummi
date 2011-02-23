@@ -35,23 +35,24 @@
 #include <string.h>
 #include <sys/stat.h>
 
+#include <gdk/gdkkeysyms.h>
 #include <glib.h>
 
-#include "environment.h"
+#include "editor.h"
 #include "utils.h"
 
-GuSnippets* snippets_init(const gchar* filename, GuEditor* ec) {
+GuSnippets* snippets_init(const gchar* filename) {
     GuSnippets* s = g_new0(GuSnippets, 1);
-    gchar* dirname = NULL;
+    gchar* dirname = g_path_get_dirname(filename);
 
-    g_mkdir_with_parents(dirname = g_path_get_dirname(filename),
+    g_mkdir_with_parents(dirname,
             S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
     g_free(dirname);
 
     slog(L_INFO, "snippets : %s\n", filename);
 
-    s->b_editor = ec;
     s->filename = g_strdup(filename);
+    snippets_load(s);
     return s;
 }
 
@@ -163,4 +164,188 @@ void snippets_clean_up(GuSnippets* sc) {
         prev = current;
     }
     sc->head = NULL;
+}
+
+gchar* snippets_get_value(GuSnippets* sc, const gchar* term) {
+    slist* index = slist_find_index_of(sc->head, term, FALSE);
+    return (index)? index->second: NULL;
+}
+
+gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
+        GdkEventKey* event) {
+    if (event->keyval != GDK_KEY_Tab && !ec->snippet_editing)
+       return FALSE;
+
+    if (ec->snippet_editing) {
+    } else {
+        GuSnippetInfo* info = NULL;
+        GtkTextIter current, start;
+        gchar* word = NULL;
+        gchar* snippet = NULL;
+
+        editor_get_current_iter(ec, &current);
+        if (!gtk_text_iter_ends_word(&current)) return FALSE;
+
+        start = current;
+        gtk_text_iter_backward_word_start(&start);
+        word = gtk_text_iter_get_text(&start, &current);
+        snippet = snippets_get_value(sc, word);
+        if (!snippet) {
+            g_free(word);
+            return FALSE;
+        }
+        info = snippets_parse(snippet);
+        gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
+        gtk_text_buffer_insert(ec_sourcebuffer, &start, info->expanded, -1);
+        gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
+        g_free(word);
+    }
+    return TRUE;
+}
+
+GuSnippetInfo* snippets_parse(char* snippet) {
+    gint start, end;
+    GError* err = NULL;
+    gchar** results = NULL;
+    GRegex* holder1_regex = NULL;
+    GRegex* holder2_regex = NULL;
+    GMatchInfo* match_info = NULL;
+    const gchar* holder1 = "\\$([0-9]*)";
+    const gchar* holder2 = "\\${([0-9]*):?([^}]*)}";
+
+    GuSnippetInfo* info = snippet_info_new(snippet);
+
+    if (!(holder1_regex = g_regex_new(holder1, G_REGEX_DOTALL, 0, &err))) {
+        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+        goto cleanup;
+    }
+    g_regex_match(holder1_regex, snippet, 0, &match_info);
+    while (g_match_info_matches(match_info)) {
+        results = g_match_info_fetch_all(match_info);
+        g_match_info_fetch_pos(match_info, 0, &start, &end);
+        snippet_info_append_holder(info, atoi(results[1]), start, end);
+        g_match_info_next(match_info, NULL);
+    }
+    g_strfreev(results);
+
+    if (!(holder2_regex = g_regex_new(holder2, G_REGEX_DOTALL, 0, &err))) {
+        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+        goto cleanup;
+    }
+    g_regex_match(holder2_regex, snippet, 0, &match_info);
+    while (g_match_info_matches(match_info)) {
+        results = g_match_info_fetch_all(match_info);
+        g_match_info_fetch_pos(match_info, 0, &start, &end);
+        int i = 0;
+        for (i = 0; results[i]; ++i);
+        if (i < 3) {
+            slog(L_ERROR, "invalid snippet");
+            goto cleanup;
+        }
+        snippet_info_append_holder(info, atoi(results[1]), start, end -start);
+        g_match_info_next(match_info, NULL);
+    }
+    g_strfreev(results);
+
+cleanup:
+    if (err) g_error_free(err);
+    g_regex_unref(holder1_regex);
+    g_regex_unref(holder2_regex);
+    g_match_info_free(match_info);
+    return info;
+}
+
+GuSnippetInfo* snippet_info_new(gchar* snippet) {
+    GuSnippetInfo* info = g_new0(GuSnippetInfo, 1);
+    info->snippet = g_strdup(snippet);
+    info->expanded = g_strdup(snippet);
+    return info;
+}
+
+void snippet_info_free(GuSnippetInfo* info) {
+    GuSnippetInfoGroup* next = NULL;
+    GuSnippetInfoGroup* current = info->groups;
+    while (current) {
+        next = current->next;
+        Tuple2* tnext = NULL;
+        Tuple2* cur = current->group;
+        while (cur) {
+            tnext = cur->next;
+            g_free(cur);
+            cur = tnext;
+        }
+        g_free(current);
+        current = next;
+    }
+    g_free(info->snippet);
+}
+
+void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
+        gint len) {
+    GuSnippetInfoGroup* current = info->groups;
+    GuSnippetInfoGroup* prev = NULL;
+    while (current) {
+        if (current->group_number == group)
+            break;
+        prev = current;
+        current = current->next;
+    }
+    /* Group already exists */
+    if (current) {
+        Tuple2* prev = NULL;
+        Tuple2* cur = current->group;
+        while (cur) {
+            prev = cur;
+            cur = cur->next;
+        }
+        prev->next = g_new0(Tuple2, 1);
+        cur = prev->next;
+        cur->first = (gpointer)start;
+        cur->second = (gpointer)len;
+    } else { /* Create new group */
+        if (!info->groups) {
+            info->groups = g_new0(GuSnippetInfoGroup, 1);
+            current = info->groups; 
+        } else {
+            prev->next = g_new0(GuSnippetInfoGroup, 1);
+            current = prev->next;
+        }
+        current->group_number = group;
+        current->group = g_new0(Tuple2, 1);
+        current->group->first = (gpointer)start;
+        current->group->second = (gpointer)len;
+    }
+}
+
+void snippet_info_expand(GuSnippetInfo* info, gint group, gchar* text) {
+    GError* err = NULL;
+    GRegex* holder1_regex = NULL;
+    GRegex* holder2_regex = NULL;
+    gchar* prev = NULL;
+    gchar* holder1 = g_strdup_printf("\\$%d", group);
+    gchar* holder2 = g_strdup_printf("\\${%d:?[^}]*}", group);
+
+    if (!(holder1_regex = g_regex_new(holder1, G_REGEX_DOTALL, 0, &err))) {
+        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+        goto cleanup;
+    }
+    if (!(holder2_regex = g_regex_new(holder2, G_REGEX_DOTALL, 0, &err))) {
+        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+        goto cleanup;
+    }
+
+    g_free(info->expanded);
+    info->expanded = g_regex_replace(holder1_regex, info->snippet, -1, 0, text,
+            0, 0);
+    prev = info->expanded;
+    info->expanded = g_regex_replace(holder2_regex, info->expanded, -1, 0,
+            text, 0, 0);
+    g_free(prev);
+
+cleanup:
+    if (err) g_error_free(err);
+    g_regex_unref(holder1_regex);
+    g_regex_unref(holder2_regex);
+    g_free(holder1);
+    g_free(holder2);
 }

@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_LATEX_H
-#define GUMMI_LATEX_H
+#ifndef __GUMMI_LATEX_H__
+#define __GUMMI_LATEX_H__
 
 #include <glib.h>
 
@@ -49,5 +49,4 @@ void latex_update_pdffile(GuLatex* mc, GuEditor* ec);
 void latex_update_auxfile(GuLatex* mc, GuEditor* ec);
 void latex_export_pdffile(GuLatex* mc, GuEditor* ec, const gchar* path);
 
-#endif /* GUMMI_LATEX_H */
-
+#endif /* __GUMMI_LATEX_H__ */

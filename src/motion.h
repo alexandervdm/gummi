@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_MOTION_H
-#define GUMMI_MOTION_H
+#ifndef __GUMMI_MOTION_H__
+#define __GUMMI_MOTION_H__
 
 #include <glib.h>
 
@@ -45,5 +45,4 @@ void motion_stop_timer(GuMotion* mc);
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user);
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user);
 
-#endif /* GUMMI_MOTION_H */
-
+#endif /* __GUMMI_MOTION_H__ */

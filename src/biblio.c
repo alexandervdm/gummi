@@ -98,12 +98,13 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
         g_free(auxname);
         latex_update_workfile(lc, ec);
         latex_update_auxfile(lc, ec);
-        pdata res = utils_popen_r(command);
-        gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar), res.data);
+        Tuple2 res = utils_popen_r(command);
+        gtk_widget_set_tooltip_text(GTK_WIDGET(bc->progressbar),
+                (gchar*)res.second);
         g_free(command);
         g_free(dirname);
-        success = !(strstr(res.data, "Database file #1") == NULL);
-        g_free(res.data);
+        success = !(strstr((gchar*)res.second, "Database file #1") == NULL);
+        g_free(res.second);
         return success;
     }
     slog(L_WARNING, "bibtex command is not present or executable.\n");
@@ -146,7 +147,7 @@ int biblio_parse_entries(GuBiblio* bc, gchar *bib_content) {
     
     while (g_match_info_matches(match_entry)) {
         
-        gchar *entry = g_match_info_fetch (match_entry, 0);
+        gchar *entry = g_match_info_fetch(match_entry, 0);
 
         gchar **ident_res = g_regex_split(subregex_ident, entry, 0);
         gchar **title_res = g_regex_split(subregex_title, entry, 0);

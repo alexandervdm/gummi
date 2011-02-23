@@ -32,13 +32,14 @@
 #include "utils.h"
 
 Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl) {
+        GuTemplate* tpl) {//, GuSnippets* snip) {
     Gummi* g = g_new0(Gummi, 1);
     g->editor = ed;
     g->motion = mo;
     g->latex = latex;
     g->biblio = bib;
     g->templ = tpl;
+    //g->snippets = snip;
     return g;
 }
 

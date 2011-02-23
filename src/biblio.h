@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_BIBLIO_H
-#define GUMMI_BIBLIO_H
+#ifndef __GUMMI_BIBLIO_H__
+#define __GUMMI_BIBLIO_H__
 
 #include <gtk/gtk.h>
 
@@ -50,4 +50,4 @@ gboolean biblio_compile_bibliography(GuBiblio* bc, GuEditor* ec, GuLatex* lc);
 int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
 
 
-#endif /* GUMMI_BIBLIO_H */
+#endif /* __GUMMI_BIBLIO_H__ */

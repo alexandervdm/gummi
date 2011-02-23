@@ -28,8 +28,8 @@
  */
 
 
-#ifndef GUMMI_EDITOR_H
-#define GUMMI_EDITOR_H
+#ifndef __GUMMI_EDITOR_H__
+#define __GUMMI_EDITOR_H__
 
 #ifdef HAVE_CONFIG_H
 #   include "config.h"
@@ -66,6 +66,7 @@ typedef struct _GuEditor {
     gboolean backwards;
     gboolean wholeword;
     gboolean matchcase;
+    gboolean snippet_editing;
 } GuEditor;
 
 GuEditor* editor_init(GtkBuilder* builder);
@@ -103,4 +104,4 @@ void editor_set_style_scheme_by_id(GuEditor* ec, const gchar* id);
 gint schemes_compare (gconstpointer a, gconstpointer b);
 GList* editor_list_style_scheme_sorted(GuEditor* ec);
 
-#endif /* GUMMI_EDITOR_H */
+#endif /* __GUMMI_EDITOR_H__ */

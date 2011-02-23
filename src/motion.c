@@ -27,6 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "snippets.h"
 #include "latex.h"
 
 #include <stdlib.h>
@@ -34,8 +35,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <gtk/gtk.h>
 #include <glib.h>
+#include <gtk/gtk.h>
 
 #include "configfile.h"
 #include "editor.h"
@@ -82,7 +83,8 @@ void motion_stop_timer(GuMotion* mc) {
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     L_F_DEBUG;
     motion_stop_timer((GuMotion*)user);
-    //snippets_key_press_cb(event);
+    //if (snippets_key_press_cb(gummi->snippets, gummi->editor, event))
+    //    return TRUE;
     return FALSE;
 }
 

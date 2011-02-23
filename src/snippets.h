@@ -27,32 +27,48 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
  
-#ifndef GUMMI_SNIPPETS
-#define GUMMI_SNIPPETS
+#ifndef __GUMMI_SNIPPETS_H__
+#define __GUMMI_SNIPPETS_H__
 
 #include <stdio.h>
 
 #include <glib.h>
+#include <gtk/gtk.h>
 
 #include "editor.h"
 #include "utils.h"
 
 typedef struct _GuSnippets {
-    GuEditor* b_editor;
     gchar* filename;
     slist* head;
 } GuSnippets;
 
-GuSnippets* snippets_init(const gchar* filename, GuEditor* ec);
+typedef struct _GuSnippetInfoGroup {
+    struct _GuSnippetInfoGroup* next;
+    gint group_number;
+    Tuple2* group;
+} GuSnippetInfoGroup;
 
-/**
- * @brief reset settings to default
- */
+typedef struct _GuSnippetInfo {
+    gchar* snippet;
+    gchar* expanded;
+    GuSnippetInfoGroup* groups;
+} GuSnippetInfo;
+
+GuSnippets* snippets_init(const gchar* filename);
+
 void snippets_set_default(GuSnippets* sc);
-
-/* [Internal] */
 void snippets_load(GuSnippets* sc);
 void snippets_save(GuSnippets* sc);
 void snippets_clean_up(GuSnippets* sc);
+gchar* snippets_get_value(GuSnippets* sc, const gchar* term);
+gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
+        GdkEventKey* event);
+GuSnippetInfo* snippets_parse(char* snippet);
+GuSnippetInfo* snippet_info_new(gchar* snippet);
+void snippet_info_free(GuSnippetInfo* info);
+void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
+        gint len);
+void snippet_info_expand(GuSnippetInfo* info, gint group, gchar* text);
 
-#endif /* GUMMI_SNIPPETS */
+#endif /* __GUMMI_SNIPPETS__ */

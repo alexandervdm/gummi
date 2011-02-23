@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_TEMPLATE_H
-#define GUMMI_TEMPLATE_H
+#ifndef __GUMMI_TEMPLATE_H__
+#define __GUMMI_TEMPLATE_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -58,4 +58,4 @@ void template_remove_entry(GuTemplate* t);
 void template_create_file(GuTemplate* t, gchar* filename, gchar* text);
 templdata template_open_selected(GuTemplate* t);
 
-#endif /* GUMMI_TEMPLATE_H */
+#endif /* __GUMMI_TEMPLATE_H__ */

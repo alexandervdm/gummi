@@ -1,5 +1,5 @@
 /**
- * @file    gui-preview.h
+ * @file   gui-preview.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_GUI_PREVIEW_H
-#define GUMMI_GUI_PREVIEW_H
+#ifndef __GUMMI_GUI_PREVIEW_H__
+#define __GUMMI_GUI_PREVIEW_H__
 
 #include <gtk/gtk.h>
 #include <poppler.h> 
@@ -82,4 +82,4 @@ void previewgui_zoom_change(GtkWidget* widget, void* user);
 void previewgui_calc_dimensions(GuPreviewGui* pc);
 gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
 
-#endif /* GUMMI_GUI_PREVIEW_H */
+#endif /* __GUMMI_GUI_PREVIEW_H__ */

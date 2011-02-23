@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_GUI_IMPORT_H
-#define GUMMI_GUI_IMPORT_H
+#ifndef __GUMMI_GUI_IMPORT_H__
+#define __GUMMI_GUI_IMPORT_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -70,4 +70,4 @@ void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
 void on_image_file_activate(void);
 void importer_imagegui_set_sensitive(const gchar* name, gboolean mode);
 
-#endif /* GUMMI_GUI_IMPORT_H */
+#endif /* __GUMMI_GUI_IMPORT_H__ */

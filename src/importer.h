@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_IMPORTER_H
-#define GUMMI_IMPORTER_H
+#ifndef __GUMMI_IMPORTER_H__
+#define __GUMMI_IMPORTER_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -41,4 +41,4 @@ const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols);
 const gchar* importer_generate_image(const gchar* image_file,
         const gchar* caption, const gchar* label, gdouble scale);
 
-#endif /* GUMMI_IMPORTER_H */
+#endif /* __GUMMI_IMPORTER_H__ */

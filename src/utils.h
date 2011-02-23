@@ -28,8 +28,8 @@
  */
 
 
-#ifndef GUMMI_UTILS
-#define GUMMI_UTILS
+#ifndef __GUMMI_UTILS__
+#define __GUMMI_UTILS__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -47,10 +47,11 @@
 
 #define L_F_DEBUG  slog(L_DEBUG, "%s()\n", __func__);
 
-typedef struct _pdata {
-    gint ret;
-    gchar* data;
-} pdata;
+typedef struct _Tuple2 {
+    struct _Tuple2* next;
+    gpointer first;
+    gpointer second;
+} Tuple2;
 
 typedef struct _slist {
     struct _slist* next;
@@ -64,8 +65,9 @@ void slog(gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog(const gchar* message);
 gboolean utils_path_exists(const gchar* path);
 gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
-pdata utils_popen_r(const gchar* cmd);
+Tuple2 utils_popen_r(const gchar* cmd);
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
-slist* slist_find_index_of(slist* head, const gchar* term);
+slist* slist_find_index_of(slist* head, const gchar* term,
+        gboolean create_if_not_exists);
 
-#endif /* GUMMI_UTILS */
+#endif /* __GUMMI_UTILS__ */

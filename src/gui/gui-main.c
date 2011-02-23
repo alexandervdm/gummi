@@ -564,7 +564,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
         }
 
         cmd = g_strdup_printf("texcount '%s'", tmpfile);
-        pdata result = utils_popen_r(cmd);
+        Tuple2 result = utils_popen_r(cmd);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
             if (!(regexs[i] = g_regex_new(terms_regex[i], 0, 0, &err))) {
@@ -575,7 +575,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
             }
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
-            if (g_regex_match(regexs[i], result.data, 0, &match_info)) {
+            if (g_regex_match(regexs[i], result.second, 0, &match_info)) {
                 matched = g_match_info_fetch_all(match_info);
                 if (NULL == matched[1]) {
                     slog(L_WARNING, "can't extract info: %s\n", terms[i]);
@@ -596,7 +596,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
                              terms[4], ": ", res[5], "\n",
                              terms[6], ": ", res[6], "\n",
                              NULL);
-        g_free(result.data);
+        g_free(result.second);
         g_free(tmpfile);
     }
     else {

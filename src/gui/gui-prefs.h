@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_GUI_PREFS_H
-#define GUMMI_GUI_PREFS_H
+#ifndef __GUMMI_GUI_PREFS_H__
+#define __GUMMI_GUI_PREFS_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -86,4 +86,4 @@ void on_combo_language_changed(GtkWidget* widget, void* user);
 void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
 void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user);
 
-#endif /* GUMMI_GUI_PREFS_H */
+#endif /* __GUMMI_GUI_PREFS_H__ */

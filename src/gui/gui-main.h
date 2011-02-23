@@ -1,5 +1,5 @@
 /**
- * @file    gui-main.h
+ * @file   gui-main.h
  * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -28,8 +28,8 @@
  */
 
 
-#ifndef GUMMI_GUI_MAIN_H
-#define GUMMI_GUI_MAIN_H
+#ifndef __GUMMI_GUI_MAIN_H__
+#define __GUMMI_GUI_MAIN_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -143,4 +143,4 @@ gboolean statusbar_del_message(void* user);
 
 void check_preview_timer(void);
 
-#endif /* GUMMI_GUI_MAIN_H */
+#endif /* __GUMMI_GUI_MAIN_H__ */

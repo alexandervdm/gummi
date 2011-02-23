@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_GUI_SEARCH_H
-#define GUMMI_GUI_SEARCH_H
+#ifndef __GUMMI_GUI_SEARCH_H__
+#define __GUMMI_GUI_SEARCH_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -55,4 +55,4 @@ void on_button_searchwindow_find_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_replace_next_clicked(GtkWidget* widget, void* user);
 void on_button_searchwindow_replace_all_clicked(GtkWidget* widget, void* user);
 
-#endif /* GUMMI_GUI_SEARCH_H */
+#endif /* __GUMMI_GUI_SEARCH_H__ */

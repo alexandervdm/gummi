@@ -75,8 +75,9 @@
 #include "editor.h"
 #include "importer.h"
 #include "iofunctions.h"
-#include "motion.h"
 #include "latex.h"
+#include "motion.h"
+#include "snippets.h"
 #include "template.h"
 
 #define _(T) gettext(T)
@@ -101,10 +102,11 @@ typedef struct _Gummi {
     GuLatex* latex;
     GuBiblio* biblio;
     GuTemplate* templ;
+    //GuSnippets* snippets;
 } Gummi;
 
 Gummi* gummi_init(GuEditor* ed, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl);
+        GuTemplate* tpl);//, GuSnippets* snip);
 void gummi_new_environment(Gummi* gc, const gchar* filename);
 
 #endif /* GUMMI_ENVIRONMENT_H */

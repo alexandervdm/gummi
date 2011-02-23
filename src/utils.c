@@ -174,9 +174,9 @@ gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
 /**
  * @brief  Platform independent interface for calling popen() and returns a
  * newly allocated pointer
- * @return struct _pdata
+ * @return Tuple2
  */
-pdata utils_popen_r(const gchar* cmd) {
+Tuple2 utils_popen_r(const gchar* cmd) {
     FILE* fp = popen(cmd, "r");
     gchar buf[BUFSIZ];
     gchar* ret = NULL;
@@ -198,7 +198,7 @@ pdata utils_popen_r(const gchar* cmd) {
         g_free(rot);
     }
     status = WEXITSTATUS(pclose(fp));
-    return (pdata){status, ret};
+    return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
 }
 
 /**
@@ -215,9 +215,8 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
     return tstr;
 }
 
-slist* slist_find_index_of(slist* head, const gchar* term) {
-    /* return the index of the entry, if the entry does not exist, create a
-     * new entry for it and return the new pointer. */
+slist* slist_find_index_of(slist* head, const gchar* term,
+        gboolean create_if_not_exists) {
     slist* current = head;
     slist* prev = 0;
 
@@ -227,11 +226,14 @@ slist* slist_find_index_of(slist* head, const gchar* term) {
         prev = current;
         current = current->next;
     }
-    slog(L_WARNING, "can't find option `%s', creating new field for it...\n",
-           term);
-    prev->next = g_new0(slist, 1);
-    current = prev->next;
-    current->first = g_strdup(term);
-    current->second = g_strdup("");
+    if (create_if_not_exists) {
+        slog(L_WARNING, "can't find `%s', creating new field for it...\n",
+                term);
+        prev->next = g_new0(slist, 1);
+        current = prev->next;
+        current->first = g_strdup(term);
+        current->second = g_strdup("");
+    } else
+        current = NULL;
     return current;
 }
