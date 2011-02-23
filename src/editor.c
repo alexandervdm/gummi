@@ -125,7 +125,7 @@ void editor_destroy(GuEditor* ec) {
     int i = 0;
 
     for (i = 0; i < 2; ++i)
-        g_signal_handler_disconnect(ec, ec->sigid[i]);
+        g_signal_handler_disconnect(ec->sourceview, ec->sigid[i]);
 
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname(ec->filename);
