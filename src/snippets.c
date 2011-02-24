@@ -201,8 +201,8 @@ void snippets_set_accelerator(GuSnippets* sc, gchar* key_accel) {
 void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
     gchar* snippet = NULL;
     GtkTextIter start;
-    if (!(snippet = snippets_get_value(sc, key)))
-        return;
+    snippet = snippets_get_value(sc, key);
+    g_return_if_fail(snippet != NULL);
 
     editor_get_current_iter(ec, &start);
     sc->info = snippets_parse(snippet);
@@ -220,6 +220,7 @@ void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
 void snippets_deactivate(GuSnippets* sc, GuEditor* ec) {
     sc->activated = FALSE;
     snippet_info_free(sc->info, ec);
+    printf("deactivated\n");
 }
 
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
@@ -251,17 +252,17 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
         
     } else {
         gchar* key = NULL;
-
         editor_get_current_iter(ec, &current);
         if (!gtk_text_iter_ends_word(&current)) return FALSE;
-
         start = current;
         gtk_text_iter_backward_word_start(&start);
         key = gtk_text_iter_get_text(&start, &current);
-        gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
-        snippets_activate(sc, ec, key);
+        if (snippets_get_value(sc, key)) {
+            gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
+            snippets_activate(sc, ec, key);
+        }
         g_free(key);
-        return TRUE;
+        return sc->activated;
     }
     return FALSE;
 }
@@ -346,7 +347,6 @@ void snippet_info_free(GuSnippetInfo* info, GuEditor* ec) {
 gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
     GuSnippetExpandInfo* einfo = NULL;
     GtkTextIter start, end;
-    GList* prev = info->current;
     gboolean success = TRUE;
 
     if (!info->current) {
@@ -360,7 +360,7 @@ gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
     if (!info->current) {
         info->current = g_list_first(info->einfo_sorted);
         if (GU_SNIPPET_EXPAND_INFO(info->current->data)->group_number != 0)
-            info->current = prev;
+            return FALSE;
         success = FALSE;
     }
     einfo = GU_SNIPPET_EXPAND_INFO(info->current->data);
