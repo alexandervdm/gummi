@@ -45,6 +45,8 @@ typedef struct _GuSnippets {
 
 typedef struct _GuSnippetExpandInfo {
     gint group_number;
+    GtkTextMark* right_mark;
+    GtkTextMark* left_mark;
     gint start;
     gint len;
     gchar* text;
@@ -56,7 +58,6 @@ typedef struct _GuSnippetInfo {
     gchar* snippet;
     gchar* expanded;
     gint offset;
-    gint start_offset;
     GList* current;
     GList* einfo;   /* A list of GuSnippetExpandInfo */
     GList* einfo_unique;
@@ -80,6 +81,7 @@ void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
 void snippet_info_initial_expand(GuSnippetInfo* info);
 void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
         GuSnippetExpandInfo* source);
+void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
 gint snippet_info_cmp(gconstpointer a, gconstpointer b);
