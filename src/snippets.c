@@ -203,6 +203,8 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
             return FALSE;
         }
         sc->info = snippets_parse(snippet);
+        sc->info->start_offset = gtk_text_iter_get_offset(&start);
+
         snippet_info_initial_expand(sc->info);
         gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
         gtk_text_buffer_insert(ec_sourcebuffer, &start, sc->info->expanded, -1);
@@ -230,36 +232,37 @@ gboolean snippets_key_press_after_cb(GuSnippets* sc, GuEditor* ec,
 }
 
 GuSnippetInfo* snippets_parse(char* snippet) {
-    gint start, end;
+    gint i, start, end;
     GError* err = NULL;
     gchar** results = NULL;
-    GRegex* holder_regex = NULL;
+    GRegex* regex = NULL;
     GMatchInfo* match_info = NULL;
-    const gchar* holder = "\\${?([0-9]*):?([^}]*)}?";
+    const gchar* holders[] = { "\\$([0-9]+)", "\\${([0-9]*):?([^}]*)}" };
 
     GuSnippetInfo* info = snippet_info_new(snippet);
 
-    if (!(holder_regex = g_regex_new(holder, G_REGEX_DOTALL, 0, &err))) {
-        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
-        goto cleanup;
+    for (i = 0; i < 2; ++i) {
+        if (!(regex = g_regex_new(holders[i], G_REGEX_DOTALL, 0, &err))) {
+            slog(L_ERROR, "g_regex_new(): %s\n", err->message);
+            g_error_free(err);
+            return info;
+        }
+        g_regex_match(regex, snippet, 0, &match_info);
+        while (g_match_info_matches(match_info)) {
+            results = g_match_info_fetch_all(match_info);
+            g_match_info_fetch_pos(match_info, 0, &start, &end);
+            snippet_info_append_holder(info, atoi(results[1]), start,
+                    end -start, results[2]);
+            g_match_info_next(match_info, NULL);
+        }
+        g_strfreev(results);
+        g_regex_unref(regex);
+        g_match_info_free(match_info);
     }
-    g_regex_match(holder_regex, snippet, 0, &match_info);
-    while (g_match_info_matches(match_info)) {
-        results = g_match_info_fetch_all(match_info);
-        g_match_info_fetch_pos(match_info, 0, &start, &end);
-        snippet_info_append_holder(info, atoi(results[1]), start, end -start, 
-                results[2]);
-        g_match_info_next(match_info, NULL);
-    }
-    g_strfreev(results);
 
+    info->einfo = g_list_sort(info->einfo, snippet_info_pos_cmp);
     info->einfo_sorted = g_list_copy(info->einfo);
-    info->einfo_sorted = g_list_sort(info->einfo_sorted, snippet_info_cmp);
-
-cleanup:
-    if (err) g_error_free(err);
-    g_regex_unref(holder_regex);
-    g_match_info_free(match_info);
+    info->einfo_sorted = g_list_sort(info->einfo_sorted, snippet_info_num_cmp);
     return info;
 }
 
@@ -327,7 +330,7 @@ void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
     einfo->group_number = group;
     einfo->start = start;
     einfo->len = len;
-    einfo->text = g_strdup(text);
+    einfo->text = g_strdup(text? text: "");
     info->einfo = g_list_append(info->einfo, einfo);
 }
 
@@ -338,9 +341,9 @@ void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec) {
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
         gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &start,
-                einfo->start);
+                info->start_offset + einfo->start);
         gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &end,
-                einfo->start + einfo->len);
+                info->start_offset + einfo->start + einfo->len);
         einfo->left_mark = gtk_text_mark_new(NULL, TRUE);
         einfo->right_mark = gtk_text_mark_new(NULL, FALSE);
         gtk_text_buffer_add_mark(ec_sourcebuffer, einfo->left_mark, &start);
@@ -364,7 +367,7 @@ void snippet_info_initial_expand(GuSnippetInfo* info) {
         }
         current = g_list_next(current);
     }
-    info->einfo_unique = g_list_sort(info->einfo_unique, snippet_info_cmp);
+    info->einfo_unique = g_list_sort(info->einfo_unique, snippet_info_num_cmp);
 
     current = g_list_first(info->einfo);
     info->offset = 0;
@@ -427,7 +430,12 @@ void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec) {
     g_free(text);
 }
 
-gint snippet_info_cmp(gconstpointer a, gconstpointer b) {
+gint snippet_info_num_cmp(gconstpointer a, gconstpointer b) {
     return ((GU_SNIPPET_EXPAND_INFO(a)->group_number <
                 GU_SNIPPET_EXPAND_INFO(b)->group_number)? -1: 1);
+}
+
+gint snippet_info_pos_cmp(gconstpointer a, gconstpointer b) {
+    return ((GU_SNIPPET_EXPAND_INFO(a)->start <
+                GU_SNIPPET_EXPAND_INFO(b)->start)? -1: 1);
 }

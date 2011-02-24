@@ -52,6 +52,7 @@ typedef struct _GuSnippetExpandInfo {
 typedef struct _GuSnippetInfo {
     gchar* snippet;
     gchar* expanded;
+    gint start_offset;
     gint offset;
     GList* current;
     GList* einfo;   /* A list of GuSnippetExpandInfo */
@@ -87,6 +88,7 @@ void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);
-gint snippet_info_cmp(gconstpointer a, gconstpointer b);
+gint snippet_info_num_cmp(gconstpointer a, gconstpointer b);
+gint snippet_info_pos_cmp(gconstpointer a, gconstpointer b);
 
 #endif /* __GUMMI_SNIPPETS__ */
