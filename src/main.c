@@ -87,8 +87,8 @@ int main (int argc, char *argv[]) {
     gtk_builder_set_translation_domain(builder, PACKAGE);
 
     /* initialize classes */
-    //gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
-    //                              "tex.snippets", NULL);
+    gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
+                                  "tex.snippets", NULL);
     GList* editors = NULL;
     GuMotion* motion = motion_init();
     GuLatex* latex = latex_init(); 
@@ -97,10 +97,10 @@ int main (int argc, char *argv[]) {
     
     GuEditor* editor = editor_init(motion);
     editors = g_list_append(editors, editor);
-    //GuSnippets* snippets = snippets_init(snippetsname);
-    //g_free(snippetsname);
+    GuSnippets* snippets = snippets_init(snippetsname);
+    g_free(snippetsname);
 
-    gummi = gummi_init(editors, motion, latex, biblio, templ);//, snippets);
+    gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
     gui = gui_init(builder);
 
     slog_set_gui_parent(gui->mainwindow);

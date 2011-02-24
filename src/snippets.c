@@ -173,13 +173,20 @@ gchar* snippets_get_value(GuSnippets* sc, const gchar* term) {
 
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
         GdkEventKey* event) {
+    static GtkTextIter current, start;
+    static GuSnippetInfo* info = NULL;
+
     if (event->keyval != GDK_KEY_Tab && !ec->snippet_editing)
        return FALSE;
 
     if (ec->snippet_editing) {
+        if (event->keyval == GDK_KEY_Tab)
+            snippet_info_jump_to_next_placeholder(info, ec);
+        else if (event->keyval == GDK_KEY_ISO_Left_Tab
+                && event->state & GDK_SHIFT_MASK)
+            snippet_info_jump_to_prev_placeholder(info, ec);
+        return TRUE;
     } else {
-        GuSnippetInfo* info = NULL;
-        GtkTextIter current, start;
         gchar* word = NULL;
         gchar* snippet = NULL;
 
@@ -195,62 +202,50 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
             return FALSE;
         }
         info = snippets_parse(snippet);
+        snippet_info_initial_expand(info);
         gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
         gtk_text_buffer_insert(ec_sourcebuffer, &start, info->expanded, -1);
         gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
+        gtk_text_iter_backward_chars(&start, strlen(info->expanded));
+        info->start_offset = gtk_text_iter_get_offset(&start);
+        snippet_info_jump_to_next_placeholder(info, ec);
         g_free(word);
+        ec->snippet_editing = TRUE;
+        return TRUE;
     }
-    return TRUE;
+    return FALSE;
 }
 
 GuSnippetInfo* snippets_parse(char* snippet) {
     gint start, end;
     GError* err = NULL;
     gchar** results = NULL;
-    GRegex* holder1_regex = NULL;
-    GRegex* holder2_regex = NULL;
+    GRegex* holder_regex = NULL;
     GMatchInfo* match_info = NULL;
-    const gchar* holder1 = "\\$([0-9]*)";
-    const gchar* holder2 = "\\${([0-9]*):?([^}]*)}";
+    const gchar* holder = "\\${?([0-9]*):?([^}]*)}?";
 
     GuSnippetInfo* info = snippet_info_new(snippet);
 
-    if (!(holder1_regex = g_regex_new(holder1, G_REGEX_DOTALL, 0, &err))) {
+    if (!(holder_regex = g_regex_new(holder, G_REGEX_DOTALL, 0, &err))) {
         slog(L_ERROR, "g_regex_new(): %s\n", err->message);
         goto cleanup;
     }
-    g_regex_match(holder1_regex, snippet, 0, &match_info);
+    g_regex_match(holder_regex, snippet, 0, &match_info);
     while (g_match_info_matches(match_info)) {
         results = g_match_info_fetch_all(match_info);
         g_match_info_fetch_pos(match_info, 0, &start, &end);
-        snippet_info_append_holder(info, atoi(results[1]), start, end);
+        snippet_info_append_holder(info, atoi(results[1]), start, end -start, 
+                results[2]);
         g_match_info_next(match_info, NULL);
     }
     g_strfreev(results);
 
-    if (!(holder2_regex = g_regex_new(holder2, G_REGEX_DOTALL, 0, &err))) {
-        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
-        goto cleanup;
-    }
-    g_regex_match(holder2_regex, snippet, 0, &match_info);
-    while (g_match_info_matches(match_info)) {
-        results = g_match_info_fetch_all(match_info);
-        g_match_info_fetch_pos(match_info, 0, &start, &end);
-        int i = 0;
-        for (i = 0; results[i]; ++i);
-        if (i < 3) {
-            slog(L_ERROR, "invalid snippet");
-            goto cleanup;
-        }
-        snippet_info_append_holder(info, atoi(results[1]), start, end -start);
-        g_match_info_next(match_info, NULL);
-    }
-    g_strfreev(results);
+    info->einfo_sorted = g_list_copy(info->einfo);
+    info->einfo_sorted = g_list_sort(info->einfo_sorted, snippet_info_cmp);
 
 cleanup:
     if (err) g_error_free(err);
-    g_regex_unref(holder1_regex);
-    g_regex_unref(holder2_regex);
+    g_regex_unref(holder_regex);
     g_match_info_free(match_info);
     return info;
 }
@@ -259,93 +254,117 @@ GuSnippetInfo* snippet_info_new(gchar* snippet) {
     GuSnippetInfo* info = g_new0(GuSnippetInfo, 1);
     info->snippet = g_strdup(snippet);
     info->expanded = g_strdup(snippet);
+    info->einfo = NULL;
+    info->einfo_sorted = NULL;
     return info;
 }
 
 void snippet_info_free(GuSnippetInfo* info) {
-    GuSnippetInfoGroup* next = NULL;
-    GuSnippetInfoGroup* current = info->groups;
+    GList* current = g_list_first(info->einfo);
     while (current) {
-        next = current->next;
-        Tuple2* tnext = NULL;
-        Tuple2* cur = current->group;
-        while (cur) {
-            tnext = cur->next;
-            g_free(cur);
-            cur = tnext;
-        }
-        g_free(current);
-        current = next;
+        g_free(GU_SNIPPET_EXPAND_INFO(current->data)->text);
+        current = g_list_next(current);
     }
-    g_free(info->snippet);
+    g_list_free(info->einfo);
+    g_list_free(info->einfo_sorted);
+}
+
+void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
+    GuSnippetExpandInfo* einfo = NULL;
+    GtkTextIter start, current;
+    if (!info->current) {
+        if (GU_SNIPPET_EXPAND_INFO(info->einfo_unique->data)->group_number == 0)
+            info->current = g_list_next(info->einfo_unique);
+        else
+            info->current = info->einfo_unique;
+    } else {
+        info->current = g_list_next(info->current);
+    }
+    if (!info->current) return;
+    einfo = GU_SNIPPET_EXPAND_INFO(info->current->data);
+    gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &start,
+            info->start_offset + einfo->start);
+    current = start;
+    gtk_text_iter_forward_chars(&current, einfo->len);
+    gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
+    gtk_text_buffer_select_range(ec_sourcebuffer, &start, &current);
+}
+
+void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec) {
+    GuSnippetExpandInfo* einfo = NULL;
+    GtkTextIter start, current;
+    if (!info->current)
+        return;
+    else
+        info->current = g_list_previous(info->current);
+    einfo = GU_SNIPPET_EXPAND_INFO(info->current->data);
+    gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &start,
+            info->start_offset + einfo->start);
+    gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
+    current = start;
+    gtk_text_iter_forward_chars(&current, einfo->len);
+    gtk_text_buffer_select_range(ec_sourcebuffer, &start, &current);
 }
 
 void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
-        gint len) {
-    GuSnippetInfoGroup* current = info->groups;
-    GuSnippetInfoGroup* prev = NULL;
-    while (current) {
-        if (current->group_number == group)
-            break;
-        prev = current;
-        current = current->next;
-    }
-    /* Group already exists */
-    if (current) {
-        Tuple2* prev = NULL;
-        Tuple2* cur = current->group;
-        while (cur) {
-            prev = cur;
-            cur = cur->next;
-        }
-        prev->next = g_new0(Tuple2, 1);
-        cur = prev->next;
-        cur->first = (gpointer)start;
-        cur->second = (gpointer)len;
-    } else { /* Create new group */
-        if (!info->groups) {
-            info->groups = g_new0(GuSnippetInfoGroup, 1);
-            current = info->groups; 
-        } else {
-            prev->next = g_new0(GuSnippetInfoGroup, 1);
-            current = prev->next;
-        }
-        current->group_number = group;
-        current->group = g_new0(Tuple2, 1);
-        current->group->first = (gpointer)start;
-        current->group->second = (gpointer)len;
-    }
+        gint len, gchar* text) {
+    GuSnippetExpandInfo* einfo = g_new0(GuSnippetExpandInfo, 1);
+    *einfo = (GuSnippetExpandInfo){ group, start, len, g_strdup(text) };
+    info->einfo = g_list_append(info->einfo, einfo);
 }
 
-void snippet_info_expand(GuSnippetInfo* info, gint group, gchar* text) {
-    GError* err = NULL;
-    GRegex* holder1_regex = NULL;
-    GRegex* holder2_regex = NULL;
-    gchar* prev = NULL;
-    gchar* holder1 = g_strdup_printf("\\$%d", group);
-    gchar* holder2 = g_strdup_printf("\\${%d:?[^}]*}", group);
+void snippet_info_initial_expand(GuSnippetInfo* info) {
+    GHashTable* map = g_hash_table_new(NULL, NULL);
+    GList* current = g_list_first(info->einfo);
+    gint key = 0;
+    GuSnippetExpandInfo* value = NULL;
 
-    if (!(holder1_regex = g_regex_new(holder1, G_REGEX_DOTALL, 0, &err))) {
-        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
-        goto cleanup;
+    while (current) {
+        GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
+        if (!g_hash_table_lookup_extended(map, ((gpointer)einfo->group_number),
+                    (gpointer)&key, (gpointer)&value)) {
+            g_hash_table_insert(map, (gpointer)einfo->group_number, einfo);
+            info->einfo_unique = g_list_append(info->einfo_unique, einfo);
+        }
+        current = g_list_next(current);
     }
-    if (!(holder2_regex = g_regex_new(holder2, G_REGEX_DOTALL, 0, &err))) {
-        slog(L_ERROR, "g_regex_new(): %s\n", err->message);
-        goto cleanup;
+    info->einfo_unique = g_list_sort(info->einfo_unique, snippet_info_cmp);
+
+    current = g_list_first(info->einfo);
+    info->offset = 0;
+    while (current) {
+        GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
+        g_hash_table_lookup_extended(map, (gpointer)einfo->group_number,
+                (gpointer)&key, (gpointer)&value);
+        snippet_info_sub(info, einfo, value);
+        current = g_list_next(current);
     }
 
+    g_hash_table_destroy(map);
+}
+
+void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
+        GuSnippetExpandInfo* source) {
+    gchar* first = NULL;
+    gchar* third = NULL;
+    gchar* new = NULL;
+
+    target->start += info->offset;
+
+    first = g_strndup(info->expanded, target->start);
+    third = g_strdup(info->expanded + target->start + target->len);
+    new = g_strconcat(first, source->text, third, NULL);
     g_free(info->expanded);
-    info->expanded = g_regex_replace(holder1_regex, info->snippet, -1, 0, text,
-            0, 0);
-    prev = info->expanded;
-    info->expanded = g_regex_replace(holder2_regex, info->expanded, -1, 0,
-            text, 0, 0);
-    g_free(prev);
+    info->expanded = new;
 
-cleanup:
-    if (err) g_error_free(err);
-    g_regex_unref(holder1_regex);
-    g_regex_unref(holder2_regex);
-    g_free(holder1);
-    g_free(holder2);
+    info->offset += strlen(source->text) - target->len;
+    target->len = strlen(source->text);
+    if (source->text != target->text)
+        g_free(target->text);
+    target->text = g_strdup(source->text);
+}
+
+gint snippet_info_cmp(gconstpointer a, gconstpointer b) {
+    return ((GU_SNIPPET_EXPAND_INFO(a)->group_number <
+                GU_SNIPPET_EXPAND_INFO(b)->group_number)? -1: 1);
 }

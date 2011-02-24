@@ -58,7 +58,6 @@ const gchar style[][3][20] = {
 };
 
 GuEditor* editor_init(GuMotion* mc) {
-
     GuEditor* ec = g_new0(GuEditor, 1);
 
     /* File related member initialization */

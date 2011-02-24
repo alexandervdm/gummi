@@ -79,8 +79,8 @@ void motion_stop_timer(GuMotion* mc) {
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     L_F_DEBUG;
     motion_stop_timer((GuMotion*)user);
-    //if (snippets_key_press_cb(gummi->snippets, gummi->editor, event))
-    //    return TRUE;
+    if (snippets_key_press_cb(gummi->snippets, gummi->editor, event))
+        return TRUE;
     return FALSE;
 }
 

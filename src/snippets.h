@@ -43,16 +43,24 @@ typedef struct _GuSnippets {
     slist* head;
 } GuSnippets;
 
-typedef struct _GuSnippetInfoGroup {
-    struct _GuSnippetInfoGroup* next;
+typedef struct _GuSnippetExpandInfo {
     gint group_number;
-    Tuple2* group;
-} GuSnippetInfoGroup;
+    gint start;
+    gint len;
+    gchar* text;
+} GuSnippetExpandInfo;
+
+#define GU_SNIPPET_EXPAND_INFO(x) ((GuSnippetExpandInfo*)x)
 
 typedef struct _GuSnippetInfo {
     gchar* snippet;
     gchar* expanded;
-    GuSnippetInfoGroup* groups;
+    gint offset;
+    gint start_offset;
+    GList* current;
+    GList* einfo;   /* A list of GuSnippetExpandInfo */
+    GList* einfo_unique;
+    GList* einfo_sorted;
 } GuSnippetInfo;
 
 GuSnippets* snippets_init(const gchar* filename);
@@ -68,7 +76,12 @@ GuSnippetInfo* snippets_parse(char* snippet);
 GuSnippetInfo* snippet_info_new(gchar* snippet);
 void snippet_info_free(GuSnippetInfo* info);
 void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
-        gint len);
-void snippet_info_expand(GuSnippetInfo* info, gint group, gchar* text);
+        gint len, gchar* text);
+void snippet_info_initial_expand(GuSnippetInfo* info);
+void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
+        GuSnippetExpandInfo* source);
+void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
+gint snippet_info_cmp(gconstpointer a, gconstpointer b);
 
 #endif /* __GUMMI_SNIPPETS__ */

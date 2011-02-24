@@ -32,7 +32,7 @@
 #include "utils.h"
 
 Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl) {//, GuSnippets* snip) {
+        GuTemplate* tpl, GuSnippets* snip) {
     Gummi* g = g_new0(Gummi, 1);
     g->editors = eds;
     g->editor = g_list_first(eds)->data;
@@ -40,7 +40,7 @@ Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
     g->latex = latex;
     g->biblio = bib;
     g->templ = tpl;
-    //g->snippets = snip;
+    g->snippets = snip;
     return g;
 }
 

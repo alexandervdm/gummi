@@ -103,11 +103,11 @@ typedef struct _Gummi {
     GuLatex* latex;
     GuBiblio* biblio;
     GuTemplate* templ;
-    //GuSnippets* snippets;
+    GuSnippets* snippets;
 } Gummi;
 
 Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl);//, GuSnippets* snip);
+        GuTemplate* tpl, GuSnippets* snip);
 void gummi_new_environment(Gummi* gc, const gchar* filename);
 
 #endif /* GUMMI_ENVIRONMENT_H */

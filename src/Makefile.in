@@ -46,7 +46,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
-	editor.$(OBJEXT) environment.$(OBJEXT) gui-import.$(OBJEXT) \
+	editor.$(OBJEXT) environment.$(OBJEXT) \
+	gui-editortabs.$(OBJEXT) gui-import.$(OBJEXT) \
 	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
 	gui-search.$(OBJEXT) importer.$(OBJEXT) iofunctions.$(OBJEXT) \
 	latex.$(OBJEXT) motion.$(OBJEXT) snippets.$(OBJEXT) \
@@ -197,6 +198,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
+		gui/gui-editortabs.c gui/gui-editortabs.h \
 		gui/gui-import.c gui/gui-import.h \
 		gui/gui-main.c gui/gui-main.h \
 		gui/gui-prefs.c gui/gui-prefs.h \
@@ -297,6 +299,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configfile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-editortabs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-import.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
@@ -325,6 +328,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+gui-editortabs.o: gui/gui-editortabs.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-editortabs.o -MD -MP -MF $(DEPDIR)/gui-editortabs.Tpo -c -o gui-editortabs.o `test -f 'gui/gui-editortabs.c' || echo '$(srcdir)/'`gui/gui-editortabs.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-editortabs.Tpo $(DEPDIR)/gui-editortabs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-editortabs.c' object='gui-editortabs.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-editortabs.o `test -f 'gui/gui-editortabs.c' || echo '$(srcdir)/'`gui/gui-editortabs.c
+
+gui-editortabs.obj: gui/gui-editortabs.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-editortabs.obj -MD -MP -MF $(DEPDIR)/gui-editortabs.Tpo -c -o gui-editortabs.obj `if test -f 'gui/gui-editortabs.c'; then $(CYGPATH_W) 'gui/gui-editortabs.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-editortabs.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-editortabs.Tpo $(DEPDIR)/gui-editortabs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-editortabs.c' object='gui-editortabs.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-editortabs.obj `if test -f 'gui/gui-editortabs.c'; then $(CYGPATH_W) 'gui/gui-editortabs.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-editortabs.c'; fi`
 
 gui-import.o: gui/gui-import.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-import.o -MD -MP -MF $(DEPDIR)/gui-import.Tpo -c -o gui-import.o `test -f 'gui/gui-import.c' || echo '$(srcdir)/'`gui/gui-import.c
