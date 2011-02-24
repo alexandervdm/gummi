@@ -27,8 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_GUI_EDITORTABS_H
-#define GUMMI_GUI_EDITORTABS_H
+#ifndef __GUMMI_GUI_EDITORTABS_H__
+#define __GUMMI_GUI_EDITORTABS_H__
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -45,6 +45,6 @@ typedef struct _GuEditortabsGui {
 
 
 GuEditortabsGui* editortabsgui_init(GtkBuilder* builder);
-GuEditor* get_active_editor();
+GuEditor* get_active_editor(void);
 
-#endif /* GUMMI_GUI_EDITORTABS_H */
+#endif /* __GUMMI_GUI_EDITORTABS_H__ */

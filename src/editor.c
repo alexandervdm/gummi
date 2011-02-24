@@ -81,7 +81,6 @@ GuEditor* editor_init(GuMotion* mc) {
     ec->editortags = gtk_text_buffer_get_tag_table(ec_sourcebuffer);
     ec->replace_activated = FALSE;
     ec->term = NULL;
-    ec->snippet_editing = FALSE;
     
     gtk_source_view_set_tab_width(ec->sourceview,
             atoi(config_get_value("tabwidth")));

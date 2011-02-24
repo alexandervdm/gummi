@@ -68,7 +68,6 @@ typedef struct _GuEditor {
     gboolean backwards;
     gboolean wholeword;
     gboolean matchcase;
-    gboolean snippet_editing;
     gint sigid[3];
 } GuEditor;
 

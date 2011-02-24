@@ -53,6 +53,13 @@ typedef struct _Tuple2 {
     gpointer second;
 } Tuple2;
 
+typedef struct _Tuple3 {
+    struct _Tuple3* next;
+    gpointer first;
+    gpointer second;
+    gpointer third;
+} Tuple3;
+
 typedef struct _slist {
     struct _slist* next;
     gchar* first;

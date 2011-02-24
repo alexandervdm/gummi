@@ -86,23 +86,30 @@ int main (int argc, char *argv[]) {
     gtk_builder_add_from_file(builder, DATADIR"/gummi.glade", NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
 
-    /* initialize classes */
+    /* Initialize classes */
     //gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
     //                              "snippets", NULL);
+
+    /* Initialize Gummi */
     gchar* snippetsname = DATADIR"/snippets";
     GList* editors = NULL;
     GuMotion* motion = motion_init();
     GuLatex* latex = latex_init(); 
     GuBiblio* biblio = biblio_init(builder);
     GuTemplate* templ = template_init(builder);
-    
     GuEditor* editor = editor_init(motion);
     editors = g_list_append(editors, editor);
     GuSnippets* snippets = snippets_init(snippetsname);
+    gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
     //g_free(snippetsname);
 
-    gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
+    /* Initialize GUI */
     gui = gui_init(builder);
+
+    /* Install acceleration group to mainwindow */
+    gtk_window_add_accel_group(GTK_WINDOW(gui->mainwindow),
+            snippets->accel_group);
+
 
     slog_set_gui_parent(gui->mainwindow);
 
