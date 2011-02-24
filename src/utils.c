@@ -215,14 +215,19 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
     return tstr;
 }
 
-slist* slist_find_index_of(slist* head, const gchar* term,
+slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
         gboolean create_if_not_exists) {
     slist* current = head;
     slist* prev = 0;
 
     while (current) {
-        if (0 == strcmp(current->first, term))
-            return current;
+        if (first_n) {
+            if (0 == strncmp(current->first, term, strlen(term)))
+                return current;
+        } else {
+            if (0 == strcmp(current->first, term))
+                return current;
+        }
         prev = current;
         current = current->next;
     }

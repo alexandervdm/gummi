@@ -67,7 +67,7 @@ gboolean utils_path_exists(const gchar* path);
 gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
 Tuple2 utils_popen_r(const gchar* cmd);
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
-slist* slist_find_index_of(slist* head, const gchar* term,
+slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
         gboolean create_if_not_exists);
 
 #endif /* __GUMMI_UTILS__ */

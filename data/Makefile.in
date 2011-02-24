@@ -68,10 +68,11 @@ am__base_list = \
 man1dir = $(mandir)/man1
 am__installdirs = "$(DESTDIR)$(man1dir)" "$(DESTDIR)$(desktopdir)" \
 	"$(DESTDIR)$(gladedir)" "$(DESTDIR)$(imagesdir)" \
-	"$(DESTDIR)$(pixmapsdir)"
+	"$(DESTDIR)$(pixmapsdir)" "$(DESTDIR)$(snippetsdir)"
 NROFF = nroff
 MANS = $(man_MANS)
-DATA = $(desktop_DATA) $(glade_DATA) $(images_DATA) $(pixmaps_DATA)
+DATA = $(desktop_DATA) $(glade_DATA) $(images_DATA) $(pixmaps_DATA) \
+	$(snippets_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
@@ -199,11 +200,14 @@ imagesdir = $(datadir)/$(PACKAGE)
 images_DATA = $(PACKAGE).png icon.png
 gladedir = $(datadir)/$(PACKAGE)
 glade_DATA = gummi.glade prefs.glade
+snippetsdir = $(datadir)/$(PACKAGE)
+snippets_DATA = snippets
 EXTRA_DIST = $(man_MANS) \
 	     $(desktop_DATA).in \
 	     $(pixmaps_DATA) \
 	     $(images_DATA) \
-	     $(glade_DATA)
+	     $(glade_DATA) \
+	     $(snippets_DATA)
 
 all: all-am
 
@@ -356,6 +360,26 @@ uninstall-pixmapsDATA:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(pixmapsdir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(pixmapsdir)" && rm -f $$files
+install-snippetsDATA: $(snippets_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(snippetsdir)" || $(MKDIR_P) "$(DESTDIR)$(snippetsdir)"
+	@list='$(snippets_DATA)'; test -n "$(snippetsdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(snippetsdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(snippetsdir)" || exit $$?; \
+	done
+
+uninstall-snippetsDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(snippets_DATA)'; test -n "$(snippetsdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(snippetsdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(snippetsdir)" && rm -f $$files
 tags: TAGS
 TAGS:
 
@@ -410,7 +434,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(MANS) $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(man1dir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gladedir)" "$(DESTDIR)$(imagesdir)" "$(DESTDIR)$(pixmapsdir)"; do \
+	for dir in "$(DESTDIR)$(man1dir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gladedir)" "$(DESTDIR)$(imagesdir)" "$(DESTDIR)$(pixmapsdir)" "$(DESTDIR)$(snippetsdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -459,7 +483,8 @@ info: info-am
 info-am:
 
 install-data-am: install-desktopDATA install-gladeDATA \
-	install-imagesDATA install-man install-pixmapsDATA
+	install-imagesDATA install-man install-pixmapsDATA \
+	install-snippetsDATA
 
 install-dvi: install-dvi-am
 
@@ -504,7 +529,8 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-desktopDATA uninstall-gladeDATA \
-	uninstall-imagesDATA uninstall-man uninstall-pixmapsDATA
+	uninstall-imagesDATA uninstall-man uninstall-pixmapsDATA \
+	uninstall-snippetsDATA
 
 uninstall-man: uninstall-man1
 
@@ -517,12 +543,12 @@ uninstall-man: uninstall-man1
 	install-exec-am install-gladeDATA install-html install-html-am \
 	install-imagesDATA install-info install-info-am install-man \
 	install-man1 install-pdf install-pdf-am install-pixmapsDATA \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
+	install-ps install-ps-am install-snippetsDATA install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am uninstall uninstall-am uninstall-desktopDATA \
 	uninstall-gladeDATA uninstall-imagesDATA uninstall-man \
-	uninstall-man1 uninstall-pixmapsDATA
+	uninstall-man1 uninstall-pixmapsDATA uninstall-snippetsDATA
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

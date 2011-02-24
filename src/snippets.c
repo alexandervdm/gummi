@@ -78,7 +78,6 @@ void snippets_load(GuSnippets* sc) {
 
     if (!(fh = fopen(sc->filename, "r"))) {
         slog(L_ERROR, "can't find snippets file, reseting to default\n");
-        snippets_set_default(sc);
         return snippets_load(sc);
     }
 
@@ -167,7 +166,9 @@ void snippets_clean_up(GuSnippets* sc) {
 }
 
 gchar* snippets_get_value(GuSnippets* sc, const gchar* term) {
-    slist* index = slist_find_index_of(sc->head, term, FALSE);
+    gchar* key = g_strdup_printf("%s,", term);
+    slist* index = slist_find_index_of(sc->head, key, TRUE, FALSE);
+    g_free(key);
     return (index)? index->second: NULL;
 }
 
@@ -202,6 +203,9 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
             g_free(word);
             return FALSE;
         }
+        /* Free previous info */
+        if (sc->info) snippet_info_free(sc->info, ec);
+
         sc->info = snippets_parse(snippet);
         sc->info->start_offset = gtk_text_iter_get_offset(&start);
 
@@ -275,7 +279,8 @@ GuSnippetInfo* snippet_info_new(gchar* snippet) {
     return info;
 }
 
-void snippet_info_free(GuSnippetInfo* info) {
+void snippet_info_free(GuSnippetInfo* info, GuEditor* ec) {
+    snippet_info_remove_marks(info, ec);
     GList* current = g_list_first(info->einfo);
     while (current) {
         g_free(GU_SNIPPET_EXPAND_INFO(current->data)->text);
@@ -348,6 +353,17 @@ void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec) {
         einfo->right_mark = gtk_text_mark_new(NULL, FALSE);
         gtk_text_buffer_add_mark(ec_sourcebuffer, einfo->left_mark, &start);
         gtk_text_buffer_add_mark(ec_sourcebuffer, einfo->right_mark, &end);
+        current = g_list_next(current);
+    }
+}
+
+void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec) {
+    GList* current = g_list_first(info->einfo);
+
+    while (current) {
+        GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
+        gtk_text_buffer_delete_mark(ec_sourcebuffer, einfo->left_mark);
+        gtk_text_buffer_delete_mark(ec_sourcebuffer, einfo->right_mark);
         current = g_list_next(current);
     }
 }

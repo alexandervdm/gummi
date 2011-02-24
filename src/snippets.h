@@ -78,13 +78,14 @@ gboolean snippets_key_press_after_cb(GuSnippets* sc, GuEditor* ec,
         GdkEventKey* event);
 GuSnippetInfo* snippets_parse(char* snippet);
 GuSnippetInfo* snippet_info_new(gchar* snippet);
-void snippet_info_free(GuSnippetInfo* info);
+void snippet_info_free(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
         gint len, gchar* text);
 void snippet_info_initial_expand(GuSnippetInfo* info);
 void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
         GuSnippetExpandInfo* source);
 void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);
