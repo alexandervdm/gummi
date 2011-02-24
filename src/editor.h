@@ -69,7 +69,7 @@ typedef struct _GuEditor {
     gboolean wholeword;
     gboolean matchcase;
     gboolean snippet_editing;
-    gint sigid[2];
+    gint sigid[3];
 } GuEditor;
 
 GuEditor* editor_init(GuMotion* mc);

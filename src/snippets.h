@@ -38,11 +38,6 @@
 #include "editor.h"
 #include "utils.h"
 
-typedef struct _GuSnippets {
-    gchar* filename;
-    slist* head;
-} GuSnippets;
-
 typedef struct _GuSnippetExpandInfo {
     gint group_number;
     GtkTextMark* right_mark;
@@ -64,14 +59,21 @@ typedef struct _GuSnippetInfo {
     GList* einfo_sorted;
 } GuSnippetInfo;
 
-GuSnippets* snippets_init(const gchar* filename);
+typedef struct _GuSnippets {
+    gchar* filename;
+    slist* head;
+    GuSnippetInfo* info;
+} GuSnippets;
 
+GuSnippets* snippets_init(const gchar* filename);
 void snippets_set_default(GuSnippets* sc);
 void snippets_load(GuSnippets* sc);
 void snippets_save(GuSnippets* sc);
 void snippets_clean_up(GuSnippets* sc);
 gchar* snippets_get_value(GuSnippets* sc, const gchar* term);
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec,
+        GdkEventKey* event);
+gboolean snippets_key_press_after_cb(GuSnippets* sc, GuEditor* ec,
         GdkEventKey* event);
 GuSnippetInfo* snippets_parse(char* snippet);
 GuSnippetInfo* snippet_info_new(gchar* snippet);
@@ -84,6 +86,7 @@ void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
 void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_jump_to_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);
 gint snippet_info_cmp(gconstpointer a, gconstpointer b);
 
 #endif /* __GUMMI_SNIPPETS__ */

@@ -87,5 +87,7 @@ gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     L_F_DEBUG;
     motion_start_timer((GuMotion*)user);
+    if (snippets_key_press_after_cb(gummi->snippets, gummi->editor, event))
+        return TRUE;
     return FALSE;
 }
