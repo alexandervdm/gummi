@@ -55,9 +55,13 @@ typedef struct _GuSnippetInfo {
     gint start_offset;
     gint offset;
     GList* current;
-    GList* einfo;   /* A list of GuSnippetExpandInfo */
-    GList* einfo_unique;
+    GList* einfo;   /* A list of GuSnippetExpandInfo sorted by start pos */
+    GList* einfo_unique; /* A list of unique group einfo */
     GList* einfo_sorted;
+
+    /* Constants */
+    gchar* sel_text;
+    GtkTextMark sel_start;
 } GuSnippetInfo;
 
 typedef struct _GuSnippets {
@@ -88,11 +92,10 @@ GuSnippetInfo* snippet_info_new(gchar* snippet);
 void snippet_info_free(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
         gint len, gchar* text);
-void snippet_info_initial_expand(GuSnippetInfo* info);
-void snippet_info_sub(GuSnippetInfo* info, GuSnippetExpandInfo* target,
-        GuSnippetExpandInfo* source);
 void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_initial_expand(GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_replace_constants(GuSnippetInfo* info, GuEditor* ec);
 gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_goto_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);
