@@ -45,7 +45,7 @@ Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
 }
 
 void gummi_new_environment(Gummi* gc, const gchar* filename) {
-    editor_update_fileinfo(gc->editor, filename);
+    editor_fileinfo_update(gc->editor, filename);
 
     slog(L_INFO, "\n");
     slog(L_INFO, "Environment created for:\n");

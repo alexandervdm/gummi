@@ -110,12 +110,77 @@ GuEditor* editor_init(GuMotion* mc) {
 }
 
 void editor_destroy(GuEditor* ec) {
-    gchar* auxfile = NULL;
-    gchar* logfile = NULL;
-    int i = 0;
+    gint i = 0;
 
     for (i = 0; i < 2; ++i)
         g_signal_handler_disconnect(ec->sourceview, ec->sigid[i]);
+
+    editor_fileinfo_cleanup(ec);
+}
+
+gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
+    g_free(ec->bibfile);
+
+    if (ec->filename && !g_path_is_absolute(filename)) {
+        gchar* dirname = g_path_get_dirname(ec->filename);
+        ec->bibfile = g_build_filename(dirname, filename, NULL);
+        g_free(dirname);
+    } else
+        ec->bibfile = g_strdup(filename);
+    return utils_path_exists(ec->bibfile);
+}
+
+/* FileInfo:
+ * When a TeX document includes materials from other files(image, documents,
+ * bibliography ... etc), pdflatex will try to find those files under the
+ * working directory if the include path is not absolute.
+ * Before Gummi svn505, gummi copies the TeX file to a temporarily directory
+ * and compile there, because of this, the included files can't be located if
+ * the include path is not absolute. In svn505 we copy the TeX file to the
+ * same directory as the original TeX document but named it as '.FILENAME.swp'.
+ * Since pdflatex refuses to compile TeX files with '.' prefixed, we have to
+ * set the environment variable 'openout_any=a'.
+ *
+ * For a newly created document, all files including the TeX file is stored
+ * under the temp directory. For files that are already saved, only the
+ * workfile is saved under DIRNAME(FILENAME). Other compilation-related files
+ * are located in the temp directory.
+ *
+ * P.S. pdflatex will automatically strip the suffix, so for a file named
+ * FILE.tex under /absolute/path/:
+ *
+ * filename = /absolute/path/FILE.tex
+ * workfile = /absolute/path/.FILE.tex.swp
+ * pdffile = /tmp/.FILE.tex.pdf
+ */
+void editor_fileinfo_update(GuEditor* ec, const gchar* filename) {
+
+    if (ec->workfd != -1)
+        editor_fileinfo_cleanup(ec);
+
+    ec->fdname = g_build_filename(ec->tmpdir, "gummi_XXXXXX", NULL);
+    ec->workfd = g_mkstemp(ec->fdname); 
+
+    if (filename) {
+        gchar* basename = g_path_get_basename(filename);
+        gchar* dirname = g_path_get_dirname(filename);
+        ec->filename = g_strdup(filename);
+        ec->workfile = g_strdup_printf("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
+                                       basename);
+        ec->pdffile =  g_strdup_printf("%s%c.%s.pdf", ec->tmpdir,
+                                       G_DIR_SEPARATOR, basename);
+        g_free(basename);
+        g_free(dirname);
+    } else {
+        ec->workfile = g_strdup(ec->fdname);
+        ec->pdffile =  g_strdup_printf("%s.pdf", ec->fdname);
+    }
+}
+
+void editor_fileinfo_cleanup(GuEditor* ec) {
+    gchar* auxfile = NULL;
+    gchar* logfile = NULL;
+    int i = 0;
 
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname(ec->filename);
@@ -155,65 +220,6 @@ void editor_destroy(GuEditor* ec) {
     ec->filename = NULL;
     ec->workfile = NULL;
     ec->pdffile = NULL;
-}
-
-gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
-    g_free(ec->bibfile);
-
-    if (ec->filename && !g_path_is_absolute(filename)) {
-        gchar* dirname = g_path_get_dirname(ec->filename);
-        ec->bibfile = g_build_filename(dirname, filename, NULL);
-        g_free(dirname);
-    } else
-        ec->bibfile = g_strdup(filename);
-    return utils_path_exists(ec->bibfile);
-}
-
-/* FileInfo:
- * When a TeX document includes materials from other files(image, documents,
- * bibliography ... etc), pdflatex will try to find those files under the
- * working directory if the include path is not absolute.
- * Before Gummi svn505, gummi copies the TeX file to a temporarily directory
- * and compile there, because of this, the included files can't be located if
- * the include path is not absolute. In svn505 we copy the TeX file to the
- * same directory as the original TeX document but named it as '.FILENAME.swp'.
- * Since pdflatex refuses to compile TeX files with '.' prefixed, we have to
- * set the environment variable 'openout_any=a'.
- *
- * For a newly created document, all files including the TeX file is stored
- * under the temp directory. For files that are already saved, only the
- * workfile is saved under DIRNAME(FILENAME). Other compilation-related files
- * are located in the temp directory.
- *
- * P.S. pdflatex will automatically strip the suffix, so for a file named
- * FILE.tex under /absolute/path/:
- *
- * filename = /absolute/path/FILE.tex
- * workfile = /absolute/path/.FILE.tex.swp
- * pdffile = /tmp/.FILE.tex.pdf
- */
-void editor_update_fileinfo(GuEditor* ec, const gchar* filename) {
-
-    if (ec->workfd != -1)
-        editor_destroy(ec);
-
-    ec->fdname = g_build_filename(ec->tmpdir, "gummi_XXXXXX", NULL);
-    ec->workfd = g_mkstemp(ec->fdname); 
-
-    if (filename) {
-        gchar* basename = g_path_get_basename(filename);
-        gchar* dirname = g_path_get_dirname(filename);
-        ec->filename = g_strdup(filename);
-        ec->workfile = g_strdup_printf("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
-                                       basename);
-        ec->pdffile =  g_strdup_printf("%s%c.%s.pdf", ec->tmpdir,
-                                       G_DIR_SEPARATOR, basename);
-        g_free(basename);
-        g_free(dirname);
-    } else {
-        ec->workfile = g_strdup(ec->fdname);
-        ec->pdffile =  g_strdup_printf("%s.pdf", ec->fdname);
-    }
 }
 
 void editor_sourceview_config(GuEditor* ec) {
