@@ -49,10 +49,10 @@ am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	editor.$(OBJEXT) environment.$(OBJEXT) \
 	gui-editortabs.$(OBJEXT) gui-import.$(OBJEXT) \
 	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
-	gui-search.$(OBJEXT) importer.$(OBJEXT) iofunctions.$(OBJEXT) \
-	latex.$(OBJEXT) motion.$(OBJEXT) snippets.$(OBJEXT) \
-	template.$(OBJEXT) updatecheck.$(OBJEXT) utils.$(OBJEXT) \
-	main.$(OBJEXT)
+	gui-search.$(OBJEXT) gui-snippets.$(OBJEXT) importer.$(OBJEXT) \
+	iofunctions.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
+	snippets.$(OBJEXT) template.$(OBJEXT) updatecheck.$(OBJEXT) \
+	utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -204,6 +204,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-prefs.c gui/gui-prefs.h \
 		gui/gui-preview.c gui/gui-preview.h \
 		gui/gui-search.c gui/gui-search.h \
+		gui/gui-snippets.c gui/gui-snippets.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \
@@ -305,6 +306,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-preview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-snippets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iofunctions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/latex.Po@am__quote@
@@ -412,6 +414,20 @@ gui-search.obj: gui/gui-search.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-search.c' object='gui-search.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-search.obj `if test -f 'gui/gui-search.c'; then $(CYGPATH_W) 'gui/gui-search.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-search.c'; fi`
+
+gui-snippets.o: gui/gui-snippets.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-snippets.o -MD -MP -MF $(DEPDIR)/gui-snippets.Tpo -c -o gui-snippets.o `test -f 'gui/gui-snippets.c' || echo '$(srcdir)/'`gui/gui-snippets.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-snippets.Tpo $(DEPDIR)/gui-snippets.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-snippets.c' object='gui-snippets.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-snippets.o `test -f 'gui/gui-snippets.c' || echo '$(srcdir)/'`gui/gui-snippets.c
+
+gui-snippets.obj: gui/gui-snippets.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-snippets.obj -MD -MP -MF $(DEPDIR)/gui-snippets.Tpo -c -o gui-snippets.obj `if test -f 'gui/gui-snippets.c'; then $(CYGPATH_W) 'gui/gui-snippets.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-snippets.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-snippets.Tpo $(DEPDIR)/gui-snippets.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-snippets.c' object='gui-snippets.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-snippets.obj `if test -f 'gui/gui-snippets.c'; then $(CYGPATH_W) 'gui/gui-snippets.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-snippets.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

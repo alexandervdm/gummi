@@ -34,11 +34,12 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "gui-editortabs.h"
 #include "gui-import.h"
 #include "gui-prefs.h"
 #include "gui-preview.h"
 #include "gui-search.h"
-#include "gui-editortabs.h"
+#include "gui-snippets.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
@@ -46,11 +47,12 @@
 #define g_e_view GTK_TEXT_VIEW(gummi->editor->sourceview)
 
 typedef struct _GummiGui {
-    GuPrefsGui* prefsgui;
-    GuSearchGui* searchgui;
-    GuImportGui* importgui;
-    GuPreviewGui* previewgui;
     GuEditortabsGui* editortabsgui;
+    GuImportGui* importgui;
+    GuPrefsGui* prefsgui;
+    GuPreviewGui* previewgui;
+    GuSearchGui* searchgui;
+    GuSnippetsGui* snippetsgui;
 
     GtkWidget *mainwindow;
     GtkTextBuffer *errorbuff;

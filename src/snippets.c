@@ -229,6 +229,7 @@ void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
 void snippets_deactivate(GuSnippets* sc, GuEditor* ec) {
     sc->activated = FALSE;
     snippet_info_free(sc->info, ec);
+    printf("deactivated\n");
 }
 
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {

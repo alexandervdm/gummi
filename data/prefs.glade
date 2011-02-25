@@ -55,13 +55,16 @@
   <object class="GtkWindow" id="prefwindow">
     <property name="title" translatable="yes">Gummi Preferences</property>
     <property name="resizable">False</property>
-    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
     <property name="icon">icon.png</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
     <signal name="delete_event" handler="on_prefs_close_clicked"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkNotebook" id="notebook1">
             <property name="visible">True</property>
@@ -72,10 +75,12 @@
               <object class="GtkVBox" id="top_viewbox">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="box_textwrapping">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label4">
@@ -96,6 +101,7 @@
                     <child>
                       <object class="GtkVBox" id="vbox6">
                         <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkHBox" id="hbox17">
@@ -180,6 +186,7 @@
                 <child>
                   <object class="GtkVBox" id="box_linenumbers">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label5">
@@ -241,6 +248,7 @@
                 <child>
                   <object class="GtkVBox" id="box_highlighting">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label6">
@@ -314,10 +322,12 @@
               <object class="GtkVBox" id="top_editorbox">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="box_tabstops">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label15">
@@ -434,6 +444,7 @@
                 <child>
                   <object class="GtkVBox" id="box_indent">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label17">
@@ -493,8 +504,70 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkVBox" id="box_snippets">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="label36">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Snippets</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="padding">5</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox7">
+                        <property name="visible">True</property>
+                        <child>
+                          <object class="GtkLabel" id="label37">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">   </property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="configure_snippets">
+                            <property name="label" translatable="yes">Configure snippets</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="xalign">0.49000000953674316</property>
+                            <signal name="clicked" handler="on_configure_snippets_clicked"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkVBox" id="box_filesaving">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label10">
@@ -586,11 +659,8 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -611,10 +681,12 @@
               <object class="GtkVBox" id="top_fontcolorbox">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="box_font">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label12">
@@ -674,6 +746,7 @@
                 <child>
                   <object class="GtkVBox" id="vbox5">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="label34">
                         <property name="visible">True</property>
@@ -693,6 +766,7 @@
                     <child>
                       <object class="GtkHBox" id="hbox4">
                         <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="label35">
                             <property name="visible">True</property>
@@ -793,10 +867,12 @@
               <object class="GtkVBox" id="top_miscbox">
                 <property name="visible">True</property>
                 <property name="border_width">12</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="box_typesetter">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label8">
@@ -951,6 +1027,7 @@
                 <child>
                   <object class="GtkVBox" id="box_spellcheck">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label9">
@@ -1013,12 +1090,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox2">
+                  <object class="GtkVBox" id="box_pdfcompile">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">3</property>
                     <child>
                       <object class="GtkVBox" id="box_compile">
                         <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkLabel" id="label13">
@@ -1118,18 +1197,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox4">
-                    <property name="visible">True</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="position">3</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="box_warnings">
+                  <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="spacing">3</property>
                     <child>

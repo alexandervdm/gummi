@@ -1,9 +1,6 @@
 # \begin{}...\end{}
 snippet begin,
-	\begin{${1:env}}
-		${2}
-	\end{${1}}
-	$0
+	Basename: ${1:$BASENAME} $0
 # Tabular
 snippet tab,
 	\begin{${1:tabular}}{${2:c}}
@@ -63,43 +60,43 @@ snippet spl,
 # Part
 snippet part,
 	\part{${1:part name}} % (fold)
-	\label{prt:${2:$1}}
+	\label{prt:${2}}
 	${3}
 	% part $2 (end)
 # Chapter
 snippet cha,
 	\chapter{${1:chapter name}} % (fold)
-	\label{cha:${2:$1}}
+	\label{cha:${2}}
 	${3}
 	% chapter $2 (end)
 # Section
 snippet sec,
 	\section{${1:section name}} % (fold)
-	\label{sec:${2:$1}}
+	\label{sec:${2}}
 	${3}
 	% section $2 (end)
 # Sub Section
 snippet sub,
 	\subsection{${1:subsection name}} % (fold)
-	\label{sub:${2:1}}
+	\label{sub:${2}}
 	${3}
 	% subsection $2 (end)
 # Sub Sub Section
 snippet subs,
 	\subsubsection{${1:subsubsection name}} % (fold)
-	\label{ssub:${2:$1}}
+	\label{ssub:${2}}
 	${3}
 	% subsubsection $2 (end)
 # Paragraph
 snippet par,
 	\paragraph{${1:paragraph name}} % (fold)
-	\label{par:${2:$1}}
+	\label{par:${2}}
 	${3}
 	% paragraph $2 (end)
 # Sub Paragraph
 snippet subp,
 	\subparagraph{${1:subparagraph name}} % (fold)
-	\label{subp:${2:$1}}
+	\label{subp:${2}}
 	${3}
 	% subparagraph $2 (end)
 snippet itd,
@@ -114,7 +111,15 @@ snippet section,
 	${1:Section}~\ref{${2:sec:}}${3}
 snippet page,
 	${1:page}~\pageref{${2}}${3}
-snippet gpl,
+snippet cm,<Ctrl>k
+	<test>${1:$SELECTED_TEXT}</test>
+snippet fn,
+	Basename: ${1:$BASENAME}
+snippet bn,
+	Basename: ${1:$BASENAME} WTF
+snippet none,
+	noGroup
+snippet gpl,<Ctrl>j
 	%
 	% ${1:<filename>}
 	% This file is part of ${2:<program name>}

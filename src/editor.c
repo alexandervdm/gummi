@@ -70,8 +70,8 @@ GuEditor* editor_init(GuMotion* mc) {
     ec->tmpdir = g_strdup(g_get_tmp_dir());
 
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
-    GtkSourceLanguage* lang = gtk_source_language_manager_get_language
-                                                        (manager, "latex");
+    GtkSourceLanguage* lang = gtk_source_language_manager_get_language(manager,
+            "latex");
     ec->sourcebuffer = gtk_source_buffer_new_with_language(lang);
     ec->sourceview =
         GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(ec->sourcebuffer));

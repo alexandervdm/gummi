@@ -65,7 +65,7 @@ typedef struct _GuPrefsGui {
     GtkHBox* commandbox;
 } GuPrefsGui;
 
-GuPrefsGui* prefsgui_init(GtkWindow* mainwindow);
+GuPrefsGui* prefsgui_init(GtkWidget* mainwindow);
 void prefsgui_main(GuPrefsGui* prefs);
 void prefsgui_set_current_settings(GuPrefsGui* prefs);
 void toggle_linenumbers(GtkWidget* widget, void* user);
@@ -78,6 +78,7 @@ void toggle_autosaving(GtkWidget* widget, void* user);
 void on_prefs_close_clicked(GtkWidget* widget, void* user);
 void on_prefs_reset_clicked(GtkWidget* widget, void* user);
 void on_tabwidth_value_changed(GtkWidget* widget, void* user);
+void on_configure_snippets_clicked(GtkWidget* widget, void* user);
 void on_autosave_value_changed(GtkWidget* widget, void* user);
 void on_compile_value_changed(GtkWidget* widget, void* user);
 void on_editor_font_set(GtkWidget* widget, void* user);

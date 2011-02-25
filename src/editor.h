@@ -57,8 +57,8 @@ typedef struct _GuEditor {
     const gchar* tmpdir;
 
     /* GUI related members */
-    GtkSourceView *sourceview;
-    GtkSourceBuffer *sourcebuffer;
+    GtkSourceView* sourceview;
+    GtkSourceBuffer* sourcebuffer;
     GtkSourceStyleSchemeManager* stylemanager;
     GtkTextTag* errortag;
     GtkTextTag* searchtag;

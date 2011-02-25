@@ -37,14 +37,13 @@
 
 #include "configfile.h"
 #include "environment.h"
-#include "utils.h"
 #include "gui/gui-main.h"
+#include "utils.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
-
+GuPrefsGui* prefsgui_init(GtkWidget* mainwindow) {
     GuPrefsGui* p = g_new0(GuPrefsGui, 1);
     GtkBuilder* builder = gtk_builder_new();
     gtk_builder_add_from_file(builder, DATADIR"/prefs.glade", NULL);
@@ -400,6 +399,10 @@ void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
 
     config_set_value("tabwidth", g_ascii_dtostr(buf, 16, (double)newval));
     gtk_source_view_set_tab_width(gummi->editor->sourceview, newval);
+}
+
+void on_configure_snippets_clicked(GtkWidget* widget, void* user) {
+    snippetsgui_main(gui->snippetsgui);
 }
 
 void on_autosave_value_changed(GtkWidget* widget, void* user) {

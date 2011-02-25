@@ -2,60 +2,34 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkListStore" id="model1">
+  <object class="GtkListStore" id="list_snippets">
     <columns>
-      <!-- column-name gchararray -->
+      <!-- column-name Snippets -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0">text</col>
-      </row>
-      <row>
-        <col id="0">text/plain</col>
-      </row>
-      <row>
-        <col id="0">text/xml</col>
-      </row>
-      <row>
-        <col id="0">image</col>
-      </row>
-      <row>
-        <col id="0">image/png</col>
-      </row>
-      <row>
-        <col id="0">image/jpeg</col>
-      </row>
-      <row>
-        <col id="0">audio</col>
-      </row>
-      <row>
-        <col id="0">video</col>
-      </row>
-    </data>
   </object>
-  <object class="GtkDialog" id="dialog_snippets">
+  <object class="GtkDialog" id="snippetswindow">
+    <property name="can_focus">True</property>
+    <property name="border_width">5</property>
     <property name="title" translatable="yes">Snippets Manager</property>
+    <property name="window_position">center-on-parent</property>
     <property name="default_width">750</property>
     <property name="default_height">500</property>
     <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <signal name="destroy" handler="on_dialog_snippets_destroy"/>
-    <signal name="response" handler="on_dialog_snippets_response"/>
+    <property name="type_hint">normal</property>
+    <signal name="delete_event" handler="on_snippetsgui_close_clicked"/>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
         <child>
-          <object class="GtkHPaned" id="hpaned_paned">
+          <object class="GtkHPaned" id="hpaned1">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="border_width">6</property>
             <property name="position">275</property>
             <child>
-              <object class="GtkVBox" id="vbox_selection">
-                <property name="width_request">230</property>
+              <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
@@ -63,9 +37,8 @@
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Snippets:</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">tree_view_snippets</property>
+                    <property name="label" translatable="yes">Snippets:</property>
+                    <property name="justify">right</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -74,19 +47,31 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolled_window_snippets">
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkTreeView" id="tree_view_snippets">
+                      <object class="GtkTreeView" id="snippets_tree_view">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="model">list_snippets</property>
                         <property name="headers_visible">False</property>
-                        <signal name="row_expanded" handler="on_tree_view_snippets_row_expanded"/>
-                        <signal name="key_press_event" handler="on_tree_view_snippets_key_press"/>
+                        <signal name="cursor_changed" handler="on_snippets_tree_view_cursor_changed"/>
+                        <signal name="row_activated" handler="on_snippets_tree_view_cursor_changed"/>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="title">Snippets</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -95,16 +80,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox_buttons">
+                  <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkButton" id="button_new_snippet">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="can_default">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="tooltip_text" translatable="yes">Create new snippet</property>
+                        <property name="receives_default">True</property>
                         <signal name="clicked" handler="on_button_new_snippet_clicked"/>
                         <child>
                           <object class="GtkImage" id="image1">
@@ -122,14 +105,11 @@
                     <child>
                       <object class="GtkButton" id="button_remove_snippet">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
-                        <property name="can_default">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="tooltip_text" translatable="yes">Delete selected snippet</property>
+                        <property name="receives_default">True</property>
                         <signal name="clicked" handler="on_button_remove_snippet_clicked"/>
                         <child>
-                          <object class="GtkImage" id="image_remove">
+                          <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
                             <property name="stock">gtk-delete</property>
                           </object>
@@ -151,25 +131,25 @@
               </object>
               <packing>
                 <property name="resize">False</property>
-                <property name="shrink">False</property>
+                <property name="shrink">True</property>
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox_snippet">
+              <object class="GtkVBox" id="vbox2">
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkVBox" id="vbox2">
+                  <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkLabel" id="label2">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">_Edit:</property>
+                        <property name="label" translatable="yes">Edit:</property>
                         <property name="use_underline">True</property>
+                        <property name="justify">right</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -178,12 +158,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkScrolledWindow" id="scrolled_window_snippet">
+                      <object class="GtkScrolledWindow" id="snippet_scroll">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">automatic</property>
                         <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">in</property>
+                        <child>
+                          <placeholder/>
+                        </child>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -195,7 +178,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox1">
+                  <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
@@ -204,10 +187,8 @@
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Activation</property>
-                        <property name="use_markup">True</property>
-                        <attributes>
-                          <attribute name="weight"/>
-                        </attributes>
+                        <property name="use_underline">True</property>
+                        <property name="justify">right</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -216,10 +197,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox1">
+                      <object class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
                         <child>
-                          <object class="GtkLabel" id="label2">
+                          <object class="GtkLabel" id="label4">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">    </property>
                           </object>
@@ -237,81 +218,55 @@
                             <property name="column_spacing">6</property>
                             <property name="row_spacing">6</property>
                             <child>
-                              <object class="GtkLabel" id="label_tab_trigger">
+                              <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes" comments="&quot;tab&quot; here means the tab key, not the notebook tab!">_Tab trigger:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">entry_tab_trigger</property>
+                                <property name="label" translatable="yes">Tab trigger:</property>
                               </object>
                               <packing>
                                 <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="hbox_tab_trigger">
+                              <object class="GtkLabel" id="label6">
                                 <property name="visible">True</property>
-                                <child>
-                                  <object class="GtkEntry" id="entry_tab_trigger">
-                                    <property name="visible">True</property>
-                                    <property name="sensitive">False</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="tooltip_text" translatable="yes">Single word the snippet is activated with after pressing Tab</property>
-                                    <signal name="changed" handler="on_entry_tab_trigger_changed"/>
-                                    <signal name="focus_out_event" handler="on_entry_tab_trigger_focus_out"/>
-                                  </object>
-                                  <packing>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkImage" id="image_tab_trigger"/>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="padding">3</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Shortcut key:</property>
                               </object>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="y_options"></property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry_accelerator">
+                              <object class="GtkEntry" id="tab_trigger_entry">
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
-                                <property name="tooltip_text" translatable="yes">Shortcut key with which the snippet is activated</property>
+                                <property name="invisible_char">&#x2022;</property>
+                                <signal name="changed" handler="on_tab_trigger_entry_changed"/>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="accelerator_entry">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
                                 <property name="editable">False</property>
-                                <signal name="key_press_event" handler="on_entry_accelerator_key_press"/>
-                                <signal name="focus_out_event" handler="on_entry_accelerator_focus_out"/>
-                                <signal name="focus_in_event" handler="on_entry_accelerator_focus_in"/>
+                                <property name="invisible_char">&#x2022;</property>
+                                <signal name="focus_in_event" handler="on_accelerator_entry_focus_in_event"/>
+                                <signal name="focus_out_event" handler="on_accelerator_entry_focus_out_event"/>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="label_accelerator">
-                                <property name="visible">True</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">S_hortcut key:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">entry_accelerator</property>
-                              </object>
-                              <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options"></property>
                               </packing>
                             </child>
                           </object>
@@ -343,17 +298,17 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="closebutton1">
+              <object class="GtkButton" id="snippetsgui_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
+                <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_snippetsgui_close_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -371,7 +326,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-7">closebutton1</action-widget>
+      <action-widget response="0">snippetsgui_close</action-widget>
     </action-widgets>
   </object>
 </interface>

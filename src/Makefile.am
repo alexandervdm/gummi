@@ -17,6 +17,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-prefs.c gui/gui-prefs.h \
 		gui/gui-preview.c gui/gui-preview.h \
 		gui/gui-search.c gui/gui-search.h \
+		gui/gui-snippets.c gui/gui-snippets.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \

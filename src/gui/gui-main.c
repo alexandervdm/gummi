@@ -100,10 +100,11 @@ GummiGui* gui_init(GtkBuilder* builder) {
         GTK_MENU_ITEM(gtk_builder_get_object(builder, "menu_recent5"));
 
     g->editortabsgui = editortabsgui_init(builder);
-    g->prefsgui = prefsgui_init(GTK_WINDOW(g->mainwindow));
-    g->searchgui = searchgui_init(builder);
     g->importgui = importgui_init(builder);
     g->previewgui = previewgui_init(builder);
+    g->searchgui = searchgui_init(builder);
+    g->prefsgui = prefsgui_init(g->mainwindow);
+    g->snippetsgui = snippetsgui_init(g->mainwindow);
 
     gtk_window_resize(GTK_WINDOW(g->mainwindow),
                       atoi(config_get_value("mainwindow_w")),
@@ -250,7 +251,7 @@ void gui_open_file(const gchar* filename) {
      * the real_time compile scheme, the compile scheme functions can
      * access fileinfo */
     previewgui_stop_preview(gui->previewgui);
-    editor_destroy(gummi->editor);
+    editor_fileinfo_cleanup(gummi->editor);
 
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists(prev_workfile)) {
