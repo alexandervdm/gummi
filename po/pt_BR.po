@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-06-27 23:14-0300\n"
 "Last-Translator: Fernando Governatore Cruz <fergc@uol.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,10 +863,14 @@ msgstr ""
 "Favor corrigir os erros listados e clicar nesta area\n"
 "para recarregar o painel de pré-visulização"
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Criar um novo documento"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Alterações serão efetivadas ao reiniciar"

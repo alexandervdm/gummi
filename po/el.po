@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-05-24 14:43+0200\n"
 "Last-Translator: Dimitris Leventeas <mydimle@gmail.com>\n"
 "Language-Team: EL <mydimle@gmail.com>>\n"
@@ -863,10 +863,14 @@ msgstr ""
 "Παρακαλώ διορθώστε τα λάθη που παρατίθενται και κάντε κλικ σε αυτή\n"
 "την περιοχή για να επαναφορτώσετε το υποπαράθυρο προεπισκόπισης."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Δημιουργία νέου έγγράφου"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Οι αλλαγές θα ενεργοποιηθούν στην επόμενη εκκίνηση"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-11-11 01:08+0100\n"
 "Last-Translator: Hubert Kowalski <johnnybit@gmail.com>\n"
 "Language-Team: Polish Translation <johnnybit@gmail.com>\n"
@@ -870,10 +870,14 @@ msgstr ""
 "Additional information is available on the Error Output tab.\n"
 "Please correct the listed errors to restore preview."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Tworzy nowy dokument"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid ""
 #~ "\n"

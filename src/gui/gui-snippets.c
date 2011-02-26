@@ -268,13 +268,17 @@ void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     if (!strlen(gtk_entry_get_text(s->accelerator_entry)))
         gtk_entry_set_text(s->accelerator_entry, _("Type a new shortcut"));
+    else
+        gtk_entry_set_text(s->accelerator_entry,
+                _("Type a new shortcut, or press Backspace to clear"));
 }
 
 void on_accelerator_entry_focus_out_event(GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
-    if (strcmp(gtk_entry_get_text(s->accelerator_entry),
-                _("Type a new shortcut")) == 0)
-        gtk_entry_set_text(s->accelerator_entry, "");
+    gchar** configs = NULL;
+    configs = g_strsplit(s->current->first, ",", 0);
+    gtk_entry_set_text(s->accelerator_entry, configs[1]);
+    g_strfreev(configs);
 }
 
 gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
@@ -285,13 +289,14 @@ gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
     if (event->keyval == GDK_KEY_Escape) {
         /* Reset */
         gtk_entry_set_text(s->accelerator_entry, "");
+        snippetsgui_update_snippet(gummi->snippets);
         gtk_widget_grab_focus(GTK_WIDGET(s->snippets_tree_view));
     } else if (event->keyval == GDK_KEY_BackSpace
                || event->keyval == GDK_KEY_Delete) {
         /* Remove accelerator */
         gtk_entry_set_text(s->accelerator_entry, "");
+        snippetsgui_update_snippet(gummi->snippets);
         gtk_widget_grab_focus(GTK_WIDGET(s->snippets_tree_view));
-        return TRUE;
     } else if (gtk_accelerator_valid(event->keyval, event->state)) {
         /* New accelerator */
         new_accel = gtk_accelerator_name(event->keyval,
@@ -299,6 +304,7 @@ gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
         gtk_entry_set_text(s->accelerator_entry, new_accel);
         snippetsgui_update_snippet(gummi->snippets);
         g_free(new_accel);
+        gtk_widget_grab_focus(GTK_WIDGET(s->snippets_tree_view));
     }
     return TRUE;
 }

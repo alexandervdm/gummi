@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -860,10 +860,14 @@ msgstr ""
 "Ret venligst de viste fejl og klik på dette område\n"
 "for at genindlæse fremvisningspanelet."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Ændringerne vil træde i kraft efter genstart"

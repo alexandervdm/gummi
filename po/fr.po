@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-10-26 19:39+0200\n"
 "Last-Translator: yvand, olivier Brousse <yvan.duron@gmail.com, "
 "obrousse@gmail.com>\n"
@@ -869,10 +869,14 @@ msgstr ""
 "S'il vous plaît corrigez les erreurs répertoriées et cliquez ici\n"
 "pour recharger la fenêtre de prévisualisation."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Créer un nouveau document"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid ""
 #~ "\n"

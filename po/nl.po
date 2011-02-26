@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -862,10 +862,14 @@ msgid ""
 "Please correct the listed errors to restore preview."
 msgstr "PDF preview kon niet genitialiseerd worden."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Creer nieuw document"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Wijzigingen worden actief bij volgende start"

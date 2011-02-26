@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -840,6 +840,10 @@ msgstr ""
 "更多的訊息請參照錯誤輸出欄.\n"
 "預覽將在錯誤修正後自動啟動."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 msgid "Type a new shortcut"
 msgstr "輸入新的捷徑"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "輸入新的捷徑, 或按後退鍵清除"

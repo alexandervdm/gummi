@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"POT-Creation-Date: 2011-02-26 23:10+0800\n"
 "PO-Revision-Date: 2010-10-27 20:28+0100\n"
 "Last-Translator: Salvatore Vassallo <vassallosalvatore@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,10 +863,14 @@ msgstr ""
 "Informazioni aggiuntive sono disponibili nella scheda Output di errore.\n"
 "Correggere gli errori elencati per ripristinare l'anteprima."
 
-#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#: ../src/gui/gui-snippets.c:270
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Crea un nuovo documento"
+
+#: ../src/gui/gui-snippets.c:273
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr ""
 
 #~ msgid ""
 #~ "\n"
