@@ -13,7 +13,7 @@ gladedir = $(datadir)/$(PACKAGE)
 glade_DATA = gummi.glade prefs.glade
 
 snippetsdir = $(datadir)/$(PACKAGE)
-snippets_DATA = snippets
+snippets_DATA = snippets.glade
 
 EXTRA_DIST = $(man_MANS) \
 	     $(desktop_DATA).in \
