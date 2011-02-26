@@ -260,7 +260,8 @@ void on_button_remove_snippet_clicked(GtkBuilder* widget, void* user) {
 }
 
 void on_tab_trigger_entry_changed(GtkEntry* entry, void* user) {
-    snippetsgui_update_snippet(gummi->snippets);
+    if (!gui->snippetsgui->loading)
+        snippetsgui_update_snippet(gummi->snippets);
 }
 
 void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user) {
@@ -294,8 +295,7 @@ gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
     } else if (gtk_accelerator_valid(event->keyval, event->state)) {
         /* New accelerator */
         new_accel = gtk_accelerator_name(event->keyval,
-                gtk_accelerator_get_default_mod_mask()
-                                         & event->state);
+                gtk_accelerator_get_default_mod_mask() & event->state);
         gtk_entry_set_text(s->accelerator_entry, new_accel);
         snippetsgui_update_snippet(gummi->snippets);
         g_free(new_accel);
@@ -322,12 +322,17 @@ void on_snippets_tree_view_row_activated(GtkTreeView* view, void* user) {
     configs = g_strsplit(config, ",", 0);
     snippet = snippets_get_value(gummi->snippets, configs[0]);
 
+    /* Set loading to True to prevent triggering the "changed" signal */
+    s->loading = TRUE;
+
     /* Set text buffer */
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(s->sourcebuffer), snippet, -1);
 
     /* Set entries */
     gtk_entry_set_text(s->tab_trigger_entry, configs[0]);
     gtk_entry_set_text(s->accelerator_entry, configs[1]);
+
+    s->loading = FALSE;
 
     g_strfreev(configs);
     g_free(config);

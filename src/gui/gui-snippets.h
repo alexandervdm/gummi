@@ -46,6 +46,7 @@ typedef struct _GuSnippetsGui {
     GtkSourceView* sourceview;
     GtkSourceBuffer* sourcebuffer;
     slist* current;
+    gboolean loading;
 } GuSnippetsGui;
 
 GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow);
