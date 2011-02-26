@@ -4,7 +4,9 @@
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkListStore" id="list_snippets">
     <columns>
-      <!-- column-name Snippets -->
+      <!-- column-name Snippet -->
+      <column type="gchararray"/>
+      <!-- column-name config -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -59,13 +61,14 @@
                         <property name="can_focus">True</property>
                         <property name="model">list_snippets</property>
                         <property name="headers_visible">False</property>
-                        <signal name="cursor_changed" handler="on_snippets_tree_view_cursor_changed"/>
-                        <signal name="row_activated" handler="on_snippets_tree_view_cursor_changed"/>
+                        <signal name="row_activated" handler="on_snippets_tree_view_row_activated"/>
                         <child>
-                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                          <object class="GtkTreeViewColumn" id="snippet_column">
                             <property name="title">Snippets</property>
                             <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <object class="GtkCellRendererText" id="snippet_renderer">
+                                <signal name="edited" handler="on_snippet_renderer_edited"/>
+                              </object>
                               <attributes>
                                 <attribute name="text">0</attribute>
                               </attributes>
@@ -259,6 +262,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="editable">False</property>
                                 <property name="invisible_char">&#x2022;</property>
+                                <signal name="key_press_event" handler="on_accelerator_entry_key_press_event"/>
                                 <signal name="focus_in_event" handler="on_accelerator_entry_focus_in_event"/>
                                 <signal name="focus_out_event" handler="on_accelerator_entry_focus_out_event"/>
                               </object>
@@ -313,6 +317,24 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="snippetsgui_reset">
+                <property name="label" translatable="yes">_Reset</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Reset all snippets</property>
+                <property name="use_underline">True</property>
+                <accelerator key="r" signal="clicked" modifiers="GDK_MOD1_MASK"/>
+                <signal name="clicked" handler="on_snippetsgui_reset_clicked"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="pack_type">end</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -327,6 +349,7 @@
     </child>
     <action-widgets>
       <action-widget response="0">snippetsgui_close</action-widget>
+      <action-widget response="0">snippetsgui_reset</action-widget>
     </action-widgets>
   </object>
 </interface>

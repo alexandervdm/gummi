@@ -1466,6 +1466,7 @@ bibliography database</property>
                 <property name="primary_icon_stock">gtk-find</property>
                 <accelerator key="Return" signal="activate"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
@@ -2128,7 +2129,7 @@ cells have line borders. </property>
                             <property name="title">templates</property>
                             <child>
                               <object class="GtkCellRendererText" id="template_renderer">
-                                <signal name="edited" handler="on_template_rowitem_editted"/>
+                                <signal name="edited" handler="on_template_rowitem_edited"/>
                               </object>
                               <attributes>
                                 <attribute name="text">0</attribute>
