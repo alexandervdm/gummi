@@ -242,3 +242,33 @@ slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
         current = NULL;
     return current;
 }
+
+slist* slist_append(slist* head, slist* node) {
+    slist* current = head;
+    slist* prev = NULL;
+
+    while (current) {
+        prev = current;
+        current = current->next;
+    }
+    prev->next = node;
+    return head;
+}
+
+slist* slist_remove(slist* head, slist* node) {
+    slist* current = head;
+    slist* prev = NULL;
+
+    while (current) {
+        if (current == node) break;
+        prev = current;
+        current = current->next;
+    }
+    if (current) {
+        if (current == head)
+            head = head->next;
+        else
+            prev->next = current->next;
+    }
+    return head;
+}

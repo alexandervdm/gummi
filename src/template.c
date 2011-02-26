@@ -75,7 +75,8 @@ void template_setup(GuTemplate* t) {
                                       "templates" , NULL);
     
     GDir* dir = g_dir_open (dirpath, 0, &error);    
-    if (error) { // print error if directory does not exist
+    if (error) { 
+        /* print error if directory does not exist */
         slog(L_INFO, "unable to read template directory, creating new..\n");
         g_mkdir_with_parents(dirpath,
                 S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
@@ -115,10 +116,10 @@ templdata template_open_selected(GuTemplate* t) {
 
 void template_add_new_entry(GuTemplate* t) {
     GtkTreeIter iter;
-    GtkTreeModel *model;
-    GtkTreePath *path;
-    GtkTreeViewColumn *col;
-    GList *cells;
+    GtkTreeModel* model = NULL;
+    GtkTreePath* path = NULL;
+    GtkTreeViewColumn* col = NULL;
+    GList* cells = NULL;
     
     gtk_label_set_text(t->template_label, "");
     gtk_list_store_append(t->list_templates, &iter);
@@ -133,15 +134,17 @@ void template_add_new_entry(GuTemplate* t) {
     path = gtk_tree_model_get_path(model, &iter);
     cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT(col));
 
-    gtk_tree_view_set_cursor_on_cell
-        (t->templateview, path, col, cells->data, TRUE);
+    gtk_tree_view_set_cursor_on_cell(t->templateview, path, col, cells->data,
+                                     TRUE);
+    g_list_free(cells);
+    gtk_tree_path_free(path);
 }
 
 void template_remove_entry(GuTemplate* t) {
-    GtkTreeModel *model;
+    GtkTreeModel* model = NULL;
     GtkTreeIter iter;
-    GtkTreeSelection *selection;
-    gchar *filepath;
+    GtkTreeSelection* selection = NULL;
+    gchar* filepath = NULL;
 
     model = gtk_tree_view_get_model(t->templateview);
     selection = gtk_tree_view_get_selection(t->templateview);
@@ -154,8 +157,8 @@ void template_remove_entry(GuTemplate* t) {
 }
 
 void template_create_file(GuTemplate* t, gchar* filename, gchar* text) {
-    const char *filepath = g_build_filename(g_get_user_config_dir(), 
-                           "gummi", "templates", filename, NULL);
+    const char* filepath = g_build_filename(g_get_user_config_dir(),
+            "gummi", "templates", filename, NULL);
                            
     if (g_file_test(filepath, G_FILE_TEST_EXISTS)) {
         gtk_label_set_text(t->template_label, "filename already exists");

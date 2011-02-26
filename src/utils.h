@@ -53,12 +53,16 @@ typedef struct _Tuple2 {
     gpointer second;
 } Tuple2;
 
+#define TUPLE2(x) ((Tuple2*)x)
+
 typedef struct _Tuple3 {
     struct _Tuple3* next;
     gpointer first;
     gpointer second;
     gpointer third;
 } Tuple3;
+
+#define TUPLE3(x) ((Tuple3*)x)
 
 typedef struct _slist {
     struct _slist* next;
@@ -76,5 +80,7 @@ Tuple2 utils_popen_r(const gchar* cmd);
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
 slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
         gboolean create_if_not_exists);
+slist* slist_append(slist* head, slist* node);
+slist* slist_remove(slist* head, slist* node);
 
 #endif /* __GUMMI_UTILS__ */

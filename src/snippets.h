@@ -69,7 +69,7 @@ typedef struct _GuSnippets {
     slist* head;
     GuSnippetInfo* info;
     GtkAccelGroup* accel_group;
-    GList* closures;
+    GList* closure_data;
     gboolean activated;
 } GuSnippets;
 
@@ -79,7 +79,7 @@ void snippets_load(GuSnippets* sc);
 void snippets_save(GuSnippets* sc);
 void snippets_clean_up(GuSnippets* sc);
 gchar* snippets_get_value(GuSnippets* sc, const gchar* term);
-void snippets_set_accelerator(GuSnippets* sc, gchar* accel);
+void snippets_set_accelerator(GuSnippets* sc, gchar* config);
 void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key);
 void snippets_deactivate(GuSnippets* sc, GuEditor* ec);
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
@@ -87,6 +87,9 @@ gboolean snippets_key_release_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
 GuSnippetInfo* snippets_parse(char* snippet);
 void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata);
+void snippets_accel_connect(GtkAccelGroup* accel_group, guint keyval,
+        GdkModifierType mod, GClosure* closure);
+void snippets_accel_disconnect(GtkAccelGroup* accel_group, GClosure* closure);
 
 GuSnippetInfo* snippet_info_new(gchar* snippet);
 void snippet_info_free(GuSnippetInfo* info, GuEditor* ec);

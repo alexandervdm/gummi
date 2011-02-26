@@ -180,7 +180,6 @@ void editor_fileinfo_update(GuEditor* ec, const gchar* filename) {
 void editor_fileinfo_cleanup(GuEditor* ec) {
     gchar* auxfile = NULL;
     gchar* logfile = NULL;
-    int i = 0;
 
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname(ec->filename);
@@ -590,10 +589,7 @@ void editor_get_current_iter(GuEditor* ec, GtkTextIter* current) {
 void editor_scroll_to_cursor(GuEditor* ec) {
     gtk_text_view_scroll_to_mark(ec_sourceview,
                                  gtk_text_buffer_get_insert(ec_sourcebuffer),
-                                 0.25,
-                                 FALSE,
-                                 0.0,
-                                 0.0);
+                                 0.25, FALSE, 0.0, 0.0);
 }
 
 void editor_undo_change(GuEditor* ec) {

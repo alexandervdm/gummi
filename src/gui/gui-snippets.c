@@ -31,6 +31,7 @@
 
 #include <string.h>
 
+#include <gdk/gdkkeysyms.h>
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
@@ -41,6 +42,7 @@
 
 #include "environment.h"
 #include "gui/gui-main.h"
+#include "snippets.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;
@@ -63,6 +65,9 @@ GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow) {
         GTK_ENTRY(gtk_builder_get_object(builder, "accelerator_entry"));
     s->list_snippets = 
         GTK_LIST_STORE(gtk_builder_get_object(builder, "list_snippets"));
+    s->snippet_renderer = GTK_CELL_RENDERER_TEXT
+        (gtk_builder_get_object(builder, "snippet_renderer"));
+
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language(manager,
             "latex");
@@ -72,14 +77,18 @@ GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow) {
     gtk_container_add(GTK_CONTAINER(s->snippet_scroll),
             GTK_WIDGET(s->sourceview));
 
-    /* set style scheme */
+    /* Load snippets */
     slist* current = gummi->snippets->head;
     GtkTreeIter iter;
+    gchar** configs = NULL;
 
     while (current) {
         if (current->first[0] != '#') {
             gtk_list_store_append(s->list_snippets, &iter);
-            gtk_list_store_set(s->list_snippets, &iter, 0, current->first, -1);
+            configs = g_strsplit(current->first, ",", 0);
+            gtk_list_store_set(s->list_snippets, &iter, 0, configs[2],
+                    1, current->first, -1);
+            g_strfreev(configs);
         }
         current = current->next;
     }
@@ -94,8 +103,79 @@ GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow) {
     return s;
 }
 
-void snippetsgui_main(GuSnippetsGui* snip) {
-    gtk_widget_show_all(snip->snippetswindow);
+void snippetsgui_main(GuSnippetsGui* s) {
+    gtk_widget_show_all(s->snippetswindow);
+    GtkTreeIter iter;
+    GtkTreeSelection* selection = NULL;
+    GtkTreeModel* model = NULL;
+    GtkTreePath* path = NULL;
+    GtkTreeViewColumn* col = NULL;
+
+    model = gtk_tree_view_get_model(s->snippets_tree_view);
+    selection = gtk_tree_view_get_selection(s->snippets_tree_view);
+    gtk_tree_selection_get_selected(selection, &model, &iter);
+    path = gtk_tree_model_get_path(model, &iter);
+    col = gtk_tree_view_get_column(s->snippets_tree_view, 0);
+    gtk_tree_view_row_activated(s->snippets_tree_view, path, col);
+
+    gtk_tree_path_free(path);
+}
+
+void snippetsgui_update_snippet(GuSnippets* sc) {
+    GuSnippetsGui* s = gui->snippetsgui;
+    slist* target = s->current;
+    gchar** configs = g_strsplit(target->first, ",", 0);
+    const gchar* new_key = gtk_entry_get_text(s->tab_trigger_entry);
+    const gchar* new_accel = gtk_entry_get_text(s->accelerator_entry);
+    GtkTreeIter iter;
+    GtkTreeModel* model =
+        GTK_TREE_MODEL(gtk_tree_view_get_model(s->snippets_tree_view));
+    GtkTreeSelection* selection =
+        gtk_tree_view_get_selection(s->snippets_tree_view);
+
+    gtk_tree_selection_get_selected(selection, &model, &iter);
+
+    g_free(target->first);
+    target->first = g_strdup_printf("%s,%s,%s", new_key, new_accel, configs[2]);
+    gtk_list_store_set(s->list_snippets, &iter, 1, target->first, -1);
+
+    /* Update */
+    if (strlen(new_accel) && strcmp(new_accel, configs[1]) != 0) {
+        guint keyval = 0;
+        GdkModifierType mod;
+        Tuple2* data = g_new0(Tuple2, 1);
+        Tuple2* closure_data = NULL;
+        Tuple2* new_closure_data = g_new0(Tuple2, 1);
+
+        data->first = (gpointer)sc;
+        data->second = (gpointer)g_strdup(new_key);
+
+        GList* current = sc->closure_data;
+        GClosure* new_closure = g_cclosure_new(G_CALLBACK(snippets_accel_cb),
+                data, NULL);
+        new_closure_data->first = data->second;
+        new_closure_data->second = new_closure;
+
+        while (current) {
+            closure_data = TUPLE2(current->data);
+            if (strcmp(closure_data->first, configs[0]) == 0)
+                break;
+            current = g_list_next(current);
+        }
+
+        /* Remove old accelerator if exists */
+        if (current) {
+            snippets_accel_disconnect(sc->accel_group, closure_data->second);
+            sc->closure_data = g_list_remove(sc->closure_data, closure_data);
+            g_free(closure_data);
+        }
+
+        /* Connect new accelerator */
+        gtk_accelerator_parse(new_accel, &keyval, &mod);
+        sc->closure_data = g_list_append(sc->closure_data, new_closure_data);
+        snippets_accel_connect(sc->accel_group, keyval, mod, new_closure);
+    }
+    g_strfreev(configs);
 }
 
 void on_snippetsgui_close_clicked(GtkWidget* widget, void* user) {
@@ -104,73 +184,149 @@ void on_snippetsgui_close_clicked(GtkWidget* widget, void* user) {
 }
 
 void on_button_new_snippet_clicked(GtkBuilder* widget, void* user) {
+    GuSnippetsGui* s = gui->snippetsgui;
+    GtkTreeIter iter;
+    GtkTreeModel *model = NULL;
+    GtkTreePath *path = NULL;
+    GtkTreeViewColumn *col = NULL;
+    GList* cells = NULL;
+
+    gtk_list_store_append(s->list_snippets, &iter);
+    g_object_set(s->snippet_renderer, "editable", TRUE, NULL);
     
+    col = gtk_tree_view_get_column(s->snippets_tree_view, 0);
+    model = gtk_tree_view_get_model(s->snippets_tree_view);
+    path = gtk_tree_model_get_path(model, &iter);
+    cells = gtk_cell_layout_get_cells(GTK_CELL_LAYOUT(col));
+
+    gtk_tree_view_set_cursor_on_cell(s->snippets_tree_view, path, col,
+            cells->data, TRUE);
+
+    g_list_free(cells);
+    gtk_tree_path_free(path);
 }
 
 void on_button_remove_snippet_clicked(GtkBuilder* widget, void* user) {
-    
+    GuSnippetsGui* s = gui->snippetsgui;
+    GtkTreeModel* model= gtk_tree_view_get_model(s->snippets_tree_view);
+    GtkTreeSelection* selection = gtk_tree_view_get_selection(
+            s->snippets_tree_view);
+    GtkTreeIter iter;
+    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+        gchar* config = NULL;
+        slist* target = NULL;
+        gtk_tree_model_get(model, &iter, 1, &config, -1);
+        gtk_list_store_remove(s->list_snippets, &iter);
+        target = slist_find_index_of(gummi->snippets->head, config, FALSE,
+                FALSE);
+        slist_remove(gummi->snippets->head, target);
+    }
 }
 
 void on_tab_trigger_entry_changed(GtkEntry* entry, void* user) {
-    gchar* key = NULL;
-    gchar* accel = NULL;
-    gchar* new_key = gtk_entry_get_text(entry);
-    slist* target = gui->snippetsgui->current;
-    key = g_strndup(target->first, strstr(target->first, ",") - target->first);
-    accel = g_strdup(strstr(target->first, ",") + 1);
-    g_free(target->first);
-    target->first = g_strdup_printf("%s,%s", new_key, accel);
+    snippetsgui_update_snippet(gummi->snippets);
 }
 
 void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user) {
-    
+    GuSnippetsGui* s = gui->snippetsgui;
+    if (!strlen(gtk_entry_get_text(s->accelerator_entry)))
+        gtk_entry_set_text(s->accelerator_entry, _("Type a new shortcut"));
 }
 
 void on_accelerator_entry_focus_out_event(GtkWidget* widget, void* user) {
-    
+    GuSnippetsGui* s = gui->snippetsgui;
+    if (strcmp(gtk_entry_get_text(s->accelerator_entry),
+                _("Type a new shortcut")) == 0)
+        gtk_entry_set_text(s->accelerator_entry, "");
 }
 
-void on_snippets_tree_view_cursor_changed(GtkTreeView* view, void* user) {
-    if (!gui) return;
+gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
+        GdkEventKey* event, void* user) {
+    GuSnippetsGui* s = gui->snippetsgui;
+    gchar* new_accel = NULL;
 
+    if (event->keyval == GDK_KEY_Escape) {
+        /* Reset */
+        gtk_entry_set_text(s->accelerator_entry, "");
+        gtk_widget_grab_focus(GTK_WIDGET(s->snippets_tree_view));
+    } else if (event->keyval == GDK_KEY_BackSpace
+               || event->keyval == GDK_KEY_Delete) {
+        /* Remove accelerator */
+        gtk_entry_set_text(s->accelerator_entry, "");
+        gtk_widget_grab_focus(GTK_WIDGET(s->snippets_tree_view));
+        return TRUE;
+    } else if (gtk_accelerator_valid(event->keyval, event->state)) {
+        /* New accelerator */
+        new_accel = gtk_accelerator_name(event->keyval,
+                gtk_accelerator_get_default_mod_mask()
+                                         & event->state);
+        gtk_entry_set_text(s->accelerator_entry, new_accel);
+        snippetsgui_update_snippet(gummi->snippets);
+        g_free(new_accel);
+    }
+    return TRUE;
+}
+
+void on_snippets_tree_view_row_activated(GtkTreeView* view, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     GtkTreeIter iter;
-    gchar* key_accel = NULL;
-    gchar* key = NULL;
-    gchar* accel = NULL;
+    gchar* config = NULL;
+    gchar** configs = NULL;
     gchar* snippet = NULL;
     GtkTreeModel* model = GTK_TREE_MODEL(gtk_tree_view_get_model(view));
     GtkTreeSelection* selection = gtk_tree_view_get_selection(view);
 
     gtk_tree_selection_get_selected(selection, &model, &iter);
-    gtk_tree_model_get(model, &iter, 0, &key_accel, -1);
+    gtk_tree_model_get(model, &iter, 1, &config, -1);
 
     /* Record current activated snippet */
-    s->current = slist_find_index_of(gummi->snippets->head,
-            key_accel, FALSE, FALSE);
+    s->current = slist_find_index_of(gummi->snippets->head, config, FALSE,
+            FALSE);
 
-    key = g_strndup(key_accel, strstr(key_accel, ",") - key_accel);
-    accel = g_strdup(strstr(key_accel, ",") + 1);
-    snippet = snippets_get_value(gummi->snippets, key);
+    configs = g_strsplit(config, ",", 0);
+    snippet = snippets_get_value(gummi->snippets, configs[0]);
 
     /* Set text buffer */
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(s->sourcebuffer), snippet, -1);
-    /* Set entries */
-    gtk_entry_set_text(s->tab_trigger_entry, key);
-    gtk_entry_set_text(s->accelerator_entry, accel);
 
-    g_free(key_accel);
-    g_free(accel);
-    g_free(key);
+    /* Set entries */
+    gtk_entry_set_text(s->tab_trigger_entry, configs[0]);
+    gtk_entry_set_text(s->accelerator_entry, configs[1]);
+
+    g_strfreev(configs);
+    g_free(config);
+}
+
+void on_snippet_renderer_edited(GtkCellRendererText* renderer, gchar *path,
+        gchar* name, void* user) {
+    GuSnippetsGui* s = gui->snippetsgui;
+    GtkTreeModel* model = NULL;
+    GtkTreeSelection* selection = NULL;
+    GtkTreeIter iter;
+    
+    g_object_set(renderer, "editable", FALSE, NULL);
+    model = gtk_tree_view_get_model(s->snippets_tree_view);
+    selection = gtk_tree_view_get_selection(s->snippets_tree_view);
+
+    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+        gchar* config = g_strdup_printf(",,%s", name);
+        slist* node = g_new0(slist, 1);
+        node->first = config;
+        node->second = g_strdup("");
+        gummi->snippets->head = slist_append(gummi->snippets->head, node);
+        s->current = node;
+        gtk_list_store_set(s->list_snippets, &iter, 0, name, 1, config, -1);
+    }
 }
 
 gboolean on_snippet_source_buffer_key_release(GtkWidget* widget, void* user) {
+    GuSnippetsGui* s = gui->snippetsgui;
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds(GTK_TEXT_BUFFER(gui->snippetsgui->sourcebuffer),
-                &start, &end);
+            &start, &end);
     gchar* text = gtk_text_iter_get_text(&start, &end);
-    g_free(gui->snippetsgui->current->second);
-    gui->snippetsgui->current->second = g_strdup(text);
+    g_free(s->current->second);
+    s->current->second = g_strdup(text);
     g_free(text);
     return FALSE;
 }

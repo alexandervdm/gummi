@@ -68,7 +68,6 @@ void snippets_set_default(GuSnippets* sc) {
 void snippets_load(GuSnippets* sc) {
     FILE* fh = 0;
     gchar buf[BUFSIZ];
-    gchar* accel = NULL;
     gchar* rot = NULL;
     gchar* seg = NULL;
     slist* current = NULL;
@@ -90,12 +89,9 @@ void snippets_load(GuSnippets* sc) {
             if ('#' == buf[0]) {
                 current->first = g_strdup(buf);
             } else {
-                seg = strtok(buf, " ");
-                seg = strtok(NULL, " ");
+                seg = strstr(buf, " ") + 1;
                 current->first = g_strdup((seg == buf)? "Invalid": seg);
-                accel = strstr(current->first, ",") + 1;
-                if (strlen(accel) != 0)
-                    snippets_set_accelerator(sc, current->first);
+                snippets_set_accelerator(sc, current->first);
             }
         } else {
             if (!prev->second) {
@@ -176,26 +172,37 @@ gchar* snippets_get_value(GuSnippets* sc, const gchar* term) {
     return (index)? index->second: NULL;
 }
 
-void snippets_set_accelerator(GuSnippets* sc, gchar* key_accel) {
-    /* key_accel has the form: keyword,Accel_key */
+void snippets_set_accelerator(GuSnippets* sc, gchar* config) {
+    /* config has the form: Key,Accel_key,Name */
     GClosure* closure = NULL;
-    GdkModifierType mods;
+    GdkModifierType mod;
     guint keyval = 0;
-    gchar* accel = strstr(key_accel, ",") + 1;
+    gchar** configs = g_strsplit(config, ",", 0);
     Tuple2* data = g_new0(Tuple2, 1);
+    Tuple2* closure_data = g_new0(Tuple2, 1);
+
+    /* Return if config does not contains accelerator */
+    if (strlen(configs[1]) == 0) {
+        g_strfreev(configs);
+        return;
+    }
 
     data->first = (gpointer)sc;
-    data->second = (gpointer)g_strndup(key_accel, accel -key_accel -1);
+    data->second = (gpointer)g_strdup(configs[0]);
+
 
     closure = g_cclosure_new(G_CALLBACK(snippets_accel_cb), data, NULL);
-    sc->closures = g_list_append(sc->closures, (gpointer)closure);
-    gtk_accelerator_parse(accel, &keyval, &mods);
+    closure_data->first = (gpointer)data->second;
+    closure_data->second = (gpointer)closure;
+
+    sc->closure_data = g_list_append(sc->closure_data, closure_data);
+    gtk_accelerator_parse(configs[1], &keyval, &mod);
 
     /* Return without connect if accel is not valid */
-    if (!gtk_accelerator_valid(keyval, mods)) return;
+    if (!gtk_accelerator_valid(keyval, mod)) return;
 
-    gtk_accel_group_connect(sc->accel_group, keyval, mods, GTK_ACCEL_VISIBLE,
-            closure);
+    snippets_accel_connect(sc->accel_group, keyval, mod, closure);
+    g_strfreev(configs);
 }
 
 void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
@@ -229,7 +236,6 @@ void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
 void snippets_deactivate(GuSnippets* sc, GuEditor* ec) {
     sc->activated = FALSE;
     snippet_info_free(sc->info, ec);
-    printf("deactivated\n");
 }
 
 gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
@@ -311,8 +317,8 @@ GuSnippetInfo* snippets_parse(char* snippet) {
             snippet_info_append_holder(info, atoi(result[1]), start,
                     end -start, result[2]);
             g_match_info_next(match_info, NULL);
+            g_strfreev(result);
         }
-        g_strfreev(result);
         g_regex_unref(regex);
         g_match_info_free(match_info);
     }
@@ -332,6 +338,16 @@ void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
      * editor in user_data, because snippets should only have effect on
      * active tab */
     snippets_activate(sc, get_active_editor(), key);
+}
+
+void snippets_accel_connect(GtkAccelGroup* accel_group, guint keyval,
+        GdkModifierType mod, GClosure* closure) {
+    gtk_accel_group_connect(accel_group, keyval, mod, GTK_ACCEL_VISIBLE,
+            closure);
+}
+
+void snippets_accel_disconnect(GtkAccelGroup* accel_group, GClosure* closure) {
+    gtk_accel_group_disconnect(accel_group, closure);
 }
 
 GuSnippetInfo* snippet_info_new(gchar* snippet) {

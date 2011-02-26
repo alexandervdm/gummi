@@ -755,14 +755,14 @@ void on_button_template_close_clicked(GtkWidget* widget, void* user) {
     gtk_widget_hide(GTK_WIDGET(gummi->templ->templatewindow));
 }
 
-void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
+void on_template_rowitem_edited(GtkWidget* widget, gchar *path, gchar* filenm,
         void* user) {
-    GtkTreeModel *model;
     GtkTreeIter iter;
-    GtkTreeSelection *selection;
-    gchar *text;
-    gchar *filepath = g_build_filename(g_get_user_config_dir(),
-                                       "gummi", "templates", filenm, NULL);
+    GtkTreeModel* model = NULL;
+    GtkTreeSelection* selection = NULL;
+    gchar* text = NULL;
+    gchar* filepath = g_build_filename(g_get_user_config_dir(),
+            "gummi", "templates", filenm, NULL);
     
     model = gtk_tree_view_get_model(gummi->templ->templateview);
     selection = gtk_tree_view_get_selection(gummi->templ->templateview);

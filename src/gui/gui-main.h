@@ -123,7 +123,7 @@ void on_button_template_add_clicked(GtkWidget* widget, void* user);
 void on_button_template_remove_clicked(GtkWidget* widget, void* user);
 void on_button_template_open_clicked(GtkWidget* widget, void* user);
 void on_button_template_close_clicked(GtkWidget* widget, void* user);
-void on_template_rowitem_editted(GtkWidget* widget, gchar *path, gchar* filenm,
+void on_template_rowitem_edited(GtkWidget* widget, gchar *path, gchar* filenm,
         void* user);
 
 void on_button_biblio_compile_clicked(GtkWidget* widget, void* user);
