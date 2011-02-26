@@ -52,23 +52,26 @@ void editortabsgui_create_tab(GuEditor* editor, const gchar* filename) {
     GtkWidget *tablabel;
     gchar *tabname;
     
-    //gummi_new_environment is central function to create new editors.
+    // reminder; gui_new_environment is central caller for this function. 
 
     gint nr_pages = gtk_notebook_get_n_pages(g_tabs_notebook);
     
+    // creating tab object; label & tooltip
     if (filename == NULL) 
         tabname = g_strdup_printf("Unsaved Document %d", (nr_pages+1));
     else 
         tabname = g_path_get_basename(filename);
     tablabel = gtk_label_new(tabname);
+    gtk_widget_set_tooltip_text(tablabel, filename);
     
+    // creating tab object; scrollwindow
     scrollwindow = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrollwindow),
                                     GTK_POLICY_AUTOMATIC, 
                                     GTK_POLICY_AUTOMATIC);
+    gtk_container_add(
+            GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->sourceview));
 
-    gtk_container_add(GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->sourceview));
-    
     gtk_notebook_append_page(
         GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel);
 }
