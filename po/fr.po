@@ -6,11 +6,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-25 20:23+0800\n"
+"POT-Creation-Date: 2011-02-26 22:54+0800\n"
 "PO-Revision-Date: 2010-10-26 19:39+0200\n"
 "Last-Translator: yvand, olivier Brousse <yvan.duron@gmail.com, "
 "obrousse@gmail.com>\n"
 "Language-Team: FR <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -265,7 +266,7 @@ msgstr "Mots entiers seulement"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/gummi.glade.h:72 ../src/gui/gui-main.c:825
+#: ../data/gummi.glade.h:72 ../src/gui/gui-main.c:852
 msgid "N/A"
 msgstr "N/A"
 
@@ -433,11 +434,11 @@ msgstr "Affichage (_V)"
 msgid "filter:"
 msgstr "Filtre:"
 
-#: ../data/gummi.glade.h:114 ../src/gui/gui-main.c:823
+#: ../data/gummi.glade.h:114 ../src/gui/gui-main.c:850
 msgid "no bibliography file detected"
 msgstr "Aucun fichier de bibliographie détecté"
 
-#: ../data/gummi.glade.h:115 ../src/gui/gui-main.c:824
+#: ../data/gummi.glade.h:115 ../src/gui/gui-main.c:851
 msgid "none"
 msgstr "aucun"
 
@@ -491,148 +492,232 @@ msgid "Command: "
 msgstr ""
 
 #: ../data/prefs.glade.h:5
+msgid "Configure snippets"
+msgstr ""
+
+#: ../data/prefs.glade.h:6
 #, fuzzy
 msgid "Customize"
 msgstr "Compiler"
 
-#: ../data/prefs.glade.h:6
+#: ../data/prefs.glade.h:7
 msgid "Default Text"
 msgstr "Texte par défaut"
 
-#: ../data/prefs.glade.h:7
+#: ../data/prefs.glade.h:8
 msgid "Display line numbers"
 msgstr "Afficher les numéros de ligne"
 
-#: ../data/prefs.glade.h:8
+#: ../data/prefs.glade.h:9
 msgid "Do not split words over two lines"
 msgstr "Ne pas couper les mots sur deux lignes"
 
-#: ../data/prefs.glade.h:9
+#: ../data/prefs.glade.h:10
 msgid "Editor"
 msgstr "Éditeur"
 
-#: ../data/prefs.glade.h:10
+#: ../data/prefs.glade.h:11
 #, fuzzy
 msgid "Editor font"
 msgstr "Police de l'éditeur:"
 
-#: ../data/prefs.glade.h:11
+#: ../data/prefs.glade.h:12
 msgid "Enable text wrapping"
 msgstr "Activer le retour à la ligne"
 
-#: ../data/prefs.glade.h:12
+#: ../data/prefs.glade.h:13
 msgid "Extra flags:"
 msgstr ""
 
-#: ../data/prefs.glade.h:13
+#: ../data/prefs.glade.h:14
 #, fuzzy
 msgid "File saving"
 msgstr "Enregistrement du fichier:"
 
-#: ../data/prefs.glade.h:14
+#: ../data/prefs.glade.h:15
 msgid "Font & Colors"
 msgstr ""
 
-#: ../data/prefs.glade.h:15
+#: ../data/prefs.glade.h:16
 msgid "Gummi Preferences"
 msgstr "Préférences de Gummi"
 
-#: ../data/prefs.glade.h:16
+#: ../data/prefs.glade.h:17
 msgid "Highlight current line"
 msgstr "Surligner la ligne actuelle"
 
-#: ../data/prefs.glade.h:17
+#: ../data/prefs.glade.h:18
 #, fuzzy
 msgid "Highlighting"
 msgstr "Ligne actuelle:"
 
-#: ../data/prefs.glade.h:18
+#: ../data/prefs.glade.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Insérer des e(_s)paces au lieu des tabulations"
 
-#: ../data/prefs.glade.h:19
+#: ../data/prefs.glade.h:20
 #, fuzzy
 msgid "Line numbers"
 msgstr "Numéros de ligne:"
 
-#: ../data/prefs.glade.h:20
+#: ../data/prefs.glade.h:21
 msgid "Miscellaneous"
 msgstr "Autres options"
 
-#: ../data/prefs.glade.h:21
+#: ../data/prefs.glade.h:22
 msgid "None"
 msgstr "Aucun"
 
-#: ../data/prefs.glade.h:22
+#: ../data/prefs.glade.h:23
 #, fuzzy
 msgid "PDF Compiling"
 msgstr "Compilation au format PDF:"
 
-#: ../data/prefs.glade.h:23
+#: ../data/prefs.glade.h:24
+msgid "Snippets"
+msgstr ""
+
+#: ../data/prefs.glade.h:25
 #, fuzzy
 msgid "Spell check language"
 msgstr "Langue du vérificateur orthographique:"
 
-#: ../data/prefs.glade.h:24
+#: ../data/prefs.glade.h:26
 #, fuzzy
 msgid "Tab stops"
 msgstr "Tabulations:"
 
-#: ../data/prefs.glade.h:25
+#: ../data/prefs.glade.h:27
 msgid "Tab width:"
 msgstr "Largeur des tabulations:"
 
-#: ../data/prefs.glade.h:26
+#: ../data/prefs.glade.h:28
 #, fuzzy
 msgid "Text wrapping"
 msgstr "Longues lignes:"
 
-#: ../data/prefs.glade.h:27
+#: ../data/prefs.glade.h:29
 #, fuzzy
 msgid "Typesetter command"
 msgstr "Commande:"
 
-#: ../data/prefs.glade.h:28
+#: ../data/prefs.glade.h:30
 msgid "View"
 msgstr "Affichage"
 
-#: ../data/prefs.glade.h:29
+#: ../data/prefs.glade.h:31
 msgid "_Autosave files every"
 msgstr "Enregistrer (_a)utomatiquement toutes les"
 
-#: ../data/prefs.glade.h:30
+#: ../data/prefs.glade.h:32
 msgid "_Enable automatic indentation"
 msgstr "Activ(_e)r l'indentation automatique"
 
-#: ../data/prefs.glade.h:31
+#: ../data/prefs.glade.h:33
 msgid "_Reset defaults"
 msgstr "(_R)éinitialiser"
 
-#: ../data/prefs.glade.h:32
+#: ../data/prefs.glade.h:34
 msgid "compile every"
 msgstr "compiler automatiquement toutes les"
 
-#: ../data/prefs.glade.h:33
+#: ../data/prefs.glade.h:35
 msgid "compile when idle for "
 msgstr "compiler quand inactif depuis "
 
-#: ../data/prefs.glade.h:34
+#: ../data/prefs.glade.h:36
 msgid "minutes"
 msgstr "minutes"
 
-#: ../data/prefs.glade.h:35
+#: ../data/prefs.glade.h:37
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/prefs.glade.h:36
+#: ../data/prefs.glade.h:38
 msgid "seconds"
 msgstr "secondes"
 
-#: ../data/prefs.glade.h:37
+#: ../data/prefs.glade.h:39
 msgid "xelatex"
 msgstr "xelatex"
 
-#: ../src/updatecheck.c:113
+#: ../data/snippets.glade.h:1
+#, fuzzy
+msgid "    "
+msgstr "        "
+
+#: ../data/snippets.glade.h:2
+msgid "Activation"
+msgstr ""
+
+#: ../data/snippets.glade.h:3
+#, fuzzy
+msgid "Edit:"
+msgstr "Édition"
+
+#: ../data/snippets.glade.h:4
+#, fuzzy
+msgid "Reset all snippets"
+msgstr "(_R)éinitialiser"
+
+#: ../data/snippets.glade.h:5
+msgid "Shortcut key:"
+msgstr ""
+
+#: ../data/snippets.glade.h:6
+msgid "Snippets Manager"
+msgstr ""
+
+#: ../data/snippets.glade.h:7
+msgid "Snippets:"
+msgstr ""
+
+#: ../data/snippets.glade.h:8
+msgid "Tab trigger:"
+msgstr ""
+
+#: ../data/snippets.glade.h:9
+msgid "_Reset"
+msgstr ""
+
+#: ../src/editor.c:506
+msgid "Top reached, search from bottom?"
+msgstr ""
+"Le haut du fichier a été atteint, voulez-vous rechercher depuis le bas?"
+
+#: ../src/editor.c:513
+msgid "Bottom reached, search from top?"
+msgstr ""
+"Le bas du fichier a été atteint, voulez-vous rechercher depuis le haut?"
+
+#: ../src/iofunctions.c:94
+#, c-format
+msgid "Saving %s..."
+msgstr "Enregistrement de %s..."
+
+#: ../src/iofunctions.c:111
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+"%s\n"
+"Merci de réessayer ultérieurement."
+
+#: ../src/iofunctions.c:155
+msgid "Can not convert text to UTF-8!\n"
+msgstr "Gummi n'a pas réussi à convertir le document en UTF-8!\n"
+
+#: ../src/iofunctions.c:180
+#, c-format
+msgid "Autosaving file %s"
+msgstr "Enregistrement automatique du fichier %s"
+
+#: ../src/latex.c:172 ../src/gui/gui-main.c:378 ../src/gui/gui-main.c:406
+msgid "The file already exists. Overwrite?"
+msgstr "Le fichier existe déjà. Voulez-vous le remplacer?"
+
+#: ../src/updatecheck.c:112
 #, c-format
 msgid ""
 "Currently installed:\n"
@@ -647,53 +732,125 @@ msgstr ""
 "Version disponible:\n"
 "%s"
 
-#: ../src/updatecheck.c:115
+#: ../src/updatecheck.c:114
 msgid "Update Check"
 msgstr "Vérifier les mises à jours"
-
-#: ../src/latex.c:177 ../src/gui/gui-main.c:340 ../src/gui/gui-main.c:369
-msgid "The file already exists. Overwrite?"
-msgstr "Le fichier existe déjà. Voulez-vous le remplacer?"
-
-#: ../src/iofunctions.c:95
-#, c-format
-msgid "Saving %s..."
-msgstr "Enregistrement de %s..."
-
-#: ../src/iofunctions.c:108
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-"%s\n"
-"Merci de réessayer ultérieurement."
-
-#: ../src/iofunctions.c:154
-msgid "Can not convert text to UTF-8!\n"
-msgstr "Gummi n'a pas réussi à convertir le document en UTF-8!\n"
-
-#: ../src/iofunctions.c:179
-#, c-format
-msgid "Autosaving file %s"
-msgstr "Enregistrement automatique du fichier %s"
 
 #: ../src/utils.c:90
 #, c-format
 msgid ""
-"\n"
-"Gummi has encountered a serious error and requires a restart, you can find "
-"your file in the %s directory\n"
+"%s has encountered a serious error and will require a restart. Your working "
+"data will be restored when you reload your document. Please report bugs at: "
+"http://dev.midnightcoding.org"
 msgstr ""
-"\n"
-"Gummi a rencontré une erreur grave et nécessite d'être redémarré.Vous "
-"pourrez trouvé votre fichier dans le dossier %s\n"
 
-#: ../src/utils.c:131
+#: ../src/utils.c:136
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#: ../src/gui/gui-preview.c:81
+#: ../src/gui/gui-import.c:167
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr "%s: Aucun fichier ou dossier\n"
+
+#: ../src/gui/gui-main.c:331
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "Erreur lors du chargement du fichier récent: %s"
+
+#: ../src/gui/gui-main.c:553
+msgid "Words in text"
+msgstr "Mots dans le texte"
+
+#: ../src/gui/gui-main.c:554
+msgid "Words in headers"
+msgstr "Mots dans les titres"
+
+#: ../src/gui/gui-main.c:555
+msgid "Words in float captions"
+msgstr "Mots dans les légendes de flottants"
+
+#: ../src/gui/gui-main.c:556
+msgid "Number of headers"
+msgstr "Nombre de titres"
+
+#: ../src/gui/gui-main.c:557
+msgid "Number of floats"
+msgstr "Nombre de flottants"
+
+#: ../src/gui/gui-main.c:558
+msgid "Number of math inlines"
+msgstr "Nombre de formules en mode interne"
+
+#: ../src/gui/gui-main.c:559
+msgid "Number of math displayed"
+msgstr "Nombre de formules en mode externe"
+
+#: ../src/gui/gui-main.c:620
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr ""
+"Cette fonction nécessite\n"
+"le programme texcount.\n"
+
+#: ../src/gui/gui-main.c:628
+msgid "Document Statistics"
+msgstr "Statistiques du document"
+
+#: ../src/gui/gui-main.c:807
+msgid "Compiling bibliography file..."
+msgstr "Compilation de la bibliographie..."
+
+#: ../src/gui/gui-main.c:809
+msgid "bibliography compiled without errors"
+msgstr "Bibliographie compilée sans erreurs"
+
+#: ../src/gui/gui-main.c:811
+msgid "Error compiling bibliography file or none detected..."
+msgstr ""
+"Erreur lors de la compilation du fichier de bibliographie ou fichier non "
+"détecté"
+
+#: ../src/gui/gui-main.c:814
+msgid "error compiling bibliography file"
+msgstr "Erreur lors de la compilation du fichier de bibliographie"
+
+#: ../src/gui/gui-main.c:843
+#, c-format
+msgid "%s loaded"
+msgstr "%s chargé"
+
+#: ../src/gui/gui-main.c:883
+msgid "Do you want to save the changes you have made?"
+msgstr "Voulez-vous enregistrer les modifications apportées au document?"
+
+#: ../src/gui/gui-main.c:893
+msgid "Open LaTeX document"
+msgstr "Ouverture d'un document au format LaTeX"
+
+#: ../src/gui/gui-main.c:896
+msgid "Select an image to insert"
+msgstr "Sélectionner une image à insérer"
+
+#: ../src/gui/gui-main.c:897
+msgid "Select bibliography file"
+msgstr "Sélectionner un fichier de bibliographie"
+
+#: ../src/gui/gui-main.c:931
+msgid "Save LaTeX document"
+msgstr "Sauvegarde du fichier LaTeX"
+
+#: ../src/gui/gui-main.c:932
+msgid "Save as LaTeX document"
+msgstr "Enregistrer sous le fichier au format LaTeX"
+
+#: ../src/gui/gui-main.c:933
+msgid "Export to PDF"
+msgstr "Exporter au format PDF"
+
+#. g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
+#: ../src/gui/gui-preview.c:83
 #, c-format
 msgid ""
 "PDF Preview could not initialize.\n"
@@ -712,106 +869,19 @@ msgstr ""
 "S'il vous plaît corrigez les erreurs répertoriées et cliquez ici\n"
 "pour recharger la fenêtre de prévisualisation."
 
-#: ../src/gui/gui-import.c:170
-#, c-format
-msgid "%s: No such file or directory\n"
-msgstr "%s: Aucun fichier ou dossier\n"
+#: ../src/gui/gui-snippets.c:270 ../src/gui/gui-snippets.c:276
+#, fuzzy
+msgid "Type a new shortcut"
+msgstr "Créer un nouveau document"
 
-#: ../src/gui/gui-main.c:290
-#, c-format
-msgid "Error loading recent file: %s"
-msgstr "Erreur lors du chargement du fichier récent: %s"
-
-#: ../src/gui/gui-main.c:531
-msgid "Words in text"
-msgstr "Mots dans le texte"
-
-#: ../src/gui/gui-main.c:532
-msgid "Words in headers"
-msgstr "Mots dans les titres"
-
-#: ../src/gui/gui-main.c:533
-msgid "Words in float captions"
-msgstr "Mots dans les légendes de flottants"
-
-#: ../src/gui/gui-main.c:534
-msgid "Number of headers"
-msgstr "Nombre de titres"
-
-#: ../src/gui/gui-main.c:535
-msgid "Number of floats"
-msgstr "Nombre de flottants"
-
-#: ../src/gui/gui-main.c:536
-msgid "Number of math inlines"
-msgstr "Nombre de formules en mode interne"
-
-#: ../src/gui/gui-main.c:537
-msgid "Number of math displayed"
-msgstr "Nombre de formules en mode externe"
-
-#: ../src/gui/gui-main.c:583
-msgid ""
-"This function requires\n"
-"the texcount program.\n"
-msgstr ""
-"Cette fonction nécessite\n"
-"le programme texcount.\n"
-
-#: ../src/gui/gui-main.c:591
-msgid "Document Statistics"
-msgstr "Statistiques du document"
-
-#: ../src/gui/gui-main.c:783
-msgid "Compiling bibliography file..."
-msgstr "Compilation de la bibliographie..."
-
-#: ../src/gui/gui-main.c:785
-msgid "bibliography compiled without errors"
-msgstr "Bibliographie compilée sans erreurs"
-
-#: ../src/gui/gui-main.c:787
-msgid "Error compiling bibliography file or none detected..."
-msgstr ""
-"Erreur lors de la compilation du fichier de bibliographie ou fichier non "
-"détecté"
-
-#: ../src/gui/gui-main.c:790
-msgid "error compiling bibliography file"
-msgstr "Erreur lors de la compilation du fichier de bibliographie"
-
-#: ../src/gui/gui-main.c:816
-#, c-format
-msgid "%s loaded"
-msgstr "%s chargé"
-
-#: ../src/gui/gui-main.c:859
-msgid "Do you want to save the changes you have made?"
-msgstr "Voulez-vous enregistrer les modifications apportées au document?"
-
-#: ../src/gui/gui-main.c:870
-msgid "Open LaTeX document"
-msgstr "Ouverture d'un document au format LaTeX"
-
-#: ../src/gui/gui-main.c:873
-msgid "Select an image to insert"
-msgstr "Sélectionner une image à insérer"
-
-#: ../src/gui/gui-main.c:874
-msgid "Select bibliography file"
-msgstr "Sélectionner un fichier de bibliographie"
-
-#: ../src/gui/gui-main.c:909
-msgid "Save LaTeX document"
-msgstr "Sauvegarde du fichier LaTeX"
-
-#: ../src/gui/gui-main.c:910
-msgid "Save as LaTeX document"
-msgstr "Enregistrer sous le fichier au format LaTeX"
-
-#: ../src/gui/gui-main.c:911
-msgid "Export to PDF"
-msgstr "Exporter au format PDF"
+#~ msgid ""
+#~ "\n"
+#~ "Gummi has encountered a serious error and requires a restart, you can "
+#~ "find your file in the %s directory\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Gummi a rencontré une erreur grave et nécessite d'être redémarré.Vous "
+#~ "pourrez trouvé votre fichier dans le dossier %s\n"
 
 #~ msgid ""
 #~ "Search document for\n"
@@ -822,14 +892,6 @@ msgstr "Exporter au format PDF"
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Les changements seront effectifs au prochain lancement"
-
-#~ msgid "Top reached, search from bottom?"
-#~ msgstr ""
-#~ "Le haut du fichier a été atteint, voulez-vous rechercher depuis le bas?"
-
-#~ msgid "Bottom reached, search from top?"
-#~ msgstr ""
-#~ "Le bas du fichier a été atteint, voulez-vous rechercher depuis le haut?"
 
 # Gummi Translation for French
 # Copyright (C) Yvan Duron 2010

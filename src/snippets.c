@@ -378,7 +378,9 @@ gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
     GtkTextIter start, end;
     gboolean success = TRUE;
 
+    /* Snippet just activated */
     if (!info->current) {
+        /* Skip $0 and jump to next insertion point */
         if (info->einfo_unique
             && GU_SNIPPET_EXPAND_INFO(info->einfo_unique->data)->group_number
             == 0)
@@ -388,6 +390,7 @@ gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
     } else
         info->current = g_list_next(info->current);
 
+    /* No insertion points left */
     if (!info->current) {
         info->current = g_list_first(info->einfo_sorted);
         if (!info->current
