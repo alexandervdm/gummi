@@ -216,6 +216,8 @@ void gui_new_environment(const gchar* filename) {
     while (gtk_events_pending()) gtk_main_iteration();
     previewgui_reset(gui->previewgui);
     motion_start_timer(gummi->motion);
+    
+    editortabsgui_create_tab(gummi->editor, gummi->editor->filename);
 }
 
 void gui_update_title(void) {
