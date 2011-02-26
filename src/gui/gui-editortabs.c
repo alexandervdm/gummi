@@ -42,24 +42,22 @@ GuEditortabsGui* editortabsgui_init(GtkBuilder* builder) {
     
     GuEditortabsGui* et = g_new0(GuEditortabsGui, 1);
     
-    et->tab_notebook = 
-        GTK_WIDGET(gtk_builder_get_object(builder, "tab_notebook"));
+    et->tab_notebook = gtk_builder_get_object(builder, "tab_notebook");
     
     return et;
 }
 
-void editortabsgui_create_tab(GuEditor* editor, gchar* filename) {
+void editortabsgui_create_tab(GuEditor* editor, const gchar* filename) {
     GtkWidget *scrollwindow;
     GtkWidget *tablabel;
     gchar *tabname;
     
     //gummi_new_environment is central function to create new editors.
 
-    gint nr_pages = 
-        (gtk_notebook_get_n_pages(GTK_NOTEBOOK(g_tabs_notebook)) + 1);
+    gint nr_pages = gtk_notebook_get_n_pages(g_tabs_notebook);
     
     if (filename == NULL) 
-        tabname = g_strdup_printf("Unsaved Document %d", nr_pages);
+        tabname = g_strdup_printf("Unsaved Document %d", (nr_pages+1));
     else 
         tabname = g_path_get_basename(filename);
     tablabel = gtk_label_new(tabname);
@@ -71,8 +69,8 @@ void editortabsgui_create_tab(GuEditor* editor, gchar* filename) {
 
     gtk_container_add(GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->sourceview));
     
-    gtk_notebook_insert_page(
-        GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel, nr_pages);
+    gtk_notebook_append_page(
+        GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel);
 }
 
 

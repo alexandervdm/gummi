@@ -39,15 +39,14 @@
 #define g_tabs_notebook gui->editortabsgui->tab_notebook
 
 typedef struct _GuEditortabsGui {
-    GuEditor* default_editor;
-    GtkWidget *tab_notebook;
+    GtkNotebook *tab_notebook;
 } GuEditortabsGui;
 
 
 
 
 GuEditortabsGui* editortabsgui_init(GtkBuilder* builder);
-void editortabsgui_create_tab(GuEditor* editor, gchar* filename);
+void editortabsgui_create_tab(GuEditor* editor, const gchar* filename);
 GuEditor* get_active_editor(void);
 
 #endif /* __GUMMI_GUI_EDITORTABS_H__ */

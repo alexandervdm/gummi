@@ -217,7 +217,19 @@ void gui_new_environment(const gchar* filename) {
     previewgui_reset(gui->previewgui);
     motion_start_timer(gummi->motion);
     
-    editortabsgui_create_tab(gummi->editor, gummi->editor->filename);
+    int nrpages = gtk_notebook_get_n_pages(gui->editortabsgui->tab_notebook);
+    if (nrpages != 0) { // change this, because we will want to close the only tab as well sometimes
+        /*
+        GuEditor *ed = editor_init(gummi->motion);
+        // todo: append to glist
+        editortabsgui_create_tab(ed, filename);
+        gtk_widget_show_all(gui->mainwindow);
+        */
+        printf("multi-tab code!\n");
+    }
+    else {
+        editortabsgui_create_tab(gummi->editor, gummi->editor->filename);
+    }
 }
 
 void gui_update_title(void) {
