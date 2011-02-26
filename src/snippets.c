@@ -45,8 +45,7 @@
 GuSnippets* snippets_init(const gchar* filename) {
     GuSnippets* s = g_new0(GuSnippets, 1);
     gchar* dirname = g_path_get_dirname(filename);
-    g_mkdir_with_parents(dirname,
-            S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+    g_mkdir_with_parents(dirname, DIR_PERMS);
     g_free(dirname);
 
     slog(L_INFO, "snippets : %s\n", filename);
@@ -58,11 +57,11 @@ GuSnippets* snippets_init(const gchar* filename) {
 }
 
 void snippets_set_default(GuSnippets* sc) {
-    FILE* fh = 0;
-    if (!(fh = fopen(sc->filename, "w")))
-        slog(L_FATAL, "can't open config for writing... abort\n");
-
-    fclose(fh);
+    GError* err = NULL;
+    if (!utils_copy_file(DATADIR"/snippets.cfg", sc->filename, &err))
+        slog(L_G_ERROR, "can't open snippets file for writing, snippets may "
+                "not work properly.");
+    snippets_load(sc);
 }
 
 void snippets_load(GuSnippets* sc) {
@@ -78,6 +77,7 @@ void snippets_load(GuSnippets* sc) {
 
     if (!(fh = fopen(sc->filename, "r"))) {
         slog(L_ERROR, "can't find snippets file, reseting to default\n");
+        snippets_set_default(sc);
         return snippets_load(sc);
     }
 
@@ -228,9 +228,9 @@ void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
     snippet_info_replace_constants(sc->info, ec);
     gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
 
+    sc->activated = TRUE;
     if (!snippet_info_goto_next_placeholder(sc->info, ec))
         snippets_deactivate(sc, ec);
-    sc->activated = TRUE;
 }
 
 void snippets_deactivate(GuSnippets* sc, GuEditor* ec) {

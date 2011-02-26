@@ -49,7 +49,9 @@ typedef struct _GuSnippetsGui {
 } GuSnippetsGui;
 
 GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow);
-void snippetsgui_main(GuSnippetsGui* snip);
+void snippetsgui_main(GuSnippetsGui* sc);
+void snippetsgui_load_snippets(GuSnippetsGui* sc);
+void snippetsgui_activate_row(GuSnippetsGui* sc, gint row);
 void snippetsgui_update_snippet(GuSnippets* sc);
 void on_button_new_snippet_clicked(GtkBuilder* widget, void* user);
 void on_button_remove_snippet_clicked(GtkBuilder* widget, void* user);
@@ -59,6 +61,7 @@ void on_accelerator_entry_focus_out_event(GtkWidget* widget, void* user);
 gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
         GdkEventKey* event, void* user);
 void on_snippetsgui_close_clicked(GtkWidget* widget, void* user);
+void on_snippetsgui_reset_clicked(GtkWidget* widget, void* user);
 void on_snippets_tree_view_row_activated(GtkTreeView* view, void* user);
 void on_snippet_renderer_edited(GtkCellRendererText* renderer, gchar *path,
         gchar* name, void* user);

@@ -99,8 +99,7 @@ void config_init(const gchar* filename) {
     const gchar* config_version = NULL;
     gchar* dirname = g_path_get_dirname(filename);
 
-    g_mkdir_with_parents(dirname,
-            S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+    g_mkdir_with_parents(dirname, DIR_PERMS);
     g_free(dirname);
 
     slog(L_INFO, "configuration file: %s\n", filename);

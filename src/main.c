@@ -70,29 +70,28 @@ int main (int argc, char *argv[]) {
     g_option_context_add_main_entries(context, entries, PACKAGE);
     g_option_context_parse(context, &argc, &argv, &error);
 
+    /* initialize GTK */
+    gtk_init (&argc, &argv);
+    GtkBuilder* builder = gtk_builder_new();
+    gtk_builder_add_from_file(builder, DATADIR"/gummi.glade", NULL);
+    gtk_builder_set_translation_domain(builder, PACKAGE);
+
+    /* Initialize logging */
     slog_init(debug);
     slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
-    /* set up configuration file */
+    /* Initialize configuration */
     gchar* configname = g_build_filename(g_get_user_config_dir(), "gummi",
                                   "gummi.cfg", NULL);
     config_init(configname);
     config_load();
     g_free(configname);
 
-    /* initialize gtk */
-    gtk_init (&argc, &argv);
-    GtkBuilder* builder = gtk_builder_new();
-    gtk_builder_add_from_file(builder, DATADIR"/gummi.glade", NULL);
-    gtk_builder_set_translation_domain(builder, PACKAGE);
-
-    /* Initialize classes */
-    //gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
-    //                              "snippets", NULL);
-
-    /* Initialize Gummi */
-    gchar* snippetsname = DATADIR"/snippets";
+    /* Initialize Classes */
+    gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
+                                  "snippets.cfg", NULL);
     GList* editors = NULL;
+
     GuMotion* motion = motion_init();
     GuLatex* latex = latex_init(); 
     GuBiblio* biblio = biblio_init(builder);
@@ -101,17 +100,16 @@ int main (int argc, char *argv[]) {
     editors = g_list_append(editors, editor);
     GuSnippets* snippets = snippets_init(snippetsname);
     gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
-    //g_free(snippetsname);
+
+    g_free(snippetsname);
 
     /* Initialize GUI */
     gui = gui_init(builder);
+    slog_set_gui_parent(gui->mainwindow);
 
     /* Install acceleration group to mainwindow */
     gtk_window_add_accel_group(GTK_WINDOW(gui->mainwindow),
             snippets->accel_group);
-
-
-    slog_set_gui_parent(gui->mainwindow);
 
     if (argc != 2) {
         iofunctions_load_default_text(editor);
