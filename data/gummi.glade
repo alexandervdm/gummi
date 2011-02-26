@@ -260,6 +260,15 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="menu_close">
+                        <property name="label">gtk-close</property>
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkImageMenuItem" id="menu_quit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
@@ -597,7 +606,7 @@ and update preview.</property>
                   <object class="GtkToolButton" id="tool_new">
                     <property name="visible">True</property>
                     <property name="tooltip_text" translatable="yes">Create a new document</property>
-                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="label" translatable="yes">New</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-new</property>
                     <signal name="clicked" handler="on_menu_new_activate"/>
@@ -1464,9 +1473,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
