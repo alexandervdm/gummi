@@ -268,17 +268,20 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
         }
     } else {
         gchar* key = NULL;
+        gboolean found = FALSE;
         editor_get_current_iter(ec, &current);
         if (!gtk_text_iter_ends_word(&current)) return FALSE;
         start = current;
         gtk_text_iter_backward_word_start(&start);
         key = gtk_text_iter_get_text(&start, &current);
+
         if (snippets_get_value(sc, key)) {
             gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
             snippets_activate(sc, ec, key);
+            found = TRUE;
         }
         g_free(key);
-        return sc->activated;
+        return found;
     }
     return FALSE;
 }
