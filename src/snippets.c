@@ -61,8 +61,10 @@ void snippets_set_default(GuSnippets* sc) {
     gchar* snip = g_build_filename(DATADIR, "snippets", "snippets.cfg", NULL);
     if (!utils_copy_file(snip, sc->filename, &err)) {
         slog(L_G_ERROR, "can't open snippets file for writing, snippets may "
-                "not work properly.");
+                "not work properly.\n");
         g_error_free(err);
+    } else {
+        snippets_load(sc);
     }
     g_free(snip);
 }
@@ -81,7 +83,7 @@ void snippets_load(GuSnippets* sc) {
     if (!(fh = fopen(sc->filename, "r"))) {
         slog(L_ERROR, "can't find snippets file, reseting to default\n");
         snippets_set_default(sc);
-        return snippets_load(sc);
+        return;
     }
 
     current = sc->head = prev = g_new0(slist, 1);

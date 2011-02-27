@@ -48,7 +48,7 @@
     if (s->loading) return x;
 
 typedef struct _GuSnippetsGui {
-    GtkWidget* snippetswindow;
+    GtkWindow* snippetswindow;
     GtkTreeView* snippets_tree_view;
     GtkScrolledWindow* snippet_scroll;
     GtkEntry* tab_trigger_entry;

@@ -64,7 +64,7 @@ GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
     g_free(ui);
 
     s->snippetswindow =
-        GTK_WIDGET(gtk_builder_get_object(builder, "snippetswindow"));
+        GTK_WINDOW(gtk_builder_get_object(builder, "snippetswindow"));
     s->snippets_tree_view =
         GTK_TREE_VIEW(gtk_builder_get_object(builder, "snippets_tree_view"));
     s->snippet_scroll =
@@ -103,15 +103,14 @@ GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
     g_signal_connect(s->view, "key-release-event",
             G_CALLBACK(on_snippet_source_buffer_key_release), NULL);
 
-    gtk_window_set_transient_for(GTK_WINDOW(s->snippetswindow), mainwindow);
+    gtk_window_set_transient_for(s->snippetswindow, mainwindow);
     gtk_builder_connect_signals(builder, NULL);
-    //gtk_widget_show_all(s->snippetswindow);
 
     return s;
 }
 
 void snippetsgui_main(GuSnippetsGui* s) {
-    gtk_widget_show_all(s->snippetswindow);
+    gtk_widget_show_all(GTK_WIDGET(s->snippetswindow));
 }
 
 void snippetsgui_load_snippets(GuSnippetsGui* s) {
@@ -202,7 +201,7 @@ void snippetsgui_update_snippet(GuSnippets* sc) {
 }
 
 void on_snippetsgui_close_clicked(GtkWidget* widget, void* user) {
-    gtk_widget_hide_all(gui->snippetsgui->snippetswindow);
+    gtk_widget_hide_all(GTK_WIDGET(gui->snippetsgui->snippetswindow));
     snippets_save(gummi->snippets);
 }
 
