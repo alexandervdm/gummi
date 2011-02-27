@@ -32,7 +32,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <gdk/gdkkeysyms.h>
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
@@ -43,6 +42,7 @@
 
 #include "environment.h"
 #include "gui/gui-main.h"
+#include "porting.h"
 #include "snippets.h"
 
 extern Gummi* gummi;

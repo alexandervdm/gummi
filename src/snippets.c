@@ -35,11 +35,11 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include <gdk/gdkkeysyms.h>
 #include <glib.h>
 
 #include "editor.h"
 #include "gui/gui-editortabs.h"
+#include "porting.h"
 #include "utils.h"
 
 GuSnippets* snippets_init(const gchar* filename) {

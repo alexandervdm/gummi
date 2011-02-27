@@ -61,7 +61,7 @@
                         <property name="can_focus">True</property>
                         <property name="model">list_snippets</property>
                         <property name="headers_visible">False</property>
-                        <signal name="row_activated" handler="on_snippets_tree_view_row_activated"/>
+                        <signal name="cursor_changed" handler="on_snippets_tree_view_cursor_changed"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="snippet_column">
                             <property name="title">Snippets</property>
