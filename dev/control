@@ -3,7 +3,7 @@ Section: misc
 Priority: extra
 Maintainer: Wei-Ning Huang (AZ) <aitjcize@gmail.com>
 Build-Depends: cdbs, debhelper (>= 7), autotools-dev, intltool, libgtk2.0-dev, libglib2.0-dev, libpoppler-glib-dev, libgtksourceview2.0-dev, libgtkspell-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.9.1
 Homepage: http://gummi.midnightcoding.org/
 
 Package: gummi
