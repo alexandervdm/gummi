@@ -43,8 +43,8 @@
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
-#define g_e_buffer GTK_TEXT_BUFFER(gummi->editor->sourcebuffer)
-#define g_e_view GTK_TEXT_VIEW(gummi->editor->sourceview)
+#define g_e_buffer GTK_TEXT_BUFFER(gummi->editor->buffer)
+#define g_e_view GTK_TEXT_VIEW(gummi->editor->view)
 
 typedef struct _GummiGui {
     GuEditortabsGui* editortabsgui;

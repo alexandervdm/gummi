@@ -47,7 +47,7 @@ static guint sid = 0;
 void iofunctions_load_default_text(GuEditor* ec) {
     gchar* str = g_strdup(config_get_value("welcome"));
     editor_fill_buffer(ec, str);
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
+    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->buffer), FALSE);
     g_free(str);
 }
 
@@ -77,7 +77,7 @@ void iofunctions_load_file(GuEditor* ec, const gchar* filename) {
         goto cleanup;
 
     editor_fill_buffer(ec, decoded);
-    gtk_text_buffer_set_modified(ec_sourcebuffer, FALSE);
+    gtk_text_buffer_set_modified(ec_buffer, FALSE);
 
 cleanup:
     g_free(decoded);
@@ -111,7 +111,7 @@ void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
         slog(L_G_ERROR, _("%s\nPlease try again later."), err->message);
         g_error_free(err);
     }
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->sourcebuffer), FALSE);
+    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->buffer), FALSE);
     g_free(encoded);
     g_free(text); 
 }
@@ -180,8 +180,8 @@ gboolean iofunctions_autosave_cb(gpointer name) {
     char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
     if (fname) {
         iofunctions_write_file(gummi->editor, fname);
-        gtk_text_buffer_set_modified(
-                GTK_TEXT_BUFFER(gummi->editor->sourcebuffer), FALSE);
+        gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(gummi->editor->buffer),
+                FALSE);
         statusbar_set_message(buf);
         g_free(buf);
         return TRUE;

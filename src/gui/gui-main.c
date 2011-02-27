@@ -359,7 +359,7 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
         gui_open_file(filename);
     g_free(filename);
 
-    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
 }
 
 void on_menu_save_activate(GtkWidget *widget, void* user) {
@@ -388,7 +388,7 @@ void on_menu_save_activate(GtkWidget *widget, void* user) {
     } else
         iofunctions_write_file(gummi->editor, gummi->editor->filename); 
     gui_update_title();
-    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
 }
 
 void on_menu_saveas_activate(GtkWidget *widget, void* user) {
@@ -413,7 +413,7 @@ void on_menu_saveas_activate(GtkWidget *widget, void* user) {
         iofunctions_write_file(gummi->editor, filename); 
         g_free(filename);
     }
-    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->sourceview));
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
 }
 
 void on_menu_cut_activate(GtkWidget *widget, void* user) {

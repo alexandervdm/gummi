@@ -171,7 +171,7 @@ void prefsgui_set_current_settings(GuPrefsGui* prefs) {
 
     PangoFontDescription* font_desc = pango_font_description_from_string(font);
     gtk_widget_modify_font(GTK_WIDGET(prefs->default_text), font_desc);
-    gtk_widget_modify_font(GTK_WIDGET(gummi->editor->sourceview), font_desc);
+    gtk_widget_modify_font(GTK_WIDGET(gummi->editor->view), font_desc);
     pango_font_description_free(font_desc);
 
     /* set all checkboxs */
@@ -288,7 +288,7 @@ void toggle_linenumbers(GtkWidget* widget, void* user) {
 
     config_set_value("line_numbers", newval? "True": "False");
     gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(
-                gummi->editor->sourceview), newval);
+                gummi->editor->view), newval);
 }
 
 void toggle_highlighting(GtkWidget* widget, void* user) {
@@ -296,7 +296,7 @@ void toggle_highlighting(GtkWidget* widget, void* user) {
 
     config_set_value("highlighting", newval? "True": "False");
     gtk_source_view_set_highlight_current_line(GTK_SOURCE_VIEW(
-                gummi->editor->sourceview), newval);
+                gummi->editor->view), newval);
 }
 
 void toggle_textwrapping(GtkWidget* widget, void* user) {
@@ -341,13 +341,13 @@ void toggle_spaces_instof_tabs(GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("spaces_instof_tabs", newval? "True": "False");
     gtk_source_view_set_insert_spaces_instead_of_tabs(
-            gummi->editor->sourceview, newval);
+            gummi->editor->view, newval);
 }
 
 void toggle_autoindentation(GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
     config_set_value("autoindentation", newval? "True": "False");
-    gtk_source_view_set_auto_indent(gummi->editor->sourceview, newval);
+    gtk_source_view_set_auto_indent(gummi->editor->view, newval);
 }
 
 void toggle_autosaving(GtkWidget* widget, void* user) {
@@ -398,7 +398,7 @@ void on_tabwidth_value_changed(GtkWidget* widget, void* user) {
     gchar buf[16];
 
     config_set_value("tabwidth", g_ascii_dtostr(buf, 16, (double)newval));
-    gtk_source_view_set_tab_width(gummi->editor->sourceview, newval);
+    gtk_source_view_set_tab_width(gummi->editor->view, newval);
 }
 
 void on_configure_snippets_clicked(GtkWidget* widget, void* user) {
@@ -426,7 +426,7 @@ void on_editor_font_set(GtkWidget* widget, void* user) {
     slog(L_INFO, "setting font to %s\n", font);
     config_set_value("font", font);
     PangoFontDescription* font_desc = pango_font_description_from_string(font);
-    gtk_widget_modify_font(GTK_WIDGET(gummi->editor->sourceview), font_desc);
+    gtk_widget_modify_font(GTK_WIDGET(gummi->editor->view), font_desc);
     pango_font_description_free(font_desc);
 }
 

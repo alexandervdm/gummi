@@ -216,17 +216,17 @@ void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key) {
     sc->info->start_offset = gtk_text_iter_get_offset(&start);
 
     /* Prepare constants */
-    gtk_text_buffer_get_selection_bounds(ec_sourcebuffer, &start, &end);
+    gtk_text_buffer_get_selection_bounds(ec_buffer, &start, &end);
     sc->info->sel_text = gtk_text_iter_get_text(&start, &end);
     GSList* marks = gtk_text_iter_get_marks(&start);
     sc->info->sel_start = *GTK_TEXT_MARK(marks->data);
     g_slist_free(marks);
 
-    gtk_text_buffer_insert(ec_sourcebuffer, &start, sc->info->expanded, -1);
+    gtk_text_buffer_insert(ec_buffer, &start, sc->info->expanded, -1);
     snippet_info_create_marks(sc->info, ec);
     snippet_info_initial_expand(sc->info, ec);
     snippet_info_replace_constants(sc->info, ec);
-    gtk_text_buffer_set_modified(ec_sourcebuffer, TRUE);
+    gtk_text_buffer_set_modified(ec_buffer, TRUE);
 
     sc->activated = TRUE;
     if (!snippet_info_goto_next_placeholder(sc->info, ec))
@@ -260,7 +260,7 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
         gint offset = gtk_text_iter_get_offset(&current);
         GList* last = g_list_last(sc->info->einfo);
         if (last) {
-            gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &current,
+            gtk_text_buffer_get_iter_at_mark(ec_buffer, &current,
                     GU_SNIPPET_EXPAND_INFO(last->data)->left_mark);
             gint bound_end = gtk_text_iter_get_offset(&current);
             if (offset < sc->info->start_offset || offset > bound_end)
@@ -276,7 +276,7 @@ gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
         key = gtk_text_iter_get_text(&start, &current);
 
         if (snippets_get_value(sc, key)) {
-            gtk_text_buffer_delete(ec_sourcebuffer, &start, &current);
+            gtk_text_buffer_delete(ec_buffer, &start, &current);
             snippets_activate(sc, ec, key);
             found = TRUE;
         }
@@ -399,10 +399,10 @@ gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
         success = FALSE;
     }
     einfo = GU_SNIPPET_EXPAND_INFO(info->current->data);
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start, einfo->left_mark);
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end, einfo->right_mark);
-    gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
-    gtk_text_buffer_select_range(ec_sourcebuffer, &start, &end);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &start, einfo->left_mark);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &end, einfo->right_mark);
+    gtk_text_buffer_place_cursor(ec_buffer, &start);
+    gtk_text_buffer_select_range(ec_buffer, &start, &end);
     return success;
 }
 
@@ -414,10 +414,10 @@ void snippet_info_goto_prev_placeholder(GuSnippetInfo* info, GuEditor* ec) {
     else
         info->current = g_list_previous(info->current);
     einfo = GU_SNIPPET_EXPAND_INFO(info->current->data);
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start, einfo->left_mark);
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end, einfo->right_mark);
-    gtk_text_buffer_place_cursor(ec_sourcebuffer, &start);
-    gtk_text_buffer_select_range(ec_sourcebuffer, &start, &end);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &start, einfo->left_mark);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &end, einfo->right_mark);
+    gtk_text_buffer_place_cursor(ec_buffer, &start);
+    gtk_text_buffer_select_range(ec_buffer, &start, &end);
 }
 
 void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
@@ -436,14 +436,14 @@ void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec) {
 
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
-        gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &start,
+        gtk_text_buffer_get_iter_at_offset(ec_buffer, &start,
                 info->start_offset + einfo->start);
-        gtk_text_buffer_get_iter_at_offset(ec_sourcebuffer, &end,
+        gtk_text_buffer_get_iter_at_offset(ec_buffer, &end,
                 info->start_offset + einfo->start + einfo->len);
         einfo->left_mark = gtk_text_mark_new(NULL, TRUE);
         einfo->right_mark = gtk_text_mark_new(NULL, FALSE);
-        gtk_text_buffer_add_mark(ec_sourcebuffer, einfo->left_mark, &start);
-        gtk_text_buffer_add_mark(ec_sourcebuffer, einfo->right_mark, &end);
+        gtk_text_buffer_add_mark(ec_buffer, einfo->left_mark, &start);
+        gtk_text_buffer_add_mark(ec_buffer, einfo->right_mark, &end);
         current = g_list_next(current);
     }
 }
@@ -453,8 +453,8 @@ void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec) {
 
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
-        gtk_text_buffer_delete_mark(ec_sourcebuffer, einfo->left_mark);
-        gtk_text_buffer_delete_mark(ec_sourcebuffer, einfo->right_mark);
+        gtk_text_buffer_delete_mark(ec_buffer, einfo->left_mark);
+        gtk_text_buffer_delete_mark(ec_buffer, einfo->right_mark);
         current = g_list_next(current);
     }
 }
@@ -479,16 +479,15 @@ void snippet_info_initial_expand(GuSnippetInfo* info, GuEditor* ec) {
 
     current = g_list_first(info->einfo);
     info->offset = 0;
+
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
         g_hash_table_lookup_extended(map, (gpointer)einfo->group_number,
                 (gpointer)&key, (gpointer)&value);
-        gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start,
-                einfo->left_mark);
-        gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end,
-                einfo->right_mark);
-        gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
-        gtk_text_buffer_insert(ec_sourcebuffer, &start, einfo->text, -1);
+        gtk_text_buffer_get_iter_at_mark(ec_buffer, &start, einfo->left_mark);
+        gtk_text_buffer_get_iter_at_mark(ec_buffer, &end, einfo->right_mark);
+        gtk_text_buffer_delete(ec_buffer, &start, &end);
+        gtk_text_buffer_insert(ec_buffer, &start, einfo->text, -1);
         current = g_list_next(current);
     }
     g_hash_table_destroy(map);
@@ -501,28 +500,28 @@ void snippet_info_replace_constants(GuSnippetInfo* info, GuEditor* ec) {
 
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
-        gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start,
+        gtk_text_buffer_get_iter_at_mark(ec_buffer, &start,
                 einfo->left_mark);
-        gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end,
+        gtk_text_buffer_get_iter_at_mark(ec_buffer, &end,
                 einfo->right_mark);
         text = gtk_text_iter_get_text(&start, &end);
         if (strcmp(text, "$SELECTED_TEXT") == 0) {
             GtkTextIter ms, me;
-            gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
-            gtk_text_buffer_insert(ec_sourcebuffer, &start, info->sel_text, -1);
-            gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &ms,
+            gtk_text_buffer_delete(ec_buffer, &start, &end);
+            gtk_text_buffer_insert(ec_buffer, &start, info->sel_text, -1);
+            gtk_text_buffer_get_iter_at_mark(ec_buffer, &ms,
                     &info->sel_start);
             me = ms;
             gtk_text_iter_forward_chars(&me, strlen(info->sel_text));
-            gtk_text_buffer_delete(ec_sourcebuffer, &ms, &me);
+            gtk_text_buffer_delete(ec_buffer, &ms, &me);
         } else if (strcmp(text, "$FILENAME") == 0) {
-            gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
-            gtk_text_buffer_insert(ec_sourcebuffer, &start,
+            gtk_text_buffer_delete(ec_buffer, &start, &end);
+            gtk_text_buffer_insert(ec_buffer, &start,
                     ec->filename? ec->filename: "", -1);
         } else if (strcmp(text, "$BASENAME") == 0) {
             gchar* basename = g_path_get_basename(ec->filename?ec->filename:"");
-            gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
-            gtk_text_buffer_insert(ec_sourcebuffer, &start, basename, -1);
+            gtk_text_buffer_delete(ec_buffer, &start, &end);
+            gtk_text_buffer_insert(ec_buffer, &start, basename, -1);
             g_free(basename);
         }
         g_free(text);
@@ -537,21 +536,19 @@ void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec) {
     gchar* text = NULL;
     GtkTextIter start, end;
 
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start,
-            active->left_mark);
-    gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end,
-            active->right_mark);
-    text = gtk_text_buffer_get_text(ec_sourcebuffer, &start, &end, TRUE);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &start, active->left_mark);
+    gtk_text_buffer_get_iter_at_mark(ec_buffer, &end, active->right_mark);
+    text = gtk_text_buffer_get_text(ec_buffer, &start, &end, TRUE);
 
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO(current->data);
         if (einfo != active && einfo->group_number == active->group_number) {
-            gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &start,
+            gtk_text_buffer_get_iter_at_mark(ec_buffer, &start,
                     einfo->left_mark);
-            gtk_text_buffer_get_iter_at_mark(ec_sourcebuffer, &end,
+            gtk_text_buffer_get_iter_at_mark(ec_buffer, &end,
                     einfo->right_mark);
-            gtk_text_buffer_delete(ec_sourcebuffer, &start, &end);
-            gtk_text_buffer_insert(ec_sourcebuffer, &start, text, -1);
+            gtk_text_buffer_delete(ec_buffer, &start, &end);
+            gtk_text_buffer_insert(ec_buffer, &start, text, -1);
         }
         current = g_list_next(current);
     }

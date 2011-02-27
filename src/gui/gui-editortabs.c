@@ -42,7 +42,8 @@ GuEditortabsGui* editortabsgui_init(GtkBuilder* builder) {
     
     GuEditortabsGui* et = g_new0(GuEditortabsGui, 1);
     
-    et->tab_notebook = gtk_builder_get_object(builder, "tab_notebook");
+    et->tab_notebook =
+        GTK_NOTEBOOK(gtk_builder_get_object(builder, "tab_notebook"));
     
     return et;
 }
@@ -69,8 +70,7 @@ void editortabsgui_create_tab(GuEditor* editor, const gchar* filename) {
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrollwindow),
                                     GTK_POLICY_AUTOMATIC, 
                                     GTK_POLICY_AUTOMATIC);
-    gtk_container_add(
-            GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->sourceview));
+    gtk_container_add(GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->view));
 
     gtk_notebook_append_page(
         GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel);

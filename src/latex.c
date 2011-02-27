@@ -58,12 +58,12 @@ void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
 
     /* save selection */
     gtk_text_buffer_get_selection_bounds(
-            GTK_TEXT_BUFFER(ec->sourcebuffer), &start, &end);
+            GTK_TEXT_BUFFER(ec->buffer), &start, &end);
     text = editor_grab_buffer(ec);
 
     /* restore selection */
     gtk_text_buffer_select_range(
-            GTK_TEXT_BUFFER(ec->sourcebuffer), &start, &end);
+            GTK_TEXT_BUFFER(ec->buffer), &start, &end);
     
     fp = fopen(ec->workfile, "w");
     

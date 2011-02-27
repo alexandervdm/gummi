@@ -43,8 +43,8 @@
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 
-#define ec_sourcebuffer GTK_TEXT_BUFFER(ec->sourcebuffer)
-#define ec_sourceview GTK_TEXT_VIEW(ec->sourceview)
+#define ec_buffer GTK_TEXT_BUFFER(ec->buffer)
+#define ec_view GTK_TEXT_VIEW(ec->view)
 
 typedef struct _GuEditor {
     /* File related members */
@@ -57,8 +57,8 @@ typedef struct _GuEditor {
     const gchar* tmpdir;
 
     /* GUI related members */
-    GtkSourceView* sourceview;
-    GtkSourceBuffer* sourcebuffer;
+    GtkSourceView* view;
+    GtkSourceBuffer* buffer;
     GtkSourceStyleSchemeManager* stylemanager;
     GtkTextTag* errortag;
     GtkTextTag* searchtag;
