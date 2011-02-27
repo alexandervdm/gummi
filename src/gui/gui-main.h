@@ -54,7 +54,7 @@ typedef struct _GummiGui {
     GuSearchGui* searchgui;
     GuSnippetsGui* snippetsgui;
 
-    GtkWidget *mainwindow;
+    GtkWindow *mainwindow;
     GtkTextBuffer *errorbuff;
     GtkVBox* rightpane;
     GtkHBox* toolbar;

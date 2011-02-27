@@ -43,11 +43,13 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-GuPrefsGui* prefsgui_init(GtkWidget* mainwindow) {
+GuPrefsGui* prefsgui_init(GtkWindow* mainwindow) {
     GuPrefsGui* p = g_new0(GuPrefsGui, 1);
     GtkBuilder* builder = gtk_builder_new();
-    gtk_builder_add_from_file(builder, DATADIR"/prefs.glade", NULL);
+    gchar* ui = g_build_filename(DATADIR, "ui", "prefs.glade", NULL);
+    gtk_builder_add_from_file(builder, ui, NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
+    g_free(ui);
 
     p->prefwindow =
         GTK_WIDGET(gtk_builder_get_object(builder, "prefwindow"));
@@ -103,8 +105,7 @@ GuPrefsGui* prefsgui_init(GtkWidget* mainwindow) {
     p->compile_box = GTK_HBOX(gtk_builder_get_object(builder, "compile_box"));
     p->commandbox = GTK_HBOX(gtk_builder_get_object(builder, "commandbox"));
 
-    gtk_window_set_transient_for(GTK_WINDOW(p->prefwindow), 
-            GTK_WINDOW(mainwindow));
+    gtk_window_set_transient_for(GTK_WINDOW(p->prefwindow), mainwindow);
 
     /* list available style schemes */
     GList* schemes = editor_list_style_scheme_sorted(gummi->editor);

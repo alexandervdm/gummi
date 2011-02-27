@@ -48,11 +48,13 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow) {
+GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
     GuSnippetsGui* s = g_new0(GuSnippetsGui, 1);
     GtkBuilder* builder = gtk_builder_new();
-    gtk_builder_add_from_file(builder, DATADIR"/snippets.glade", NULL);
+    gchar* ui = g_build_filename(DATADIR, "ui", "snippets.glade", NULL);
+    gtk_builder_add_from_file(builder, ui, NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
+    g_free(ui);
 
     s->snippetswindow =
         GTK_WIDGET(gtk_builder_get_object(builder, "snippetswindow"));
@@ -81,8 +83,7 @@ GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow) {
     g_signal_connect(s->view, "key-release-event",
             G_CALLBACK(on_snippet_source_buffer_key_release), NULL);
 
-    gtk_window_set_transient_for(GTK_WINDOW(s->snippetswindow), 
-            GTK_WINDOW(mainwindow));
+    gtk_window_set_transient_for(GTK_WINDOW(s->snippetswindow), mainwindow);
     gtk_builder_connect_signals(builder, NULL);
     //gtk_widget_show_all(s->snippetswindow);
 

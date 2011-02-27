@@ -73,8 +73,10 @@ int main (int argc, char *argv[]) {
     /* initialize GTK */
     gtk_init (&argc, &argv);
     GtkBuilder* builder = gtk_builder_new();
-    gtk_builder_add_from_file(builder, DATADIR"/gummi.glade", NULL);
+    gchar* ui = g_build_filename(DATADIR, "ui", "gummi.glade", NULL);
+    gtk_builder_add_from_file(builder, ui, NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
+    g_free(ui);
 
     /* Initialize logging */
     slog_init(debug);
@@ -89,7 +91,7 @@ int main (int argc, char *argv[]) {
 
     /* Initialize Classes */
     gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
-                                  "snippets.cfg", NULL);
+                                  "snippets", "snippets.cfg", NULL);
     GList* editors = NULL;
 
     GuMotion* motion = motion_init();
@@ -108,8 +110,7 @@ int main (int argc, char *argv[]) {
     slog_set_gui_parent(gui->mainwindow);
 
     /* Install acceleration group to mainwindow */
-    gtk_window_add_accel_group(GTK_WINDOW(gui->mainwindow),
-            snippets->accel_group);
+    gtk_window_add_accel_group(gui->mainwindow, snippets->accel_group);
 
     if (argc != 2) {
         iofunctions_load_default_text(editor);

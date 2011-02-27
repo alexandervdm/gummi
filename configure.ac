@@ -76,8 +76,12 @@ AC_SUBST(GUI_CFLAGS)
 AC_CONFIG_FILES([Makefile
 		 src/Makefile
 		 data/Makefile
+		 data/ui/Makefile
+		 data/icons/Makefile
+		 data/snippets/Makefile
+		 data/misc/Makefile
 		 po/Makefile.in
-		 data/$PACKAGE.desktop
+		 data/misc/$PACKAGE.desktop
 		 ])
 AC_OUTPUT
 

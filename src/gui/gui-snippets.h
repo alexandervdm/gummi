@@ -61,7 +61,7 @@ typedef struct _GuSnippetsGui {
     gboolean loading;
 } GuSnippetsGui;
 
-GuSnippetsGui* snippetsgui_init(GtkWidget* mainwindow);
+GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow);
 void snippetsgui_main(GuSnippetsGui* sc);
 void snippetsgui_load_snippets(GuSnippetsGui* sc);
 void snippetsgui_move_cursor_to_row(GuSnippetsGui* sc, gint row);

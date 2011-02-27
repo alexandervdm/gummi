@@ -67,7 +67,7 @@ GummiGui* gui_init(GtkBuilder* builder) {
 
     errortext = GTK_WIDGET(gtk_builder_get_object(builder, "errorfield"));
     g->mainwindow =
-        GTK_WIDGET(gtk_builder_get_object(builder, "mainwindow"));
+        GTK_WINDOW(gtk_builder_get_object(builder, "mainwindow"));
     g->toolbar =
         GTK_HBOX(gtk_builder_get_object(builder, "toolbar"));
     g->statusbar =
@@ -106,22 +106,25 @@ GummiGui* gui_init(GtkBuilder* builder) {
     g->prefsgui = prefsgui_init(g->mainwindow);
     g->snippetsgui = snippetsgui_init(g->mainwindow);
 
-    gtk_window_resize(GTK_WINDOW(g->mainwindow),
+    gchar* icon_file = g_build_filename(DATADIR, "icons", "icon.png", NULL);
+    gtk_window_set_icon_from_file(g->mainwindow, icon_file, NULL);
+    g_free(icon_file);
+    gtk_window_resize(g->mainwindow,
                       atoi(config_get_value("mainwindow_w")),
                       atoi(config_get_value("mainwindow_h")));
 
     wx = atoi(config_get_value("mainwindow_x"));
     wy = atoi(config_get_value("mainwindow_y"));
     if (wx && wy)
-      gtk_window_move(GTK_WINDOW(g->mainwindow), wx, wy);
+      gtk_window_move(g->mainwindow, wx, wy);
     else
-      gtk_window_set_position(GTK_WINDOW(g->mainwindow), GTK_WIN_POS_CENTER);
+      gtk_window_set_position(g->mainwindow, GTK_WIN_POS_CENTER);
 
     PangoFontDescription* font_desc = 
         pango_font_description_from_string("Monospace 8");
     gtk_widget_modify_font(errortext, font_desc);
     pango_font_description_free(font_desc);
-    gtk_window_get_size(GTK_WINDOW(g->mainwindow), &width, &height);
+    gtk_window_get_size(g->mainwindow, &width, &height);
 
     hpaned= GTK_WIDGET(gtk_builder_get_object(builder, "hpaned"));
     gtk_paned_set_position(GTK_PANED(hpaned), (width/2)); 
@@ -168,7 +171,7 @@ void gui_main(GtkBuilder* builder) {
     gtk_builder_connect_signals(builder, NULL);       
     g_signal_connect(g_e_buffer, "changed",
             G_CALLBACK(check_preview_timer), NULL);
-    gtk_widget_show_all(gui->mainwindow);
+    gtk_widget_show_all(GTK_WIDGET(gui->mainwindow));
 
     // TODO: SVN NOTICE 23 NOVEMBER - REMOVE ON 0.6.0 RELEASE
     // only want to show this once, and perhaps for future instances
@@ -193,8 +196,8 @@ gboolean gui_quit(void) {
         return TRUE;
 
     editor_destroy(gummi->editor);
-    gtk_window_get_size(GTK_WINDOW(gui->mainwindow), &width, &height);
-    gtk_window_get_position(GTK_WINDOW(gui->mainwindow), &wx, &wy);
+    gtk_window_get_size(gui->mainwindow, &width, &height);
+    gtk_window_get_position(gui->mainwindow, &wx, &wy);
     config_set_value("mainwindow_x", g_ascii_dtostr(buf, 16, (double)wx));
     config_set_value("mainwindow_y", g_ascii_dtostr(buf, 16, (double)wy));
     config_set_value("mainwindow_w", g_ascii_dtostr(buf, 16, (double)width));
@@ -249,7 +252,7 @@ void gui_update_title(void) {
                 (gtk_text_buffer_get_modified(g_e_buffer)? "*": ""),
                 PACKAGE_NAME);
 
-    gtk_window_set_title(GTK_WINDOW(gui->mainwindow), title);
+    gtk_window_set_title(gui->mainwindow, title);
     g_free(title);
 }
 
@@ -492,9 +495,9 @@ void on_menu_rightpane_toggled(GtkWidget *widget, void * user) {
 
     void on_menu_fullscreen_toggled(GtkWidget *widget, void * user) {
         if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(widget)))
-            gtk_window_fullscreen(GTK_WINDOW(gui->mainwindow));
+            gtk_window_fullscreen(gui->mainwindow);
         else
-            gtk_window_unfullscreen(GTK_WINDOW(gui->mainwindow));
+            gtk_window_unfullscreen(gui->mainwindow);
     }
 
 void on_menu_find_activate(GtkWidget *widget, void* user) {
@@ -620,7 +623,7 @@ void on_menu_docstat_activate(GtkWidget *widget, void * user) {
         output = g_strdup(_("This function requires\nthe texcount program.\n"));
     }
     
-    dialog = gtk_message_dialog_new(GTK_WINDOW(gui->mainwindow),
+    dialog = gtk_message_dialog_new(gui->mainwindow,
             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_INFO,
             GTK_BUTTONS_OK,
@@ -651,16 +654,16 @@ void on_menu_spelling_toggled(GtkWidget *widget, void * user) {
 }
 
 void on_menu_update_activate(GtkWidget *widget, void * user) {
-    gboolean ret = updatecheck(GTK_WINDOW(gui->mainwindow));
+    gboolean ret = updatecheck(gui->mainwindow);
     if (!ret)
         slog(L_G_ERROR, "Update check failed!\n");
 }
 
 void on_menu_about_activate(GtkWidget *widget, void * user) {
     GError* err = NULL;
-    GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size
-        (DATADIR"/gummi.png", 80, 80, &err);
-    if (!icon) g_error_free(err);
+    gchar* icon_file = g_build_filename(DATADIR, "icons", "gummi.png", NULL);
+    GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size(icon_file, 80, 80, &err);
+    g_free(icon_file);
 
     const gchar* authors[] = { "Alexander van der Mey\n"
         "<alexvandermey@gmail.com>",
@@ -686,8 +689,7 @@ void on_menu_about_activate(GtkWidget *widget, void * user) {
         "Spanish: Carlos Salas Contreras\n";
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
-    gtk_window_set_transient_for(GTK_WINDOW(dialog),
-            GTK_WINDOW(gui->mainwindow));
+    gtk_window_set_transient_for(GTK_WINDOW(dialog), gui->mainwindow);
     gtk_window_set_destroy_with_parent(GTK_WINDOW(dialog), TRUE);
     gtk_about_dialog_set_authors(dialog, authors);
     gtk_about_dialog_set_program_name(dialog, PACKAGE_NAME);
@@ -899,7 +901,7 @@ gchar* get_open_filename(GuFilterType type) {
 
     chooser = GTK_FILE_CHOOSER(gtk_file_chooser_dialog_new(
                 chooser_title[type],
-                GTK_WINDOW (gui->mainwindow),
+                gui->mainwindow,
                 GTK_FILE_CHOOSER_ACTION_OPEN,
                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                 GTK_STOCK_OPEN, GTK_RESPONSE_OK,
@@ -937,7 +939,7 @@ gchar* get_save_filename(GuFilterType type) {
 
     chooser = GTK_FILE_CHOOSER(gtk_file_chooser_dialog_new(
                 chooser_title[type],
-                GTK_WINDOW (gui->mainwindow),
+                gui->mainwindow,
                 GTK_FILE_CHOOSER_ACTION_SAVE,
                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                 GTK_STOCK_SAVE, GTK_RESPONSE_OK,

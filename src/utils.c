@@ -56,8 +56,8 @@ void slog_init(gint debug) {
     slog_debug = debug;
 }
 
-void slog_set_gui_parent(GtkWidget* p) {
-    parent = GTK_WINDOW(p);
+void slog_set_gui_parent(GtkWindow* p) {
+    parent = p;
 }
 
 void slog(gint level, const gchar *fmt, ...) {

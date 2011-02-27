@@ -5948,7 +5948,7 @@ done
 
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile po/Makefile.in data/$PACKAGE.desktop"
+ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile data/ui/Makefile data/icons/Makefile data/snippets/Makefile data/misc/Makefile po/Makefile.in data/misc/$PACKAGE.desktop"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -6689,8 +6689,12 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
+    "data/ui/Makefile") CONFIG_FILES="$CONFIG_FILES data/ui/Makefile" ;;
+    "data/icons/Makefile") CONFIG_FILES="$CONFIG_FILES data/icons/Makefile" ;;
+    "data/snippets/Makefile") CONFIG_FILES="$CONFIG_FILES data/snippets/Makefile" ;;
+    "data/misc/Makefile") CONFIG_FILES="$CONFIG_FILES data/misc/Makefile" ;;
     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
-    "data/$PACKAGE.desktop") CONFIG_FILES="$CONFIG_FILES data/$PACKAGE.desktop" ;;
+    "data/misc/$PACKAGE.desktop") CONFIG_FILES="$CONFIG_FILES data/misc/$PACKAGE.desktop" ;;
     "po/stamp-it") CONFIG_COMMANDS="$CONFIG_COMMANDS po/stamp-it" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;

@@ -73,7 +73,7 @@ typedef struct _slist {
 } slist;
 
 void slog_init(gint debug);
-void slog_set_gui_parent(GtkWidget* p);
+void slog_set_gui_parent(GtkWindow* p);
 void slog(gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog(const gchar* message);
 gboolean utils_path_exists(const gchar* path);

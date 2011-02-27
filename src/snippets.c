@@ -58,10 +58,13 @@ GuSnippets* snippets_init(const gchar* filename) {
 
 void snippets_set_default(GuSnippets* sc) {
     GError* err = NULL;
-    if (!utils_copy_file(DATADIR"/snippets.cfg", sc->filename, &err))
+    gchar* snip = g_build_filename(DATADIR, "snippets", "snippets.cfg", NULL);
+    if (!utils_copy_file(snip, sc->filename, &err)) {
         slog(L_G_ERROR, "can't open snippets file for writing, snippets may "
                 "not work properly.");
-    snippets_load(sc);
+        g_error_free(err);
+    }
+    g_free(snip);
 }
 
 void snippets_load(GuSnippets* sc) {

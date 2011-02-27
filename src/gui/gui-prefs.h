@@ -65,7 +65,7 @@ typedef struct _GuPrefsGui {
     GtkHBox* commandbox;
 } GuPrefsGui;
 
-GuPrefsGui* prefsgui_init(GtkWidget* mainwindow);
+GuPrefsGui* prefsgui_init(GtkWindow* mainwindow);
 void prefsgui_main(GuPrefsGui* prefs);
 void prefsgui_set_current_settings(GuPrefsGui* prefs);
 void toggle_linenumbers(GtkWidget* widget, void* user);
