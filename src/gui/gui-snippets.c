@@ -50,6 +50,13 @@ extern GummiGui* gui;
 
 GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
     GuSnippetsGui* s = g_new0(GuSnippetsGui, 1);
+    GtkSourceLanguageManager* manager = NULL;
+    GtkSourceLanguage* lang = NULL;
+    gchar* lang_dir = NULL;
+    gchar** langs = NULL;
+    gchar** new_langs = NULL;
+    gint len = 0, i = 0;
+
     GtkBuilder* builder = gtk_builder_new();
     gchar* ui = g_build_filename(DATADIR, "ui", "snippets.glade", NULL);
     gtk_builder_add_from_file(builder, ui, NULL);
@@ -71,9 +78,22 @@ GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
     s->snippet_renderer = GTK_CELL_RENDERER_TEXT
         (gtk_builder_get_object(builder, "snippet_renderer"));
 
-    GtkSourceLanguageManager* manager = gtk_source_language_manager_new();
-    GtkSourceLanguage* lang = gtk_source_language_manager_get_language(manager,
-            "latex");
+    /* Initialize GtkSourceView */
+    manager = gtk_source_language_manager_new();
+    lang_dir = g_build_filename(DATADIR, "snippets", NULL);
+    langs = g_strdupv((gchar**)gtk_source_language_manager_get_search_path(
+                manager));
+    len = g_strv_length(langs);
+    new_langs = g_new0(gchar*, len + 2);
+    for (i = 0; i < len; ++i)
+        new_langs[i] = langs[i];
+    new_langs[len] = lang_dir;
+    gtk_source_language_manager_set_search_path(manager, new_langs);
+    lang = gtk_source_language_manager_get_language(manager, "snippets");
+    g_strfreev(langs);
+    g_free(new_langs);
+    g_free(lang_dir);
+
     s->buffer = gtk_source_buffer_new_with_language(lang);
     s->view = GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(s->buffer));
     gtk_container_add(GTK_CONTAINER(s->snippet_scroll), GTK_WIDGET(s->view));
