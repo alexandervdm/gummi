@@ -1,5 +1,5 @@
 /**
- * @file   gui-snippets.h
+ * @file   gui-snippets.c
  * @brief  Handle snippets and provide edit/new/delete function
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>

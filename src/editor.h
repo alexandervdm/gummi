@@ -74,7 +74,7 @@ typedef struct _GuEditor {
 GuEditor* editor_init(GuMotion* mc);
 void editor_fileinfo_update(GuEditor* ec, const gchar* filename);
 void editor_fileinfo_cleanup(GuEditor* ec);
-gboolean editor_update_biblio(GuEditor* ec, const gchar* filename);
+gboolean editor_fileinfo_update_biblio(GuEditor* ec,  const gchar* filename);
 void editor_destroy(GuEditor* ec);
 void editor_sourceview_config(GuEditor* ec);
 #ifdef USE_GTKSPELL

@@ -118,7 +118,7 @@ void editor_destroy(GuEditor* ec) {
     editor_fileinfo_cleanup(ec);
 }
 
-gboolean editor_update_biblio(GuEditor* ec,  const gchar* filename) {
+gboolean editor_fileinfo_update_biblio(GuEditor* ec,  const gchar* filename) {
     g_free(ec->bibfile);
 
     if (ec->filename && !g_path_is_absolute(filename)) {

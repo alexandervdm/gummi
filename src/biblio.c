@@ -57,19 +57,25 @@ GuBiblio* biblio_init(GtkBuilder* builder) {
 }
 
 gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec) {
-    gchar* content;
-    gchar** result;
+    gchar* content = NULL;
+    gchar* bibfn = NULL;
+    gchar** result = NULL;
     GMatchInfo *match_info;
-    GRegex* bib_regex;
+    GRegex* bib_regex = NULL;
     gboolean state = FALSE;
     
     content = editor_grab_buffer(ec);
     bib_regex = g_regex_new("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match(bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all(match_info);
-        state = (result[1] &&
-            0 == strncmp(result[1] + strlen(result[1]) -4, ".bib", 4) &&
-            editor_update_biblio(ec, result[1]));
+        if (result[1]) {
+            if (strcmp(result[1] +strlen(result[1]) -4, ".bib") != 0)
+                bibfn = g_strconcat(result[1], ".bib", NULL);
+            else
+                bibfn = g_strdup(result[1]);
+            state = editor_fileinfo_update_biblio(ec, bibfn);
+            g_free(bibfn);
+        }
         slog(L_INFO, "Detect bibliography file: %s\n", ec->bibfile);
         g_strfreev(result);
     }
