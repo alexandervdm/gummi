@@ -10,10 +10,10 @@ imagesdir = $(datadir)/$(PACKAGE)
 images_DATA = $(PACKAGE).png icon.png
 
 gladedir = $(datadir)/$(PACKAGE)
-glade_DATA = gummi.glade prefs.glade
+glade_DATA = gummi.glade prefs.glade snippets.glade
 
 snippetsdir = $(datadir)/$(PACKAGE)
-snippets_DATA = snippets.glade
+snippets_DATA = snippets.cfg
 
 EXTRA_DIST = $(man_MANS) \
 	     $(desktop_DATA).in \
