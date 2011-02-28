@@ -249,7 +249,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">&#x2022;</property>
-                                <signal name="changed" handler="on_tab_trigger_entry_changed"/>
+                                <signal name="focus_out_event" handler="on_tab_trigger_entry_focus_out_event"/>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
