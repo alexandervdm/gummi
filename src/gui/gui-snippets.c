@@ -77,6 +77,10 @@ GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow) {
         GTK_LIST_STORE(gtk_builder_get_object(builder, "list_snippets"));
     s->snippet_renderer = GTK_CELL_RENDERER_TEXT
         (gtk_builder_get_object(builder, "snippet_renderer"));
+    s->button_new =
+        GTK_BUTTON(gtk_builder_get_object(builder, "button_new_snippet"));
+    s->button_remove =
+        GTK_BUTTON(gtk_builder_get_object(builder, "button_remove_snippet"));
 
     /* Initialize GtkSourceView */
     manager = gtk_source_language_manager_new();
@@ -225,6 +229,9 @@ void on_button_new_snippet_clicked(GtkWidget* widget, void* user) {
     model = gtk_tree_view_get_model(s->snippets_tree_view);
     path = gtk_tree_model_get_path(model, &iter);
 
+    gtk_widget_set_sensitive(GTK_WIDGET(s->button_new), FALSE);
+    gtk_widget_set_sensitive(GTK_WIDGET(s->button_remove), FALSE);
+
     SIG_SAFE(gtk_tree_view_set_cursor(s->snippets_tree_view, path, col, TRUE));
 
     gtk_tree_path_free(path);
@@ -271,9 +278,20 @@ void on_button_remove_snippet_clicked(GtkWidget* widget, void* user) {
     }
 }
 
-void on_tab_trigger_entry_changed(GtkEntry* entry, void* user) {
-    if (!gui->snippetsgui->loading)
+gboolean on_tab_trigger_entry_focus_out_event(GtkEntry* entry, void* user) {
+    GuSnippetsGui* s = gui->snippetsgui;
+    const gchar* new_key = gtk_entry_get_text(entry);
+
+    return_if_sig_safe(FALSE);
+
+    /* Check dumplicate key */
+    if (snippets_get_value(gummi->snippets, new_key)) {
+        gtk_entry_set_text(entry, "");
+        slog(L_G_ERROR, _("Duplicate activation tab trigger dectected! Please "
+                "choose another one.\n"));
+    } else
         snippetsgui_update_snippet(gummi->snippets);
+    return FALSE;
 }
 
 void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user) {
@@ -376,12 +394,14 @@ void on_snippet_renderer_edited(GtkCellRendererText* renderer, gchar *path,
             gummi->snippets->head = slist_append(gummi->snippets->head, node);
             s->current = node;
             gtk_list_store_set(s->list_snippets, &iter, 0, name, 1, config, -1);
+            on_snippets_tree_view_cursor_changed(s->snippets_tree_view, NULL);
         } else {
             gtk_list_store_set(s->list_snippets, &iter, 0, name, 1, "", -1);
             on_button_remove_snippet_clicked(NULL, NULL);
         }
-        g_free(config);
     }
+    gtk_widget_set_sensitive(GTK_WIDGET(s->button_new), TRUE);
+    gtk_widget_set_sensitive(GTK_WIDGET(s->button_remove), TRUE);
 }
 
 gboolean on_snippet_source_buffer_key_release(GtkWidget* widget, void* user) {

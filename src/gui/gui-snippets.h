@@ -55,6 +55,8 @@ typedef struct _GuSnippetsGui {
     GtkEntry* accelerator_entry;
     GtkListStore* list_snippets;
     GtkCellRendererText* snippet_renderer;
+    GtkButton* button_new;
+    GtkButton* button_remove;
     GtkSourceView* view;
     GtkSourceBuffer* buffer;
     slist* current;
@@ -68,7 +70,7 @@ void snippetsgui_move_cursor_to_row(GuSnippetsGui* sc, gint row);
 void snippetsgui_update_snippet(GuSnippets* sc);
 void on_button_new_snippet_clicked(GtkWidget* widget, void* user);
 void on_button_remove_snippet_clicked(GtkWidget* widget, void* user);
-void on_tab_trigger_entry_changed(GtkEntry* entry, void* user);
+gboolean on_tab_trigger_entry_focus_out_event(GtkEntry* entry, void* user);
 void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user);
 void on_accelerator_entry_focus_out_event(GtkWidget* widget, void* user);
 gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,

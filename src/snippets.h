@@ -38,6 +38,7 @@
 #include "editor.h"
 #include "utils.h"
 
+/* Storing placeholders */
 typedef struct _GuSnippetExpandInfo {
     gint group_number;
     GtkTextMark* right_mark;
@@ -49,6 +50,7 @@ typedef struct _GuSnippetExpandInfo {
 
 #define GU_SNIPPET_EXPAND_INFO(x) ((GuSnippetExpandInfo*)x)
 
+/* Storing single snippet info */
 typedef struct _GuSnippetInfo {
     gchar* snippet;
     gchar* expanded;
@@ -69,7 +71,7 @@ typedef struct _GuSnippets {
     slist* head;
     GuSnippetInfo* info;
     GtkAccelGroup* accel_group;
-    GList* closure_data;
+    GList* closure_data; /* data: Tuple2(key, closure) */
     gboolean activated;
 } GuSnippets;
 

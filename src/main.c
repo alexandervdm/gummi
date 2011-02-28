@@ -91,7 +91,7 @@ int main (int argc, char *argv[]) {
 
     /* Initialize Classes */
     gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
-                                  "snippets", "snippets.cfg", NULL);
+            "snippets.cfg", NULL);
     GList* editors = NULL;
 
     GuMotion* motion = motion_init();

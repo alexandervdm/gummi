@@ -59,6 +59,17 @@ GuSnippets* snippets_init(const gchar* filename) {
 void snippets_set_default(GuSnippets* sc) {
     GError* err = NULL;
     gchar* snip = g_build_filename(DATADIR, "snippets", "snippets.cfg", NULL);
+    GList* current = sc->closure_data;
+
+    /* Remove all accelerator */
+    while (current) {
+        snippets_accel_disconnect(sc->accel_group,
+                TUPLE2(current->data)->second);
+        current = g_list_next(current);
+    }
+    g_list_free(sc->closure_data);
+    sc->closure_data = NULL;
+
     if (!utils_copy_file(snip, sc->filename, &err)) {
         slog(L_G_ERROR, "can't open snippets file for writing, snippets may "
                 "not work properly.\n");
@@ -330,7 +341,6 @@ GuSnippetInfo* snippets_parse(char* snippet) {
         g_regex_unref(regex);
         g_match_info_free(match_info);
     }
-
     info->einfo = g_list_sort(info->einfo, snippet_info_pos_cmp);
     info->einfo_sorted = g_list_copy(info->einfo);
     info->einfo_sorted = g_list_sort(info->einfo_sorted, snippet_info_num_cmp);
@@ -375,7 +385,9 @@ void snippet_info_free(GuSnippetInfo* info, GuEditor* ec) {
         current = g_list_next(current);
     }
     g_list_free(info->einfo);
+    g_list_free(info->einfo_unique);
     g_list_free(info->einfo_sorted);
+    g_free(info);
 }
 
 gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec) {
