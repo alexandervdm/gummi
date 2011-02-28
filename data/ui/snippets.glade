@@ -4,9 +4,11 @@
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkListStore" id="list_snippets">
     <columns>
-      <!-- column-name Snippet -->
+      <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name config -->
+      <!-- column-name key -->
+      <column type="gchararray"/>
+      <!-- column-name accel -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -68,6 +70,7 @@
                             <child>
                               <object class="GtkCellRendererText" id="snippet_renderer">
                                 <signal name="edited" handler="on_snippet_renderer_edited"/>
+                                <signal name="editing_canceled" handler="on_snippet_renderer_editing_canceled"/>
                               </object>
                               <attributes>
                                 <attribute name="text">0</attribute>

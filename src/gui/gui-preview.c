@@ -165,7 +165,7 @@ void previewgui_refresh(GuPreviewGui* pc) {
     
     gint width = (int)pc->page_width * pc->page_scale;
     gint height = (int)pc->page_height * pc->page_scale;
-    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width,
+    pc->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width,
             height);
     cr = cairo_create (pc->surface);
     

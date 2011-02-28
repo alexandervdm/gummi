@@ -55,21 +55,18 @@ GuMotion* motion_init(void) {
 }
 
 gboolean motion_idle_cb(void* user) {
-    L_F_DEBUG;
     if (gui->previewgui->preview_on_idle)
         previewgui_update_preview(gui->previewgui);
     return FALSE;
 }
 
 void motion_start_timer(GuMotion* mc) {
-    L_F_DEBUG;
     motion_stop_timer(mc);
     mc->timer = g_timeout_add_seconds(atoi(config_get_value("compile_timer")),
             motion_idle_cb, mc);
 }
 
 void motion_stop_timer(GuMotion* mc) {
-    L_F_DEBUG;
     if (mc->timer > 0) {
         g_source_remove(mc->timer);
         mc->timer = 0;
@@ -77,7 +74,6 @@ void motion_stop_timer(GuMotion* mc) {
 }
     
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    L_F_DEBUG;
     motion_stop_timer((GuMotion*)user);
     if (snippets_key_press_cb(gummi->snippets, gummi->editor, event))
         return TRUE;
@@ -85,7 +81,6 @@ gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
 }
 
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    L_F_DEBUG;
     motion_start_timer((GuMotion*)user);
     if (snippets_key_release_cb(gummi->snippets, gummi->editor, event))
         return TRUE;

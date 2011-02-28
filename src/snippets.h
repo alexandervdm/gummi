@@ -57,9 +57,9 @@ typedef struct _GuSnippetInfo {
     gint start_offset;
     gint offset;
     GList* current;
-    GList* einfo;   /* A list of GuSnippetExpandInfo sorted by start pos */
-    GList* einfo_unique; /* A list of unique group einfo */
-    GList* einfo_sorted;
+    GList* einfo;        /* List of GuSnippetExpandInfo sorted by start pos */
+    GList* einfo_unique; /* List of unique group einfo */
+    GList* einfo_sorted; /* List of GuSnippetExpandInfo sorted by #group */
 
     /* Constants */
     gchar* sel_text;
@@ -89,9 +89,9 @@ gboolean snippets_key_release_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
 GuSnippetInfo* snippets_parse(char* snippet);
 void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata);
-void snippets_accel_connect(GtkAccelGroup* accel_group, guint keyval,
-        GdkModifierType mod, GClosure* closure);
-void snippets_accel_disconnect(GtkAccelGroup* accel_group, GClosure* closure);
+void snippets_accel_connect(GuSnippets* sc, guint keyval, GdkModifierType mod,
+        GClosure* closure);
+void snippets_accel_disconnect(GuSnippets* sc, const gchar* key);
 
 GuSnippetInfo* snippet_info_new(gchar* snippet);
 void snippet_info_free(GuSnippetInfo* info, GuEditor* ec);
@@ -100,7 +100,6 @@ void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
 void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_initial_expand(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_replace_constants(GuSnippetInfo* info, GuEditor* ec);
 gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_goto_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);

@@ -80,6 +80,7 @@ void on_snippetsgui_reset_clicked(GtkWidget* widget, void* user);
 void on_snippets_tree_view_cursor_changed(GtkTreeView* view, void* user);
 void on_snippet_renderer_edited(GtkCellRendererText* renderer, gchar *path,
         gchar* name, void* user);
+void on_snippet_renderer_editing_canceled(GtkCellRenderer* rend, void* user);
 gboolean on_snippet_source_buffer_key_release(GtkWidget* widget, void* user);
 
 #endif /* __GUMMI_GUI_SNIPPETS__ */
