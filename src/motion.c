@@ -45,7 +45,6 @@
 #include "utils.h"
 #include "gui/gui-main.h"
 
-extern Gummi* gummi;
 extern GummiGui* gui;
 
 GuMotion* motion_init(void) {
@@ -75,14 +74,16 @@ void motion_stop_timer(GuMotion* mc) {
     
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     motion_stop_timer((GuMotion*)user);
-    if (snippets_key_press_cb(gummi->snippets, gummi->editor, event))
+    if (snippets_key_press_cb(gummi_get_snippets(), gummi_get_active_editor(),
+                event))
         return TRUE;
     return FALSE;
 }
 
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
     motion_start_timer((GuMotion*)user);
-    if (snippets_key_release_cb(gummi->snippets, gummi->editor, event))
+    if (snippets_key_release_cb(gummi_get_snippets(), gummi_get_active_editor(),
+                event))
         return TRUE;
     return FALSE;
 }

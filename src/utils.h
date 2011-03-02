@@ -54,7 +54,7 @@
  * @first: a gpointer that points to the first field
  * @second: a gpointer that points to the second field
  *
- * A general purpose Tuple with 2 fields
+ * General purpose Tuple with 2 fields.
  */
 typedef struct _Tuple2 {
     /*< private >*/
@@ -73,7 +73,7 @@ typedef struct _Tuple2 {
  * @second: a gpointer that points to the second field
  * @third: a gpointer that points to the third field
  *
- * A general purpose Tuple with 3 fields
+ * General purpose Tuple with 3 fields.
  */
 typedef struct _Tuple3 {
     /*< private >*/
@@ -92,9 +92,9 @@ typedef struct _Tuple3 {
  * @first: a gchar* that points to the key
  * @second: a gchar* that points to the value
  *
- * list for storing gummi settings, snippets
+ * list for storing gummi settings, snippets.
  * Deprecated: Warning this sturct may be replaced with glist or Tuple2 in the
- * future
+ * future.
  */
 typedef struct _slist {
     /*< private >*/
@@ -116,7 +116,7 @@ gboolean utils_path_exists(const gchar* path);
  *
  * Returns: return TRUE if succeed
  *
- * Platform independent file copy operation
+ * Platform independent file copy operation.
  */
 gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
 
@@ -126,7 +126,7 @@ gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
  * Returns: A Tuple2 with Tuple2::first storing the exit code and
  * Tuple2::second pointing to a newly allocated gchar* array
  *
- * Platform independent interface for calling popen()
+ * Platform independent interface for calling popen().
  */
 Tuple2 utils_popen_r(const gchar* cmd);
 
@@ -147,9 +147,9 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target);
  * @n: TRUE if only compare first n characters (using strncmp)
  * @create: TRUE to create new entry for term that isn't found
  *
- * Returns a pointer to the slit node
+ * Returns: a pointer to the slist node
  *
- * Find term in slist
+ * Find term in slist.
  */
 slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create);
 

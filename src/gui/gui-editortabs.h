@@ -49,6 +49,5 @@ struct _GuEditortabsGui {
 
 GuEditortabsGui* editortabsgui_init(GtkBuilder* builder);
 void editortabsgui_create_tab(GuEditor* editor, const gchar* filename);
-GuEditor* get_active_editor(void);
 
 #endif /* __GUMMI_GUI_EDITORTABS_H__ */

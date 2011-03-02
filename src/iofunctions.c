@@ -41,7 +41,6 @@
 #include "gui/gui-main.h"
 #include "utils.h"
 
-extern Gummi* gummi;
 static guint sid = 0;
 
 void iofunctions_load_default_text(GuEditor* ec) {
@@ -179,8 +178,9 @@ gboolean iofunctions_autosave_cb(gpointer name) {
     char* fname = (char*)name;
     char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
     if (fname) {
-        iofunctions_write_file(gummi->editor, fname);
-        gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(gummi->editor->buffer),
+        iofunctions_write_file(gummi_get_active_editor(), fname);
+        gtk_text_buffer_set_modified(
+                GTK_TEXT_BUFFER(gummi_get_active_editor()->buffer),
                 FALSE);
         statusbar_set_message(buf);
         g_free(buf);

@@ -207,7 +207,7 @@ slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create) {
     slist* prev = 0;
 
     while (current) {
-        if (first_n) {
+        if (n) {
             if (0 == strncmp(current->first, term, strlen(term)))
                 return current;
         } else {
@@ -217,7 +217,7 @@ slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create) {
         prev = current;
         current = current->next;
     }
-    if (create_if_not_exists) {
+    if (create) {
         slog(L_WARNING, "can't find `%s', creating new field for it...\n",
                 term);
         prev->next = g_new0(slist, 1);

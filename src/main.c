@@ -45,9 +45,9 @@
 #include "template.h"
 #include "utils.h"
 
+extern Gummi* gummi;
+extern GummiGui* gui;
 static int debug = 0;
-Gummi* gummi = 0;
-GummiGui* gui = 0;
 
 static GOptionEntry entries[] = {
     { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE, &debug, 

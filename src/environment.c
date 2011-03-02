@@ -29,7 +29,11 @@
 
 #include "configfile.h"
 #include "environment.h"
+#include "gui/gui-main.h"
 #include "utils.h"
+
+Gummi* gummi = 0;
+GummiGui* gui = 0;
 
 Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl, GuSnippets* snip) {
@@ -55,3 +59,32 @@ void gummi_new_environment(Gummi* gc, const gchar* filename) {
 
     iofunctions_reset_autosave(filename);
 }
+
+GList* gummi_get_editors(void) {
+    return gummi->editors;
+}
+
+GuEditor* gummi_get_active_editor(void) {
+    return gummi->editor;
+}
+
+GuMotion* gummi_get_motion(void) {
+    return gummi->motion;
+}
+
+GuLatex* gummi_get_latex(void) {
+    return gummi->latex;
+}
+
+GuBiblio* gummi_get_biblio(void) {
+    return gummi->biblio;
+}
+
+GuTemplate* gummi_get_template(void) {
+    return gummi->templ;
+}
+
+GuSnippets* gummi_get_snippets(void) {
+    return gummi->snippets;
+}
+

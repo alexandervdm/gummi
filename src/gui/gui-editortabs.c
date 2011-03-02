@@ -75,9 +75,3 @@ void editortabsgui_create_tab(GuEditor* editor, const gchar* filename) {
     gtk_notebook_append_page(
         GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel);
 }
-
-
-GuEditor* get_active_editor(void) {
-    return gummi->editor;
-}
-

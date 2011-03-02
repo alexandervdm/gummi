@@ -38,7 +38,7 @@
 #include <glib.h>
 
 #include "editor.h"
-#include "gui/gui-editortabs.h"
+#include "environment.h"
 #include "porting.h"
 #include "utils.h"
 
@@ -357,12 +357,12 @@ void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata) {
     GuSnippets* sc = (GuSnippets*)udata->first;
     gchar* key = (gchar*)udata->second;
-    /* XXX: Don't know how to avoid using get_active_editor() here. Since
+    /* XXX: Don't know how to avoid using gummi_get_active_editor() here. Since
      * gtk_accel_group must be connect when load, we can not specify the
      * editor in user_data, because snippets should only have effect on
      * active tab */
     if (!sc->activated)
-        snippets_activate(sc, get_active_editor(), key);
+        snippets_activate(sc, gummi_get_active_editor(), key);
 }
 
 void snippets_accel_connect(GuSnippets* sc, guint keyval, GdkModifierType mod,
