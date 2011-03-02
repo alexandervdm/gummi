@@ -49,16 +49,37 @@
 
 #define L_F_DEBUG  slog(L_DEBUG, "%s()\n", __func__);
 
+/**
+ * Tuple2:
+ * @first: a gpointer that points to the first field
+ * @second: a gpointer that points to the second field
+ *
+ * A general purpose Tuple with 2 fields
+ */
 typedef struct _Tuple2 {
+    /*< private >*/
     struct _Tuple2* next;
+
+    /*< public >*/
     gpointer first;
     gpointer second;
 } Tuple2;
 
 #define TUPLE2(x) ((Tuple2*)x)
 
+/**
+ * Tuple2:
+ * @first: a gpointer that points to the first field
+ * @second: a gpointer that points to the second field
+ * @third: a gpointer that points to the third field
+ *
+ * A general purpose Tuple with 3 fields
+ */
 typedef struct _Tuple3 {
+    /*< private >*/
     struct _Tuple3* next;
+
+    /*< public >*/
     gpointer first;
     gpointer second;
     gpointer third;
@@ -66,8 +87,20 @@ typedef struct _Tuple3 {
 
 #define TUPLE3(x) ((Tuple3*)x)
 
+/**
+ * slist:
+ * @first: a gchar* that points to the key
+ * @second: a gchar* that points to the value
+ *
+ * list for storing gummi settings, snippets
+ * Deprecated: Warning this sturct may be replaced with glist or Tuple2 in the
+ * future
+ */
 typedef struct _slist {
+    /*< private >*/
     struct _slist* next;
+
+    /*< public >*/
     gchar* first;
     gchar* second;
 } slist;
@@ -77,11 +110,49 @@ void slog_set_gui_parent(GtkWindow* p);
 void slog(gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog(const gchar* message);
 gboolean utils_path_exists(const gchar* path);
+
+/**
+ * utils_copy_file:
+ *
+ * Returns: return TRUE if succeed
+ *
+ * Platform independent file copy operation
+ */
 gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
+
+/**
+ * utils_popen_r:
+ *
+ * Returns: A Tuple2 with Tuple2::first storing the exit code and
+ * Tuple2::second pointing to a newly allocated gchar* array
+ *
+ * Platform independent interface for calling popen()
+ */
 Tuple2 utils_popen_r(const gchar* cmd);
+
+/**
+ * utils_path_to_relative:
+ *
+ * Returns: A newly allocated pointer to gchar* to the relative path, if target
+ * isn't relative to root, target is simply duplicated and returned.
+ *
+ * Transforms target to path relative to root.
+ */
 gchar* utils_path_to_relative(const gchar* root, const gchar* target);
-slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
-        gboolean create_if_not_exists);
+
+/**
+ * slist_find:
+ * @head: the list head
+ * @term: the term to find
+ * @n: TRUE if only compare first n characters (using strncmp)
+ * @create: TRUE to create new entry for term that isn't found
+ *
+ * Returns a pointer to the slit node
+ *
+ * Find term in slist
+ */
+slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create);
+
 slist* slist_append(slist* head, slist* node);
 slist* slist_remove(slist* head, slist* node);
 

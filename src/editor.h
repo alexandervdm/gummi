@@ -46,7 +46,9 @@
 #define ec_buffer GTK_TEXT_BUFFER(ec->buffer)
 #define ec_view GTK_TEXT_VIEW(ec->view)
 
-typedef struct _GuEditor {
+typedef struct _GuEditor GuEditor;
+
+struct _GuEditor {
     /* File related members */
     gint workfd;
     gchar* fdname;
@@ -69,7 +71,7 @@ typedef struct _GuEditor {
     gboolean wholeword;
     gboolean matchcase;
     gint sigid[3];
-} GuEditor;
+};
 
 GuEditor* editor_init(GuMotion* mc);
 void editor_fileinfo_update(GuEditor* ec, const gchar* filename);

@@ -39,19 +39,24 @@
 #include "utils.h"
 
 /* Storing placeholders */
-typedef struct _GuSnippetExpandInfo {
+typedef struct _GuSnippetExpandInfo GuSnippetExpandInfo;
+
+struct _GuSnippetExpandInfo {
     gint group_number;
     GtkTextMark* right_mark;
     GtkTextMark* left_mark;
     gint start;
     gint len;
     gchar* text;
-} GuSnippetExpandInfo;
+};
 
 #define GU_SNIPPET_EXPAND_INFO(x) ((GuSnippetExpandInfo*)x)
 
+
 /* Storing single snippet info */
-typedef struct _GuSnippetInfo {
+typedef struct _GuSnippetInfo GuSnippetInfo;
+
+struct _GuSnippetInfo {
     gchar* snippet;
     gchar* expanded;
     gint start_offset;
@@ -64,16 +69,19 @@ typedef struct _GuSnippetInfo {
     /* Constants */
     gchar* sel_text;
     GtkTextMark sel_start;
-} GuSnippetInfo;
+};
 
-typedef struct _GuSnippets {
+
+typedef struct _GuSnippets GuSnippets;
+
+struct _GuSnippets {
     gchar* filename;
     slist* head;
     GuSnippetInfo* info;
     GtkAccelGroup* accel_group;
     GList* closure_data; /* data: Tuple2(key, closure) */
     gboolean activated;
-} GuSnippets;
+};
 
 GuSnippets* snippets_init(const gchar* filename);
 void snippets_set_default(GuSnippets* sc);

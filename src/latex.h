@@ -35,13 +35,15 @@
 #include "editor.h"
 #include "gui/gui-preview.h"
 
-typedef struct _GuLatex {
+typedef struct _GuLatex GuLatex;
+
+struct _GuLatex {
     gchar* typesetter;
     /* use fixed size for errorlines in consider of performance */
     gint errorlines[BUFSIZ];
     gchar* errormessage;
     gboolean modified_since_compile;
-} GuLatex;
+};
 
 GuLatex* latex_init(void);
 void latex_update_workfile(GuLatex* mc, GuEditor* ec);

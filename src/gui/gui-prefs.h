@@ -33,7 +33,9 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuPrefsGui {
+typedef struct _GuPrefsGui GuPrefsGui; 
+
+struct _GuPrefsGui {
     GtkWidget* prefwindow;
     GtkNotebook* notebook;
     GtkCheckButton* textwrap_button;
@@ -63,7 +65,7 @@ typedef struct _GuPrefsGui {
     GtkHBox* editor_box;
     GtkHBox* compile_box;
     GtkHBox* commandbox;
-} GuPrefsGui;
+};
 
 GuPrefsGui* prefsgui_init(GtkWindow* mainwindow);
 void prefsgui_main(GuPrefsGui* prefs);

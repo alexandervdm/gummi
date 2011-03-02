@@ -35,7 +35,9 @@
 
 #define g_importgui gui->importgui
 
-typedef struct _GuImportGui {
+typedef struct _GuImportGui GuImportGui; 
+
+struct _GuImportGui {
     GtkHBox* box_image;
     GtkHBox* box_table;
     GtkHBox* box_matrix;
@@ -59,7 +61,7 @@ typedef struct _GuImportGui {
     GtkAdjustment* matrix_rows;
     GtkAdjustment* matrix_cols;
     GtkComboBox* matrix_combobracket;
-} GuImportGui;
+};
 
 GuImportGui* importgui_init(GtkBuilder* builder);
 void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,

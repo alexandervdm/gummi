@@ -96,7 +96,9 @@
  *                             Gummi
  */
 
-typedef struct _Gummi {
+typedef struct _Gummi Gummi;
+
+struct _Gummi {
     GList* editors;
     GuEditor* editor;
     GuMotion* motion;
@@ -104,7 +106,7 @@ typedef struct _Gummi {
     GuBiblio* biblio;
     GuTemplate* templ;
     GuSnippets* snippets;
-} Gummi;
+};
 
 Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl, GuSnippets* snip);

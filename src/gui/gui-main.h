@@ -46,7 +46,9 @@
 #define g_e_buffer GTK_TEXT_BUFFER(gummi->editor->buffer)
 #define g_e_view GTK_TEXT_VIEW(gummi->editor->view)
 
-typedef struct _GummiGui {
+typedef struct _GummiGui GummiGui; 
+
+struct _GummiGui {
     GuEditortabsGui* editortabsgui;
     GuImportGui* importgui;
     GuPrefsGui* prefsgui;
@@ -68,7 +70,7 @@ typedef struct _GummiGui {
     
     guint statusid;
     gchar* recent_list[5];
-} GummiGui;
+};
 
 typedef enum _GuFilterType {
     TYPE_LATEX = 0,

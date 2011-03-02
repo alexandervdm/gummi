@@ -33,7 +33,9 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuSearchGui {
+typedef struct _GuSearchGui GuSearchGui; 
+
+struct _GuSearchGui {
     GtkWidget* searchwindow;
     GtkEntry* searchentry;
     GtkEntry* replaceentry;
@@ -42,7 +44,7 @@ typedef struct _GuSearchGui {
     gboolean wholeword;
     gchar* prev_search;
     gchar* prev_replace;
-} GuSearchGui;
+};
 
 GuSearchGui* searchgui_init(GtkBuilder* builder);
 void searchgui_main(GuSearchGui* gc);

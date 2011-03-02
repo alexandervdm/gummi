@@ -47,7 +47,9 @@
 #define return_if_sig_safe(x) \
     if (s->loading) return x;
 
-typedef struct _GuSnippetsGui {
+typedef struct _GuSnippetsGui GuSnippetsGui; 
+
+struct _GuSnippetsGui {
     GtkWindow* snippetswindow;
     GtkTreeView* snippets_tree_view;
     GtkScrolledWindow* snippet_scroll;
@@ -61,7 +63,7 @@ typedef struct _GuSnippetsGui {
     GtkSourceBuffer* buffer;
     slist* current;
     gboolean loading;
-} GuSnippetsGui;
+};
 
 GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow);
 void snippetsgui_main(GuSnippetsGui* sc);

@@ -37,10 +37,10 @@
 #include <sys/types.h>
 
 #ifdef HAVE_SYS_WAIT_H
-# include <sys/wait.h>
+#   include <sys/wait.h>
 #endif
 #ifndef WEXITSTATUS
-# define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
+#   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
 
 #include <glib.h>
@@ -149,9 +149,6 @@ gboolean utils_path_exists(const gchar* path) {
     return result;
 }
 
-/*
- * Platform independent file copy operation
- */
 gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
     gchar* contents;
     gsize length;
@@ -171,11 +168,6 @@ gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
     return TRUE;
 }
 
-/**
- * @brief  Platform independent interface for calling popen() and returns a
- * newly allocated pointer
- * @return Tuple2
- */
 Tuple2 utils_popen_r(const gchar* cmd) {
     FILE* fp = popen(cmd, "r");
     gchar buf[BUFSIZ];
@@ -201,11 +193,6 @@ Tuple2 utils_popen_r(const gchar* cmd) {
     return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
 }
 
-/**
- * @brief Transforms target to path relative to root.
- * @return a newly allocated pointer to gchar* to the relative path, if target
- * isn't relative to root, target is simply duplicated and returned.
- */
 gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
     gchar* tstr = NULL;
     if ((root != NULL) && (0 == strncmp(target, root, strlen(root))))
@@ -215,8 +202,7 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
     return tstr;
 }
 
-slist* slist_find_index_of(slist* head, const gchar* term, gboolean first_n,
-        gboolean create_if_not_exists) {
+slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create) {
     slist* current = head;
     slist* prev = 0;
 

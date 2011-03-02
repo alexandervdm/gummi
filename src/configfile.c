@@ -134,7 +134,7 @@ void config_set_default(void) {
 
 const gchar* config_get_value(const gchar* term) {
     gchar* ret  = NULL;
-    slist* index = slist_find_index_of(config_head, term, FALSE, TRUE);
+    slist* index = slist_find(config_head, term, FALSE, TRUE);
 
     ret = index->second;
     if (ret && 0 == strcmp(ret, "False"))
@@ -146,7 +146,7 @@ void config_set_value(const gchar* term, const gchar* value) {
     if (!config_head)
         slog(L_FATAL, "configuration not initialized\n");
 
-    slist* index = slist_find_index_of(config_head, term, FALSE, TRUE);
+    slist* index = slist_find(config_head, term, FALSE, TRUE);
     g_free(index->second);
 
     index->second = g_strdup(value? value: "");

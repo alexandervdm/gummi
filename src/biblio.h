@@ -34,7 +34,10 @@
 
 #include "latex.h"
 
-typedef struct _GuBiblio {
+
+typedef struct _GuBiblio GuBiblio;
+
+struct _GuBiblio {
     GtkProgressBar* progressbar;
     GtkAdjustment* progressmon;
     GtkListStore* list_biblios;
@@ -42,7 +45,7 @@ typedef struct _GuBiblio {
     GtkLabel* refnr_label;
     gchar* basename;
     double progressval;
-} GuBiblio;
+};
 
 GuBiblio* biblio_init(GtkBuilder* builder);
 gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec);

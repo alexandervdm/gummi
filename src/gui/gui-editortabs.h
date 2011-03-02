@@ -38,9 +38,11 @@
 #define g_editortabsgui gui->editortabsgui
 #define g_tabs_notebook gui->editortabsgui->tab_notebook
 
-typedef struct _GuEditortabsGui {
+typedef struct _GuEditortabsGui GuEditortabsGui; 
+
+struct _GuEditortabsGui {
     GtkNotebook *tab_notebook;
-} GuEditortabsGui;
+};
 
 
 

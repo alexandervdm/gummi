@@ -185,7 +185,7 @@ void snippets_clean_up(GuSnippets* sc) {
 
 gchar* snippets_get_value(GuSnippets* sc, const gchar* term) {
     gchar* key = g_strdup_printf("%s,", term);
-    slist* index = slist_find_index_of(sc->head, key, TRUE, FALSE);
+    slist* index = slist_find(sc->head, key, TRUE, FALSE);
     g_free(key);
     return (index)? index->second: NULL;
 }

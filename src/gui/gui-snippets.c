@@ -259,8 +259,7 @@ void on_button_remove_snippet_clicked(GtkWidget* widget, void* user) {
          * remove if the snippets is already in the slist */
         if (widget) {
             config = g_strdup_printf("%s,%s,%s", key, accel, name);
-            target = slist_find_index_of(gummi->snippets->head, config, FALSE,
-                    FALSE);
+            target = slist_find(gummi->snippets->head, config, FALSE, FALSE);
             slist_remove(gummi->snippets->head, target);
         }
         /* Disconnect accelerator */
@@ -296,7 +295,7 @@ gboolean on_tab_trigger_entry_focus_out_event(GtkEntry* entry, void* user) {
 
     /* Check dumplicate key */
     search_key = g_strdup_printf("%s,", new_key);
-    index = slist_find_index_of(gummi->snippets->head, search_key, TRUE, FALSE);
+    index = slist_find(gummi->snippets->head, search_key, TRUE, FALSE);
 
     if (index && index != s->current) {
         gtk_entry_set_text(entry, "");
@@ -375,8 +374,7 @@ void on_snippets_tree_view_cursor_changed(GtkTreeView* view, void* user) {
 
         /* Record current activated snippet */
         config = g_strdup_printf("%s,%s,%s", key, accel, name);
-        s->current = slist_find_index_of(gummi->snippets->head, config, FALSE,
-                FALSE);
+        s->current = slist_find(gummi->snippets->head, config, FALSE, FALSE);
 
         snippet = snippets_get_value(gummi->snippets, key);
 

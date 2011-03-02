@@ -33,7 +33,9 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
-typedef struct _GuPreviewGui {
+typedef struct _GuPreviewGui GuPreviewGui; 
+
+struct _GuPreviewGui {
     PopplerDocument* doc;
     PopplerPage* page;
     GtkViewport* previewgui_viewport;
@@ -60,7 +62,7 @@ typedef struct _GuPreviewGui {
     
     cairo_surface_t *surface;
 
-} GuPreviewGui;
+};
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder);
 void previewgui_update_statuslight(const gchar* type);

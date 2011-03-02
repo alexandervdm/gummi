@@ -33,9 +33,11 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuMotion {
+typedef struct _GuMotion GuMotion;
+
+struct _GuMotion {
     gint timer;
-} GuMotion;
+};
 
 GuMotion* motion_init(void);
 gboolean motion_idle_cb(void* user);
