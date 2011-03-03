@@ -82,23 +82,15 @@
 
 #define _(T) gettext(T)
 
-/* Gummi Class Hierarchy
+/**
+ * Gummi:
  *
- * GuEditor GuFileInfo GuLatex          GuPrefsGui GuImportGui GuSearchGui
- *   |\     /    |      |  /                    \          |          /
- *   | `---+- GuLatex -+-`                      `----- GummiGui ----`
- *   |     |            |                                  |
- *   |     |            |   GuImporter GuTemplate GuBiblio |
- *   |     |            |        |          |        |     |
- *   |     |            |        |          |        |     |
- *   |     |            |        |          |        |     |
- *   `-----`------------`--------|----------`--------------`
- *                             Gummi
+ * Stores Gummi main context.
  */
-
 typedef struct _Gummi Gummi;
 
 struct _Gummi {
+    /*< private >*/
     GList* editors;
     GuEditor* editor;
     GuMotion* motion;
@@ -115,6 +107,7 @@ void gummi_new_environment(Gummi* gc, const gchar* filename);
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to
  * non-GUI classes.
+ * Please only use this functions if avoidable.
  */
 GList* gummi_get_editors(void);
 GuEditor* gummi_get_active_editor(void);
