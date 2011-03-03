@@ -62,7 +62,6 @@ struct _GuPreviewGui {
     gboolean errormode;
     
     cairo_surface_t *surface;
-    GMutex* refresh_mutex;
 };
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder);

@@ -98,6 +98,8 @@ gpointer motion_compile_thread(gpointer data) {
         latex_update_workfile(gummi_get_latex(), gummi_get_active_editor());
         gdk_threads_leave();
         latex_update_pdffile(latex, editor);
+        g_mutex_unlock(mc->compile_mutex);
+
         gdk_threads_enter();
         editor_apply_errortags(editor, latex->errorlines);
         errorbuffer_set_text(latex->errormessage);
@@ -111,12 +113,10 @@ gpointer motion_compile_thread(gpointer data) {
         previewgui_refresh(gui->previewgui);
         gdk_threads_leave();
         gtk_widget_grab_focus(focus);
-        g_mutex_unlock(mc->compile_mutex);
     }
 }
 
 gboolean motion_idle_cb(gpointer user) {
-    L_F_DEBUG;
     if (gui->previewgui->preview_on_idle)
         motion_do_compile(GU_MOTION(user));
     return FALSE;
@@ -136,7 +136,6 @@ void motion_stop_timer(GuMotion* mc) {
 }
 
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    L_F_DEBUG;
     motion_stop_timer(GU_MOTION(user));
     if (snippets_key_press_cb(gummi_get_snippets(), gummi_get_active_editor(),
                 event))
@@ -145,7 +144,6 @@ gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
 }
 
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    L_F_DEBUG;
     motion_start_timer(GU_MOTION(user));
     if (snippets_key_release_cb(gummi_get_snippets(), gummi_get_active_editor(),
                 event))

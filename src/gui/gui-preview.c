@@ -76,7 +76,6 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     p->preview_on_idle = FALSE;
     p->page_total = 0;
     p->page_current = 1;
-    p->refresh_mutex = g_mutex_new();
 
     gtk_widget_modify_bg(p->drawarea, GTK_STATE_NORMAL, &bg); 
 
@@ -139,7 +138,9 @@ void previewgui_refresh(GuPreviewGui* pc) {
     L_F_DEBUG;
     cairo_t *cr = NULL;
 
-    //if (!g_mutex_trylock(pc->refresh_mutex)) return;
+    /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
+     * compiling. Also prevent PDF from changing(compiling) when previewing */
+    if (!g_mutex_trylock(gummi->motion->compile_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return;
@@ -180,7 +181,7 @@ void previewgui_refresh(GuPreviewGui* pc) {
     
     gtk_widget_queue_draw(pc->drawarea);
 
-    //g_mutex_unlock(pc->refresh_mutex);
+    g_mutex_unlock(gummi->motion->compile_mutex);
 }
 
 void previewgui_set_pagedata(GuPreviewGui* pc) {
