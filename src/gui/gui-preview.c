@@ -42,8 +42,9 @@
 
 #include "configfile.h"
 #include "environment.h"
-#include "utils.h"
 #include "gui/gui-main.h"
+#include "motion.h"
+#include "utils.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;
@@ -73,6 +74,10 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     p->page_zoommode = 1;
     p->update_timer = 0;
     p->preview_on_idle = FALSE;
+    p->page_total = 0;
+    p->page_current = 1;
+    p->refresh_mutex = g_mutex_new();
+
     gtk_widget_modify_bg(p->drawarea, GTK_STATE_NORMAL, &bg); 
 
     g_signal_connect(GTK_OBJECT(p->drawarea), "expose-event",
@@ -95,28 +100,26 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
 }
 
 void previewgui_update_statuslight(const gchar* type) {
+    gdk_threads_enter();
     gtk_tool_button_set_stock_id(GTK_TOOL_BUTTON(gui->previewgui->statuslight),
            type);
-    while (gtk_events_pending()) gtk_main_iteration();
+    gdk_threads_leave();
 }
 
 void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
-    GError *err = NULL;
-
-    // clean up objects from previous document
-    if (pc->page) g_object_unref(pc->page);
-    if (pc->doc) g_object_unref(pc->doc);
+    L_F_DEBUG;
+    previewgui_cleanup_fds(pc);
 
     pc->uri = g_strconcat("file://", pdffile, NULL);
-    if (!(pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err))) {
-        slog(L_ERROR, "poppler_document_new_from_file(): %s\n", err->message);
-        g_error_free(err);
-        return;
-    }
+    pc->doc = poppler_document_new_from_file(pc->uri, NULL, NULL);
+    g_return_if_fail(pc->doc != NULL);
+
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     pc->page_current = 0;
     
     pc->page = poppler_document_get_page(pc->doc, pc->page_current);
+    g_return_if_fail(pc->page != NULL);
+
     poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
     /*
     pc->page_total = poppler_document_get_n_pages(pc->doc);
@@ -134,28 +137,24 @@ void my_getsize(GtkWidget *widget, GtkAllocation *allocation, void *data) {
 
 void previewgui_refresh(GuPreviewGui* pc) {
     L_F_DEBUG;
-    GError *err = NULL;
-    cairo_t *cr;
+    cairo_t *cr = NULL;
+
+    //if (!g_mutex_trylock(pc->refresh_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_path_exists(pc->uri + 7)) return;
 
-    /* clean up */
-    if (pc->page) g_object_unref(pc->page);
-    if (pc->doc) g_object_unref(pc->doc);
+    previewgui_cleanup_fds(pc);
 
-    if (!(pc->doc = poppler_document_new_from_file(pc->uri, NULL, &err))) {
-        slog(L_FATAL, "poppler_document_new_from_file(): %s\n", err->message);
-        g_error_free(err);
-        return;
-    }
-    
-    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
+    pc->doc = poppler_document_new_from_file(pc->uri, NULL, NULL);
+    g_return_if_fail(pc->doc != NULL);
     
     /* recheck document dimensions on refresh for orientation changes */
-    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
     pc->page_total = poppler_document_get_n_pages(pc->doc);
     previewgui_set_pagedata(pc);
+
+    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
+    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
     
     if (pc->surface)
         cairo_surface_destroy (pc->surface);
@@ -180,18 +179,26 @@ void previewgui_refresh(GuPreviewGui* pc) {
     cairo_destroy(cr);
     
     gtk_widget_queue_draw(pc->drawarea);
+
+    //g_mutex_unlock(pc->refresh_mutex);
 }
 
 void previewgui_set_pagedata(GuPreviewGui* pc) {
     L_F_DEBUG;
+    gchar* current = NULL;
+    gchar* total = NULL;
+
     if ((pc->page_total - 1) > pc->page_current) {
         gtk_widget_set_sensitive(GTK_WIDGET(pc->page_next), TRUE);
     }
     else if (pc->page_current >= pc->page_total) {
-        previewgui_goto_page(pc, pc->page_total -1);
+        pc->page_current = pc->page_current;
+        gtk_widget_set_sensitive(pc->page_prev, (pc->page_current > 0));
+        gtk_widget_set_sensitive(pc->page_next,
+                (pc->page_current < (pc->page_total -1)));
     }
-    char* current = g_strdup_printf("%d", (pc->page_current+1));
-    char* total = g_strdup_printf("of %d", pc->page_total);
+    current = g_strdup_printf("%d", (pc->page_current+1));
+    total = g_strdup_printf("of %d", pc->page_total);
 
     gtk_entry_set_text(GTK_ENTRY(pc->page_input), current);
     gtk_label_set_text(GTK_LABEL(pc->page_label), total);
@@ -202,8 +209,10 @@ void previewgui_set_pagedata(GuPreviewGui* pc) {
 
 void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
     L_F_DEBUG;
-    if (page_number < 0 || page_number >= pc->page_total)
+    if (page_number < 0 || page_number >= pc->page_total) {
         slog(L_ERROR, "page_number is a negative number!\n");
+        return;
+    }
 
     pc->page_current = page_number;
     gtk_widget_set_sensitive(pc->page_prev, (page_number > 0));
@@ -224,7 +233,8 @@ void previewgui_start_error_mode(GuPreviewGui* pc) {
 }
 
 void previewgui_stop_error_mode(GuPreviewGui* pc) {
-    
+    L_F_DEBUG;
+    if (!pc->errormode) return;
     pc->errormode = FALSE;
     g_object_ref(pc->errorlabel);
     gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
@@ -291,48 +301,35 @@ void previewgui_reset(GuPreviewGui* pc) {
     /* reset uri */
     g_free(pc->uri);
     pc->uri = NULL;
+    pc->page_current = 0;
 
     gummi->latex->modified_since_compile = TRUE;
     previewgui_stop_preview(pc);
-    previewgui_update_preview(pc);
-
-    if (!pc->errormode && gummi->latex->errorlines[0])
-        previewgui_start_error_mode(pc);
+    motion_do_compile(gummi->motion);
 
     if (config_get_value("compile_status"))
         previewgui_start_preview(pc);
 }
 
-gboolean previewgui_update_preview(gpointer user) {
-    L_F_DEBUG;
-    GuPreviewGui* pc = (GuPreviewGui*)user;
-
-    latex_update_workfile(gummi->latex, gummi->editor);
-    latex_update_pdffile(gummi->latex, gummi->editor);
-    editor_apply_errortags(gummi->editor, gummi->latex->errorlines);
-    errorbuffer_set_text(gummi->latex->errormessage);
-
-    if (!gummi->latex->errorlines[0]) {
-        if (pc->errormode) previewgui_stop_error_mode(pc);
-        if (!pc->uri) previewgui_set_pdffile(pc, gummi->editor->pdffile);
+void previewgui_cleanup_fds(GuPreviewGui* pc) {
+    if (pc->page) {
+        g_object_unref(pc->page);
+        pc->page = NULL;
     }
-
-    /* We need to refresh preview even if PDF compilation fails, because
-     * the previous PDF file is now(possibly) replaced with a new one, so
-     * the previous FD is invalidized */
-    previewgui_refresh(pc);
-    return (0 == strcmp(config_get_value("compile_scheme"), "real_time"));
+    if (pc->doc) {
+        g_object_unref(pc->doc);
+        pc->doc = NULL;
+    }
 }
 
 void previewgui_start_preview(GuPreviewGui* pc) {
     L_F_DEBUG;
-    previewgui_stop_preview(pc);
     if (0 == strcmp(config_get_value("compile_scheme"), "on_idle")) {
         pc->preview_on_idle = TRUE;
     } else {
         pc->update_timer = g_timeout_add_seconds(
                 atoi(config_get_value("compile_timer")),
-                previewgui_update_preview, pc);
+                motion_do_compile, gummi->motion);
     }
 }
 

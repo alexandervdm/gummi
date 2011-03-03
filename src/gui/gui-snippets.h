@@ -47,7 +47,8 @@
 #define return_if_sig_safe(x) \
     if (s->loading) return x;
 
-typedef struct _GuSnippetsGui GuSnippetsGui; 
+#define GU_SNIPPETS_GUI(x) ((GuSnippetsGui*)x)
+typedef struct _GuSnippetsGui GuSnippetsGui;
 
 struct _GuSnippetsGui {
     GtkWindow* snippetswindow;

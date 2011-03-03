@@ -52,18 +52,18 @@ GuLatex* latex_init(void) {
 }
 
 void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
+    L_F_DEBUG;
     GtkTextIter start, end;
     gchar *text;
     FILE *fp;
 
     /* save selection */
-    gtk_text_buffer_get_selection_bounds(
-            GTK_TEXT_BUFFER(ec->buffer), &start, &end);
+    gtk_text_buffer_get_selection_bounds(GTK_TEXT_BUFFER(ec->buffer), &start,
+            &end);
     text = editor_grab_buffer(ec);
 
     /* restore selection */
-    gtk_text_buffer_select_range(
-            GTK_TEXT_BUFFER(ec->buffer), &start, &end);
+    gtk_text_buffer_select_range(GTK_TEXT_BUFFER(ec->buffer), &start, &end);
     
     fp = fopen(ec->workfile, "w");
     
@@ -74,10 +74,10 @@ void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
     fwrite(text, strlen(text), 1, fp);
     g_free(text);
     fclose(fp);
-    // TODO: Maybe add editorviewer grab focus line here if necessary
 }
 
 void latex_update_pdffile(GuLatex* lc, GuEditor* ec) {
+    L_F_DEBUG;
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value("typesetter");

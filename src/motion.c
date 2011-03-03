@@ -41,39 +41,103 @@
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
+#include "gui/gui-main.h"
+#include "gui/gui-preview.h"
 #include "latex.h"
 #include "utils.h"
-#include "gui/gui-main.h"
 
 extern GummiGui* gui;
 
 GuMotion* motion_init(void) {
     GuMotion* m = g_new0(GuMotion, 1);
-    m->timer = 0;
+    GError* err = NULL;
+
+    m->key_press_timer = 0;
+    m->signal_mutex = g_mutex_new();
+    m->compile_mutex = g_mutex_new();
+    m->compile_cv = g_cond_new();
+    m->compile_thread = g_thread_create(motion_compile_thread, m, FALSE, &err);
+
+    if (!m->compile_thread)
+        slog(L_G_FATAL, "Can not create new thread: %s\n", err->message);
     return m;
 }
 
-gboolean motion_idle_cb(void* user) {
+gboolean motion_do_compile(gpointer user) {
+    L_F_DEBUG;
+    GuMotion* mc = GU_MOTION(user);
+
+    if (!g_mutex_trylock(mc->signal_mutex)) goto ret;
+    g_cond_signal(mc->compile_cv);
+    g_mutex_unlock(mc->signal_mutex);
+
+ret:
+    return (0 == strcmp(config_get_value("compile_scheme"), "real_time"));
+}
+
+gpointer motion_compile_thread(gpointer data) {
+    L_F_DEBUG;
+    GuMotion* mc = GU_MOTION(data);
+    GuEditor* editor = NULL;
+    GuLatex* latex = NULL;
+    GuPreviewGui* pc = NULL;
+    GtkWidget* focus = NULL;
+
+    while (TRUE) {
+        g_mutex_lock(mc->compile_mutex);
+        slog(L_DEBUG, "Compile thread sleeping...\n");
+        g_cond_wait(mc->compile_cv, mc->compile_mutex);
+        slog(L_DEBUG, "Compile thread awoke.\n");
+
+        focus = gtk_window_get_focus(gui->mainwindow);
+        editor = gummi_get_active_editor();
+        latex = gummi_get_latex();
+        pc = gui->previewgui;
+
+        gdk_threads_enter();
+        latex_update_workfile(gummi_get_latex(), gummi_get_active_editor());
+        gdk_threads_leave();
+        latex_update_pdffile(latex, editor);
+        gdk_threads_enter();
+        editor_apply_errortags(editor, latex->errorlines);
+        errorbuffer_set_text(latex->errormessage);
+
+        if (!pc->errormode && latex->errorlines[0]) {
+            previewgui_start_error_mode(pc);
+        } else if (!latex->errorlines[0]) {
+            if (pc->errormode) previewgui_stop_error_mode(pc);
+            if (!pc->uri) previewgui_set_pdffile(pc, editor->pdffile);
+        }
+        previewgui_refresh(gui->previewgui);
+        gdk_threads_leave();
+        gtk_widget_grab_focus(focus);
+        g_mutex_unlock(mc->compile_mutex);
+    }
+}
+
+gboolean motion_idle_cb(gpointer user) {
+    L_F_DEBUG;
     if (gui->previewgui->preview_on_idle)
-        previewgui_update_preview(gui->previewgui);
+        motion_do_compile(GU_MOTION(user));
     return FALSE;
 }
 
 void motion_start_timer(GuMotion* mc) {
     motion_stop_timer(mc);
-    mc->timer = g_timeout_add_seconds(atoi(config_get_value("compile_timer")),
-            motion_idle_cb, mc);
+    mc->key_press_timer = g_timeout_add_seconds(atoi(
+                config_get_value("compile_timer")), motion_idle_cb, mc);
 }
 
 void motion_stop_timer(GuMotion* mc) {
-    if (mc->timer > 0) {
-        g_source_remove(mc->timer);
-        mc->timer = 0;
+    if (mc->key_press_timer > 0) {
+        g_source_remove(mc->key_press_timer);
+        mc->key_press_timer = 0;
     }
 }
-    
+
 gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    motion_stop_timer((GuMotion*)user);
+    L_F_DEBUG;
+    motion_stop_timer(GU_MOTION(user));
     if (snippets_key_press_cb(gummi_get_snippets(), gummi_get_active_editor(),
                 event))
         return TRUE;
@@ -81,7 +145,8 @@ gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
 }
 
 gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user) {
-    motion_start_timer((GuMotion*)user);
+    L_F_DEBUG;
+    motion_start_timer(GU_MOTION(user));
     if (snippets_key_release_cb(gummi_get_snippets(), gummi_get_active_editor(),
                 event))
         return TRUE;

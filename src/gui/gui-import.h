@@ -35,7 +35,8 @@
 
 #define g_importgui gui->importgui
 
-typedef struct _GuImportGui GuImportGui; 
+#define GU_IMPORT_GUI(x) ((GuImportGui*)x)
+typedef struct _GuImportGui GuImportGui;
 
 struct _GuImportGui {
     GtkHBox* box_image;

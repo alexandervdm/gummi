@@ -76,6 +76,8 @@ int main (int argc, char *argv[]) {
     gchar* ui = g_build_filename(DATADIR, "ui", "gummi.glade", NULL);
     gtk_builder_add_from_file(builder, ui, NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
+    g_thread_init(NULL);
+    gdk_threads_init();
     g_free(ui);
 
     /* Initialize logging */
@@ -102,12 +104,14 @@ int main (int argc, char *argv[]) {
     editors = g_list_append(editors, editor);
     GuSnippets* snippets = snippets_init(snippetsname);
     gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
+    slog(L_DEBUG, "Gummi created!\n");
 
     g_free(snippetsname);
 
     /* Initialize GUI */
     gui = gui_init(builder);
     slog_set_gui_parent(gui->mainwindow);
+    slog(L_DEBUG, "GummiGui created!\n");
 
     /* Install acceleration group to mainwindow */
     gtk_window_add_accel_group(gui->mainwindow, snippets->accel_group);

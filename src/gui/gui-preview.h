@@ -33,7 +33,8 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
-typedef struct _GuPreviewGui GuPreviewGui; 
+#define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
+typedef struct _GuPreviewGui GuPreviewGui;
 
 struct _GuPreviewGui {
     PopplerDocument* doc;
@@ -49,10 +50,10 @@ struct _GuPreviewGui {
     GtkLabel* errorlabel;
 
     gchar *uri;
+    gint update_timer;
     gint page_total;
     gint page_current;
     gint page_zoommode;
-    gint update_timer;
     gdouble page_scale;
     gdouble page_width;
     gdouble page_height;
@@ -61,7 +62,7 @@ struct _GuPreviewGui {
     gboolean errormode;
     
     cairo_surface_t *surface;
-
+    GMutex* refresh_mutex;
 };
 
 GuPreviewGui* previewgui_init(GtkBuilder * builder);
@@ -73,7 +74,7 @@ void previewgui_goto_page(GuPreviewGui* prev, int page_number);
 void previewgui_start_error_mode(GuPreviewGui* pc);
 void previewgui_stop_error_mode(GuPreviewGui* pc);
 void previewgui_reset(GuPreviewGui* pc);
-gboolean previewgui_update_preview(gpointer user);
+void previewgui_cleanup_fds(GuPreviewGui* pc);
 void previewgui_start_preview(GuPreviewGui* pc);
 void previewgui_calc_dimensions(GuPreviewGui* pc);
 void previewgui_stop_preview(GuPreviewGui* pc);

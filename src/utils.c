@@ -51,9 +51,11 @@
 
 static gint slog_debug = 0;
 static GtkWindow* parent = 0;
+GThread* main_thread = 0;
 
 void slog_init(gint debug) {
     slog_debug = debug;
+    main_thread = g_thread_self();
 }
 
 void slog_set_gui_parent(GtkWindow* p) {
@@ -67,6 +69,9 @@ void slog(gint level, const gchar *fmt, ...) {
 
     if (L_IS_TYPE(level, L_DEBUG) && !slog_debug) return;
 
+    if (g_thread_self() != main_thread)
+        fprintf(stderr, "\e[1;31m[Thread]\e[0m");
+
     if (L_IS_TYPE(level, L_DEBUG))
         fprintf(stderr, "\e[1;32m[Debug]\e[0m ");
     else if (L_IS_TYPE(level, L_FATAL) || L_IS_TYPE(level, L_G_FATAL))
@@ -77,7 +82,7 @@ void slog(gint level, const gchar *fmt, ...) {
         fprintf(stderr, "\e[1;33m[Warning]\e[0m ");
     else
         fprintf(stderr, "\e[1;34m[Info]\e[0m ");
-    
+
     va_start(vap, fmt);
     vsnprintf(message, BUFSIZ, fmt, vap);
     va_end(vap);

@@ -33,7 +33,8 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuSearchGui GuSearchGui; 
+#define GU_SEARCH_GUI(x) ((GuSearchGui*)x)
+typedef struct _GuSearchGui GuSearchGui;
 
 struct _GuSearchGui {
     GtkWidget* searchwindow;

@@ -33,7 +33,8 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-typedef struct _GuPrefsGui GuPrefsGui; 
+#define GU_PREFS_GUI(x) ((GuPrefsGui*)x)
+typedef struct _GuPrefsGui GuPrefsGui;
 
 struct _GuPrefsGui {
     GtkWidget* prefwindow;

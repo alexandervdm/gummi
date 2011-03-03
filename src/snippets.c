@@ -355,7 +355,7 @@ GuSnippetInfo* snippets_parse(char* snippet) {
 
 void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata) {
-    GuSnippets* sc = (GuSnippets*)udata->first;
+    GuSnippets* sc = GU_SNIPPETS(udata->first);
     gchar* key = (gchar*)udata->second;
     /* XXX: Don't know how to avoid using gummi_get_active_editor() here. Since
      * gtk_accel_group must be connect when load, we can not specify the

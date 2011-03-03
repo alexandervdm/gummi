@@ -539,7 +539,7 @@ void on_menu_bibupdate_activate(GtkWidget *widget, void * user) {
 
 void on_menu_pdfcompile_activate(GtkWidget *widget, void* user) {
     gummi->latex->modified_since_compile = TRUE;
-    previewgui_update_preview(gui->previewgui);
+    motion_do_compile(gummi->motion);
 }
 
 void on_menu_docstat_activate(GtkWidget *widget, void * user) {
