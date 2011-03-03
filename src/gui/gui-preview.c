@@ -143,7 +143,10 @@ void previewgui_refresh(GuPreviewGui* pc) {
     if (!g_mutex_trylock(gummi->motion->compile_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
-    if (!pc->uri || !utils_path_exists(pc->uri + 7)) return;
+    if (!pc->uri || !utils_path_exists(pc->uri + 7)) {
+        g_mutex_unlock(gummi->motion->compile_mutex);
+        return;
+    }
 
     previewgui_cleanup_fds(pc);
 
