@@ -84,19 +84,21 @@ gpointer motion_compile_thread(gpointer data) {
     GtkWidget* focus = NULL;
 
     while (TRUE) {
-        g_mutex_lock(mc->compile_mutex);
+        if (!g_mutex_trylock(mc->compile_mutex)) continue;
         slog(L_DEBUG, "Compile thread sleeping...\n");
         g_cond_wait(mc->compile_cv, mc->compile_mutex);
         slog(L_DEBUG, "Compile thread awoke.\n");
 
-        focus = gtk_window_get_focus(gui->mainwindow);
         editor = gummi_get_active_editor();
         latex = gummi_get_latex();
         pc = gui->previewgui;
 
         gdk_threads_enter();
+        focus = gtk_window_get_focus(gui->mainwindow);
         latex_update_workfile(gummi_get_latex(), gummi_get_active_editor());
+        gtk_widget_grab_focus(focus);
         gdk_threads_leave();
+
         latex_update_pdffile(latex, editor);
         g_mutex_unlock(mc->compile_mutex);
 
@@ -104,7 +106,7 @@ gpointer motion_compile_thread(gpointer data) {
         editor_apply_errortags(editor, latex->errorlines);
         errorbuffer_set_text(latex->errormessage);
 
-        if (!pc->errormode && latex->errorlines[0]) {
+        if (!pc->errormode && latex->errorlines[0] && !pc->uri) {
             previewgui_start_error_mode(pc);
         } else if (!latex->errorlines[0]) {
             if (pc->errormode) previewgui_stop_error_mode(pc);
@@ -112,7 +114,6 @@ gpointer motion_compile_thread(gpointer data) {
         }
         previewgui_refresh(gui->previewgui);
         gdk_threads_leave();
-        gtk_widget_grab_focus(focus);
     }
 }
 

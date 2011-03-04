@@ -295,7 +295,6 @@ gchar* editor_grab_buffer(GuEditor* ec) {
     gtk_text_buffer_get_bounds(ec_buffer, &start, &end);
     gchar* pstr = gtk_text_iter_get_text (&start, &end);
     gtk_widget_set_sensitive(GTK_WIDGET(ec->view), TRUE);
-    gtk_widget_grab_focus(GTK_WIDGET(ec->view));
     return pstr;
 }
 
