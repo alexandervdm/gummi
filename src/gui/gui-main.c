@@ -191,7 +191,7 @@ gboolean gui_quit(void) {
     gint ret = check_for_save();
 
     if (GTK_RESPONSE_YES == ret)
-        on_menu_save_activate(NULL, NULL);  
+        gui_save_file(FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return TRUE;
 
@@ -292,10 +292,46 @@ void gui_open_file(const gchar* filename) {
     gui_new_environment(filename);
 }
 
+void gui_save_file(gboolean saveas) {
+    gboolean new = FALSE;
+    gchar* filename = NULL;
+    gchar* pdfname = NULL;
+    gchar* prev = NULL;
+    gint ret = 0;
+
+    if (saveas || !(filename = gummi->editor->filename)) {
+        if ((filename = get_save_filename(TYPE_LATEX))) {
+            new = TRUE;
+            if (strcmp(filename + strlen(filename) -4, ".tex")) {
+                prev = filename;
+                filename = g_strdup_printf("%s.tex", filename);
+                g_free(prev);
+            }
+            if (utils_path_exists(filename)) {
+                ret = utils_yes_no_dialog(
+                        _("The file already exists. Overwrite?"));
+                if (GTK_RESPONSE_YES != ret) goto cleanup;
+            }
+        } else goto cleanup;
+    }
+    iofunctions_write_file(gummi->editor, filename);
+
+    pdfname = g_strdup(filename);
+    pdfname[strlen(pdfname) -4] = 0;
+    latex_export_pdffile(gummi->latex, gummi->editor, pdfname, FALSE);
+    if (new) gui_new_environment(filename);
+    gui_update_title();
+    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
+
+cleanup:
+    if (new) g_free(filename);
+    g_free(pdfname);
+}
+
 void on_menu_new_activate(GtkWidget *widget, void* user) {
     gint ret = check_for_save();
     if (GTK_RESPONSE_YES == ret)
-        on_menu_save_activate(NULL, NULL);  
+        gui_save_file(FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     gui_new_environment(NULL);
@@ -313,7 +349,7 @@ void on_menu_exportpdf_activate(GtkWidget *widget, void * user) {
 
     filename = get_save_filename(TYPE_PDF);
     if (filename)
-        latex_export_pdffile(gummi->latex, gummi->editor, filename);
+        latex_export_pdffile(gummi->latex, gummi->editor, filename, TRUE);
     g_free(filename);
 }
 
@@ -324,7 +360,7 @@ void on_menu_recent_activate(GtkWidget *widget, void * user) {
     gint ret = check_for_save();
 
     if (GTK_RESPONSE_YES == ret)
-        on_menu_save_activate(NULL, NULL);  
+        gui_save_file(FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
 
@@ -354,7 +390,7 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
     gint ret = check_for_save();
 
     if (GTK_RESPONSE_YES == ret)
-        on_menu_save_activate(NULL, NULL);  
+        gui_save_file(FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
 
@@ -366,57 +402,11 @@ void on_menu_open_activate(GtkWidget *widget, void* user) {
 }
 
 void on_menu_save_activate(GtkWidget *widget, void* user) {
-    gchar* filename = NULL;
-    gboolean new = FALSE;
-    gint ret = 0;
-
-    if (!gummi->editor->filename) {
-        if ((filename = get_save_filename(TYPE_LATEX))) {
-            if (strcmp(filename + strlen(filename) -4, ".tex")) {
-                filename = g_strdup_printf("%s.tex", filename);
-                new = TRUE;
-            }
-            if (utils_path_exists(filename)) {
-                ret = utils_yes_no_dialog(
-                        _("The file already exists. Overwrite?"));
-                if (GTK_RESPONSE_YES != ret) {
-                    g_free(filename);
-                    return;
-                }
-            }
-            iofunctions_write_file(gummi->editor, filename); 
-            gui_new_environment(filename);
-            g_free(filename);
-        }
-    } else
-        iofunctions_write_file(gummi->editor, gummi->editor->filename); 
-    gui_update_title();
-    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
+    gui_save_file(FALSE);
 }
 
 void on_menu_saveas_activate(GtkWidget *widget, void* user) {
-    gchar* filename = NULL;
-    gboolean new = FALSE;
-    gint ret = 0;
-
-    if ((filename = get_save_filename(TYPE_LATEX_SAVEAS))) {
-        if (strcmp(filename + strlen(filename) -4, ".tex")) {
-            filename = g_strdup_printf("%s.tex", filename);
-            new = TRUE;
-        }
-        if (utils_path_exists(filename)) {
-            ret = utils_yes_no_dialog(
-                    _("The file already exists. Overwrite?"));
-            if (GTK_RESPONSE_YES != ret) {
-                g_free(filename);
-                return;
-            }
-        }
-        gui_new_environment(filename);
-        iofunctions_write_file(gummi->editor, filename); 
-        g_free(filename);
-    }
-    gtk_widget_grab_focus(GTK_WIDGET(gummi->editor->view));
+    gui_save_file(TRUE);
 }
 
 void on_menu_cut_activate(GtkWidget *widget, void* user) {

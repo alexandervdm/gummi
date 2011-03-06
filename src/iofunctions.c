@@ -83,17 +83,21 @@ cleanup:
 }
 
 void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
-    GError* err = NULL;
-    gchar* status;
-    gchar* text;
-    gchar* encoded;
     gboolean result;
+    gchar* encoded = NULL;
+    gchar* status = NULL;
+    gchar* text = NULL;
+    GError* err = NULL;
+    GtkWidget* focus = NULL;
 
     status = g_strdup_printf(_("Saving %s..."), filename);
     statusbar_set_message(status);    
     g_free (status);
     
+    focus = gtk_window_get_focus(gummi_get_gui()->mainwindow);
     text = editor_grab_buffer(ec);
+    gtk_widget_grab_focus(focus);
+
     encoded = iofunctions_encode_text(text);
     
     /* set the contents of the file to the text from the buffer */

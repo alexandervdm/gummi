@@ -52,7 +52,6 @@ GuLatex* latex_init(void) {
 }
 
 void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
-    L_F_DEBUG;
     GtkTextIter start, end;
     gchar *text;
     FILE *fp;
@@ -77,7 +76,6 @@ void latex_update_workfile(GuLatex* lc, GuEditor* ec) {
 }
 
 void latex_update_pdffile(GuLatex* lc, GuEditor* ec) {
-    L_F_DEBUG;
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value("typesetter");
@@ -159,7 +157,8 @@ void latex_update_auxfile(GuLatex* lc, GuEditor* ec) {
     g_free(command);
 }
 
-void latex_export_pdffile(GuLatex* lc, GuEditor* ec, const gchar* path) {
+void latex_export_pdffile(GuLatex* lc, GuEditor* ec, const gchar* path,
+        gboolean prompt_overrite) {
     gchar* savepath = NULL;
     GError* err = NULL;
     gint ret = 0;
@@ -168,7 +167,8 @@ void latex_export_pdffile(GuLatex* lc, GuEditor* ec, const gchar* path) {
         savepath = g_strdup_printf("%s.pdf", path);
     else
         savepath = g_strdup(path);
-    if (utils_path_exists(savepath)) {
+
+    if (prompt_overrite && utils_path_exists(savepath)) {
         ret = utils_yes_no_dialog(_("The file already exists. Overwrite?"));
         if (GTK_RESPONSE_YES != ret) {
             g_free(savepath);

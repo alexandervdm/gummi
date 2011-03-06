@@ -73,6 +73,7 @@
 
 #include "biblio.h"
 #include "editor.h"
+#include "gui/gui-main.h"
 #include "importer.h"
 #include "iofunctions.h"
 #include "latex.h"
@@ -110,6 +111,7 @@ void gummi_new_environment(Gummi* gc, const gchar* filename);
  * non-GUI classes.
  * Please only use this functions if avoidable.
  */
+GummiGui* gummi_get_gui(void);
 GList* gummi_get_editors(void);
 GuEditor* gummi_get_active_editor(void);
 GuMotion* gummi_get_motion(void);

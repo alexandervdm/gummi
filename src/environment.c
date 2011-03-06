@@ -60,6 +60,10 @@ void gummi_new_environment(Gummi* gc, const gchar* filename) {
     iofunctions_reset_autosave(filename);
 }
 
+GummiGui* gummi_get_gui(void) {
+    return gui;
+}
+
 GList* gummi_get_editors(void) {
     return gummi->editors;
 }
