@@ -51,8 +51,8 @@ am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
 	gui-search.$(OBJEXT) gui-snippets.$(OBJEXT) importer.$(OBJEXT) \
 	iofunctions.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
-	snippets.$(OBJEXT) template.$(OBJEXT) updatecheck.$(OBJEXT) \
-	utils.$(OBJEXT) main.$(OBJEXT)
+	signals.$(OBJEXT) snippets.$(OBJEXT) template.$(OBJEXT) \
+	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -209,6 +209,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \
 		motion.c motion.h \
+		signals.c signals.h \
 		snippets.c snippets.h \
 		template.c template.h \
 		updatecheck.c updatecheck.h \
@@ -313,6 +314,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/latex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/motion.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/signals.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snippets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/updatecheck.Po@am__quote@
