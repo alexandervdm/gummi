@@ -41,6 +41,7 @@
 #include "gui/gui-main.h"
 #include "iofunctions.h"
 #include "motion.h"
+#include "signals.h"
 #include "snippets.h"
 #include "template.h"
 #include "utils.h"
@@ -71,13 +72,13 @@ int main (int argc, char *argv[]) {
     g_option_context_parse(context, &argc, &argv, &error);
 
     /* initialize GTK */
+    g_thread_init(NULL);
+    gdk_threads_init();
     gtk_init (&argc, &argv);
     GtkBuilder* builder = gtk_builder_new();
     gchar* ui = g_build_filename(DATADIR, "ui", "gummi.glade", NULL);
     gtk_builder_add_from_file(builder, ui, NULL);
     gtk_builder_set_translation_domain(builder, PACKAGE);
-    g_thread_init(NULL);
-    gdk_threads_init();
     g_free(ui);
 
     /* Initialize logging */
@@ -90,6 +91,9 @@ int main (int argc, char *argv[]) {
     config_init(configname);
     config_load();
     g_free(configname);
+
+    /* Initialize signals */
+    gummi_signals_register();
 
     /* Initialize Classes */
     gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
@@ -105,13 +109,17 @@ int main (int argc, char *argv[]) {
     GuSnippets* snippets = snippets_init(snippetsname);
     gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
     slog(L_DEBUG, "Gummi created!\n");
-
     g_free(snippetsname);
 
     /* Initialize GUI */
     gui = gui_init(builder);
     slog_set_gui_parent(gui->mainwindow);
     slog(L_DEBUG, "GummiGui created!\n");
+
+    /* Start compile thread */
+    motion_start_compile_thread(motion);
+    slog(L_DEBUG, "Compile thread started!\n");
+
 
     /* Install acceleration group to mainwindow */
     gtk_window_add_accel_group(gui->mainwindow, snippets->accel_group);

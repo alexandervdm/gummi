@@ -50,17 +50,21 @@ extern GummiGui* gui;
 
 GuMotion* motion_init(void) {
     GuMotion* m = g_new0(GuMotion, 1);
-    GError* err = NULL;
 
     m->key_press_timer = 0;
     m->signal_mutex = g_mutex_new();
     m->compile_mutex = g_mutex_new();
     m->compile_cv = g_cond_new();
-    m->compile_thread = g_thread_create(motion_compile_thread, m, FALSE, &err);
 
+    return m;
+}
+
+void motion_start_compile_thread(GuMotion* m) {
+    GError* err = NULL;
+
+    m->compile_thread = g_thread_create(motion_compile_thread, m, FALSE, &err); 
     if (!m->compile_thread)
         slog(L_G_FATAL, "Can not create new thread: %s\n", err->message);
-    return m;
 }
 
 gboolean motion_do_compile(gpointer user) {
@@ -83,6 +87,9 @@ gpointer motion_compile_thread(gpointer data) {
     GuPreviewGui* pc = NULL;
     GtkWidget* focus = NULL;
 
+    latex = gummi_get_latex();
+    pc = gui->previewgui;
+
     while (TRUE) {
         if (!g_mutex_trylock(mc->compile_mutex)) continue;
         slog(L_DEBUG, "Compile thread sleeping...\n");
@@ -90,12 +97,10 @@ gpointer motion_compile_thread(gpointer data) {
         slog(L_DEBUG, "Compile thread awoke.\n");
 
         editor = gummi_get_active_editor();
-        latex = gummi_get_latex();
-        pc = gui->previewgui;
 
         gdk_threads_enter();
         focus = gtk_window_get_focus(gui->mainwindow);
-        latex_update_workfile(gummi_get_latex(), gummi_get_active_editor());
+        latex_update_workfile(latex, editor);
         gtk_widget_grab_focus(focus);
         gdk_threads_leave();
 

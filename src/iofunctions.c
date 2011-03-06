@@ -63,7 +63,6 @@ void iofunctions_load_file(GuEditor* ec, const gchar* filename) {
     status = g_strdup_printf ("Loading %s...", filename);
     statusbar_set_message(status);
     g_free(status);
-    while (gtk_events_pending()) gtk_main_iteration();
     
     /* get the file contents */
     if (FALSE == (result = g_file_get_contents(filename, &text, NULL, &err))) {
@@ -93,7 +92,6 @@ void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
     status = g_strdup_printf(_("Saving %s..."), filename);
     statusbar_set_message(status);    
     g_free (status);
-    while (gtk_events_pending()) gtk_main_iteration();
     
     text = editor_grab_buffer(ec);
     encoded = iofunctions_encode_text(text);

@@ -1,6 +1,6 @@
 /**
- * @file   motion.h
- * @brief   
+ * @file   signals.c
+ * @brief  Define signals for Gummi
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -27,31 +27,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __GUMMI_MOTION_H__
-#define __GUMMI_MOTION_H__
-
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#define GU_MOTION(x) ((GuMotion*)x)
-typedef struct _GuMotion GuMotion;
-
-struct _GuMotion {
-    gint key_press_timer;
-    GMutex* signal_mutex;
-    GMutex* compile_mutex;
-    GThread* compile_thread;
-    GCond* compile_cv;
-};
-
-GuMotion* motion_init(void);
-void motion_start_compile_thread(GuMotion* m);
-gboolean motion_do_compile(gpointer user);
-gpointer motion_compile_thread(gpointer data);
-gboolean motion_idle_cb(gpointer user);
-void motion_start_timer(GuMotion* mc);
-void motion_stop_timer(GuMotion* mc);
-gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user);
-gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user);
-
-#endif /* __GUMMI_MOTION_H__ */
+void gummi_signals_register(void) {
+    g_signal_new("document-load",
+            G_TYPE_OBJECT, G_SIGNAL_RUN_FIRST,
+            0, NULL, NULL,
+            g_cclosure_marshal_VOID__POINTER,
+            G_TYPE_NONE, 1, G_TYPE_POINTER);
+}
