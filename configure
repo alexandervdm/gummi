@@ -2759,7 +2759,6 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
-# ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
 GETTEXT_PACKAGE=gummi
 
 cat >>confdefs.h <<_ACEOF
@@ -2768,7 +2767,8 @@ _ACEOF
 
 
 
-ALL_LINGUAS="ca de da fr el es it nl pl pt_BR ro ru zh_TW"
+# ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
+ALL_LINGUAS="ca da de el es fr it nl pl pt_BR ro ru zh_TW"
 
 
 ac_config_headers="$ac_config_headers config.h"

@@ -5,12 +5,12 @@ AC_PREREQ(2.65)
 AC_INIT([Gummi], [svn681], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
-# ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
 GETTEXT_PACKAGE=gummi
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
 AC_SUBST(GETTEXT_PACKAGE)
 
-ALL_LINGUAS="ca de da fr el es it nl pl pt_BR ro ru zh_TW"
+# ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
+ALL_LINGUAS="ca da de el es fr it nl pl pt_BR ro ru zh_TW"
 
 AC_CONFIG_SRCDIR([src/environment.h])
 AC_CONFIG_HEADERS([config.h])

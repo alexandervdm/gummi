@@ -1,7 +1,7 @@
 # List of source files which contain translatable strings.
-data/gummi.glade
-data/prefs.glade
-data/snippets.glade
+data/ui/gummi.glade
+data/ui/prefs.glade
+data/ui/snippets.glade
 src/biblio.c
 src/biblio.h
 src/configfile.c
