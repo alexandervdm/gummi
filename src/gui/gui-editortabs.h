@@ -38,7 +38,7 @@
 #define g_editortabsgui gui->editortabsgui
 #define g_tabs_notebook gui->editortabsgui->tab_notebook
 
-#define GU_EDITORTABS_GUI(x) ((GuEditortabsGui*)x)
+#define GU_EDITORTABS_GUI (x) ( (GuEditortabsGui*)x)
 typedef struct _GuEditortabsGui GuEditortabsGui;
 
 struct _GuEditortabsGui {
@@ -48,7 +48,7 @@ struct _GuEditortabsGui {
 
 
 
-GuEditortabsGui* editortabsgui_init(GtkBuilder* builder);
-void editortabsgui_create_tab(GuEditor* editor, const gchar* filename);
+GuEditortabsGui* editortabsgui_init (GtkBuilder* builder);
+void editortabsgui_create_tab (GuEditor* editor, const gchar* filename);
 
 #endif /* __GUMMI_GUI_EDITORTABS_H__ */

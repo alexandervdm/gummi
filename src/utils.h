@@ -36,8 +36,8 @@
 
 #define DIR_PERMS (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
 
-#define L_IS_TYPE(level, type) ((level & type) == type)
-#define L_IS_GUI(level) (level & 0xf0)
+#define L_IS_TYPE (level, type) ( (level & type) == type)
+#define L_IS_GUI (level) (level & 0xf0)
 #define L_INFO      0x00   /* for informative messages */
 #define L_WARNING   0x01   /* warnning */
 #define L_DEBUG     0x02   /* debug messages, only print if -d flags is used */
@@ -47,7 +47,7 @@
 #define L_G_ERROR   0x20   /* recoverable error */
 #define L_G_FATAL   0x40   /* inrecoverable error */
 
-#define L_F_DEBUG  slog(L_DEBUG, "%s()\n", __func__);
+#define L_F_DEBUG  slog (L_DEBUG, "%s ()\n", __func__);
 
 /**
  * Tuple2:
@@ -65,7 +65,7 @@ typedef struct _Tuple2 {
     gpointer second;
 } Tuple2;
 
-#define TUPLE2(x) ((Tuple2*)x)
+#define TUPLE2 (x) ( (Tuple2*)x)
 
 /**
  * Tuple2:
@@ -85,7 +85,7 @@ typedef struct _Tuple3 {
     gpointer third;
 } Tuple3;
 
-#define TUPLE3(x) ((Tuple3*)x)
+#define TUPLE3 (x) ( (Tuple3*)x)
 
 /**
  * slist:
@@ -105,11 +105,11 @@ typedef struct _slist {
     gchar* second;
 } slist;
 
-void slog_init(gint debug);
-void slog_set_gui_parent(GtkWindow* p);
-void slog(gint level, const gchar *fmt, ...);
-gint utils_yes_no_dialog(const gchar* message);
-gboolean utils_path_exists(const gchar* path);
+void slog_init (gint debug);
+void slog_set_gui_parent (GtkWindow* p);
+void slog (gint level, const gchar *fmt, ...);
+gint utils_yes_no_dialog (const gchar* message);
+gboolean utils_path_exists (const gchar* path);
 
 /**
  * utils_copy_file:
@@ -118,7 +118,7 @@ gboolean utils_path_exists(const gchar* path);
  *
  * Platform independent file copy operation.
  */
-gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
+gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err);
 
 /**
  * utils_popen_r:
@@ -126,9 +126,9 @@ gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err);
  * Returns: A Tuple2 with Tuple2::first storing the exit code and
  * Tuple2::second pointing to a newly allocated gchar* array
  *
- * Platform independent interface for calling popen().
+ * Platform independent interface for calling popen ().
  */
-Tuple2 utils_popen_r(const gchar* cmd);
+Tuple2 utils_popen_r (const gchar* cmd);
 
 /**
  * utils_path_to_relative:
@@ -138,7 +138,7 @@ Tuple2 utils_popen_r(const gchar* cmd);
  *
  * Transforms target to path relative to root.
  */
-gchar* utils_path_to_relative(const gchar* root, const gchar* target);
+gchar* utils_path_to_relative (const gchar* root, const gchar* target);
 
 /**
  * slist_find:
@@ -151,9 +151,9 @@ gchar* utils_path_to_relative(const gchar* root, const gchar* target);
  *
  * Find term in slist.
  */
-slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create);
+slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create);
 
-slist* slist_append(slist* head, slist* node);
-slist* slist_remove(slist* head, slist* node);
+slist* slist_append (slist* head, slist* node);
+slist* slist_remove (slist* head, slist* node);
 
 #endif /* __GUMMI_UTILS__ */

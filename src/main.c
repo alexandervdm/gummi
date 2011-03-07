@@ -57,83 +57,83 @@ static GOptionEntry entries[] = {
 };
 
 void on_window_destroy (GtkObject *object, gpointer user_data) {
-    gtk_main_quit();
+    gtk_main_quit ();
 }
 
 int main (int argc, char *argv[]) {
     /* set up i18n */
-    bindtextdomain(PACKAGE, LOCALEDIR);
-    setlocale(LC_ALL, "");
-    textdomain(PACKAGE);
+    bindtextdomain (PACKAGE, LOCALEDIR);
+    setlocale (LC_ALL, "");
+    textdomain (PACKAGE);
 
     GError* error = NULL;
-    GOptionContext* context = g_option_context_new("files");
-    g_option_context_add_main_entries(context, entries, PACKAGE);
-    g_option_context_parse(context, &argc, &argv, &error);
+    GOptionContext* context = g_option_context_new ("files");
+    g_option_context_add_main_entries (context, entries, PACKAGE);
+    g_option_context_parse (context, &argc, &argv, &error);
 
     /* initialize GTK */
-    g_thread_init(NULL);
-    gdk_threads_init();
+    g_thread_init (NULL);
+    gdk_threads_init ();
     gtk_init (&argc, &argv);
-    GtkBuilder* builder = gtk_builder_new();
-    gchar* ui = g_build_filename(DATADIR, "ui", "gummi.glade", NULL);
-    gtk_builder_add_from_file(builder, ui, NULL);
-    gtk_builder_set_translation_domain(builder, PACKAGE);
-    g_free(ui);
+    GtkBuilder* builder = gtk_builder_new ();
+    gchar* ui = g_build_filename (DATADIR, "ui", "gummi.glade", NULL);
+    gtk_builder_add_from_file (builder, ui, NULL);
+    gtk_builder_set_translation_domain (builder, PACKAGE);
+    g_free (ui);
 
     /* Initialize logging */
-    slog_init(debug);
-    slog(L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
+    slog_init (debug);
+    slog (L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
 
     /* Initialize configuration */
-    gchar* configname = g_build_filename(g_get_user_config_dir(), "gummi",
+    gchar* configname = g_build_filename (g_get_user_config_dir (), "gummi",
                                   "gummi.cfg", NULL);
-    config_init(configname);
-    config_load();
-    g_free(configname);
+    config_init (configname);
+    config_load ();
+    g_free (configname);
 
     /* Initialize signals */
-    gummi_signals_register();
+    gummi_signals_register ();
 
     /* Initialize Classes */
-    gchar* snippetsname = g_build_filename(g_get_user_config_dir(), "gummi",
+    gchar* snippetsname = g_build_filename (g_get_user_config_dir (), "gummi",
             "snippets.cfg", NULL);
     GList* editors = NULL;
 
-    GuMotion* motion = motion_init();
-    GuLatex* latex = latex_init(); 
-    GuBiblio* biblio = biblio_init(builder);
-    GuTemplate* templ = template_init(builder);
-    GuEditor* editor = editor_init(motion);
-    editors = g_list_append(editors, editor);
-    GuSnippets* snippets = snippets_init(snippetsname);
-    gummi = gummi_init(editors, motion, latex, biblio, templ, snippets);
-    slog(L_DEBUG, "Gummi created!\n");
-    g_free(snippetsname);
+    GuMotion* motion = motion_init ();
+    GuLatex* latex = latex_init (); 
+    GuBiblio* biblio = biblio_init (builder);
+    GuTemplate* templ = template_init (builder);
+    GuEditor* editor = editor_init (motion);
+    editors = g_list_append (editors, editor);
+    GuSnippets* snippets = snippets_init (snippetsname);
+    gummi = gummi_init (editors, motion, latex, biblio, templ, snippets);
+    slog (L_DEBUG, "Gummi created!\n");
+    g_free (snippetsname);
 
     /* Initialize GUI */
-    gui = gui_init(builder);
-    slog_set_gui_parent(gui->mainwindow);
-    slog(L_DEBUG, "GummiGui created!\n");
+    gui = gui_init (builder);
+    slog_set_gui_parent (gui->mainwindow);
+    slog (L_DEBUG, "GummiGui created!\n");
 
     /* Start compile thread */
-    motion_start_compile_thread(motion);
-    slog(L_DEBUG, "Compile thread started!\n");
+    motion_start_compile_thread (motion);
+    slog (L_DEBUG, "Compile thread started!\n");
 
 
     /* Install acceleration group to mainwindow */
-    gtk_window_add_accel_group(gui->mainwindow, snippets->accel_group);
+    gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
     if (argc != 2) {
-        iofunctions_load_default_text(editor);
-        gui_new_environment(NULL);
+        iofunctions_load_default_text (editor);
+        gui_new_environment (NULL);
     } else {
-        iofunctions_load_file(editor, argv[1]);
-        gui_new_environment(argv[1]);
+        iofunctions_load_file (editor, argv[1]);
+        gui_new_environment (argv[1]);
     }
 
-    gui_main(builder);
-    config_save();
-    config_clean_up();
+    gui_main (builder);
+    config_save ();
+    config_clean_up ();
     return 0;
 }

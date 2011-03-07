@@ -33,7 +33,7 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
-#define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
+#define GU_PREVIEW_GUI (x) ( (GuPreviewGui*)x)
 typedef struct _GuPreviewGui GuPreviewGui;
 
 struct _GuPreviewGui {
@@ -64,24 +64,24 @@ struct _GuPreviewGui {
     cairo_surface_t *surface;
 };
 
-GuPreviewGui* previewgui_init(GtkBuilder * builder);
-void previewgui_update_statuslight(const gchar* type);
-void previewgui_set_pdffile(GuPreviewGui* prev, const gchar *pdffile);
-void previewgui_refresh(GuPreviewGui* prev);
-void previewgui_set_pagedata(GuPreviewGui* prev);
-void previewgui_goto_page(GuPreviewGui* prev, int page_number);
-void previewgui_start_error_mode(GuPreviewGui* pc);
-void previewgui_stop_error_mode(GuPreviewGui* pc);
-void previewgui_reset(GuPreviewGui* pc);
-void previewgui_cleanup_fds(GuPreviewGui* pc);
-void previewgui_start_preview(GuPreviewGui* pc);
-void previewgui_calc_dimensions(GuPreviewGui* pc);
-void previewgui_stop_preview(GuPreviewGui* pc);
-void previewgui_page_input_changed(GtkEntry* entry, void* user);
-void previewgui_next_page(GtkWidget* widget, void* user);
-void previewgui_prev_page(GtkWidget* widget, void* user);
-void previewgui_zoom_change(GtkWidget* widget, void* user);
-void previewgui_calc_dimensions(GuPreviewGui* pc);
-gboolean on_expose(GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
+GuPreviewGui* previewgui_init (GtkBuilder * builder);
+void previewgui_update_statuslight (const gchar* type);
+void previewgui_set_pdffile (GuPreviewGui* prev, const gchar *pdffile);
+void previewgui_refresh (GuPreviewGui* prev);
+void previewgui_set_pagedata (GuPreviewGui* prev);
+void previewgui_goto_page (GuPreviewGui* prev, int page_number);
+void previewgui_start_error_mode (GuPreviewGui* pc);
+void previewgui_stop_error_mode (GuPreviewGui* pc);
+void previewgui_reset (GuPreviewGui* pc);
+void previewgui_cleanup_fds (GuPreviewGui* pc);
+void previewgui_start_preview (GuPreviewGui* pc);
+void previewgui_calc_dimensions (GuPreviewGui* pc);
+void previewgui_stop_preview (GuPreviewGui* pc);
+void previewgui_page_input_changed (GtkEntry* entry, void* user);
+void previewgui_next_page (GtkWidget* widget, void* user);
+void previewgui_prev_page (GtkWidget* widget, void* user);
+void previewgui_zoom_change (GtkWidget* widget, void* user);
+void previewgui_calc_dimensions (GuPreviewGui* pc);
+gboolean on_expose (GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
 
 #endif /* __GUMMI_GUI_PREVIEW_H__ */

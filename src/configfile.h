@@ -34,8 +34,8 @@
 
 #include <glib.h>
 
-void config_init(const gchar* filename);
-void config_set_default(void);
+void config_init (const gchar* filename);
+void config_set_default (void);
 
 /**
  * @brief get value of a setting
@@ -44,17 +44,17 @@ void config_set_default(void);
  * the value type is boolean, config_get_value will return NULL for False
  * and non-NULL for True
  */
-const gchar* config_get_value(const gchar* term);
+const gchar* config_get_value (const gchar* term);
 
 /**
  * @brief set value of a setting
  * @param term the name of the setting
  * @param value the value of the setting
  */
-void config_set_value(const gchar* term, const gchar* value);
+void config_set_value (const gchar* term, const gchar* value);
 
-void config_load(void);
-void config_save(void);
-void config_clean_up(void);
+void config_load (void);
+void config_save (void);
+void config_clean_up (void);
 
 #endif /* __GUMMI_CONFIGFILE__ */

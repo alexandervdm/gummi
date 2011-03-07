@@ -51,23 +51,23 @@ extern GummiGui* gui;
 
 gdouble scrollw_lastsize;
 
-GuPreviewGui* previewgui_init(GtkBuilder * builder) {
-    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+GuPreviewGui* previewgui_init (GtkBuilder * builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
-    GuPreviewGui* p = g_new0(GuPreviewGui, 1);
+    GuPreviewGui* p = g_new0 (GuPreviewGui, 1);
     GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->previewgui_viewport =
-        GTK_VIEWPORT(gtk_builder_get_object(builder, "previewgui_view"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "previewgui_view"));
     p->statuslight =
-        GTK_WIDGET(gtk_builder_get_object(builder, "tool_statuslight"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "tool_statuslight"));
     p->drawarea =
-        GTK_WIDGET(gtk_builder_get_object(builder, "previewgui_draw"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_draw"));
     p->scrollw =
-        GTK_WIDGET(gtk_builder_get_object(builder, "previewgui_scroll"));
-    p->page_next = GTK_WIDGET(gtk_builder_get_object(builder, "page_next"));
-    p->page_prev = GTK_WIDGET(gtk_builder_get_object(builder, "page_prev"));
-    p->page_label = GTK_WIDGET(gtk_builder_get_object(builder, "page_label"));
-    p->page_input = GTK_WIDGET(gtk_builder_get_object(builder, "page_input"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
+    p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
+    p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
+    p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
+    p->page_input = GTK_WIDGET (gtk_builder_get_object (builder, "page_input"));
     p->uri = NULL;
     p->doc = NULL;
     p->page = NULL;
@@ -77,189 +77,189 @@ GuPreviewGui* previewgui_init(GtkBuilder * builder) {
     p->page_total = 0;
     p->page_current = 1;
 
-    gtk_widget_modify_bg(p->drawarea, GTK_STATE_NORMAL, &bg); 
+    gtk_widget_modify_bg (p->drawarea, GTK_STATE_NORMAL, &bg); 
 
-    g_signal_connect(GTK_OBJECT(p->drawarea), "expose-event",
-            G_CALLBACK(on_expose), p); 
+    g_signal_connect (GTK_OBJECT (p->drawarea), "expose-event",
+            G_CALLBACK (on_expose), p); 
             
-    //g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
+    //g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 
-    char* message = g_strdup_printf(_("PDF Preview could not initialize.\n\n"
+    char* message = g_strdup_printf (_ ("PDF Preview could not initialize.\n\n"
             "It appears your LaTeX document contains errors or\n"
             "the program `%s' was not installed.\n"
             "Additional information is available on the Error Output tab.\n"
             "Please correct the listed errors to restore preview."),
-            config_get_value("typesetter"));
-    p->errorlabel = GTK_LABEL(gtk_label_new(message));
-    gtk_label_set_justify(p->errorlabel, GTK_JUSTIFY_CENTER);
-    g_free(message);
+            config_get_value ("typesetter"));
+    p->errorlabel = GTK_LABEL (gtk_label_new (message));
+    gtk_label_set_justify (p->errorlabel, GTK_JUSTIFY_CENTER);
+    g_free (message);
 
-    slog(L_INFO, "using libpoppler %s ...\n", poppler_get_version());
+    slog (L_INFO, "using libpoppler %s ...\n", poppler_get_version ());
     return p;
 }
 
-void previewgui_update_statuslight(const gchar* type) {
-    gdk_threads_enter();
-    gtk_tool_button_set_stock_id(GTK_TOOL_BUTTON(gui->previewgui->statuslight),
+void previewgui_update_statuslight (const gchar* type) {
+    gdk_threads_enter ();
+    gtk_tool_button_set_stock_id (GTK_TOOL_BUTTON (gui->previewgui->statuslight),
            type);
-    gdk_threads_leave();
+    gdk_threads_leave ();
 }
 
-void previewgui_set_pdffile(GuPreviewGui* pc, const gchar *pdffile) {
+void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     L_F_DEBUG;
-    previewgui_cleanup_fds(pc);
+    previewgui_cleanup_fds (pc);
 
-    pc->uri = g_strconcat("file://", pdffile, NULL);
-    pc->doc = poppler_document_new_from_file(pc->uri, NULL, NULL);
-    g_return_if_fail(pc->doc != NULL);
+    pc->uri = g_strconcat ("file://", pdffile, NULL);
+    pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
+    g_return_if_fail (pc->doc != NULL);
 
-    pc->page_total = poppler_document_get_n_pages(pc->doc);
+    pc->page_total = poppler_document_get_n_pages (pc->doc);
     pc->page_current = 0;
     
-    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
-    g_return_if_fail(pc->page != NULL);
+    pc->page = poppler_document_get_page (pc->doc, pc->page_current);
+    g_return_if_fail (pc->page != NULL);
 
-    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);
+    poppler_page_get_size (pc->page, &pc->page_width, &pc->page_height);
     /*
-    pc->page_total = poppler_document_get_n_pages(pc->doc);
+    pc->page_total = poppler_document_get_n_pages (pc->doc);
     pc->page_ratio = (pc->page_width / pc->page_height);
     pc->page_scale = 1.0;
-    previewgui_set_pagedata(pc);
+    previewgui_set_pagedata (pc);
     */
 }
 
 /*
-void my_getsize(GtkWidget *widget, GtkAllocation *allocation, void *data) {
-    printf("width = %d, height = %d\n", allocation->width, allocation->height);
+void my_getsize (GtkWidget *widget, GtkAllocation *allocation, void *data) {
+    printf ("width = %d, height = %d\n", allocation->width, allocation->height);
 }*/
 
 
-void previewgui_refresh(GuPreviewGui* pc) {
+void previewgui_refresh (GuPreviewGui* pc) {
     L_F_DEBUG;
     cairo_t *cr = NULL;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
-     * compiling. Also prevent PDF from changing(compiling) when previewing */
-    if (!g_mutex_trylock(gummi->motion->compile_mutex)) return;
+     * compiling. Also prevent PDF from changing (compiling) when previewing */
+    if (!g_mutex_trylock (gummi->motion->compile_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
-    if (!pc->uri || !utils_path_exists(pc->uri + 7)) {
-        g_mutex_unlock(gummi->motion->compile_mutex);
+    if (!pc->uri || !utils_path_exists (pc->uri + 7)) {
+        g_mutex_unlock (gummi->motion->compile_mutex);
         return;
     }
 
-    previewgui_cleanup_fds(pc);
+    previewgui_cleanup_fds (pc);
 
-    pc->doc = poppler_document_new_from_file(pc->uri, NULL, NULL);
-    g_return_if_fail(pc->doc != NULL);
+    pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
+    g_return_if_fail (pc->doc != NULL);
     
     /* recheck document dimensions on refresh for orientation changes */
-    pc->page_total = poppler_document_get_n_pages(pc->doc);
-    previewgui_set_pagedata(pc);
+    pc->page_total = poppler_document_get_n_pages (pc->doc);
+    previewgui_set_pagedata (pc);
 
-    pc->page = poppler_document_get_page(pc->doc, pc->page_current);
-    poppler_page_get_size(pc->page, &pc->page_width, &pc->page_height);  
+    pc->page = poppler_document_get_page (pc->doc, pc->page_current);
+    poppler_page_get_size (pc->page, &pc->page_width, &pc->page_height);  
     
     if (pc->surface)
         cairo_surface_destroy (pc->surface);
     pc->surface = NULL;
     
-    previewgui_calc_dimensions(pc);
+    previewgui_calc_dimensions (pc);
     
     gint width = (int)pc->page_width * pc->page_scale;
     gint height = (int)pc->page_height * pc->page_scale;
-    pc->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width,
+    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width,
             height);
     cr = cairo_create (pc->surface);
     
-    cairo_scale(cr, pc->page_scale, pc->page_scale); 
-    cairo_save(cr);
-    poppler_page_render(pc->page, cr);
-    cairo_restore(cr);
+    cairo_scale (cr, pc->page_scale, pc->page_scale); 
+    cairo_save (cr);
+    poppler_page_render (pc->page, cr);
+    cairo_restore (cr);
     
-    cairo_set_operator(cr, CAIRO_OPERATOR_DEST_OVER);
-    cairo_set_source_rgb(cr, 1., 1., 1.);
-    cairo_paint(cr);
-    cairo_destroy(cr);
+    cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
+    cairo_set_source_rgb (cr, 1., 1., 1.);
+    cairo_paint (cr);
+    cairo_destroy (cr);
     
-    gtk_widget_queue_draw(pc->drawarea);
+    gtk_widget_queue_draw (pc->drawarea);
 
-    g_mutex_unlock(gummi->motion->compile_mutex);
+    g_mutex_unlock (gummi->motion->compile_mutex);
 }
 
-void previewgui_set_pagedata(GuPreviewGui* pc) {
+void previewgui_set_pagedata (GuPreviewGui* pc) {
     L_F_DEBUG;
     gchar* current = NULL;
     gchar* total = NULL;
 
-    if ((pc->page_total - 1) > pc->page_current) {
-        gtk_widget_set_sensitive(GTK_WIDGET(pc->page_next), TRUE);
+    if ( (pc->page_total - 1) > pc->page_current) {
+        gtk_widget_set_sensitive (GTK_WIDGET (pc->page_next), TRUE);
     }
     else if (pc->page_current >= pc->page_total) {
         pc->page_current = pc->page_current;
-        gtk_widget_set_sensitive(pc->page_prev, (pc->page_current > 0));
-        gtk_widget_set_sensitive(pc->page_next,
+        gtk_widget_set_sensitive (pc->page_prev, (pc->page_current > 0));
+        gtk_widget_set_sensitive (pc->page_next,
                 (pc->page_current < (pc->page_total -1)));
     }
-    current = g_strdup_printf("%d", (pc->page_current+1));
-    total = g_strdup_printf("of %d", pc->page_total);
+    current = g_strdup_printf ("%d", (pc->page_current+1));
+    total = g_strdup_printf ("of %d", pc->page_total);
 
-    gtk_entry_set_text(GTK_ENTRY(pc->page_input), current);
-    gtk_label_set_text(GTK_LABEL(pc->page_label), total);
+    gtk_entry_set_text (GTK_ENTRY (pc->page_input), current);
+    gtk_label_set_text (GTK_LABEL (pc->page_label), total);
 
-    g_free(current);
-    g_free(total);
+    g_free (current);
+    g_free (total);
 }
 
-void previewgui_goto_page(GuPreviewGui* pc, int page_number) {
+void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
     L_F_DEBUG;
     if (page_number < 0 || page_number >= pc->page_total) {
-        slog(L_ERROR, "page_number is a negative number!\n");
+        slog (L_ERROR, "page_number is a negative number!\n");
         return;
     }
 
     pc->page_current = page_number;
-    gtk_widget_set_sensitive(pc->page_prev, (page_number > 0));
-    gtk_widget_set_sensitive(pc->page_next,
+    gtk_widget_set_sensitive (pc->page_prev, (page_number > 0));
+    gtk_widget_set_sensitive (pc->page_next,
             (page_number < (pc->page_total -1)));
-    previewgui_refresh(pc);
+    previewgui_refresh (pc);
     // set label info
 }
 
-void previewgui_start_error_mode(GuPreviewGui* pc) {
+void previewgui_start_error_mode (GuPreviewGui* pc) {
     L_F_DEBUG;
     pc->errormode = TRUE;
-    gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
-            GTK_WIDGET(pc->drawarea));
-    gtk_container_add(GTK_CONTAINER(pc->previewgui_viewport),
-            GTK_WIDGET(pc->errorlabel));
-    gtk_widget_show_all(GTK_WIDGET(pc->previewgui_viewport));
+    gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
+            GTK_WIDGET (pc->drawarea));
+    gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
+            GTK_WIDGET (pc->errorlabel));
+    gtk_widget_show_all (GTK_WIDGET (pc->previewgui_viewport));
 }
 
-void previewgui_stop_error_mode(GuPreviewGui* pc) {
+void previewgui_stop_error_mode (GuPreviewGui* pc) {
     L_F_DEBUG;
     if (!pc->errormode) return;
     pc->errormode = FALSE;
-    g_object_ref(pc->errorlabel);
-    gtk_container_remove(GTK_CONTAINER(pc->previewgui_viewport),
-            GTK_WIDGET(pc->errorlabel));
-    gtk_container_add(GTK_CONTAINER(pc->previewgui_viewport),
-            GTK_WIDGET(pc->drawarea));
+    g_object_ref (pc->errorlabel);
+    gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
+            GTK_WIDGET (pc->errorlabel));
+    gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
+            GTK_WIDGET (pc->drawarea));
 }
 
-gboolean on_expose(GtkWidget* area, GdkEventExpose* e, GuPreviewGui* pc) {
+gboolean on_expose (GtkWidget* area, GdkEventExpose* e, GuPreviewGui* pc) {
     
     /* This line is very important, if no pdf exist, preview fails */
-    if (!pc->uri || !utils_path_exists(pc->uri + 7)) return FALSE;
+    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
     
-    previewgui_calc_dimensions(pc);
+    previewgui_calc_dimensions (pc);
     
     cairo_t *cr;
     cr = gdk_cairo_create (gtk_widget_get_window (area));
     
     double scrollwidth = pc->scrollw->allocation.width;
     if (scrollw_lastsize != scrollwidth) {
-        previewgui_refresh(pc);
+        previewgui_refresh (pc);
         scrollw_lastsize = scrollwidth;
     }
     
@@ -269,7 +269,7 @@ gboolean on_expose(GtkWidget* area, GdkEventExpose* e, GuPreviewGui* pc) {
     return TRUE;
 } 
 
-void previewgui_calc_dimensions(GuPreviewGui* pc) {
+void previewgui_calc_dimensions (GuPreviewGui* pc) {
     double scrollwidth = pc->scrollw->allocation.width;
     double scrollheight = pc->scrollw->allocation.height;
     double scrollw_ratio = (scrollwidth / scrollheight);
@@ -285,94 +285,94 @@ void previewgui_calc_dimensions(GuPreviewGui* pc) {
     }
     
     // setting gtkdrawingarea dimensions
-    gint height = (int)(pc->page_height * pc->page_scale);
-    gint width = (int)(pc->page_width * pc->page_scale); 
+    gint height = (int) (pc->page_height * pc->page_scale);
+    gint width = (int) (pc->page_width * pc->page_scale); 
     switch (pc->page_zoommode) {
         case 0: // best_fit
-            gtk_widget_set_size_request(pc->drawarea, -1, (height-10));
+            gtk_widget_set_size_request (pc->drawarea, -1, (height-10));
             break;
         case 1: // fit_width
-            if (fabs(pc->page_ratio - scrollw_ratio) > 0.01)
-                gtk_widget_set_size_request(pc->drawarea, -1, height);
+            if (fabs (pc->page_ratio - scrollw_ratio) > 0.01)
+                gtk_widget_set_size_request (pc->drawarea, -1, height);
             break;
         default: // percentage zoom
-            gtk_widget_set_size_request(pc->drawarea, width, height);
+            gtk_widget_set_size_request (pc->drawarea, width, height);
     }
 }
 
-void previewgui_reset(GuPreviewGui* pc) {
+void previewgui_reset (GuPreviewGui* pc) {
     L_F_DEBUG;
     /* reset uri */
-    g_free(pc->uri);
+    g_free (pc->uri);
     pc->uri = NULL;
     pc->page_current = 0;
 
     gummi->latex->modified_since_compile = TRUE;
-    previewgui_stop_preview(pc);
-    motion_do_compile(gummi->motion);
+    previewgui_stop_preview (pc);
+    motion_do_compile (gummi->motion);
 
-    if (config_get_value("compile_status"))
-        previewgui_start_preview(pc);
+    if (config_get_value ("compile_status"))
+        previewgui_start_preview (pc);
 }
 
-void previewgui_cleanup_fds(GuPreviewGui* pc) {
+void previewgui_cleanup_fds (GuPreviewGui* pc) {
     if (pc->page) {
-        g_object_unref(pc->page);
+        g_object_unref (pc->page);
         pc->page = NULL;
     }
     if (pc->doc) {
-        g_object_unref(pc->doc);
+        g_object_unref (pc->doc);
         pc->doc = NULL;
     }
 }
 
-void previewgui_start_preview(GuPreviewGui* pc) {
+void previewgui_start_preview (GuPreviewGui* pc) {
     L_F_DEBUG;
-    if (0 == strcmp(config_get_value("compile_scheme"), "on_idle")) {
+    if (0 == strcmp (config_get_value ("compile_scheme"), "on_idle")) {
         pc->preview_on_idle = TRUE;
     } else {
-        pc->update_timer = g_timeout_add_seconds(
-                atoi(config_get_value("compile_timer")),
+        pc->update_timer = g_timeout_add_seconds (
+                atoi (config_get_value ("compile_timer")),
                 motion_do_compile, gummi->motion);
     }
 }
 
-void previewgui_stop_preview(GuPreviewGui* pc) {
+void previewgui_stop_preview (GuPreviewGui* pc) {
     L_F_DEBUG;
     pc->preview_on_idle = FALSE;
-    if (pc->update_timer != 0) g_source_remove(pc->update_timer);
+    if (pc->update_timer != 0) g_source_remove (pc->update_timer);
     pc->update_timer = 0;
 }
 
-void previewgui_page_input_changed(GtkEntry* entry, void* user) {
-    gint newpage = atoi(gtk_entry_get_text(entry));
+void previewgui_page_input_changed (GtkEntry* entry, void* user) {
+    gint newpage = atoi (gtk_entry_get_text (entry));
 
     if (0 == newpage)
         return;
     else if (newpage >= 1 &&  newpage <= gui->previewgui->page_total) {
-        previewgui_goto_page(gui->previewgui, newpage -1);
+        previewgui_goto_page (gui->previewgui, newpage -1);
     } else {
-        newpage = CLAMP(newpage, 1, gui->previewgui->page_total);
-        gchar* num = g_strdup_printf("%d", newpage);
-        gtk_entry_set_text(entry, num);
-        g_free(num);
-        previewgui_goto_page(gui->previewgui, newpage -1);
+        newpage = CLAMP (newpage, 1, gui->previewgui->page_total);
+        gchar* num = g_strdup_printf ("%d", newpage);
+        gtk_entry_set_text (entry, num);
+        g_free (num);
+        previewgui_goto_page (gui->previewgui, newpage -1);
     }
 }
 
-void previewgui_next_page(GtkWidget* widget, void* user) {
-    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current + 1);
+void previewgui_next_page (GtkWidget* widget, void* user) {
+    previewgui_goto_page (gui->previewgui, gui->previewgui->page_current + 1);
 }
 
-void previewgui_prev_page(GtkWidget* widget, void* user) {
-    previewgui_goto_page(gui->previewgui, gui->previewgui->page_current - 1);
+void previewgui_prev_page (GtkWidget* widget, void* user) {
+    previewgui_goto_page (gui->previewgui, gui->previewgui->page_current - 1);
 }
 
-void previewgui_zoom_change(GtkWidget* widget, void* user) {
-    gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+void previewgui_zoom_change (GtkWidget* widget, void* user) {
+    gint index = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
     double opts[9] = {0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0}; 
 
-    if (index < 0) slog(L_ERROR, "preview zoom level is < 0.\n");
+    if (index < 0) slog (L_ERROR, "preview zoom level is < 0.\n");
 
     if (index < 2) {
         if (index == 0) {
@@ -386,5 +386,5 @@ void previewgui_zoom_change(GtkWidget* widget, void* user) {
         gui->previewgui->page_scale = opts[index-2];
         gui->previewgui->page_zoommode = index;
     }
-    gtk_widget_queue_draw(gui->previewgui->drawarea);
+    gtk_widget_queue_draw (gui->previewgui->drawarea);
 }

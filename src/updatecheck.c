@@ -47,7 +47,7 @@
 #ifdef WIN32
 /* TODO: use Winsock for WIN32 */
 #else
-gboolean updatecheck(GtkWindow* parent) {
+gboolean updatecheck (GtkWindow* parent) {
     GtkWidget* dialog;
     struct sockaddr_in servaddr;
     struct hostent *hp;
@@ -61,59 +61,59 @@ gboolean updatecheck(GtkWindow* parent) {
         "Host: dev.midnightcoding.org\r\n"
         "\r\n";
 
-    if (-1 == (sock_fd = socket(AF_INET, SOCK_STREAM, 0))) {
-        slog(L_ERROR, "socket() error\n");
+    if (-1 == (sock_fd = socket (AF_INET, SOCK_STREAM, 0))) {
+        slog (L_ERROR, "socket () error\n");
         return FALSE;
     }
 
     /* set timeout to prevent hanging */
-    memset(&timeout, 0, sizeof(struct timeval));
+    memset (&timeout, 0, sizeof (struct timeval));
     timeout.tv_sec = 5;
-    if (setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &timeout,
-            sizeof(struct timeval))) {
-        slog(L_ERROR, "setsockopt() error\n");
+    if (setsockopt (sock_fd, SOL_SOCKET, SO_RCVTIMEO, &timeout,
+            sizeof (struct timeval))) {
+        slog (L_ERROR, "setsockopt () error\n");
         return FALSE;
     }
 
-    memset(&servaddr, 0, sizeof(servaddr));
-    if (NULL == (hp = gethostbyname("dev.midnightcoding.org"))) {
-        slog(L_ERROR, "gethostbyname() error\n");
+    memset (&servaddr, 0, sizeof (servaddr));
+    if (NULL == (hp = gethostbyname ("dev.midnightcoding.org"))) {
+        slog (L_ERROR, "gethostbyname () error\n");
         return FALSE;
     }
 
-    memcpy((gchar*)&servaddr.sin_addr.s_addr, (gchar*)hp->h_addr, hp->h_length);
-    servaddr.sin_port = htons(80);
+    memcpy ((gchar*)&servaddr.sin_addr.s_addr, (gchar*)hp->h_addr, hp->h_length);
+    servaddr.sin_port = htons (80);
     servaddr.sin_family = AF_INET;
 
-    if (0 != connect(sock_fd, (struct sockaddr*)&servaddr, sizeof(servaddr))) {
-        slog(L_G_ERROR, "connect() error");
+    if (0 != connect (sock_fd, (struct sockaddr*)&servaddr, sizeof (servaddr))) {
+        slog (L_G_ERROR, "connect () error");
         return FALSE;
     }
 
-    write(sock_fd, request, strlen(request));
-    read(sock_fd, data, BUFSIZ);
+    write (sock_fd, request, strlen (request));
+    read (sock_fd, data, BUFSIZ);
 
-    if (0 == strlen(data)) {
-        slog(L_ERROR, "connection timeout\n");
+    if (0 == strlen (data)) {
+        slog (L_ERROR, "connection timeout\n");
         return FALSE;
     }
 
     /* get version string */
-    for (i = strlen(data) -2; i >= 0 && data[i] != '\n'; --i);
+    for (i = strlen (data) -2; i >= 0 && data[i] != '\n'; --i);
     avail_version = data + i + 1;
     
-    slog(L_INFO, "Currently installed: "PACKAGE_VERSION"\n");
-    slog(L_INFO, "Currently available: %s", avail_version);
+    slog (L_INFO, "Currently installed: "PACKAGE_VERSION"\n");
+    slog (L_INFO, "Currently available: %s", avail_version);
 
     dialog = gtk_message_dialog_new (parent, 
         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
         GTK_MESSAGE_INFO,
         GTK_BUTTONS_OK,
-        _("Currently installed:\n%s\n\nCurrently available:\n%s"),
+        _ ("Currently installed:\n%s\n\nCurrently available:\n%s"),
         PACKAGE_VERSION, avail_version);
-    gtk_window_set_title(GTK_WINDOW(dialog), _("Update Check"));
-    gtk_dialog_run(GTK_DIALOG(dialog));      
-    gtk_widget_destroy(dialog);
+    gtk_window_set_title (GTK_WINDOW (dialog), _ ("Update Check"));
+    gtk_dialog_run (GTK_DIALOG (dialog));      
+    gtk_widget_destroy (dialog);
 
     return TRUE;
 }

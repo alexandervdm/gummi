@@ -33,7 +33,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#define GU_MOTION(x) ((GuMotion*)x)
+#define GU_MOTION (x) ( (GuMotion*)x)
 typedef struct _GuMotion GuMotion;
 
 struct _GuMotion {
@@ -44,14 +44,14 @@ struct _GuMotion {
     GCond* compile_cv;
 };
 
-GuMotion* motion_init(void);
-void motion_start_compile_thread(GuMotion* m);
-gboolean motion_do_compile(gpointer user);
-gpointer motion_compile_thread(gpointer data);
-gboolean motion_idle_cb(gpointer user);
-void motion_start_timer(GuMotion* mc);
-void motion_stop_timer(GuMotion* mc);
-gboolean on_key_press_cb(GtkWidget* widget, GdkEventKey* event, void* user);
-gboolean on_key_release_cb(GtkWidget* widget, GdkEventKey* event, void* user);
+GuMotion* motion_init (void);
+void motion_start_compile_thread (GuMotion* m);
+gboolean motion_do_compile (gpointer user);
+gpointer motion_compile_thread (gpointer data);
+gboolean motion_idle_cb (gpointer user);
+void motion_start_timer (GuMotion* mc);
+void motion_stop_timer (GuMotion* mc);
+gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user);
+gboolean on_key_release_cb (GtkWidget* widget, GdkEventKey* event, void* user);
 
 #endif /* __GUMMI_MOTION_H__ */

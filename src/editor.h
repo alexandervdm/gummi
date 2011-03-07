@@ -43,10 +43,10 @@
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 
-#define ec_buffer GTK_TEXT_BUFFER(ec->buffer)
-#define ec_view GTK_TEXT_VIEW(ec->view)
+#define ec_buffer GTK_TEXT_BUFFER (ec->buffer)
+#define ec_view GTK_TEXT_VIEW (ec->view)
 
-#define GU_EDITOR(x) ((GuEditor*)x)
+#define GU_EDITOR (x) ( (GuEditor*)x)
 typedef struct _GuEditor GuEditor;
 
 struct _GuEditor {
@@ -74,40 +74,40 @@ struct _GuEditor {
     gint sigid[3];
 };
 
-GuEditor* editor_init(GuMotion* mc);
-void editor_fileinfo_update(GuEditor* ec, const gchar* filename);
-void editor_fileinfo_cleanup(GuEditor* ec);
-gboolean editor_fileinfo_update_biblio(GuEditor* ec,  const gchar* filename);
-void editor_destroy(GuEditor* ec);
-void editor_sourceview_config(GuEditor* ec);
+GuEditor* editor_init (GuMotion* mc);
+void editor_fileinfo_update (GuEditor* ec, const gchar* filename);
+void editor_fileinfo_cleanup (GuEditor* ec);
+gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename);
+void editor_destroy (GuEditor* ec);
+void editor_sourceview_config (GuEditor* ec);
 #ifdef USE_GTKSPELL
-void editor_activate_spellchecking(GuEditor* ec, gboolean status);
+void editor_activate_spellchecking (GuEditor* ec, gboolean status);
 #endif
-void editor_fill_buffer(GuEditor* ec, const gchar* text);
+void editor_fill_buffer (GuEditor* ec, const gchar* text);
 
 /* editor_grab_buffer will return a newly allocated string */
-gchar* editor_grab_buffer(GuEditor* ec);
-void editor_insert_package(GuEditor* ec, const gchar* package);
-void editor_insert_bib(GuEditor* ec, const gchar* package);
-void editor_set_selection_textstyle(GuEditor* ec, const gchar* type);
-void editor_apply_errortags(GuEditor* ec, gint* lines);
-void editor_jumpto_search_result(GuEditor* ec, gint direction);
-void editor_start_search(GuEditor* ec, const gchar* term, gboolean backwards,
+gchar* editor_grab_buffer (GuEditor* ec);
+void editor_insert_package (GuEditor* ec, const gchar* package);
+void editor_insert_bib (GuEditor* ec, const gchar* package);
+void editor_set_selection_textstyle (GuEditor* ec, const gchar* type);
+void editor_apply_errortags (GuEditor* ec, gint* lines);
+void editor_jumpto_search_result (GuEditor* ec, gint direction);
+void editor_start_search (GuEditor* ec, const gchar* term, gboolean backwards,
         gboolean wholeword, gboolean matchcase);
-void editor_apply_searchtag(GuEditor* ec);
-void editor_search_next(GuEditor* ec, gboolean inverse);
-void editor_start_replace_next(GuEditor* ec, const gchar* term,
+void editor_apply_searchtag (GuEditor* ec);
+void editor_search_next (GuEditor* ec, gboolean inverse);
+void editor_start_replace_next (GuEditor* ec, const gchar* term,
         const gchar* rterm, gboolean backwards, gboolean wholeword,
         gboolean matchcase);
-void editor_start_replace_all(GuEditor* ec, const gchar* term,
+void editor_start_replace_all (GuEditor* ec, const gchar* term,
         const gchar* rterm, gboolean backwards, gboolean wholeword,
         gboolean matchcase);
-void editor_get_current_iter(GuEditor* ec, GtkTextIter* current);
-inline void editor_scroll_to_cursor(GuEditor* ec);
-void editor_undo_change(GuEditor* ec);
-void editor_redo_change(GuEditor* ec);
-void editor_set_style_scheme_by_id(GuEditor* ec, const gchar* id);
+void editor_get_current_iter (GuEditor* ec, GtkTextIter* current);
+inline void editor_scroll_to_cursor (GuEditor* ec);
+void editor_undo_change (GuEditor* ec);
+void editor_redo_change (GuEditor* ec);
+void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);
 gint schemes_compare (gconstpointer a, gconstpointer b);
-GList* editor_list_style_scheme_sorted(GuEditor* ec);
+GList* editor_list_style_scheme_sorted (GuEditor* ec);
 
 #endif /* __GUMMI_EDITOR_H__ */

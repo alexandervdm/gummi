@@ -37,17 +37,17 @@
 
 /* Macro to execute function without trggering unwanted signals by setting
  * GuSnippetsGui::loading flag */
-#define SIG_SAFE(x) \
+#define SIG_SAFE (x) \
     do { \
     s->loading = TRUE; \
     x; \
     s->loading = FALSE; \
     } while (0);
 
-#define return_if_sig_safe(x) \
+#define return_if_sig_safe (x) \
     if (s->loading) return x;
 
-#define GU_SNIPPETS_GUI(x) ((GuSnippetsGui*)x)
+#define GU_SNIPPETS_GUI (x) ( (GuSnippetsGui*)x)
 typedef struct _GuSnippetsGui GuSnippetsGui;
 
 struct _GuSnippetsGui {
@@ -66,24 +66,24 @@ struct _GuSnippetsGui {
     gboolean loading;
 };
 
-GuSnippetsGui* snippetsgui_init(GtkWindow* mainwindow);
-void snippetsgui_main(GuSnippetsGui* sc);
-void snippetsgui_load_snippets(GuSnippetsGui* sc);
-void snippetsgui_move_cursor_to_row(GuSnippetsGui* sc, gint row);
-void snippetsgui_update_snippet(GuSnippets* sc);
-void on_button_new_snippet_clicked(GtkWidget* widget, void* user);
-void on_button_remove_snippet_clicked(GtkWidget* widget, void* user);
-gboolean on_tab_trigger_entry_focus_out_event(GtkEntry* entry, void* user);
-void on_accelerator_entry_focus_in_event(GtkWidget* widget, void* user);
-void on_accelerator_entry_focus_out_event(GtkWidget* widget, void* user);
-gboolean on_accelerator_entry_key_press_event(GtkWidget* widget,
+GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow);
+void snippetsgui_main (GuSnippetsGui* sc);
+void snippetsgui_load_snippets (GuSnippetsGui* sc);
+void snippetsgui_move_cursor_to_row (GuSnippetsGui* sc, gint row);
+void snippetsgui_update_snippet (GuSnippets* sc);
+void on_button_new_snippet_clicked (GtkWidget* widget, void* user);
+void on_button_remove_snippet_clicked (GtkWidget* widget, void* user);
+gboolean on_tab_trigger_entry_focus_out_event (GtkEntry* entry, void* user);
+void on_accelerator_entry_focus_in_event (GtkWidget* widget, void* user);
+void on_accelerator_entry_focus_out_event (GtkWidget* widget, void* user);
+gboolean on_accelerator_entry_key_press_event (GtkWidget* widget,
         GdkEventKey* event, void* user);
-void on_snippetsgui_close_clicked(GtkWidget* widget, void* user);
-void on_snippetsgui_reset_clicked(GtkWidget* widget, void* user);
-void on_snippets_tree_view_cursor_changed(GtkTreeView* view, void* user);
-void on_snippet_renderer_edited(GtkCellRendererText* renderer, gchar *path,
+void on_snippetsgui_close_clicked (GtkWidget* widget, void* user);
+void on_snippetsgui_reset_clicked (GtkWidget* widget, void* user);
+void on_snippets_tree_view_cursor_changed (GtkTreeView* view, void* user);
+void on_snippet_renderer_edited (GtkCellRendererText* renderer, gchar *path,
         gchar* name, void* user);
-void on_snippet_renderer_editing_canceled(GtkCellRenderer* rend, void* user);
-gboolean on_snippet_source_buffer_key_release(GtkWidget* widget, void* user);
+void on_snippet_renderer_editing_canceled (GtkCellRenderer* rend, void* user);
+gboolean on_snippet_source_buffer_key_release (GtkWidget* widget, void* user);
 
 #endif /* __GUMMI_GUI_SNIPPETS__ */

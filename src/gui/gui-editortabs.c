@@ -37,41 +37,41 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-GuEditortabsGui* editortabsgui_init(GtkBuilder* builder) {
-    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
+GuEditortabsGui* editortabsgui_init (GtkBuilder* builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
     
-    GuEditortabsGui* et = g_new0(GuEditortabsGui, 1);
+    GuEditortabsGui* et = g_new0 (GuEditortabsGui, 1);
     
     et->tab_notebook =
-        GTK_NOTEBOOK(gtk_builder_get_object(builder, "tab_notebook"));
+        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
     
     return et;
 }
 
-void editortabsgui_create_tab(GuEditor* editor, const gchar* filename) {
+void editortabsgui_create_tab (GuEditor* editor, const gchar* filename) {
     GtkWidget *scrollwindow;
     GtkWidget *tablabel;
     gchar *tabname;
     
     // reminder; gui_new_environment is central caller for this function. 
 
-    gint nr_pages = gtk_notebook_get_n_pages(g_tabs_notebook);
+    gint nr_pages = gtk_notebook_get_n_pages (g_tabs_notebook);
     
     // creating tab object; label & tooltip
     if (filename == NULL) 
-        tabname = g_strdup_printf("Unsaved Document %d", (nr_pages+1));
+        tabname = g_strdup_printf ("Unsaved Document %d", (nr_pages+1));
     else 
-        tabname = g_path_get_basename(filename);
-    tablabel = gtk_label_new(tabname);
-    gtk_widget_set_tooltip_text(tablabel, filename);
+        tabname = g_path_get_basename (filename);
+    tablabel = gtk_label_new (tabname);
+    gtk_widget_set_tooltip_text (tablabel, filename);
     
     // creating tab object; scrollwindow
     scrollwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrollwindow),
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrollwindow),
                                     GTK_POLICY_AUTOMATIC, 
                                     GTK_POLICY_AUTOMATIC);
-    gtk_container_add(GTK_CONTAINER(scrollwindow), GTK_WIDGET(editor->view));
+    gtk_container_add (GTK_CONTAINER (scrollwindow), GTK_WIDGET (editor->view));
 
-    gtk_notebook_append_page(
-        GTK_NOTEBOOK(g_tabs_notebook), scrollwindow, tablabel);
+    gtk_notebook_append_page (
+        GTK_NOTEBOOK (g_tabs_notebook), scrollwindow, tablabel);
 }

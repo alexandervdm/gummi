@@ -39,7 +39,7 @@
 #include "utils.h"
 
 /* Storing placeholders */
-#define GU_SNIPPET_EXPAND_INFO(x) ((GuSnippetExpandInfo*)x)
+#define GU_SNIPPET_EXPAND_INFO (x) ( (GuSnippetExpandInfo*)x)
 typedef struct _GuSnippetExpandInfo GuSnippetExpandInfo;
 
 struct _GuSnippetExpandInfo {
@@ -53,7 +53,7 @@ struct _GuSnippetExpandInfo {
 
 
 /* Storing single snippet info */
-#define GU_SNIPPET_INFO(x) ((GuSnippetInfo*)x)
+#define GU_SNIPPET_INFO (x) ( (GuSnippetInfo*)x)
 typedef struct _GuSnippetInfo GuSnippetInfo;
 
 struct _GuSnippetInfo {
@@ -72,7 +72,7 @@ struct _GuSnippetInfo {
 };
 
 
-#define GU_SNIPPETS(x) ((GuSnippets*)x)
+#define GU_SNIPPETS (x) ( (GuSnippets*)x)
 typedef struct _GuSnippets GuSnippets;
 
 struct _GuSnippets {
@@ -80,39 +80,39 @@ struct _GuSnippets {
     slist* head;
     GuSnippetInfo* info;
     GtkAccelGroup* accel_group;
-    GList* closure_data; /* data: Tuple2(key, closure) */
+    GList* closure_data; /* data: Tuple2 (key, closure) */
     gboolean activated;
 };
 
-GuSnippets* snippets_init(const gchar* filename);
-void snippets_set_default(GuSnippets* sc);
-void snippets_load(GuSnippets* sc);
-void snippets_save(GuSnippets* sc);
-void snippets_clean_up(GuSnippets* sc);
-gchar* snippets_get_value(GuSnippets* sc, const gchar* term);
-void snippets_set_accelerator(GuSnippets* sc, gchar* config);
-void snippets_activate(GuSnippets* sc, GuEditor* ec, gchar* key);
-void snippets_deactivate(GuSnippets* sc, GuEditor* ec);
-gboolean snippets_key_press_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
-gboolean snippets_key_release_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
-GuSnippetInfo* snippets_parse(char* snippet);
-void snippets_accel_cb(GtkAccelGroup* accel_group, GObject* obj,
+GuSnippets* snippets_init (const gchar* filename);
+void snippets_set_default (GuSnippets* sc);
+void snippets_load (GuSnippets* sc);
+void snippets_save (GuSnippets* sc);
+void snippets_clean_up (GuSnippets* sc);
+gchar* snippets_get_value (GuSnippets* sc, const gchar* term);
+void snippets_set_accelerator (GuSnippets* sc, gchar* config);
+void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key);
+void snippets_deactivate (GuSnippets* sc, GuEditor* ec);
+gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
+gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
+GuSnippetInfo* snippets_parse (char* snippet);
+void snippets_accel_cb (GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata);
-void snippets_accel_connect(GuSnippets* sc, guint keyval, GdkModifierType mod,
+void snippets_accel_connect (GuSnippets* sc, guint keyval, GdkModifierType mod,
         GClosure* closure);
-void snippets_accel_disconnect(GuSnippets* sc, const gchar* key);
+void snippets_accel_disconnect (GuSnippets* sc, const gchar* key);
 
-GuSnippetInfo* snippet_info_new(gchar* snippet);
-void snippet_info_free(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_append_holder(GuSnippetInfo* info, gint group, gint start,
+GuSnippetInfo* snippet_info_new (gchar* snippet);
+void snippet_info_free (GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_append_holder (GuSnippetInfo* info, gint group, gint start,
         gint len, gchar* text);
-void snippet_info_create_marks(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_remove_marks(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_initial_expand(GuSnippetInfo* info, GuEditor* ec);
-gboolean snippet_info_goto_next_placeholder(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_goto_prev_placeholder(GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_sync_group(GuSnippetInfo* info, GuEditor* ec);
-gint snippet_info_num_cmp(gconstpointer a, gconstpointer b);
-gint snippet_info_pos_cmp(gconstpointer a, gconstpointer b);
+void snippet_info_create_marks (GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_remove_marks (GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec);
+gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec);
+void snippet_info_sync_group (GuSnippetInfo* info, GuEditor* ec);
+gint snippet_info_num_cmp (gconstpointer a, gconstpointer b);
+gint snippet_info_pos_cmp (gconstpointer a, gconstpointer b);
 
 #endif /* __GUMMI_SNIPPETS__ */

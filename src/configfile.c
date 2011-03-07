@@ -95,64 +95,64 @@ const gchar config_str[] =
 "	\\end{center}\n"
 "	\\end{document}\n";
 
-void config_init(const gchar* filename) {
+void config_init (const gchar* filename) {
     const gchar* config_version = NULL;
-    gchar* dirname = g_path_get_dirname(filename);
+    gchar* dirname = g_path_get_dirname (filename);
 
-    g_mkdir_with_parents(dirname, DIR_PERMS);
-    g_free(dirname);
+    g_mkdir_with_parents (dirname, DIR_PERMS);
+    g_free (dirname);
 
-    slog(L_INFO, "configuration file: %s\n", filename);
+    slog (L_INFO, "configuration file: %s\n", filename);
 
-    g_free(config_filename);
-    config_filename = g_strdup(filename);
+    g_free (config_filename);
+    config_filename = g_strdup (filename);
 
-    config_load();
-    config_version = config_get_value("config_version");
+    config_load ();
+    config_version = config_get_value ("config_version");
 
     /* config_version field is not in gummi.cfg before 0.5.0 */
     if (0 == config_version[0]) {
-        slog(L_INFO, "found old configuration file, replacing it with new "
+        slog (L_INFO, "found old configuration file, replacing it with new "
                 "one ...\n");
-        config_set_default();
-    } else if (0 != strcmp(PACKAGE_VERSION, config_version)) {
-        slog(L_INFO, "updating version tag in configuration file...\n");
-        config_set_value("config_version", PACKAGE_VERSION);
+        config_set_default ();
+    } else if (0 != strcmp (PACKAGE_VERSION, config_version)) {
+        slog (L_INFO, "updating version tag in configuration file...\n");
+        config_set_value ("config_version", PACKAGE_VERSION);
     }
-    config_save();
+    config_save ();
 }
 
-void config_set_default(void) {
+void config_set_default (void) {
     FILE* fh = 0;
-    if (!(fh = fopen(config_filename, "w")))
-        slog(L_FATAL, "can't open config for writing... abort\n");
+    if (! (fh = fopen (config_filename, "w")))
+        slog (L_FATAL, "can't open config for writing... abort\n");
 
-    fwrite(config_str, strlen(config_str), 1, fh);
-    fclose(fh);
-    config_load();
+    fwrite (config_str, strlen (config_str), 1, fh);
+    fclose (fh);
+    config_load ();
 }
 
-const gchar* config_get_value(const gchar* term) {
+const gchar* config_get_value (const gchar* term) {
     gchar* ret  = NULL;
-    slist* index = slist_find(config_head, term, FALSE, TRUE);
+    slist* index = slist_find (config_head, term, FALSE, TRUE);
 
     ret = index->second;
-    if (ret && 0 == strcmp(ret, "False"))
+    if (ret && 0 == strcmp (ret, "False"))
         return NULL;
     return ret;
 }
 
-void config_set_value(const gchar* term, const gchar* value) {
+void config_set_value (const gchar* term, const gchar* value) {
     if (!config_head)
-        slog(L_FATAL, "configuration not initialized\n");
+        slog (L_FATAL, "configuration not initialized\n");
 
-    slist* index = slist_find(config_head, term, FALSE, TRUE);
-    g_free(index->second);
+    slist* index = slist_find (config_head, term, FALSE, TRUE);
+    g_free (index->second);
 
-    index->second = g_strdup(value? value: "");
+    index->second = g_strdup (value? value: "");
 }
 
-void config_load(void) {
+void config_load (void) {
     FILE* fh = 0;
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
@@ -161,57 +161,57 @@ void config_load(void) {
     slist* prev = NULL;
 
     if (config_head)
-        config_clean_up();
+        config_clean_up ();
 
-    if (!(fh = fopen(config_filename, "r"))) {
-        slog(L_ERROR, "can't find configuration file, reseting to default\n");
-        config_set_default();
-        return config_load();
+    if (! (fh = fopen (config_filename, "r"))) {
+        slog (L_ERROR, "can't find configuration file, reseting to default\n");
+        config_set_default ();
+        return config_load ();
     }
 
-    current = config_head = prev = g_new0(slist, 1);
+    current = config_head = prev = g_new0 (slist, 1);
 
-    while (fgets(buf, BUFSIZ, fh)) {
-        buf[strlen(buf) -1] = 0; /* remove trailing '\n' */
+    while (fgets (buf, BUFSIZ, fh)) {
+        buf[strlen (buf) -1] = 0; /* remove trailing '\n' */
         if (buf[0] != '\t') {
-            seg = strtok(buf, " =");
-            current->first = g_strdup((seg)? seg: "");
-            /* prevent strtok() from cutting string after '=' */
-            seg = strtok(NULL, "=");
-            current->second = g_strdup((seg)? seg + 1: NULL);
+            seg = strtok (buf, " =");
+            current->first = g_strdup ((seg)? seg: "");
+            /* prevent strtok () from cutting string after '=' */
+            seg = strtok (NULL, "=");
+            current->second = g_strdup ((seg)? seg + 1: NULL);
         } else {
-            rot = g_strdup(prev->second);
-            g_free(prev->second);
-            prev->second = g_strconcat(rot, "\n", buf + 1, NULL);
-            g_free(rot);
-            g_free(current);
+            rot = g_strdup (prev->second);
+            g_free (prev->second);
+            prev->second = g_strconcat (rot, "\n", buf + 1, NULL);
+            g_free (rot);
+            g_free (current);
             current = prev;
         }
         prev = current;
-        current->next = g_new0(slist, 1);
+        current->next = g_new0 (slist, 1);
         current = current->next;
     }
-    g_free(current);
+    g_free (current);
     prev->next = NULL;
-    fclose(fh);
+    fclose (fh);
 }
 
-void config_save(void) {
+void config_save (void) {
     FILE* fh = 0;
     slist* current = config_head;
     gint i = 0, count = 0, len = 0;
     gchar* buf = 0;
 
-    if (!(fh = fopen(config_filename, "w")))
-        slog(L_FATAL, "can't open config for writing... abort\n");
+    if (! (fh = fopen (config_filename, "w")))
+        slog (L_FATAL, "can't open config for writing... abort\n");
 
     while (current) {
-        fputs(current->first, fh);
+        fputs (current->first, fh);
         if (current->second) {
-            fputs(" = ", fh);
-            len = strlen(current->second) + 1;
-            buf = (gchar*)g_malloc(len * 2);
-            memset(buf, 0, len * 2);
+            fputs (" = ", fh);
+            len = strlen (current->second) + 1;
+            buf = (gchar*)g_malloc (len * 2);
+            memset (buf, 0, len * 2);
             /* replace '\n' with '\n\t' for options with multi-line content */
             for (i = 0; i < len; ++i) {
                 if (count + 2 == len * 2) break;
@@ -219,22 +219,22 @@ void config_save(void) {
                 if (i != len -2 && '\n' == current->second[i])
                     buf[count++] = '\t';
             }
-            fputs(buf, fh);
-            g_free(buf);
+            fputs (buf, fh);
+            g_free (buf);
         }
-        fputs("\n", fh);
+        fputs ("\n", fh);
         current = current->next;
         count = 0;
     }
-    fclose(fh);
+    fclose (fh);
 }
 
-void config_clean_up(void) {
+void config_clean_up (void) {
     slist* prev = config_head;
     slist* current;
     while (prev) {
         current = prev->next;
-        g_free(prev);
+        g_free (prev);
         prev = current;
     }
     config_head = NULL;

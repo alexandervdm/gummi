@@ -81,14 +81,14 @@
 #include "snippets.h"
 #include "template.h"
 
-#define _(T) gettext(T)
+#define _ (T) gettext (T)
 
 /**
  * Gummi:
  *
  * Stores Gummi main context.
  */
-#define GUMMI(x) ((Gummi*)x)
+#define GUMMI (x) ( (Gummi*)x)
 typedef struct _Gummi Gummi;
 
 struct _Gummi {
@@ -102,22 +102,22 @@ struct _Gummi {
     GuSnippets* snippets;
 };
 
-Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+Gummi* gummi_init (GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl, GuSnippets* snip);
-void gummi_new_environment(Gummi* gc, const gchar* filename);
+void gummi_new_environment (Gummi* gc, const gchar* filename);
 
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to
  * non-GUI classes.
  * Please only use this functions if avoidable.
  */
-GummiGui* gummi_get_gui(void);
-GList* gummi_get_editors(void);
-GuEditor* gummi_get_active_editor(void);
-GuMotion* gummi_get_motion(void);
-GuLatex* gummi_get_latex(void);
-GuBiblio* gummi_get_biblio(void);
-GuTemplate* gummi_get_template(void);
-GuSnippets* gummi_get_snippets(void);
+GummiGui* gummi_get_gui (void);
+GList* gummi_get_editors (void);
+GuEditor* gummi_get_active_editor (void);
+GuMotion* gummi_get_motion (void);
+GuLatex* gummi_get_latex (void);
+GuBiblio* gummi_get_biblio (void);
+GuTemplate* gummi_get_template (void);
+GuSnippets* gummi_get_snippets (void);
 
 #endif /* GUMMI_ENVIRONMENT_H */

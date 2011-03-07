@@ -43,46 +43,46 @@
 
 static guint sid = 0;
 
-void iofunctions_load_default_text(GuEditor* ec) {
-    gchar* str = g_strdup(config_get_value("welcome"));
-    editor_fill_buffer(ec, str);
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->buffer), FALSE);
-    g_free(str);
+void iofunctions_load_default_text (GuEditor* ec) {
+    gchar* str = g_strdup (config_get_value ("welcome"));
+    editor_fill_buffer (ec, str);
+    gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
+    g_free (str);
 }
 
-void iofunctions_load_file(GuEditor* ec, const gchar* filename) {
+void iofunctions_load_file (GuEditor* ec, const gchar* filename) {
     GError* err = NULL;
     gchar* status;
     gchar* text;
     gchar* decoded;
     gboolean result;
 
-    slog(L_INFO, "loading %s ...\n", filename);
+    slog (L_INFO, "loading %s ...\n", filename);
 
     /* add Loading message to status bar and ensure GUI is current */
     status = g_strdup_printf ("Loading %s...", filename);
-    statusbar_set_message(status);
-    g_free(status);
+    statusbar_set_message (status);
+    g_free (status);
     
     /* get the file contents */
-    if (FALSE == (result = g_file_get_contents(filename, &text, NULL, &err))) {
-        slog(L_G_ERROR, "g_file_get_contents(): %s\n", err->message);
-        g_error_free(err);
-        iofunctions_load_default_text(ec);
+    if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
+        slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
+        g_error_free (err);
+        iofunctions_load_default_text (ec);
         goto cleanup;
     }
-    if (NULL == (decoded = iofunctions_decode_text(text)))
+    if (NULL == (decoded = iofunctions_decode_text (text)))
         goto cleanup;
 
-    editor_fill_buffer(ec, decoded);
-    gtk_text_buffer_set_modified(ec_buffer, FALSE);
+    editor_fill_buffer (ec, decoded);
+    gtk_text_buffer_set_modified (ec_buffer, FALSE);
 
 cleanup:
-    g_free(decoded);
-    g_free(text); 
+    g_free (decoded);
+    g_free (text); 
 }
 
-void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
+void iofunctions_write_file (GuEditor* ec, const gchar* filename) {
     gboolean result;
     gchar* encoded = NULL;
     gchar* status = NULL;
@@ -90,71 +90,71 @@ void iofunctions_write_file(GuEditor* ec, const gchar* filename) {
     GError* err = NULL;
     GtkWidget* focus = NULL;
 
-    status = g_strdup_printf(_("Saving %s..."), filename);
-    statusbar_set_message(status);    
+    status = g_strdup_printf (_ ("Saving %s..."), filename);
+    statusbar_set_message (status);    
     g_free (status);
     
-    focus = gtk_window_get_focus(gummi_get_gui()->mainwindow);
-    text = editor_grab_buffer(ec);
-    gtk_widget_grab_focus(focus);
+    focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
+    text = editor_grab_buffer (ec);
+    gtk_widget_grab_focus (focus);
 
-    encoded = iofunctions_encode_text(text);
+    encoded = iofunctions_encode_text (text);
     
     /* set the contents of the file to the text from the buffer */
     if (filename != NULL) {
-        if (!(result = g_file_set_contents (filename, text, -1, &err))) {
-            slog(L_ERROR, "g_file_set_contents(): %s\n", err->message);
-            g_error_free(err);
+        if (! (result = g_file_set_contents (filename, text, -1, &err))) {
+            slog (L_ERROR, "g_file_set_contents (): %s\n", err->message);
+            g_error_free (err);
         }
     }
         
     if (result == FALSE) {
-        slog(L_G_ERROR, _("%s\nPlease try again later."), err->message);
-        g_error_free(err);
+        slog (L_G_ERROR, _ ("%s\nPlease try again later."), err->message);
+        g_error_free (err);
     }
-    gtk_text_buffer_set_modified(GTK_TEXT_BUFFER(ec->buffer), FALSE);
-    g_free(encoded);
-    g_free(text); 
+    gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
+    g_free (encoded);
+    g_free (text); 
 }
 
-void iofunctions_start_autosave(const gchar* name) {
+void iofunctions_start_autosave (const gchar* name) {
     static gchar* filename = NULL;
     if (filename) {
-        g_free(filename);
+        g_free (filename);
         filename = NULL;
     }
-    filename = g_strdup(name);
-    sid = g_timeout_add_seconds(atoi(config_get_value("autosave_timer")) * 60,
+    filename = g_strdup (name);
+    sid = g_timeout_add_seconds (atoi (config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, filename);
 }
 
-void iofunctions_stop_autosave(void) {
-    if (sid > 0) g_source_remove(sid);
+void iofunctions_stop_autosave (void) {
+    if (sid > 0) g_source_remove (sid);
 }
 
-void iofunctions_reset_autosave(const gchar* name) {
-    iofunctions_stop_autosave();
-    if (config_get_value("autosaving"))
-        iofunctions_start_autosave(name);
+void iofunctions_reset_autosave (const gchar* name) {
+    iofunctions_stop_autosave ();
+    if (config_get_value ("autosaving"))
+        iofunctions_start_autosave (name);
 }
 
-char* iofunctions_decode_text(gchar* text) {
+char* iofunctions_decode_text (gchar* text) {
     GError* err = NULL;
     gchar* result = 0;
     gsize read = 0, written = 0;
 
-    if (!(result = g_locale_to_utf8(text, -1, &read, &written, &err))) {
-        g_error_free(err);
-        slog(L_ERROR, "failed to convert text from default locale, trying "
+    if (! (result = g_locale_to_utf8 (text, -1, &read, &written, &err))) {
+        g_error_free (err);
+        slog (L_ERROR, "failed to convert text from default locale, trying "
                 "ISO-8859-1\n");
-        gsize in_size = strlen(text), out_size = in_size * 2;
-        gchar* out = (gchar*)g_malloc(out_size);
+        gsize in_size = strlen (text), out_size = in_size * 2;
+        gchar* out = (gchar*)g_malloc (out_size);
         gchar* process = out;
-        iconv_t cd = iconv_open("UTF-8//IGNORE", "ISO−8859-1");
+        iconv_t cd = iconv_open ("UTF-8//IGNORE", "ISO−8859-1");
 
-        if (-1 == iconv(cd, &text, &in_size, &process, &out_size)) {
-            slog(L_G_ERROR, _("Can not convert text to UTF-8!\n"));
-            g_free(out);
+        if (-1 == iconv (cd, &text, &in_size, &process, &out_size)) {
+            slog (L_G_ERROR, _ ("Can not convert text to UTF-8!\n"));
+            g_free (out);
             out = NULL;
         }
         result = out;
@@ -162,32 +162,32 @@ char* iofunctions_decode_text(gchar* text) {
     return result;
 }
 
-gchar* iofunctions_encode_text(gchar* text) {
+gchar* iofunctions_encode_text (gchar* text) {
     GError* err = NULL;
     gchar* result = 0;
     gsize read = 0, written = 0;
 
-    if (!(result = g_locale_from_utf8(text, -1, &read, &written, &err))) {
-        g_error_free(err);
-        slog(L_ERROR, "failed to convert text to default locale, text will "
+    if (! (result = g_locale_from_utf8 (text, -1, &read, &written, &err))) {
+        g_error_free (err);
+        slog (L_ERROR, "failed to convert text to default locale, text will "
                 "be saved in UTF-8\n");
-        result = g_strdup(text);
+        result = g_strdup (text);
     }
     return result;
 }
 
-gboolean iofunctions_autosave_cb(gpointer name) {
+gboolean iofunctions_autosave_cb (gpointer name) {
     char* fname = (char*)name;
-    char* buf = g_strdup_printf(_("Autosaving file %s"), fname);
+    char* buf = g_strdup_printf (_ ("Autosaving file %s"), fname);
     if (fname) {
-        iofunctions_write_file(gummi_get_active_editor(), fname);
-        gtk_text_buffer_set_modified(
-                GTK_TEXT_BUFFER(gummi_get_active_editor()->buffer),
+        iofunctions_write_file (gummi_get_active_editor (), fname);
+        gtk_text_buffer_set_modified (
+                GTK_TEXT_BUFFER (gummi_get_active_editor ()->buffer),
                 FALSE);
-        statusbar_set_message(buf);
-        g_free(buf);
+        statusbar_set_message (buf);
+        g_free (buf);
         return TRUE;
     }
-    g_free(buf);
+    g_free (buf);
     return FALSE;
 }

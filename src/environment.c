@@ -35,11 +35,11 @@
 Gummi* gummi = 0;
 GummiGui* gui = 0;
 
-Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
+Gummi* gummi_init (GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
         GuTemplate* tpl, GuSnippets* snip) {
-    Gummi* g = g_new0(Gummi, 1);
+    Gummi* g = g_new0 (Gummi, 1);
     g->editors = eds;
-    g->editor = g_list_first(eds)->data;
+    g->editor = g_list_first (eds)->data;
     g->motion = mo;
     g->latex = latex;
     g->biblio = bib;
@@ -48,47 +48,47 @@ Gummi* gummi_init(GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
     return g;
 }
 
-void gummi_new_environment(Gummi* gc, const gchar* filename) {
-    editor_fileinfo_update(gc->editor, filename);
+void gummi_new_environment (Gummi* gc, const gchar* filename) {
+    editor_fileinfo_update (gc->editor, filename);
 
-    slog(L_INFO, "\n");
-    slog(L_INFO, "Environment created for:\n");
-    slog(L_INFO, "TEX: %s\n", gc->editor->filename);
-    slog(L_INFO, "TMP: %s\n", gc->editor->workfile);
-    slog(L_INFO, "PDF: %s\n", gc->editor->pdffile); 
+    slog (L_INFO, "\n");
+    slog (L_INFO, "Environment created for:\n");
+    slog (L_INFO, "TEX: %s\n", gc->editor->filename);
+    slog (L_INFO, "TMP: %s\n", gc->editor->workfile);
+    slog (L_INFO, "PDF: %s\n", gc->editor->pdffile); 
 
-    iofunctions_reset_autosave(filename);
+    iofunctions_reset_autosave (filename);
 }
 
-GummiGui* gummi_get_gui(void) {
+GummiGui* gummi_get_gui (void) {
     return gui;
 }
 
-GList* gummi_get_editors(void) {
+GList* gummi_get_editors (void) {
     return gummi->editors;
 }
 
-GuEditor* gummi_get_active_editor(void) {
+GuEditor* gummi_get_active_editor (void) {
     return gummi->editor;
 }
 
-GuMotion* gummi_get_motion(void) {
+GuMotion* gummi_get_motion (void) {
     return gummi->motion;
 }
 
-GuLatex* gummi_get_latex(void) {
+GuLatex* gummi_get_latex (void) {
     return gummi->latex;
 }
 
-GuBiblio* gummi_get_biblio(void) {
+GuBiblio* gummi_get_biblio (void) {
     return gummi->biblio;
 }
 
-GuTemplate* gummi_get_template(void) {
+GuTemplate* gummi_get_template (void) {
     return gummi->templ;
 }
 
-GuSnippets* gummi_get_snippets(void) {
+GuSnippets* gummi_get_snippets (void) {
     return gummi->snippets;
 }
 

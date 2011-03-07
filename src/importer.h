@@ -35,10 +35,10 @@
 
 #include "editor.h"
 
-const gchar* importer_generate_table(gint rows, gint cols, gint borders,
+const gchar* importer_generate_table (gint rows, gint cols, gint borders,
         gint alignment);
-const gchar* importer_generate_matrix(gint bracket, gint rows, gint cols);
-const gchar* importer_generate_image(const gchar* image_file,
+const gchar* importer_generate_matrix (gint bracket, gint rows, gint cols);
+const gchar* importer_generate_image (const gchar* image_file,
         const gchar* caption, const gchar* label, gdouble scale);
 
 #endif /* __GUMMI_IMPORTER_H__ */

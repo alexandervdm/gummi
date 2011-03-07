@@ -40,7 +40,7 @@
 #   include <sys/wait.h>
 #endif
 #ifndef WEXITSTATUS
-#   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
+#   define WEXITSTATUS (stat_val) ( (unsigned int) (stat_val) >> 8)
 #endif
 
 #include <glib.h>
@@ -53,84 +53,84 @@ static gint slog_debug = 0;
 static GtkWindow* parent = 0;
 GThread* main_thread = 0;
 
-void slog_init(gint debug) {
+void slog_init (gint debug) {
     slog_debug = debug;
-    main_thread = g_thread_self();
+    main_thread = g_thread_self ();
 }
 
-void slog_set_gui_parent(GtkWindow* p) {
+void slog_set_gui_parent (GtkWindow* p) {
     parent = p;
 }
 
-void slog(gint level, const gchar *fmt, ...) {
+void slog (gint level, const gchar *fmt, ...) {
     gchar message[BUFSIZ];
     gchar* out;
     va_list vap;
 
-    if (L_IS_TYPE(level, L_DEBUG) && !slog_debug) return;
+    if (L_IS_TYPE (level, L_DEBUG) && !slog_debug) return;
 
-    if (g_thread_self() != main_thread)
-        fprintf(stderr, "\e[1;31m[Thread]\e[0m");
+    if (g_thread_self () != main_thread)
+        fprintf (stderr, "\e[1;31m[Thread]\e[0m");
 
-    if (L_IS_TYPE(level, L_DEBUG))
-        fprintf(stderr, "\e[1;32m[Debug]\e[0m ");
-    else if (L_IS_TYPE(level, L_FATAL) || L_IS_TYPE(level, L_G_FATAL))
-        fprintf(stderr, "\e[1;37;41m[Fatal]\e[0m ");
-    else if (L_IS_TYPE(level, L_ERROR) || L_IS_TYPE(level, L_G_ERROR))
-        fprintf(stderr, "\e[1;31m[Error]\e[0m ");
-    else if (L_IS_TYPE(level, L_WARNING))
-        fprintf(stderr, "\e[1;33m[Warning]\e[0m ");
+    if (L_IS_TYPE (level, L_DEBUG))
+        fprintf (stderr, "\e[1;32m[Debug]\e[0m ");
+    else if (L_IS_TYPE (level, L_FATAL) || L_IS_TYPE (level, L_G_FATAL))
+        fprintf (stderr, "\e[1;37;41m[Fatal]\e[0m ");
+    else if (L_IS_TYPE (level, L_ERROR) || L_IS_TYPE (level, L_G_ERROR))
+        fprintf (stderr, "\e[1;31m[Error]\e[0m ");
+    else if (L_IS_TYPE (level, L_WARNING))
+        fprintf (stderr, "\e[1;33m[Warning]\e[0m ");
     else
-        fprintf(stderr, "\e[1;34m[Info]\e[0m ");
+        fprintf (stderr, "\e[1;34m[Info]\e[0m ");
 
-    va_start(vap, fmt);
-    vsnprintf(message, BUFSIZ, fmt, vap);
-    va_end(vap);
-    fprintf(stderr, "%s", message);
+    va_start (vap, fmt);
+    vsnprintf (message, BUFSIZ, fmt, vap);
+    va_end (vap);
+    fprintf (stderr, "%s", message);
 
-    if (L_IS_GUI(level)) {
+    if (L_IS_GUI (level)) {
         GtkWidget* dialog;
 
-        if (L_IS_TYPE(level, L_G_FATAL))
-            out = g_strdup_printf(_("%s has encountered a serious error and "
+        if (L_IS_TYPE (level, L_G_FATAL))
+            out = g_strdup_printf (_ ("%s has encountered a serious error and "
                         "will require a restart. Your working data will be "
                         "restored when you reload your document. Please "
                         "report bugs at: http://dev.midnightcoding.org"),
                         PACKAGE_NAME);
         else
-            out = g_strdup(message);
+            out = g_strdup (message);
 
         dialog = gtk_message_dialog_new (parent, 
                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                L_IS_TYPE(level,L_G_INFO)? GTK_MESSAGE_INFO: GTK_MESSAGE_ERROR,
+                L_IS_TYPE (level,L_G_INFO)? GTK_MESSAGE_INFO: GTK_MESSAGE_ERROR,
                 GTK_BUTTONS_OK,
                 "%s", message);
-        g_free(out);
+        g_free (out);
 
-        if (L_IS_TYPE(level, L_G_ERROR))
-            gtk_window_set_title(GTK_WINDOW(dialog), "Error!");
-        else if (L_IS_TYPE(level, L_G_FATAL))
-            gtk_window_set_title(GTK_WINDOW(dialog), "Fatal Error!");
-        else if (L_IS_TYPE(level, L_G_INFO))
-            gtk_window_set_title(GTK_WINDOW(dialog), "Info");
+        if (L_IS_TYPE (level, L_G_ERROR))
+            gtk_window_set_title (GTK_WINDOW (dialog), "Error!");
+        else if (L_IS_TYPE (level, L_G_FATAL))
+            gtk_window_set_title (GTK_WINDOW (dialog), "Fatal Error!");
+        else if (L_IS_TYPE (level, L_G_INFO))
+            gtk_window_set_title (GTK_WINDOW (dialog), "Info");
 
-        gtk_dialog_run(GTK_DIALOG(dialog));
-        gtk_widget_destroy(dialog);
+        gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_widget_destroy (dialog);
     }
 
-    if (!L_IS_TYPE(level, L_INFO) &&
-        !L_IS_TYPE(level, L_DEBUG) && 
-        !L_IS_TYPE(level, L_ERROR) && 
-        !L_IS_TYPE(level, L_G_INFO) &&
-        !L_IS_TYPE(level, L_G_ERROR))
-        exit(1);
+    if (!L_IS_TYPE (level, L_INFO) &&
+        !L_IS_TYPE (level, L_DEBUG) && 
+        !L_IS_TYPE (level, L_ERROR) && 
+        !L_IS_TYPE (level, L_G_INFO) &&
+        !L_IS_TYPE (level, L_G_ERROR))
+        exit (1);
 }
 
-gint utils_yes_no_dialog(const gchar* message) {
+gint utils_yes_no_dialog (const gchar* message) {
     GtkWidget* dialog;
     gint ret = 0;
 
-    g_return_val_if_fail(message != NULL, 0);
+    g_return_val_if_fail (message != NULL, 0);
 
     dialog = gtk_message_dialog_new (parent, 
                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -138,103 +138,103 @@ gint utils_yes_no_dialog(const gchar* message) {
                  GTK_BUTTONS_YES_NO,
                  "%s", message);
 
-    gtk_window_set_title(GTK_WINDOW(dialog), _("Confirmation"));
-    ret = gtk_dialog_run(GTK_DIALOG(dialog));      
-    gtk_widget_destroy(dialog);
+    gtk_window_set_title (GTK_WINDOW (dialog), _ ("Confirmation"));
+    ret = gtk_dialog_run (GTK_DIALOG (dialog));      
+    gtk_widget_destroy (dialog);
 
     return ret;
 }
 
-gboolean utils_path_exists(const gchar* path) {
+gboolean utils_path_exists (const gchar* path) {
     if (NULL == path) return FALSE;
     gboolean result = FALSE;
-    GFile* file = g_file_new_for_path(path);
-    result = g_file_query_exists(file, NULL);
-    g_object_unref(file);
+    GFile* file = g_file_new_for_path (path);
+    result = g_file_query_exists (file, NULL);
+    g_object_unref (file);
     return result;
 }
 
-gboolean utils_copy_file(const gchar* source, const gchar* dest, GError** err) {
+gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err) {
     gchar* contents;
     gsize length;
 
-    g_return_val_if_fail(source != NULL, FALSE);
-    g_return_val_if_fail(dest != NULL, FALSE);
-    g_return_val_if_fail(err == NULL || *err == NULL, FALSE);
+    g_return_val_if_fail (source != NULL, FALSE);
+    g_return_val_if_fail (dest != NULL, FALSE);
+    g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
 
-    if (!g_file_get_contents(source, &contents, &length, err))
+    if (!g_file_get_contents (source, &contents, &length, err))
         return FALSE;
 
-    if (!g_file_set_contents(dest, contents, length, err))
+    if (!g_file_set_contents (dest, contents, length, err))
         return FALSE;
 
-    g_free(contents);
+    g_free (contents);
 
     return TRUE;
 }
 
-Tuple2 utils_popen_r(const gchar* cmd) {
-    FILE* fp = popen(cmd, "r");
+Tuple2 utils_popen_r (const gchar* cmd) {
+    FILE* fp = popen (cmd, "r");
     gchar buf[BUFSIZ];
     gchar* ret = NULL;
     gchar* rot = NULL;
     gint status = 0, len = 0;
 
-    g_assert(cmd != NULL);
+    g_assert (cmd != NULL);
 
-    if (!fp) slog(L_FATAL, "popen() error\n");
+    if (!fp) slog (L_FATAL, "popen () error\n");
 
-    while ((len = fread(buf, 1, BUFSIZ, fp))) {
+    while ( (len = fread (buf, 1, BUFSIZ, fp))) {
         buf[len - (len == BUFSIZ)] = 0;
-        rot = g_strdup(ret);
-        g_free(ret);
+        rot = g_strdup (ret);
+        g_free (ret);
         if (ret)
-            ret = g_strconcat(rot, buf, NULL);
+            ret = g_strconcat (rot, buf, NULL);
         else
-            ret = g_strdup(buf);
-        g_free(rot);
+            ret = g_strdup (buf);
+        g_free (rot);
     }
-    status = WEXITSTATUS(pclose(fp));
+    status = WEXITSTATUS (pclose (fp));
     return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
 }
 
-gchar* utils_path_to_relative(const gchar* root, const gchar* target) {
+gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
     gchar* tstr = NULL;
-    if ((root != NULL) && (0 == strncmp(target, root, strlen(root))))
-        tstr = g_strdup(target + strlen(root) + 1);
+    if ( (root != NULL) && (0 == strncmp (target, root, strlen (root))))
+        tstr = g_strdup (target + strlen (root) + 1);
     else
-        tstr = g_strdup(target);
+        tstr = g_strdup (target);
     return tstr;
 }
 
-slist* slist_find(slist* head, const gchar* term, gboolean n, gboolean create) {
+slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create) {
     slist* current = head;
     slist* prev = 0;
 
     while (current) {
         if (n) {
-            if (0 == strncmp(current->first, term, strlen(term)))
+            if (0 == strncmp (current->first, term, strlen (term)))
                 return current;
         } else {
-            if (0 == strcmp(current->first, term))
+            if (0 == strcmp (current->first, term))
                 return current;
         }
         prev = current;
         current = current->next;
     }
     if (create) {
-        slog(L_WARNING, "can't find `%s', creating new field for it...\n",
+        slog (L_WARNING, "can't find `%s', creating new field for it...\n",
                 term);
-        prev->next = g_new0(slist, 1);
+        prev->next = g_new0 (slist, 1);
         current = prev->next;
-        current->first = g_strdup(term);
-        current->second = g_strdup("");
+        current->first = g_strdup (term);
+        current->second = g_strdup ("");
     } else
         current = NULL;
     return current;
 }
 
-slist* slist_append(slist* head, slist* node) {
+slist* slist_append (slist* head, slist* node) {
     slist* current = head;
     slist* prev = NULL;
 
@@ -246,7 +246,7 @@ slist* slist_append(slist* head, slist* node) {
     return head;
 }
 
-slist* slist_remove(slist* head, slist* node) {
+slist* slist_remove (slist* head, slist* node) {
     slist* current = head;
     slist* prev = NULL;
 

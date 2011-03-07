@@ -40,60 +40,60 @@
 #include "utils.h"
 
 
-GuTemplate* template_init(GtkBuilder* builder) {
-    g_return_val_if_fail(GTK_IS_BUILDER(builder), NULL);
-    GuTemplate* t = g_new0(GuTemplate, 1);
+GuTemplate* template_init (GtkBuilder* builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
+    GuTemplate* t = g_new0 (GuTemplate, 1);
     t->templatewindow =
-        GTK_WINDOW(gtk_builder_get_object(builder, "templatewindow"));
+        GTK_WINDOW (gtk_builder_get_object (builder, "templatewindow"));
     t->templateview = 
-        GTK_TREE_VIEW(gtk_builder_get_object(builder, "template_treeview"));
+        GTK_TREE_VIEW (gtk_builder_get_object (builder, "template_treeview"));
     t->list_templates =
-        GTK_LIST_STORE(gtk_builder_get_object(builder, "list_templates"));
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_templates"));
     t->template_label = 
-        GTK_LABEL(gtk_builder_get_object(builder, "template_label"));
+        GTK_LABEL (gtk_builder_get_object (builder, "template_label"));
     t->template_add =
-        GTK_BUTTON(gtk_builder_get_object(builder, "template_add"));
+        GTK_BUTTON (gtk_builder_get_object (builder, "template_add"));
     t->template_remove =
-        GTK_BUTTON(gtk_builder_get_object(builder, "template_remove"));
+        GTK_BUTTON (gtk_builder_get_object (builder, "template_remove"));
     t->template_open =
-        GTK_BUTTON(gtk_builder_get_object(builder, "template_open")); 
-    t->template_render = GTK_CELL_RENDERER_TEXT(
-            gtk_builder_get_object(builder, "template_renderer"));
-    t->template_col = GTK_TREE_VIEW_COLUMN(
-            gtk_builder_get_object(builder, "template_column"));
-    gtk_tree_view_column_set_sort_column_id(t->template_col, 0);
+        GTK_BUTTON (gtk_builder_get_object (builder, "template_open")); 
+    t->template_render = GTK_CELL_RENDERER_TEXT (
+            gtk_builder_get_object (builder, "template_renderer"));
+    t->template_col = GTK_TREE_VIEW_COLUMN (
+            gtk_builder_get_object (builder, "template_column"));
+    gtk_tree_view_column_set_sort_column_id (t->template_col, 0);
     return t;
 }
 
-void template_setup(GuTemplate* t) {
+void template_setup (GuTemplate* t) {
     const gchar *filename;
     char *filepath = NULL;
     GError *error = NULL;
     GtkTreeIter iter;
 
-    gchar *dirpath = g_build_filename(g_get_user_config_dir(), "gummi",
+    gchar *dirpath = g_build_filename (g_get_user_config_dir (), "gummi",
                                       "templates" , NULL);
     
     GDir* dir = g_dir_open (dirpath, 0, &error);    
     if (error) { 
         /* print error if directory does not exist */
-        slog(L_INFO, "unable to read template directory, creating new..\n");
-        g_mkdir_with_parents(dirpath, DIR_PERMS);
-        g_free(dirpath);
+        slog (L_INFO, "unable to read template directory, creating new..\n");
+        g_mkdir_with_parents (dirpath, DIR_PERMS);
+        g_free (dirpath);
         return;
     }
 
-    while ( (filename = g_dir_read_name(dir))) {
-        filepath = g_build_filename(dirpath, filename, NULL);
-        gtk_list_store_append(t->list_templates, &iter);
-        gtk_list_store_set(t->list_templates, &iter, 0, filename, 1,
+    while ( (filename = g_dir_read_name (dir))) {
+        filepath = g_build_filename (dirpath, filename, NULL);
+        gtk_list_store_append (t->list_templates, &iter);
+        gtk_list_store_set (t->list_templates, &iter, 0, filename, 1,
                 filepath, -1);
-        g_free(filepath);
+        g_free (filepath);
     }
-    g_free(dirpath);
+    g_free (dirpath);
 }
 
-templdata template_open_selected(GuTemplate* t) {
+templdata template_open_selected (GuTemplate* t) {
     GtkTreeModel *model;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
@@ -101,73 +101,73 @@ templdata template_open_selected(GuTemplate* t) {
     gchar *itemname = NULL;
     gchar *data = NULL;
     
-    model = gtk_tree_view_get_model(t->templateview);
-    selection = gtk_tree_view_get_selection(t->templateview);
+    model = gtk_tree_view_get_model (t->templateview);
+    selection = gtk_tree_view_get_selection (t->templateview);
     
-    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+    if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 0, &itemname, -1);
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
-        g_file_get_contents(filepath, &data, NULL, NULL);
+        g_file_get_contents (filepath, &data, NULL, NULL);
     } 
     return (templdata){itemname, data};
 }
 
 
-void template_add_new_entry(GuTemplate* t) {
+void template_add_new_entry (GuTemplate* t) {
     GtkTreeIter iter;
     GtkTreeModel* model = NULL;
     GtkTreePath* path = NULL;
     GtkTreeViewColumn* col = NULL;
     GList* cells = NULL;
     
-    gtk_label_set_text(t->template_label, "");
-    gtk_list_store_append(t->list_templates, &iter);
+    gtk_label_set_text (t->template_label, "");
+    gtk_list_store_append (t->list_templates, &iter);
     
-    g_object_set(t->template_render, "editable", TRUE, NULL);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), FALSE);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), FALSE);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_open), FALSE);
+    g_object_set (t->template_render, "editable", TRUE, NULL);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_add), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_remove), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_open), FALSE);
     
-    col = gtk_tree_view_get_column(t->templateview, 0);
-    model = gtk_tree_view_get_model(t->templateview);
-    path = gtk_tree_model_get_path(model, &iter);
-    cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT(col));
+    col = gtk_tree_view_get_column (t->templateview, 0);
+    model = gtk_tree_view_get_model (t->templateview);
+    path = gtk_tree_model_get_path (model, &iter);
+    cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (col));
 
-    gtk_tree_view_set_cursor_on_cell(t->templateview, path, col, cells->data,
+    gtk_tree_view_set_cursor_on_cell (t->templateview, path, col, cells->data,
                                      TRUE);
-    g_list_free(cells);
-    gtk_tree_path_free(path);
+    g_list_free (cells);
+    gtk_tree_path_free (path);
 }
 
-void template_remove_entry(GuTemplate* t) {
+void template_remove_entry (GuTemplate* t) {
     GtkTreeModel* model = NULL;
     GtkTreeIter iter;
     GtkTreeSelection* selection = NULL;
     gchar* filepath = NULL;
 
-    model = gtk_tree_view_get_model(t->templateview);
-    selection = gtk_tree_view_get_selection(t->templateview);
+    model = gtk_tree_view_get_model (t->templateview);
+    selection = gtk_tree_view_get_selection (t->templateview);
     
-    if (gtk_tree_selection_get_selected(selection, &model, &iter)) {
+    if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
-        gtk_list_store_remove(t->list_templates, &iter);
-        g_remove(filepath);
+        gtk_list_store_remove (t->list_templates, &iter);
+        g_remove (filepath);
     }
 }
 
-void template_create_file(GuTemplate* t, gchar* filename, gchar* text) {
-    const char* filepath = g_build_filename(g_get_user_config_dir(),
+void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
+    const char* filepath = g_build_filename (g_get_user_config_dir (),
             "gummi", "templates", filename, NULL);
                            
-    if (g_file_test(filepath, G_FILE_TEST_EXISTS)) {
-        gtk_label_set_text(t->template_label, "filename already exists");
-        template_remove_entry(t);
+    if (g_file_test (filepath, G_FILE_TEST_EXISTS)) {
+        gtk_label_set_text (t->template_label, "filename already exists");
+        template_remove_entry (t);
     }
     else {
-        g_file_set_contents(filepath, text, strlen(text), NULL);
+        g_file_set_contents (filepath, text, strlen (text), NULL);
     }
-    g_object_set(t->template_render, "editable", FALSE, NULL);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_add), TRUE);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_remove), TRUE);
-    gtk_widget_set_sensitive(GTK_WIDGET(t->template_open), TRUE);
+    g_object_set (t->template_render, "editable", FALSE, NULL);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_add), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_remove), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (t->template_open), TRUE);
 }

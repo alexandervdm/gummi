@@ -30,6 +30,6 @@
 #ifndef __GUMMI_SIGNALS_H__
 #define __GUMMI_SIGNALS_H__
 
-void gummi_signals_register(void);
+void gummi_signals_register (void);
 
 #endif /* __GUMMI_SIGNALS_H__ */

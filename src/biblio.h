@@ -34,7 +34,7 @@
 
 #include "latex.h"
 
-#define GU_BIBLIO(x) ((GuBiblio*)x)
+#define GU_BIBLIO (x) ( (GuBiblio*)x)
 typedef struct _GuBiblio GuBiblio;
 
 struct _GuBiblio {
@@ -47,10 +47,10 @@ struct _GuBiblio {
     double progressval;
 };
 
-GuBiblio* biblio_init(GtkBuilder* builder);
-gboolean biblio_detect_bibliography(GuBiblio* bc, GuEditor* ec);
-gboolean biblio_compile_bibliography(GuBiblio* bc, GuEditor* ec, GuLatex* lc);
-int biblio_parse_entries(GuBiblio* bc, gchar *bib_content);
+GuBiblio* biblio_init (GtkBuilder* builder);
+gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec);
+gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc);
+int biblio_parse_entries (GuBiblio* bc, gchar *bib_content);
 
 
 #endif /* __GUMMI_BIBLIO_H__ */

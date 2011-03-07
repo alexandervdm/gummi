@@ -33,7 +33,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#define GU_PREFS_GUI(x) ((GuPrefsGui*)x)
+#define GU_PREFS_GUI (x) ( (GuPrefsGui*)x)
 typedef struct _GuPrefsGui GuPrefsGui;
 
 struct _GuPrefsGui {
@@ -68,26 +68,26 @@ struct _GuPrefsGui {
     GtkHBox* commandbox;
 };
 
-GuPrefsGui* prefsgui_init(GtkWindow* mainwindow);
-void prefsgui_main(GuPrefsGui* prefs);
-void prefsgui_set_current_settings(GuPrefsGui* prefs);
-void toggle_linenumbers(GtkWidget* widget, void* user);
-void toggle_highlighting(GtkWidget* widget, void* user);
-void toggle_textwrapping(GtkWidget* widget, void* user);
-void toggle_wordwrapping(GtkWidget* widget, void* user);
-void toggle_compilestatus(GtkWidget* widget, void* user);
-void toggle_spaces_instof_tabs(GtkWidget* widget, void* user);
-void toggle_autosaving(GtkWidget* widget, void* user);
-void on_prefs_close_clicked(GtkWidget* widget, void* user);
-void on_prefs_reset_clicked(GtkWidget* widget, void* user);
-void on_tabwidth_value_changed(GtkWidget* widget, void* user);
-void on_configure_snippets_clicked(GtkWidget* widget, void* user);
-void on_autosave_value_changed(GtkWidget* widget, void* user);
-void on_compile_value_changed(GtkWidget* widget, void* user);
-void on_editor_font_set(GtkWidget* widget, void* user);
-void on_combo_typesetter_changed(GtkWidget* widget, void* user);
-void on_combo_language_changed(GtkWidget* widget, void* user);
-void on_combo_compilescheme_changed(GtkWidget* widget, void* user);
-void on_styleschemes_treeview_cursor_changed(GtkTreeView* treeview, void* user);
+GuPrefsGui* prefsgui_init (GtkWindow* mainwindow);
+void prefsgui_main (GuPrefsGui* prefs);
+void prefsgui_set_current_settings (GuPrefsGui* prefs);
+void toggle_linenumbers (GtkWidget* widget, void* user);
+void toggle_highlighting (GtkWidget* widget, void* user);
+void toggle_textwrapping (GtkWidget* widget, void* user);
+void toggle_wordwrapping (GtkWidget* widget, void* user);
+void toggle_compilestatus (GtkWidget* widget, void* user);
+void toggle_spaces_instof_tabs (GtkWidget* widget, void* user);
+void toggle_autosaving (GtkWidget* widget, void* user);
+void on_prefs_close_clicked (GtkWidget* widget, void* user);
+void on_prefs_reset_clicked (GtkWidget* widget, void* user);
+void on_tabwidth_value_changed (GtkWidget* widget, void* user);
+void on_configure_snippets_clicked (GtkWidget* widget, void* user);
+void on_autosave_value_changed (GtkWidget* widget, void* user);
+void on_compile_value_changed (GtkWidget* widget, void* user);
+void on_editor_font_set (GtkWidget* widget, void* user);
+void on_combo_typesetter_changed (GtkWidget* widget, void* user);
+void on_combo_language_changed (GtkWidget* widget, void* user);
+void on_combo_compilescheme_changed (GtkWidget* widget, void* user);
+void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user);
 
 #endif /* __GUMMI_GUI_PREFS_H__ */

@@ -35,7 +35,7 @@
 
 #define g_importgui gui->importgui
 
-#define GU_IMPORT_GUI(x) ((GuImportGui*)x)
+#define GU_IMPORT_GUI (x) ( (GuImportGui*)x)
 typedef struct _GuImportGui GuImportGui;
 
 struct _GuImportGui {
@@ -64,13 +64,13 @@ struct _GuImportGui {
     GtkComboBox* matrix_combobracket;
 };
 
-GuImportGui* importgui_init(GtkBuilder* builder);
-void on_import_tabs_switch_page(GtkNotebook* notebook, GtkNotebookPage* page,
+GuImportGui* importgui_init (GtkBuilder* builder);
+void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
         guint page_num, void* user);
-void on_button_import_table_apply_clicked(GtkWidget* widget, void* user);
-void on_button_import_image_apply_clicked(GtkWidget* widget, void* user);
-void on_button_import_matrix_apply_clicked(GtkWidget* widget, void* user);
-void on_image_file_activate(void);
-void importer_imagegui_set_sensitive(const gchar* name, gboolean mode);
+void on_button_import_table_apply_clicked (GtkWidget* widget, void* user);
+void on_button_import_image_apply_clicked (GtkWidget* widget, void* user);
+void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user);
+void on_image_file_activate (void);
+void importer_imagegui_set_sensitive (const gchar* name, gboolean mode);
 
 #endif /* __GUMMI_GUI_IMPORT_H__ */

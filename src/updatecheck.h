@@ -34,6 +34,6 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-gboolean updatecheck(GtkWindow* parent);
+gboolean updatecheck (GtkWindow* parent);
 
 #endif /* __GUMMI_UPDATE_CHECK__ */
