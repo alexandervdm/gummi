@@ -33,7 +33,7 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
-#define GU_PREVIEW_GUI (x) ( (GuPreviewGui*)x)
+#define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
 typedef struct _GuPreviewGui GuPreviewGui;
 
 struct _GuPreviewGui {

@@ -36,8 +36,8 @@
 
 #define DIR_PERMS (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
 
-#define L_IS_TYPE (level, type) ( (level & type) == type)
-#define L_IS_GUI (level) (level & 0xf0)
+#define L_IS_TYPE(level, type) ((level & type) == type)
+#define L_IS_GUI(level) (level & 0xf0)
 #define L_INFO      0x00   /* for informative messages */
 #define L_WARNING   0x01   /* warnning */
 #define L_DEBUG     0x02   /* debug messages, only print if -d flags is used */
@@ -47,7 +47,7 @@
 #define L_G_ERROR   0x20   /* recoverable error */
 #define L_G_FATAL   0x40   /* inrecoverable error */
 
-#define L_F_DEBUG  slog (L_DEBUG, "%s ()\n", __func__);
+#define L_F_DEBUG slog(L_DEBUG, "%s ()\n", __func__);
 
 /**
  * Tuple2:
@@ -65,7 +65,7 @@ typedef struct _Tuple2 {
     gpointer second;
 } Tuple2;
 
-#define TUPLE2 (x) ( (Tuple2*)x)
+#define TUPLE2(x) ((Tuple2*)x)
 
 /**
  * Tuple2:
@@ -85,7 +85,7 @@ typedef struct _Tuple3 {
     gpointer third;
 } Tuple3;
 
-#define TUPLE3 (x) ( (Tuple3*)x)
+#define TUPLE3(x) ((Tuple3*)x)
 
 /**
  * slist:

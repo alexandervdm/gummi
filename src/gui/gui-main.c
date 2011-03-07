@@ -309,7 +309,7 @@ void gui_save_file (gboolean saveas) {
             }
             if (utils_path_exists (filename)) {
                 ret = utils_yes_no_dialog (
-                        _ ("The file already exists. Overwrite?"));
+                        _("The file already exists. Overwrite?"));
                 if (GTK_RESPONSE_YES != ret) goto cleanup;
             }
         } else goto cleanup;
@@ -367,7 +367,7 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
     if (utils_path_exists (gui->recent_list[index])) {
         gui_open_file (gui->recent_list[index]);
     } else {
-        tstr = g_strdup_printf (_ ("Error loading recent file: %s"),
+        tstr = g_strdup_printf (_("Error loading recent file: %s"),
                 gui->recent_list[index]);
         slog (L_ERROR, "%s\n", tstr);
         slog (L_G_ERROR, "Could not find the file %s.\n",
@@ -543,13 +543,13 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
     gchar* res[TEXCOUNT_OUTPUT_LINES] = { 0 };
     const gchar* terms[] = {
-        _ ("Words in text"),
-        _ ("Words in headers"),
-        _ ("Words in float captions"),
-        _ ("Number of headers"),
-        _ ("Number of floats"),
-        _ ("Number of math inlines"),
-        _ ("Number of math displayed")
+        _("Words in text"),
+        _("Words in headers"),
+        _("Words in float captions"),
+        _("Number of headers"),
+        _("Number of floats"),
+        _("Number of math inlines"),
+        _("Number of math displayed")
     };
     const gchar* terms_regex[] = {
         "Words in text: ([0-9]*)",
@@ -610,7 +610,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     }
     else {
         cmd = NULL;
-        output = g_strdup (_ ("This function requires\nthe texcount program.\n"));
+        output = g_strdup (_("This function requires\nthe texcount program.\n"));
     }
     
     dialog = gtk_message_dialog_new (gui->mainwindow,
@@ -618,7 +618,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
             GTK_MESSAGE_INFO,
             GTK_BUTTONS_OK,
             "%s", output);
-    gtk_window_set_title (GTK_WINDOW (dialog), _ ("Document Statistics"));
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Document Statistics"));
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
 
@@ -796,14 +796,14 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
 
     if (biblio_compile_bibliography (gummi->biblio, gummi->editor,
                 gummi->latex)) {
-        statusbar_set_message (_ ("Compiling bibliography file..."));
+        statusbar_set_message (_("Compiling bibliography file..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _ ("bibliography compiled without errors"));
+                _("bibliography compiled without errors"));
     } else {
-        statusbar_set_message (_ ("Error compiling bibliography file or none "
+        statusbar_set_message (_("Error compiling bibliography file or none "
                     "detected..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _ ("error compiling bibliography file"));
+                _("error compiling bibliography file"));
     }
     check_preview_timer ();
 }
@@ -832,16 +832,16 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
         str = g_strdup_printf ("%d", number);
         gtk_label_set_text (gummi->biblio->refnr_label, str);
         g_free (str);
-        str = g_strdup_printf (_ ("%s loaded"), basename);
+        str = g_strdup_printf (_("%s loaded"), basename);
         gtk_progress_bar_set_text (gummi->biblio->progressbar, str);
         g_free (basename);
         g_free (str);
     }
     else {
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _ ("no bibliography file detected"));
-        gtk_label_set_text (gummi->biblio->filenm_label, _ ("none"));
-        gtk_label_set_text (gummi->biblio->refnr_label, _ ("N/A"));
+                _("no bibliography file detected"));
+        gtk_label_set_text (gummi->biblio->filenm_label, _("none"));
+        gtk_label_set_text (gummi->biblio->refnr_label, _("N/A"));
     }
 }
 
@@ -872,7 +872,7 @@ gint check_for_save (void) {
 
     if (gtk_text_buffer_get_modified (g_e_buffer))
         ret = utils_yes_no_dialog (
-                _ ("Do you want to save the changes you have made?"));
+                _("Do you want to save the changes you have made?"));
     return ret;
 }
 
@@ -882,11 +882,11 @@ gchar* get_open_filename (GuFilterType type) {
     gchar* filename = NULL;
 
     const gchar* chooser_title[] = {
-        _ ("Open LaTeX document"),
+        _("Open LaTeX document"),
         "shouldn't happen",
         "shouldn't happen",
-        _ ("Select an image to insert"),
-        _ ("Select bibliography file")
+        _("Select an image to insert"),
+        _("Select bibliography file")
     };
 
     chooser = GTK_FILE_CHOOSER (gtk_file_chooser_dialog_new (
@@ -920,9 +920,9 @@ gchar* get_save_filename (GuFilterType type) {
     gchar* filename = NULL;
 
     const gchar* chooser_title[] = {
-        _ ("Save LaTeX document"),
-        _ ("Save as LaTeX document"),
-        _ ("Export to PDF"),
+        _("Save LaTeX document"),
+        _("Save as LaTeX document"),
+        _("Export to PDF"),
         "shouldn't happen",
         "shouldn't happen"
     };

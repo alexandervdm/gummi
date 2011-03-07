@@ -81,14 +81,14 @@
 #include "snippets.h"
 #include "template.h"
 
-#define _ (T) gettext (T)
+#define _(T) gettext(T)
 
 /**
  * Gummi:
  *
  * Stores Gummi main context.
  */
-#define GUMMI (x) ( (Gummi*)x)
+#define GUMMI(x) ((Gummi*)x)
 typedef struct _Gummi Gummi;
 
 struct _Gummi {

@@ -169,7 +169,7 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
         savepath = g_strdup (path);
 
     if (prompt_overrite && utils_path_exists (savepath)) {
-        ret = utils_yes_no_dialog (_ ("The file already exists. Overwrite?"));
+        ret = utils_yes_no_dialog (_("The file already exists. Overwrite?"));
         if (GTK_RESPONSE_YES != ret) {
             g_free (savepath);
             return;

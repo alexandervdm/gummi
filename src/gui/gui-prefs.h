@@ -33,7 +33,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#define GU_PREFS_GUI (x) ( (GuPrefsGui*)x)
+#define GU_PREFS_GUI(x) ((GuPrefsGui*)x)
 typedef struct _GuPrefsGui GuPrefsGui;
 
 struct _GuPrefsGui {

@@ -34,7 +34,7 @@
 
 #include "latex.h"
 
-#define GU_BIBLIO (x) ( (GuBiblio*)x)
+#define GU_BIBLIO(x) ((GuBiblio*)x)
 typedef struct _GuBiblio GuBiblio;
 
 struct _GuBiblio {

@@ -90,7 +90,7 @@ void iofunctions_write_file (GuEditor* ec, const gchar* filename) {
     GError* err = NULL;
     GtkWidget* focus = NULL;
 
-    status = g_strdup_printf (_ ("Saving %s..."), filename);
+    status = g_strdup_printf (_("Saving %s..."), filename);
     statusbar_set_message (status);    
     g_free (status);
     
@@ -109,7 +109,7 @@ void iofunctions_write_file (GuEditor* ec, const gchar* filename) {
     }
         
     if (result == FALSE) {
-        slog (L_G_ERROR, _ ("%s\nPlease try again later."), err->message);
+        slog (L_G_ERROR, _("%s\nPlease try again later."), err->message);
         g_error_free (err);
     }
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
@@ -153,7 +153,7 @@ char* iofunctions_decode_text (gchar* text) {
         iconv_t cd = iconv_open ("UTF-8//IGNORE", "ISO−8859-1");
 
         if (-1 == iconv (cd, &text, &in_size, &process, &out_size)) {
-            slog (L_G_ERROR, _ ("Can not convert text to UTF-8!\n"));
+            slog (L_G_ERROR, _("Can not convert text to UTF-8!\n"));
             g_free (out);
             out = NULL;
         }
@@ -178,7 +178,7 @@ gchar* iofunctions_encode_text (gchar* text) {
 
 gboolean iofunctions_autosave_cb (gpointer name) {
     char* fname = (char*)name;
-    char* buf = g_strdup_printf (_ ("Autosaving file %s"), fname);
+    char* buf = g_strdup_printf (_("Autosaving file %s"), fname);
     if (fname) {
         iofunctions_write_file (gummi_get_active_editor (), fname);
         gtk_text_buffer_set_modified (

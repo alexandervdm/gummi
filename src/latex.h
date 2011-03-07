@@ -35,7 +35,7 @@
 #include "editor.h"
 #include "gui/gui-preview.h"
 
-#define GU_LATEX (x) ( (GuLatex*)x)
+#define GU_LATEX(x) ((GuLatex*)x)
 typedef struct _GuLatex GuLatex;
 
 struct _GuLatex {

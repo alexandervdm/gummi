@@ -35,7 +35,7 @@
 
 #define g_importgui gui->importgui
 
-#define GU_IMPORT_GUI (x) ( (GuImportGui*)x)
+#define GU_IMPORT_GUI(x) ((GuImportGui*)x)
 typedef struct _GuImportGui GuImportGui;
 
 struct _GuImportGui {

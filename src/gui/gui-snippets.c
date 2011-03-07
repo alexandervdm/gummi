@@ -299,7 +299,7 @@ gboolean on_tab_trigger_entry_focus_out_event (GtkEntry* entry, void* user) {
 
     if (index && index != s->current) {
         gtk_entry_set_text (entry, "");
-        slog (L_G_ERROR, _ ("Duplicate activation tab trigger dectected! Please "
+        slog (L_G_ERROR, _("Duplicate activation tab trigger dectected! Please "
                 "choose another one.\n"));
     } else {
         snippetsgui_update_snippet (gummi->snippets);
@@ -312,10 +312,10 @@ gboolean on_tab_trigger_entry_focus_out_event (GtkEntry* entry, void* user) {
 void on_accelerator_entry_focus_in_event (GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     if (!strlen (gtk_entry_get_text (s->accelerator_entry)))
-        gtk_entry_set_text (s->accelerator_entry, _ ("Type a new shortcut"));
+        gtk_entry_set_text (s->accelerator_entry, _("Type a new shortcut"));
     else
         gtk_entry_set_text (s->accelerator_entry,
-                _ ("Type a new shortcut, or press Backspace to clear"));
+                _("Type a new shortcut, or press Backspace to clear"));
 }
 
 void on_accelerator_entry_focus_out_event (GtkWidget* widget, void* user) {

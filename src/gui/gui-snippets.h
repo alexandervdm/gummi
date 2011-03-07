@@ -37,17 +37,17 @@
 
 /* Macro to execute function without trggering unwanted signals by setting
  * GuSnippetsGui::loading flag */
-#define SIG_SAFE (x) \
+#define SIG_SAFE(x) \
     do { \
-    s->loading = TRUE; \
-    x; \
-    s->loading = FALSE; \
+        s->loading = TRUE; \
+        x; \
+        s->loading = FALSE; \
     } while (0);
 
-#define return_if_sig_safe (x) \
+#define return_if_sig_safe(x) \
     if (s->loading) return x;
 
-#define GU_SNIPPETS_GUI (x) ( (GuSnippetsGui*)x)
+#define GU_SNIPPETS_GUI(x) ((GuSnippetsGui*)x)
 typedef struct _GuSnippetsGui GuSnippetsGui;
 
 struct _GuSnippetsGui {

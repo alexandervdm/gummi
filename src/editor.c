@@ -503,14 +503,14 @@ void editor_search_next (GuEditor* ec, gboolean inverse) {
     if (!ret) {
         if (ec->backwards ^ inverse) {
             response = utils_yes_no_dialog (
-                    _ ("Top reached, search from bottom?"));
+                    _("Top reached, search from bottom?"));
             if (GTK_RESPONSE_YES == response) {
                 gtk_text_buffer_place_cursor (ec_buffer, &end);
                 editor_search_next (ec, inverse);
             }
         } else {
             response = utils_yes_no_dialog (
-                    _ ("Bottom reached, search from top?"));
+                    _("Bottom reached, search from top?"));
             if (GTK_RESPONSE_YES == response) {
                 gtk_text_buffer_place_cursor (ec_buffer, &start);
                 editor_search_next (ec, inverse);

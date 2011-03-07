@@ -92,7 +92,7 @@ void slog (gint level, const gchar *fmt, ...) {
         GtkWidget* dialog;
 
         if (L_IS_TYPE (level, L_G_FATAL))
-            out = g_strdup_printf (_ ("%s has encountered a serious error and "
+            out = g_strdup_printf (_("%s has encountered a serious error and "
                         "will require a restart. Your working data will be "
                         "restored when you reload your document. Please "
                         "report bugs at: http://dev.midnightcoding.org"),
@@ -138,7 +138,7 @@ gint utils_yes_no_dialog (const gchar* message) {
                  GTK_BUTTONS_YES_NO,
                  "%s", message);
 
-    gtk_window_set_title (GTK_WINDOW (dialog), _ ("Confirmation"));
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Confirmation"));
     ret = gtk_dialog_run (GTK_DIALOG (dialog));      
     gtk_widget_destroy (dialog);
 

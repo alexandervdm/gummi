@@ -46,7 +46,7 @@
 #define g_e_buffer GTK_TEXT_BUFFER (gummi->editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (gummi->editor->view)
 
-#define GUMMI_GUI (x) ( (GummiGui*)x)
+#define GUMMI_GUI(x) ((GummiGui*)x)
 typedef struct _GummiGui GummiGui; 
 
 struct _GummiGui {

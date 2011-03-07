@@ -109,9 +109,9 @@ gboolean updatecheck (GtkWindow* parent) {
         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
         GTK_MESSAGE_INFO,
         GTK_BUTTONS_OK,
-        _ ("Currently installed:\n%s\n\nCurrently available:\n%s"),
+        _("Currently installed:\n%s\n\nCurrently available:\n%s"),
         PACKAGE_VERSION, avail_version);
-    gtk_window_set_title (GTK_WINDOW (dialog), _ ("Update Check"));
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Update Check"));
     gtk_dialog_run (GTK_DIALOG (dialog));      
     gtk_widget_destroy (dialog);
 

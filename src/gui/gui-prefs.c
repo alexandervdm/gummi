@@ -134,7 +134,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     ptr = strtok ((gchar*)pret.second, " \n");
     while (ptr) {
         GtkTreeIter iter;
-        if (ptr[0] != ' (') {
+        if (ptr[0] != '(') {
             gtk_list_store_append (p->list_languages, &iter);
             gtk_list_store_set (p->list_languages, &iter, 0, ptr, -1);
         }

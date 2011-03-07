@@ -164,7 +164,7 @@ void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
 
     if (0 != strlen (imagefile)) {
         if (!utils_path_exists (imagefile)) {
-            slog (L_G_ERROR, _ ("%s: No such file or directory\n"), imagefile);
+            slog (L_G_ERROR, _("%s: No such file or directory\n"), imagefile);
         } else {
             if (gummi->editor->filename)
                 root_path = g_path_get_dirname (gummi->editor->filename);

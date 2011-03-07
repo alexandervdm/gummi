@@ -84,7 +84,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
             
     //g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 
-    char* message = g_strdup_printf (_ ("PDF Preview could not initialize.\n\n"
+    char* message = g_strdup_printf (_("PDF Preview could not initialize.\n\n"
             "It appears your LaTeX document contains errors or\n"
             "the program `%s' was not installed.\n"
             "Additional information is available on the Error Output tab.\n"

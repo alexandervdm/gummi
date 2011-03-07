@@ -39,7 +39,7 @@
 #include "utils.h"
 
 /* Storing placeholders */
-#define GU_SNIPPET_EXPAND_INFO (x) ( (GuSnippetExpandInfo*)x)
+#define GU_SNIPPET_EXPAND_INFO(x) ((GuSnippetExpandInfo*)x)
 typedef struct _GuSnippetExpandInfo GuSnippetExpandInfo;
 
 struct _GuSnippetExpandInfo {
@@ -53,7 +53,7 @@ struct _GuSnippetExpandInfo {
 
 
 /* Storing single snippet info */
-#define GU_SNIPPET_INFO (x) ( (GuSnippetInfo*)x)
+#define GU_SNIPPET_INFO(x) ((GuSnippetInfo*)x)
 typedef struct _GuSnippetInfo GuSnippetInfo;
 
 struct _GuSnippetInfo {
@@ -72,7 +72,7 @@ struct _GuSnippetInfo {
 };
 
 
-#define GU_SNIPPETS (x) ( (GuSnippets*)x)
+#define GU_SNIPPETS(x) ((GuSnippets*)x)
 typedef struct _GuSnippets GuSnippets;
 
 struct _GuSnippets {

@@ -43,10 +43,10 @@
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 
-#define ec_buffer GTK_TEXT_BUFFER (ec->buffer)
-#define ec_view GTK_TEXT_VIEW (ec->view)
+#define ec_buffer GTK_TEXT_BUFFER(ec->buffer)
+#define ec_view GTK_TEXT_VIEW(ec->view)
 
-#define GU_EDITOR (x) ( (GuEditor*)x)
+#define GU_EDITOR(x) ((GuEditor*)x)
 typedef struct _GuEditor GuEditor;
 
 struct _GuEditor {
