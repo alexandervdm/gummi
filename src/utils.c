@@ -40,7 +40,7 @@
 #   include <sys/wait.h>
 #endif
 #ifndef WEXITSTATUS
-#   define WEXITSTATUS (stat_val) ( (unsigned int) (stat_val) >> 8)
+#   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
 
 #include <glib.h>
