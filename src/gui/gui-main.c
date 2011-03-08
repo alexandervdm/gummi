@@ -278,7 +278,7 @@ void gui_open_file (const gchar* filename) {
 
         ret = utils_yes_no_dialog (message);
         if (GTK_RESPONSE_YES == ret)
-            iofunctions_load_file (gummi->editor, prev_workfile); 
+            iofunctions_load_file (gummi->io, prev_workfile); 
         g_free (message);
     }
 
@@ -287,7 +287,7 @@ void gui_open_file (const gchar* filename) {
     g_free (prev_workfile);
 
     if (GTK_RESPONSE_YES != ret)
-        iofunctions_load_file (gummi->editor, filename); 
+        iofunctions_load_file (gummi->io, filename); 
 
     gui_new_environment (filename);
 }
@@ -314,7 +314,7 @@ void gui_save_file (gboolean saveas) {
             }
         } else goto cleanup;
     }
-    iofunctions_write_file (gummi->editor, filename);
+    iofunctions_save_file (gummi->io, filename);
 
     pdfname = g_strdup (filename);
     pdfname[strlen (pdfname) -4] = 0;
@@ -335,7 +335,7 @@ void on_menu_new_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     gui_new_environment (NULL);
-    iofunctions_load_default_text (gummi->editor);
+    iofunctions_load_default_text ();
 }
 
 void on_menu_template_activate (GtkWidget *widget, void * user) {

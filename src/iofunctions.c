@@ -43,19 +43,36 @@
 
 static guint sid = 0;
 
-void iofunctions_load_default_text (GuEditor* ec) {
+/* private functions */
+void iofunctions_real_load_file (GObject* hook, const gchar* filename);
+void iofunctions_real_save_file (GObject* hook, const gchar* filename);
+gchar* iofunctions_decode_text (gchar* text);
+gchar* iofunctions_encode_text (gchar* text);
+
+GuIOFunc* iofunctions_init (void) {
+  GuIOFunc* io = g_new0(GuIOFunc, 1);
+
+  io->sig_hook = g_object_new(G_TYPE_OBJECT, NULL);
+
+  /* Connect signals */
+  g_signal_connect (io->sig_hook, "document-load",
+      G_CALLBACK(iofunctions_real_load_file), NULL);
+  g_signal_connect (io->sig_hook, "document-write",
+      G_CALLBACK(iofunctions_real_save_file), NULL);
+
+  return io;
+}
+
+void iofunctions_load_default_text (void) {
+    GuEditor* ec = gummi_get_active_editor();
     gchar* str = g_strdup (config_get_value ("welcome"));
     editor_fill_buffer (ec, str);
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
     g_free (str);
 }
 
-void iofunctions_load_file (GuEditor* ec, const gchar* filename) {
-    GError* err = NULL;
+void iofunctions_load_file (GuIOFunc* io, const gchar* filename) {
     gchar* status;
-    gchar* text;
-    gchar* decoded;
-    gboolean result;
 
     slog (L_INFO, "loading %s ...\n", filename);
 
@@ -63,37 +80,55 @@ void iofunctions_load_file (GuEditor* ec, const gchar* filename) {
     status = g_strdup_printf ("Loading %s...", filename);
     statusbar_set_message (status);
     g_free (status);
-    
+
+    g_signal_emit_by_name (io->sig_hook, "document-load", filename);
+}
+
+void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
+    GError* err = NULL;
+    gchar* text;
+    gchar* decoded;
+    gboolean result;
+    GuEditor* ec = NULL;
+
+    ec = gummi_get_active_editor();
     /* get the file contents */
     if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
         g_error_free (err);
-        iofunctions_load_default_text (ec);
+        iofunctions_load_default_text ();
         goto cleanup;
     }
     if (NULL == (decoded = iofunctions_decode_text (text)))
         goto cleanup;
 
     editor_fill_buffer (ec, decoded);
-    gtk_text_buffer_set_modified (ec_buffer, FALSE);
+    gtk_text_buffer_set_modified (GTK_TEXT_BUFFER(ec->buffer), FALSE);
 
 cleanup:
     g_free (decoded);
     g_free (text); 
 }
 
-void iofunctions_write_file (GuEditor* ec, const gchar* filename) {
-    gboolean result;
-    gchar* encoded = NULL;
+void iofunctions_save_file (GuIOFunc* io, const gchar* filename) {
     gchar* status = NULL;
-    gchar* text = NULL;
-    GError* err = NULL;
-    GtkWidget* focus = NULL;
 
     status = g_strdup_printf (_("Saving %s..."), filename);
     statusbar_set_message (status);    
     g_free (status);
     
+    g_signal_emit_by_name (io->sig_hook, "document-write", filename);
+}
+
+void iofunctions_real_save_file (GObject* hook, const gchar* filename) {
+    gboolean result = FALSE;
+    gchar* encoded = NULL;
+    gchar* text = NULL;
+    GError* err = NULL;
+    GtkWidget* focus = NULL;
+    GuEditor* ec = NULL;
+
+    ec = gummi_get_active_editor();
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
     text = editor_grab_buffer (ec);
     gtk_widget_grab_focus (focus);
@@ -113,6 +148,7 @@ void iofunctions_write_file (GuEditor* ec, const gchar* filename) {
         g_error_free (err);
     }
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
+
     g_free (encoded);
     g_free (text); 
 }
@@ -180,7 +216,7 @@ gboolean iofunctions_autosave_cb (gpointer name) {
     char* fname = (char*)name;
     char* buf = g_strdup_printf (_("Autosaving file %s"), fname);
     if (fname) {
-        iofunctions_write_file (gummi_get_active_editor (), fname);
+        iofunctions_save_file (gummi_get_io(), fname);
         gtk_text_buffer_set_modified (
                 GTK_TEXT_BUFFER (gummi_get_active_editor ()->buffer),
                 FALSE);

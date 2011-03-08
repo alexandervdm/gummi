@@ -35,11 +35,12 @@
 Gummi* gummi = 0;
 GummiGui* gui = 0;
 
-Gummi* gummi_init (GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl, GuSnippets* snip) {
+Gummi* gummi_init (GList* eds, GuMotion* mo, GuIOFunc* io, GuLatex* latex,
+    GuBiblio* bib, GuTemplate* tpl, GuSnippets* snip) {
     Gummi* g = g_new0 (Gummi, 1);
     g->editors = eds;
     g->editor = g_list_first (eds)->data;
+    g->io = io;
     g->motion = mo;
     g->latex = latex;
     g->biblio = bib;
@@ -70,6 +71,10 @@ GList* gummi_get_editors (void) {
 
 GuEditor* gummi_get_active_editor (void) {
     return gummi->editor;
+}
+
+GuIOFunc* gummi_get_io (void) {
+    return gummi->io;
 }
 
 GuMotion* gummi_get_motion (void) {

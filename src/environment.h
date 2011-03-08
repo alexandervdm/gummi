@@ -95,6 +95,7 @@ struct _Gummi {
     /*< private >*/
     GList* editors;
     GuEditor* editor;
+    GuIOFunc* io;
     GuMotion* motion;
     GuLatex* latex;
     GuBiblio* biblio;
@@ -102,8 +103,8 @@ struct _Gummi {
     GuSnippets* snippets;
 };
 
-Gummi* gummi_init (GList* eds, GuMotion* mo, GuLatex* latex, GuBiblio* bib,
-        GuTemplate* tpl, GuSnippets* snip);
+Gummi* gummi_init (GList* eds, GuMotion* mo, GuIOFunc* io, GuLatex* latex,
+    GuBiblio* bib, GuTemplate* tpl, GuSnippets* snip);
 void gummi_new_environment (Gummi* gc, const gchar* filename);
 
 /**
@@ -114,6 +115,7 @@ void gummi_new_environment (Gummi* gc, const gchar* filename);
 GummiGui* gummi_get_gui (void);
 GList* gummi_get_editors (void);
 GuEditor* gummi_get_active_editor (void);
+GuIOFunc* gummi_get_io (void);
 GuMotion* gummi_get_motion (void);
 GuLatex* gummi_get_latex (void);
 GuBiblio* gummi_get_biblio (void);

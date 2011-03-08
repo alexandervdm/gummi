@@ -101,13 +101,14 @@ int main (int argc, char *argv[]) {
     GList* editors = NULL;
 
     GuMotion* motion = motion_init ();
+    GuIOFunc* io = iofunctions_init();
     GuLatex* latex = latex_init (); 
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
     GuEditor* editor = editor_init (motion);
     editors = g_list_append (editors, editor);
     GuSnippets* snippets = snippets_init (snippetsname);
-    gummi = gummi_init (editors, motion, latex, biblio, templ, snippets);
+    gummi = gummi_init (editors, motion, io, latex, biblio, templ, snippets);
     slog (L_DEBUG, "Gummi created!\n");
     g_free (snippetsname);
 
@@ -125,10 +126,10 @@ int main (int argc, char *argv[]) {
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
     if (argc != 2) {
-        iofunctions_load_default_text (editor);
+        iofunctions_load_default_text ();
         gui_new_environment (NULL);
     } else {
-        iofunctions_load_file (editor, argv[1]);
+        iofunctions_load_file (io, argv[1]);
         gui_new_environment (argv[1]);
     }
 
