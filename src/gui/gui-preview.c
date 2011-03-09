@@ -386,5 +386,6 @@ void previewgui_zoom_change (GtkWidget* widget, void* user) {
         gui->previewgui->page_scale = opts[index-2];
         gui->previewgui->page_zoommode = index;
     }
-    gtk_widget_queue_draw (gui->previewgui->drawarea);
+    previewgui_refresh(gui->previewgui);
+    //gtk_widget_queue_draw (gui->previewgui->drawarea);
 }
