@@ -667,6 +667,7 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
         "Brazilian-Portugese: Fernando Cruz\n"
         "Catalan: Marc Vinyals\n"
         "Chinese (Traditional): Wei-Ning Huang\n"
+        "Czech: Přemysl Janouch\n"
         "Danish: Jack Olsen\n"
         "Dutch: Alexander van der Mey\n"
         "French: Yvan Duron & Olivier Brousse\n"

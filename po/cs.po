@@ -1,0 +1,861 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gummi SVN700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-26 22:54+0800\n"
+"PO-Revision-Date: 2011-03-03 19:15+0100\n"
+"Last-Translator: Přemysl Janouch <p.janouch@gmail.com>\n"
+"Language-Team: Czech <p.janouch@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: ../data/gummi.glade.h:1
+msgid "        "
+msgstr "        "
+
+#: ../data/gummi.glade.h:2
+msgid "0"
+msgstr "0"
+
+#: ../data/gummi.glade.h:4
+#, no-c-format
+msgid "100%"
+msgstr "100 %"
+
+#: ../data/gummi.glade.h:6
+#, no-c-format
+msgid "125%"
+msgstr "125 %"
+
+#: ../data/gummi.glade.h:8
+#, no-c-format
+msgid "150%"
+msgstr "150 %"
+
+#: ../data/gummi.glade.h:10
+#, no-c-format
+msgid "200%"
+msgstr "200 %"
+
+#: ../data/gummi.glade.h:12
+#, no-c-format
+msgid "300%"
+msgstr "300 %"
+
+#: ../data/gummi.glade.h:14
+#, no-c-format
+msgid "400%"
+msgstr "400 %"
+
+#: ../data/gummi.glade.h:16
+#, no-c-format
+msgid "50%"
+msgstr "50 %"
+
+#: ../data/gummi.glade.h:18
+#, no-c-format
+msgid "70%"
+msgstr "70 %"
+
+#: ../data/gummi.glade.h:20
+#, no-c-format
+msgid "85%"
+msgstr "85 %"
+
+#: ../data/gummi.glade.h:21
+msgid "Align center"
+msgstr "Zarovnat na střed"
+
+#: ../data/gummi.glade.h:22
+msgid "Align left"
+msgstr "Zarovnat doleva"
+
+#: ../data/gummi.glade.h:23
+msgid "Align right"
+msgstr "Zarovnat doprava"
+
+#: ../data/gummi.glade.h:24
+msgid ""
+"Alignment of the\n"
+"cell content."
+msgstr ""
+"Zarovnání\n"
+"obsahu buňky."
+
+#: ../data/gummi.glade.h:26
+msgid "Best Fit"
+msgstr "Nejlepší přizpůsobení"
+
+#: ../data/gummi.glade.h:27
+msgid "Bibliography"
+msgstr "Bibliografie"
+
+#: ../data/gummi.glade.h:28
+msgid "Bold text"
+msgstr "Tučný text"
+
+#: ../data/gummi.glade.h:29
+msgid "Border all cells"
+msgstr "Rámeček u všech buněk"
+
+#: ../data/gummi.glade.h:30
+msgid "Border outline"
+msgstr "Vnější rámeček"
+
+#: ../data/gummi.glade.h:31
+msgid "Braces"
+msgstr "Složené závorky"
+
+#: ../data/gummi.glade.h:32
+msgid "Bracket:"
+msgstr "Závorky:"
+
+#: ../data/gummi.glade.h:33
+msgid "Brackets"
+msgstr "Hranaté závorky"
+
+#: ../data/gummi.glade.h:34
+msgid "Caption:"
+msgstr "Nadpis:"
+
+#: ../data/gummi.glade.h:35
+msgid "Center text"
+msgstr "Zarovnat text na střed"
+
+#: ../data/gummi.glade.h:36
+msgid "Check _Updates"
+msgstr "Ověřit _aktualizace"
+
+#: ../data/gummi.glade.h:37
+msgid "Columns:"
+msgstr "Sloupce:"
+
+#: ../data/gummi.glade.h:38
+msgid "Compile"
+msgstr "Zkompilovat"
+
+#: ../data/gummi.glade.h:39
+msgid ""
+"Compile LaTeX document\n"
+"and update preview."
+msgstr ""
+"Zkompilovat dokument LaTeX\n"
+"a aktualizovat náhled."
+
+#: ../data/gummi.glade.h:41
+msgid "Compile _PDF"
+msgstr "Zkompilovat _PDF"
+
+#: ../data/gummi.glade.h:42
+msgid ""
+"Compile the active \n"
+"bibliography database"
+msgstr ""
+"Zkompilovat aktivní\n"
+"databází bibliografie"
+
+#: ../data/gummi.glade.h:44
+msgid "Create a new document"
+msgstr "Vytvořit nový dokument"
+
+#: ../data/gummi.glade.h:45
+msgid "Create new document from template.."
+msgstr "Vytvořit nový dokument ze šablony..."
+
+#: ../data/gummi.glade.h:46
+msgid "Deletes the selected template"
+msgstr "Smaže vybranou šablonu"
+
+#: ../data/gummi.glade.h:47
+msgid ""
+"Detect mention of a bibtex\n"
+"file in the current document"
+msgstr ""
+"Zjišťovat zmínku o souboru\n"
+"bibtex v současném dokumentu"
+
+#: ../data/gummi.glade.h:49
+msgid ""
+"Determines whether the\n"
+"cells have line borders. "
+msgstr ""
+"Určuje, zda buňky\n"
+"mají rámečky."
+
+#: ../data/gummi.glade.h:51
+msgid "Double line"
+msgstr "Dvojitá čára"
+
+#: ../data/gummi.glade.h:52
+msgid "Error output"
+msgstr "Chybový výstup"
+
+#: ../data/gummi.glade.h:53
+msgid ""
+"Error status for\n"
+"active document"
+msgstr ""
+"Chybový stav\n"
+"aktivního dokumentu"
+
+#: ../data/gummi.glade.h:55
+msgid "File:"
+msgstr "Soubor:"
+
+#: ../data/gummi.glade.h:56
+msgid "Filename:"
+msgstr "Název souboru:"
+
+#: ../data/gummi.glade.h:57
+msgid "Find"
+msgstr "Hledat"
+
+#: ../data/gummi.glade.h:58
+msgid "Find Ne_xt"
+msgstr "Najít _další"
+
+#: ../data/gummi.glade.h:59
+msgid "Find Pre_vious"
+msgstr "Najít _předchozí"
+
+#: ../data/gummi.glade.h:60
+msgid "Fit Page Width"
+msgstr "Přizpůsobit šířce stránky"
+
+#: ../data/gummi.glade.h:61
+msgid "Gummi - LaTeX Editor"
+msgstr "Gummi - Editor pro LaTeX"
+
+#: ../data/gummi.glade.h:62
+msgid "Hello svn user!"
+msgstr "Zdravím tě, uživateli svn!"
+
+#: ../data/gummi.glade.h:63
+msgid "Image"
+msgstr "Obrázek"
+
+#: ../data/gummi.glade.h:64
+msgid "Italic text"
+msgstr "Kurzíva"
+
+#: ../data/gummi.glade.h:65
+msgid "Label:"
+msgstr "Návěstí:"
+
+#: ../data/gummi.glade.h:66
+msgid "Load a file"
+msgstr "Nahrát soubor"
+
+#: ../data/gummi.glade.h:67
+msgid ""
+"Make a template from the \n"
+"current active document."
+msgstr ""
+"Vytvořit šablonu\n"
+"z aktivního dokumentu."
+
+#: ../data/gummi.glade.h:69
+msgid "Match case"
+msgstr "Rozlišovat velikost písmen"
+
+#: ../data/gummi.glade.h:70
+msgid "Match entire word only"
+msgstr "Hledat pouze celá slova"
+
+#: ../data/gummi.glade.h:71
+msgid "Matrix"
+msgstr "Matice"
+
+#: ../data/gummi.glade.h:72
+#: ../src/gui/gui-main.c:852
+msgid "N/A"
+msgstr "nelze aplikovat"
+
+#: ../data/gummi.glade.h:73
+msgid "New from _Template"
+msgstr "Nový ze _šablony"
+
+#: ../data/gummi.glade.h:74
+msgid "Next"
+msgstr "Další"
+
+#: ../data/gummi.glade.h:75
+msgid "No borders"
+msgstr "Bez rámečků"
+
+#: ../data/gummi.glade.h:76
+msgid "Open"
+msgstr "Otevřít"
+
+#: ../data/gummi.glade.h:77
+msgid "Open the selected template"
+msgstr "Otevřít vybranou šablonu"
+
+#: ../data/gummi.glade.h:78
+msgid "Parentheses"
+msgstr "Kulaté závorky"
+
+#: ../data/gummi.glade.h:79
+msgid "Pause updating the preview pane."
+msgstr "Pozastavit aktualizaci panelu s náhledy."
+
+#: ../data/gummi.glade.h:80
+msgid "Preview Pane"
+msgstr "Náhled"
+
+#: ../data/gummi.glade.h:81
+msgid "Previous"
+msgstr "Předchozí"
+
+#: ../data/gummi.glade.h:82
+msgid "References:"
+msgstr "Odkazy:"
+
+#: ../data/gummi.glade.h:83
+msgid "Replace _All"
+msgstr "Nahradit _vše"
+
+#: ../data/gummi.glade.h:84
+msgid "Replace with:"
+msgstr "Nahradit čím:"
+
+#: ../data/gummi.glade.h:85
+msgid "Rows:"
+msgstr "Řádky:"
+
+#: ../data/gummi.glade.h:86
+msgid "Save"
+msgstr "Uložit"
+
+#: ../data/gummi.glade.h:87
+msgid "Save _As..."
+msgstr "Uložit _jako..."
+
+#: ../data/gummi.glade.h:88
+msgid "Save the current file"
+msgstr "Uložit současný soubor"
+
+#: ../data/gummi.glade.h:89
+msgid "Scale:"
+msgstr "Měřítko:"
+
+#: ../data/gummi.glade.h:90
+msgid "Search backwards"
+msgstr "Hledat odzadu"
+
+#: ../data/gummi.glade.h:91
+msgid "Search for:"
+msgstr "Co hledat:"
+
+#: ../data/gummi.glade.h:92
+msgid "Single line"
+msgstr "Jediný řádek"
+
+#: ../data/gummi.glade.h:93
+msgid "Table"
+msgstr "Tabulka"
+
+#: ../data/gummi.glade.h:94
+msgid "Unbracketed"
+msgstr "Neozávorkovaný"
+
+#: ../data/gummi.glade.h:95
+msgid "Underline text"
+msgstr "Podtržený text"
+
+#: ../data/gummi.glade.h:96
+msgid "_Autocheck Spelling"
+msgstr "_Automaticky ověřovat pravopis"
+
+#: ../data/gummi.glade.h:97
+msgid "_Compile Bibliography"
+msgstr "_Zkompilovat bibliografii"
+
+#: ../data/gummi.glade.h:98
+msgid "_Document Statistics"
+msgstr "Statistiky _dokumentu"
+
+#: ../data/gummi.glade.h:99
+msgid "_Edit"
+msgstr "_Úpravy"
+
+#: ../data/gummi.glade.h:100
+msgid "_Export to PDF"
+msgstr "_Exportovat do PDF"
+
+#: ../data/gummi.glade.h:101
+msgid "_File"
+msgstr "_Soubor"
+
+#: ../data/gummi.glade.h:102
+msgid "_Fullscreen"
+msgstr "_Celá obrazovka"
+
+#: ../data/gummi.glade.h:103
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: ../data/gummi.glade.h:104
+msgid "_Insert Bibliography"
+msgstr "_Vložit bibliografii"
+
+#: ../data/gummi.glade.h:105
+msgid "_Open..."
+msgstr "_Otevřít..."
+
+#: ../data/gummi.glade.h:106
+msgid "_Replace"
+msgstr "_Nahradit"
+
+#: ../data/gummi.glade.h:107
+msgid "_Right Pane"
+msgstr "_Pravý panel"
+
+#: ../data/gummi.glade.h:108
+msgid "_Search"
+msgstr "_Hledat"
+
+#: ../data/gummi.glade.h:109
+msgid "_Statusbar"
+msgstr "_Stavový řádek"
+
+#: ../data/gummi.glade.h:110
+msgid "_Toolbar"
+msgstr "_Panel nástrojů"
+
+#: ../data/gummi.glade.h:111
+msgid "_Tools"
+msgstr "_Nástroje"
+
+#: ../data/gummi.glade.h:112
+msgid "_View"
+msgstr "_Zobrazení"
+
+#: ../data/gummi.glade.h:113
+msgid "filter:"
+msgstr "filtr:"
+
+#: ../data/gummi.glade.h:114
+#: ../src/gui/gui-main.c:850
+msgid "no bibliography file detected"
+msgstr "nenalezen žádný soubor s bibliografií"
+
+#: ../data/gummi.glade.h:115
+#: ../src/gui/gui-main.c:851
+msgid "none"
+msgstr "žádný"
+
+#: ../data/gummi.glade.h:116
+msgid "of 0"
+msgstr "z 0"
+
+#: ../data/gummi.glade.h:117
+msgid "shouldnotseeme"
+msgstr "shouldnotseeme"
+
+#: ../data/gummi.glade.h:118
+msgid "toolbutton1"
+msgstr "toolbutton1"
+
+#: ../data/gummi.glade.h:119
+msgid "toolbutton2"
+msgstr "toolbutton2"
+
+#: ../data/gummi.glade.h:120
+msgid "toolbutton3"
+msgstr "toolbutton3"
+
+#: ../data/gummi.glade.h:121
+msgid "toolbutton5"
+msgstr "toolbutton5"
+
+#: ../data/gummi.glade.h:122
+msgid "toolbutton6"
+msgstr "toolbutton6"
+
+#: ../data/gummi.glade.h:123
+msgid "toolbutton7"
+msgstr "toolbutton7"
+
+#: ../data/prefs.glade.h:1
+msgid "   "
+msgstr "   "
+
+#: ../data/prefs.glade.h:2
+msgid "Automatic Indentation"
+msgstr "Automatické odsazování"
+
+#: ../data/prefs.glade.h:3
+msgid "Color Scheme"
+msgstr "Barevné schéma"
+
+#: ../data/prefs.glade.h:4
+msgid "Command: "
+msgstr "Příkaz: "
+
+#: ../data/prefs.glade.h:5
+msgid "Configure snippets"
+msgstr "Konfigurace výstřižků"
+
+#: ../data/prefs.glade.h:6
+msgid "Customize"
+msgstr "Přizpůsobit"
+
+#: ../data/prefs.glade.h:7
+msgid "Default Text"
+msgstr "Výchozí text"
+
+#: ../data/prefs.glade.h:8
+msgid "Display line numbers"
+msgstr "Zobrazit čísla řádků"
+
+#: ../data/prefs.glade.h:9
+msgid "Do not split words over two lines"
+msgstr "Nedělit slova přes dva řádky"
+
+#: ../data/prefs.glade.h:10
+msgid "Editor"
+msgstr "Editor"
+
+#: ../data/prefs.glade.h:11
+msgid "Editor font"
+msgstr "Font editoru"
+
+#: ../data/prefs.glade.h:12
+msgid "Enable text wrapping"
+msgstr "Povolit zalamování textu"
+
+#: ../data/prefs.glade.h:13
+msgid "Extra flags:"
+msgstr "Další parametry:"
+
+#: ../data/prefs.glade.h:14
+msgid "File saving"
+msgstr "Ukládání souborů"
+
+#: ../data/prefs.glade.h:15
+msgid "Font & Colors"
+msgstr "Fonty a barvy"
+
+#: ../data/prefs.glade.h:16
+msgid "Gummi Preferences"
+msgstr "Nastavení Gummi"
+
+#: ../data/prefs.glade.h:17
+msgid "Highlight current line"
+msgstr "Zvýraznit současný řádek"
+
+#: ../data/prefs.glade.h:18
+msgid "Highlighting"
+msgstr "Zvýrazňování"
+
+#: ../data/prefs.glade.h:19
+msgid "Insert _spaces instead of tabs"
+msgstr "Vkládat _mezery namísto tabulátorů"
+
+#: ../data/prefs.glade.h:20
+msgid "Line numbers"
+msgstr "Čísla řádků"
+
+#: ../data/prefs.glade.h:21
+msgid "Miscellaneous"
+msgstr "Smíšené"
+
+#: ../data/prefs.glade.h:22
+msgid "None"
+msgstr "Žádný"
+
+#: ../data/prefs.glade.h:23
+msgid "PDF Compiling"
+msgstr "Kompilace PDF"
+
+#: ../data/prefs.glade.h:24
+msgid "Snippets"
+msgstr "Výstřižky"
+
+#: ../data/prefs.glade.h:25
+msgid "Spell check language"
+msgstr "Jazyk pro kontrolu pravopisu"
+
+#: ../data/prefs.glade.h:26
+msgid "Tab stops"
+msgstr "Tabulátory"
+
+#: ../data/prefs.glade.h:27
+msgid "Tab width:"
+msgstr "Šířka tabulátoru:"
+
+#: ../data/prefs.glade.h:28
+msgid "Text wrapping"
+msgstr "Zalamování textu"
+
+#: ../data/prefs.glade.h:29
+msgid "Typesetter command"
+msgstr "Příkaz pro sázecí program"
+
+#: ../data/prefs.glade.h:30
+msgid "View"
+msgstr "Zobrazení"
+
+#: ../data/prefs.glade.h:31
+msgid "_Autosave files every"
+msgstr "_Uložit každých"
+
+#: ../data/prefs.glade.h:32
+msgid "_Enable automatic indentation"
+msgstr "_Povolit automatické odsazování"
+
+#: ../data/prefs.glade.h:33
+msgid "_Reset defaults"
+msgstr "_Obnovit výchozí hodnoty"
+
+#: ../data/prefs.glade.h:34
+msgid "compile every"
+msgstr "kompilovat každých"
+
+#: ../data/prefs.glade.h:35
+msgid "compile when idle for "
+msgstr "kompilovat při nečinnosti po "
+
+#: ../data/prefs.glade.h:36
+msgid "minutes"
+msgstr "minut"
+
+#: ../data/prefs.glade.h:37
+msgid "pdflatex"
+msgstr "pdflatex"
+
+#: ../data/prefs.glade.h:38
+msgid "seconds"
+msgstr "sekund"
+
+#: ../data/prefs.glade.h:39
+msgid "xelatex"
+msgstr "xelatex"
+
+#: ../data/snippets.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../data/snippets.glade.h:2
+msgid "Activation"
+msgstr "Aktivace"
+
+#: ../data/snippets.glade.h:3
+msgid "Edit:"
+msgstr "Upravit:"
+
+#: ../data/snippets.glade.h:4
+msgid "Reset all snippets"
+msgstr "Vrát nastavení všech výstřižků"
+
+#: ../data/snippets.glade.h:5
+msgid "Shortcut key:"
+msgstr "Klávesová zkratka:"
+
+#: ../data/snippets.glade.h:6
+msgid "Snippets Manager"
+msgstr "Správce výstřižků"
+
+#: ../data/snippets.glade.h:7
+msgid "Snippets:"
+msgstr "Výstřižky"
+
+#: ../data/snippets.glade.h:8
+msgid "Tab trigger:"
+msgstr "Vyvolat pomocí:"
+
+#: ../data/snippets.glade.h:9
+msgid "_Reset"
+msgstr "_Vrátit nastavení"
+
+#: ../src/editor.c:506
+msgid "Top reached, search from bottom?"
+msgstr "Dosažen začátek, hledat od konce?"
+
+#: ../src/editor.c:513
+msgid "Bottom reached, search from top?"
+msgstr "Dosažen konec, hledat od začátku?"
+
+#: ../src/iofunctions.c:94
+#, c-format
+msgid "Saving %s..."
+msgstr "Ukládám %s..."
+
+#: ../src/iofunctions.c:111
+#, c-format
+msgid ""
+"%s\n"
+"Please try again later."
+msgstr ""
+"%s\n"
+"Zkuste to, prosím, znovu."
+
+#: ../src/iofunctions.c:155
+msgid "Can not convert text to UTF-8!\n"
+msgstr "Nemohu převést text na UTF-8!\n"
+
+#: ../src/iofunctions.c:180
+#, c-format
+msgid "Autosaving file %s"
+msgstr "Automaticky ukládám soubor %s"
+
+#: ../src/latex.c:172
+#: ../src/gui/gui-main.c:378
+#: ../src/gui/gui-main.c:406
+msgid "The file already exists. Overwrite?"
+msgstr "Soubor již existuje. Přepsat?"
+
+#: ../src/updatecheck.c:112
+#, c-format
+msgid ""
+"Currently installed:\n"
+"%s\n"
+"\n"
+"Currently available:\n"
+"%s"
+msgstr ""
+"Nyní nainstalovaná:\n"
+"%s\n"
+"\n"
+"Nyní dostupná:\n"
+"%s"
+
+#: ../src/updatecheck.c:114
+msgid "Update Check"
+msgstr "Ověřit aktualizace"
+
+#: ../src/utils.c:90
+#, c-format
+msgid "%s has encountered a serious error and will require a restart. Your working data will be restored when you reload your document. Please report bugs at: http://dev.midnightcoding.org"
+msgstr "%s zaznamenal vážnou chybu a bude vyžadovat opětovné spuštění. Data, se kterými jste pracovali, budou obnovena, až znovu otevřene vaše dokumenty. Chyby, prosím, hlaště na: http://dev.midnightcoding.org"
+
+#: ../src/utils.c:136
+msgid "Confirmation"
+msgstr "Potvrzení"
+
+#: ../src/gui/gui-import.c:167
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr "%s: Není soubor nebo adresář\n"
+
+#: ../src/gui/gui-main.c:331
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "Chyba při otevírání nedávného souboru: %s"
+
+#: ../src/gui/gui-main.c:553
+msgid "Words in text"
+msgstr "Slova v textu"
+
+#: ../src/gui/gui-main.c:554
+msgid "Words in headers"
+msgstr "Slova v hlavičkách"
+
+#: ../src/gui/gui-main.c:555
+msgid "Words in float captions"
+msgstr "Slova v plovoucích nadpisech"
+
+#: ../src/gui/gui-main.c:556
+msgid "Number of headers"
+msgstr "Počet hlaviček"
+
+#: ../src/gui/gui-main.c:557
+msgid "Number of floats"
+msgstr "Počet plovoucích elementů"
+
+#: ../src/gui/gui-main.c:558
+msgid "Number of math inlines"
+msgstr "Počet vložených vzorců"
+
+#: ../src/gui/gui-main.c:559
+msgid "Number of math displayed"
+msgstr "Počet zobrazených vzorců"
+
+#: ../src/gui/gui-main.c:620
+msgid ""
+"This function requires\n"
+"the texcount program.\n"
+msgstr ""
+"Tato funkce vyžaduje\n"
+"program texcount.\n"
+
+#: ../src/gui/gui-main.c:628
+msgid "Document Statistics"
+msgstr "Statistiky dokumentu"
+
+#: ../src/gui/gui-main.c:807
+msgid "Compiling bibliography file..."
+msgstr "Kompiluji soubor s bibliografií..."
+
+#: ../src/gui/gui-main.c:809
+msgid "bibliography compiled without errors"
+msgstr "bibliografie se zkompilována bez chyb"
+
+#: ../src/gui/gui-main.c:811
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Chyba při kompilaci souboru s bibliografií nebo nebyl žádný nalezen..."
+
+#: ../src/gui/gui-main.c:814
+msgid "error compiling bibliography file"
+msgstr "chyba při kompilaci souboru s bibliografií"
+
+#: ../src/gui/gui-main.c:843
+#, c-format
+msgid "%s loaded"
+msgstr "%s nahráno"
+
+#: ../src/gui/gui-main.c:883
+msgid "Do you want to save the changes you have made?"
+msgstr "Chcete uložit změny, které jste provedli?"
+
+#: ../src/gui/gui-main.c:893
+msgid "Open LaTeX document"
+msgstr "Otevřít dokument LaTeX"
+
+#: ../src/gui/gui-main.c:896
+msgid "Select an image to insert"
+msgstr "Vyberte obrázek pro vložení"
+
+#: ../src/gui/gui-main.c:897
+msgid "Select bibliography file"
+msgstr "Vyberte soubor s bibliografií"
+
+#: ../src/gui/gui-main.c:931
+msgid "Save LaTeX document"
+msgstr "Uložit dokument LaTeX"
+
+#: ../src/gui/gui-main.c:932
+msgid "Save as LaTeX document"
+msgstr "Uložit jako dokument LaTeX"
+
+#: ../src/gui/gui-main.c:933
+msgid "Export to PDF"
+msgstr "Exportovat do PDF"
+
+#. g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
+#: ../src/gui/gui-preview.c:83
+#, c-format
+msgid ""
+"PDF Preview could not initialize.\n"
+"\n"
+"It appears your LaTeX document contains errors or\n"
+"the program `%s' was not installed.\n"
+"Additional information is available on the Error Output tab.\n"
+"Please correct the listed errors to restore preview."
+msgstr ""
+"Nepodařilo se inicializovat náhledy PDF.\n"
+"\n"
+"Zdá se, že váš dokument LaTeX obsahuje chyby nebo\n"
+"nebyl nainstalován program \"%s\".\n"
+"Další informace jsou dostupné na záložce Chybový výstup.\n"
+"Opravte, prosím, vypsané chyby pro obnovení náhledů."
+
+#: ../src/gui/gui-snippets.c:270
+#: ../src/gui/gui-snippets.c:276
+msgid "Type a new shortcut"
+msgstr "Zadejte novou zkratku"
+
