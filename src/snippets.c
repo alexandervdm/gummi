@@ -323,7 +323,7 @@ GuSnippetInfo* snippets_parse (char* snippet) {
     gchar** result = NULL;
     GRegex* regex = NULL;
     GMatchInfo* match_info = NULL;
-    const gchar* holders[] = { "\\$ ([0-9]+)", "\\${ ([0-9]*):? ([^}]*)}" };
+    const gchar* holders[] = { "\\$([0-9]+)", "\\${([0-9]*):?([^}]*)}" };
 
     GuSnippetInfo* info = snippet_info_new (snippet);
 
