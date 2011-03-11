@@ -115,7 +115,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
         GRegex* match_str = NULL;
         GMatchInfo* match_info;
 
-        if (! (match_str = g_regex_new (": (\\d+):", G_REGEX_DOTALL, 0, &err))) {
+        if (! (match_str = g_regex_new (":(\\d+):", G_REGEX_DOTALL, 0, &err))) {
             slog (L_ERROR, "g_regex_new (): %s\n", err->message);
             g_error_free (err);
             return;

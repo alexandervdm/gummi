@@ -65,7 +65,7 @@ gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec) {
     gboolean state = FALSE;
     
     content = editor_grab_buffer (ec);
-    bib_regex = g_regex_new ("\\\\bibliography{\\s* ([^{}\\s]*)\\s*}", 0,0,NULL);
+    bib_regex = g_regex_new ("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match (bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all (match_info);
         if (result[1]) {
@@ -136,14 +136,14 @@ int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
     GMatchInfo *match_entry; 
     
     regex_entry = g_regex_new (
-        " (@article|@book|@booklet|@conference|@inbook|@incollection|"
+        "(@article|@book|@booklet|@conference|@inbook|@incollection|"
         "@inproceedings|@manual|@mastersthesis|@misc|@phdthesis|"
-        "@proceedings|@techreport|@unpublished) ([^@]*)", 
+        "@proceedings|@techreport|@unpublished)([^@]*)", 
         (G_REGEX_CASELESS | G_REGEX_DOTALL), 0, NULL);
       
     subregex_ident = g_regex_new ("@.+{ ([^,]+),", 0, 0, NULL);
-    subregex_title = g_regex_new ("[^book]title[\\s]*=[\\s]* (.*)", 0, 0, NULL);
-    subregex_author = g_regex_new ("author[\\s]*=[\\s]* (.*)", 0, 0, NULL);
+    subregex_title = g_regex_new ("[^book]title[\\s]*=[\\s]*(.*)", 0, 0, NULL);
+    subregex_author = g_regex_new ("author[\\s]*=[\\s]*(.*)", 0, 0, NULL);
     subregex_year = g_regex_new ("year[\\s]*=[\\s]*[{|\"]? ([1|2][0-9]{3})", 0,
             0, NULL);
     regex_formatting = g_regex_new ("[{|}|\"|,|\\$]", 0, 0, NULL);
