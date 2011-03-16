@@ -151,7 +151,12 @@ void previewgui_refresh (GuPreviewGui* pc) {
     previewgui_cleanup_fds (pc);
 
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
-    g_return_if_fail (pc->doc != NULL);
+
+    // release mutex and return when poppler doc is damaged or missing
+    if (pc->doc == NULL) {
+        g_mutex_unlock (gummi->motion->compile_mutex);
+        return;
+    }
     
     /* recheck document dimensions on refresh for orientation changes */
     pc->page_total = poppler_document_get_n_pages (pc->doc);
