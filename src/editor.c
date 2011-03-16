@@ -50,7 +50,7 @@
 
 const gchar style[][3][20] = {
     { "tool_bold", "\\textbf{", "}" },
-    { "tool_italic", "\\textit{", "}" },
+    { "tool_italic", "\\emph{", "}" },
     { "tool_unline", "\\underline{", "}" },
     { "tool_left", "\\begin{flushleft}", "\\end{flushleft}"},
     { "tool_center", "\\begin{center}", "\\end{center}"},
