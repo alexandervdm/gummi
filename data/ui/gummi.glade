@@ -513,7 +513,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menu_pdfcompile">
-                        <property name="label" translatable="yes">Compile _PDF</property>
+                        <property name="label" translatable="yes">Compile _Document</property>
                         <property name="visible">True</property>
                         <property name="tooltip_text" translatable="yes">Compile LaTeX document
 and update preview.</property>
@@ -531,7 +531,7 @@ and update preview.</property>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menu_docstat">
-                        <property name="label" translatable="yes">_Document Statistics</property>
+                        <property name="label" translatable="yes">Document _Statistics</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="image">image6</property>
@@ -547,9 +547,16 @@ and update preview.</property>
                     <child>
                       <object class="GtkCheckMenuItem" id="menu_spelling">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">_Autocheck Spelling</property>
+                        <property name="label" translatable="yes">Enable S_pellchecking</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_menu_spelling_toggled"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_snippets">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Enable S_nippets</property>
+                        <property name="use_underline">True</property>
                       </object>
                     </child>
                   </object>
@@ -1471,9 +1478,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
