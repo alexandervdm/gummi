@@ -655,7 +655,7 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
         config_set_value ("snippets", "True");
     } else {
         printf("snippets deactivated\n");
-        snippets_deactivate(gummi->snippets, gummi->editor);
+        //snippets_deactivate(gummi->snippets, gummi->editor);
         config_set_value ("snippets", "False");
     }
 }
