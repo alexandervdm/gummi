@@ -2,12 +2,12 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
-Gummi 0.5.8 (March xxth, 2011):
+Gummi 0.5.8 (March 17th, 2011):
 
 	Bugs fixed:
 	* PDF latency when document is scrolled fixed
 	* Fixed gui hanging issues in certain situations
-	* Fixed compability with Bibtex 0.99d (texlive 2010)
+	* Fixed compatibility with Bibtex 0.99d (texlive 2010)
 	* Updated glade files for compability with new releases
 	* Better detection for damaged or incomplete pdf files
 	* Replaced textit with emph for italic toolbar function
@@ -15,7 +15,7 @@ Gummi 0.5.8 (March xxth, 2011):
 	* High resolution gummi icon
 
 	Features added:
-	* LaTeX compilation is now a threaded proces 
+	* LaTeX compilation is now a threaded process
 	* Implemented Snippets interface
 	* Automatic export of the PDF file on document save
 	* Added German, Spanish, Polish and Czech translations
