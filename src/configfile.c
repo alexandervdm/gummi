@@ -61,6 +61,7 @@ const gchar config_str[] =
 "autoindentation = True\n"
 "style_scheme = classic\n"
 "spelling = False\n"
+"snippets = True\n"
 "toolbar = True\n"
 "statusbar = True\n"
 "rightpane = True\n"

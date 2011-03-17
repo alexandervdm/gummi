@@ -52,7 +52,10 @@ GuSnippets* snippets_init (const gchar* filename) {
 
     s->filename = g_strdup (filename);
     s->accel_group = gtk_accel_group_new ();
-    snippets_load (s);
+    
+    if (config_get_value("snippets")) {
+        snippets_load (s);
+    }
     return s;
 }
 

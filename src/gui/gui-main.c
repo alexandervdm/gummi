@@ -80,6 +80,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_text_view_get_buffer (GTK_TEXT_VIEW (errortext));
     g->menu_spelling =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_spelling"));
+    g->menu_snippets =
+        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_snippets"));
     g->menu_toolbar =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_toolbar"));
     g->menu_statusbar =
@@ -135,6 +137,10 @@ GummiGui* gui_init (GtkBuilder* builder) {
     if (config_get_value ("spelling"))
         gtk_check_menu_item_set_active (g->menu_spelling, TRUE);
 #endif
+    if (config_get_value ("snippets")) {
+        gtk_check_menu_item_set_active (g->menu_snippets, TRUE);
+        gtk_widget_show (GTK_WIDGET (g->menu_snippets));
+    }
     if (config_get_value ("toolbar")) {
         gtk_check_menu_item_set_active (g->menu_toolbar, TRUE);
         gtk_widget_show (GTK_WIDGET (g->toolbar));
@@ -641,6 +647,17 @@ void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
         config_set_value ("spelling", "False");
     }
 #endif
+}
+
+void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
+    if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
+        printf("snippets activated\n");
+        config_set_value ("snippets", "True");
+    } else {
+        printf("snippets deactivated\n");
+        snippets_deactivate(gummi->snippets, gummi->editor);
+        config_set_value ("snippets", "False");
+    }
 }
 
 void on_menu_update_activate (GtkWidget *widget, void * user) {

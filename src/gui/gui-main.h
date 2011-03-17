@@ -64,6 +64,7 @@ struct _GummiGui {
     GtkStatusbar *statusbar;
     GtkToggleToolButton* previewoff;
     GtkCheckMenuItem* menu_spelling;
+    GtkCheckMenuItem* menu_snippets;
     GtkCheckMenuItem* menu_toolbar;
     GtkCheckMenuItem* menu_statusbar;
     GtkCheckMenuItem* menu_rightpane;
