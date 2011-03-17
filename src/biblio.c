@@ -98,9 +98,10 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
     if (g_find_program_in_path ("bibtex")) {
         gboolean success = FALSE;
         char* command = g_strdup_printf ("cd \"%s\";"
-                                         "bibtex \"%s\"",
+                                         "env openout_any=a bibtex \"%s\"",
                                          dirname,
                                          auxname);
+                                         
         g_free (auxname);
         latex_update_workfile (lc, ec);
         latex_update_auxfile (lc, ec);
