@@ -651,11 +651,10 @@ void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 
 void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
-        printf("snippets activated\n");
+        slog(L_INFO, "snippets activated\n");
         config_set_value ("snippets", "True");
     } else {
-        printf("snippets deactivated\n");
-        //snippets_deactivate(gummi->snippets, gummi->editor);
+        slog(L_INFO, "snippets deactivated\n");
         config_set_value ("snippets", "False");
     }
 }

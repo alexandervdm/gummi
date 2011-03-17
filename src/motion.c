@@ -143,7 +143,8 @@ void motion_stop_timer (GuMotion* mc) {
 
 gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     motion_stop_timer (GU_MOTION (user));
-    if (snippets_key_press_cb (gummi_get_snippets (),
+    if (config_get_value("snippets") && 
+        snippets_key_press_cb (gummi_get_snippets (),
                                gummi_get_active_editor (), event))
         return TRUE;
     return FALSE;
@@ -151,7 +152,8 @@ gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
 
 gboolean on_key_release_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     motion_start_timer (GU_MOTION (user));
-    if (snippets_key_release_cb (gummi_get_snippets (),
+    if (config_get_value("snippets") && 
+        snippets_key_release_cb (gummi_get_snippets (),
                                  gummi_get_active_editor (), event))
         return TRUE;
     return FALSE;
