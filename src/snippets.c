@@ -104,7 +104,7 @@ void snippets_load (GuSnippets* sc) {
     while (fgets (buf, BUFSIZ, fh)) {
         buf[strlen (buf) -1] = 0; /* remove trailing '\n' */
         if (buf[0] != '\t') {
-            if ('#' == buf[0]) {
+            if ('#' == buf[0] || !strlen(buf)) {
                 current->first = g_strdup (buf);
             } else {
                 seg = strstr (buf, " ") + 1;

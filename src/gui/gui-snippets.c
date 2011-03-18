@@ -124,12 +124,12 @@ void snippetsgui_load_snippets (GuSnippetsGui* s) {
 
     gtk_list_store_clear (s->list_snippets);
     while (current) {
-        if (current->first[0] != '#') {
+        if (current->first[0] != '#' && strlen(current->first)) {
             gtk_list_store_append (s->list_snippets, &iter);
             configs = g_strsplit (current->first, ",", 0);
             gtk_list_store_set (s->list_snippets, &iter, 0, configs[2],
-                                                        1, configs[0],
-                                                        2, configs[1], -1);
+                                                         1, configs[0],
+                                                         2, configs[1], -1);
             g_strfreev (configs);
         }
         current = current->next;
@@ -167,10 +167,10 @@ void snippetsgui_update_snippet (GuSnippets* sc) {
     gtk_tree_selection_get_selected (selection, &model, &iter);
 
     g_free (target->first);
-    target->first = g_strdup_printf ("%s,%s,%s", new_key, new_accel, configs[2]);
+    target->first = g_strdup_printf("%s,%s,%s", new_key, new_accel, configs[2]);
     gtk_list_store_set (s->list_snippets, &iter, 0, configs[2],
-                                                1, new_key,
-                                                2, new_accel, -1);
+                                                 1, new_key,
+                                                 2, new_accel, -1);
 
     /* Disconnect old accelerator */
     snippets_accel_disconnect (sc, configs[0]);
@@ -187,7 +187,7 @@ void snippetsgui_update_snippet (GuSnippets* sc) {
         data->first = (gpointer)sc;
         data->second = (gpointer)g_strdup (new_key);
 
-        new_closure = g_cclosure_new (G_CALLBACK (snippets_accel_cb), data, NULL);
+        new_closure = g_cclosure_new(G_CALLBACK(snippets_accel_cb), data, NULL);
         new_closure_data->first = data->second;
         new_closure_data->second = new_closure;
 
@@ -227,7 +227,7 @@ void on_button_new_snippet_clicked (GtkWidget* widget, void* user) {
     gtk_widget_set_sensitive (GTK_WIDGET (s->button_new), FALSE);
     gtk_widget_set_sensitive (GTK_WIDGET (s->button_remove), FALSE);
 
-    SIG_SAFE (gtk_tree_view_set_cursor (s->snippets_tree_view, path, col, TRUE));
+    SIG_SAFE (gtk_tree_view_set_cursor(s->snippets_tree_view, path, col, TRUE));
 
     gtk_tree_path_free (path);
 }
@@ -269,7 +269,7 @@ void on_button_remove_snippet_clicked (GtkWidget* widget, void* user) {
         if (gtk_list_store_remove (s->list_snippets, &iter)) {
             snippetsgui_move_cursor_to_row (gui->snippetsgui, atoi (path_str));
         } else if (gtk_tree_model_get_iter_first (model, &iter)) {
-            snippetsgui_move_cursor_to_row (gui->snippetsgui, atoi (path_str) -1);
+            snippetsgui_move_cursor_to_row(gui->snippetsgui, atoi(path_str) -1);
         } else {
             SIG_SAFE (
                 gtk_text_buffer_set_text (GTK_TEXT_BUFFER (s->buffer), "", -1);
