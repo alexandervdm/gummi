@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 10:13+0800\n"
+"POT-Creation-Date: 2011-03-20 20:06+0800\n"
 "PO-Revision-Date: 2010-05-23 16:18+0400\n"
 "Last-Translator: kruvalig <kruvalig@gmail.com>\n"
 "Language-Team: fedora-trans-ru\n"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:41
 #, fuzzy
-msgid "Compile _PDF"
+msgid "Compile _Document"
 msgstr "Скомпилировать"
 
 #: ../data/ui/gummi.glade.h:42
@@ -185,14 +185,27 @@ msgstr ""
 "ячейки иметь границы. "
 
 #: ../data/ui/gummi.glade.h:51
+msgid "Document _Statistics"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:52
 msgid "Double line"
 msgstr "Двойная линия"
 
-#: ../data/ui/gummi.glade.h:52
+#: ../data/ui/gummi.glade.h:53
+msgid "Enable S_nippets"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:54
+#, fuzzy
+msgid "Enable S_pell checking"
+msgstr "Проверка орфографии для зыка:"
+
+#: ../data/ui/gummi.glade.h:55
 msgid "Error output"
 msgstr "Вывод ошибок"
 
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:56
 msgid ""
 "Error status for\n"
 "active document"
@@ -200,282 +213,274 @@ msgstr ""
 "Предупреждения об ошибках\n"
 "активного документа"
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:58
 msgid "File:"
 msgstr "Файл:"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:59
 msgid "Filename:"
 msgstr "Имя файла:"
 
-#: ../data/ui/gummi.glade.h:57
+#: ../data/ui/gummi.glade.h:60
 msgid "Find"
 msgstr "Найти"
 
-#: ../data/ui/gummi.glade.h:58
+#: ../data/ui/gummi.glade.h:61
 msgid "Find Ne_xt"
 msgstr "Найти _далее"
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:62
 msgid "Find Pre_vious"
 msgstr "_Обратный поиск"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:63
 msgid "Fit Page Width"
 msgstr "По ширине страницы"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:64
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - редактор LaTeX"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:65
 msgid "Hello svn user!"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:66
 msgid "Image"
 msgstr "Изображение"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:67
 msgid "Italic text"
 msgstr "Курсив"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:68
 msgid "Label:"
 msgstr "Ярлык:"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:69
 msgid "Load a file"
 msgstr "Открыть файл"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:70
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:72
 msgid "Match case"
 msgstr "Учитывать регистр"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:73
 msgid "Match entire word only"
 msgstr "Полное совпадения слов"
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:74
 msgid "Matrix"
 msgstr "Матрица"
 
-#: ../data/ui/gummi.glade.h:72 ../src/gui/gui-main.c:854
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:861
 msgid "N/A"
 msgstr "N/A"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:76
 msgid "New"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:77
 msgid "New from _Template"
 msgstr "Документ из _шаблона"
 
-#: ../data/ui/gummi.glade.h:75
+#: ../data/ui/gummi.glade.h:78
 msgid "Next"
 msgstr "Далее"
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:79
 msgid "No borders"
 msgstr "Без границ"
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:80
 msgid "Open"
 msgstr "Открыть"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:81
 msgid "Open the selected template"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:79
+#: ../data/ui/gummi.glade.h:82
 msgid "Parentheses"
 msgstr "Круглые скобки"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:83
 msgid "Pause updating the preview pane."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:84
 msgid "Preview Pane"
 msgstr "Область предпросмотра"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:85
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:86
 msgid "References:"
 msgstr "Ссылки:"
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:87
 msgid "Replace _All"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:88
 msgid "Replace with:"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:89
 msgid "Rows:"
 msgstr "Строки:"
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:90
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:91
 msgid "Save _As..."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:92
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:93
 msgid "Scale:"
 msgstr "Масштаб:"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:94
 msgid "Search backwards"
 msgstr "Поиск назад"
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:95
 msgid "Search for:"
 msgstr "Искать в:"
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:96
 msgid "Single line"
 msgstr "Однострочный"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:97
 msgid "Table"
 msgstr "Таблица"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:98
 msgid "Unbracketed"
 msgstr "Без скобок"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:99
 msgid "Underline text"
 msgstr "Подчеркнутый текст"
 
-#: ../data/ui/gummi.glade.h:97
-msgid "_Autocheck Spelling"
-msgstr "_Автопроверка орфографии"
-
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:100
 msgid "_Compile Bibliography"
 msgstr "_Скомпилировать библиографию"
 
-#: ../data/ui/gummi.glade.h:99
-msgid "_Document Statistics"
-msgstr ""
-
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:101
 msgid "_Edit"
 msgstr "_Изменить"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:102
 msgid "_Export to PDF"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:103
 msgid "_File"
 msgstr "_Файл"
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:104
 msgid "_Fullscreen"
 msgstr "На _весь экран"
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:105
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:106
 msgid "_Insert Bibliography"
 msgstr "_Добавить Библиографию"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:107
 #, fuzzy
 msgid "_Open..."
 msgstr "Открыть"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:108
 msgid "_Replace"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:109
 msgid "_Right Pane"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:110
 msgid "_Search"
 msgstr "П_оиск"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:111
 msgid "_Statusbar"
 msgstr "_Строка состояния"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:112
 msgid "_Toolbar"
 msgstr "_Инструменты"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:113
 msgid "_Tools"
 msgstr "_Инструменты"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:114
 msgid "_View"
 msgstr "_Вид"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:115
 msgid "filter:"
 msgstr "Фильтр:"
 
-#: ../data/ui/gummi.glade.h:115 ../src/gui/gui-main.c:852
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:859
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:853
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:860
 msgid "none"
 msgstr "отсутствует"
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:118
 msgid "of 0"
 msgstr "из 0"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:119
 msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:120
 msgid "toolbutton1"
 msgstr "инструментальнаякнопка1"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:121
 msgid "toolbutton2"
 msgstr "инструментальнаякнопка2"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:122
 msgid "toolbutton3"
 msgstr "инструментальнаякнопка3"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:123
 msgid "toolbutton5"
 msgstr "инструментальнаякнопка5"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:124
 msgid "toolbutton6"
 msgstr "инструментальнаякнопка6"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:125
 msgid "toolbutton7"
 msgstr "инструментальнаякнопка7"
 
@@ -692,28 +697,28 @@ msgstr ""
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/iofunctions.c:93
+#: ../src/iofunctions.c:116
 #, c-format
 msgid "Saving %s..."
 msgstr ""
 
-#: ../src/iofunctions.c:110
+#: ../src/iofunctions.c:147
 #, c-format
 msgid ""
 "%s\n"
 "Please try again later."
 msgstr ""
 
-#: ../src/iofunctions.c:154
+#: ../src/iofunctions.c:192
 msgid "Can not convert text to UTF-8!\n"
 msgstr ""
 
-#: ../src/iofunctions.c:179
+#: ../src/iofunctions.c:217
 #, fuzzy, c-format
 msgid "Autosaving file %s"
 msgstr "Однострочный"
 
-#: ../src/latex.c:172 ../src/gui/gui-main.c:381 ../src/gui/gui-main.c:409
+#: ../src/latex.c:172 ../src/gui/gui-main.c:318
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
@@ -749,108 +754,108 @@ msgstr "Заголовок:"
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:334
+#: ../src/gui/gui-main.c:376
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui/gui-main.c:556
+#: ../src/gui/gui-main.c:552
 #, fuzzy
 msgid "Words in text"
 msgstr "Жирный текст"
 
-#: ../src/gui/gui-main.c:557
+#: ../src/gui/gui-main.c:553
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:558
+#: ../src/gui/gui-main.c:554
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-main.c:559
+#: ../src/gui/gui-main.c:555
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:560
+#: ../src/gui/gui-main.c:556
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-main.c:561
+#: ../src/gui/gui-main.c:557
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-main.c:562
+#: ../src/gui/gui-main.c:558
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:623
+#: ../src/gui/gui-main.c:619
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:631
+#: ../src/gui/gui-main.c:627
 msgid "Document Statistics"
 msgstr ""
 
-#: ../src/gui/gui-main.c:809
+#: ../src/gui/gui-main.c:816
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:811
+#: ../src/gui/gui-main.c:818
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:813
+#: ../src/gui/gui-main.c:820
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:816
+#: ../src/gui/gui-main.c:823
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:845
+#: ../src/gui/gui-main.c:852
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:885
+#: ../src/gui/gui-main.c:892
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:895
+#: ../src/gui/gui-main.c:902
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:898
+#: ../src/gui/gui-main.c:905
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:899
+#: ../src/gui/gui-main.c:906
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:933
+#: ../src/gui/gui-main.c:940
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:934
+#: ../src/gui/gui-main.c:941
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:935
+#: ../src/gui/gui-main.c:942
 msgid "Export to PDF"
 msgstr ""
 
-#. g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
+#. g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 #: ../src/gui/gui-preview.c:87
 #, c-format
 msgid ""
@@ -875,6 +880,9 @@ msgstr "Создать новый документ"
 #: ../src/gui/gui-snippets.c:318
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
+
+#~ msgid "_Autocheck Spelling"
+#~ msgstr "_Автопроверка орфографии"
 
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Изменения будут применены при следующем запуске"

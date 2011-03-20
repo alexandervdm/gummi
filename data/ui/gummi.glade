@@ -547,7 +547,7 @@ and update preview.</property>
                     <child>
                       <object class="GtkCheckMenuItem" id="menu_spelling">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">Enable S_pellchecking</property>
+                        <property name="label" translatable="yes">Enable S_pell checking</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_menu_spelling_toggled"/>
                       </object>
