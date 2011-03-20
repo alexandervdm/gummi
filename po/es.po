@@ -146,12 +146,11 @@ msgstr "Compilar"
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
-msgstr "Compilar documento LaTeX\n"
+msgstr "Compilar documento LaTeX"
 
 #: ../data/ui/gummi.glade.h:41
-#, fuzzy
 msgid "Compile _Document"
-msgstr "Compilar"
+msgstr "Compilar _Documento"
 
 #: ../data/ui/gummi.glade.h:42
 msgid ""
@@ -177,7 +176,7 @@ msgstr "Borrar plantillas seleccionadas"
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
-msgstr "Detectar la mención de bibtex\n"
+msgstr "Detectar la mención de bibtex"
 
 #: ../data/ui/gummi.glade.h:49
 msgid ""
@@ -188,21 +187,18 @@ msgstr ""
 "tienen bordes de linea."
 
 #: ../data/ui/gummi.glade.h:51
-#, fuzzy
 msgid "Document _Statistics"
-msgstr "Estadísticas del Documento"
+msgstr "E_stadísticas del Documento"
 
 #: ../data/ui/gummi.glade.h:52
 msgid "Double line"
 msgstr "Doble línea"
 
 #: ../data/ui/gummi.glade.h:53
-#, fuzzy
 msgid "Enable S_nippets"
-msgstr "Snippets"
+msgstr "S_nippets"
 
 #: ../data/ui/gummi.glade.h:54
-#, fuzzy
 msgid "Enable S_pell checking"
 msgstr "Lenguaje de revisión ortográfica:"
 
