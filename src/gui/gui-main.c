@@ -680,7 +680,7 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
         "Cameron Grout", NULL };
                 
     const gchar* translators =
-        "Brazilian-Portugese: Fernando Cruz\n"
+        "Brazilian-Portugese: Fernando Cruz & Alexandre Guimarães\n"
         "Catalan: Marc Vinyals\n"
         "Chinese (Traditional): Wei-Ning Huang\n"
         "Czech: Přemysl Janouch\n"
@@ -691,6 +691,7 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
         "Greek: Dimitris Leventeas\n"
         "Italian: Salvatore Vassallo\n"
         "Polish: Hubert Kowalski\n"
+        "Portugese: Alexandre Guimarães\n"
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig\n"
         "Spanish: Carlos Salas Contreras\n";
