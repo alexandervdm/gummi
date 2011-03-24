@@ -2768,7 +2768,7 @@ _ACEOF
 
 
 # ls po/*.po | sort | sed 's/po\///g;s/.po//g'| sed ':a;N;s/\n/ /g;ta'
-ALL_LINGUAS="ca cs da de el es fr it nl pl pt pt_BR ro ru zh_TW"
+ALL_LINGUAS="ar ca cs da de el es fr it nl pl pt pt_BR ro ru zh_TW"
 
 
 ac_config_headers="$ac_config_headers config.h"
