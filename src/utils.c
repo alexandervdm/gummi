@@ -207,6 +207,23 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
     return tstr;
 }
 
+gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens) {
+    if (target != NULL && substr != NULL) {
+        if (case_sens == TRUE) {
+            if (strstr(g_utf8_strup(target, -1), g_utf8_strup(substr, -1)) != NULL) {
+                return TRUE;
+            }
+        }
+        else {
+            if (strstr(target, substr) != NULL) {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+    
+
 slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create) {
     slist* current = head;
     slist* prev = 0;

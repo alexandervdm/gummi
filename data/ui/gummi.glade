@@ -1375,10 +1375,12 @@ bibliography database</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry" id="entry1">
+                                  <object class="GtkEntry" id="biblio_filter">
                                     <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
                                     <property name="invisible_char">&#x2022;</property>
+                                    <signal name="changed" handler="on_biblio_filter_changed"/>
                                   </object>
                                   <packing>
                                     <property name="padding">5</property>

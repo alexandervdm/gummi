@@ -52,6 +52,10 @@ GuBiblio* biblio_init (GtkBuilder* builder) {
         GTK_LABEL (gtk_builder_get_object (builder, "bibfilenm"));
     b->refnr_label = 
         GTK_LABEL (gtk_builder_get_object (builder, "bibrefnr"));
+    b->list_filter =
+        GTK_ENTRY (gtk_builder_get_object (builder, "biblio_filter"));
+    b->biblio_treeview =
+        GTK_TREE_VIEW (gtk_builder_get_object (builder, "bibtreeview"));
     b->progressval = 0.0;
     return b;
 }

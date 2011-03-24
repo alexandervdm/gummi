@@ -135,6 +135,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user);
 void on_button_biblio_detect_clicked (GtkWidget* widget, void* user);
 void on_bibreference_clicked (GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user);
+void on_biblio_filter_changed (GtkWidget* widget, void* user);
 gboolean on_bibprogressbar_update (void* user);
 
 /* misc functions */

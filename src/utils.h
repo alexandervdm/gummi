@@ -141,6 +141,15 @@ Tuple2 utils_popen_r (const gchar* cmd);
 gchar* utils_path_to_relative (const gchar* root, const gchar* target);
 
 /**
+ * utils_subinstr:
+ * 
+ * Returns: A gboolean that states whether or the string in the first
+ * argument is a substring of the second argument. When the case_sens arg
+ * is passed as TRUE, case sensitivity of the two strings is ignored.
+ */
+gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens);
+
+/**
  * slist_find:
  * @head: the list head
  * @term: the term to find

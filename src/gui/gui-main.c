@@ -845,6 +845,10 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
             g_error_free (err);
             return;
         }
+        
+        gtk_widget_set_sensitive 
+                    (GTK_WIDGET(gummi->biblio->list_filter), TRUE);
+        
         number = biblio_parse_entries (gummi->biblio, text);
         basename = g_path_get_basename (gummi->editor->bibfile);
         gtk_label_set_text (gummi->biblio->filenm_label, basename);
@@ -857,6 +861,8 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
         g_free (str);
     }
     else {
+        gtk_widget_set_sensitive 
+                    (GTK_WIDGET(gummi->biblio->list_filter), FALSE);
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
                 _("no bibliography file detected"));
         gtk_label_set_text (gummi->biblio->filenm_label, _("none"));
@@ -878,6 +884,44 @@ void on_bibreference_clicked (GtkTreeView* view, GtkTreePath* Path,
     gtk_text_buffer_insert_at_cursor (g_e_buffer, out, strlen (out));
     g_free (out);
 }
+
+static gboolean visible_func (GtkTreeModel *model, GtkTreeIter  *iter, gpointer data) {
+    gboolean row_visible = FALSE;
+    gchar* title;
+    gchar* author;
+    gchar* year;
+
+    /* make all entries visible again when filter buffer is empty */
+    if (strlen(data) == 0) return TRUE;
+
+    gtk_tree_model_get (model, iter, 1, &title, 2, &author, 3, &year, -1);
+    if (utils_subinstr (data, title , TRUE)) row_visible = TRUE;
+    if (utils_subinstr (data, author , TRUE)) row_visible = TRUE;
+    if (utils_subinstr (data, year , TRUE)) row_visible = TRUE;
+    
+    g_free(title);
+    g_free(author);
+    g_free(year);
+    
+    return row_visible;
+}
+
+
+void on_biblio_filter_changed (GtkWidget* widget, void* user) {
+    GtkTreeModel *filter;
+
+    gchar *entry = gtk_entry_get_text(GTK_ENTRY(widget));
+    filter = gtk_tree_model_filter_new (
+            GTK_TREE_MODEL(gummi->biblio->list_biblios),NULL);
+    gtk_tree_model_filter_set_visible_func(
+            GTK_TREE_MODEL_FILTER(filter), visible_func, entry, NULL);
+    gtk_tree_view_set_model ( 
+            GTK_TREE_VIEW( gummi->biblio->biblio_treeview ),filter);
+    g_object_unref (G_OBJECT(filter));
+    g_free(entry);
+}
+
+
 
 gboolean on_bibprogressbar_update (void* user) {
     gtk_adjustment_set_value
