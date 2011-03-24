@@ -1,12 +1,18 @@
+# Translation of gummi to German
+# This file is distributed under the same license as the Lilo package.
+#
+# Translators:
+#     Joachim Wiedorn <ad_debian@joonet.de>, 2010, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-03-20 20:06+0800\n"
-"PO-Revision-Date: 2010-12-19 19:46+0100\n"
+"PO-Revision-Date: 2011-03-22 21:15+0100\n"
 "Last-Translator: Joachim Wiedorn <ad_debian@joonet.de>\n"
-"Language-Team: de_DE <ad_debian@joonet.de>\n"
-"Language: \n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,11 +148,12 @@ msgid ""
 "Compile LaTeX document\n"
 "and update preview."
 msgstr ""
+"LaTeX-Dokument kompilieren\n"
+"und Vorschau aktualisieren."
 
 #: ../data/ui/gummi.glade.h:41
-#, fuzzy
 msgid "Compile _Document"
-msgstr "Kompilieren"
+msgstr "_Dokument kompilieren"
 
 #: ../data/ui/gummi.glade.h:42
 msgid ""
@@ -173,6 +180,8 @@ msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr ""
+"Nennung einer bibtex-Datei \n"
+"im aktuellen Dokument finden."
 
 #: ../data/ui/gummi.glade.h:49
 msgid ""
@@ -183,9 +192,8 @@ msgstr ""
 "Umrandungen haben. "
 
 #: ../data/ui/gummi.glade.h:51
-#, fuzzy
 msgid "Document _Statistics"
-msgstr "Dokument Statistik"
+msgstr "Dokument _Statistik"
 
 #: ../data/ui/gummi.glade.h:52
 msgid "Double line"
@@ -193,12 +201,11 @@ msgstr "Doppelte Line"
 
 #: ../data/ui/gummi.glade.h:53
 msgid "Enable S_nippets"
-msgstr ""
+msgstr "Schnipsel einschalten"
 
 #: ../data/ui/gummi.glade.h:54
-#, fuzzy
 msgid "Enable S_pell checking"
-msgstr "Sprache für Rechtschreibprüfung:"
+msgstr "Rechtschreibprüfung einschalten"
 
 #: ../data/ui/gummi.glade.h:55
 msgid "Error output"
@@ -242,7 +249,7 @@ msgstr "Gummi - LaTeX Editor"
 
 #: ../data/ui/gummi.glade.h:65
 msgid "Hello svn user!"
-msgstr ""
+msgstr "Hallo SVN Benutzer!"
 
 #: ../data/ui/gummi.glade.h:66
 msgid "Image"
@@ -280,13 +287,14 @@ msgstr "Nur ganze Wörter finden"
 msgid "Matrix"
 msgstr "Matrix"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:861
+#: ../data/ui/gummi.glade.h:75
+#: ../src/gui/gui-main.c:861
 msgid "N/A"
 msgstr "N/A"
 
 #: ../data/ui/gummi.glade.h:76
 msgid "New"
-msgstr ""
+msgstr "Neu"
 
 #: ../data/ui/gummi.glade.h:77
 msgid "New from _Template"
@@ -318,7 +326,7 @@ msgstr "Aktualisierung der Vorschau unterbrechen."
 
 #: ../data/ui/gummi.glade.h:84
 msgid "Preview Pane"
-msgstr "Vorschaufeld"
+msgstr "Vorschau"
 
 #: ../data/ui/gummi.glade.h:85
 msgid "Previous"
@@ -444,11 +452,13 @@ msgstr "_Ansicht"
 msgid "filter:"
 msgstr "Filter:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:859
+#: ../data/ui/gummi.glade.h:116
+#: ../src/gui/gui-main.c:859
 msgid "no bibliography file detected"
 msgstr "Keine Bibliografiedatei gefunden"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:860
+#: ../data/ui/gummi.glade.h:117
+#: ../src/gui/gui-main.c:860
 msgid "none"
 msgstr "Keine"
 
@@ -489,26 +499,24 @@ msgid "   "
 msgstr "   "
 
 #: ../data/ui/prefs.glade.h:2
-#, fuzzy
 msgid "Automatic Indentation"
-msgstr "Automatischer Einzug:"
+msgstr "Automatischer Einzug"
 
 #: ../data/ui/prefs.glade.h:3
 msgid "Color Scheme"
-msgstr ""
+msgstr "Farbeschema"
 
 #: ../data/ui/prefs.glade.h:4
 msgid "Command: "
-msgstr ""
+msgstr "Befehl:"
 
 #: ../data/ui/prefs.glade.h:5
 msgid "Configure snippets"
-msgstr ""
+msgstr "Schnipsel konfigurieren"
 
 #: ../data/ui/prefs.glade.h:6
-#, fuzzy
 msgid "Customize"
-msgstr "Kompilieren"
+msgstr "Anpassen"
 
 #: ../data/ui/prefs.glade.h:7
 msgid "Default Text"
@@ -527,9 +535,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: ../data/ui/prefs.glade.h:11
-#, fuzzy
 msgid "Editor font"
-msgstr "Editor Schriftart:"
+msgstr "Editor Schriftart"
 
 #: ../data/ui/prefs.glade.h:12
 msgid "Enable text wrapping"
@@ -537,16 +544,15 @@ msgstr "Automatischen Zeilenumbruch aktivieren"
 
 #: ../data/ui/prefs.glade.h:13
 msgid "Extra flags:"
-msgstr ""
+msgstr "Zusätzliche Markierungen"
 
 #: ../data/ui/prefs.glade.h:14
-#, fuzzy
 msgid "File saving"
-msgstr "Datei speichern:"
+msgstr "Datei speichern"
 
 #: ../data/ui/prefs.glade.h:15
 msgid "Font & Colors"
-msgstr ""
+msgstr "Schriftart & Farben"
 
 #: ../data/ui/prefs.glade.h:16
 msgid "Gummi Preferences"
@@ -557,18 +563,16 @@ msgid "Highlight current line"
 msgstr "Aktuelle Zeile hervorheben"
 
 #: ../data/ui/prefs.glade.h:18
-#, fuzzy
 msgid "Highlighting"
-msgstr "Hervorhebung:"
+msgstr "Hervorhebung"
 
 #: ../data/ui/prefs.glade.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Leerzeichen _statt Tabulatoren einfügen"
 
 #: ../data/ui/prefs.glade.h:20
-#, fuzzy
 msgid "Line numbers"
-msgstr "Zeilennummern:"
+msgstr "Zeilennummern"
 
 #: ../data/ui/prefs.glade.h:21
 msgid "Miscellaneous"
@@ -584,31 +588,27 @@ msgstr "PDF Erzeugung"
 
 #: ../data/ui/prefs.glade.h:24
 msgid "Snippets"
-msgstr ""
+msgstr "Schnipsel"
 
 #: ../data/ui/prefs.glade.h:25
-#, fuzzy
 msgid "Spell check language"
-msgstr "Sprache für Rechtschreibprüfung:"
+msgstr "Sprache für Rechtschreibprüfung"
 
 #: ../data/ui/prefs.glade.h:26
-#, fuzzy
 msgid "Tab stops"
-msgstr "Tabulatoren:"
+msgstr "Tabulatoren"
 
 #: ../data/ui/prefs.glade.h:27
 msgid "Tab width:"
 msgstr "Tabulatorweite:"
 
 #: ../data/ui/prefs.glade.h:28
-#, fuzzy
 msgid "Text wrapping"
-msgstr "Zeilenumbruch:"
+msgstr "Zeilenumbruch"
 
 #: ../data/ui/prefs.glade.h:29
-#, fuzzy
 msgid "Typesetter command"
-msgstr "Befehle für Schriftsetzen:"
+msgstr "Befehl für Schriftensetzen"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "View"
@@ -651,43 +651,40 @@ msgid "xelatex"
 msgstr "xelatex"
 
 #: ../data/ui/snippets.glade.h:1
-#, fuzzy
 msgid "    "
 msgstr "        "
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Activation"
-msgstr ""
+msgstr "Aktivierung"
 
 #: ../data/ui/snippets.glade.h:3
-#, fuzzy
 msgid "Edit:"
-msgstr "_Bearbeiten"
+msgstr "Bearbeiten:"
 
 #: ../data/ui/snippets.glade.h:4
-#, fuzzy
 msgid "Reset all snippets"
-msgstr "_Zurücksetzen"
+msgstr "Alle Schnipsel zurücksetzen"
 
 #: ../data/ui/snippets.glade.h:5
 msgid "Shortcut key:"
-msgstr ""
+msgstr "Tastenkombination:"
 
 #: ../data/ui/snippets.glade.h:6
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Schnipsel Manager"
 
 #: ../data/ui/snippets.glade.h:7
 msgid "Snippets:"
-msgstr ""
+msgstr "Schnipsel:"
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Tab trigger:"
-msgstr ""
+msgstr "Tab Auslöser:"
 
 #: ../data/ui/snippets.glade.h:9
 msgid "_Reset"
-msgstr ""
+msgstr "Zu_rücksetzen"
 
 #: ../src/editor.c:506
 msgid "Top reached, search from bottom?"
@@ -720,7 +717,8 @@ msgstr "Text kann nicht nach UTF-8 konvertiert werden!\n"
 msgid "Autosaving file %s"
 msgstr "Autospeichern der Datei  %s"
 
-#: ../src/latex.c:172 ../src/gui/gui-main.c:318
+#: ../src/latex.c:172
+#: ../src/gui/gui-main.c:318
 msgid "The file already exists. Overwrite?"
 msgstr "Die Datei existiert bereits. Überschreiben?"
 
@@ -745,11 +743,8 @@ msgstr "Aktualisierungsüberprüfung"
 
 #: ../src/utils.c:95
 #, c-format
-msgid ""
-"%s has encountered a serious error and will require a restart. Your working "
-"data will be restored when you reload your document. Please report bugs at: "
-"http://dev.midnightcoding.org"
-msgstr ""
+msgid "%s has encountered a serious error and will require a restart. Your working data will be restored when you reload your document. Please report bugs at: http://dev.midnightcoding.org"
+msgstr "%s hat einen ernsten Fehler festgestellt und benötigt einen Neustart. Ihre Arbeitsdaten werden gespeichert, wenn das Dokument neu eingelesen wird. Fehlerberichte bitte an: http://dev.midnightcoding.org"
 
 #: ../src/utils.c:141
 msgid "Confirmation"
@@ -775,7 +770,7 @@ msgstr "Wörter in den Kopfzeilen"
 
 #: ../src/gui/gui-main.c:554
 msgid "Words in float captions"
-msgstr "Wörter in \"float captions\""
+msgstr "Wörter in Objektuntertiteln"
 
 #: ../src/gui/gui-main.c:555
 msgid "Number of headers"
@@ -874,38 +869,31 @@ msgstr ""
 "wieder herzustellen."
 
 #: ../src/gui/gui-snippets.c:302
-msgid ""
-"Duplicate activation tab trigger dectected! Please choose another one.\n"
-msgstr ""
+msgid "Duplicate activation tab trigger dectected! Please choose another one.\n"
+msgstr "Doppelte Aktivierung des Tab Auslösers festgestellt! Bitte wählen Sie einen anderen.\n"
 
 #: ../src/gui/gui-snippets.c:315
-#, fuzzy
 msgid "Type a new shortcut"
-msgstr "Erstelle neues Dokument"
+msgstr "Neue Tastenkombination drücken"
 
 #: ../src/gui/gui-snippets.c:318
 msgid "Type a new shortcut, or press Backspace to clear"
-msgstr ""
+msgstr "Neue Tastenkombination drücken, oder mit der Rücktaste löschen"
 
 #~ msgid "_Autocheck Spelling"
 #~ msgstr "_Automatische Rechtschreibprüfung"
-
 #~ msgid "_Document Statistics"
 #~ msgstr "_Dokument Statistik"
-
 #~ msgid ""
 #~ "Search document for\n"
 #~ "bibliography databases"
 #~ msgstr ""
 #~ "Suche Dokument für \n"
 #~ "Bibliografie-Datenbank"
-
 #~ msgid "Changes will become active on next start"
 #~ msgstr "Änderungen werden beim nächsten Start aktiv"
-
 #~ msgid "PDF Compiling:"
 #~ msgstr "PDF Erzeugung:"
-
 #~ msgid ""
 #~ "\n"
 #~ "Gummi has encountered a serious error and requires a restart, you can "
@@ -918,27 +906,20 @@ msgstr ""
 #, fuzzy
 #~ msgid "Words in text: ([0-9]*)"
 #~ msgstr "Fett"
-
 #~ msgid "Open File..."
 #~ msgstr "Datei öffnen..."
-
 #~ msgid "Save File..."
 #~ msgstr "Datei speichern..."
-
 #~ msgid ".."
 #~ msgstr ".."
-
 #~ msgid "Article"
 #~ msgstr "Artikel"
-
 #~ msgid "Book"
 #~ msgstr "Buch"
-
 #~ msgid "Letter"
 #~ msgstr "Brief"
-
 #~ msgid "Report"
 #~ msgstr "Report"
-
 #~ msgid "Template options:"
 #~ msgstr "Vorlagenoptionen"
+
