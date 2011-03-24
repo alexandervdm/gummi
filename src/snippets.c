@@ -99,10 +99,13 @@ void snippets_load (GuSnippets* sc) {
         return;
     }
 
-    current = sc->head = prev = g_new0 (slist, 1);
-
     while (fgets (buf, BUFSIZ, fh)) {
+        current = g_new0 (slist, 1);
+        if (!sc->head)
+            sc->head = prev = current;
+        prev->next = current;
         buf[strlen (buf) -1] = 0; /* remove trailing '\n' */
+
         if (buf[0] != '\t') {
             if ('#' == buf[0] || !strlen(buf)) {
                 current->first = g_strdup (buf);
@@ -124,11 +127,10 @@ void snippets_load (GuSnippets* sc) {
             current = prev;
         }
         prev = current;
-        current->next = g_new0 (slist, 1);
-        current = current->next;
     }
     g_free (current);
-    prev->next = NULL;
+    if (prev)
+        prev->next = NULL;
     fclose (fh);
 }
 
@@ -143,7 +145,7 @@ void snippets_save (GuSnippets* sc) {
 
     while (current) {
         /* skip comments */
-        if ('#' == current->first[0]) {
+        if (!current->second) {
             fputs (current->first, fh);
             fputs ("\n", fh);
             current = current->next;

@@ -68,7 +68,7 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
     s->snippets_tree_view =
         GTK_TREE_VIEW (gtk_builder_get_object (builder, "snippets_tree_view"));
     s->snippet_scroll =
-        GTK_SCROLLED_WINDOW (gtk_builder_get_object (builder, "snippet_scroll"));
+        GTK_SCROLLED_WINDOW(gtk_builder_get_object (builder, "snippet_scroll"));
     s->tab_trigger_entry = 
         GTK_ENTRY (gtk_builder_get_object (builder, "tab_trigger_entry"));
     s->accelerator_entry = 
