@@ -124,7 +124,7 @@ void snippetsgui_load_snippets (GuSnippetsGui* s) {
 
     gtk_list_store_clear (s->list_snippets);
     while (current) {
-        if (current->first[0] != '#' && strlen(current->first)) {
+        if (current->second) {
             gtk_list_store_append (s->list_snippets, &iter);
             configs = g_strsplit (current->first, ",", 0);
             gtk_list_store_set (s->list_snippets, &iter, 0, configs[2],

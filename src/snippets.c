@@ -128,9 +128,7 @@ void snippets_load (GuSnippets* sc) {
         }
         prev = current;
     }
-    g_free (current);
-    if (prev)
-        prev->next = NULL;
+    if (prev) prev->next = NULL;
     fclose (fh);
 }
 
