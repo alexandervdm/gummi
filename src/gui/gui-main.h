@@ -86,7 +86,8 @@ typedef enum _GuFilterType {
 GummiGui* gui_init (GtkBuilder* builder);
 void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
-void gui_new_environment (const gchar* filename);
+void gui_create_environment (const gchar* filename);
+void gui_update_environment (const gchar* filename);
 void gui_update_title (void);
 void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);

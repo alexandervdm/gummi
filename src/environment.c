@@ -51,9 +51,10 @@ Gummi* gummi_init (GList* eds, GuMotion* mo, GuIOFunc* io, GuLatex* latex,
 
 void gummi_new_environment (Gummi* gc, const gchar* filename) {
     editor_fileinfo_update (gc->editor, filename);
-
+    gint position = g_list_index(gc->editors, gc->editor);
+    
     slog (L_INFO, "\n");
-    slog (L_INFO, "Environment created for:\n");
+    slog (L_INFO, "Environment created at (%d) for:\n", position);
     slog (L_INFO, "TEX: %s\n", gc->editor->filename);
     slog (L_INFO, "TMP: %s\n", gc->editor->workfile);
     slog (L_INFO, "PDF: %s\n", gc->editor->pdffile); 

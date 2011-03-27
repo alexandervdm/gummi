@@ -218,28 +218,35 @@ gboolean gui_quit (void) {
     return FALSE;
 }
 
-void gui_new_environment (const gchar* filename) {
+void gui_update_environment (const gchar* filename) {
+    /* NO new editor
+     * NO new tab page
+     * update tmp files
+     * update gui info (label, title) */
     gummi_new_environment (gummi, filename);
     add_to_recent_list (filename);
+    
+    editortabsgui_change_label (filename);
+    // TODO: rename to update_windowtitle?
     gui_update_title ();
+    
     while (gtk_events_pending ()) gtk_main_iteration ();
     previewgui_reset (gui->previewgui);
     motion_start_timer (gummi->motion);
-    
-    int nrpages = gtk_notebook_get_n_pages (gui->editortabsgui->tab_notebook);
-    if (nrpages != 0) { // change this, because we will want to close the only tab as well sometimes
-        /*
-        GuEditor *ed = editor_init (gummi->motion);
-        // todo: append to glist
-        editortabsgui_create_tab (ed, filename);
-        gtk_widget_show_all (gui->mainwindow);
-        */
-        printf ("multi-tab code!\n");
-    }
-    else {
-        editortabsgui_create_tab (gummi->editor, gummi->editor->filename);
-    }
 }
+
+
+void gui_create_environment (const gchar* filename) {
+    /* THE BIG KABOSH!! -Michael Schiavello */
+    
+    GuEditor *ed = editor_init (gummi->motion);
+    
+    // todo: append to glist
+    editortabsgui_create_tab (ed, filename);
+    printf ("multi-tab code!\n");
+}
+
+
 
 void gui_update_title (void) {
     gchar* basename = NULL;
@@ -295,7 +302,7 @@ void gui_open_file (const gchar* filename) {
     if (GTK_RESPONSE_YES != ret)
         iofunctions_load_file (gummi->io, filename); 
 
-    gui_new_environment (filename);
+    gui_update_environment (filename);
 }
 
 void gui_save_file (gboolean saveas) {
@@ -325,7 +332,7 @@ void gui_save_file (gboolean saveas) {
     pdfname = g_strdup (filename);
     pdfname[strlen (pdfname) -4] = 0;
     latex_export_pdffile (gummi->latex, gummi->editor, pdfname, FALSE);
-    if (new) gui_new_environment (filename);
+    if (new) gui_update_environment (filename);
     gui_update_title ();
     gtk_widget_grab_focus (GTK_WIDGET (gummi->editor->view));
 
@@ -340,7 +347,7 @@ void on_menu_new_activate (GtkWidget *widget, void* user) {
         gui_save_file (FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-    gui_new_environment (NULL);
+    gui_create_environment (NULL);
     iofunctions_load_default_text ();
 }
 
@@ -413,6 +420,14 @@ void on_menu_save_activate (GtkWidget *widget, void* user) {
 
 void on_menu_saveas_activate (GtkWidget *widget, void* user) {
     gui_save_file (TRUE);
+}
+
+void on_menu_close_activate (GtkWidget *widget, void* user) {
+    /* temporary measure to disable closing the initial tab */
+    if (gtk_notebook_get_current_page(gui->editortabsgui->tab_notebook) != 0) {
+           editortabsgui_remove_tab(); 
+    }
+    /* TODO: remove from environment and such */
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
@@ -767,7 +782,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         statusbar_set_message (status);
         g_free (status);
         
-        gui_new_environment (NULL);
+        gui_create_environment (NULL);
         editor_fill_buffer (gummi->editor, template.itemdata);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }

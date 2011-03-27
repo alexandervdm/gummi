@@ -50,5 +50,9 @@ struct _GuEditortabsGui {
 
 GuEditortabsGui* editortabsgui_init (GtkBuilder* builder);
 void editortabsgui_create_tab (GuEditor* editor, const gchar* filename);
+gint editortabsgui_remove_tab ();
+
+void editortabsgui_change_label (const gchar *filename);
+GtkWidget* editortabsgui_create_label (const gchar *filename);
 
 #endif /* __GUMMI_GUI_EDITORTABS_H__ */

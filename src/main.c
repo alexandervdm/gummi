@@ -127,10 +127,12 @@ int main (int argc, char *argv[]) {
 
     if (argc != 2) {
         iofunctions_load_default_text ();
-        gui_new_environment (NULL);
+        gui_update_environment (NULL);
+        editortabsgui_create_tab (editor, NULL);
     } else {
         iofunctions_load_file (io, argv[1]);
-        gui_new_environment (argv[1]);
+        gui_update_environment (argv[1]);
+        editortabsgui_create_tab (editor, argv[1]);
     }
 
     gui_main (builder);
