@@ -918,7 +918,6 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user) {
     gtk_tree_view_set_model ( 
             GTK_TREE_VIEW( gummi->biblio->biblio_treeview ),filter);
     g_object_unref (G_OBJECT(filter));
-    g_free(entry);
 }
 
 
