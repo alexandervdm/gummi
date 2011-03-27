@@ -329,9 +329,12 @@ void gui_save_file (gboolean saveas) {
     }
     iofunctions_save_file (gummi->io, filename);
 
-    pdfname = g_strdup (filename);
-    pdfname[strlen (pdfname) -4] = 0;
-    latex_export_pdffile (gummi->latex, gummi->editor, pdfname, FALSE);
+
+    if (config_get_value ("autoexport")) {
+        pdfname = g_strdup (filename);
+        pdfname[strlen (pdfname) -4] = 0;
+        latex_export_pdffile (gummi->latex, gummi->editor, pdfname, FALSE);
+    }
     if (new) gui_update_environment (filename);
     gui_update_title ();
     gtk_widget_grab_focus (GTK_WIDGET (gummi->editor->view));

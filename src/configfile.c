@@ -71,6 +71,7 @@ const gchar config_str[] =
 "[File]\n"
 "autosaving = False\n"
 "autosave_timer = 10\n"
+"autoexport = True\n"
 "\n"
 "[Compile]\n"
 "typesetter = pdflatex\n"

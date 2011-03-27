@@ -99,7 +99,9 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_compilescheme"));
     p->compile_timer =
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "compile_timer"));
-
+    p->autoexport =
+        GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "auto_export")); 
+        
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
     p->compile_box = GTK_HBOX (gtk_builder_get_object (builder, "compile_box"));
@@ -197,6 +199,8 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
             (gboolean)config_get_value ("spaces_instof_tabs"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoindentation),
             (gboolean)config_get_value ("autoindentation"));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
+            (gboolean)config_get_value ("autoexport"));
 
     if (!config_get_value ("autosaving"))
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->autosave_timer), FALSE);
@@ -366,6 +370,12 @@ void toggle_autosaving (GtkWidget* widget, void* user) {
         iofunctions_stop_autosave ();
     }
 }
+
+void toggle_autoexport (GtkWidget* widget, void* user) {
+    gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    config_set_value ("autoexport", newval? "True": "False");
+}
+
 
 void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     GtkTextIter start, end;
