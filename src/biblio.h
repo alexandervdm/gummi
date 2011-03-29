@@ -41,7 +41,7 @@ struct _GuBiblio {
     GtkProgressBar* progressbar;
     GtkAdjustment* progressmon;
     GtkListStore* list_biblios;
-    GtkWidget* biblio_treeview;
+    GtkTreeView* biblio_treeview;
     GtkLabel* filenm_label;
     GtkLabel* refnr_label;
     GtkEntry* list_filter;

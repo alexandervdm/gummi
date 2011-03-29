@@ -108,6 +108,6 @@ void editor_undo_change (GuEditor* ec);
 void editor_redo_change (GuEditor* ec);
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);
 gint schemes_compare (gconstpointer a, gconstpointer b);
-GList* editor_list_style_scheme_sorted (GuEditor* ec);
+GList* editor_list_style_scheme_sorted (void);
 
 #endif /* __GUMMI_EDITOR_H__ */

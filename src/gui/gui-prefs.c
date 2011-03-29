@@ -66,7 +66,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->tabwidth =
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "tabwidth"));
     p->spaces_instof_tabs =
-        GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "spaces_instof_tabs"));
+        GTK_CHECK_BUTTON(gtk_builder_get_object(builder, "spaces_instof_tabs"));
     p->autoindentation =
         GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "autoindentation"));
     p->autosaving =
@@ -80,7 +80,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->list_languages =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_languages"));
     p->styleschemes_treeview =
-        GTK_TREE_VIEW (gtk_builder_get_object (builder, "styleschemes_treeview"));
+        GTK_TREE_VIEW(gtk_builder_get_object(builder, "styleschemes_treeview"));
     p->list_styleschemes =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_styleschemes"));
     p->default_text =
@@ -132,8 +132,24 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GtkHBox* hbox10 = GTK_HBOX (gtk_builder_get_object (builder, "hbox10"));
     GtkLabel* label9 = GTK_LABEL (gtk_builder_get_object (builder, "label9"));
     gtk_container_remove (GTK_CONTAINER (hbox11), GTK_WIDGET (label9));
-    gtk_container_remove (GTK_CONTAINER (hbox10), GTK_WIDGET (p->combo_languages));
+    gtk_container_remove(GTK_CONTAINER (hbox10),GTK_WIDGET(p->combo_languages));
 #endif
+    GList* schemes = editor_list_style_scheme_sorted ();
+    GList* schemes_iter = schemes;
+    gchar* desc = NULL;
+    GtkTreeIter iter;
+    while (schemes_iter) {
+        desc = g_markup_printf_escaped ("<b>%s</b> - %s",
+                gtk_source_style_scheme_get_name (schemes_iter->data),
+                gtk_source_style_scheme_get_description (schemes_iter->data));
+        gtk_list_store_append (p->list_styleschemes, &iter);
+        gtk_list_store_set (p->list_styleschemes, &iter,
+                0, desc,
+                1, gtk_source_style_scheme_get_id (schemes_iter->data), -1);
+        schemes_iter = g_list_next (schemes_iter);
+        g_free (desc);
+    }
+    g_list_free (schemes);
 
     gtk_builder_connect_signals (builder, NULL);
 
@@ -141,7 +157,6 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 }
 
 void prefsgui_main (GuPrefsGui* prefs) {
-    list_available_style_schemes(prefs, gummi->editor);
     prefsgui_set_current_settings (prefs);
     
     gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
@@ -164,9 +179,9 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     /* set all checkboxs */
     value = (gboolean)config_get_value ("textwrapping");
     if (value) {
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->textwrap_button),
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->textwrap_button),
                 value);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->wordwrap_button),
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->wordwrap_button),
                 (gboolean)config_get_value ("wordwrapping"));
     } else
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->wordwrap_button), FALSE);
@@ -203,7 +218,7 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     gtk_font_button_set_font_name (prefs->editor_font,
             config_get_value ("font"));
     gtk_text_buffer_set_text (prefs->default_buffer,
-            config_get_value ("welcome"), strlen (config_get_value ("welcome")));
+            config_get_value ("welcome"), strlen(config_get_value ("welcome")));
 
     /* set combo boxes */
     /* typesetter */
@@ -239,8 +254,15 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     }
 
     /* set style scheme */
+    prefsgui_apply_style_scheme(prefs);
+
+    /* set extra flags */
+    gtk_entry_set_text (prefs->extra_flags, config_get_value ("extra_flags"));
+}
+
+void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
     const gchar* scheme = config_get_value ("style_scheme");
-    GList* schemes = editor_list_style_scheme_sorted (gummi->editor);
+    GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
     gint column = 0;
     GtkTreePath* treepath;
@@ -267,28 +289,6 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
         gtk_tree_path_free (treepath);
         editor_set_style_scheme_by_id (gummi->editor, "classic");
     }
-
-    /* set extra flags */
-    gtk_entry_set_text (prefs->extra_flags, config_get_value ("extra_flags"));
-}
-
-void list_available_style_schemes(GuPrefsGui* p, GuEditor *editor) {
-    GList* schemes = editor_list_style_scheme_sorted (editor);
-    GList* schemes_iter = schemes;
-    gchar* desc = NULL;
-    GtkTreeIter iter;
-    while (schemes_iter) {
-        desc = g_markup_printf_escaped ("<b>%s</b> - %s",
-                gtk_source_style_scheme_get_name (schemes_iter->data),
-                gtk_source_style_scheme_get_description (schemes_iter->data));
-        gtk_list_store_append (p->list_styleschemes, &iter);
-        gtk_list_store_set (p->list_styleschemes, &iter,
-                0, desc,
-                1, gtk_source_style_scheme_get_id (schemes_iter->data), -1);
-        schemes_iter = g_list_next (schemes_iter);
-        g_free (desc);
-    }
-    g_list_free (schemes);
 }
 
 void toggle_linenumbers (GtkWidget* widget, void* user) {
@@ -341,7 +341,7 @@ void toggle_wordwrapping (GtkWidget* widget, void* user) {
 void toggle_compilestatus (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("compile_status", newval? "True": "False");
-    gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->compile_timer), newval);
+    gtk_widget_set_sensitive (GTK_WIDGET(gui->prefsgui->compile_timer), newval);
     gtk_toggle_tool_button_set_active (gui->previewoff, !newval);
 }
 
@@ -423,7 +423,7 @@ void on_autosave_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
 
-    config_set_value ("autosave_timer", g_ascii_dtostr (buf, 16, (double)newval));
+    config_set_value("autosave_timer", g_ascii_dtostr(buf, 16, (double)newval));
     iofunctions_reset_autosave (gummi->editor->filename);
 }
 
@@ -431,12 +431,12 @@ void on_compile_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
 
-    config_set_value ("compile_timer", g_ascii_dtostr (buf, 16, (double)newval));
+    config_set_value("compile_timer", g_ascii_dtostr (buf, 16, (double)newval));
     previewgui_reset (gui->previewgui);
 }
 
 void on_editor_font_set (GtkWidget* widget, void* user) {
-    const gchar* font = gtk_font_button_get_font_name (GTK_FONT_BUTTON (widget));
+    const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON (widget));
     slog (L_INFO, "setting font to %s\n", font);
     config_set_value ("font", font);
     PangoFontDescription* font_desc = pango_font_description_from_string (font);

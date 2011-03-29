@@ -928,17 +928,15 @@ static gboolean visible_func (GtkTreeModel *model, GtkTreeIter  *iter, gpointer 
 void on_biblio_filter_changed (GtkWidget* widget, void* user) {
     GtkTreeModel *filter;
 
-    gchar *entry = gtk_entry_get_text(GTK_ENTRY(widget));
+    const gchar *entry = gtk_entry_get_text(GTK_ENTRY(widget));
     filter = gtk_tree_model_filter_new (
             GTK_TREE_MODEL(gummi->biblio->list_biblios),NULL);
     gtk_tree_model_filter_set_visible_func(
-            GTK_TREE_MODEL_FILTER(filter), visible_func, entry, NULL);
+            GTK_TREE_MODEL_FILTER(filter), visible_func, (gpointer)entry, NULL);
     gtk_tree_view_set_model ( 
             GTK_TREE_VIEW( gummi->biblio->biblio_treeview ),filter);
     g_object_unref (G_OBJECT(filter));
 }
-
-
 
 gboolean on_bibprogressbar_update (void* user) {
     gtk_adjustment_set_value

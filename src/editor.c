@@ -637,16 +637,17 @@ gint schemes_compare (gconstpointer a, gconstpointer b) {
     return g_utf8_collate (name_a, name_b);
 }
 
-GList* editor_list_style_scheme_sorted (GuEditor* ec) {
+GList* editor_list_style_scheme_sorted (void) {
     const gchar * const * scheme_ids;
     GList *schemes = NULL;
+    GtkSourceStyleSchemeManager* manager =
+        gtk_source_style_scheme_manager_get_default();
 
-    scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (
-            ec->stylemanager);
+    scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
 
     while (*scheme_ids != NULL) {
         GtkSourceStyleScheme *scheme;
-        scheme = gtk_source_style_scheme_manager_get_scheme (ec->stylemanager,
+        scheme = gtk_source_style_scheme_manager_get_scheme (manager,
                 *scheme_ids);
         schemes = g_list_prepend (schemes, scheme);
         ++scheme_ids;
