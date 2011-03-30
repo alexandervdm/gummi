@@ -1,10 +1,10 @@
 /**
- * @file   gui-editortabs.h
- * @brief
+ * @file    tabmanager.h
+ * @brief   
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- *
+ * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,32 +27,34 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __GUMMI_GUI_EDITORTABS_H__
-#define __GUMMI_GUI_EDITORTABS_H__
+#ifndef GUMMI_TABMANAGER_H
+#define GUMMI_TABMANAGER_H
 
-#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "editor.h"
 
-#define g_editortabsgui gui->editortabsgui
-#define g_tabs_notebook gui->editortabsgui->tab_notebook
+/* TODO: is this a poor practice? it sure is clean/handy.. */
+#define g_tabmanager_editors gummi->tabmanager->editors
+#define g_tabmanager_pages gummi->tabmanager->pages
+#define g_active_editor gummi->tabmanager->active_editor
+#define g_active_page gummi->tabmanager->active_page
 
-#define GU_EDITORTABS_GUI(x) ((GuEditortabsGui*)x)
-typedef struct _GuEditortabsGui GuEditortabsGui;
+typedef struct _GuTabmanager GuTabmanager;
 
-struct _GuEditortabsGui {
-    GtkNotebook *tab_notebook;
+struct _GuTabmanager {
+    GList *editors;
+    GList *pages;
+    GuEditor* active_editor;
+    GtkNotebookPage* active_page;
 };
 
 
+GuTabmanager* tabmanager_init (GuEditor* first);
+void tabmanager_create_tab(GuEditor *new_editor, const gchar* filename);
+void tabmanager_remove_tab(gint pagenr);
+void tabmanager_set_active_tab(gint pagenr);
 
+gint tabmanager_get_position_from_page(GtkNotebookPage* page);
+#endif /* __GUMMI_TABMANAGER_H__ */
 
-GuEditortabsGui* editortabsgui_init (GtkBuilder* builder);
-gint editortabsgui_create_page (GuEditor* editor, const gchar* filename);
-gint editortabsgui_remove_page ();
-
-void editortabsgui_change_label (const gchar *filename);
-GtkWidget* editortabsgui_create_label (const gchar *filename);
-
-#endif /* __GUMMI_GUI_EDITORTABS_H__ */

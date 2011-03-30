@@ -829,6 +829,7 @@ active document</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="scrollable">True</property>
+                    <signal name="switch_page" handler="on_tab_notebook_switch_page"/>
                     <child>
                       <placeholder/>
                     </child>
@@ -1483,9 +1484,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>

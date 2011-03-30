@@ -98,17 +98,20 @@ int main (int argc, char *argv[]) {
     /* Initialize Classes */
     gchar* snippetsname = g_build_filename (g_get_user_config_dir (), "gummi",
             "snippets.cfg", NULL);
-    GList* editors = NULL;
 
     GuMotion* motion = motion_init ();
     GuIOFunc* io = iofunctions_init();
     GuLatex* latex = latex_init (); 
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
+    
+    
     GuEditor* editor = editor_init (motion);
-    editors = g_list_append (editors, editor);
+    GuTabmanager* tabmgr = tabmanager_init (editor);
+    
+
     GuSnippets* snippets = snippets_init (snippetsname);
-    gummi = gummi_init (editors, motion, io, latex, biblio, templ, snippets);
+    gummi = gummi_init (motion, io, latex, biblio, templ, snippets, tabmgr);
     slog (L_DEBUG, "Gummi created!\n");
     g_free (snippetsname);
 
@@ -127,12 +130,12 @@ int main (int argc, char *argv[]) {
 
     if (argc != 2) {
         iofunctions_load_default_text ();
-        gui_update_environment (NULL);
-        editortabsgui_create_tab (editor, NULL);
+        gui_create_environment (editor, NULL);
+        
+
     } else {
         iofunctions_load_file (io, argv[1]);
-        gui_update_environment (argv[1]);
-        editortabsgui_create_tab (editor, argv[1]);
+        gui_create_environment (editor, NULL);
     }
 
     gui_main (builder);

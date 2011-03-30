@@ -80,6 +80,7 @@
 #include "motion.h"
 #include "snippets.h"
 #include "template.h"
+#include "tabmanager.h"
 
 #define _(T) gettext(T)
 
@@ -93,7 +94,6 @@ typedef struct _Gummi Gummi;
 
 struct _Gummi {
     /*< private >*/
-    GList* editors;
     GuEditor* editor;
     GuIOFunc* io;
     GuMotion* motion;
@@ -101,11 +101,12 @@ struct _Gummi {
     GuBiblio* biblio;
     GuTemplate* templ;
     GuSnippets* snippets;
+    GuTabmanager* tabmanager;
 };
 
-Gummi* gummi_init (GList* eds, GuMotion* mo, GuIOFunc* io, GuLatex* latex,
-    GuBiblio* bib, GuTemplate* tpl, GuSnippets* snip);
-void gummi_new_environment (Gummi* gc, const gchar* filename);
+Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib, 
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager *tab);
+void gummi_new_environment (GList *eds, GuEditor* ec, const gchar* filename);
 
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to
@@ -113,7 +114,6 @@ void gummi_new_environment (Gummi* gc, const gchar* filename);
  * Please only use this functions if avoidable.
  */
 GummiGui* gummi_get_gui (void);
-GList* gummi_get_editors (void);
 GuEditor* gummi_get_active_editor (void);
 GuIOFunc* gummi_get_io (void);
 GuMotion* gummi_get_motion (void);

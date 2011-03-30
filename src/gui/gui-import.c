@@ -144,7 +144,7 @@ void on_button_import_table_apply_clicked (GtkWidget* widget, void* user) {
     gint align = gtk_combo_box_get_active (g_importgui->table_comboalign);
     const gchar* text = importer_generate_table (rows, cols, border, align);
 
-    editor_get_current_iter (gummi->editor, &current);
+    editor_get_current_iter (g_active_editor, &current);
     gtk_text_buffer_begin_user_action (g_e_buffer);
     gtk_text_buffer_insert (g_e_buffer, &current, text, strlen (text));
     gtk_text_buffer_end_user_action (g_e_buffer);
@@ -166,12 +166,12 @@ void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
         if (!utils_path_exists (imagefile)) {
             slog (L_G_ERROR, _("%s: No such file or directory\n"), imagefile);
         } else {
-            if (gummi->editor->filename)
-                root_path = g_path_get_dirname (gummi->editor->filename);
+            if (g_active_editor->filename)
+                root_path = g_path_get_dirname (g_active_editor->filename);
             relative_path = utils_path_to_relative (root_path, imagefile);
             text =importer_generate_image (relative_path, caption, label, scale);
-            editor_insert_package (gummi->editor, "graphicx");
-            editor_get_current_iter (gummi->editor, &current);
+            editor_insert_package (g_active_editor, "graphicx");
+            editor_get_current_iter (g_active_editor, &current);
             gtk_text_buffer_begin_user_action (g_e_buffer);
             gtk_text_buffer_insert (g_e_buffer, &current,text,strlen (text));
             gtk_text_buffer_end_user_action (g_e_buffer);
@@ -192,8 +192,8 @@ void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     gint rows = gtk_adjustment_get_value (g_importgui->matrix_rows);
     gint cols = gtk_adjustment_get_value (g_importgui->matrix_cols);
     const gchar* text = importer_generate_matrix (bracket, rows, cols);
-    editor_insert_package (gummi->editor, "amsmath");
-    editor_get_current_iter (gummi->editor, &current);
+    editor_insert_package (g_active_editor, "amsmath");
+    editor_get_current_iter (g_active_editor, &current);
     gtk_text_buffer_begin_user_action (g_e_buffer);
     gtk_text_buffer_insert (g_e_buffer, &current, text, strlen (text));
     gtk_text_buffer_end_user_action (g_e_buffer);

@@ -43,8 +43,8 @@
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
-#define g_e_buffer GTK_TEXT_BUFFER (gummi->editor->buffer)
-#define g_e_view GTK_TEXT_VIEW (gummi->editor->view)
+#define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
+#define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
 
 #define GUMMI_GUI(x) ((GummiGui*)x)
 typedef struct _GummiGui GummiGui; 
@@ -86,7 +86,7 @@ typedef enum _GuFilterType {
 GummiGui* gui_init (GtkBuilder* builder);
 void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
-void gui_create_environment (const gchar* filename);
+void gui_create_environment (GuEditor* ec, const gchar* filename);
 void gui_update_environment (const gchar* filename);
 void gui_update_title (void);
 void gui_open_file (const gchar* filename);

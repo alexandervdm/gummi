@@ -41,6 +41,8 @@
 #include "gui/gui-main.h"
 #include "utils.h"
 
+extern Gummi* gummi;
+
 static guint sid = 0;
 
 /* private functions */
@@ -64,7 +66,7 @@ GuIOFunc* iofunctions_init (void) {
 }
 
 void iofunctions_load_default_text (void) {
-    GuEditor* ec = gummi_get_active_editor();
+    GuEditor* ec = g_active_editor;
     gchar* str = g_strdup (config_get_value ("welcome"));
     editor_fill_buffer (ec, str);
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);

@@ -35,29 +35,31 @@
 Gummi* gummi = 0;
 GummiGui* gui = 0;
 
-Gummi* gummi_init (GList* eds, GuMotion* mo, GuIOFunc* io, GuLatex* latex,
-    GuBiblio* bib, GuTemplate* tpl, GuSnippets* snip) {
+Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabmgr) {
+    
     Gummi* g = g_new0 (Gummi, 1);
-    g->editors = eds;
-    g->editor = g_list_first (eds)->data;
     g->io = io;
     g->motion = mo;
     g->latex = latex;
     g->biblio = bib;
     g->templ = tpl;
     g->snippets = snip;
+    g->tabmanager = tabmgr;
     return g;
 }
 
-void gummi_new_environment (Gummi* gc, const gchar* filename) {
-    editor_fileinfo_update (gc->editor, filename);
-    gint position = g_list_index(gc->editors, gc->editor);
+void gummi_new_environment (GList *eds, GuEditor* ec, const gchar* filename) {
+    editor_fileinfo_update (ec, filename);
+    
+    gint position = g_list_index(eds, ec);
+
     
     slog (L_INFO, "\n");
     slog (L_INFO, "Environment created at (%d) for:\n", position);
-    slog (L_INFO, "TEX: %s\n", gc->editor->filename);
-    slog (L_INFO, "TMP: %s\n", gc->editor->workfile);
-    slog (L_INFO, "PDF: %s\n", gc->editor->pdffile); 
+    slog (L_INFO, "TEX: %s\n", ec->filename);
+    slog (L_INFO, "TMP: %s\n", ec->workfile);
+    slog (L_INFO, "PDF: %s\n", ec->pdffile); 
 
     iofunctions_reset_autosave (filename);
 }
@@ -66,12 +68,9 @@ GummiGui* gummi_get_gui (void) {
     return gui;
 }
 
-GList* gummi_get_editors (void) {
-    return gummi->editors;
-}
 
 GuEditor* gummi_get_active_editor (void) {
-    return gummi->editor;
+    return g_active_editor;
 }
 
 GuIOFunc* gummi_get_io (void) {

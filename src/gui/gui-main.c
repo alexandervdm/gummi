@@ -201,7 +201,7 @@ gboolean gui_quit (void) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return TRUE;
 
-    editor_destroy (gummi->editor);
+    editor_destroy (g_active_editor);
     gtk_window_get_size (gui->mainwindow, &width, &height);
     gtk_window_get_position (gui->mainwindow, &wx, &wy);
     config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
@@ -219,31 +219,32 @@ gboolean gui_quit (void) {
 }
 
 void gui_update_environment (const gchar* filename) {
-    /* NO new editor
-     * NO new tab page
-     * update tmp files
-     * update gui info (label, title) */
-    gummi_new_environment (gummi, filename);
     add_to_recent_list (filename);
-    
     editortabsgui_change_label (filename);
-    // TODO: rename to update_windowtitle?
     gui_update_title ();
-    
     while (gtk_events_pending ()) gtk_main_iteration ();
     previewgui_reset (gui->previewgui);
     motion_start_timer (gummi->motion);
 }
 
 
-void gui_create_environment (const gchar* filename) {
+void gui_create_environment (GuEditor* ec, const gchar* filename) {
     /* THE BIG KABOSH!! -Michael Schiavello */
     
-    GuEditor *ed = editor_init (gummi->motion);
+    /* TODO: temp workaround */
+    if (ec == NULL) {
+        tabmanager_create_tab(NULL, filename);
+    }
+    else {
+        tabmanager_create_tab(ec, filename);
+    }
     
-    // todo: append to glist
-    editortabsgui_create_tab (ed, filename);
-    printf ("multi-tab code!\n");
+    add_to_recent_list (filename);
+    //editortabsgui_change_label (filename);
+    gui_update_title ();
+    while (gtk_events_pending ()) gtk_main_iteration ();
+    previewgui_reset (gui->previewgui);
+    motion_start_timer (gummi->motion);
 }
 
 
@@ -252,9 +253,9 @@ void gui_update_title (void) {
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
-    if (gummi->editor->filename) {
-        basename = g_path_get_basename (gummi->editor->filename);
-        dirname = g_path_get_dirname (gummi->editor->filename);
+    if (g_active_editor->filename) {
+        basename = g_path_get_basename (g_active_editor->filename);
+        dirname = g_path_get_dirname (g_active_editor->filename);
         title = g_strdup_printf ("%s%s (%s) - %s",
                 (gtk_text_buffer_get_modified (g_e_buffer)? "*": ""),
                 basename, dirname, PACKAGE_NAME);
@@ -280,8 +281,11 @@ void gui_open_file (const gchar* filename) {
      * line before the previewgui_stop_preview, else if the user is using
      * the real_time compile scheme, the compile scheme functions can
      * access fileinfo */
-    previewgui_stop_preview (gui->previewgui);
-    editor_fileinfo_cleanup (gummi->editor);
+     
+    /* TODO: old obsolete code? 
+     * previewgui_stop_preview (gui->previewgui);
+     * editor_fileinfo_cleanup (g_active_editor);
+     */
 
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
@@ -298,11 +302,13 @@ void gui_open_file (const gchar* filename) {
     g_free (dirname);
     g_free (basename);
     g_free (prev_workfile);
+    
+        gui_create_environment (NULL, filename);
 
     if (GTK_RESPONSE_YES != ret)
         iofunctions_load_file (gummi->io, filename); 
 
-    gui_update_environment (filename);
+
 }
 
 void gui_save_file (gboolean saveas) {
@@ -312,7 +318,7 @@ void gui_save_file (gboolean saveas) {
     gchar* prev = NULL;
     gint ret = 0;
 
-    if (saveas || ! (filename = gummi->editor->filename)) {
+    if (saveas || ! (filename = g_active_editor->filename)) {
         if ( (filename = get_save_filename (TYPE_LATEX))) {
             new = TRUE;
             if (strcmp (filename + strlen (filename) -4, ".tex")) {
@@ -333,11 +339,11 @@ void gui_save_file (gboolean saveas) {
     if (config_get_value ("autoexport")) {
         pdfname = g_strdup (filename);
         pdfname[strlen (pdfname) -4] = 0;
-        latex_export_pdffile (gummi->latex, gummi->editor, pdfname, FALSE);
+        latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
     }
     if (new) gui_update_environment (filename);
     gui_update_title ();
-    gtk_widget_grab_focus (GTK_WIDGET (gummi->editor->view));
+    gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 
 cleanup:
     if (new) g_free (filename);
@@ -345,13 +351,16 @@ cleanup:
 }
 
 void on_menu_new_activate (GtkWidget *widget, void* user) {
+    /*
     gint ret = check_for_save ();
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-    gui_create_environment (NULL);
-    iofunctions_load_default_text ();
+    */
+    gui_create_environment (NULL, NULL);
+    
+    //iofunctions_load_default_text ();
 }
 
 void on_menu_template_activate (GtkWidget *widget, void * user) {
@@ -365,7 +374,7 @@ void on_menu_exportpdf_activate (GtkWidget *widget, void * user) {
 
     filename = get_save_filename (TYPE_PDF);
     if (filename)
-        latex_export_pdffile (gummi->latex, gummi->editor, filename, TRUE);
+        latex_export_pdffile (gummi->latex, g_active_editor, filename, TRUE);
     g_free (filename);
 }
 
@@ -403,18 +412,22 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
 
 void on_menu_open_activate (GtkWidget *widget, void* user) {
     gchar *filename = NULL;
+    
+    /* TODO: obsolete code?
     gint ret = check_for_save ();
 
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
+        
+    */
 
     if ( (filename = get_open_filename (TYPE_LATEX)))
         gui_open_file (filename);
     g_free (filename);
 
-    gtk_widget_grab_focus (GTK_WIDGET (gummi->editor->view));
+    gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 }
 
 void on_menu_save_activate (GtkWidget *widget, void* user) {
@@ -426,11 +439,20 @@ void on_menu_saveas_activate (GtkWidget *widget, void* user) {
 }
 
 void on_menu_close_activate (GtkWidget *widget, void* user) {
-    /* temporary measure to disable closing the initial tab */
-    if (gtk_notebook_get_current_page(gui->editortabsgui->tab_notebook) != 0) {
-           editortabsgui_remove_tab(); 
+    printf("close\n");
+    gint ret = check_for_save ();
+    if (GTK_RESPONSE_YES == ret)
+        gui_save_file (FALSE);
+    else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
+        return;
+    
+    /* TODO: temporary measure to disable closing the initial tab */
+    gint current_tab = gtk_notebook_get_current_page
+                        (gui->editortabsgui->tab_notebook);
+    if (current_tab != 0) {
+        tabmanager_remove_tab(current_tab);
+        /* TODO: disconnect signals and such if last tab is closed.. */
     }
-    /* TODO: remove from environment and such */
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
@@ -454,11 +476,11 @@ void on_menu_paste_activate (GtkWidget *widget, void* user) {
 }
 
 void on_menu_undo_activate (GtkWidget *widget, void* user) {
-    editor_undo_change (gummi->editor);
+    editor_undo_change (g_active_editor);
 }
 
 void on_menu_redo_activate (GtkWidget *widget, void* user) {
-    editor_redo_change (gummi->editor);
+    editor_redo_change (g_active_editor);
 }
 
 void on_menu_delete_activate (GtkWidget *widget, void * user) {
@@ -474,6 +496,22 @@ void on_menu_selectall_activate (GtkWidget *widget, void * user) {
 void on_menu_preferences_activate (GtkWidget *widget, void * user) {
     prefsgui_main (gui->prefsgui);
 }
+
+void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *nbpage, int page, void *data) {
+    gint pos = tabmanager_get_position_from_page(nbpage);
+    
+    
+
+    /* TODO: correct compile/preview switching */
+    
+    /* very important line */
+    tabmanager_set_active_tab(pos);
+    previewgui_reset (gui->previewgui);
+    
+    
+    slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
+}
+
 
 void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
@@ -519,11 +557,11 @@ void on_menu_find_activate (GtkWidget *widget, void* user) {
 }
 
 void on_menu_findnext_activate (GtkWidget *widget, void * user) {
-    editor_jumpto_search_result (gummi->editor, 1);
+    editor_jumpto_search_result (g_active_editor, 1);
 }
 
 void on_menu_findprev_activate (GtkWidget *widget, void * user) {
-    editor_jumpto_search_result (gummi->editor, -1);
+    editor_jumpto_search_result (g_active_editor, -1);
 }
 
 void on_menu_bibload_activate (GtkWidget *widget, void * user) {
@@ -534,10 +572,10 @@ void on_menu_bibload_activate (GtkWidget *widget, void * user) {
 
     filename = get_open_filename (TYPE_BIBLIO);
     if (filename) {
-        if (gummi->editor->filename)
-            root_path = g_path_get_dirname (gummi->editor->filename);
+        if (g_active_editor->filename)
+            root_path = g_path_get_dirname (g_active_editor->filename);
         relative_path = utils_path_to_relative (root_path, filename);
-        editor_insert_bib (gummi->editor, relative_path);
+        editor_insert_bib (g_active_editor, relative_path);
         basename = g_path_get_basename (filename);
         gtk_label_set_text (gummi->biblio->filenm_label, basename);
         g_free (relative_path);
@@ -548,7 +586,7 @@ void on_menu_bibload_activate (GtkWidget *widget, void * user) {
 }
 
 void on_menu_bibupdate_activate (GtkWidget *widget, void * user) {
-    biblio_compile_bibliography (gummi->biblio, gummi->editor, gummi->latex);
+    biblio_compile_bibliography (gummi->biblio, g_active_editor, gummi->latex);
 }
 
 void on_menu_pdfcompile_activate (GtkWidget *widget, void* user) {
@@ -588,8 +626,8 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     if (g_find_program_in_path ("texcount")) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
-        gchar* tmpfile = g_strdup_printf ("%s.state", gummi->editor->fdname);
-        if (!utils_copy_file (gummi->editor->workfile, tmpfile, &err)) {
+        gchar* tmpfile = g_strdup_printf ("%s.state", g_active_editor->fdname);
+        if (!utils_copy_file (g_active_editor->workfile, tmpfile, &err)) {
             slog (L_G_ERROR, "utils_copy_file (): %s\n", err->message);
             g_free (tmpfile);
             g_error_free (err);
@@ -658,10 +696,10 @@ cleanup:
 void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 #ifdef USE_GTKSPELL
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
-        editor_activate_spellchecking (gummi->editor, TRUE);
+        editor_activate_spellchecking (g_active_editor, TRUE);
         config_set_value ("spelling", "True");
     } else {
-        editor_activate_spellchecking (gummi->editor, FALSE);
+        editor_activate_spellchecking (g_active_editor, FALSE);
         config_set_value ("spelling", "False");
     }
 #endif
@@ -742,27 +780,27 @@ void on_tool_previewoff_toggled (GtkWidget *widget, void * user) {
 }
 
 void on_tool_textstyle_bold_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_bold");
+    editor_set_selection_textstyle (g_active_editor, "tool_bold");
 }
 
 void on_tool_textstyle_italic_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_italic");
+    editor_set_selection_textstyle (g_active_editor, "tool_italic");
 }
 
 void on_tool_textstyle_underline_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_unline");
+    editor_set_selection_textstyle (g_active_editor, "tool_unline");
 }
 
 void on_tool_textstyle_left_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_left");
+    editor_set_selection_textstyle (g_active_editor, "tool_left");
 }
 
 void on_tool_textstyle_center_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_center");
+    editor_set_selection_textstyle (g_active_editor, "tool_center");
 }
 
 void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
-    editor_set_selection_textstyle (gummi->editor, "tool_right");
+    editor_set_selection_textstyle (g_active_editor, "tool_right");
 }
 
 
@@ -785,8 +823,8 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         statusbar_set_message (status);
         g_free (status);
         
-        gui_create_environment (NULL);
-        editor_fill_buffer (gummi->editor, template.itemdata);
+        gui_create_environment (NULL, NULL);
+        editor_fill_buffer (g_active_editor, template.itemdata);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
 }
@@ -813,7 +851,7 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_list_store_set (gummi->templ->list_templates, &iter, 0, filenm, 1,
                 filepath, -1);
-        text = editor_grab_buffer (gummi->editor);
+        text = editor_grab_buffer (g_active_editor);
         template_create_file (gummi->templ, filenm, text);
     }
     g_free (text);
@@ -831,7 +869,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
     g_timeout_add (10, on_bibprogressbar_update, NULL);
 
-    if (biblio_compile_bibliography (gummi->biblio, gummi->editor,
+    if (biblio_compile_bibliography (gummi->biblio, g_active_editor,
                 gummi->latex)) {
         statusbar_set_message (_("Compiling bibliography file..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
@@ -856,9 +894,9 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
     g_timeout_add (2, on_bibprogressbar_update, NULL);
     gtk_list_store_clear (gummi->biblio->list_biblios);
 
-    if (biblio_detect_bibliography (gummi->biblio, gummi->editor)) {
-        editor_insert_bib (gummi->editor, gummi->editor->bibfile);
-        if (!g_file_get_contents (gummi->editor->bibfile, &text, NULL, &err)) {
+    if (biblio_detect_bibliography (gummi->biblio, g_active_editor)) {
+        editor_insert_bib (g_active_editor, g_active_editor->bibfile);
+        if (!g_file_get_contents (g_active_editor->bibfile, &text, NULL, &err)) {
             slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
             g_error_free (err);
             return;
@@ -868,7 +906,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
                     (GTK_WIDGET(gummi->biblio->list_filter), TRUE);
         
         number = biblio_parse_entries (gummi->biblio, text);
-        basename = g_path_get_basename (gummi->editor->bibfile);
+        basename = g_path_get_basename (g_active_editor->bibfile);
         gtk_label_set_text (gummi->biblio->filenm_label, basename);
         str = g_strdup_printf ("%d", number);
         gtk_label_set_text (gummi->biblio->refnr_label, str);
@@ -1016,9 +1054,9 @@ gchar* get_save_filename (GuFilterType type) {
     file_dialog_set_filter (chooser, type);
     gtk_file_chooser_set_current_folder (chooser, g_get_home_dir ());
 
-    if (gummi->editor->filename) {
-        gchar* dirname = g_path_get_dirname (gummi->editor->filename);
-        gchar* basename = g_path_get_basename (gummi->editor->filename);
+    if (g_active_editor->filename) {
+        gchar* dirname = g_path_get_dirname (g_active_editor->filename);
+        gchar* basename = g_path_get_basename (g_active_editor->filename);
 
         gtk_file_chooser_set_current_folder (chooser, dirname);
 

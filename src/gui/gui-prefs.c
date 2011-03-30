@@ -173,7 +173,7 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
 
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
     gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
-    gtk_widget_modify_font (GTK_WIDGET (gummi->editor->view), font_desc);
+    gtk_widget_modify_font (GTK_WIDGET (g_active_editor->view), font_desc);
     pango_font_description_free (font_desc);
 
     /* set all checkboxs */
@@ -287,7 +287,7 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
         gtk_tree_view_set_cursor (prefs->styleschemes_treeview, treepath, NULL,
                 FALSE);
         gtk_tree_path_free (treepath);
-        editor_set_style_scheme_by_id (gummi->editor, "classic");
+        editor_set_style_scheme_by_id (g_active_editor, "classic");
     }
 }
 
@@ -296,7 +296,7 @@ void toggle_linenumbers (GtkWidget* widget, void* user) {
 
     config_set_value ("line_numbers", newval? "True": "False");
     gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (
-                gummi->editor->view), newval);
+                g_active_editor->view), newval);
 }
 
 void toggle_highlighting (GtkWidget* widget, void* user) {
@@ -304,7 +304,7 @@ void toggle_highlighting (GtkWidget* widget, void* user) {
 
     config_set_value ("highlighting", newval? "True": "False");
     gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (
-                gummi->editor->view), newval);
+                g_active_editor->view), newval);
 }
 
 void toggle_textwrapping (GtkWidget* widget, void* user) {
@@ -349,13 +349,13 @@ void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("spaces_instof_tabs", newval? "True": "False");
     gtk_source_view_set_insert_spaces_instead_of_tabs (
-            gummi->editor->view, newval);
+            g_active_editor->view, newval);
 }
 
 void toggle_autoindentation (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("autoindentation", newval? "True": "False");
-    gtk_source_view_set_auto_indent (gummi->editor->view, newval);
+    gtk_source_view_set_auto_indent (g_active_editor->view, newval);
 }
 
 void toggle_autosaving (GtkWidget* widget, void* user) {
@@ -366,7 +366,7 @@ void toggle_autosaving (GtkWidget* widget, void* user) {
                 GTK_WIDGET (gui->prefsgui->autosave_timer), TRUE);
         gint time = atoi (config_get_value ("autosave_timer"));
         gtk_spin_button_set_value (gui->prefsgui->autosave_timer, time);
-        iofunctions_reset_autosave (gummi->editor->filename);
+        iofunctions_reset_autosave (g_active_editor->filename);
     } else {
         gtk_widget_set_sensitive (
                 GTK_WIDGET (gui->prefsgui->autosave_timer), FALSE);
@@ -412,7 +412,7 @@ void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     gchar buf[16];
 
     config_set_value ("tabwidth", g_ascii_dtostr (buf, 16, (double)newval));
-    gtk_source_view_set_tab_width (gummi->editor->view, newval);
+    gtk_source_view_set_tab_width (g_active_editor->view, newval);
 }
 
 void on_configure_snippets_clicked (GtkWidget* widget, void* user) {
@@ -424,7 +424,7 @@ void on_autosave_value_changed (GtkWidget* widget, void* user) {
     gchar buf[16];
 
     config_set_value("autosave_timer", g_ascii_dtostr(buf, 16, (double)newval));
-    iofunctions_reset_autosave (gummi->editor->filename);
+    iofunctions_reset_autosave (g_active_editor->filename);
 }
 
 void on_compile_value_changed (GtkWidget* widget, void* user) {
@@ -440,7 +440,7 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
     slog (L_INFO, "setting font to %s\n", font);
     config_set_value ("font", font);
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_modify_font (GTK_WIDGET (gummi->editor->view), font_desc);
+    gtk_widget_modify_font (GTK_WIDGET (g_active_editor->view), font_desc);
     pango_font_description_free (font_desc);
 }
 
@@ -460,8 +460,8 @@ void on_combo_language_changed (GtkWidget* widget, void* user) {
     gchar* selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
     config_set_value ("spell_language", selected);
     if (config_get_value ("spelling")) {
-        editor_activate_spellchecking (gummi->editor, FALSE);
-        editor_activate_spellchecking (gummi->editor, TRUE);
+        editor_activate_spellchecking (g_active_editor, FALSE);
+        editor_activate_spellchecking (g_active_editor, TRUE);
     }
 #endif
 }
@@ -484,6 +484,6 @@ void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
 
     gtk_tree_selection_get_selected (selection, &model, &iter);
     gtk_tree_model_get (model, &iter, 0, &name, 1, &id, -1);
-    editor_set_style_scheme_by_id (gummi->editor, id);
+    editor_set_style_scheme_by_id (g_active_editor, id);
     config_set_value ("style_scheme", id);
 }

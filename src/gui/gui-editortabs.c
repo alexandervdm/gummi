@@ -81,7 +81,7 @@ void editortabsgui_change_label (const gchar *filename) {
 }
 
 
-void editortabsgui_create_tab (GuEditor* editor, const gchar* filename) {
+gint editortabsgui_create_page (GuEditor* editor, const gchar* filename) {
     GtkWidget *scrollwindow;
     GtkWidget *tablabel;
     
@@ -95,14 +95,18 @@ void editortabsgui_create_tab (GuEditor* editor, const gchar* filename) {
     tablabel = editortabsgui_create_label(filename);
 
     /* adding new tab to the gui */
-    gtk_notebook_append_page (
+    gint position = gtk_notebook_append_page (
         GTK_NOTEBOOK (g_tabs_notebook), scrollwindow, tablabel);
+        
     gtk_widget_show(scrollwindow);
+    gtk_widget_show(GTK_WIDGET(editor->view));
+
+    return position;
 }
 
 
 
-gint editortabsgui_remove_tab () {
+gint editortabsgui_remove_page () {
     gint active_page = gtk_notebook_get_current_page(g_tabs_notebook);
     gtk_notebook_remove_page(g_tabs_notebook, active_page);
     return active_page;
