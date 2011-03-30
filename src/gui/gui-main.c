@@ -219,12 +219,14 @@ gboolean gui_quit (void) {
 }
 
 void gui_update_environment (const gchar* filename) {
+    /* this function is called when the document is saved. no new editor
+     * or tab object has to be initialised, but we'll need a fileinfo env
+     * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
     editortabsgui_change_label (filename);
+    gummi_new_environment(g_tabmanager_editors, g_active_editor, filename);
     gui_update_title ();
-    while (gtk_events_pending ()) gtk_main_iteration ();
     previewgui_reset (gui->previewgui);
-    motion_start_timer (gummi->motion);
 }
 
 
@@ -238,13 +240,9 @@ void gui_create_environment (GuEditor* ec, const gchar* filename) {
     else {
         tabmanager_create_tab(ec, filename);
     }
-    
     add_to_recent_list (filename);
-    //editortabsgui_change_label (filename);
     gui_update_title ();
-    while (gtk_events_pending ()) gtk_main_iteration ();
     previewgui_reset (gui->previewgui);
-    motion_start_timer (gummi->motion);
 }
 
 

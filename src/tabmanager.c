@@ -61,6 +61,7 @@ void tabmanager_create_tab(GuEditor *editor, const gchar* filename) {
     new_page = gtk_notebook_get_nth_page(g_tabs_notebook, pagenr);
     g_tabmanager_pages = g_list_append(g_tabmanager_pages, new_page);
     
+    //tabmanager_set_active_tab(pagenr);
     gtk_notebook_set_current_page(g_tabs_notebook, pagenr);
     
 }
@@ -81,7 +82,6 @@ void tabmanager_remove_tab(gint pagenr) {
 
 
 void tabmanager_set_active_tab(gint position) {
-    
     g_active_editor = g_list_nth_data(g_tabmanager_editors, position);
     g_active_page = g_list_nth_data(g_tabmanager_pages, position);
 }
