@@ -55,6 +55,6 @@ void tabmanager_create_tab(GuEditor *new_editor, const gchar* filename);
 void tabmanager_remove_tab(gint pagenr);
 void tabmanager_set_active_tab(gint pagenr);
 
-gint tabmanager_get_position_from_page(GtkNotebook* page);
+gint tabmanager_get_position_from_page(GtkWidget* page);
 #endif /* __GUMMI_TABMANAGER_H__ */
 

@@ -47,7 +47,7 @@ GuTabmanager* tabmanager_init (GuEditor *first) {
 }
 
 void tabmanager_create_tab(GuEditor *editor, const gchar* filename) {
-    GtkNotebook *new_page;
+    GtkWidget *new_page;
     
     /* editor */
     if (editor == NULL) {
@@ -58,7 +58,7 @@ void tabmanager_create_tab(GuEditor *editor, const gchar* filename) {
     
     /* page */
     gint pagenr = editortabsgui_create_page(editor, filename);
-    new_page = GTK_NOTEBOOK(gtk_notebook_get_nth_page(g_tabs_notebook, pagenr));
+    new_page = gtk_notebook_get_nth_page(g_tabs_notebook, pagenr);
     g_tabmanager_pages = g_list_append(g_tabmanager_pages, new_page);
     
     //tabmanager_set_active_tab(pagenr);
@@ -68,11 +68,10 @@ void tabmanager_create_tab(GuEditor *editor, const gchar* filename) {
 }
 
 void tabmanager_remove_tab(gint pagenr) {
-    GtkNotebook*current_page;
+    GtkWidget *current_page;
     
     /*TODO: remove direct gtk calls from this non-gui class */
-    current_page = GTK_NOTEBOOK(gtk_notebook_get_nth_page(g_tabs_notebook,
-                                                          pagenr));
+    current_page = gtk_notebook_get_nth_page(g_tabs_notebook, pagenr);
     gint indexnr = tabmanager_get_position_from_page(current_page);
     
     g_tabmanager_editors = g_list_remove (g_tabmanager_editors, 
@@ -93,7 +92,7 @@ gint tabmanager_get_position_from_editor(GuEditor* ec) {
     return g_list_index(g_tabmanager_editors, ec);
 }
 
-gint tabmanager_get_position_from_page(GtkNotebook* page) {
+gint tabmanager_get_position_from_page(GtkWidget* page) {
     return g_list_index(g_tabmanager_pages, page);
 }
 
