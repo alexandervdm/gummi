@@ -162,7 +162,7 @@ void iofunctions_start_autosave (const gchar* name) {
         filename = NULL;
     }
     filename = g_strdup (name);
-    sid = g_timeout_add_seconds (atoi (config_get_value ("autosave_timer")) * 60,
+    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, filename);
 }
 

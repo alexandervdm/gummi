@@ -169,7 +169,7 @@ void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
             if (g_active_editor->filename)
                 root_path = g_path_get_dirname (g_active_editor->filename);
             relative_path = utils_path_to_relative (root_path, imagefile);
-            text =importer_generate_image (relative_path, caption, label, scale);
+            text =importer_generate_image(relative_path, caption, label, scale);
             editor_insert_package (g_active_editor, "graphicx");
             editor_get_current_iter (g_active_editor, &current);
             gtk_text_buffer_begin_user_action (g_e_buffer);

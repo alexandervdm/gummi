@@ -85,9 +85,9 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->menu_toolbar =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_toolbar"));
     g->menu_statusbar =
-        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_statusbar"));
+        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_statusbar"));
     g->menu_rightpane =
-        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_rightpane"));
+        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_rightpane"));
     g->statusid =
         gtk_statusbar_get_context_id (GTK_STATUSBAR (g->statusbar), "Gummi");
     g->recent[0] =
@@ -316,8 +316,8 @@ void gui_save_file (gboolean saveas) {
     gchar* prev = NULL;
     gint ret = 0;
 
-    if (saveas || ! (filename = g_active_editor->filename)) {
-        if ( (filename = get_save_filename (TYPE_LATEX))) {
+    if (saveas || !(filename = g_active_editor->filename)) {
+        if ((filename = get_save_filename (TYPE_LATEX))) {
             new = TRUE;
             if (strcmp (filename + strlen (filename) -4, ".tex")) {
                 prev = filename;
@@ -670,7 +670,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     }
     else {
         cmd = NULL;
-        output = g_strdup (_("This function requires\nthe texcount program.\n"));
+        output = g_strdup(_("This function requires\nthe texcount program.\n"));
     }
     
     dialog = gtk_message_dialog_new (gui->mainwindow,

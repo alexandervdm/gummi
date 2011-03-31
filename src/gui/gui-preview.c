@@ -100,7 +100,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
 void previewgui_update_statuslight (const gchar* type) {
     gdk_threads_enter ();
-    gtk_tool_button_set_stock_id (GTK_TOOL_BUTTON (gui->previewgui->statuslight),
+    gtk_tool_button_set_stock_id (GTK_TOOL_BUTTON(gui->previewgui->statuslight),
            type);
     gdk_threads_leave ();
 }

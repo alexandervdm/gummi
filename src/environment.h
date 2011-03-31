@@ -111,7 +111,7 @@ void gummi_new_environment (GList *eds, GuEditor* ec, const gchar* filename);
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to
  * non-GUI classes.
- * Please only use this functions if avoidable.
+ * Please only use this functions if not avoidable.
  */
 GummiGui* gummi_get_gui (void);
 GuEditor* gummi_get_active_editor (void);
