@@ -62,8 +62,9 @@ void tabmanager_create_tab(GuEditor *editor, const gchar* filename) {
     g_tabmanager_pages = g_list_append(g_tabmanager_pages, new_page);
     
     //tabmanager_set_active_tab(pagenr);
+
     gtk_notebook_set_current_page(g_tabs_notebook, pagenr);
-    
+    gtk_widget_grab_focus(GTK_WIDGET(editor->view));
 }
 
 void tabmanager_remove_tab(gint pagenr) {

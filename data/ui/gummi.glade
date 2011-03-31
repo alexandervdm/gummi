@@ -1275,7 +1275,6 @@ bibliography database</property>
                                     <property name="height_request">20</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="has_focus">True</property>
                                     <property name="pulse_step">0.02</property>
                                     <property name="text" translatable="yes">no bibliography file detected</property>
                                     <property name="adjustment">bibprogressmon</property>
@@ -1484,9 +1483,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
