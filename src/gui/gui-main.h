@@ -104,6 +104,8 @@ void on_menu_redo_activate (GtkWidget* widget, void* user);
 void on_menu_delete_activate (GtkWidget *widget, void* user);
 void on_menu_selectall_activate (GtkWidget *widget, void* user);
 void on_menu_preferences_activate (GtkWidget *widget, void* user);
+void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkNotebook* nbpage,
+        int page, void* data);
 void on_menu_statusbar_toggled (GtkWidget *widget, void* user);
 void on_menu_toolbar_toggled (GtkWidget *widget, void* user);
 void on_menu_rightpane_toggled (GtkWidget *widget, void* user);

@@ -493,7 +493,8 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
     prefsgui_main (gui->prefsgui);
 }
 
-void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *nbpage, int page, void *data) {
+void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkNotebook*nbpage,
+        int page, void *data) {
     gint pos = tabmanager_get_position_from_page(nbpage);
     
     
