@@ -86,6 +86,8 @@ gpointer motion_compile_thread (gpointer data) {
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
     GtkWidget* focus = NULL;
+    gboolean precompile_ok;
+    gchar *editortext;
 
     latex = gummi_get_latex ();
     pc = gui->previewgui;
@@ -100,24 +102,35 @@ gpointer motion_compile_thread (gpointer data) {
 
         gdk_threads_enter ();
         focus = gtk_window_get_focus (gui->mainwindow);
-        latex_update_workfile (latex, editor);
+        editortext = latex_update_workfile (latex, editor);
+        
+        precompile_ok = latex_precompile_check(editortext);
+        g_free(editortext);
+        
         gtk_widget_grab_focus (focus);
         gdk_threads_leave ();
-
-        latex_update_pdffile (latex, editor);
+        
+        /* TODO: make compatibility with new master/slave doc system */
+        if (precompile_ok) latex_update_pdffile (latex, editor);
+        
         g_mutex_unlock (mc->compile_mutex);
 
         gdk_threads_enter ();
         editor_apply_errortags (editor, latex->errorlines);
         errorbuffer_set_text (latex->errormessage);
 
-        if (!pc->errormode && latex->errorlines[0] && !pc->uri) {
+
+        if ((!pc->errormode && latex->errorlines[0] && !pc->uri) ||        
+            (!pc->errormode && !precompile_ok)) {
             previewgui_start_error_mode (pc);
-        } else if (!latex->errorlines[0]) {
+        } else if (!latex->errorlines[0] && precompile_ok) {
             if (pc->errormode) previewgui_stop_error_mode (pc);
             if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
         }
-        previewgui_refresh (gui->previewgui);
+        
+        /* TODO: make compatibility with new master/slave doc system */
+        if (precompile_ok) previewgui_refresh (gui->previewgui);
+        
         gdk_threads_leave ();
     }
 }

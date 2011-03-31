@@ -51,7 +51,7 @@ GuLatex* latex_init (void) {
     return l;
 }
 
-void latex_update_workfile (GuLatex* lc, GuEditor* ec) {
+gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter start, end;
     gchar *text;
     FILE *fp;
@@ -68,11 +68,11 @@ void latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     
     if (fp == NULL) {
         slog (L_ERROR, "unable to create workfile in tmpdir\n");
-        return;
+        return g_strdup(text);
     }
     fwrite (text, strlen (text), 1, fp);
-    g_free (text);
     fclose (fp);
+    return g_strdup(text);
 }
 
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
@@ -155,6 +155,18 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
     Tuple2 res = utils_popen_r (command);
     g_free (res.second);
     g_free (command);
+}
+
+gboolean latex_precompile_check (gchar* editortext) {
+    /* both documentclass and documentstyle appear to be valid.
+     * http://pangea.stanford.edu/computing/unix/formatting/parts.php
+     * TOD: Improve and add document scan tags and make compatible with
+     * upcoming master/slave document system */
+    
+    gboolean class = utils_subinstr("\\documentclass", editortext, FALSE);
+    gboolean style = utils_subinstr("\\documentstyle", editortext, FALSE);
+    
+    return (class || style);
 }
 
 void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
