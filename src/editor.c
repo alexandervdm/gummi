@@ -105,6 +105,8 @@ GuEditor* editor_init (GuMotion* mc) {
                 G_CALLBACK (on_key_press_cb), mc);
     ec->sigid[1] = g_signal_connect (ec->view, "key-release-event",
                 G_CALLBACK (on_key_release_cb), mc);
+    ec->sigid[2] = g_signal_connect (ec->buffer, "changed",
+                G_CALLBACK (check_preview_timer), NULL);
 
     return ec;
 }
@@ -114,6 +116,7 @@ void editor_destroy (GuEditor* ec) {
 
     for (i = 0; i < 2; ++i)
         g_signal_handler_disconnect (ec->view, ec->sigid[i]);
+    g_signal_handler_disconnect (ec->buffer, ec->sigid[2]);
 
     editor_fileinfo_cleanup (ec);
 }

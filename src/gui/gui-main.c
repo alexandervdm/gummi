@@ -175,8 +175,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
 void gui_main (GtkBuilder* builder) {
     gtk_builder_connect_signals (builder, NULL);       
-    g_signal_connect (g_e_buffer, "changed",
-            G_CALLBACK (check_preview_timer), NULL);
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
     // TODO: SVN NOTICE 23 NOVEMBER - REMOVE ON 0.6.0 RELEASE
@@ -505,7 +503,6 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *nbpage,
     /* very important line */
     tabmanager_set_active_tab(pos);
     previewgui_reset (gui->previewgui);
-    
     
     slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
 }
