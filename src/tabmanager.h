@@ -34,11 +34,6 @@
 
 #include "editor.h"
 
-/* TODO: is this a poor practice? it sure is clean/handy..
- * Yes, we usually avoid defining macros that relies on local magic variable
- * names */
-#define g_active_editor gummi->tabmanager->active_editor
-
 typedef struct _GuTabmanager GuTabmanager;
 
 struct _GuTabmanager {

@@ -48,6 +48,7 @@
  * syntax sugar */
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
+#define g_active_editor gummi->tabmanager->active_editor
 
 #define GUMMI_GUI(x) ((GummiGui*)x)
 typedef struct _GummiGui GummiGui; 
