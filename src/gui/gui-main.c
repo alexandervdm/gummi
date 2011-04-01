@@ -287,7 +287,7 @@ void gui_open_file (const gchar* filename) {
     g_free (basename);
     g_free (prev_workfile);
     
-        gui_create_environment (NULL, filename);
+    gui_create_environment (NULL, filename);
 
     if (GTK_RESPONSE_YES != ret)
         iofunctions_load_file (gummi->io, filename); 

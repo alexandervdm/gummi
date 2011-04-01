@@ -131,11 +131,9 @@ int main (int argc, char *argv[]) {
     if (argc != 2) {
         iofunctions_load_default_text ();
         gui_create_environment (editor, NULL);
-        
-
     } else {
         iofunctions_load_file (io, argv[1]);
-        gui_create_environment (editor, NULL);
+        gui_create_environment (editor, argv[1]);
     }
 
     gui_main (builder);
