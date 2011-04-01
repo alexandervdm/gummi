@@ -222,28 +222,21 @@ void gui_update_environment (const gchar* filename) {
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
     editortabsgui_change_label (filename);
-    gummi_new_environment(g_tabmanager_editors, g_active_editor, filename);
+    gummi_new_environment(gummi->tabmanager->editors,
+                          gummi->tabmanager->active_editor, filename);
     gui_update_title ();
     previewgui_reset (gui->previewgui);
 }
-
 
 void gui_create_environment (GuEditor* ec, const gchar* filename) {
     /* THE BIG KABOSH!! -Michael Schiavello */
     
-    /* TODO: temp workaround */
-    if (ec == NULL) {
-        tabmanager_create_tab(NULL, filename);
-    }
-    else {
-        tabmanager_create_tab(ec, filename);
-    }
+    if (!ec) ec = editor_init(gummi->motion);
+    tabmanager_create_tab(gummi->tabmanager, ec, filename);
     add_to_recent_list (filename);
     gui_update_title ();
     previewgui_reset (gui->previewgui);
 }
-
-
 
 void gui_update_title (void) {
     gchar* basename = NULL;
@@ -278,11 +271,6 @@ void gui_open_file (const gchar* filename) {
      * the real_time compile scheme, the compile scheme functions can
      * access fileinfo */
      
-    /* TODO: old obsolete code? 
-     * previewgui_stop_preview (gui->previewgui);
-     * editor_fileinfo_cleanup (g_active_editor);
-     */
-
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
         slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
@@ -303,8 +291,6 @@ void gui_open_file (const gchar* filename) {
 
     if (GTK_RESPONSE_YES != ret)
         iofunctions_load_file (gummi->io, filename); 
-
-
 }
 
 void gui_save_file (gboolean saveas) {
@@ -435,7 +421,6 @@ void on_menu_saveas_activate (GtkWidget *widget, void* user) {
 }
 
 void on_menu_close_activate (GtkWidget *widget, void* user) {
-    printf("close\n");
     gint ret = check_for_save ();
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (FALSE);
@@ -445,10 +430,12 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     /* TODO: temporary measure to disable closing the initial tab */
     gint current_tab = gtk_notebook_get_current_page
                         (gui->editortabsgui->tab_notebook);
-    if (current_tab != 0) {
-        tabmanager_remove_tab(current_tab);
-        /* TODO: disconnect signals and such if last tab is closed.. */
-    }
+
+    /* Temporarily call to remove tab, when the close button is add in the
+     * future, it should call tabmanager_remove_tab director instead of
+     * on_menu_close_activate */
+    tabmanager_remove_tab(gummi->tabmanager, current_tab);
+    /* TODO: disconnect signals and such if last tab is closed.. */
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
@@ -494,15 +481,15 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
 }
 
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
-        int page, void *data) {
-    gint pos = tabmanager_get_position_from_page(nbpage);
+                                 int page, void *data) {
+    gint pos = tabmanager_get_position_from_page(gummi->tabmanager, nbpage);
     
     
 
     /* TODO: correct compile/preview switching */
     
     /* very important line */
-    tabmanager_set_active_tab(pos);
+    tabmanager_set_active_tab(gummi->tabmanager, pos);
     previewgui_reset (gui->previewgui);
     
     slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);

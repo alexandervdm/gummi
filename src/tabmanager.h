@@ -34,11 +34,10 @@
 
 #include "editor.h"
 
-/* TODO: is this a poor practice? it sure is clean/handy.. */
-#define g_tabmanager_editors gummi->tabmanager->editors
-#define g_tabmanager_pages gummi->tabmanager->pages
+/* TODO: is this a poor practice? it sure is clean/handy..
+ * Yes, we usually avoid defining macros that relies on local magic variable
+ * names */
 #define g_active_editor gummi->tabmanager->active_editor
-#define g_active_page gummi->tabmanager->active_page
 
 typedef struct _GuTabmanager GuTabmanager;
 
@@ -51,10 +50,17 @@ struct _GuTabmanager {
 
 
 GuTabmanager* tabmanager_init (GuEditor* first);
-void tabmanager_create_tab(GuEditor *new_editor, const gchar* filename);
-void tabmanager_remove_tab(gint pagenr);
-void tabmanager_set_active_tab(gint pagenr);
+void tabmanager_create_tab(GuTabmanager* tc, GuEditor *new_editor,
+                           const gchar* filename);
 
-gint tabmanager_get_position_from_page(GtkWidget* page);
+/*
+ * @brief remove a tab
+ * @return TURE means the removed tab is last one
+ */
+gboolean tabmanager_remove_tab(GuTabmanager* tc, gint pagenr);
+void tabmanager_set_active_tab(GuTabmanager* tc, gint pagenr);
+gint tabmanager_get_position_from_editor(GuTabmanager* tc, GuEditor* ec);
+gint tabmanager_get_position_from_page(GuTabmanager* tc, GtkWidget* page);
+
 #endif /* __GUMMI_TABMANAGER_H__ */
 

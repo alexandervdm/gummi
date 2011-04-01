@@ -46,8 +46,6 @@ struct _GuEditortabsGui {
 };
 
 
-
-
 GuEditortabsGui* editortabsgui_init (GtkBuilder* builder);
 gint editortabsgui_create_page (GuEditor* editor, const gchar* filename);
 gint editortabsgui_remove_page ();

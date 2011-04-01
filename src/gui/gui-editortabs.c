@@ -48,8 +48,6 @@ GuEditortabsGui* editortabsgui_init (GtkBuilder* builder) {
     return et;
 }
 
-
-
 GtkWidget* editortabsgui_create_label (const gchar *filename) {
     GtkWidget *tablabel;
     gchar *tabname;
@@ -80,7 +78,6 @@ void editortabsgui_change_label (const gchar *filename) {
     
 }
 
-
 gint editortabsgui_create_page (GuEditor* editor, const gchar* filename) {
     GtkWidget *scrollwindow;
     GtkWidget *tablabel;
@@ -104,11 +101,8 @@ gint editortabsgui_create_page (GuEditor* editor, const gchar* filename) {
     return position;
 }
 
-
-
 gint editortabsgui_remove_page () {
     gint active_page = gtk_notebook_get_current_page(g_tabs_notebook);
     gtk_notebook_remove_page(g_tabs_notebook, active_page);
     return active_page;
 }
-

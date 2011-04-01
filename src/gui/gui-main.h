@@ -43,6 +43,9 @@
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
+
+/* These macros should be only used in GUI related classes which acted as
+ * syntax sugar */
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
 
