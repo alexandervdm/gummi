@@ -256,6 +256,7 @@ void gui_update_title (void) {
                 PACKAGE_NAME);
 
     gtk_window_set_title (gui->mainwindow, title);
+    printf("%s\n", title);
     g_free (title);
 }
 
@@ -482,14 +483,15 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
 
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
+                                     
     gint pos = tabmanager_get_position_from_page(gummi->tabmanager, nbpage);
-    
-    
 
-    /* TODO: correct compile/preview switching */
-    
     /* very important line */
     tabmanager_set_active_tab(gummi->tabmanager, pos);
+    
+    gui_update_title();
+    
+    
     previewgui_reset (gui->previewgui);
     
     slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
