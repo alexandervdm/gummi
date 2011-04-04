@@ -193,6 +193,15 @@ gboolean gui_quit (void) {
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
     gint ret = check_for_save ();
+    
+    
+    
+    int max = 5;
+    int i;
+    for(i = 0; i < max;i++){
+        printf("%d\n", i);
+    }
+    
 
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (FALSE);
