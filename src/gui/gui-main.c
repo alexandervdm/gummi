@@ -256,7 +256,6 @@ void gui_update_title (void) {
                 PACKAGE_NAME);
 
     gtk_window_set_title (gui->mainwindow, title);
-    printf("%s\n", title);
     g_free (title);
 }
 
@@ -365,13 +364,7 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
     gint index = name[0] - '0' -1;
-    gint ret = check_for_save ();
-
-    if (GTK_RESPONSE_YES == ret)
-        gui_save_file (FALSE);
-    else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
-        return;
-
+    
     if (utils_path_exists (gui->recent_list[index])) {
         gui_open_file (gui->recent_list[index]);
     } else {
