@@ -192,21 +192,25 @@ void gui_main (GtkBuilder* builder) {
 gboolean gui_quit (void) {
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
-    gint ret = check_for_save ();
-    
-    
-    
-    int max = 5;
     int i;
-    for(i = 0; i < max;i++){
-        printf("%d\n", i);
+
+    gint length = g_list_length (gummi->tabmanager->editors);
+
+    for(i = 0; i < length;i++){
+        
+        
+        gtk_notebook_set_current_page(g_tabs_notebook, i);
+        tabmanager_set_active_tab(gummi->tabmanager, i);
+        
+        gint ret = check_for_save ();
+        if (GTK_RESPONSE_YES == ret)
+            gui_save_file (FALSE);
+        else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
+            return TRUE;
     }
     
 
-    if (GTK_RESPONSE_YES == ret)
-        gui_save_file (FALSE);
-    else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
-        return TRUE;
+
 
     editor_destroy (g_active_editor);
     gtk_window_get_size (gui->mainwindow, &width, &height);
