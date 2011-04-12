@@ -36,7 +36,7 @@ Gummi* gummi = 0;
 GummiGui* gui = 0;
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
-                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabmgr) {
+                   GuTemplate* tpl, GuSnippets* snip) {
     
     Gummi* g = g_new0 (Gummi, 1);
     g->io = io;
@@ -45,15 +45,11 @@ Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
     g->biblio = bib;
     g->templ = tpl;
     g->snippets = snip;
-    g->tabmanager = tabmgr;
     return g;
 }
 
-void gummi_new_environment (GList *eds, GuEditor* ec, const gchar* filename) {
+void gummi_new_environment (GuEditor* ec, gint position, const gchar* filename) {
     editor_fileinfo_update (ec, filename);
-    
-    gint position = g_list_index(eds, ec);
-
     
     slog (L_INFO, "\n");
     slog (L_INFO, "Environment created at (%d) for:\n", position);
@@ -69,7 +65,7 @@ GummiGui* gummi_get_gui (void) {
 }
 
 GuEditor* gummi_get_active_editor (void) {
-    return gummi->tabmanager->active_editor;
+    return gui->tabmanager->active_editor;
 }
 
 GuIOFunc* gummi_get_io (void) {

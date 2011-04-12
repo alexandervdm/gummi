@@ -1,10 +1,10 @@
 /**
- * @file    tabmanager.h
- * @brief   
+ * @file   gui-editortabs.h
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,35 +27,47 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef GUMMI_TABMANAGER_H
-#define GUMMI_TABMANAGER_H
+#ifndef __GUMMI_GUI_TABMANAGER_H__
+#define __GUMMI_GUI_TABMANAGER_H__
 
+
+#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "editor.h"
 
-typedef struct _GuTabmanager GuTabmanager;
 
-struct _GuTabmanager {
-    GList *editors;
-    GList *pages;
-    GuEditor* active_editor;
+
+
+#define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
+typedef struct _GuTabmanagerGui GuTabmanagerGui;
+
+struct _GuTabmanagerGui {
+	GtkNotebook *notebook;
+
+	GuEditor* active_editor;
     GtkNotebook* active_page;
+    
+	GList *editors;
+    GList *pages;
 };
 
 
-GuTabmanager* tabmanager_init (GuEditor* first);
-void tabmanager_create_tab(GuTabmanager* tc, GuEditor *new_editor,
-                           const gchar* filename);
 
-/*
- * @brief remove a tab
- * @return TURE means the removed tab is last one
- */
-gboolean tabmanager_remove_tab(GuTabmanager* tc, gint pagenr);
-void tabmanager_set_active_tab(GuTabmanager* tc, gint pagenr);
-gint tabmanager_get_position_from_editor(GuTabmanager* tc, GuEditor* ec);
-gint tabmanager_get_position_from_page(GuTabmanager* tc, GtkWidget* page);
+GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 
-#endif /* __GUMMI_TABMANAGER_H__ */
+gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor, const gchar* filename);
+GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
+void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename);
 
+void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position);
+
+gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec);
+gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg);
+gint tabmanager_get_position_editor(GuTabmanagerGui* tc, GuEditor* ec);
+gint tabmanager_get_position_page(GuTabmanagerGui* tc, GtkWidget* pg);
+
+
+
+
+#endif /* __GUMMI_GUI_TABMANAGER_H__ */

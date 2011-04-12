@@ -34,32 +34,34 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include "gui-editortabs.h"
 #include "gui-import.h"
 #include "gui-prefs.h"
 #include "gui-preview.h"
 #include "gui-search.h"
 #include "gui-snippets.h"
+#include "gui-tabmanager.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
 
-/* These macros should be only used in GUI related classes which acted as
- * syntax sugar */
+/* These macros should be only used in GUI related classes 
+ * which acted as syntax sugar */
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
-#define g_active_editor gummi->tabmanager->active_editor
+#define g_active_editor gui->tabmanager->active_editor
+
+
 
 #define GUMMI_GUI(x) ((GummiGui*)x)
 typedef struct _GummiGui GummiGui; 
 
 struct _GummiGui {
-    GuEditortabsGui* editortabsgui;
     GuImportGui* importgui;
     GuPrefsGui* prefsgui;
     GuPreviewGui* previewgui;
     GuSearchGui* searchgui;
     GuSnippetsGui* snippetsgui;
+    GuTabmanagerGui* tabmanager;
 
     GtkWindow *mainwindow;
     GtkTextBuffer *errorbuff;

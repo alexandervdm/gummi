@@ -101,12 +101,12 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
 
-    g->editortabsgui = editortabsgui_init (builder);
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
     g->searchgui = searchgui_init (builder);
     g->prefsgui = prefsgui_init (g->mainwindow);
     g->snippetsgui = snippetsgui_init (g->mainwindow);
+    g->tabmanager = tabmanagergui_init (builder);
 
     gchar* icon_file = g_build_filename (DATADIR, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);
@@ -194,13 +194,13 @@ gboolean gui_quit (void) {
     gchar buf[16];
     int i;
 
-    gint length = g_list_length (gummi->tabmanager->editors);
+    gint length = g_list_length (gui->tabmanager->editors);
 
     for(i = 0; i < length;i++){
         
         
-        gtk_notebook_set_current_page(g_tabs_notebook, i);
-        tabmanager_set_active_tab(gummi->tabmanager, i);
+        gtk_notebook_set_current_page(gui->tabmanager->notebook, i);
+        tabmanager_set_active_tab(gui->tabmanager, i);
         
         gint ret = check_for_save ();
         if (GTK_RESPONSE_YES == ret)
@@ -234,18 +234,24 @@ void gui_update_environment (const gchar* filename) {
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
-    editortabsgui_change_label (filename);
-    gummi_new_environment(gummi->tabmanager->editors,
-                          gummi->tabmanager->active_editor, filename);
+    tabmanager_change_label (gui->tabmanager, filename);
+    
+    gint position = tabmanager_get_position_editor(gui->tabmanager, gui->tabmanager->active_editor);
+    
+    gummi_new_environment(gui->tabmanager->active_editor, position, filename);
     gui_update_title ();
     previewgui_reset (gui->previewgui);
 }
 
 void gui_create_environment (GuEditor* ec, const gchar* filename) {
-    /* THE BIG KABOSH!! -Michael Schiavello */
-    
+	/* new editor */
     if (!ec) ec = editor_init(gummi->motion);
-    tabmanager_create_tab(gummi->tabmanager, ec, filename);
+    gint position = tabmanager_push_editor(gui->tabmanager, ec);
+    gummi_new_environment(ec, position, filename);
+    
+    /* new page */
+    tabmanager_create_page(gui->tabmanager, ec, filename);
+    
     add_to_recent_list (filename);
     gui_update_title ();
     previewgui_reset (gui->previewgui);
@@ -436,12 +442,12 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     
     /* TODO: temporary measure to disable closing the initial tab */
     gint current_tab = gtk_notebook_get_current_page
-                        (gui->editortabsgui->tab_notebook);
+                        (gui->tabmanager->notebook);
 
     /* Temporarily call to remove tab, when the close button is add in the
-     * future, it should call tabmanager_remove_tab director instead of
+     * future, it should call tabmanagergui_remove_tab director instead of
      * on_menu_close_activate */
-    tabmanager_remove_tab(gummi->tabmanager, current_tab);
+    //----tabmanager_remove_tab(gui->tabmanager, current_tab);
     /* TODO: disconnect signals and such if last tab is closed.. */
 }
 
@@ -490,10 +496,10 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
                                      
-    gint pos = tabmanager_get_position_from_page(gummi->tabmanager, nbpage);
+    gint pos = tabmanager_get_position_page(gui->tabmanager, nbpage);
 
     /* very important line */
-    tabmanager_set_active_tab(gummi->tabmanager, pos);
+    tabmanager_set_active_tab(gui->tabmanager, pos);
     
     gui_update_title();
     
