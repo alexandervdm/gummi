@@ -22,7 +22,6 @@ gummi_SOURCES = biblio.c  biblio.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \
 		motion.c motion.h \
-		tabmanager.c tabmanager.h \
 		signals.c signals.h \
 		snippets.c snippets.h \
 		template.c template.h \
