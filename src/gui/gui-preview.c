@@ -133,7 +133,6 @@ void my_getsize (GtkWidget *widget, GtkAllocation *allocation, void *data) {
     printf ("width = %d, height = %d\n", allocation->width, allocation->height);
 }*/
 
-
 void previewgui_refresh (GuPreviewGui* pc) {
     L_F_DEBUG;
     cairo_t *cr = NULL;

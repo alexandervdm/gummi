@@ -54,7 +54,7 @@ GuLatex* latex_init (void) {
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter start, end;
     gchar *text;
-    FILE *fp;
+    GError* err = NULL;
 
     /* save selection */
     gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (ec->buffer), &start,
@@ -64,11 +64,12 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     /* restore selection */
     gtk_text_buffer_select_range (GTK_TEXT_BUFFER (ec->buffer), &start, &end);
     
-    if (fp == NULL) {
-        slog (L_ERROR, "unable to create workfile in tmpdir\n");
-        return g_strdup(text);
+    if (!g_file_set_contents(ec->workfile, text, -1, &err)) {
+        slog (L_ERROR, "%s\n", err->message);
+        g_error_free(err);
+        return text;
     }
-    g_file_set_contents(ec->workfile, text, -1, NULL);
+
     return text;
 }
 

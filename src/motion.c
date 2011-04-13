@@ -113,7 +113,10 @@ gpointer motion_compile_thread (gpointer data) {
         if (!precompile_ok) {
             gdk_threads_leave();
             g_mutex_unlock (mc->compile_mutex);
+
+            gdk_threads_enter();
             previewgui_start_error_mode (pc);
+            gdk_threads_leave();
             continue;
         }
         
