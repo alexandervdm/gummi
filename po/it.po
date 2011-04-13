@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-20 20:06+0800\n"
+"POT-Creation-Date: 2011-04-14 00:00+0800\n"
 "PO-Revision-Date: 2010-10-27 20:28+0100\n"
 "Last-Translator: Salvatore Vassallo <vassallosalvatore@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -279,7 +279,7 @@ msgstr "Solo parole intere"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:861
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
 msgid "N/A"
 msgstr "N/A"
 
@@ -443,11 +443,11 @@ msgstr "(_V)isualizza"
 msgid "filter:"
 msgstr "filtra:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:859
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
 msgid "no bibliography file detected"
 msgstr "nessuna bibliografia trovata"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:860
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
 msgid "none"
 msgstr "nessuno"
 
@@ -484,168 +484,182 @@ msgid "toolbutton7"
 msgstr "toolbutton7"
 
 #: ../data/ui/prefs.glade.h:1
-msgid "   "
+#, fuzzy
+msgid "  "
 msgstr "   "
 
 #: ../data/ui/prefs.glade.h:2
+msgid "   "
+msgstr "   "
+
+#: ../data/ui/prefs.glade.h:3
 #, fuzzy
 msgid "Automatic Indentation"
 msgstr "Indentazione automatica:"
 
-#: ../data/ui/prefs.glade.h:3
-msgid "Color Scheme"
-msgstr ""
-
 #: ../data/ui/prefs.glade.h:4
-msgid "Command: "
+msgid "Automatically export PDF on document save"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:5
-msgid "Configure snippets"
+msgid "Color Scheme"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:6
+msgid "Command: "
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:7
+msgid "Configure snippets"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:8
 #, fuzzy
 msgid "Customize"
 msgstr "Compila"
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:9
 msgid "Default Text"
 msgstr "Testo predefinito"
 
-#: ../data/ui/prefs.glade.h:8
+#: ../data/ui/prefs.glade.h:10
 msgid "Display line numbers"
 msgstr "Mostrare i numeri di riga"
 
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:11
 msgid "Do not split words over two lines"
 msgstr "Non dividere le parole su due righe"
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:12
 msgid "Editor"
 msgstr "Editor"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:13
 #, fuzzy
 msgid "Editor font"
 msgstr "Caratteri dell'editor:"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:14
 msgid "Enable text wrapping"
 msgstr "Attivare a capo automatico"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:15
 msgid "Extra flags:"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:16
 #, fuzzy
 msgid "File saving"
 msgstr "Salvataggio file:"
 
-#: ../data/ui/prefs.glade.h:15
+#: ../data/ui/prefs.glade.h:17
 msgid "Font & Colors"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:18
 msgid "Gummi Preferences"
 msgstr "Preferenze di Gummi"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:19
 msgid "Highlight current line"
 msgstr "Evidenzia la linea corrente"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:20
 #, fuzzy
 msgid "Highlighting"
 msgstr "Evidenziazione:"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Usa degli (_s)pazi invece della tabulazione"
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:22
 #, fuzzy
 msgid "Line numbers"
 msgstr "Numeri di riga:"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:23
 msgid "Miscellaneous"
 msgstr "Miscellanea"
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:24
 msgid "None"
 msgstr "Nessuno"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:25
 msgid "PDF Compiling"
 msgstr "Compilazione PDF"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:26
+#, fuzzy
+msgid "PDF Exporting"
+msgstr "Compilazione PDF"
+
+#: ../data/ui/prefs.glade.h:27
 msgid "Snippets"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:28
 #, fuzzy
 msgid "Spell check language"
 msgstr "Lingua controllo ortografico:"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:29
 #, fuzzy
 msgid "Tab stops"
 msgstr "Limite tabulazione:"
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:30
 msgid "Tab width:"
 msgstr "Ampiezza:"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:31
 #, fuzzy
 msgid "Text wrapping"
 msgstr "A capo automatico:"
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:32
 #, fuzzy
 msgid "Typesetter command"
 msgstr "Comandi di composizione:"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:33
 msgid "View"
 msgstr "Visualizza"
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:34
 msgid "_Autosave files every"
 msgstr "Salvataggio (_a)utomatico ogni"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:35
 msgid "_Enable automatic indentation"
 msgstr "Abilita l'indentazione (_a)utomatica"
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:36
 msgid "_Reset defaults"
 msgstr "(_R)ipristina predefiniti"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:37
 msgid "compile every"
 msgstr "Compila automaticamente ogni"
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:38
 msgid "compile when idle for "
 msgstr "Compila quando fermo per"
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:39
 msgid "minutes"
 msgstr "minuti"
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:40
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:41
 msgid "seconds"
 msgstr "secondi"
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:42
 msgid "xelatex"
 msgstr "xelatex"
 
@@ -688,20 +702,20 @@ msgstr ""
 msgid "_Reset"
 msgstr ""
 
-#: ../src/editor.c:506
+#: ../src/editor.c:509
 msgid "Top reached, search from bottom?"
 msgstr "Raggiunto l'inizio del documento, cercare dal fondo?"
 
-#: ../src/editor.c:513
+#: ../src/editor.c:516
 msgid "Bottom reached, search from top?"
 msgstr "Raggiunta la fine del documento, cercare dall'inzio?"
 
-#: ../src/iofunctions.c:116
+#: ../src/iofunctions.c:118
 #, c-format
 msgid "Saving %s..."
 msgstr "Salvataggio in corso di %s..."
 
-#: ../src/iofunctions.c:147
+#: ../src/iofunctions.c:149
 #, c-format
 msgid ""
 "%s\n"
@@ -710,16 +724,16 @@ msgstr ""
 "%s\n"
 "Riprovare nuovamente più tardi."
 
-#: ../src/iofunctions.c:192
+#: ../src/iofunctions.c:194
 msgid "Can not convert text to UTF-8!\n"
 msgstr "Non è possibile convertire il testo in UTF-8!\n"
 
-#: ../src/iofunctions.c:217
+#: ../src/iofunctions.c:219
 #, c-format
 msgid "Autosaving file %s"
 msgstr "Salvataggio automatico del file %s"
 
-#: ../src/latex.c:172 ../src/gui/gui-main.c:318
+#: ../src/latex.c:182 ../src/gui/gui-main.c:366
 msgid "The file already exists. Overwrite?"
 msgstr "Il file esiste già. Volete sovrascriverlo?"
 
@@ -759,40 +773,40 @@ msgstr "Conferma"
 msgid "%s: No such file or directory\n"
 msgstr "%s: Nessun file o directory\n"
 
-#: ../src/gui/gui-main.c:376
+#: ../src/gui/gui-main.c:415
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Errore nel caricare un file modificato di recente: %s"
 
-#: ../src/gui/gui-main.c:552
+#: ../src/gui/gui-main.c:597
 msgid "Words in text"
 msgstr "Parole nel testo"
 
-#: ../src/gui/gui-main.c:553
+#: ../src/gui/gui-main.c:598
 msgid "Words in headers"
 msgstr "Parole nelle intestazioni"
 
-#: ../src/gui/gui-main.c:554
+#: ../src/gui/gui-main.c:599
 msgid "Words in float captions"
 msgstr "Parole nelle didascalie dei float"
 
-#: ../src/gui/gui-main.c:555
+#: ../src/gui/gui-main.c:600
 msgid "Number of headers"
 msgstr "Numero di intestazioni"
 
-#: ../src/gui/gui-main.c:556
+#: ../src/gui/gui-main.c:601
 msgid "Number of floats"
 msgstr "Numero di float"
 
-#: ../src/gui/gui-main.c:557
+#: ../src/gui/gui-main.c:602
 msgid "Number of math inlines"
 msgstr "Numero di espressioni matematiche"
 
-#: ../src/gui/gui-main.c:558
+#: ../src/gui/gui-main.c:603
 msgid "Number of math displayed"
 msgstr "Numero di espressioni matematiche visualizzate"
 
-#: ../src/gui/gui-main.c:619
+#: ../src/gui/gui-main.c:664
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
@@ -800,58 +814,64 @@ msgstr ""
 "Questa funzione richiede\n"
 "il porgramma texcount.\n"
 
-#: ../src/gui/gui-main.c:627
+#: ../src/gui/gui-main.c:672
 msgid "Document Statistics"
 msgstr "Statistiche del documento"
 
-#: ../src/gui/gui-main.c:816
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:811
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:863
 msgid "Compiling bibliography file..."
 msgstr "Compilazione della bibliografia..."
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:865
 msgid "bibliography compiled without errors"
 msgstr "bibliografia compilata senza errori"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:867
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Errore nel compilare il file della bibliografia o nessuna bibliografia "
 "trovata..."
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:870
 msgid "error compiling bibliography file"
 msgstr "errore compilando la bibliografia"
 
-#: ../src/gui/gui-main.c:852
+#: ../src/gui/gui-main.c:903
 #, c-format
 msgid "%s loaded"
 msgstr "Caricato%s"
 
-#: ../src/gui/gui-main.c:892
+#: ../src/gui/gui-main.c:980
 msgid "Do you want to save the changes you have made?"
 msgstr "Salvare le modifiche al documento?"
 
-#: ../src/gui/gui-main.c:902
+#: ../src/gui/gui-main.c:990
 msgid "Open LaTeX document"
 msgstr "Apri un documento LaTex"
 
-#: ../src/gui/gui-main.c:905
+#: ../src/gui/gui-main.c:993
 msgid "Select an image to insert"
 msgstr "Selezionare un'immagine da inserire"
 
-#: ../src/gui/gui-main.c:906
+#: ../src/gui/gui-main.c:994
 msgid "Select bibliography file"
 msgstr "Seleziona il file della bibliografia"
 
-#: ../src/gui/gui-main.c:940
+#: ../src/gui/gui-main.c:1028
 msgid "Save LaTeX document"
 msgstr "Salva il documento LaTex"
 
-#: ../src/gui/gui-main.c:941
+#: ../src/gui/gui-main.c:1029
 msgid "Save as LaTeX document"
 msgstr "Salva come documento LaTeX"
 
-#: ../src/gui/gui-main.c:942
+#: ../src/gui/gui-main.c:1030
 msgid "Export to PDF"
 msgstr "Esporta nel formato PDF"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 10:19+0800\n"
+"POT-Creation-Date: 2011-04-14 00:00+0800\n"
 "PO-Revision-Date: 2011-03-22 17:7+0300\n"
 "Last-Translator: Hamad Mohammad\n"
 "Language-Team: www.linuxac.org\n"
@@ -72,73 +72,73 @@ msgstr "85%"
 
 #: ../data/ui/gummi.glade.h:21
 msgid "Align center"
-msgstr "محاذاة وسط"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:22
 msgid "Align left"
-msgstr "محاذاة يسار"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:23
 msgid "Align right"
-msgstr "محاذاة يمين"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:24
 msgid ""
 "Alignment of the\n"
 "cell content."
-msgstr "محاذاة محتوى الخلية"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:26
 msgid "Best Fit"
-msgstr "أفضل ملاءمة"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:27
 msgid "Bibliography"
-msgstr "ببليوجرافيا"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:28
 msgid "Bold text"
-msgstr "نص غامق"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:29
 msgid "Border all cells"
-msgstr "أطّر كل الخلايا"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:30
 msgid "Border outline"
-msgstr "أطّر الخط الخارجي"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:31
 msgid "Braces"
-msgstr "حواصر"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:32
 msgid "Bracket:"
-msgstr "قوس:"
+msgstr ":"
 
 #: ../data/ui/gummi.glade.h:33
 msgid "Brackets"
-msgstr "أقواس"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:34
 msgid "Caption:"
-msgstr "شرح لوحة:"
+msgstr " :"
 
 #: ../data/ui/gummi.glade.h:35
 msgid "Center text"
-msgstr "توسيط النص"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:36
 msgid "Check _Updates"
-msgstr "افحص التحديثات"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:37
 msgid "Columns:"
-msgstr "أعمدة:"
+msgstr ":"
 
 #: ../data/ui/gummi.glade.h:38
 msgid "Compile"
-msgstr "صرّف"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:39
 msgid ""
@@ -147,8 +147,9 @@ msgid ""
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:41
-msgid "Compile _PDF"
-msgstr "تصريف PDF"
+#, fuzzy
+msgid "Compile _Document"
+msgstr " PDF"
 
 #: ../data/ui/gummi.glade.h:42
 msgid ""
@@ -158,15 +159,15 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:44
 msgid "Create a new document"
-msgstr "أنشئ مستند جديد"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:45
 msgid "Create new document from template.."
-msgstr "أنشئ مستند جديد من قالب.."
+msgstr "    .."
 
 #: ../data/ui/gummi.glade.h:46
 msgid "Deletes the selected template"
-msgstr "احذف القالب المحدد"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:47
 msgid ""
@@ -181,450 +182,469 @@ msgid ""
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:51
-msgid "Double line"
-msgstr "سطر مزدوج"
+#, fuzzy
+msgid "Document _Statistics"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:52
-msgid "Error output"
-msgstr "خطأ في الخرْج"
+msgid "Double line"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:53
+msgid "Enable S_nippets"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:54
+msgid "Enable S_pell checking"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:55
+msgid "Error output"
+msgstr "  "
+
+#: ../data/ui/gummi.glade.h:56
 msgid ""
 "Error status for\n"
 "active document"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:55
-msgid "File:"
-msgstr "ملف:"
-
-#: ../data/ui/gummi.glade.h:56
-msgid "Filename:"
-msgstr "اسم الملف"
-
-#: ../data/ui/gummi.glade.h:57
-msgid "Find"
-msgstr "بحث"
-
 #: ../data/ui/gummi.glade.h:58
-msgid "Find Ne_xt"
-msgstr "ابحث في التالي"
+msgid "File:"
+msgstr ":"
 
 #: ../data/ui/gummi.glade.h:59
-msgid "Find Pre_vious"
-msgstr "ابحث في السابق"
+msgid "Filename:"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:60
-msgid "Fit Page Width"
-msgstr "ملاءمة عرض الصفحة"
+msgid "Find"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:61
-msgid "Gummi - LaTeX Editor"
-msgstr "Gummi - محرر LaTeX"
+msgid "Find Ne_xt"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:62
-msgid "Hello svn user!"
-msgstr "أهلا مستخدم svn"
+msgid "Find Pre_vious"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:63
-msgid "Image"
-msgstr "صورة"
+msgid "Fit Page Width"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:64
-msgid "Italic text"
-msgstr "نص مائل"
+msgid "Gummi - LaTeX Editor"
+msgstr "Gummi -  LaTeX"
 
 #: ../data/ui/gummi.glade.h:65
-msgid "Label:"
-msgstr "ملصق:"
+msgid "Hello svn user!"
+msgstr "  svn"
 
 #: ../data/ui/gummi.glade.h:66
-msgid "Load a file"
-msgstr "حمّل ملف"
+msgid "Image"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:67
+msgid "Italic text"
+msgstr " "
+
+#: ../data/ui/gummi.glade.h:68
+msgid "Label:"
+msgstr ":"
+
+#: ../data/ui/gummi.glade.h:69
+msgid "Load a file"
+msgstr " "
+
+#: ../data/ui/gummi.glade.h:70
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:72
 msgid "Match case"
-msgstr "طابق الحالة"
+msgstr " "
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:73
 msgid "Match entire word only"
-msgstr "طابق كل كلمة فقط"
+msgstr "   "
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:74
 msgid "Matrix"
-msgstr "مصفوفة"
+msgstr ""
 
-#: ../data/ui/gummi.glade.h:72 ../src/gui/gui-main.c:854
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
 msgid "N/A"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:73
-msgid "New"
-msgstr "جديد"
-
-#: ../data/ui/gummi.glade.h:74
-msgid "New from _Template"
-msgstr "جديد من القالب"
-
-#: ../data/ui/gummi.glade.h:75
-msgid "Next"
-msgstr "التالي"
-
 #: ../data/ui/gummi.glade.h:76
-msgid "No borders"
-msgstr "لا إطارات"
+msgid "New"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:77
-msgid "Open"
-msgstr "افتح"
+msgid "New from _Template"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:78
-msgid "Open the selected template"
-msgstr "افتح الفالب المحدد"
+msgid "Next"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:79
-msgid "Parentheses"
-msgstr "قوسان"
+msgid "No borders"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:80
-msgid "Pause updating the preview pane."
+msgid "Open"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:81
-msgid "Preview Pane"
-msgstr "عاين اللوحة"
+msgid "Open the selected template"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:82
-msgid "Previous"
-msgstr "عاين"
-
-#: ../data/ui/gummi.glade.h:83
-msgid "References:"
-msgstr "مراجع:"
-
-#: ../data/ui/gummi.glade.h:84
-msgid "Replace _All"
-msgstr "استبدل الكل"
-
-#: ../data/ui/gummi.glade.h:85
-msgid "Replace with:"
-msgstr "استبدل ب:"
-
-#: ../data/ui/gummi.glade.h:86
-msgid "Rows:"
-msgstr "صفوف:"
-
-#: ../data/ui/gummi.glade.h:87
-msgid "Save"
-msgstr "حفظ"
-
-#: ../data/ui/gummi.glade.h:88
-msgid "Save _As..."
-msgstr "احفظ ك..."
-
-#: ../data/ui/gummi.glade.h:89
-msgid "Save the current file"
-msgstr "احفظ الملف الحالي"
-
-#: ../data/ui/gummi.glade.h:90
-msgid "Scale:"
-msgstr "مقياس:"
-
-#: ../data/ui/gummi.glade.h:91
-msgid "Search backwards"
-msgstr "ابحث للخلف"
-
-#: ../data/ui/gummi.glade.h:92
-msgid "Search for:"
-msgstr "ابحث عن:"
-
-#: ../data/ui/gummi.glade.h:93
-msgid "Single line"
-msgstr "سطر وحيد"
-
-#: ../data/ui/gummi.glade.h:94
-msgid "Table"
-msgstr "جدول"
-
-#: ../data/ui/gummi.glade.h:95
-msgid "Unbracketed"
+msgid "Parentheses"
 msgstr ""
 
+#: ../data/ui/gummi.glade.h:83
+msgid "Pause updating the preview pane."
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:84
+msgid "Preview Pane"
+msgstr " "
+
+#: ../data/ui/gummi.glade.h:85
+msgid "Previous"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:86
+msgid "References:"
+msgstr ":"
+
+#: ../data/ui/gummi.glade.h:87
+msgid "Replace _All"
+msgstr " "
+
+#: ../data/ui/gummi.glade.h:88
+msgid "Replace with:"
+msgstr " :"
+
+#: ../data/ui/gummi.glade.h:89
+msgid "Rows:"
+msgstr ":"
+
+#: ../data/ui/gummi.glade.h:90
+msgid "Save"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:91
+msgid "Save _As..."
+msgstr " ..."
+
+#: ../data/ui/gummi.glade.h:92
+msgid "Save the current file"
+msgstr "  "
+
+#: ../data/ui/gummi.glade.h:93
+msgid "Scale:"
+msgstr ":"
+
+#: ../data/ui/gummi.glade.h:94
+msgid "Search backwards"
+msgstr " "
+
+#: ../data/ui/gummi.glade.h:95
+msgid "Search for:"
+msgstr " :"
+
 #: ../data/ui/gummi.glade.h:96
-msgid "Underline text"
-msgstr "ضع خط سفلي"
+msgid "Single line"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:97
-msgid "_Autocheck Spelling"
+msgid "Table"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:98
-msgid "_Compile Bibliography"
-msgstr "صرّف الببليوجرافيا"
+msgid "Unbracketed"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:99
-msgid "_Document Statistics"
-msgstr "إحصائيات المستند"
+msgid "Underline text"
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:100
-msgid "_Edit"
-msgstr "حرّر"
+msgid "_Compile Bibliography"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:101
-msgid "_Export to PDF"
-msgstr "صدّر إلى PDF"
+msgid "_Edit"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:102
-msgid "_File"
-msgstr "ملف"
+msgid "_Export to PDF"
+msgstr "  PDF"
 
 #: ../data/ui/gummi.glade.h:103
-msgid "_Fullscreen"
-msgstr "كامل الشاشة"
+msgid "_File"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:104
-msgid "_Help"
-msgstr "مساعدة"
+msgid "_Fullscreen"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:105
-msgid "_Insert Bibliography"
-msgstr "أدرج ببليوجرافيا"
+msgid "_Help"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:106
-msgid "_Open..."
-msgstr "افتح..."
+msgid "_Insert Bibliography"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:107
-msgid "_Replace"
-msgstr "استبدل"
+msgid "_Open..."
+msgstr "..."
 
 #: ../data/ui/gummi.glade.h:108
-msgid "_Right Pane"
-msgstr "اللوحة اليمنى"
+msgid "_Replace"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:109
-msgid "_Search"
-msgstr "بحث"
+msgid "_Right Pane"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:110
-msgid "_Statusbar"
-msgstr "شريط الحالة"
+msgid "_Search"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:111
-msgid "_Toolbar"
-msgstr "شريط الأدوات"
+msgid "_Statusbar"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:112
-msgid "_Tools"
-msgstr "الأدوات"
+msgid "_Toolbar"
+msgstr " "
 
 #: ../data/ui/gummi.glade.h:113
-msgid "_View"
-msgstr "معاينة"
+msgid "_Tools"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:114
-msgid "filter:"
-msgstr "مرشح:"
+msgid "_View"
+msgstr ""
 
-#: ../data/ui/gummi.glade.h:115 ../src/gui/gui-main.c:852
+#: ../data/ui/gummi.glade.h:115
+msgid "filter:"
+msgstr ":"
+
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
 msgid "no bibliography file detected"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:853
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
 msgid "none"
-msgstr "لا شيء"
+msgstr " "
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:118
 msgid "of 0"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:119
 msgid "shouldnotseeme"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:120
 msgid "toolbutton1"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:121
 msgid "toolbutton2"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:122
 msgid "toolbutton3"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:123
 msgid "toolbutton5"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:124
 msgid "toolbutton6"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:125
 msgid "toolbutton7"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:1
-msgid "   "
+#, fuzzy
+msgid "  "
 msgstr "   "
 
 #: ../data/ui/prefs.glade.h:2
-msgid "Automatic Indentation"
-msgstr "إزاحة آلية"
+msgid "   "
+msgstr "   "
 
 #: ../data/ui/prefs.glade.h:3
-msgid "Color Scheme"
-msgstr "مخطط اللون"
+msgid "Automatic Indentation"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:4
-msgid "Command: "
-msgstr "أمر: "
+msgid "Automatically export PDF on document save"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:5
-msgid "Configure snippets"
-msgstr "اضبط القصاصات"
+msgid "Color Scheme"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:6
-msgid "Customize"
-msgstr "خصّص"
+msgid "Command: "
+msgstr ": "
 
 #: ../data/ui/prefs.glade.h:7
-msgid "Default Text"
-msgstr "النص الإفتراضي"
+msgid "Configure snippets"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:8
-msgid "Display line numbers"
-msgstr "اظهر أرقام الأسطر"
+msgid "Customize"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:9
+msgid "Default Text"
+msgstr " "
+
+#: ../data/ui/prefs.glade.h:10
+msgid "Display line numbers"
+msgstr "  "
+
+#: ../data/ui/prefs.glade.h:11
 msgid "Do not split words over two lines"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:10
-msgid "Editor"
-msgstr "حرّر"
-
-#: ../data/ui/prefs.glade.h:11
-msgid "Editor font"
-msgstr "حرّر الخط"
-
 #: ../data/ui/prefs.glade.h:12
-msgid "Enable text wrapping"
-msgstr "مكّن تغليف النص"
+msgid "Editor"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:13
-msgid "Extra flags:"
-msgstr "أعلام أخرى:"
+msgid "Editor font"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:14
-msgid "File saving"
-msgstr "حفظ الملف"
+msgid "Enable text wrapping"
+msgstr "  "
 
 #: ../data/ui/prefs.glade.h:15
-msgid "Font & Colors"
-msgstr "الخط والألوان"
+msgid "Extra flags:"
+msgstr " :"
 
 #: ../data/ui/prefs.glade.h:16
-msgid "Gummi Preferences"
-msgstr "تفضيلات Gummi"
+msgid "File saving"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:17
-msgid "Highlight current line"
-msgstr "أبرز السطر الحالي"
+msgid "Font & Colors"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:18
-msgid "Highlighting"
-msgstr "إبراز"
+msgid "Gummi Preferences"
+msgstr " Gummi"
 
 #: ../data/ui/prefs.glade.h:19
-msgid "Insert _spaces instead of tabs"
-msgstr "أدرج مساحات بدلا من ألسن"
+msgid "Highlight current line"
+msgstr "  "
 
 #: ../data/ui/prefs.glade.h:20
-msgid "Line numbers"
-msgstr "رقم الأسطر"
+msgid "Highlighting"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:21
-msgid "Miscellaneous"
-msgstr "متفرقات"
+msgid "Insert _spaces instead of tabs"
+msgstr "    "
 
 #: ../data/ui/prefs.glade.h:22
-msgid "None"
-msgstr "بلا"
+msgid "Line numbers"
+msgstr " "
 
 #: ../data/ui/prefs.glade.h:23
-msgid "PDF Compiling"
-msgstr "تصريف PDF"
+msgid "Miscellaneous"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:24
-msgid "Snippets"
-msgstr "قصاصات"
+msgid "None"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:25
+msgid "PDF Compiling"
+msgstr " PDF"
+
+#: ../data/ui/prefs.glade.h:26
+#, fuzzy
+msgid "PDF Exporting"
+msgstr " PDF"
+
+#: ../data/ui/prefs.glade.h:27
+msgid "Snippets"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:28
 msgid "Spell check language"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:29
 msgid "Tab stops"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:27
-msgid "Tab width:"
-msgstr "عرض اللسان:"
-
-#: ../data/ui/prefs.glade.h:28
-msgid "Text wrapping"
-msgstr "تغليف النص"
-
-#: ../data/ui/prefs.glade.h:29
-msgid "Typesetter command"
-msgstr "أمر تنضيد"
-
 #: ../data/ui/prefs.glade.h:30
-msgid "View"
-msgstr "معاينة"
+msgid "Tab width:"
+msgstr " :"
 
 #: ../data/ui/prefs.glade.h:31
+msgid "Text wrapping"
+msgstr " "
+
+#: ../data/ui/prefs.glade.h:32
+msgid "Typesetter command"
+msgstr " "
+
+#: ../data/ui/prefs.glade.h:33
+msgid "View"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:34
 msgid "_Autosave files every"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:32
-msgid "_Enable automatic indentation"
-msgstr "مكّن الإزاحة الآلية"
-
-#: ../data/ui/prefs.glade.h:33
-msgid "_Reset defaults"
-msgstr "استعد الوضع الإفتراضي"
-
-#: ../data/ui/prefs.glade.h:34
-msgid "compile every"
-msgstr "صرّف الكل"
-
 #: ../data/ui/prefs.glade.h:35
+msgid "_Enable automatic indentation"
+msgstr "  "
+
+#: ../data/ui/prefs.glade.h:36
+msgid "_Reset defaults"
+msgstr "  "
+
+#: ../data/ui/prefs.glade.h:37
+msgid "compile every"
+msgstr " "
+
+#: ../data/ui/prefs.glade.h:38
 msgid "compile when idle for "
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:39
 msgid "minutes"
-msgstr "دقائق"
+msgstr ""
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:40
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:41
 msgid "seconds"
-msgstr "ثواني"
+msgstr ""
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:42
 msgid "xelatex"
 msgstr "xelatex"
 
@@ -634,27 +654,27 @@ msgstr "    "
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Activation"
-msgstr "تنشيط"
+msgstr ""
 
 #: ../data/ui/snippets.glade.h:3
 msgid "Edit:"
-msgstr "تحرير:"
+msgstr ":"
 
 #: ../data/ui/snippets.glade.h:4
 msgid "Reset all snippets"
-msgstr "صفّر كل القصاصات"
+msgstr "  "
 
 #: ../data/ui/snippets.glade.h:5
 msgid "Shortcut key:"
-msgstr "مفاتيح إختصار:"
+msgstr " :"
 
 #: ../data/ui/snippets.glade.h:6
 msgid "Snippets Manager"
-msgstr "مدير القصاصات"
+msgstr " "
 
 #: ../data/ui/snippets.glade.h:7
 msgid "Snippets:"
-msgstr "القصاصات:"
+msgstr ":"
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Tab trigger:"
@@ -662,40 +682,40 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:9
 msgid "_Reset"
-msgstr "صفّر"
+msgstr ""
 
-#: ../src/editor.c:506
+#: ../src/editor.c:509
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:513
+#: ../src/editor.c:516
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/iofunctions.c:93
+#: ../src/iofunctions.c:118
 #, c-format
 msgid "Saving %s..."
-msgstr "حفظ %s..."
+msgstr " %s..."
 
-#: ../src/iofunctions.c:110
+#: ../src/iofunctions.c:149
 #, c-format
 msgid ""
 "%s\n"
 "Please try again later."
-msgstr "من فضلك حاول لاحقا."
+msgstr "   ."
 
-#: ../src/iofunctions.c:154
+#: ../src/iofunctions.c:194
 msgid "Can not convert text to UTF-8!\n"
 msgstr ""
 
-#: ../src/iofunctions.c:179
+#: ../src/iofunctions.c:219
 #, c-format
 msgid "Autosaving file %s"
-msgstr "حفظ ملف %s آليا"
+msgstr "  %s "
 
-#: ../src/latex.c:172 ../src/gui/gui-main.c:381 ../src/gui/gui-main.c:409
+#: ../src/latex.c:182 ../src/gui/gui-main.c:366
 msgid "The file already exists. Overwrite?"
-msgstr "هذا الملف موجود هل تريد الكتابة عليه؟"
+msgstr "      "
 
 #: ../src/updatecheck.c:112
 #, c-format
@@ -709,7 +729,7 @@ msgstr ""
 
 #: ../src/updatecheck.c:114
 msgid "Update Check"
-msgstr "افحص التحديثات"
+msgstr " "
 
 #: ../src/utils.c:95
 #, c-format
@@ -721,106 +741,112 @@ msgstr ""
 
 #: ../src/utils.c:141
 msgid "Confirmation"
-msgstr "تأكيد"
+msgstr ""
 
 #: ../src/gui/gui-import.c:167
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:334
+#: ../src/gui/gui-main.c:415
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui/gui-main.c:556
+#: ../src/gui/gui-main.c:597
 msgid "Words in text"
-msgstr "كلمات في النص"
+msgstr "  "
 
-#: ../src/gui/gui-main.c:557
+#: ../src/gui/gui-main.c:598
 msgid "Words in headers"
-msgstr "كلمات في الترويسات"
+msgstr "  "
 
-#: ../src/gui/gui-main.c:558
+#: ../src/gui/gui-main.c:599
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-main.c:559
+#: ../src/gui/gui-main.c:600
 msgid "Number of headers"
-msgstr "رقم الترويسات"
+msgstr " "
 
-#: ../src/gui/gui-main.c:560
+#: ../src/gui/gui-main.c:601
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-main.c:561
+#: ../src/gui/gui-main.c:602
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-main.c:562
+#: ../src/gui/gui-main.c:603
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:623
+#: ../src/gui/gui-main.c:664
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:631
+#: ../src/gui/gui-main.c:672
 msgid "Document Statistics"
-msgstr "إحصائيات المستند"
+msgstr " "
 
-#: ../src/gui/gui-main.c:809
-msgid "Compiling bibliography file..."
-msgstr "تصريف ملف ببليوجرافيا..."
-
+#. add Loading message to status bar
 #: ../src/gui/gui-main.c:811
-msgid "bibliography compiled without errors"
-msgstr "صُرّفت الببليوجرافيا بدون أخطاء"
+#, c-format
+msgid "Loading template ..."
+msgstr ""
 
-#: ../src/gui/gui-main.c:813
+#: ../src/gui/gui-main.c:863
+msgid "Compiling bibliography file..."
+msgstr "  ..."
+
+#: ../src/gui/gui-main.c:865
+msgid "bibliography compiled without errors"
+msgstr "   "
+
+#: ../src/gui/gui-main.c:867
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:816
+#: ../src/gui/gui-main.c:870
 msgid "error compiling bibliography file"
-msgstr "أخطاء في تصريف الببليوجرافيا"
+msgstr "   "
 
-#: ../src/gui/gui-main.c:845
+#: ../src/gui/gui-main.c:903
 #, c-format
 msgid "%s loaded"
-msgstr "%s تحميل"
+msgstr "%s "
 
-#: ../src/gui/gui-main.c:885
+#: ../src/gui/gui-main.c:980
 msgid "Do you want to save the changes you have made?"
-msgstr "هل تريد حفظ التغييرات؟"
+msgstr "   "
 
-#: ../src/gui/gui-main.c:895
+#: ../src/gui/gui-main.c:990
 msgid "Open LaTeX document"
-msgstr "افتح مستند LaTeX"
+msgstr "  LaTeX"
 
-#: ../src/gui/gui-main.c:898
+#: ../src/gui/gui-main.c:993
 msgid "Select an image to insert"
-msgstr "اختر صورة للإدراج"
+msgstr "  "
 
-#: ../src/gui/gui-main.c:899
+#: ../src/gui/gui-main.c:994
 msgid "Select bibliography file"
-msgstr "اختر ملف ببليوجرافيا"
+msgstr "  "
 
-#: ../src/gui/gui-main.c:933
+#: ../src/gui/gui-main.c:1028
 msgid "Save LaTeX document"
-msgstr "احفظ مستند LaTeX"
+msgstr "  LaTeX"
 
-#: ../src/gui/gui-main.c:934
+#: ../src/gui/gui-main.c:1029
 msgid "Save as LaTeX document"
-msgstr "احفظ كمستند LaTeX"
+msgstr "  LaTeX"
 
-#: ../src/gui/gui-main.c:935
+#: ../src/gui/gui-main.c:1030
 msgid "Export to PDF"
-msgstr "صدّر إلى PDF"
+msgstr "  PDF"
 
-#. g_signal_connect(p->scrollw, "size-allocate", G_CALLBACK(my_getsize), NULL);
+#. g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 #: ../src/gui/gui-preview.c:87
 #, c-format
 msgid ""
@@ -839,8 +865,11 @@ msgstr ""
 
 #: ../src/gui/gui-snippets.c:315
 msgid "Type a new shortcut"
-msgstr "اكتب مفتاح إختصار جديد"
+msgstr "   "
 
 #: ../src/gui/gui-snippets.c:318
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
+
+#~ msgid "_Document Statistics"
+#~ msgstr " "

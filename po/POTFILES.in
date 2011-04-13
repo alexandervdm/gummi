@@ -27,8 +27,8 @@ src/updatecheck.c
 src/updatecheck.h
 src/utils.c
 src/utils.h
-src/gui/gui-editortabs.c
-src/gui/gui-editortabs.h
+src/gui/gui-tabmanager.c
+src/gui/gui-tabmanager.h
 src/gui/gui-import.c
 src/gui/gui-import.h
 src/gui/gui-main.c

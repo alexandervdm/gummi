@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-20 20:06+0800\n"
+"POT-Creation-Date: 2011-04-14 00:00+0800\n"
 "PO-Revision-Date: 2010-09-07 16:25+0200\n"
 "Last-Translator: Alexandru-Eugen Ichim <eugen@alexichim.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -283,7 +283,7 @@ msgstr "Potriveste doar pentru cuvantul intreg"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:861
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
 msgid "N/A"
 msgstr "Indisponibil"
 
@@ -447,11 +447,11 @@ msgstr "_Vizualizare"
 msgid "filter:"
 msgstr "filtru:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:859
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
 msgid "no bibliography file detected"
 msgstr "nu a fost detectat niciun fisier de bibliografie"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:860
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
 msgid "none"
 msgstr "deloc"
 
@@ -488,167 +488,181 @@ msgid "toolbutton7"
 msgstr "butonunelte7"
 
 #: ../data/ui/prefs.glade.h:1
+#, fuzzy
+msgid "  "
+msgstr "        "
+
+#: ../data/ui/prefs.glade.h:2
 msgid "   "
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:2
+#: ../data/ui/prefs.glade.h:3
 msgid "Automatic Indentation"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:3
-msgid "Color Scheme"
-msgstr ""
-
 #: ../data/ui/prefs.glade.h:4
-msgid "Command: "
+msgid "Automatically export PDF on document save"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:5
-msgid "Configure snippets"
+msgid "Color Scheme"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:6
+msgid "Command: "
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:7
+msgid "Configure snippets"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:8
 #, fuzzy
 msgid "Customize"
 msgstr "Compileaza"
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:9
 msgid "Default Text"
 msgstr "Text Standard"
 
-#: ../data/ui/prefs.glade.h:8
+#: ../data/ui/prefs.glade.h:10
 msgid "Display line numbers"
 msgstr "Afiseaza numarul liniilor"
 
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:11
 msgid "Do not split words over two lines"
 msgstr "Nu imparti cuvintele in doua randuri"
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:12
 msgid "Editor"
 msgstr "Editor"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:13
 #, fuzzy
 msgid "Editor font"
 msgstr "Font Editor:"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:14
 msgid "Enable text wrapping"
 msgstr "Activeaza infasurarea textului"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:15
 msgid "Extra flags:"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:16
 #, fuzzy
 msgid "File saving"
 msgstr "Salvare de fisier:"
 
-#: ../data/ui/prefs.glade.h:15
+#: ../data/ui/prefs.glade.h:17
 msgid "Font & Colors"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:18
 msgid "Gummi Preferences"
 msgstr "Preferinte Gummi"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:19
 msgid "Highlight current line"
 msgstr "Evidentiaza linia curenta"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:20
 #, fuzzy
 msgid "Highlighting"
 msgstr "Evidentierea liniilor:"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:22
 #, fuzzy
 msgid "Line numbers"
 msgstr "Numarul liniilor:"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:23
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:24
 msgid "None"
 msgstr "Deloc"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:25
 msgid "PDF Compiling"
 msgstr "Compilare PDF"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:26
+#, fuzzy
+msgid "PDF Exporting"
+msgstr "Compilare PDF"
+
+#: ../data/ui/prefs.glade.h:27
 msgid "Snippets"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:28
 #, fuzzy
 msgid "Spell check language"
 msgstr "Verifica ortografia pentru limba:"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:29
 msgid "Tab stops"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:30
 #, fuzzy
 msgid "Tab width:"
 msgstr "Inlocuieste cu:"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:31
 #, fuzzy
 msgid "Text wrapping"
 msgstr "Infasurare text:"
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:32
 #, fuzzy
 msgid "Typesetter command"
 msgstr "Comanda setare tip"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:33
 msgid "View"
 msgstr "Vizualizare"
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:34
 msgid "_Autosave files every"
 msgstr "Salveaza _automat la fiecare"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:35
 msgid "_Enable automatic indentation"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:36
 msgid "_Reset defaults"
 msgstr "_Reseteaza setarile standard"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:37
 msgid "compile every"
 msgstr "compileaza la fiecare"
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:38
 msgid "compile when idle for "
 msgstr "compileaza cand este inactiv pentru"
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:39
 msgid "minutes"
 msgstr "minute"
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:40
 msgid "pdflatex"
 msgstr "pdflatex"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:41
 msgid "seconds"
 msgstr "secunde"
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:42
 msgid "xelatex"
 msgstr "xelatex"
 
@@ -691,36 +705,36 @@ msgstr ""
 msgid "_Reset"
 msgstr ""
 
-#: ../src/editor.c:506
+#: ../src/editor.c:509
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:513
+#: ../src/editor.c:516
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/iofunctions.c:116
+#: ../src/iofunctions.c:118
 #, fuzzy, c-format
 msgid "Saving %s..."
 msgstr "Salveaza Ca..."
 
-#: ../src/iofunctions.c:147
+#: ../src/iofunctions.c:149
 #, c-format
 msgid ""
 "%s\n"
 "Please try again later."
 msgstr ""
 
-#: ../src/iofunctions.c:192
+#: ../src/iofunctions.c:194
 msgid "Can not convert text to UTF-8!\n"
 msgstr ""
 
-#: ../src/iofunctions.c:217
+#: ../src/iofunctions.c:219
 #, fuzzy, c-format
 msgid "Autosaving file %s"
 msgstr "Salvarea fisierului "
 
-#: ../src/latex.c:172 ../src/gui/gui-main.c:318
+#: ../src/latex.c:182 ../src/gui/gui-main.c:366
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
@@ -759,106 +773,112 @@ msgstr "Legenda:"
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:376
+#: ../src/gui/gui-main.c:415
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
 msgstr "Eroare la incarcarea fisierului recent: "
 
-#: ../src/gui/gui-main.c:552
+#: ../src/gui/gui-main.c:597
 #, fuzzy
 msgid "Words in text"
 msgstr "Text ingrosat"
 
-#: ../src/gui/gui-main.c:553
+#: ../src/gui/gui-main.c:598
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:554
+#: ../src/gui/gui-main.c:599
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-main.c:555
+#: ../src/gui/gui-main.c:600
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:556
+#: ../src/gui/gui-main.c:601
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-main.c:557
+#: ../src/gui/gui-main.c:602
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-main.c:558
+#: ../src/gui/gui-main.c:603
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:619
+#: ../src/gui/gui-main.c:664
 #, fuzzy
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr "Aceasta functie necesita activarea\n"
 
-#: ../src/gui/gui-main.c:627
+#: ../src/gui/gui-main.c:672
 #, fuzzy
 msgid "Document Statistics"
 msgstr "Statistici _Document"
 
-#: ../src/gui/gui-main.c:816
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:811
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:863
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:865
 msgid "bibliography compiled without errors"
 msgstr "bibliografia a fost compilata fara erori"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:867
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
 "detectata.."
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:870
 msgid "error compiling bibliography file"
 msgstr "eroare in timpul compilarii fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:852
+#: ../src/gui/gui-main.c:903
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:892
+#: ../src/gui/gui-main.c:980
 msgid "Do you want to save the changes you have made?"
 msgstr "Doriti sa salvati modificarile facute?"
 
-#: ../src/gui/gui-main.c:902
+#: ../src/gui/gui-main.c:990
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:905
+#: ../src/gui/gui-main.c:993
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:906
+#: ../src/gui/gui-main.c:994
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:940
+#: ../src/gui/gui-main.c:1028
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:941
+#: ../src/gui/gui-main.c:1029
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:942
+#: ../src/gui/gui-main.c:1030
 msgid "Export to PDF"
 msgstr "Exporta ca PDF"
 
