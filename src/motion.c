@@ -113,6 +113,7 @@ gpointer motion_compile_thread (gpointer data) {
         if (!precompile_ok) {
             gdk_threads_leave();
             g_mutex_unlock (mc->compile_mutex);
+            previewgui_start_error_mode (pc);
             continue;
         }
         
@@ -130,8 +131,7 @@ gpointer motion_compile_thread (gpointer data) {
             errorbuffer_set_text (latex->errormessage);
 
 
-            if ((!pc->errormode && latex->errorlines[0] && !pc->uri) ||
-                    (!pc->errormode && !precompile_ok)) {
+            if (!pc->errormode && latex->errorlines[0] && !pc->uri) {
                 previewgui_start_error_mode (pc);
             } else if (!latex->errorlines[0] && precompile_ok) {
                 previewgui_stop_error_mode (pc);
