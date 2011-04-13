@@ -53,6 +53,8 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 
 gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
                              const gchar* filename);
+void tabmanager_remove_page (GuTabmanagerGui* tm);                             
+                             
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
 void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename);
 

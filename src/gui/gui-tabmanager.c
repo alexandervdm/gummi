@@ -77,9 +77,16 @@ gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
 
 void tabmanager_remove_page (GuTabmanagerGui* tm) {
 	gint position = gtk_notebook_get_current_page(tm->notebook);
-    gtk_notebook_remove_page(tm->notebook, position);
-    tm->editors = g_list_remove(tm->editors, tm->active_editor);
+	
+	tm->editors = g_list_remove(tm->editors, tm->active_editor);
     tm->pages = g_list_remove(tm->pages, tm->active_page);
+	gtk_notebook_remove_page(tm->notebook, position);
+
+    gint tabamount = gtk_notebook_get_n_pages(tm->notebook);
+    if (tabamount == 0) { // notebook has no open tabs
+		tm->active_editor = NULL;
+		tm->active_page = NULL;
+	}
 }
 
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {

@@ -236,25 +236,24 @@ void gui_update_environment (const gchar* filename) {
     add_to_recent_list (filename);
     tabmanager_change_label (gui->tabmanager, filename);
     
-    gint position = tabmanager_get_editor_position(gui->tabmanager,
+    gint position = tabmanager_get_editor_position (gui->tabmanager,
                                                    g_active_editor);
     
-    gummi_new_environment(g_active_editor, position, filename);
+    gummi_new_environment (g_active_editor, position, filename);
     gui_update_windowtitle ();
     previewgui_reset (gui->previewgui);
 }
 
 void gui_create_environment (OpenAct act, const gchar* filename,
                              const gchar* opt) {
-    GuEditor* editor = editor_init(gummi->motion);
-    gint position = tabmanager_push_editor(gui->tabmanager, editor);
+    GuEditor* editor = editor_init (gummi->motion);
+    gint position = tabmanager_push_editor (gui->tabmanager, editor);
 
     gint newpos = tabmanager_create_page
 								(gui->tabmanager, editor, filename);
-							
-									
-    gummi_new_environment(editor, position, filename);
-    tabmanager_set_active_tab(gui->tabmanager, newpos);
+											
+    gummi_new_environment (editor, position, filename);
+    tabmanager_set_active_tab (gui->tabmanager, newpos);
 
     switch (act) {
         case A_NONE:
@@ -282,7 +281,6 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
                                      
     gint pos = tabmanager_get_page_position(gui->tabmanager, nbpage);
-    
     /* very important line */
     tabmanager_set_active_tab(gui->tabmanager, pos);
     gui_update_windowtitle();
@@ -295,6 +293,11 @@ void gui_update_windowtitle (void) {
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
+    
+    if (!g_active_editor) {
+		gtk_window_set_title(gui->mainwindow, "Gummi");
+		return;
+	}
     
     if (g_active_editor->filename) {
         basename = g_path_get_basename (g_active_editor->filename);
@@ -472,6 +475,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
         return;
     
     tabmanager_remove_page(gui->tabmanager);
+    gui_update_windowtitle ();
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
