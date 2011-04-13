@@ -64,15 +64,12 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     /* restore selection */
     gtk_text_buffer_select_range (GTK_TEXT_BUFFER (ec->buffer), &start, &end);
     
-    fp = fopen (ec->workfile, "w");
-    
     if (fp == NULL) {
         slog (L_ERROR, "unable to create workfile in tmpdir\n");
         return g_strdup(text);
     }
-    fwrite (text, strlen (text), 1, fp);
-    fclose (fp);
-    return g_strdup(text);
+    g_file_set_contents(ec->workfile, text, -1, NULL);
+    return text;
 }
 
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {

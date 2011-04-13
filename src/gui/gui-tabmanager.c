@@ -43,13 +43,20 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     return tm;
 }
 
-void tabmanager_tabs_pop_active (GuTabmanagerGui* tm) {
+gboolean tabmanager_tabs_pop_active (GuTabmanagerGui* tm) {
     gint position = gtk_notebook_get_current_page(tm->notebook);
+    gint total = gtk_notebook_get_n_pages(tm->notebook);
+
+    if (total == 0) return FALSE;
     GuTabContext* tab = g_list_nth(tm->tabs, position)->data;
 
-    editor_destroy(tm->active_editor);
-    gtk_notebook_remove_page(tm->notebook, position);
     tm->tabs = g_list_remove(tm->tabs, tab);
+    tabmanager_set_active_tab(tm, total -2);
+    editor_destroy(tab->editor);
+    gtk_notebook_remove_page(tm->notebook, position);
+    g_free(tab);
+
+    return (total != 1);
 }
 
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {
@@ -86,10 +93,15 @@ void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename) {
 }
 
 void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position) {
-    tm->active_editor =
-        GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->editor;
-    tm->active_page =
-        GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->page;
+    if (position == -1) {
+        tm->active_editor = NULL;
+        tm->active_page = NULL;
+    } else {
+        tm->active_editor =
+            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->editor;
+        tm->active_page =
+            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->page;
+    }
 }
 
 GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,

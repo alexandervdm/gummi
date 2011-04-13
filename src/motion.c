@@ -98,7 +98,10 @@ gpointer motion_compile_thread (gpointer data) {
         g_cond_wait (mc->compile_cv, mc->compile_mutex);
         slog (L_DEBUG, "Compile thread awoke.\n");
 
-        editor = gummi_get_active_editor ();
+        if (!(editor = gummi_get_active_editor ())) {
+            g_mutex_unlock (mc->compile_mutex);
+            continue;
+        }
 
         gdk_threads_enter ();
         focus = gtk_window_get_focus (gui->mainwindow);
@@ -106,32 +109,38 @@ gpointer motion_compile_thread (gpointer data) {
         
         precompile_ok = latex_precompile_check(editortext);
         g_free(editortext);
+
+        if (!precompile_ok) {
+            gdk_threads_leave();
+            g_mutex_unlock (mc->compile_mutex);
+            continue;
+        }
         
         gtk_widget_grab_focus (focus);
         gdk_threads_leave ();
         
-        /* TODO: make compatibility with new master/slave doc system */
-        if (precompile_ok) latex_update_pdffile (latex, editor);
+        latex_update_pdffile (latex, editor);
         
         g_mutex_unlock (mc->compile_mutex);
 
-        gdk_threads_enter ();
-        editor_apply_errortags (editor, latex->errorlines);
-        errorbuffer_set_text (latex->errormessage);
+        /* Make sure the editor still exists after compile */
+        if (editor == gummi_get_active_editor()) {
+            gdk_threads_enter ();
+            editor_apply_errortags (editor, latex->errorlines);
+            errorbuffer_set_text (latex->errormessage);
 
 
-        if ((!pc->errormode && latex->errorlines[0] && !pc->uri) ||        
-            (!pc->errormode && !precompile_ok)) {
-            previewgui_start_error_mode (pc);
-        } else if (!latex->errorlines[0] && precompile_ok) {
-            if (pc->errormode) previewgui_stop_error_mode (pc);
-            if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
+            if ((!pc->errormode && latex->errorlines[0] && !pc->uri) ||
+                    (!pc->errormode && !precompile_ok)) {
+                previewgui_start_error_mode (pc);
+            } else if (!latex->errorlines[0] && precompile_ok) {
+                previewgui_stop_error_mode (pc);
+                if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
+            }
+
+            previewgui_refresh (gui->previewgui);
+            gdk_threads_leave ();
         }
-        
-        /* TODO: make compatibility with new master/slave doc system */
-        if (precompile_ok) previewgui_refresh (gui->previewgui);
-        
-        gdk_threads_leave ();
     }
 }
 

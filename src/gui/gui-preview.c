@@ -143,20 +143,14 @@ void previewgui_refresh (GuPreviewGui* pc) {
     if (!g_mutex_trylock (gummi->motion->compile_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
-    if (!pc->uri || !utils_path_exists (pc->uri + 7)) {
-        g_mutex_unlock (gummi->motion->compile_mutex);
-        return;
-    }
+    if (!pc->uri || !utils_path_exists (pc->uri + 7)) goto unlock;
 
     previewgui_cleanup_fds (pc);
 
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
 
     // release mutex and return when poppler doc is damaged or missing
-    if (pc->doc == NULL) {
-        g_mutex_unlock (gummi->motion->compile_mutex);
-        return;
-    }
+    if (pc->doc == NULL) goto unlock;
     
     /* recheck document dimensions on refresh for orientation changes */
     pc->page_total = poppler_document_get_n_pages (pc->doc);
@@ -189,6 +183,7 @@ void previewgui_refresh (GuPreviewGui* pc) {
     
     gtk_widget_queue_draw (pc->drawarea);
 
+unlock:
     g_mutex_unlock (gummi->motion->compile_mutex);
 }
 
@@ -232,7 +227,7 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
 }
 
 void previewgui_start_error_mode (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    if (pc->errormode) return;
     pc->errormode = TRUE;
     gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
             GTK_WIDGET (pc->drawarea));
@@ -242,7 +237,6 @@ void previewgui_start_error_mode (GuPreviewGui* pc) {
 }
 
 void previewgui_stop_error_mode (GuPreviewGui* pc) {
-    L_F_DEBUG;
     if (!pc->errormode) return;
     pc->errormode = FALSE;
     g_object_ref (pc->errorlabel);

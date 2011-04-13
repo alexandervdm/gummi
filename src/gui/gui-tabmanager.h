@@ -62,7 +62,7 @@ GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
                                     const gchar* filename);
 
 gint tabmanager_tabs_push(GuTabmanagerGui* tm, GuTabContext* tc);
-void tabmanager_tabs_pop_active (GuTabmanagerGui* tm);
+gboolean tabmanager_tabs_pop_active (GuTabmanagerGui* tm);
 void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos);
 
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);

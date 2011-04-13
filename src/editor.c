@@ -118,6 +118,7 @@ void editor_destroy (GuEditor* ec) {
     g_signal_handler_disconnect (ec->buffer, ec->sigid[2]);
 
     editor_fileinfo_cleanup (ec);
+    g_free(ec);
 }
 
 gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename) {
