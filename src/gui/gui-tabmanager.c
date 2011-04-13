@@ -75,6 +75,13 @@ gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
     return position;
 }
 
+void tabmanager_remove_page (GuTabmanagerGui* tm) {
+	gint position = gtk_notebook_get_current_page(tm->notebook);
+    gtk_notebook_remove_page(tm->notebook, position);
+    tm->editors = g_list_remove(tm->editors, tm->active_editor);
+    tm->pages = g_list_remove(tm->pages, tm->active_page);
+}
+
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {
     GtkWidget *tablabel;
     gchar *tabname;
@@ -97,13 +104,15 @@ GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) 
 void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename) {
     GtkWidget *tablabel;
     GtkWidget *page;
-
+    
     gint cur = gtk_notebook_get_current_page(tc->notebook);
     page = gtk_notebook_get_nth_page(tc->notebook, cur);
-
+    
+    /* gtk_notebook_set_tab_label_text ()
+     * could use that, but might not work for more complicated
+     * label (with add/close button) */
     tablabel = tabmanager_create_label(tc, filename);
     gtk_notebook_set_tab_label (tc->notebook, page, tablabel);
-
 }
 
 void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position) {

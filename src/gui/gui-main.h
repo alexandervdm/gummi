@@ -49,6 +49,7 @@
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
 #define g_active_editor gui->tabmanager->active_editor
+#define g_active_page gui->tabmanager->active_page
 
 
 
@@ -100,7 +101,7 @@ void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
 void gui_create_environment (const gchar* filename, OpenAct act);
 void gui_update_environment (const gchar* filename);
-void gui_update_title (void);
+void gui_update_windowtitle (void);
 void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);
 void on_menu_new_activate (GtkWidget* widget, void* user);

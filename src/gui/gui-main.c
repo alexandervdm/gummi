@@ -240,7 +240,7 @@ void gui_update_environment (const gchar* filename) {
                                                    g_active_editor);
     
     gummi_new_environment(g_active_editor, position, filename);
-    gui_update_title ();
+    gui_update_windowtitle ();
     previewgui_reset (gui->previewgui);
 }
 
@@ -248,9 +248,12 @@ void gui_create_environment (const gchar* filename, OpenAct act) {
     GuEditor* editor = editor_init(gummi->motion);
     gint position = tabmanager_push_editor(gui->tabmanager, editor);
 
-    tabmanager_create_page(gui->tabmanager, editor, filename);
-    tabmanager_set_active_tab(gui->tabmanager, position);
+    gint newpos = tabmanager_create_page
+								(gui->tabmanager, editor, filename);
+							
+									
     gummi_new_environment(editor, position, filename);
+    tabmanager_set_active_tab(gui->tabmanager, newpos);
 
     switch (act) {
         case A_NONE:
@@ -265,15 +268,30 @@ void gui_create_environment (const gchar* filename, OpenAct act) {
             slog(L_FATAL, "can't happen bug\n");
     }
     
+	gui_update_windowtitle ();
     add_to_recent_list (filename);
-    gui_update_title ();
+
     previewgui_reset (gui->previewgui);
 }
 
-void gui_update_title (void) {
+void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
+                                 int page, void *data) {
+                                     
+    gint pos = tabmanager_get_page_position(gui->tabmanager, nbpage);
+    
+    /* very important line */
+    tabmanager_set_active_tab(gui->tabmanager, pos);
+    gui_update_windowtitle();
+    previewgui_reset (gui->previewgui);
+    
+    slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
+}
+
+void gui_update_windowtitle (void) {
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
+    
     if (g_active_editor->filename) {
         basename = g_path_get_basename (g_active_editor->filename);
         dirname = g_path_get_dirname (g_active_editor->filename);
@@ -282,14 +300,20 @@ void gui_update_title (void) {
                 basename, dirname, PACKAGE_NAME);
         g_free (basename);
         g_free (dirname);
-    } else
-        title = g_strdup_printf ("%sUnsaved Document - %s",
+    } else {
+		const gchar* unsaved = gtk_notebook_get_tab_label_text
+										(gui->tabmanager->notebook,
+										GTK_WIDGET(g_active_page));		
+        title = g_strdup_printf ("%s%s - %s",
                 (gtk_text_buffer_get_modified (g_e_buffer)? "*": ""),
-                PACKAGE_NAME);
+                unsaved, PACKAGE_NAME);
+	}
 
     gtk_window_set_title (gui->mainwindow, title);
     g_free (title);
 }
+
+
 
 void gui_open_file (const gchar* filename) {
     gint ret = 0;
@@ -357,7 +381,7 @@ void gui_save_file (gboolean saveas) {
         latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
     }
     if (new) gui_update_environment (filename);
-    gui_update_title ();
+    gui_update_windowtitle ();
     gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 
 cleanup:
@@ -366,14 +390,7 @@ cleanup:
 }
 
 void on_menu_new_activate (GtkWidget *widget, void* user) {
-    /*
-    gint ret = check_for_save ();
-    if (GTK_RESPONSE_YES == ret)
-        gui_save_file (FALSE);
-    else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
-        return;
-    */
-    gui_create_environment (NULL, A_DEFAULT);
+    gui_create_environment (NULL, A_NONE);
 }
 
 void on_menu_template_activate (GtkWidget *widget, void * user) {
@@ -452,15 +469,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
-    /* TODO: temporary measure to disable closing the initial tab */
-    gint current_tab = gtk_notebook_get_current_page
-                        (gui->tabmanager->notebook);
-
-    /* Temporarily call to remove tab, when the close button is add in the
-     * future, it should call tabmanagergui_remove_tab director instead of
-     * on_menu_close_activate */
-    //----tabmanager_remove_tab(gui->tabmanager, current_tab);
-    /* TODO: disconnect signals and such if last tab is closed.. */
+    tabmanager_remove_page(gui->tabmanager);
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
@@ -504,21 +513,6 @@ void on_menu_selectall_activate (GtkWidget *widget, void * user) {
 void on_menu_preferences_activate (GtkWidget *widget, void * user) {
     prefsgui_main (gui->prefsgui);
 }
-
-void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
-                                 int page, void *data) {
-                                     
-    gint pos = tabmanager_get_page_position(gui->tabmanager, nbpage);
-
-    /* very important line */
-    tabmanager_set_active_tab(gui->tabmanager, pos);
-    
-    gui_update_title();
-    previewgui_reset (gui->previewgui);
-    
-    slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
-}
-
 
 void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
@@ -1181,7 +1175,7 @@ void statusbar_set_message (gchar *message) {
     gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
     g_timeout_add_seconds (4, statusbar_del_message, NULL);
 }
-
+ 
 gboolean statusbar_del_message (void* user) {
     gtk_statusbar_pop (GTK_STATUSBAR (gui->statusbar), gui->statusid);
     return FALSE;
@@ -1195,7 +1189,9 @@ gboolean statusbar_del_message (void* user) {
 void check_preview_timer (void) {
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
-    gui_update_title ();
-
+    
+    gui_update_windowtitle ();
+    /* no point in running the whole update title/label procedure */
+    
     motion_start_timer (gummi->motion);
 }

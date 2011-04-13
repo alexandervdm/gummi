@@ -35,6 +35,7 @@
 
 #include "editor.h"
 
+
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
 typedef struct _GuTabmanagerGui GuTabmanagerGui;
 
@@ -56,6 +57,8 @@ GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
 void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename);
 
 void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position);
+
+gint tabmanager_create_unsavednr (GuTabmanagerGui* tc);
 
 gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec);
 gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg);
