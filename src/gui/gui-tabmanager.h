@@ -35,6 +35,14 @@
 
 #include "editor.h"
 
+#define GU_TAB_CONTEXT(x) ((GuTabContext*)x)
+typedef struct _GuTabContext GuTabContext;
+
+struct _GuTabContext {
+    GuEditor* editor;
+    GtkWidget* page;
+    GtkWidget* label;
+};
 
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
 typedef struct _GuTabmanagerGui GuTabmanagerGui;
@@ -43,28 +51,26 @@ struct _GuTabmanagerGui {
     GtkNotebook *notebook;
 
     GuEditor* active_editor;
-    GtkNotebook* active_page;
+    GtkWidget* active_page;
 
-    GList *editors;
-    GList *pages;
+    GList* tabs;
 };
 
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 
-gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
-                             const gchar* filename);
-void tabmanager_remove_page (GuTabmanagerGui* tm);                             
-                             
+GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
+                                    const gchar* filename);
+
+gint tabmanager_tabs_push(GuTabmanagerGui* tm, GuTabContext* tc);
+void tabmanager_tabs_pop_active (GuTabmanagerGui* tm);
+void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos);
+
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
-void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename);
+void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename);
 
-void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position);
+void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position);
+gint tabmanager_create_unsavednr (GuTabmanagerGui* tm);
 
-gint tabmanager_create_unsavednr (GuTabmanagerGui* tc);
-
-gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec);
-gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg);
-gint tabmanager_get_editor_position(GuTabmanagerGui* tc, GuEditor* ec);
-gint tabmanager_get_page_position(GuTabmanagerGui* tc, GtkWidget* pg);
+gint tabmanager_get_editor_position(GuTabmanagerGui* tm, GuEditor* ec);
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */

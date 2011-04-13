@@ -98,13 +98,13 @@ gchar* template_get_selected_path (GuTemplate* t) {
     GtkTreeIter iter;
     GtkTreeSelection *selection;
     gchar *filepath = NULL;
-    gchar *itemname = NULL;
     
     model = gtk_tree_view_get_model (t->templateview);
     selection = gtk_tree_view_get_selection (t->templateview);
     
     if (gtk_tree_selection_get_selected (selection, &model, &iter))
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
+
     return filepath;
 }
 

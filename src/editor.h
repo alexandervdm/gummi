@@ -74,7 +74,7 @@ struct _GuEditor {
     gint sigid[3];
 };
 
-GuEditor* editor_init (GuMotion* mc);
+GuEditor* editor_new (GuMotion* mc);
 void editor_fileinfo_update (GuEditor* ec, const gchar* filename);
 void editor_fileinfo_cleanup (GuEditor* ec);
 gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename);

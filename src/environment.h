@@ -105,7 +105,7 @@ struct _Gummi {
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib, 
                    GuTemplate* tpl, GuSnippets* snip);
-void gummi_new_environment (GuEditor* ec, gint position, const gchar* filename);
+void gummi_new_environment (GuEditor* ec, const gchar* filename);
 
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to

@@ -37,56 +37,19 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     tm->notebook =
         GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
 
-    tm->editors = NULL;
-    tm->pages = NULL;
+    tm->tabs = NULL;
     tm->active_editor = NULL;
     tm->active_page = NULL;
     return tm;
 }
 
-gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
-                             const gchar* filename) {
-    GtkWidget *scrollwindow;
-    GtkWidget *tablabel;
-    GtkWidget *page;
+void tabmanager_tabs_pop_active (GuTabmanagerGui* tm) {
+    gint position = gtk_notebook_get_current_page(tm->notebook);
+    GuTabContext* tab = g_list_nth(tm->tabs, position)->data;
 
-    /* creating tab object; scrollwindow */
-    scrollwindow = gtk_scrolled_window_new (NULL, NULL);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrollwindow),
-                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-
-    gtk_container_add (GTK_CONTAINER (scrollwindow), GTK_WIDGET(editor->view));
-
-    /* creating tab object; label */
-    tablabel = tabmanager_create_label(tm, filename);
-
-    /* adding new tab to the gui */
-    gint position = gtk_notebook_append_page (
-            GTK_NOTEBOOK (tm->notebook), scrollwindow, tablabel);
-
-    page = gtk_notebook_get_nth_page(tm->notebook, position);
-    tabmanager_push_page(tm, page);
-
-    gtk_widget_show(scrollwindow);
-    gtk_widget_show(GTK_WIDGET(editor->view));
-
-    gtk_notebook_set_current_page(tm->notebook, position);
-    gtk_widget_grab_focus(GTK_WIDGET(editor->view));
-    return position;
-}
-
-void tabmanager_remove_page (GuTabmanagerGui* tm) {
-	gint position = gtk_notebook_get_current_page(tm->notebook);
-	
-	tm->editors = g_list_remove(tm->editors, tm->active_editor);
-    tm->pages = g_list_remove(tm->pages, tm->active_page);
-	gtk_notebook_remove_page(tm->notebook, position);
-
-    gint tabamount = gtk_notebook_get_n_pages(tm->notebook);
-    if (tabamount == 0) { // notebook has no open tabs
-		tm->active_editor = NULL;
-		tm->active_page = NULL;
-	}
+    editor_destroy(tm->active_editor);
+    gtk_notebook_remove_page(tm->notebook, position);
+    tm->tabs = g_list_remove(tm->tabs, tab);
 }
 
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {
@@ -108,41 +71,65 @@ GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) 
     return tablabel;
 }
 
-void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename) {
+void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename) {
     GtkWidget *tablabel;
     GtkWidget *page;
     
-    gint cur = gtk_notebook_get_current_page(tc->notebook);
-    page = gtk_notebook_get_nth_page(tc->notebook, cur);
+    gint cur = gtk_notebook_get_current_page(tm->notebook);
+    page = gtk_notebook_get_nth_page(tm->notebook, cur);
     
     /* gtk_notebook_set_tab_label_text ()
      * could use that, but might not work for more complicated
      * label (with add/close button) */
-    tablabel = tabmanager_create_label(tc, filename);
-    gtk_notebook_set_tab_label (tc->notebook, page, tablabel);
+    tablabel = tabmanager_create_label(tm, filename);
+    gtk_notebook_set_tab_label (tm->notebook, page, tablabel);
 }
 
-void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position) {
-    tc->active_editor = g_list_nth_data(tc->editors, position);
-    tc->active_page = g_list_nth_data(tc->pages, position);
+void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position) {
+    tm->active_editor =
+        GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->editor;
+    tm->active_page =
+        GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->page;
 }
 
-gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec) {
-    tc->editors = g_list_append(tc->editors, ec);
-    gint position = g_list_index(tc->editors, ec);
-    return position;
+GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
+                                    const gchar* filename) {
+    GuTabContext* tab = g_new0(GuTabContext, 1);
+
+    tab->editor = ec;
+    tab->page = gtk_scrolled_window_new (NULL, NULL);
+    tab->label = tabmanager_create_label(tm, filename);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tab->page),
+                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+    return tab;
 }
 
-gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg) {
-    tc->pages = g_list_append(tc->pages, pg);
-    gint position = g_list_index(tc->pages, pg);
-    return position;
+gint tabmanager_tabs_push(GuTabmanagerGui* tm, GuTabContext* tc) {
+    gint pos = 0;
+
+    tm->tabs = g_list_append(tm->tabs, tc);
+    gtk_container_add (GTK_CONTAINER (tc->page),
+                       GTK_WIDGET(tc->editor->view));
+    pos = gtk_notebook_append_page (GTK_NOTEBOOK (tm->notebook), tc->page,
+                                    tc->label);
+
+    gtk_widget_grab_focus(GTK_WIDGET(tc->editor->view));
+
+    gtk_widget_show(tc->page);
+    gtk_widget_show(GTK_WIDGET(tc->editor->view));
+
+    return pos;
 }
 
-gint tabmanager_get_editor_position(GuTabmanagerGui* tc, GuEditor* ec) {
-    return g_list_index(tc->editors, ec);
+void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos) {
+    gtk_notebook_set_current_page(tm->notebook, pos);
 }
 
-gint tabmanager_get_page_position(GuTabmanagerGui* tc, GtkWidget* pg) {
-    return g_list_index(tc->pages, pg);
+gint tabmanager_get_editor_position(GuTabmanagerGui* tm, GuEditor* ec) {
+    int i = 0;
+    for (i = 0; i < g_list_length(tm->tabs); ++i) {
+        if (GU_TAB_CONTEXT(g_list_nth(tm->tabs, i)->data)->editor == ec)
+            return i;
+    }
+    return -1;
 }

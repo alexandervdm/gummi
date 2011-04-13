@@ -57,7 +57,7 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-GuEditor* editor_init (GuMotion* mc) {
+GuEditor* editor_new (GuMotion* mc) {
     GuEditor* ec = g_new0 (GuEditor, 1);
 
     /* File related member initialization */
@@ -73,8 +73,7 @@ GuEditor* editor_init (GuMotion* mc) {
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,
             "latex");
     ec->buffer = gtk_source_buffer_new_with_language (lang);
-    ec->view =
-        GTK_SOURCE_VIEW (gtk_source_view_new_with_buffer (ec->buffer));
+    ec->view = GTK_SOURCE_VIEW (gtk_source_view_new_with_buffer (ec->buffer));
     ec->stylemanager = gtk_source_style_scheme_manager_get_default ();
     ec->errortag = gtk_text_tag_new ("error");
     ec->searchtag = gtk_text_tag_new ("search");

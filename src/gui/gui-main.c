@@ -194,11 +194,9 @@ gboolean gui_quit (void) {
     gchar buf[16];
     int i;
 
-    gint length = g_list_length (gui->tabmanager->editors);
+    gint length = g_list_length (gui->tabmanager->tabs);
 
     for(i = 0; i < length;i++){
-        
-        
         gtk_notebook_set_current_page(gui->tabmanager->notebook, i);
         tabmanager_set_active_tab(gui->tabmanager, i);
         
@@ -208,9 +206,6 @@ gboolean gui_quit (void) {
         else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
             return TRUE;
     }
-    
-
-
 
     editor_destroy (g_active_editor);
     gtk_window_get_size (gui->mainwindow, &width, &height);
@@ -236,24 +231,20 @@ void gui_update_environment (const gchar* filename) {
     add_to_recent_list (filename);
     tabmanager_change_label (gui->tabmanager, filename);
     
-    gint position = tabmanager_get_editor_position (gui->tabmanager,
-                                                   g_active_editor);
-    
-    gummi_new_environment (g_active_editor, position, filename);
+    gummi_new_environment(g_active_editor, filename);
     gui_update_windowtitle ();
     previewgui_reset (gui->previewgui);
 }
 
 void gui_create_environment (OpenAct act, const gchar* filename,
                              const gchar* opt) {
-    GuEditor* editor = editor_init (gummi->motion);
-    gint position = tabmanager_push_editor (gui->tabmanager, editor);
+    GuEditor* editor = editor_new(gummi->motion);
+    GuTabContext* t = tabmanager_create_tab(gui->tabmanager, editor, filename);
+    gint pos = tabmanager_tabs_push(gui->tabmanager, t);
 
-    gint newpos = tabmanager_create_page
-								(gui->tabmanager, editor, filename);
-											
-    gummi_new_environment (editor, position, filename);
-    tabmanager_set_active_tab (gui->tabmanager, newpos);
+    tabmanager_switch_tab(gui->tabmanager, pos);
+    gummi_new_environment(editor, filename);
+    tabmanager_set_active_tab(gui->tabmanager, pos);
 
     switch (act) {
         case A_NONE:
@@ -271,7 +262,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
             slog(L_FATAL, "can't happen bug\n");
     }
     
-	gui_update_windowtitle ();
+    gui_update_windowtitle ();
     add_to_recent_list (filename);
 
     previewgui_reset (gui->previewgui);
@@ -279,14 +270,12 @@ void gui_create_environment (OpenAct act, const gchar* filename,
 
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
-                                     
-    gint pos = tabmanager_get_page_position(gui->tabmanager, nbpage);
     /* very important line */
-    tabmanager_set_active_tab(gui->tabmanager, pos);
+    tabmanager_set_active_tab(gui->tabmanager, page);
     gui_update_windowtitle();
     previewgui_reset (gui->previewgui);
     
-    slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
+    slog (L_INFO, "Switched to environment at page %d\n", page);
 }
 
 void gui_update_windowtitle (void) {
@@ -308,13 +297,12 @@ void gui_update_windowtitle (void) {
         g_free (basename);
         g_free (dirname);
     } else {
-		const gchar* unsaved = gtk_notebook_get_tab_label_text
-										(gui->tabmanager->notebook,
-										GTK_WIDGET(g_active_page));		
+        const gchar* unsaved = gtk_notebook_get_tab_label_text
+            (gui->tabmanager->notebook, GTK_WIDGET(g_active_page));		
         title = g_strdup_printf ("%s%s - %s",
                 (gtk_text_buffer_get_modified (g_e_buffer)? "*": ""),
                 unsaved, PACKAGE_NAME);
-	}
+    }
 
     gtk_window_set_title (gui->mainwindow, title);
     g_free (title);
@@ -474,8 +462,8 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
-    tabmanager_remove_page(gui->tabmanager);
-    gui_update_windowtitle ();
+    tabmanager_tabs_pop_active(gui->tabmanager);
+    //gui_update_windowtitle ();
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
