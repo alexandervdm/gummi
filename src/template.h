@@ -56,7 +56,7 @@ void template_setup ();
 void template_add_new_entry (GuTemplate* t);
 void template_remove_entry (GuTemplate* t);
 void template_create_file (GuTemplate* t, gchar* filename, gchar* text);
-templdata template_open_selected (GuTemplate* t);
+gchar* template_get_selected_path (GuTemplate* t);
 void template_data_free(templdata* data);
 
 #endif /* __GUMMI_TEMPLATE_H__ */

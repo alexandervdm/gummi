@@ -84,7 +84,8 @@ struct _GummiGui {
 typedef enum _OpenAct {
     A_NONE = 0,
     A_DEFAULT,
-    A_LOAD
+    A_LOAD,
+    A_LOAD_OPT,
 } OpenAct;
 
 typedef enum _GuFilterType {
@@ -99,7 +100,8 @@ typedef enum _GuFilterType {
 GummiGui* gui_init (GtkBuilder* builder);
 void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
-void gui_create_environment (const gchar* filename, OpenAct act);
+void gui_create_environment (OpenAct act, const gchar* filename,
+                             const gchar* opt);
 void gui_update_environment (const gchar* filename);
 void gui_update_windowtitle (void);
 void gui_open_file (const gchar* filename);

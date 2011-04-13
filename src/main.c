@@ -125,9 +125,9 @@ int main (int argc, char *argv[]) {
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
     if (argc != 2)
-        gui_create_environment (NULL, A_DEFAULT);
+        gui_create_environment (A_DEFAULT, NULL, NULL);
     else
-        gui_create_environment (argv[1], A_LOAD);
+        gui_create_environment (A_LOAD, argv[1], NULL);
 
     gui_main (builder);
     config_save ();

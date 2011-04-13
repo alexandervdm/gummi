@@ -244,7 +244,8 @@ void gui_update_environment (const gchar* filename) {
     previewgui_reset (gui->previewgui);
 }
 
-void gui_create_environment (const gchar* filename, OpenAct act) {
+void gui_create_environment (OpenAct act, const gchar* filename,
+                             const gchar* opt) {
     GuEditor* editor = editor_init(gummi->motion);
     gint position = tabmanager_push_editor(gui->tabmanager, editor);
 
@@ -263,6 +264,9 @@ void gui_create_environment (const gchar* filename, OpenAct act) {
             break;
         case A_LOAD:
             iofunctions_load_file (gummi->io, filename);
+            break;
+        case A_LOAD_OPT:
+            iofunctions_load_file (gummi->io, opt);
             break;
         default:
             slog(L_FATAL, "can't happen bug\n");
@@ -334,10 +338,8 @@ void gui_open_file (const gchar* filename) {
                 "want to recover from it?", filename);
 
         ret = utils_yes_no_dialog (message);
-        if (GTK_RESPONSE_YES == ret) {
-            iofunctions_load_file (gummi->io, prev_workfile); 
-            gui_create_environment (filename, A_NONE);
-        }
+        if (GTK_RESPONSE_YES == ret)
+            gui_create_environment (A_LOAD_OPT, filename, prev_workfile);
         g_free (message);
     }
 
@@ -347,7 +349,7 @@ void gui_open_file (const gchar* filename) {
     
 
     if (GTK_RESPONSE_YES != ret)
-        gui_create_environment (filename, A_LOAD);
+        gui_create_environment (A_LOAD, filename, NULL);
 }
 
 void gui_save_file (gboolean saveas) {
@@ -390,7 +392,7 @@ cleanup:
 }
 
 void on_menu_new_activate (GtkWidget *widget, void* user) {
-    gui_create_environment (NULL, A_NONE);
+    gui_create_environment (A_NONE, NULL, NULL);
 }
 
 void on_menu_template_activate (GtkWidget *widget, void * user) {
@@ -815,20 +817,19 @@ void on_button_template_remove_clicked (GtkWidget* widget, void* user) {
 }
 
 void on_button_template_open_clicked (GtkWidget* widget, void* user) {
-    gchar* status;
-    templdata template = template_open_selected (gummi->templ);
+    gchar* status = NULL;
+    gchar* templ_name = template_get_selected_path (gummi->templ);
     
-    if (template.itemdata) {
+    if (templ_name) {
         /* add Loading message to status bar */
-        status = g_strdup_printf ("Loading template %s...", template.itemname);
+        status = g_strdup_printf (_("Loading template ..."));
         statusbar_set_message (status);
         g_free (status);
         
-        gui_create_environment (NULL, A_NONE);
-        editor_fill_buffer (g_active_editor, template.itemdata);
+        gui_create_environment (A_LOAD_OPT, NULL, templ_name);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
-    template_data_free(&template);
+    g_free(templ_name);
 }
 
 void on_button_template_close_clicked (GtkWidget* widget, void* user) {

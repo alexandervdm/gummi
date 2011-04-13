@@ -93,23 +93,19 @@ void template_setup (GuTemplate* t) {
     g_free (dirpath);
 }
 
-templdata template_open_selected (GuTemplate* t) {
+gchar* template_get_selected_path (GuTemplate* t) {
     GtkTreeModel *model;
     GtkTreeIter iter;
     GtkTreeSelection *selection;
-    gchar *filepath;
+    gchar *filepath = NULL;
     gchar *itemname = NULL;
-    gchar *data = NULL;
     
     model = gtk_tree_view_get_model (t->templateview);
     selection = gtk_tree_view_get_selection (t->templateview);
     
-    if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-        gtk_tree_model_get (model, &iter, 0, &itemname, -1);
+    if (gtk_tree_selection_get_selected (selection, &model, &iter))
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
-        g_file_get_contents (filepath, &data, NULL, NULL);
-    } 
-    return (templdata){itemname, data};
+    return filepath;
 }
 
 
