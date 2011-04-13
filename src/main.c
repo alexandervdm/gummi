@@ -104,7 +104,6 @@ int main (int argc, char *argv[]) {
     GuLatex* latex = latex_init (); 
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
-    GuEditor* editor = editor_init (motion);
 
     GuSnippets* snippets = snippets_init (snippetsname);
     gummi = gummi_init (motion, io, latex, biblio, templ, snippets);
@@ -113,7 +112,6 @@ int main (int argc, char *argv[]) {
 
     /* Initialize GUI */
     gui = gui_init (builder);
-    g_active_editor = editor;
     
     slog_set_gui_parent (gui->mainwindow);
     slog (L_DEBUG, "GummiGui created!\n");
@@ -126,13 +124,10 @@ int main (int argc, char *argv[]) {
     /* Install acceleration group to mainwindow */
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
-    if (argc != 2) {
-        iofunctions_load_default_text (editor);
-        gui_create_environment (editor, NULL);
-    } else {
-        iofunctions_load_file (io, argv[1]);
-        gui_create_environment (editor, argv[1]);
-    }
+    if (argc != 2)
+        gui_create_environment (NULL, A_DEFAULT);
+    else
+        gui_create_environment (argv[1], A_LOAD);
 
     gui_main (builder);
     config_save ();

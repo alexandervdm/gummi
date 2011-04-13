@@ -30,33 +30,28 @@
 #ifndef __GUMMI_GUI_TABMANAGER_H__
 #define __GUMMI_GUI_TABMANAGER_H__
 
-
 #include <glib.h>
 #include <gtk/gtk.h>
 
 #include "editor.h"
 
-
-
-
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
 typedef struct _GuTabmanagerGui GuTabmanagerGui;
 
 struct _GuTabmanagerGui {
-	GtkNotebook *notebook;
+    GtkNotebook *notebook;
 
-	GuEditor* active_editor;
+    GuEditor* active_editor;
     GtkNotebook* active_page;
-    
-	GList *editors;
+
+    GList *editors;
     GList *pages;
 };
 
-
-
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 
-gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor, const gchar* filename);
+gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
+                             const gchar* filename);
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
 void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename);
 
@@ -64,10 +59,7 @@ void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position);
 
 gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec);
 gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg);
-gint tabmanager_get_position_editor(GuTabmanagerGui* tc, GuEditor* ec);
-gint tabmanager_get_position_page(GuTabmanagerGui* tc, GtkWidget* pg);
-
-
-
+gint tabmanager_get_editor_position(GuTabmanagerGui* tc, GuEditor* ec);
+gint tabmanager_get_page_position(GuTabmanagerGui* tc, GtkWidget* pg);
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */

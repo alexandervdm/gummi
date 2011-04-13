@@ -65,7 +65,8 @@ GuIOFunc* iofunctions_init (void) {
   return io;
 }
 
-void iofunctions_load_default_text (GuEditor* ec) {
+void iofunctions_load_default_text (void) {
+    GuEditor* ec = gummi_get_active_editor();
     gchar* str = g_strdup (config_get_value ("welcome"));
     editor_fill_buffer (ec, str);
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
@@ -97,7 +98,7 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
         g_error_free (err);
-        iofunctions_load_default_text (ec);
+        iofunctions_load_default_text ();
         goto cleanup;
     }
     if (NULL == (decoded = iofunctions_decode_text (text)))

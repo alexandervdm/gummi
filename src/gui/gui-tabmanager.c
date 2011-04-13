@@ -27,52 +27,46 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 #include "gui-tabmanager.h"
-
-
-
 
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
-    
+
     GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
-    
-	tm->notebook = 
-		GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
-	
-	tm->editors = NULL;
-	tm->pages = NULL;
+
+    tm->notebook =
+        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
+
+    tm->editors = NULL;
+    tm->pages = NULL;
     tm->active_editor = NULL;
     tm->active_page = NULL;
     return tm;
 }
 
-
-gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor, const gchar* filename) {
+gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor,
+                             const gchar* filename) {
     GtkWidget *scrollwindow;
     GtkWidget *tablabel;
     GtkWidget *page;
-    
+
     /* creating tab object; scrollwindow */
     scrollwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrollwindow),
-                                    GTK_POLICY_AUTOMATIC, 
-                                    GTK_POLICY_AUTOMATIC);
-                                    
-    gtk_container_add (GTK_CONTAINER (scrollwindow), 
-					   GTK_WIDGET (editor->view));
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrollwindow),
+                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-	/* creating tab object; label */
+    gtk_container_add (GTK_CONTAINER (scrollwindow), GTK_WIDGET(editor->view));
+
+    /* creating tab object; label */
     tablabel = tabmanager_create_label(tm, filename);
 
     /* adding new tab to the gui */
     gint position = gtk_notebook_append_page (
-        GTK_NOTEBOOK (tm->notebook), scrollwindow, tablabel);
-        
-	page = gtk_notebook_get_nth_page(tm->notebook, position);
-	tabmanager_push_page(tm, page);
-      
+            GTK_NOTEBOOK (tm->notebook), scrollwindow, tablabel);
+
+    page = gtk_notebook_get_nth_page(tm->notebook, position);
+    tabmanager_push_page(tm, page);
+
     gtk_widget_show(scrollwindow);
     gtk_widget_show(GTK_WIDGET(editor->view));
 
@@ -84,70 +78,55 @@ gint tabmanager_create_page (GuTabmanagerGui* tm, GuEditor* editor, const gchar*
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {
     GtkWidget *tablabel;
     gchar *tabname;
-    
+
     gint nr_pages = gtk_notebook_get_n_pages (tm->notebook);
-    
-    if (filename == NULL) 
+
+    if (!filename)
         tabname = g_strdup_printf ("Unsaved Document %d", (nr_pages+1));
     else 
         tabname = g_path_get_basename (filename);
-        
+
     tablabel = gtk_label_new (tabname);
     gtk_widget_set_tooltip_text (tablabel, filename);
-    
+
+    g_free(tabname);
+
     return tablabel;
 }
 
 void tabmanager_change_label (GuTabmanagerGui* tc, const gchar *filename) {
     GtkWidget *tablabel;
     GtkWidget *page;
-    
+
     gint cur = gtk_notebook_get_current_page(tc->notebook);
     page = gtk_notebook_get_nth_page(tc->notebook, cur);
-    
+
     tablabel = tabmanager_create_label(tc, filename);
     gtk_notebook_set_tab_label (tc->notebook, page, tablabel);
-    
+
 }
-
-
-
-
-
 
 void tabmanager_set_active_tab(GuTabmanagerGui* tc, gint position) {
     tc->active_editor = g_list_nth_data(tc->editors, position);
     tc->active_page = g_list_nth_data(tc->pages, position);
 }
 
-
 gint tabmanager_push_editor(GuTabmanagerGui* tc, GuEditor* ec) {
-	tc->editors = g_list_append(tc->editors, ec);
-	gint position = g_list_index(tc->editors, ec);
-	return position;
+    tc->editors = g_list_append(tc->editors, ec);
+    gint position = g_list_index(tc->editors, ec);
+    return position;
 }
-
 
 gint tabmanager_push_page(GuTabmanagerGui* tc, GtkWidget* pg) {
-	tc->pages = g_list_append(tc->pages, pg);
-	gint position = g_list_index(tc->pages, pg);
-	return position;
+    tc->pages = g_list_append(tc->pages, pg);
+    gint position = g_list_index(tc->pages, pg);
+    return position;
 }
 
-
-
-gint tabmanager_get_position_editor(GuTabmanagerGui* tc, GuEditor* ec) {
+gint tabmanager_get_editor_position(GuTabmanagerGui* tc, GuEditor* ec) {
     return g_list_index(tc->editors, ec);
 }
 
-gint tabmanager_get_position_page(GuTabmanagerGui* tc, GtkWidget* pg) {
+gint tabmanager_get_page_position(GuTabmanagerGui* tc, GtkWidget* pg) {
     return g_list_index(tc->pages, pg);
 }
-
-
-
-
-
-
-
-

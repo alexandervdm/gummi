@@ -236,21 +236,34 @@ void gui_update_environment (const gchar* filename) {
     add_to_recent_list (filename);
     tabmanager_change_label (gui->tabmanager, filename);
     
-    gint position = tabmanager_get_position_editor(gui->tabmanager, gui->tabmanager->active_editor);
+    gint position = tabmanager_get_editor_position(gui->tabmanager,
+                                                   g_active_editor);
     
-    gummi_new_environment(gui->tabmanager->active_editor, position, filename);
+    gummi_new_environment(g_active_editor, position, filename);
     gui_update_title ();
     previewgui_reset (gui->previewgui);
 }
 
-void gui_create_environment (GuEditor* ec, const gchar* filename) {
-	/* new editor */
-    if (!ec) ec = editor_init(gummi->motion);
-    gint position = tabmanager_push_editor(gui->tabmanager, ec);
-    gummi_new_environment(ec, position, filename);
-    
-    /* new page */
-    tabmanager_create_page(gui->tabmanager, ec, filename);
+void gui_create_environment (const gchar* filename, OpenAct act) {
+    GuEditor* editor = editor_init(gummi->motion);
+    gint position = tabmanager_push_editor(gui->tabmanager, editor);
+
+    tabmanager_create_page(gui->tabmanager, editor, filename);
+    tabmanager_set_active_tab(gui->tabmanager, position);
+    gummi_new_environment(editor, position, filename);
+
+    switch (act) {
+        case A_NONE:
+            break;
+        case A_DEFAULT:
+            iofunctions_load_default_text ();
+            break;
+        case A_LOAD:
+            iofunctions_load_file (gummi->io, filename);
+            break;
+        default:
+            slog(L_FATAL, "can't happen bug\n");
+    }
     
     add_to_recent_list (filename);
     gui_update_title ();
@@ -297,8 +310,10 @@ void gui_open_file (const gchar* filename) {
                 "want to recover from it?", filename);
 
         ret = utils_yes_no_dialog (message);
-        if (GTK_RESPONSE_YES == ret)
+        if (GTK_RESPONSE_YES == ret) {
             iofunctions_load_file (gummi->io, prev_workfile); 
+            gui_create_environment (filename, A_NONE);
+        }
         g_free (message);
     }
 
@@ -306,10 +321,9 @@ void gui_open_file (const gchar* filename) {
     g_free (basename);
     g_free (prev_workfile);
     
-    gui_create_environment (NULL, filename);
 
     if (GTK_RESPONSE_YES != ret)
-        iofunctions_load_file (gummi->io, filename); 
+        gui_create_environment (filename, A_LOAD);
 }
 
 void gui_save_file (gboolean saveas) {
@@ -359,9 +373,7 @@ void on_menu_new_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     */
-    gui_create_environment (NULL, NULL);
-    
-    //iofunctions_load_default_text ();
+    gui_create_environment (NULL, A_DEFAULT);
 }
 
 void on_menu_template_activate (GtkWidget *widget, void * user) {
@@ -496,14 +508,12 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
                                      
-    gint pos = tabmanager_get_position_page(gui->tabmanager, nbpage);
+    gint pos = tabmanager_get_page_position(gui->tabmanager, nbpage);
 
     /* very important line */
     tabmanager_set_active_tab(gui->tabmanager, pos);
     
     gui_update_title();
-    
-    
     previewgui_reset (gui->previewgui);
     
     slog (L_INFO, "Switched to environment (%d) at page %d\n", pos, page);
@@ -820,10 +830,11 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         statusbar_set_message (status);
         g_free (status);
         
-        gui_create_environment (NULL, NULL);
+        gui_create_environment (NULL, A_NONE);
         editor_fill_buffer (g_active_editor, template.itemdata);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
+    template_data_free(&template);
 }
 
 void on_button_template_close_clicked (GtkWidget* widget, void* user) {
@@ -893,7 +904,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
 
     if (biblio_detect_bibliography (gummi->biblio, g_active_editor)) {
         editor_insert_bib (g_active_editor, g_active_editor->bibfile);
-        if (!g_file_get_contents (g_active_editor->bibfile, &text, NULL, &err)) {
+        if (!g_file_get_contents(g_active_editor->bibfile, &text, NULL, &err)) {
             slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
             g_error_free (err);
             return;
@@ -1162,7 +1173,8 @@ void display_recent_files (GummiGui* gui) {
 }
 
 void errorbuffer_set_text (gchar *message) {
-    gtk_text_buffer_set_text (gui->errorbuff, message, -1);
+    if (message)
+        gtk_text_buffer_set_text (gui->errorbuff, message, -1);
 }
 
 void statusbar_set_message (gchar *message) {

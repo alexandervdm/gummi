@@ -171,3 +171,8 @@ void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
     gtk_widget_set_sensitive (GTK_WIDGET (t->template_remove), TRUE);
     gtk_widget_set_sensitive (GTK_WIDGET (t->template_open), TRUE);
 }
+
+void template_data_free(templdata* data) {
+    g_free(data->itemname);
+    g_free(data->itemdata);
+}
