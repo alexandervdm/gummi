@@ -242,8 +242,18 @@ void gui_update_environment (const gchar* filename) {
 void gui_create_environment (OpenAct act, const gchar* filename,
                              const gchar* opt) {
     GuEditor* editor = editor_new (gummi->motion);
-    GuTabContext* t = tabmanager_create_tab (gui->tabmanager, editor, filename);
-    gint pos = tabmanager_tabs_push (gui->tabmanager, t);
+    GuTabContext* t = NULL;
+    gint pos = 0;
+
+    /* Remove a tab if it's a new one and haven't been modified yet */
+    if ((act == A_LOAD || act == A_LOAD_OPT) &&
+        (g_active_editor && !g_active_editor->filename &&
+                !gtk_text_buffer_get_modified (g_e_buffer)))
+        pos = tabmanager_tab_replace_active(gui->tabmanager, editor ,filename);
+    else {
+        t = tabmanager_create_tab (gui->tabmanager, editor, filename);
+        pos = tabmanager_tab_push (gui->tabmanager, t);
+    }
 
     gummi_new_environment (editor, filename);
     tabmanager_switch_tab (gui->tabmanager, pos);
@@ -278,7 +288,7 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     gui_update_windowtitle();
     previewgui_reset (gui->previewgui);
     
-    slog (L_INFO, "Switched to environment at page %d\n", page);
+    slog (L_DEBUG, "Switched to environment at page %d\n", page);
 }
 
 void gui_update_windowtitle (void) {
@@ -455,7 +465,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
-    if (!tabmanager_tabs_pop_active(gui->tabmanager))
+    if (!tabmanager_tab_pop_active(gui->tabmanager))
         previewgui_start_error_mode(gui->previewgui);
     gui_update_windowtitle ();
 }

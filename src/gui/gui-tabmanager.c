@@ -43,7 +43,7 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     return tm;
 }
 
-gboolean tabmanager_tabs_pop_active (GuTabmanagerGui* tm) {
+gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm) {
     gint position = gtk_notebook_get_current_page(tm->notebook);
     gint total = gtk_notebook_get_n_pages(tm->notebook);
 
@@ -94,9 +94,12 @@ void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename) {
 
 void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position) {
     if (position == -1) {
+        tm->active_tab = NULL;
         tm->active_editor = NULL;
         tm->active_page = NULL;
     } else {
+        tm->active_tab =
+            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position));
         tm->active_editor =
             GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->editor;
         tm->active_page =
@@ -116,7 +119,20 @@ GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
     return tab;
 }
 
-gint tabmanager_tabs_push(GuTabmanagerGui* tm, GuTabContext* tc) {
+gint tabmanager_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
+                                   const gchar* filename) {
+    tm->active_tab->editor = ec;
+    tabmanager_change_label(tm, filename);
+    editor_destroy(tm->active_editor);
+    gtk_container_remove (GTK_CONTAINER (tm->active_tab->page),
+                          GTK_WIDGET (tm->active_editor->view));
+    gtk_container_add (GTK_CONTAINER (tm->active_tab->page),
+                       GTK_WIDGET (ec->view));
+    gtk_widget_show(GTK_WIDGET(ec->view));
+    return gtk_notebook_page_num(tm->notebook, tm->active_page);
+}
+
+gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
     gint pos = 0;
 
     tm->tabs = g_list_append(tm->tabs, tc);

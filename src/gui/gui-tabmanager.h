@@ -50,6 +50,7 @@ typedef struct _GuTabmanagerGui GuTabmanagerGui;
 struct _GuTabmanagerGui {
     GtkNotebook *notebook;
 
+    GuTabContext* active_tab;
     GuEditor* active_editor;
     GtkWidget* active_page;
 
@@ -60,9 +61,11 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 
 GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
                                     const gchar* filename);
+gint tabmanager_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
+                                   const gchar* filename);
 
-gint tabmanager_tabs_push(GuTabmanagerGui* tm, GuTabContext* tc);
-gboolean tabmanager_tabs_pop_active (GuTabmanagerGui* tm);
+gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
+gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm);
 void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos);
 
 GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
