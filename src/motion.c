@@ -111,6 +111,7 @@ gpointer motion_compile_thread (gpointer data) {
         g_free(editortext);
 
         if (!precompile_ok) {
+            gtk_widget_grab_focus (focus);
             gdk_threads_leave();
             g_mutex_unlock (mc->compile_mutex);
 

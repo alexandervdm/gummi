@@ -141,10 +141,9 @@ gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
     pos = gtk_notebook_append_page (GTK_NOTEBOOK (tm->notebook), tc->page,
                                     tc->label);
 
-    gtk_widget_grab_focus(GTK_WIDGET(tc->editor->view));
-
     gtk_widget_show(tc->page);
     gtk_widget_show(GTK_WIDGET(tc->editor->view));
+    gtk_widget_grab_focus(GTK_WIDGET(tc->editor->view));
 
     return pos;
 }
