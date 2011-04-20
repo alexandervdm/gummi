@@ -30,6 +30,7 @@
 #include "gui-tabmanager.h"
 
 #include "gui-main.h"
+#include "environment.h"
 
 GuTabLabel* tablabel_new (const gchar* filename) {
     static unsigned count = 0;
@@ -78,7 +79,7 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
     gchar* labeltext = NULL; 
     gchar* labelname = NULL;
     labelname = (filename)? g_path_get_basename (filename):
-                            g_strdup_printf("Unsaved Document %d", tl->unsave);
+                        g_strdup_printf(_("Unsaved Document %d"), tl->unsave);
     labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), labelname);
     gtk_label_set_text (tl->label, labeltext);
     g_free (labelname);

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-14 00:24+0800\n"
+"POT-Creation-Date: 2011-04-20 14:14+0800\n"
 "PO-Revision-Date: 2010-05-23 16:18+0400\n"
 "Last-Translator: kruvalig <kruvalig@gmail.com>\n"
 "Language-Team: fedora-trans-ru\n"
@@ -279,7 +279,7 @@ msgstr "Полное совпадения слов"
 msgid "Matrix"
 msgstr "Матрица"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:921
 msgid "N/A"
 msgstr "N/A"
 
@@ -444,11 +444,11 @@ msgstr "_Вид"
 msgid "filter:"
 msgstr "Фильтр:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:919
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:920
 msgid "none"
 msgstr "отсутствует"
 
@@ -732,7 +732,7 @@ msgstr ""
 msgid "Autosaving file %s"
 msgstr "Однострочный"
 
-#: ../src/latex.c:182 ../src/gui/gui-main.c:366
+#: ../src/latex.c:184 ../src/gui/gui-main.c:372
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
@@ -763,115 +763,120 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Заголовок:"
 
+#: ../src/gui/gui-tabmanager.c:82
+#, c-format
+msgid "Unsaved Document %d"
+msgstr ""
+
 #: ../src/gui/gui-import.c:167
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:415
+#: ../src/gui/gui-main.c:421
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui/gui-main.c:597
+#: ../src/gui/gui-main.c:604
 #, fuzzy
 msgid "Words in text"
 msgstr "Жирный текст"
 
-#: ../src/gui/gui-main.c:598
+#: ../src/gui/gui-main.c:605
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:599
+#: ../src/gui/gui-main.c:606
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:607
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:601
+#: ../src/gui/gui-main.c:608
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-main.c:602
+#: ../src/gui/gui-main.c:609
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-main.c:603
+#: ../src/gui/gui-main.c:610
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:664
+#: ../src/gui/gui-main.c:671
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:672
+#: ../src/gui/gui-main.c:679
 msgid "Document Statistics"
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:811
+#: ../src/gui/gui-main.c:818
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:863
+#: ../src/gui/gui-main.c:870
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:865
+#: ../src/gui/gui-main.c:872
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:867
+#: ../src/gui/gui-main.c:874
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:870
+#: ../src/gui/gui-main.c:877
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:910
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:980
+#: ../src/gui/gui-main.c:987
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:990
+#: ../src/gui/gui-main.c:997
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:993
+#: ../src/gui/gui-main.c:1000
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:994
+#: ../src/gui/gui-main.c:1001
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:1028
+#: ../src/gui/gui-main.c:1035
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:1029
+#: ../src/gui/gui-main.c:1036
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:1030
+#: ../src/gui/gui-main.c:1037
 msgid "Export to PDF"
 msgstr ""
 

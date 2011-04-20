@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-14 00:24+0800\n"
+"POT-Creation-Date: 2011-04-20 14:14+0800\n"
 "PO-Revision-Date: 2010-10-27 20:28+0100\n"
 "Last-Translator: Salvatore Vassallo <vassallosalvatore@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -279,7 +279,7 @@ msgstr "Solo parole intere"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:921
 msgid "N/A"
 msgstr "N/A"
 
@@ -443,11 +443,11 @@ msgstr "(_V)isualizza"
 msgid "filter:"
 msgstr "filtra:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:919
 msgid "no bibliography file detected"
 msgstr "nessuna bibliografia trovata"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:920
 msgid "none"
 msgstr "nessuno"
 
@@ -733,7 +733,7 @@ msgstr "Non è possibile convertire il testo in UTF-8!\n"
 msgid "Autosaving file %s"
 msgstr "Salvataggio automatico del file %s"
 
-#: ../src/latex.c:182 ../src/gui/gui-main.c:366
+#: ../src/latex.c:184 ../src/gui/gui-main.c:372
 msgid "The file already exists. Overwrite?"
 msgstr "Il file esiste già. Volete sovrascriverlo?"
 
@@ -768,45 +768,50 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Conferma"
 
+#: ../src/gui/gui-tabmanager.c:82
+#, c-format
+msgid "Unsaved Document %d"
+msgstr ""
+
 #: ../src/gui/gui-import.c:167
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr "%s: Nessun file o directory\n"
 
-#: ../src/gui/gui-main.c:415
+#: ../src/gui/gui-main.c:421
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Errore nel caricare un file modificato di recente: %s"
 
-#: ../src/gui/gui-main.c:597
+#: ../src/gui/gui-main.c:604
 msgid "Words in text"
 msgstr "Parole nel testo"
 
-#: ../src/gui/gui-main.c:598
+#: ../src/gui/gui-main.c:605
 msgid "Words in headers"
 msgstr "Parole nelle intestazioni"
 
-#: ../src/gui/gui-main.c:599
+#: ../src/gui/gui-main.c:606
 msgid "Words in float captions"
 msgstr "Parole nelle didascalie dei float"
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:607
 msgid "Number of headers"
 msgstr "Numero di intestazioni"
 
-#: ../src/gui/gui-main.c:601
+#: ../src/gui/gui-main.c:608
 msgid "Number of floats"
 msgstr "Numero di float"
 
-#: ../src/gui/gui-main.c:602
+#: ../src/gui/gui-main.c:609
 msgid "Number of math inlines"
 msgstr "Numero di espressioni matematiche"
 
-#: ../src/gui/gui-main.c:603
+#: ../src/gui/gui-main.c:610
 msgid "Number of math displayed"
 msgstr "Numero di espressioni matematiche visualizzate"
 
-#: ../src/gui/gui-main.c:664
+#: ../src/gui/gui-main.c:671
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
@@ -814,64 +819,64 @@ msgstr ""
 "Questa funzione richiede\n"
 "il porgramma texcount.\n"
 
-#: ../src/gui/gui-main.c:672
+#: ../src/gui/gui-main.c:679
 msgid "Document Statistics"
 msgstr "Statistiche del documento"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:811
+#: ../src/gui/gui-main.c:818
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:863
+#: ../src/gui/gui-main.c:870
 msgid "Compiling bibliography file..."
 msgstr "Compilazione della bibliografia..."
 
-#: ../src/gui/gui-main.c:865
+#: ../src/gui/gui-main.c:872
 msgid "bibliography compiled without errors"
 msgstr "bibliografia compilata senza errori"
 
-#: ../src/gui/gui-main.c:867
+#: ../src/gui/gui-main.c:874
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Errore nel compilare il file della bibliografia o nessuna bibliografia "
 "trovata..."
 
-#: ../src/gui/gui-main.c:870
+#: ../src/gui/gui-main.c:877
 msgid "error compiling bibliography file"
 msgstr "errore compilando la bibliografia"
 
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:910
 #, c-format
 msgid "%s loaded"
 msgstr "Caricato%s"
 
-#: ../src/gui/gui-main.c:980
+#: ../src/gui/gui-main.c:987
 msgid "Do you want to save the changes you have made?"
 msgstr "Salvare le modifiche al documento?"
 
-#: ../src/gui/gui-main.c:990
+#: ../src/gui/gui-main.c:997
 msgid "Open LaTeX document"
 msgstr "Apri un documento LaTex"
 
-#: ../src/gui/gui-main.c:993
+#: ../src/gui/gui-main.c:1000
 msgid "Select an image to insert"
 msgstr "Selezionare un'immagine da inserire"
 
-#: ../src/gui/gui-main.c:994
+#: ../src/gui/gui-main.c:1001
 msgid "Select bibliography file"
 msgstr "Seleziona il file della bibliografia"
 
-#: ../src/gui/gui-main.c:1028
+#: ../src/gui/gui-main.c:1035
 msgid "Save LaTeX document"
 msgstr "Salva il documento LaTex"
 
-#: ../src/gui/gui-main.c:1029
+#: ../src/gui/gui-main.c:1036
 msgid "Save as LaTeX document"
 msgstr "Salva come documento LaTeX"
 
-#: ../src/gui/gui-main.c:1030
+#: ../src/gui/gui-main.c:1037
 msgid "Export to PDF"
 msgstr "Esporta nel formato PDF"
 

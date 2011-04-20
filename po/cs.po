@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi SVN700\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-14 00:24+0800\n"
+"POT-Creation-Date: 2011-04-20 14:14+0800\n"
 "PO-Revision-Date: 2011-03-03 19:15+0100\n"
 "Last-Translator: Přemysl Janouch <p.janouch@gmail.com>\n"
 "Language-Team: Czech <p.janouch@gmail.com>\n"
@@ -285,7 +285,7 @@ msgstr "Hledat pouze celá slova"
 msgid "Matrix"
 msgstr "Matice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:914
+#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:921
 msgid "N/A"
 msgstr "nelze aplikovat"
 
@@ -449,11 +449,11 @@ msgstr "_Zobrazení"
 msgid "filter:"
 msgstr "filtr:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:912
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:919
 msgid "no bibliography file detected"
 msgstr "nenalezen žádný soubor s bibliografií"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:913
+#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:920
 msgid "none"
 msgstr "žádný"
 
@@ -726,7 +726,7 @@ msgstr "Nemohu převést text na UTF-8!\n"
 msgid "Autosaving file %s"
 msgstr "Automaticky ukládám soubor %s"
 
-#: ../src/latex.c:182 ../src/gui/gui-main.c:366
+#: ../src/latex.c:184 ../src/gui/gui-main.c:372
 msgid "The file already exists. Overwrite?"
 msgstr "Soubor již existuje. Přepsat?"
 
@@ -764,45 +764,50 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Potvrzení"
 
+#: ../src/gui/gui-tabmanager.c:82
+#, c-format
+msgid "Unsaved Document %d"
+msgstr ""
+
 #: ../src/gui/gui-import.c:167
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr "%s: Není soubor nebo adresář\n"
 
-#: ../src/gui/gui-main.c:415
+#: ../src/gui/gui-main.c:421
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Chyba při otevírání nedávného souboru: %s"
 
-#: ../src/gui/gui-main.c:597
+#: ../src/gui/gui-main.c:604
 msgid "Words in text"
 msgstr "Slova v textu"
 
-#: ../src/gui/gui-main.c:598
+#: ../src/gui/gui-main.c:605
 msgid "Words in headers"
 msgstr "Slova v hlavičkách"
 
-#: ../src/gui/gui-main.c:599
+#: ../src/gui/gui-main.c:606
 msgid "Words in float captions"
 msgstr "Slova v plovoucích nadpisech"
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:607
 msgid "Number of headers"
 msgstr "Počet hlaviček"
 
-#: ../src/gui/gui-main.c:601
+#: ../src/gui/gui-main.c:608
 msgid "Number of floats"
 msgstr "Počet plovoucích elementů"
 
-#: ../src/gui/gui-main.c:602
+#: ../src/gui/gui-main.c:609
 msgid "Number of math inlines"
 msgstr "Počet vložených vzorců"
 
-#: ../src/gui/gui-main.c:603
+#: ../src/gui/gui-main.c:610
 msgid "Number of math displayed"
 msgstr "Počet zobrazených vzorců"
 
-#: ../src/gui/gui-main.c:664
+#: ../src/gui/gui-main.c:671
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
@@ -810,62 +815,62 @@ msgstr ""
 "Tato funkce vyžaduje\n"
 "program texcount.\n"
 
-#: ../src/gui/gui-main.c:672
+#: ../src/gui/gui-main.c:679
 msgid "Document Statistics"
 msgstr "Statistiky dokumentu"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:811
+#: ../src/gui/gui-main.c:818
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:863
+#: ../src/gui/gui-main.c:870
 msgid "Compiling bibliography file..."
 msgstr "Kompiluji soubor s bibliografií..."
 
-#: ../src/gui/gui-main.c:865
+#: ../src/gui/gui-main.c:872
 msgid "bibliography compiled without errors"
 msgstr "bibliografie se zkompilována bez chyb"
 
-#: ../src/gui/gui-main.c:867
+#: ../src/gui/gui-main.c:874
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Chyba při kompilaci souboru s bibliografií nebo nebyl žádný nalezen..."
 
-#: ../src/gui/gui-main.c:870
+#: ../src/gui/gui-main.c:877
 msgid "error compiling bibliography file"
 msgstr "chyba při kompilaci souboru s bibliografií"
 
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:910
 #, c-format
 msgid "%s loaded"
 msgstr "%s nahráno"
 
-#: ../src/gui/gui-main.c:980
+#: ../src/gui/gui-main.c:987
 msgid "Do you want to save the changes you have made?"
 msgstr "Chcete uložit změny, které jste provedli?"
 
-#: ../src/gui/gui-main.c:990
+#: ../src/gui/gui-main.c:997
 msgid "Open LaTeX document"
 msgstr "Otevřít dokument LaTeX"
 
-#: ../src/gui/gui-main.c:993
+#: ../src/gui/gui-main.c:1000
 msgid "Select an image to insert"
 msgstr "Vyberte obrázek pro vložení"
 
-#: ../src/gui/gui-main.c:994
+#: ../src/gui/gui-main.c:1001
 msgid "Select bibliography file"
 msgstr "Vyberte soubor s bibliografií"
 
-#: ../src/gui/gui-main.c:1028
+#: ../src/gui/gui-main.c:1035
 msgid "Save LaTeX document"
 msgstr "Uložit dokument LaTeX"
 
-#: ../src/gui/gui-main.c:1029
+#: ../src/gui/gui-main.c:1036
 msgid "Save as LaTeX document"
 msgstr "Uložit jako dokument LaTeX"
 
-#: ../src/gui/gui-main.c:1030
+#: ../src/gui/gui-main.c:1037
 msgid "Export to PDF"
 msgstr "Exportovat do PDF"
 
