@@ -110,22 +110,18 @@ gpointer motion_compile_thread (gpointer data) {
         precompile_ok = latex_precompile_check(editortext);
         g_free(editortext);
 
-        if (!precompile_ok) {
-            gtk_widget_grab_focus (focus);
-            gdk_threads_leave();
-            g_mutex_unlock (mc->compile_mutex);
+        gtk_widget_grab_focus (focus);
+        gdk_threads_leave();
 
+        if (!precompile_ok) {
+            g_mutex_unlock (mc->compile_mutex);
             gdk_threads_enter();
             previewgui_start_error_mode (pc);
             gdk_threads_leave();
             continue;
         }
         
-        gtk_widget_grab_focus (focus);
-        gdk_threads_leave ();
-        
         latex_update_pdffile (latex, editor);
-        
         g_mutex_unlock (mc->compile_mutex);
 
         /* Make sure the editor still exists after compile */

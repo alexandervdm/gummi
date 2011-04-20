@@ -200,7 +200,7 @@ void snippetsgui_update_snippet (GuSnippets* sc) {
 }
 
 void on_snippetsgui_close_clicked (GtkWidget* widget, void* user) {
-    gtk_widget_hide_all (GTK_WIDGET (gui->snippetsgui->snippetswindow));
+    gtk_widget_hide (GTK_WIDGET (gui->snippetsgui->snippetswindow));
     snippets_save (gummi->snippets);
 }
 
