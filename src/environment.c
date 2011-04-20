@@ -65,7 +65,7 @@ GummiGui* gummi_get_gui (void) {
 }
 
 GuEditor* gummi_get_active_editor (void) {
-    return gui->tabmanager->active_editor;
+    return gui->tabmanagergui->active_editor;
 }
 
 GuIOFunc* gummi_get_io (void) {

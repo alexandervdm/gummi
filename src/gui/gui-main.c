@@ -106,7 +106,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->searchgui = searchgui_init (builder);
     g->prefsgui = prefsgui_init (g->mainwindow);
     g->snippetsgui = snippetsgui_init (g->mainwindow);
-    g->tabmanager = tabmanagergui_init (builder);
+    g->tabmanagergui = tabmanagerguigui_init (builder);
 
     gchar* icon_file = g_build_filename (DATADIR, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);
@@ -194,11 +194,11 @@ gboolean gui_quit (void) {
     gchar buf[16];
     int i = 0;
 
-    gint length = g_list_length (gui->tabmanager->tabs);
+    gint length = g_list_length (gui->tabmanagergui->tabs);
 
     for(i = 0; i < length; i++){
-        gtk_notebook_set_current_page(gui->tabmanager->notebook, i);
-        tabmanager_set_active_tab(gui->tabmanager, i);
+        gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
+        tabmanagergui_set_active_tab(gui->tabmanagergui, i);
         
         gint ret = check_for_save ();
         if (GTK_RESPONSE_YES == ret)
@@ -218,7 +218,7 @@ gboolean gui_quit (void) {
 
     for(i = 0; i < length; i++)
         editor_destroy (GU_TAB_CONTEXT (g_list_nth_data
-                    (gui->tabmanager->tabs, i))->editor);
+                    (gui->tabmanagergui->tabs, i))->editor);
 
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n" 
@@ -232,7 +232,7 @@ void gui_update_environment (const gchar* filename) {
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
-    tabmanager_change_label (gui->tabmanager, filename);
+    tabmanagergui_update_active_tab_label (gui->tabmanagergui, filename);
     
     gummi_new_environment (g_active_editor, filename);
     gui_update_windowtitle ();
@@ -245,19 +245,21 @@ void gui_create_environment (OpenAct act, const gchar* filename,
     GuTabContext* t = NULL;
     gint pos = 0;
 
+    gummi_new_environment (editor, filename);
+
     /* Remove a tab if it's a new one and haven't been modified yet */
     if ((act == A_LOAD || act == A_LOAD_OPT) &&
         (g_active_editor && !g_active_editor->filename &&
                 !gtk_text_buffer_get_modified (g_e_buffer)))
-        pos = tabmanager_tab_replace_active(gui->tabmanager, editor ,filename);
+        pos = tabmanagergui_tab_replace_active(gui->tabmanagergui, editor,
+                                               filename);
     else {
-        t = tabmanager_create_tab (gui->tabmanager, editor, filename);
-        pos = tabmanager_tab_push (gui->tabmanager, t);
+        t = tabmanagergui_create_tab (gui->tabmanagergui, editor, filename);
+        pos = tabmanagergui_tab_push (gui->tabmanagergui, t);
     }
 
-    gummi_new_environment (editor, filename);
-    tabmanager_switch_tab (gui->tabmanager, pos);
-    tabmanager_set_active_tab (gui->tabmanager, pos);
+    tabmanagergui_switch_tab (gui->tabmanagergui, pos);
+    tabmanagergui_set_active_tab (gui->tabmanagergui, pos);
 
     switch (act) {
         case A_NONE:
@@ -284,7 +286,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
     /* very important line */
-    tabmanager_set_active_tab(gui->tabmanager, page);
+    tabmanagergui_set_active_tab(gui->tabmanagergui, page);
     gui_update_windowtitle();
     previewgui_reset (gui->previewgui);
     
@@ -292,36 +294,30 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
 }
 
 void gui_update_windowtitle (void) {
-    gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* title = NULL;
+    const gchar* labeltext = NULL;
     
+    tabmanagergui_update_active_tab_label (gui->tabmanagergui, NULL);
+    labeltext =  gtk_label_get_text (g_active_tab->tablabel->label);
+
     if (!g_active_editor) {
         gtk_window_set_title(gui->mainwindow, "Gummi");
         return;
     }
 
     if (g_active_editor->filename) {
-        basename = g_path_get_basename (g_active_editor->filename);
         dirname = g_path_get_dirname (g_active_editor->filename);
-        title = g_strdup_printf ("%s%s (%s) - %s",
-                (gtk_text_buffer_get_modified (g_e_buffer)? "*": ""),
-                basename, dirname, PACKAGE_NAME);
-        g_free (basename);
+        title = g_strdup_printf ("%s (%s) - %s", labeltext, dirname,
+                                                 PACKAGE_NAME);
         g_free (dirname);
     } else {
-        const gchar* unsaved = gtk_notebook_get_tab_label_text
-            (gui->tabmanager->notebook, GTK_WIDGET(g_active_page));
-        title = g_strdup_printf ("%s%s - %s",
-                (gtk_text_buffer_get_modified (g_e_buffer)? "*": ""),
-                unsaved, PACKAGE_NAME);
+        title = g_strdup_printf ("%s - %s", labeltext, PACKAGE_NAME);
     }
-
     gtk_window_set_title (gui->mainwindow, title);
+
     g_free (title);
 }
-
-
 
 void gui_open_file (const gchar* filename) {
     gint ret = 0;
@@ -465,9 +461,10 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
-    if (!tabmanager_tab_pop_active(gui->tabmanager))
-        previewgui_start_error_mode(gui->previewgui);
-    gui_update_windowtitle ();
+    if (!tabmanagergui_tab_pop_active (gui->tabmanagergui))
+        previewgui_start_error_mode (gui->previewgui);
+    else
+        gui_update_windowtitle ();
 }
 
 void on_menu_cut_activate (GtkWidget *widget, void* user) {

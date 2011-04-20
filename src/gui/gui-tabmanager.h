@@ -1,5 +1,5 @@
 /**
- * @file   gui-editortabs.h
+ * @file   gui-tabmanager.h
  * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
@@ -35,13 +35,24 @@
 
 #include "editor.h"
 
+#define GU_TAB_LABEL(x) ((GuTabLabel*)x)
+typedef struct _GuTabLabel GuTabLabel;
+
+struct _GuTabLabel {
+    GtkWidget* ebox;
+    GtkButton* close;
+    GtkHBox* hbox;
+    GtkLabel* label;
+    unsigned unsave;
+};
+
 #define GU_TAB_CONTEXT(x) ((GuTabContext*)x)
 typedef struct _GuTabContext GuTabContext;
 
 struct _GuTabContext {
     GuEditor* editor;
     GtkWidget* page;
-    GtkWidget* label;
+    GuTabLabel* tablabel;
 };
 
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
@@ -57,23 +68,21 @@ struct _GuTabmanagerGui {
     GList* tabs;
 };
 
-GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
+GuTabLabel* tablabel_new (const gchar *filename);
+void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
+                                 gboolean modified);
 
-GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
+GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder);
+GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
                                     const gchar* filename);
-gint tabmanager_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
+gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
                                    const gchar* filename);
-
-gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
-gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm);
-void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos);
-
-GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename);
-void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename);
-
-void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position);
-gint tabmanager_create_unsavednr (GuTabmanagerGui* tm);
-
-gint tabmanager_get_editor_position(GuTabmanagerGui* tm, GuEditor* ec);
+gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
+gboolean tabmanagergui_tab_pop_active (GuTabmanagerGui* tm);
+void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos);
+void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position);
+gint tabmanagergui_create_unsavednr (GuTabmanagerGui* tm);
+void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
+                                            const gchar* filename);
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */

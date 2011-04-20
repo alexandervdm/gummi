@@ -29,7 +29,63 @@
 
 #include "gui-tabmanager.h"
 
-GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
+#include "gui-main.h"
+
+GuTabLabel* tablabel_new (const gchar* filename) {
+    static unsigned count = 0;
+    GtkRcStyle* rcstyle = NULL;
+    GtkWidget* image = NULL;
+    GuTabLabel* tl = g_new0(GuTabLabel, 1);
+
+    tl->unsave = ++count;
+    tl->ebox = gtk_event_box_new ();
+    tl->hbox = GTK_HBOX (gtk_hbox_new (FALSE, 0));
+
+    gtk_event_box_set_visible_window (GTK_EVENT_BOX (tl->ebox), FALSE);
+    gtk_container_add (GTK_CONTAINER(tl->ebox), GTK_WIDGET (tl->hbox));
+
+    tl->label = GTK_LABEL (gtk_label_new (filename));
+    tablabel_update_label_text (tl, filename, FALSE);
+
+    gtk_box_pack_start (GTK_BOX (tl->hbox), GTK_WIDGET (tl->label), TRUE,
+                        TRUE, 5);
+
+    tl->close = GTK_BUTTON (gtk_button_new());
+    image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
+    gtk_button_set_image (tl->close, image);
+    g_object_set (tl->close, "relief", GTK_RELIEF_NONE,
+                             "focus-on-click", FALSE, NULL);
+    gtk_box_pack_start (GTK_BOX (tl->hbox), GTK_WIDGET (tl->close), FALSE,
+                        FALSE, 0);
+    g_signal_connect (tl->close,
+                      "clicked",
+                      G_CALLBACK (on_menu_close_activate),
+                      NULL);
+
+    /* make it as small as possible */
+    rcstyle = gtk_rc_style_new ();
+    rcstyle->xthickness = rcstyle->ythickness = 0;
+    gtk_widget_modify_style (GTK_WIDGET (tl->close), rcstyle);
+    g_object_unref (rcstyle);
+
+    gtk_widget_show_all (GTK_WIDGET (tl->hbox));
+
+    return tl;
+}
+
+void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
+                                 gboolean modified) {
+    gchar* labeltext = NULL; 
+    gchar* labelname = NULL;
+    labelname = (filename)? g_path_get_basename (filename):
+                            g_strdup_printf("Unsaved Document %d", tl->unsave);
+    labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), labelname);
+    gtk_label_set_text (tl->label, labeltext);
+    g_free (labelname);
+    g_free (labeltext);
+}
+
+GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
@@ -43,7 +99,7 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     return tm;
 }
 
-gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm) {
+gboolean tabmanagergui_tab_pop_active (GuTabmanagerGui* tm) {
     gint position = gtk_notebook_get_current_page(tm->notebook);
     gint total = gtk_notebook_get_n_pages(tm->notebook);
 
@@ -51,7 +107,7 @@ gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm) {
     GuTabContext* tab = g_list_nth(tm->tabs, position)->data;
 
     tm->tabs = g_list_remove(tm->tabs, tab);
-    tabmanager_set_active_tab(tm, total -2);
+    tabmanagergui_set_active_tab(tm, total -2);
     editor_destroy(tab->editor);
     gtk_notebook_remove_page(tm->notebook, position);
     g_free(tab);
@@ -59,40 +115,7 @@ gboolean tabmanager_tab_pop_active (GuTabmanagerGui* tm) {
     return (total != 1);
 }
 
-GtkWidget* tabmanager_create_label (GuTabmanagerGui* tm, const gchar *filename) {
-    GtkWidget *tablabel;
-    gchar *tabname;
-
-    gint nr_pages = gtk_notebook_get_n_pages (tm->notebook);
-
-    if (!filename)
-        tabname = g_strdup_printf ("Unsaved Document %d", (nr_pages+1));
-    else 
-        tabname = g_path_get_basename (filename);
-
-    tablabel = gtk_label_new (tabname);
-    gtk_widget_set_tooltip_text (tablabel, filename);
-
-    g_free(tabname);
-
-    return tablabel;
-}
-
-void tabmanager_change_label (GuTabmanagerGui* tm, const gchar *filename) {
-    GtkWidget *tablabel;
-    GtkWidget *page;
-    
-    gint cur = gtk_notebook_get_current_page(tm->notebook);
-    page = gtk_notebook_get_nth_page(tm->notebook, cur);
-    
-    /* gtk_notebook_set_tab_label_text ()
-     * could use that, but might not work for more complicated
-     * label (with add/close button) */
-    tablabel = tabmanager_create_label(tm, filename);
-    gtk_notebook_set_tab_label (tm->notebook, page, tablabel);
-}
-
-void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position) {
+void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position) {
     if (position == -1) {
         tm->active_tab = NULL;
         tm->active_editor = NULL;
@@ -107,22 +130,22 @@ void tabmanager_set_active_tab(GuTabmanagerGui* tm, gint position) {
     }
 }
 
-GuTabContext* tabmanager_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
-                                    const gchar* filename) {
+GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
+                                       const gchar* filename) {
     GuTabContext* tab = g_new0(GuTabContext, 1);
 
     tab->editor = ec;
     tab->page = gtk_scrolled_window_new (NULL, NULL);
-    tab->label = tabmanager_create_label(tm, filename);
+    tab->tablabel = tablabel_new (filename);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tab->page),
                                     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     return tab;
 }
 
-gint tabmanager_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
-                                   const gchar* filename) {
+gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
+                                      const gchar* filename) {
     tm->active_tab->editor = ec;
-    tabmanager_change_label(tm, filename);
+    tabmanagergui_update_active_tab_label (tm, filename);
     editor_destroy(tm->active_editor);
     gtk_container_remove (GTK_CONTAINER (tm->active_tab->page),
                           GTK_WIDGET (tm->active_editor->view));
@@ -132,14 +155,14 @@ gint tabmanager_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
     return gtk_notebook_page_num(tm->notebook, tm->active_page);
 }
 
-gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
+gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
     gint pos = 0;
 
     tm->tabs = g_list_append(tm->tabs, tc);
     gtk_container_add (GTK_CONTAINER (tc->page),
                        GTK_WIDGET(tc->editor->view));
     pos = gtk_notebook_append_page (GTK_NOTEBOOK (tm->notebook), tc->page,
-                                    tc->label);
+                                    GTK_WIDGET (tc->tablabel->ebox));
 
     gtk_widget_show(tc->page);
     gtk_widget_show(GTK_WIDGET(tc->editor->view));
@@ -148,15 +171,15 @@ gint tabmanager_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
     return pos;
 }
 
-void tabmanager_switch_tab(GuTabmanagerGui* tm, gint pos) {
+void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos) {
     gtk_notebook_set_current_page(tm->notebook, pos);
 }
 
-gint tabmanager_get_editor_position(GuTabmanagerGui* tm, GuEditor* ec) {
-    int i = 0;
-    for (i = 0; i < g_list_length(tm->tabs); ++i) {
-        if (GU_TAB_CONTEXT(g_list_nth(tm->tabs, i)->data)->editor == ec)
-            return i;
-    }
-    return -1;
+void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
+                                            const gchar* filename) {
+    const gchar* fname = (filename && tm->active_editor)?
+                            filename: tm->active_editor->filename;
+    gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
+                                                  (tm->active_editor->buffer));
+    tablabel_update_label_text (tm->active_tab->tablabel, fname, modi);
 }
