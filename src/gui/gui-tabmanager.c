@@ -94,9 +94,7 @@ GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
     tm->notebook =
         GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
 
-    /* This function is deprecated in Gtk+ 2.24, but since most of distros
-     * still have Gtk+ 2.22, it's okay for now */
-    gtk_notebook_set_tab_vborder (tm->notebook, 0);
+    g_object_set (tm->notebook, "tab-border", 0, NULL);
 
     tm->tabs = NULL;
     tm->active_editor = NULL;
