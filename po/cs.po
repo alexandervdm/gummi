@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi SVN700\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 14:14+0800\n"
+"POT-Creation-Date: 2011-04-21 10:58+0800\n"
 "PO-Revision-Date: 2011-03-03 19:15+0100\n"
 "Last-Translator: Přemysl Janouch <p.janouch@gmail.com>\n"
 "Language-Team: Czech <p.janouch@gmail.com>\n"
@@ -146,9 +146,8 @@ msgstr ""
 "a aktualizovat náhled."
 
 #: ../data/ui/gummi.glade.h:41
-#, fuzzy
 msgid "Compile _Document"
-msgstr "Zkompilovat _PDF"
+msgstr "Zkompilovat _dokument"
 
 #: ../data/ui/gummi.glade.h:42
 msgid ""
@@ -171,6 +170,10 @@ msgid "Deletes the selected template"
 msgstr "Smaže vybranou šablonu"
 
 #: ../data/ui/gummi.glade.h:47
+msgid "Detect"
+msgstr "Zjistit"
+
+#: ../data/ui/gummi.glade.h:48
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
@@ -178,7 +181,7 @@ msgstr ""
 "Zjišťovat zmínku o souboru\n"
 "bibtex v současném dokumentu"
 
-#: ../data/ui/gummi.glade.h:49
+#: ../data/ui/gummi.glade.h:50
 msgid ""
 "Determines whether the\n"
 "cells have line borders. "
@@ -186,30 +189,27 @@ msgstr ""
 "Určuje, zda buňky\n"
 "mají rámečky."
 
-#: ../data/ui/gummi.glade.h:51
-#, fuzzy
-msgid "Document _Statistics"
-msgstr "Statistiky dokumentu"
-
 #: ../data/ui/gummi.glade.h:52
+msgid "Document _Statistics"
+msgstr "_Statistiky dokumentu"
+
+#: ../data/ui/gummi.glade.h:53
 msgid "Double line"
 msgstr "Dvojitá čára"
 
-#: ../data/ui/gummi.glade.h:53
-#, fuzzy
-msgid "Enable S_nippets"
-msgstr "Výstřižky"
-
 #: ../data/ui/gummi.glade.h:54
-#, fuzzy
-msgid "Enable S_pell checking"
-msgstr "Jazyk pro kontrolu pravopisu"
+msgid "Enable S_nippets"
+msgstr "Povolit _výstřižky"
 
 #: ../data/ui/gummi.glade.h:55
+msgid "Enable S_pell checking"
+msgstr "Povolit _kontrolu pravopisu"
+
+#: ../data/ui/gummi.glade.h:56
 msgid "Error output"
 msgstr "Chybový výstup"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:57
 msgid ""
 "Error status for\n"
 "active document"
@@ -217,55 +217,55 @@ msgstr ""
 "Chybový stav\n"
 "aktivního dokumentu"
 
-#: ../data/ui/gummi.glade.h:58
+#: ../data/ui/gummi.glade.h:59
 msgid "File:"
 msgstr "Soubor:"
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:60
 msgid "Filename:"
 msgstr "Název souboru:"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:61
 msgid "Find"
 msgstr "Hledat"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:62
 msgid "Find Ne_xt"
 msgstr "Najít _další"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:63
 msgid "Find Pre_vious"
 msgstr "Najít _předchozí"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:64
 msgid "Fit Page Width"
 msgstr "Přizpůsobit šířce stránky"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:65
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - Editor pro LaTeX"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:66
 msgid "Hello svn user!"
 msgstr "Zdravím tě, uživateli svn!"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:67
 msgid "Image"
 msgstr "Obrázek"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:68
 msgid "Italic text"
 msgstr "Kurzíva"
 
-#: ../data/ui/gummi.glade.h:68
+#: ../data/ui/gummi.glade.h:69
 msgid "Label:"
 msgstr "Návěstí:"
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:70
 msgid "Load a file"
 msgstr "Nahrát soubor"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:71
 msgid ""
 "Make a template from the \n"
 "current active document."
@@ -273,221 +273,233 @@ msgstr ""
 "Vytvořit šablonu\n"
 "z aktivního dokumentu."
 
-#: ../data/ui/gummi.glade.h:72
+#: ../data/ui/gummi.glade.h:73
 msgid "Match case"
 msgstr "Rozlišovat velikost písmen"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:74
 msgid "Match entire word only"
 msgstr "Hledat pouze celá slova"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:75
 msgid "Matrix"
 msgstr "Matice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:921
+#: ../data/ui/gummi.glade.h:76 ../src/gui/gui-main.c:921
 msgid "N/A"
 msgstr "nelze aplikovat"
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:77
 msgid "New"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:78
 msgid "New from _Template"
 msgstr "Nový ze _šablony"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:79
 msgid "Next"
 msgstr "Další"
 
-#: ../data/ui/gummi.glade.h:79
+#: ../data/ui/gummi.glade.h:80
 msgid "No borders"
 msgstr "Bez rámečků"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:81
 msgid "Open"
 msgstr "Otevřít"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:82
 msgid "Open the selected template"
 msgstr "Otevřít vybranou šablonu"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:83
 msgid "Parentheses"
 msgstr "Kulaté závorky"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:84
 msgid "Pause updating the preview pane."
 msgstr "Pozastavit aktualizaci panelu s náhledy."
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:85
 msgid "Preview Pane"
 msgstr "Náhled"
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:86
 msgid "Previous"
 msgstr "Předchozí"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:87
 msgid "References:"
 msgstr "Odkazy:"
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:88
 msgid "Replace _All"
 msgstr "Nahradit _vše"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:89
 msgid "Replace with:"
 msgstr "Nahradit čím:"
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:90
 msgid "Rows:"
 msgstr "Řádky:"
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:91
 msgid "Save"
 msgstr "Uložit"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:92
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:93
 msgid "Save the current file"
 msgstr "Uložit současný soubor"
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:94
 msgid "Scale:"
 msgstr "Měřítko:"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:95
 msgid "Search backwards"
 msgstr "Hledat odzadu"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:96
 msgid "Search for:"
 msgstr "Co hledat:"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:97
 msgid "Single line"
 msgstr "Jediný řádek"
 
-#: ../data/ui/gummi.glade.h:97
+#: ../data/ui/gummi.glade.h:98
 msgid "Table"
 msgstr "Tabulka"
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:99
 msgid "Unbracketed"
 msgstr "Neozávorkovaný"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:100
 msgid "Underline text"
 msgstr "Podtržený text"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:101
 msgid "_Compile Bibliography"
 msgstr "_Zkompilovat bibliografii"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:102
 msgid "_Edit"
 msgstr "_Úpravy"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:103
 msgid "_Export to PDF"
 msgstr "_Exportovat do PDF"
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:104
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:105
 msgid "_Fullscreen"
 msgstr "_Celá obrazovka"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:106
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:107
 msgid "_Insert Bibliography"
 msgstr "_Vložit bibliografii"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:108
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:109
 msgid "_Replace"
 msgstr "_Nahradit"
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:110
 msgid "_Right Pane"
 msgstr "_Pravý panel"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:111
 msgid "_Search"
 msgstr "_Hledat"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:112
 msgid "_Statusbar"
 msgstr "_Stavový řádek"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:113
 msgid "_Toolbar"
 msgstr "_Panel nástrojů"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:114
 msgid "_Tools"
 msgstr "_Nástroje"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:115
 msgid "_View"
 msgstr "_Zobrazení"
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:116
+msgid "author"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:117
 msgid "filter:"
 msgstr "filtr:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:919
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:919
 msgid "no bibliography file detected"
 msgstr "nenalezen žádný soubor s bibliografií"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:920
+#: ../data/ui/gummi.glade.h:119 ../src/gui/gui-main.c:920
 msgid "none"
 msgstr "žádný"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:120
 msgid "of 0"
 msgstr "z 0"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:121
 msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:122
+msgid "title"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:123
 msgid "toolbutton1"
 msgstr "toolbutton1"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:124
 msgid "toolbutton2"
 msgstr "toolbutton2"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:125
 msgid "toolbutton3"
 msgstr "toolbutton3"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:126
 msgid "toolbutton5"
 msgstr "toolbutton5"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:127
 msgid "toolbutton6"
 msgstr "toolbutton6"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:128
 msgid "toolbutton7"
 msgstr "toolbutton7"
+
+#: ../data/ui/gummi.glade.h:129
+msgid "year"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:1
 #, fuzzy
@@ -739,11 +751,8 @@ msgid ""
 "Currently available:\n"
 "%s"
 msgstr ""
-"Nyní nainstalovaná:\n"
-"%s\n"
-"\n"
-"Nyní dostupná:\n"
-"%s"
+"Nyní nainstalovaná: %s\n"
+"Nyní dostupná: %s"
 
 #: ../src/updatecheck.c:114
 msgid "Update Check"
@@ -773,6 +782,11 @@ msgstr ""
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr "%s: Není soubor nebo adresář\n"
+
+#: ../src/gui/gui-main.c:337
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr ""
 
 #: ../src/gui/gui-main.c:421
 #, c-format
@@ -874,6 +888,24 @@ msgstr "Uložit jako dokument LaTeX"
 msgid "Export to PDF"
 msgstr "Exportovat do PDF"
 
+#: ../src/gui/gui-main.c:1084
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Nahrát soubor"
+
+#: ../src/gui/gui-main.c:1089
+msgid "Text files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:1102
+#, fuzzy
+msgid "Image files"
+msgstr "Obrázek"
+
+#: ../src/gui/gui-main.c:1109
+msgid "Bibtex files"
+msgstr ""
+
 #. g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 #: ../src/gui/gui-preview.c:87
 #, c-format
@@ -892,10 +924,16 @@ msgstr ""
 "Další informace jsou dostupné na záložce Chybový výstup.\n"
 "Opravte, prosím, vypsané chyby pro obnovení náhledů."
 
+#: ../src/gui/gui-preview.c:204
+#, c-format
+msgid "of %d"
+msgstr "z %d"
+
 #: ../src/gui/gui-snippets.c:302
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
+"Duplicate activation tab trigger dectected! Please choose another one.\n"
 
 #: ../src/gui/gui-snippets.c:315
 msgid "Type a new shortcut"
@@ -903,7 +941,7 @@ msgstr "Zadejte novou zkratku"
 
 #: ../src/gui/gui-snippets.c:318
 msgid "Type a new shortcut, or press Backspace to clear"
-msgstr ""
+msgstr "Zadejte novou zkratku nebo Backspace pro smazání"
 
 #~ msgid "_Autocheck Spelling"
 #~ msgstr "_Automaticky ověřovat pravopis"

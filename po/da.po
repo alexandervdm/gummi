@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-20 14:14+0800\n"
+"POT-Creation-Date: 2011-04-21 10:58+0800\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -166,12 +166,16 @@ msgid "Deletes the selected template"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:47
+msgid "Detect"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:48
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:49
+#: ../data/ui/gummi.glade.h:50
 msgid ""
 "Determines whether the\n"
 "cells have line borders. "
@@ -179,28 +183,28 @@ msgstr ""
 "Afgør om cellerne\n"
 "har liniekant. "
 
-#: ../data/ui/gummi.glade.h:51
+#: ../data/ui/gummi.glade.h:52
 msgid "Document _Statistics"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:52
+#: ../data/ui/gummi.glade.h:53
 msgid "Double line"
 msgstr "Dobbeltlinie"
 
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:54
 msgid "Enable S_nippets"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:54
+#: ../data/ui/gummi.glade.h:55
 #, fuzzy
 msgid "Enable S_pell checking"
 msgstr "Stavekontrolsprog:"
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:56
 msgid "Error output"
 msgstr "Fejlbeskeder"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:57
 msgid ""
 "Error status for\n"
 "active document"
@@ -208,275 +212,287 @@ msgstr ""
 "Fejlstatus for\n"
 "aktivt dokument"
 
-#: ../data/ui/gummi.glade.h:58
+#: ../data/ui/gummi.glade.h:59
 msgid "File:"
 msgstr "Fil:"
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:60
 msgid "Filename:"
 msgstr "Filnavn:"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:61
 msgid "Find"
 msgstr "Find"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:62
 msgid "Find Ne_xt"
 msgstr "Find N_æste"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:63
 msgid "Find Pre_vious"
 msgstr "Find For_rige"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:64
 msgid "Fit Page Width"
 msgstr "Tilpas til sidestørrelse"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:65
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - LaTeX Editor"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:66
 msgid "Hello svn user!"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:67
 msgid "Image"
 msgstr "Billede"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:68
 msgid "Italic text"
 msgstr "Kursiv skrift"
 
-#: ../data/ui/gummi.glade.h:68
+#: ../data/ui/gummi.glade.h:69
 msgid "Label:"
 msgstr "Label:"
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:70
 msgid "Load a file"
 msgstr "Åben en fil"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:71
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:72
+#: ../data/ui/gummi.glade.h:73
 msgid "Match case"
 msgstr "Forskel på store/små bogstaver"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:74
 msgid "Match entire word only"
 msgstr "Find kun blandt hele ord"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:75
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:75 ../src/gui/gui-main.c:921
+#: ../data/ui/gummi.glade.h:76 ../src/gui/gui-main.c:921
 msgid "N/A"
 msgstr "N/A"
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:77
 msgid "New"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:78
 msgid "New from _Template"
 msgstr "Ny fra _Skabelon"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:79
 msgid "Next"
 msgstr "Næste"
 
-#: ../data/ui/gummi.glade.h:79
+#: ../data/ui/gummi.glade.h:80
 msgid "No borders"
 msgstr "Ingen rammer"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:81
 msgid "Open"
 msgstr "Åben"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:82
 msgid "Open the selected template"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:83
 msgid "Parentheses"
 msgstr "Paranteser"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:84
 msgid "Pause updating the preview pane."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:85
 msgid "Preview Pane"
 msgstr "Fremvisningspanel"
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:86
 msgid "Previous"
 msgstr "Forrige"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:87
 msgid "References:"
 msgstr "Referencer:"
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:88
 msgid "Replace _All"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:89
 msgid "Replace with:"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:90
 msgid "Rows:"
 msgstr "Rækker:"
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:91
 msgid "Save"
 msgstr "Gem"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:92
 msgid "Save _As..."
 msgstr "Gem _som..."
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:93
 msgid "Save the current file"
 msgstr "Gem denne fil"
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:94
 msgid "Scale:"
 msgstr "Skala:"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:95
 msgid "Search backwards"
 msgstr "Søg bagud"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:96
 msgid "Search for:"
 msgstr "Søg efter:"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:97
 msgid "Single line"
 msgstr "Enkelt linie"
 
-#: ../data/ui/gummi.glade.h:97
+#: ../data/ui/gummi.glade.h:98
 msgid "Table"
 msgstr "Tabel"
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:99
 msgid "Unbracketed"
 msgstr "Uden firkantparantes"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:100
 msgid "Underline text"
 msgstr "Understreget tekst"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:101
 msgid "_Compile Bibliography"
 msgstr "_Kompiler Bibliografi"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:102
 msgid "_Edit"
 msgstr "R_et"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:103
 msgid "_Export to PDF"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:104
 msgid "_File"
 msgstr "_Fil"
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:105
 msgid "_Fullscreen"
 msgstr "_Fuldskærm"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:106
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:107
 msgid "_Insert Bibliography"
 msgstr "_Indsæt Bibliografi"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:108
 msgid "_Open..."
 msgstr "_Åben"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:109
 msgid "_Replace"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:110
 msgid "_Right Pane"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:111
 msgid "_Search"
 msgstr "_Søg"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:112
 msgid "_Statusbar"
 msgstr "_Statuslinie"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:113
 msgid "_Toolbar"
 msgstr "_Værktøjslinie"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:114
 msgid "_Tools"
 msgstr "_Værktøjer"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:115
 msgid "_View"
 msgstr "_Vis"
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:116
+msgid "author"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:117
 msgid "filter:"
 msgstr "filtrer:"
 
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:919
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:919
 msgid "no bibliography file detected"
 msgstr "ingen bibliografi-fil fundet"
 
-#: ../data/ui/gummi.glade.h:117 ../src/gui/gui-main.c:920
+#: ../data/ui/gummi.glade.h:119 ../src/gui/gui-main.c:920
 msgid "none"
 msgstr "ingen"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:120
 msgid "of 0"
 msgstr "af 0"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:121
 msgid "shouldnotseeme"
 msgstr "skulleikkesemig"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:122
+msgid "title"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:123
 msgid "toolbutton1"
 msgstr "værktøjsknap1"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:124
 msgid "toolbutton2"
 msgstr "værktøjsknap2"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:125
 msgid "toolbutton3"
 msgstr "værktøjsknap3"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:126
 msgid "toolbutton5"
 msgstr "værktøjsknap5"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:127
 msgid "toolbutton6"
 msgstr "værktøjsknap6"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:128
 msgid "toolbutton7"
 msgstr "værktøjsknap7"
+
+#: ../data/ui/gummi.glade.h:129
+msgid "year"
+msgstr ""
 
 #: ../data/ui/prefs.glade.h:1
 #, fuzzy
@@ -770,6 +786,11 @@ msgstr ""
 msgid "%s: No such file or directory\n"
 msgstr ""
 
+#: ../src/gui/gui-main.c:337
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr ""
+
 #: ../src/gui/gui-main.c:421
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
@@ -876,6 +897,24 @@ msgstr "Opret et nyt dokument"
 msgid "Export to PDF"
 msgstr ""
 
+#: ../src/gui/gui-main.c:1084
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Åben en fil"
+
+#: ../src/gui/gui-main.c:1089
+msgid "Text files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:1102
+#, fuzzy
+msgid "Image files"
+msgstr "Billede"
+
+#: ../src/gui/gui-main.c:1109
+msgid "Bibtex files"
+msgstr ""
+
 #. g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
 #: ../src/gui/gui-preview.c:87
 #, fuzzy, c-format
@@ -893,6 +932,11 @@ msgstr ""
 "Yderligere information er tilgængelig på fanebladet for fejlbeskeder.\n"
 "Ret venligst de viste fejl og klik på dette område\n"
 "for at genindlæse fremvisningspanelet."
+
+#: ../src/gui/gui-preview.c:204
+#, c-format
+msgid "of %d"
+msgstr ""
 
 #: ../src/gui/gui-snippets.c:302
 msgid ""

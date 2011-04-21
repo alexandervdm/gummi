@@ -201,7 +201,7 @@ void previewgui_set_pagedata (GuPreviewGui* pc) {
                 (pc->page_current < (pc->page_total -1)));
     }
     current = g_strdup_printf ("%d", (pc->page_current+1));
-    total = g_strdup_printf ("of %d", pc->page_total);
+    total = g_strdup_printf (_("of %d"), pc->page_total);
 
     gtk_entry_set_text (GTK_ENTRY (pc->page_input), current);
     gtk_label_set_text (GTK_LABEL (pc->page_label), total);

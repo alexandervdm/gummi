@@ -334,8 +334,8 @@ void gui_open_file (const gchar* filename) {
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
         slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
-        gchar* message = g_strdup_printf ("Swap file exits for %s, do you "
-                "want to recover from it?", filename);
+        gchar* message = g_strdup_printf (_("Swap file exits for %s, do you "
+                "want to recover from it?"), filename);
 
         ret = utils_yes_no_dialog (message);
         if (GTK_RESPONSE_YES == ret)
@@ -1081,32 +1081,32 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
     switch (type) {
         case TYPE_LATEX:
         case TYPE_LATEX_SAVEAS:
-            gtk_file_filter_set_name (filter, "LaTeX files");
+            gtk_file_filter_set_name (filter, _("LaTeX files"));
             gtk_file_filter_add_pattern (filter, "*.tex");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             filter = gtk_file_filter_new ();
-            gtk_file_filter_set_name (filter, "Text files");
+            gtk_file_filter_set_name (filter, _("Text files"));
             gtk_file_filter_add_mime_type (filter, "text/plain");
             gtk_file_chooser_add_filter (dialog, filter);
             break;
 
         case TYPE_PDF:
-            gtk_file_filter_set_name (filter, "PDF files");
+            gtk_file_filter_set_name (filter, _(("PDF files")));
             gtk_file_filter_add_pattern (filter, "*.pdf");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
 
         case TYPE_IMAGE:
-            gtk_file_filter_set_name (filter, "Image files");
+            gtk_file_filter_set_name (filter, _("Image files"));
             gtk_file_filter_add_mime_type (filter, "image/*");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
 
         case TYPE_BIBLIO:
-            gtk_file_filter_set_name (filter, "Bibtex files");
+            gtk_file_filter_set_name (filter, _("Bibtex files"));
             gtk_file_filter_add_pattern (filter, "*.bib");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);

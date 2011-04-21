@@ -1223,7 +1223,7 @@ active document</property>
                                     <property name="layout_style">spread</property>
                                     <child>
                                       <object class="GtkButton" id="bibdetect">
-                                        <property name="label">Detect</property>
+                                        <property name="label" translatable="yes">Detect</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="receives_default">False</property>
@@ -1307,7 +1307,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">200</property>
-                                        <property name="title">title</property>
+                                        <property name="title" translatable="yes">title</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -1325,7 +1325,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">100</property>
-                                        <property name="title">author</property>
+                                        <property name="title" translatable="yes">author</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -1343,7 +1343,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">50</property>
-                                        <property name="title">year</property>
+                                        <property name="title" translatable="yes">year</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
                                         <signal name="clicked" handler="on_bibcolumn_clicked"/>
@@ -1483,9 +1483,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>
