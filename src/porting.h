@@ -49,11 +49,3 @@
 #ifndef GDK_KEY_ISO_Left_Tab
 #define GDK_KEY_ISO_Left_Tab GDK_ISO_Left_Tab
 #endif
-
-#ifndef GDK_KEY_Control_L
-#define Control_L GDK_Control_L
-#endif
-
-#ifndef GDK_KEY_Control_R
-#define Control_R GDK_Control_R
-#endif

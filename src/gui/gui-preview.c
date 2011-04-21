@@ -382,7 +382,7 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
     float prev_scale = 0, margin = 0, margin_x = 0, margin_y = 0,
           upper_x = 0, upper_y = 0;
 
-    if (GDK_CONTROL_MASK && e->state) {
+    if (GDK_CONTROL_MASK & e->state) {
         index = gtk_combo_box_get_active (pc->combo_sizes);
         prev_scale = list_sizes[index];
 
