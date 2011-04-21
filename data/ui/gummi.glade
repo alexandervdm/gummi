@@ -6,47 +6,6 @@
     <property name="visible">True</property>
     <property name="stock">gtk-find</property>
   </object>
-  <object class="GtkListStore" id="zoomcombo_model">
-    <columns>
-      <!-- column-name choices -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Best Fit</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Fit Page Width</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">50%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">70%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">85%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">100%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">125%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">150%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">200%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">300%</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">400%</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="list_tableborder">
     <columns>
       <!-- column-name gchararray1 -->
@@ -126,6 +85,47 @@
       <!-- column-name location -->
       <column type="gchararray"/>
     </columns>
+  </object>
+  <object class="GtkListStore" id="list_sizes">
+    <columns>
+      <!-- column-name list_sizes -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Best Fit</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Fit Page Width</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">50%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">70%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">85%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">100%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">125%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">150%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">200%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">300%</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">400%</col>
+      </row>
+    </data>
   </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="title" translatable="yes">Gummi - LaTeX Editor</property>
@@ -1079,10 +1079,10 @@ active document</property>
                               <object class="GtkToolItem" id="previewgui_zoomtool">
                                 <property name="visible">True</property>
                                 <child>
-                                  <object class="GtkComboBox" id="previewgui_zoomcombo">
+                                  <object class="GtkComboBox" id="combo_sizes">
                                     <property name="width_request">125</property>
                                     <property name="visible">True</property>
-                                    <property name="model">zoomcombo_model</property>
+                                    <property name="model">list_sizes</property>
                                     <property name="active">1</property>
                                     <signal name="changed" handler="previewgui_zoom_change"/>
                                     <child>
@@ -1307,7 +1307,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">200</property>
-                                        <property name="title" translatable="yes">title</property>
+                                        <property name="title">title</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -1325,7 +1325,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">100</property>
-                                        <property name="title" translatable="yes">author</property>
+                                        <property name="title">author</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -1343,7 +1343,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">50</property>
-                                        <property name="title" translatable="yes">year</property>
+                                        <property name="title">year</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
                                         <signal name="clicked" handler="on_bibcolumn_clicked"/>
@@ -1483,9 +1483,9 @@ bibliography database</property>
                 <property name="has_focus">True</property>
                 <property name="invisible_char">&#x2022;</property>
                 <property name="primary_icon_stock">gtk-find</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked"/>
               </object>
               <packing>

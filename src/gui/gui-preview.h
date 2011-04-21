@@ -33,6 +33,8 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
+#define SIZE_COUNT 9
+
 #define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
 typedef struct _GuPreviewGui GuPreviewGui;
 
@@ -48,6 +50,7 @@ struct _GuPreviewGui {
     GtkWidget* page_input;
     GtkWidget* scrollw;
     GtkLabel* errorlabel;
+    GtkComboBox* combo_sizes;
 
     gchar *uri;
     gint update_timer;
@@ -62,6 +65,10 @@ struct _GuPreviewGui {
     gboolean errormode;
     
     cairo_surface_t *surface;
+    GtkAdjustment* hadj;
+    GtkAdjustment* vadj;
+    gdouble prev_x;
+    gdouble prev_y;
 };
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder);
@@ -75,13 +82,16 @@ void previewgui_stop_error_mode (GuPreviewGui* pc);
 void previewgui_reset (GuPreviewGui* pc);
 void previewgui_cleanup_fds (GuPreviewGui* pc);
 void previewgui_start_preview (GuPreviewGui* pc);
-void previewgui_calc_dimensions (GuPreviewGui* pc);
+void previewgui_drawarea_resize (GuPreviewGui* pc);
 void previewgui_stop_preview (GuPreviewGui* pc);
 void previewgui_page_input_changed (GtkEntry* entry, void* user);
 void previewgui_next_page (GtkWidget* widget, void* user);
 void previewgui_prev_page (GtkWidget* widget, void* user);
 void previewgui_zoom_change (GtkWidget* widget, void* user);
-void previewgui_calc_dimensions (GuPreviewGui* pc);
-gboolean on_expose (GtkWidget* w, GdkEventExpose* e, GuPreviewGui* prev);
+gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user);
+gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user);
+gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user);
+gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user);
+gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user);
 
 #endif /* __GUMMI_GUI_PREVIEW_H__ */

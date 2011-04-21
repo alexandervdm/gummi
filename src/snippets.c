@@ -445,6 +445,7 @@ gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec) 
         if (!info->current
             || GU_SNIPPET_EXPAND_INFO (info->current->data)->group_number != 0)
             return FALSE;
+        /* This is the last one($0) set to false to deactivate snippet */
         success = FALSE;
     }
     einfo = GU_SNIPPET_EXPAND_INFO (info->current->data);
@@ -522,7 +523,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
 
     while (current) {
         GuSnippetExpandInfo* einfo = GU_SNIPPET_EXPAND_INFO (current->data);
-        if (!g_hash_table_lookup_extended (map, ( (gpointer)einfo->group_number),
+        if (!g_hash_table_lookup_extended (map, ((gpointer)einfo->group_number),
                     (gpointer)&key, (gpointer)&value)) {
             g_hash_table_insert (map, (gpointer)einfo->group_number, einfo);
             info->einfo_unique = g_list_append (info->einfo_unique, einfo);
@@ -554,7 +555,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
             gtk_text_buffer_insert (ec_buffer, &start,
                     ec->filename? ec->filename: "", -1);
         } else if (strcmp (value->text, "$BASENAME") == 0) {
-            gchar* basename = g_path_get_basename (ec->filename?ec->filename:"");
+            gchar* basename = g_path_get_basename(ec->filename?ec->filename:"");
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, basename, -1);
             g_free (basename);

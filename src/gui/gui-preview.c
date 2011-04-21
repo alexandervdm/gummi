@@ -44,12 +44,14 @@
 #include "environment.h"
 #include "gui/gui-main.h"
 #include "motion.h"
+#include "porting.h"
 #include "utils.h"
+
+static gfloat list_sizes[] = {-1, -1, 0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0,
+                              3.0, 4.0};
 
 extern Gummi* gummi;
 extern GummiGui* gui;
-
-gdouble scrollw_lastsize;
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
@@ -64,6 +66,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_draw"));
     p->scrollw =
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
+    p->combo_sizes =
+        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_sizes"));
     p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
@@ -76,14 +80,26 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->preview_on_idle = FALSE;
     p->page_total = 0;
     p->page_current = 1;
+    p->hadj = gtk_scrolled_window_get_hadjustment
+                    (GTK_SCROLLED_WINDOW (p->scrollw));
+    p->vadj = gtk_scrolled_window_get_vadjustment
+                    (GTK_SCROLLED_WINDOW (p->scrollw));
 
     gtk_widget_modify_bg (p->drawarea, GTK_STATE_NORMAL, &bg); 
 
-    g_signal_connect (GTK_OBJECT (p->drawarea), "expose-event",
-            G_CALLBACK (on_expose), p); 
-            
-    //g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
+    /* Install event handlers */
+    gtk_widget_add_events (p->drawarea, GDK_SCROLL_MASK
+                                      | GDK_BUTTON_PRESS_MASK
+                                      | GDK_BUTTON_MOTION_MASK);
 
+    g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (on_resize), p);
+    g_signal_connect (p->drawarea, "scroll-event", G_CALLBACK (on_scroll), p);
+    g_signal_connect (p->drawarea, "expose-event", G_CALLBACK (on_expose), p);
+    g_signal_connect (p->drawarea, "button-press-event",
+                      G_CALLBACK (on_key_press), p);
+    g_signal_connect (p->drawarea, "motion-notify-event",
+                      G_CALLBACK (on_motion), p);
+            
     char* message = g_strdup_printf (_("PDF Preview could not initialize.\n\n"
             "It appears your LaTeX document contains errors or\n"
             "the program `%s' was not installed.\n"
@@ -120,21 +136,11 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     g_return_if_fail (pc->page != NULL);
 
     poppler_page_get_size (pc->page, &pc->page_width, &pc->page_height);
-    /*
-    pc->page_total = poppler_document_get_n_pages (pc->doc);
-    pc->page_ratio = (pc->page_width / pc->page_height);
-    pc->page_scale = 1.0;
-    previewgui_set_pagedata (pc);
-    */
 }
-
-/*
-void my_getsize (GtkWidget *widget, GtkAllocation *allocation, void *data) {
-    printf ("width = %d, height = %d\n", allocation->width, allocation->height);
-}*/
 
 void previewgui_refresh (GuPreviewGui* pc) {
     L_F_DEBUG;
+    gint width = 0, height = 0;
     cairo_t *cr = NULL;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
@@ -148,26 +154,29 @@ void previewgui_refresh (GuPreviewGui* pc) {
 
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
 
-    // release mutex and return when poppler doc is damaged or missing
+    /* release mutex and return when poppler doc is damaged or missing */
     if (pc->doc == NULL) goto unlock;
+
+    width = pc->page_width * pc->page_scale;
+    height = pc->page_height * pc->page_scale;
     
-    /* recheck document dimensions on refresh for orientation changes */
     pc->page_total = poppler_document_get_n_pages (pc->doc);
     previewgui_set_pagedata (pc);
 
     pc->page = poppler_document_get_page (pc->doc, pc->page_current);
     poppler_page_get_size (pc->page, &pc->page_width, &pc->page_height);  
+
+    list_sizes[0] = pc->scrollw->allocation.height / pc->page_height;
+    list_sizes[1] = pc->scrollw->allocation.width / pc->page_width;
     
     if (pc->surface)
         cairo_surface_destroy (pc->surface);
     pc->surface = NULL;
     
-    previewgui_calc_dimensions (pc);
+    previewgui_drawarea_resize (pc);
     
-    gint width = (int)pc->page_width * pc->page_scale;
-    gint height = (int)pc->page_height * pc->page_scale;
-    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width,
-            height);
+    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                              width, height);
     cr = cairo_create (pc->surface);
     
     cairo_scale (cr, pc->page_scale, pc->page_scale); 
@@ -222,7 +231,6 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
     gtk_widget_set_sensitive (pc->page_next,
             (page_number < (pc->page_total -1)));
     previewgui_refresh (pc);
-    // set label info
 }
 
 void previewgui_start_error_mode (GuPreviewGui* pc) {
@@ -245,57 +253,13 @@ void previewgui_stop_error_mode (GuPreviewGui* pc) {
             GTK_WIDGET (pc->drawarea));
 }
 
-gboolean on_expose (GtkWidget* area, GdkEventExpose* e, GuPreviewGui* pc) {
-    
-    /* This line is very important, if no pdf exist, preview fails */
-    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
-    
-    previewgui_calc_dimensions (pc);
-    
-    cairo_t *cr;
-    cr = gdk_cairo_create (gtk_widget_get_window (area));
-    
-    double scrollwidth = pc->scrollw->allocation.width;
-    if (scrollw_lastsize != scrollwidth) {
-        previewgui_refresh (pc);
-        scrollw_lastsize = scrollwidth;
-    }
-    
-    cairo_set_source_surface (cr, pc->surface, 0, 0);
-    cairo_paint (cr);
-    cairo_destroy (cr);
-    return TRUE;
-} 
-
-void previewgui_calc_dimensions (GuPreviewGui* pc) {
-    double scrollwidth = pc->scrollw->allocation.width;
-    double scrollheight = pc->scrollw->allocation.height;
-    double scrollw_ratio = (scrollwidth / scrollheight);
-    
-    // TODO: STOP WITH ERROR IF PAGE RATIO OR PAGE WIDTH IS NULL!
-    if (pc->page_zoommode < 2) {
-        if (scrollw_ratio < pc->page_ratio || pc->page_zoommode == 1) {
-            pc->page_scale = scrollwidth / pc->page_width;
-        }
-        else {
-            pc->page_scale = scrollheight / pc->page_height;
-        }
-    }
-    
-    // setting gtkdrawingarea dimensions
-    gint height = (int) (pc->page_height * pc->page_scale);
-    gint width = (int) (pc->page_width * pc->page_scale); 
-    switch (pc->page_zoommode) {
-        case 0: // best_fit
-            gtk_widget_set_size_request (pc->drawarea, -1, (height-10));
-            break;
-        case 1: // fit_width
-            if (fabs (pc->page_ratio - scrollw_ratio) > 0.01)
-                gtk_widget_set_size_request (pc->drawarea, -1, height);
-            break;
-        default: // percentage zoom
-            gtk_widget_set_size_request (pc->drawarea, width, height);
-    }
+void previewgui_drawarea_resize (GuPreviewGui* pc) {
+    pc->page_scale = list_sizes[pc->page_zoommode];
+    gint height = pc->page_height * pc->page_scale;
+    gint width = pc->page_width * pc->page_scale;
+    gtk_widget_set_size_request (pc->drawarea,
+                     width - (pc->page_zoommode == 1) * 20,
+                     height - (pc->page_zoommode == 1) * 20 * height / width);
 }
 
 void previewgui_reset (GuPreviewGui* pc) {
@@ -338,7 +302,8 @@ void previewgui_start_preview (GuPreviewGui* pc) {
 void previewgui_stop_preview (GuPreviewGui* pc) {
     L_F_DEBUG;
     pc->preview_on_idle = FALSE;
-    if (pc->update_timer != 0) g_source_remove (pc->update_timer);
+    if (pc->update_timer != 0)
+        g_source_remove (pc->update_timer);
     pc->update_timer = 0;
 }
 
@@ -368,22 +333,137 @@ void previewgui_prev_page (GtkWidget* widget, void* user) {
 
 void previewgui_zoom_change (GtkWidget* widget, void* user) {
     gint index = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-    double opts[9] = {0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0}; 
-
-    if (index < 0) slog (L_ERROR, "preview zoom level is < 0.\n");
-
-    if (index < 2) {
-        if (index == 0) {
-            gui->previewgui->page_zoommode = 0;
-        }
-        else if (index == 1) {
-            gui->previewgui->page_zoommode = 1;
-        }
-    }
-    else {
-        gui->previewgui->page_scale = opts[index-2];
-        gui->previewgui->page_zoommode = index;
-    }
+    if (index < 0)
+        slog (L_ERROR, "preview zoom level is < 0.\n");
+    gui->previewgui->page_scale = list_sizes[index];
+    gui->previewgui->page_zoommode = index;
     previewgui_refresh(gui->previewgui);
-    //gtk_widget_queue_draw (gui->previewgui->drawarea);
+}
+
+gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
+    static gdouble scrollw_lastsize = 0;
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    gint width = 0, height = 0, area_width = 0, area_height = 0, x = 0, y = 0;
+
+    /* This line is very important, if no pdf exist, preview fails */
+    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
+
+    cairo_t *cr = NULL;
+    previewgui_drawarea_resize (pc);
+
+    cr = gdk_cairo_create (gtk_widget_get_window (w));
+
+    gdouble scrollwidth = pc->scrollw->allocation.width;
+    if (scrollw_lastsize != scrollwidth) {
+        previewgui_refresh (pc);
+        scrollw_lastsize = scrollwidth;
+    }
+
+    width = pc->page_width * pc->page_scale;
+    height = pc->page_height * pc->page_scale;
+    area_width = pc->scrollw->allocation.width;
+    area_height = pc->scrollw->allocation.height;
+
+    if (area_width > width)
+        x = (area_width - width) / 2;
+    if (area_height > height)
+        y = (area_height - height) / 2;
+
+    cairo_set_source_surface (cr, pc->surface, x, y);
+    cairo_paint (cr);
+    cairo_destroy (cr);
+    return TRUE;
+}
+
+gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    gint i = 0, index = 0, new_index = 0, fit_width = 0;
+    gboolean move_to_center = FALSE;
+    float prev_scale = 0, margin = 0, margin_x = 0, margin_y = 0,
+          upper_x = 0, upper_y = 0;
+
+    if (GDK_CONTROL_MASK && e->state) {
+        index = gtk_combo_box_get_active (pc->combo_sizes);
+        prev_scale = list_sizes[index];
+
+        for (i = 2; i < SIZE_COUNT; ++i)
+            if (list_sizes[index] < list_sizes[i]) {
+                fit_width = i;
+                break;
+            }
+
+        if (index < 2) {
+            new_index = fit_width;
+            move_to_center = TRUE;
+        } else {
+            new_index = index + (e->direction == GDK_SCROLL_UP)
+                              - (e->direction == GDK_SCROLL_DOWN);
+            move_to_center = index < fit_width && new_index >= fit_width;
+        }
+
+        new_index = CLAMP (new_index - 2, 0, 8) + 2;
+        gtk_combo_box_set_active(pc->combo_sizes, new_index);
+        pc->page_scale = list_sizes[new_index];
+        pc->page_zoommode = new_index;
+
+        margin = 1.0 / prev_scale * list_sizes[new_index];
+        upper_x = gtk_adjustment_get_upper (pc->hadj);
+        upper_y = gtk_adjustment_get_upper (pc->vadj);
+        margin_x = gtk_adjustment_get_value (pc->hadj)
+                   / (upper_x - pc->scrollw->allocation.width);
+        margin_y = gtk_adjustment_get_value (pc->vadj)
+                   / (upper_y - pc->scrollw->allocation.height);
+
+        upper_x *= margin;
+        upper_y *= margin;
+
+        if (index != new_index) {
+            if (move_to_center)
+                gtk_adjustment_set_value (pc->hadj,
+                    (upper_x - pc->scrollw->allocation.width) / 2 + 5);
+            else
+                gtk_adjustment_set_value (pc->hadj, margin_x * (upper_x
+                                          - pc->scrollw->allocation.width));
+
+            gtk_adjustment_set_value (pc->vadj, margin_y * (upper_y
+                                      - pc->scrollw->allocation.height));
+            gtk_adjustment_value_changed (pc->hadj);
+            gtk_adjustment_value_changed (pc->vadj);
+        }
+        previewgui_refresh (pc);
+
+        return TRUE;
+    }
+    return FALSE;
+}
+
+gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    pc->prev_x = e->x;
+    pc->prev_y = e->y;
+    return FALSE;
+}
+
+gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    gdouble delta_x = 0, delta_y = 0;
+
+    delta_x = e->x - pc->prev_x;
+    delta_y = e->y - pc->prev_y;
+
+    gtk_adjustment_set_value (pc->hadj, gtk_adjustment_get_value (pc->hadj)
+                              - delta_x);
+    gtk_adjustment_set_value (pc->vadj, gtk_adjustment_get_value (pc->vadj)
+                              - delta_y);
+    gtk_adjustment_value_changed (pc->hadj);
+    gtk_adjustment_value_changed (pc->vadj);
+
+    return TRUE;
+}
+
+gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    list_sizes[0] = r->height / pc->page_height;
+    list_sizes[1] = r->width / pc->page_width;
+    return FALSE;
 }
