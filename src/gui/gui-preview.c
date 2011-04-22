@@ -228,8 +228,7 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
 
     pc->page_current = page_number;
     gtk_widget_set_sensitive (pc->page_prev, (page_number > 0));
-    gtk_widget_set_sensitive (pc->page_next,
-            (page_number < (pc->page_total -1)));
+    gtk_widget_set_sensitive(pc->page_next, (page_number <(pc->page_total -1)));
     previewgui_refresh (pc);
 }
 
@@ -289,7 +288,6 @@ void previewgui_cleanup_fds (GuPreviewGui* pc) {
 }
 
 void previewgui_start_preview (GuPreviewGui* pc) {
-    L_F_DEBUG;
     if (0 == strcmp (config_get_value ("compile_scheme"), "on_idle")) {
         pc->preview_on_idle = TRUE;
     } else {
@@ -300,7 +298,6 @@ void previewgui_start_preview (GuPreviewGui* pc) {
 }
 
 void previewgui_stop_preview (GuPreviewGui* pc) {
-    L_F_DEBUG;
     pc->preview_on_idle = FALSE;
     if (pc->update_timer != 0)
         g_source_remove (pc->update_timer);
@@ -369,8 +366,22 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     if (area_height > height)
         y = (area_height - height) / 2;
 
+    cairo_set_source_rgb (cr, 0.808, 0.808, 0.808);
+    cairo_rectangle (cr, 0, 0, MAX(area_width,width), MAX(area_height,height));
+    cairo_fill (cr);
+
+    cairo_set_line_width (cr, 0.5);
+    cairo_set_source_rgb (cr, 0, 0, 0);
+    cairo_rectangle (cr, x - 1, y - 1, width + 1, height + 1);
+    cairo_stroke (cr);
+
+    cairo_set_source_rgb (cr, 0.302, 0.302, 0.302);
+    cairo_rectangle (cr, x, y, width + 3, height + 3);
+    cairo_fill (cr);
+
     cairo_set_source_surface (cr, pc->surface, x, y);
     cairo_paint (cr);
+
     cairo_destroy (cr);
     return TRUE;
 }
@@ -446,17 +457,24 @@ gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user) {
 
 gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
-    gdouble delta_x = 0, delta_y = 0;
+    gdouble delta_x = 0, delta_y = 0, current_x = 0, current_y = 0;
 
     delta_x = e->x - pc->prev_x;
     delta_y = e->y - pc->prev_y;
 
-    gtk_adjustment_set_value (pc->hadj, gtk_adjustment_get_value (pc->hadj)
-                              - delta_x);
-    gtk_adjustment_set_value (pc->vadj, gtk_adjustment_get_value (pc->vadj)
-                              - delta_y);
-    gtk_adjustment_value_changed (pc->hadj);
-    gtk_adjustment_value_changed (pc->vadj);
+    current_x = gtk_adjustment_get_value (pc->hadj);
+    current_y = gtk_adjustment_get_value (pc->vadj);
+
+    if (current_x - delta_x < gtk_adjustment_get_upper (pc->hadj) -
+                              pc->scrollw->allocation.width) {
+        gtk_adjustment_set_value (pc->hadj, current_x - delta_x);
+        gtk_adjustment_value_changed (pc->hadj);
+    }
+    if (current_y - delta_y < gtk_adjustment_get_upper (pc->vadj) -
+                              pc->scrollw->allocation.height) {
+        gtk_adjustment_set_value (pc->vadj, current_y - delta_y);
+        gtk_adjustment_value_changed (pc->vadj);
+    }
 
     return TRUE;
 }

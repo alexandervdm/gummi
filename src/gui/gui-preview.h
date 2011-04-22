@@ -33,6 +33,7 @@
 #include <gtk/gtk.h>
 #include <poppler.h> 
 
+#define PAGE_MARGIN 50
 #define SIZE_COUNT 9
 
 #define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
