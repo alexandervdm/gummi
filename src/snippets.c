@@ -52,6 +52,8 @@ GuSnippets* snippets_init (const gchar* filename) {
 
     s->filename = g_strdup (filename);
     s->accel_group = gtk_accel_group_new ();
+    s->stackframe = NULL;
+
     snippets_load (s);
     return s;
 }
@@ -225,6 +227,7 @@ void snippets_set_accelerator (GuSnippets* sc, gchar* config) {
 
 void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key) {
     gchar* snippet = NULL;
+    GuSnippetInfo* new_info = NULL;
     GtkTextIter start, end;
 
     slog (L_DEBUG, "Snippet `%s' activated\n", key);
@@ -233,44 +236,72 @@ void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key) {
     g_return_if_fail (snippet != NULL);
 
     editor_get_current_iter (ec, &start);
-    sc->info = snippets_parse (snippet);
-    sc->info->start_offset = gtk_text_iter_get_offset (&start);
+    new_info = snippets_parse (snippet);
+    new_info->start_offset = gtk_text_iter_get_offset (&start);
 
     gtk_text_buffer_get_selection_bounds (ec_buffer, &start, &end);
-    sc->info->sel_text = gtk_text_iter_get_text (&start, &end);
+    new_info->sel_text = gtk_text_iter_get_text (&start, &end);
     GSList* marks = gtk_text_iter_get_marks (&start);
-    sc->info->sel_start = *GTK_TEXT_MARK (marks->data);
+    new_info->sel_start = *GTK_TEXT_MARK (marks->data);
     g_slist_free (marks);
 
-    gtk_text_buffer_insert (ec_buffer, &start, sc->info->expanded, -1);
-    snippet_info_create_marks (sc->info, ec);
-    snippet_info_initial_expand (sc->info, ec);
+    gtk_text_buffer_insert (ec_buffer, &start, new_info->expanded, -1);
+    snippet_info_create_marks (new_info, ec);
+    snippet_info_initial_expand (new_info, ec);
     gtk_text_buffer_set_modified (ec_buffer, TRUE);
 
-    sc->activated = TRUE;
+    if (sc->info) {
+        snippet_info_sync_group (sc->info, ec);
+        sc->stackframe = g_list_append (sc->stackframe, sc->info);
+    }
+    sc->info = new_info;
+
     if (!snippet_info_goto_next_placeholder (sc->info, ec))
         snippets_deactivate (sc, ec);
 }
 
 void snippets_deactivate (GuSnippets* sc, GuEditor* ec) {
-    sc->activated = FALSE;
+    GList* last = NULL;
     snippet_info_free (sc->info, ec);
+    last = g_list_last (sc->stackframe);
+    if (last) {
+        sc->info = last->data;
+        sc->stackframe = g_list_remove (sc->stackframe, last->data);
+    } else
+        sc->info = NULL;
     slog (L_DEBUG, "Snippet deactivated\n");
 }
 
 gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
     GtkTextIter current, start;
 
-    if (ev->keyval != GDK_KEY_Tab && !sc->activated)
+    if (ev->keyval != GDK_KEY_Tab)
        return FALSE;
 
-    if (sc->activated) {
+    gchar* key = NULL;
+    editor_get_current_iter (ec, &current);
+
+    if (gtk_text_iter_ends_word (&current)) {
+        start = current;
+        gtk_text_iter_backward_word_start (&start);
+        key = gtk_text_iter_get_text (&start, &current);
+
+        if (snippets_get_value (sc, key)) {
+            gtk_text_buffer_delete (ec_buffer, &start, &current);
+            snippets_activate (sc, ec, key);
+            g_free (key);
+            return TRUE;
+        }
+        g_free (key);
+    }
+    
+    if (sc->info) {
         if (ev->keyval == GDK_KEY_Tab) {
             if (!snippet_info_goto_next_placeholder (sc->info, ec))
                 snippets_deactivate (sc, ec);
             return TRUE;
         } else if (ev->keyval == GDK_KEY_ISO_Left_Tab
-                && ev->state & GDK_SHIFT_MASK) {
+                   && ev->state & GDK_SHIFT_MASK) {
             snippet_info_goto_prev_placeholder (sc->info, ec);
             return TRUE;
         }
@@ -286,31 +317,17 @@ gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
             if (offset < sc->info->start_offset || offset > bound_end)
                 snippets_deactivate (sc, ec);
         }
-    } else {
-        gchar* key = NULL;
-        gboolean found = FALSE;
-        editor_get_current_iter (ec, &current);
-        if (!gtk_text_iter_ends_word (&current)) return FALSE;
-        start = current;
-        gtk_text_iter_backward_word_start (&start);
-        key = gtk_text_iter_get_text (&start, &current);
-
-        if (snippets_get_value (sc, key)) {
-            gtk_text_buffer_delete (ec_buffer, &start, &current);
-            snippets_activate (sc, ec, key);
-            found = TRUE;
-        }
-        g_free (key);
-        return found;
     }
+
     return FALSE;
 }
 
-gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* e) {
-    if (e->keyval != GDK_KEY_Tab && !sc->activated)
+gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* e)
+{
+    if (e->keyval != GDK_KEY_Tab && !sc->info)
        return FALSE;
 
-    if (sc->activated) {
+    if (sc->info) {
         snippet_info_sync_group (sc->info, ec);
         return FALSE;
     }
@@ -361,8 +378,7 @@ void snippets_accel_cb (GtkAccelGroup* accel_group, GObject* obj,
      * gtk_accel_group must be connect when load, we can not specify the
      * editor in user_data, because snippets should only have effect on
      * active tab */
-    if (!sc->activated)
-        snippets_activate (sc, gummi_get_active_editor (), key);
+    snippets_activate (sc, gummi_get_active_editor (), key);
 }
 
 void snippets_accel_connect (GuSnippets* sc, guint keyval, GdkModifierType mod,

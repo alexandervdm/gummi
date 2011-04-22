@@ -80,8 +80,8 @@ struct _GuSnippets {
     slist* head;
     GuSnippetInfo* info;
     GtkAccelGroup* accel_group;
+    GList* stackframe;
     GList* closure_data; /* data: Tuple2 (key, closure) */
-    gboolean activated;
 };
 
 GuSnippets* snippets_init (const gchar* filename);
@@ -94,7 +94,7 @@ void snippets_set_accelerator (GuSnippets* sc, gchar* config);
 void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key);
 void snippets_deactivate (GuSnippets* sc, GuEditor* ec);
 gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
-gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
+gboolean snippets_key_release_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
 GuSnippetInfo* snippets_parse (char* snippet);
 void snippets_accel_cb (GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata);
