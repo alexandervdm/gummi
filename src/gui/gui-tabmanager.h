@@ -68,7 +68,7 @@ struct _GuTabmanagerGui {
     GList* tabs;
 };
 
-GuTabLabel* tablabel_new (const gchar *filename);
+GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename);
 void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
                                  gboolean modified);
 
@@ -78,9 +78,9 @@ GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
 gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
                                    const gchar* filename);
 gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
-gboolean tabmanagergui_tab_pop_active (GuTabmanagerGui* tm);
-void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos);
-void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position);
+gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab);
+void tabmanagergui_switch_tab (GuTabmanagerGui* tm, gint pos);
+void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position);
 gint tabmanagergui_create_unsavednr (GuTabmanagerGui* tm);
 void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
                                             const gchar* filename);

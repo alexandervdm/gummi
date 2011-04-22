@@ -32,7 +32,7 @@
 #include "gui-main.h"
 #include "environment.h"
 
-GuTabLabel* tablabel_new (const gchar* filename) {
+GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename) {
     static unsigned count = 0;
     GtkRcStyle* rcstyle = NULL;
     GtkWidget* image = NULL;
@@ -61,7 +61,7 @@ GuTabLabel* tablabel_new (const gchar* filename) {
     g_signal_connect (tl->close,
                       "clicked",
                       G_CALLBACK (on_menu_close_activate),
-                      NULL);
+                      tab);
 
     /* make it as small as possible */
     rcstyle = gtk_rc_style_new ();
@@ -102,18 +102,17 @@ GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
     return tm;
 }
 
-gboolean tabmanagergui_tab_pop_active (GuTabmanagerGui* tm) {
-    gint position = gtk_notebook_get_current_page(tm->notebook);
-    gint total = gtk_notebook_get_n_pages(tm->notebook);
+gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
+    gint position = g_list_index (tm->tabs, tab);
+    gint total = gtk_notebook_get_n_pages (tm->notebook);
 
     if (total == 0) return FALSE;
-    GuTabContext* tab = g_list_nth(tm->tabs, position)->data;
 
-    tm->tabs = g_list_remove(tm->tabs, tab);
-    tabmanagergui_set_active_tab(tm, total -2);
-    editor_destroy(tab->editor);
-    gtk_notebook_remove_page(tm->notebook, position);
-    g_free(tab);
+    tm->tabs = g_list_remove (tm->tabs, tab);
+    tabmanagergui_set_active_tab (tm, total -2);
+    editor_destroy (tab->editor);
+    gtk_notebook_remove_page (tm->notebook, position);
+    g_free (tab);
 
     return (total != 1);
 }
@@ -125,11 +124,11 @@ void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position) {
         tm->active_page = NULL;
     } else {
         tm->active_tab =
-            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position));
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position));
         tm->active_editor =
-            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->editor;
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position))->editor;
         tm->active_page =
-            GU_TAB_CONTEXT(g_list_nth_data(tm->tabs, position))->page;
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position))->page;
     }
 }
 
@@ -139,7 +138,7 @@ GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
 
     tab->editor = ec;
     tab->page = gtk_scrolled_window_new (NULL, NULL);
-    tab->tablabel = tablabel_new (filename);
+    tab->tablabel = tablabel_new (tab, filename);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tab->page),
                                     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     return tab;

@@ -456,12 +456,16 @@ void on_menu_saveas_activate (GtkWidget *widget, void* user) {
 
 void on_menu_close_activate (GtkWidget *widget, void* user) {
     gint ret = check_for_save ();
+    GuTabContext* tab = NULL;
+
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
+
+    tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
     
-    if (!tabmanagergui_tab_pop_active (gui->tabmanagergui))
+    if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab))
         previewgui_start_error_mode (gui->previewgui);
     else
         gui_update_windowtitle ();
