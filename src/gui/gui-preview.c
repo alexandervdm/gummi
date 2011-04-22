@@ -348,6 +348,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
 
     if (prev_index != pc->page_zoommode)
         previewgui_drawarea_resize (gui->previewgui);
+    prev_index = pc->page_zoommode;
 
     width = pc->page_width * pc->page_scale;
     height = pc->page_height * pc->page_scale;
