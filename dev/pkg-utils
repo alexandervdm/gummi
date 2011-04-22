@@ -4,7 +4,6 @@ export DEBFULLNAME="Wei-Ning Huang (AZ)"
 export DEBEMAIL="aitjcize@gmail.com"
 
 notex=0
-maverick=0
 
 PKG_DIR=$HOME/Public
 mkdir -p $PKG_DIR
@@ -12,13 +11,21 @@ mkdir -p $PKG_DIR
 owd=`pwd`
 package=${owd##/*/}
 
-if [ -n "$2" ] && [ "$2" == "notex" ]; then
+if [ "$3" == "notex" ]; then
     notex=1
 fi
 
-if [ "$2" == "maverick" ] || [ "$3" == "maverick" ]; then
-    maverick=1
-fi
+case $2 in
+	lucid)
+		poppler_glib_ver=4
+		;;
+	maverick)
+		poppler_glib_ver=5
+		;;
+	natty)
+		poppler_glib_ver=6
+		;;
+esac
 
 if [ -e configure.ac ]; then
   version=`sed -n 's/AC_INIT([^,]*, \[\([a-zA-Z0-9.~\-]*\)\], .*/\1/p' configure.ac`
@@ -34,7 +41,6 @@ fi
 echo "Package  : $package"
 echo "Version  : $version"
 echo "NoTeX    : $notex"
-echo "Maverick : $maverick"
 
 cd ..
 cp -r $package /tmp/$package-$version
@@ -69,9 +75,7 @@ if test 1 -eq $notex; then
     mv ../../${package}_$version.orig.tar.gz ../../${package}-notex_$version.orig.tar.gz
 fi
 
-if test 1 -eq $maverick; then
-    sed -i 's/libpoppler-glib4/libpoppler-glib5/g' control
-fi
+sed -i "s/libpoppler-glibX/libpoppler-glib$poppler_glib_ver/g" control
 
 cd ..
 
