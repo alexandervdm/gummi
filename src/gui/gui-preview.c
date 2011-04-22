@@ -140,7 +140,6 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
 
 void previewgui_refresh (GuPreviewGui* pc) {
     L_F_DEBUG;
-    gint width = 0, height = 0;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
      * compiling. Also prevent PDF from changing (compiling) when previewing */
@@ -156,9 +155,6 @@ void previewgui_refresh (GuPreviewGui* pc) {
     /* release mutex and return when poppler doc is damaged or missing */
     if (pc->doc == NULL) goto unlock;
 
-    width = pc->page_width * pc->page_scale;
-    height = pc->page_height * pc->page_scale;
-    
     pc->page_total = poppler_document_get_n_pages (pc->doc);
     previewgui_set_pagedata (pc);
 
