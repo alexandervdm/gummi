@@ -340,10 +340,14 @@ void previewgui_zoom_change (GtkWidget* widget, void* user) {
 
 gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+    static gint prev_index = 0;
     gint width = 0, height = 0, area_width = 0, area_height = 0, x = 0, y = 0;
     cairo_t *cr = NULL;
 
     if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
+
+    if (prev_index != pc->page_zoommode)
+        previewgui_drawarea_resize (gui->previewgui);
 
     width = pc->page_width * pc->page_scale;
     height = pc->page_height * pc->page_scale;
