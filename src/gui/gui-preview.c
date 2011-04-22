@@ -141,7 +141,6 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
 void previewgui_refresh (GuPreviewGui* pc) {
     L_F_DEBUG;
     gint width = 0, height = 0;
-    cairo_t *cr = NULL;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
      * compiling. Also prevent PDF from changing (compiling) when previewing */
@@ -168,27 +167,8 @@ void previewgui_refresh (GuPreviewGui* pc) {
 
     list_sizes[0] = pc->scrollw->allocation.height / pc->page_height;
     list_sizes[1] = pc->scrollw->allocation.width / pc->page_width;
-    
-    if (pc->surface)
-        cairo_surface_destroy (pc->surface);
-    pc->surface = NULL;
-    
+
     previewgui_drawarea_resize (pc);
-    
-    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                              width, height);
-    cr = cairo_create (pc->surface);
-    
-    cairo_scale (cr, pc->page_scale, pc->page_scale); 
-    cairo_save (cr);
-    poppler_page_render (pc->page, cr);
-    cairo_restore (cr);
-    
-    cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
-    cairo_set_source_rgb (cr, 1., 1., 1.);
-    cairo_paint (cr);
-    cairo_destroy (cr);
-    
     gtk_widget_queue_draw (pc->drawarea);
 
 unlock:
@@ -253,12 +233,30 @@ void previewgui_stop_error_mode (GuPreviewGui* pc) {
 }
 
 void previewgui_drawarea_resize (GuPreviewGui* pc) {
+    gint width = 0, height = 0;
+    cairo_t* cr = NULL;
+
     pc->page_scale = list_sizes[pc->page_zoommode];
-    gint height = pc->page_height * pc->page_scale;
-    gint width = pc->page_width * pc->page_scale;
+    height = pc->page_height * pc->page_scale;
+    width = pc->page_width * pc->page_scale;
     gtk_widget_set_size_request (pc->drawarea,
                      width - (pc->page_zoommode == 1) * 20,
                      height - (pc->page_zoommode == 1) * 20 * height / width);
+
+    if (pc->surface)
+        cairo_surface_destroy (pc->surface);
+
+    pc->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                              width, height);
+    cr = cairo_create (pc->surface);
+
+    cairo_scale (cr, pc->page_scale, pc->page_scale);
+    poppler_page_render (pc->page, cr);
+
+    cairo_set_operator (cr, CAIRO_OPERATOR_DEST_OVER);
+    cairo_set_source_rgb (cr, 1, 1, 1);
+    cairo_paint (cr);
+    cairo_destroy (cr);
 }
 
 void previewgui_reset (GuPreviewGui* pc) {
@@ -334,27 +332,19 @@ void previewgui_zoom_change (GtkWidget* widget, void* user) {
         slog (L_ERROR, "preview zoom level is < 0.\n");
     gui->previewgui->page_scale = list_sizes[index];
     gui->previewgui->page_zoommode = index;
-    previewgui_refresh(gui->previewgui);
+    previewgui_drawarea_resize (gui->previewgui);
+    gtk_widget_queue_draw (gui->previewgui->drawarea);
 }
 
 gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
-    static gdouble scrollw_lastsize = 0;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
     gint width = 0, height = 0, area_width = 0, area_height = 0, x = 0, y = 0;
+    cairo_t *cr = NULL;
 
     /* This line is very important, if no pdf exist, preview fails */
     if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
 
-    cairo_t *cr = NULL;
-    previewgui_drawarea_resize (pc);
-
     cr = gdk_cairo_create (gtk_widget_get_window (w));
-
-    gdouble scrollwidth = pc->scrollw->allocation.width;
-    if (scrollw_lastsize != scrollwidth) {
-        previewgui_refresh (pc);
-        scrollw_lastsize = scrollwidth;
-    }
 
     width = pc->page_width * pc->page_scale;
     height = pc->page_height * pc->page_scale;
@@ -441,7 +431,8 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
             gtk_adjustment_value_changed (pc->hadj);
             gtk_adjustment_value_changed (pc->vadj);
         }
-        previewgui_refresh (pc);
+        previewgui_drawarea_resize (pc);
+        gtk_widget_queue_draw (pc->drawarea);
 
         return TRUE;
     }
