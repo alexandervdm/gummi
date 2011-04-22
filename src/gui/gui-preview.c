@@ -236,6 +236,8 @@ void previewgui_drawarea_resize (GuPreviewGui* pc) {
     gint width = 0, height = 0;
     cairo_t* cr = NULL;
 
+    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return;
+
     pc->page_scale = list_sizes[pc->page_zoommode];
     height = pc->page_height * pc->page_scale;
     width = pc->page_width * pc->page_scale;
@@ -341,10 +343,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     gint width = 0, height = 0, area_width = 0, area_height = 0, x = 0, y = 0;
     cairo_t *cr = NULL;
 
-    /* This line is very important, if no pdf exist, preview fails */
     if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
-
-    cr = gdk_cairo_create (gtk_widget_get_window (w));
 
     width = pc->page_width * pc->page_scale;
     height = pc->page_height * pc->page_scale;
@@ -355,6 +354,8 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
         x = (area_width - width) / 2;
     if (area_height > height)
         y = (area_height - height) / 2;
+
+    cr = gdk_cairo_create (gtk_widget_get_window (w));
 
     cairo_set_source_rgb (cr, 0.808, 0.808, 0.808);
     cairo_rectangle (cr, 0, 0, MAX(area_width,width), MAX(area_height,height));

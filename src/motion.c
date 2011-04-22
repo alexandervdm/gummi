@@ -131,7 +131,7 @@ gpointer motion_compile_thread (gpointer data) {
             errorbuffer_set_text (latex->errormessage);
 
 
-            if (!pc->errormode && latex->errorlines[0] && !pc->uri) {
+            if (!pc->errormode && latex->errorlines[0]) {
                 previewgui_start_error_mode (pc);
             } else if (!latex->errorlines[0] && precompile_ok) {
                 previewgui_stop_error_mode (pc);
