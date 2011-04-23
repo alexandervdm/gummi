@@ -275,24 +275,22 @@ void snippets_deactivate (GuSnippets* sc, GuEditor* ec) {
 gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
     GtkTextIter current, start;
 
-    if (ev->keyval != GDK_KEY_Tab)
-       return FALSE;
+    if (ev->keyval == GDK_KEY_Tab) {
+        gchar* key = NULL;
+        editor_get_current_iter (ec, &current);
+        if (gtk_text_iter_ends_word (&current)) {
+            start = current;
+            gtk_text_iter_backward_word_start (&start);
+            key = gtk_text_iter_get_text (&start, &current);
 
-    gchar* key = NULL;
-    editor_get_current_iter (ec, &current);
-
-    if (gtk_text_iter_ends_word (&current)) {
-        start = current;
-        gtk_text_iter_backward_word_start (&start);
-        key = gtk_text_iter_get_text (&start, &current);
-
-        if (snippets_get_value (sc, key)) {
-            gtk_text_buffer_delete (ec_buffer, &start, &current);
-            snippets_activate (sc, ec, key);
+            if (snippets_get_value (sc, key)) {
+                gtk_text_buffer_delete (ec_buffer, &start, &current);
+                snippets_activate (sc, ec, key);
+                g_free (key);
+                return TRUE;
+            }
             g_free (key);
-            return TRUE;
         }
-        g_free (key);
     }
     
     if (sc->info) {
@@ -302,7 +300,8 @@ gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
             return TRUE;
         } else if (ev->keyval == GDK_KEY_ISO_Left_Tab
                    && ev->state & GDK_SHIFT_MASK) {
-            snippet_info_goto_prev_placeholder (sc->info, ec);
+            if (!snippet_info_goto_prev_placeholder (sc->info, ec))
+                snippets_deactivate (sc, ec);
             return TRUE;
         }
         /* Deactivate snippet if the current insert range is not within the
@@ -472,18 +471,22 @@ gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec) 
     return success;
 }
 
-void snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec) {
+gboolean snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec)
+{
     GuSnippetExpandInfo* einfo = NULL;
     GtkTextIter start, end;
+    info->current = g_list_previous (info->current);
+
+    /* Return false to deactivate snippet */
     if (!info->current)
-        return;
-    else
-        info->current = g_list_previous (info->current);
+        return FALSE;
+
     einfo = GU_SNIPPET_EXPAND_INFO (info->current->data);
     gtk_text_buffer_get_iter_at_mark (ec_buffer, &start, einfo->left_mark);
     gtk_text_buffer_get_iter_at_mark (ec_buffer, &end, einfo->right_mark);
     gtk_text_buffer_place_cursor (ec_buffer, &start);
     gtk_text_buffer_select_range (ec_buffer, &start, &end);
+    return TRUE;
 }
 
 void snippet_info_append_holder (GuSnippetInfo* info, gint group, gint start,

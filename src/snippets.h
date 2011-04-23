@@ -110,7 +110,7 @@ void snippet_info_create_marks (GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_remove_marks (GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec);
 gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec);
-void snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec);
+gboolean snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec);
 void snippet_info_sync_group (GuSnippetInfo* info, GuEditor* ec);
 gint snippet_info_num_cmp (gconstpointer a, gconstpointer b);
 gint snippet_info_pos_cmp (gconstpointer a, gconstpointer b);
