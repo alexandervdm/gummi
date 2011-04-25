@@ -65,11 +65,12 @@ struct _GummiGui {
     GuSnippetsGui* snippetsgui;
     GuTabmanagerGui* tabmanagergui;
 
-    GtkWindow *mainwindow;
-    GtkTextBuffer *errorbuff;
+    GtkWindow* mainwindow;
+    GtkTextBuffer* errorbuff;
+    GtkTextView* errorfield;
     GtkVBox* rightpane;
     GtkHBox* toolbar;
-    GtkStatusbar *statusbar;
+    GtkStatusbar* statusbar;
     GtkToggleToolButton* previewoff;
     GtkCheckMenuItem* menu_spelling;
     GtkCheckMenuItem* menu_snippets;

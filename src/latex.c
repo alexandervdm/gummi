@@ -109,7 +109,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     lc->modified_since_compile = FALSE;
 
     /* find error line */
-    if ( (gint)cresult.first) {
+    if ((gint)cresult.first) {
         gchar* result = NULL;
         GError* err = NULL;
         GRegex* match_str = NULL;
@@ -124,13 +124,15 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
         if (g_regex_match (match_str, (gchar*)cresult.second, 0, &match_info)) {
             gint count = 0;
             while (g_match_info_matches (match_info)) {
-                if (count + 1== BUFSIZ) break;
+                if (count + 1 == BUFSIZ) break;
                 result = g_match_info_fetch (match_info, 1);
                 lc->errorlines[count++] = atoi (result);
                 g_free (result);
                 g_match_info_next (match_info, NULL);
             }
         }
+        if (!lc->errorlines[0])
+            lc->errorlines[0] = -1;
         g_match_info_free (match_info);
         g_regex_unref (match_str);
 

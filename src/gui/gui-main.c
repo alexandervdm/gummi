@@ -59,13 +59,11 @@ extern GummiGui* gui;
 GummiGui* gui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
-    GtkWidget *hpaned;
-    GtkWidget *errortext;
+    GtkWidget* hpaned;
     gint wx = 0, wy = 0, width = 0, height = 0;
 
     GummiGui* g = g_new0 (GummiGui, 1);
 
-    errortext = GTK_WIDGET (gtk_builder_get_object (builder, "errorfield"));
     g->mainwindow =
         GTK_WINDOW (gtk_builder_get_object (builder, "mainwindow"));
     g->toolbar =
@@ -76,8 +74,10 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_VBOX (gtk_builder_get_object (builder, "rightpanebox"));
     g->previewoff = GTK_TOGGLE_TOOL_BUTTON (
             gtk_builder_get_object (builder, "tool_previewoff"));
+    g->errorfield =
+        GTK_TEXT_VIEW (gtk_builder_get_object (builder, "errorfield"));
     g->errorbuff =
-        gtk_text_view_get_buffer (GTK_TEXT_VIEW (errortext));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (g->errorfield));
     g->menu_spelling =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_spelling"));
     g->menu_snippets =
@@ -124,7 +124,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     PangoFontDescription* font_desc = 
         pango_font_description_from_string ("Monospace 8");
-    gtk_widget_modify_font (errortext, font_desc);
+    gtk_widget_modify_font (GTK_WIDGET (g->errorfield), font_desc);
     pango_font_description_free (font_desc);
     gtk_window_get_size (g->mainwindow, &width, &height);
 
