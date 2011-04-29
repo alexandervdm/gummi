@@ -56,11 +56,21 @@ extern GummiGui* gui;
  * tutorials written by Micah Carrick that can be found on: 
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
+/* Widgets names to be set insensitive */
+const gchar* insens_widgets_str[] = {
+    "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
+    "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
+    "menu_exportpdf", "menu_undo", "menu_redo", "menu_cut", "menu_copy",
+    "menu_paste", "menu_delete", "menu_selectall", "menu_find", "menu_next",
+    "menu_prev", "menu_bibload", "menu_bibcompile", "menu_pdfcompile",
+    "menu_docstat", "menu_spelling", "menu_snippets"
+};
+
 GummiGui* gui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GtkWidget* hpaned;
-    gint wx = 0, wy = 0, width = 0, height = 0;
+    gint i = 0, wx = 0, wy = 0, width = 0, height = 0;
 
     GummiGui* g = g_new0 (GummiGui, 1);
 
@@ -74,10 +84,10 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_VBOX (gtk_builder_get_object (builder, "rightpanebox"));
     g->previewoff = GTK_TOGGLE_TOOL_BUTTON (
             gtk_builder_get_object (builder, "tool_previewoff"));
-    g->errorfield =
-        GTK_TEXT_VIEW (gtk_builder_get_object (builder, "errorfield"));
+    g->errorview =
+        GTK_TEXT_VIEW (gtk_builder_get_object (builder, "errorview"));
     g->errorbuff =
-        gtk_text_view_get_buffer (GTK_TEXT_VIEW (g->errorfield));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (g->errorview));
     g->menu_spelling =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_spelling"));
     g->menu_snippets =
@@ -100,6 +110,14 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent4"));
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
+
+
+    g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
+    g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
+
+    for (i = 0; i < g->insens_widget_size; ++i)
+        g->insens_widgets[i] =
+            GTK_WIDGET(gtk_builder_get_object (builder, insens_widgets_str[i]));
 
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
@@ -124,7 +142,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     PangoFontDescription* font_desc = 
         pango_font_description_from_string ("Monospace 8");
-    gtk_widget_modify_font (GTK_WIDGET (g->errorfield), font_desc);
+    gtk_widget_modify_font (GTK_WIDGET (g->errorview), font_desc);
     pango_font_description_free (font_desc);
     gtk_window_get_size (g->mainwindow, &width, &height);
 
@@ -391,7 +409,15 @@ cleanup:
     g_free (pdfname);
 }
 
+void gui_set_sensitive(gboolean enable) {
+    gint i = 0;
+    for (i = 0; i < gui->insens_widget_size; ++i)
+        gtk_widget_set_sensitive (gui->insens_widgets[i], enable);
+}
+
 void on_menu_new_activate (GtkWidget *widget, void* user) {
+    if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
+        gui_set_sensitive (TRUE);
     gui_create_environment (A_NONE, NULL, NULL);
 }
 
@@ -443,7 +469,8 @@ void on_menu_open_activate (GtkWidget *widget, void* user) {
         gui_open_file (filename);
     g_free (filename);
 
-    gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
+    if (g_active_editor)
+        gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 }
 
 void on_menu_save_activate (GtkWidget *widget, void* user) {
@@ -465,9 +492,10 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
 
     tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
     
-    if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab))
+    if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab)) {
         previewgui_start_error_mode (gui->previewgui);
-    else
+        gui_set_sensitive (FALSE);
+    } else
         gui_update_windowtitle ();
 }
 
@@ -1156,7 +1184,7 @@ void display_recent_files (GummiGui* gui) {
             ++count;
         }
     }
-    /* update configuration file */
+    /* update recent files */
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
         tstr = g_strdup_printf ("recent%d", i + 1);
         config_set_value (tstr, gui->recent_list[i]);
@@ -1164,12 +1192,16 @@ void display_recent_files (GummiGui* gui) {
     }
 }
 
-void errorbuffer_set_text (gchar *message) {
-    if (message)
+void errorbuffer_set_text (const gchar *message) {
+    if (message) {
+        GtkTextIter iter;
         gtk_text_buffer_set_text (gui->errorbuff, message, -1);
+        gtk_text_buffer_get_end_iter (gui->errorbuff, &iter);
+        gtk_text_view_scroll_to_iter (gui->errorview, &iter, 0.25, FALSE, 0, 0);
+    }
 }
 
-void statusbar_set_message (gchar *message) {
+void statusbar_set_message (const gchar *message) {
     gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
     g_timeout_add_seconds (4, statusbar_del_message, NULL);
 }
@@ -1180,7 +1212,7 @@ gboolean statusbar_del_message (void* user) {
 }
 
 /**
- * @brief "changed" signal callback for editor->sourcebuffer
+ * @brief "changed" signal callback for editor->buffer
  * Automatically check whether to start timer if buffer changed.
  * Also set_modified for buffer
  */

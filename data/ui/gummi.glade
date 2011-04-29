@@ -1122,18 +1122,13 @@ active document</property>
                         <property name="border_width">4</property>
                         <property name="hscrollbar_policy">automatic</property>
                         <property name="vscrollbar_policy">automatic</property>
+                        <property name="shadow_type">etched-in</property>
                         <child>
-                          <object class="GtkViewport" id="viewport1">
+                          <object class="GtkTextView" id="errorview">
                             <property name="visible">True</property>
-                            <property name="resize_mode">queue</property>
-                            <child>
-                              <object class="GtkTextView" id="errorfield">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="editable">False</property>
-                                <property name="cursor_visible">False</property>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="editable">False</property>
+                            <property name="cursor_visible">False</property>
                           </object>
                         </child>
                       </object>

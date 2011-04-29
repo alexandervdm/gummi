@@ -67,7 +67,7 @@ struct _GummiGui {
 
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;
-    GtkTextView* errorfield;
+    GtkTextView* errorview;
     GtkVBox* rightpane;
     GtkHBox* toolbar;
     GtkStatusbar* statusbar;
@@ -78,6 +78,8 @@ struct _GummiGui {
     GtkCheckMenuItem* menu_statusbar;
     GtkCheckMenuItem* menu_rightpane;
     GtkMenuItem* recent[5];
+    gint insens_widget_size;
+    GtkWidget** insens_widgets;
     
     guint statusid;
     gchar* recent_list[5];
@@ -108,7 +110,10 @@ void gui_update_environment (const gchar* filename);
 void gui_update_windowtitle (void);
 void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);
-void on_menu_close_activate (GtkWidget *widget, void* user);
+void gui_set_sensitive(gboolean enable);
+
+
+void on_menu_close_activate (GtkWidget* widget, void* user);
 void on_menu_new_activate (GtkWidget* widget, void* user);
 void on_menu_open_activate (GtkWidget* widget, void* user);
 void on_menu_save_activate (GtkWidget* widget, void* user);
@@ -168,8 +173,8 @@ gint check_for_save (void);
 void add_to_recent_list (const gchar* filename);
 void display_recent_files (GummiGui* gui);
 
-void errorbuffer_set_text (gchar *message);
-void statusbar_set_message (gchar* message);
+void errorbuffer_set_text (const gchar *message);
+void statusbar_set_message (const gchar* message);
 gboolean statusbar_del_message (void* user);
 
 void check_preview_timer (void);
