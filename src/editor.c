@@ -88,9 +88,6 @@ GuEditor* editor_new (GuMotion* mc) {
     gtk_source_view_set_auto_indent (ec->view,
             (gboolean)config_get_value ("autoindentation"));
 
-    const gchar* style_scheme = config_get_value ("style_scheme");
-    editor_set_style_scheme_by_id (ec, style_scheme);
-
 #ifdef USE_GTKSPELL
     if (config_get_value ("spelling"))
         editor_activate_spellchecking (ec, TRUE);
@@ -229,6 +226,9 @@ void editor_sourceview_config (GuEditor* ec) {
 
     gtk_source_buffer_set_highlight_matching_brackets (ec->buffer, TRUE);
 
+    const gchar* style_scheme = config_get_value ("style_scheme");
+    editor_set_style_scheme_by_id (ec, style_scheme);
+
     const gchar* font = config_get_value ("font");
     slog (L_INFO, "setting font to %s\n", font);
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
@@ -248,7 +248,7 @@ void editor_sourceview_config (GuEditor* ec) {
 
     gtk_text_view_set_wrap_mode (ec_view, wrapmode);
     g_object_set (G_OBJECT (ec->errortag), "background", "red",
-            "foreground", "white", NULL);
+                                           "foreground", "white", NULL);
     g_object_set (G_OBJECT (ec->searchtag), "background", "yellow", NULL);
 }
 

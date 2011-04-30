@@ -173,7 +173,6 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
 
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
     gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
-    gtk_widget_modify_font (GTK_WIDGET (g_active_editor->view), font_desc);
     pango_font_description_free (font_desc);
 
     /* set all checkboxs */
@@ -209,14 +208,14 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
 
     /* set spin button */
     gtk_spin_button_set_value (prefs->autosave_timer,
-            atoi (config_get_value ("autosave_timer")));
+                               atoi (config_get_value ("autosave_timer")));
     gtk_spin_button_set_value (prefs->compile_timer,
-            atoi (config_get_value ("compile_timer")));
+                               atoi (config_get_value ("compile_timer")));
     gtk_spin_button_set_value (prefs->tabwidth,
-            atoi (config_get_value ("tabwidth")));
+                               atoi (config_get_value ("tabwidth")));
 
     gtk_font_button_set_font_name (prefs->editor_font,
-            config_get_value ("font"));
+                                   config_get_value ("font"));
     gtk_text_buffer_set_text (prefs->default_buffer,
             config_get_value ("welcome"), strlen(config_get_value ("welcome")));
 
@@ -264,11 +263,13 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
     const gchar* scheme = config_get_value ("style_scheme");
     GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
+    GList* tab = gui->tabmanagergui->tabs;
     gint column = 0;
     GtkTreePath* treepath;
+
     while (schemes_iter) {
-        if (0 == strcmp (gtk_source_style_scheme_get_id (schemes_iter->data),
-                    scheme)) {
+        if (!strcmp (gtk_source_style_scheme_get_id (schemes_iter->data),
+                     scheme)) {
             gchar* path = g_strdup_printf ("%d", column);
             treepath = gtk_tree_path_new_from_string (path);
             gtk_tree_view_set_cursor (prefs->styleschemes_treeview, treepath,
@@ -287,55 +288,82 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
         gtk_tree_view_set_cursor (prefs->styleschemes_treeview, treepath, NULL,
                 FALSE);
         gtk_tree_path_free (treepath);
-        editor_set_style_scheme_by_id (g_active_editor, "classic");
+        while (tab) {
+            editor_set_style_scheme_by_id (GU_TAB_CONTEXT (tab->data)->editor,
+                                           "classic");
+            tab = g_list_next (tab);
+        }
     }
 }
 
 void toggle_linenumbers (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
 
     config_set_value ("line_numbers", newval? "True": "False");
-    gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (
-                g_active_editor->view), newval);
+    while (tab) {
+        gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW
+                (GU_TAB_CONTEXT (tab->data)->editor->view), newval);
+        tab = g_list_next (tab);
+    }
 }
 
 void toggle_highlighting (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
 
     config_set_value ("highlighting", newval? "True": "False");
-    gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (
-                g_active_editor->view), newval);
+    while (tab) {
+        gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
+                (GU_TAB_CONTEXT (tab->data)->editor->view), newval);
+        tab = g_list_next (tab);
+    }
 }
 
 void toggle_textwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
 
     config_set_value ("textwrapping", newval? "True": "False");
     if (newval) {
-        gtk_text_view_set_wrap_mode (g_e_view, GTK_WRAP_CHAR);
-        gtk_widget_set_sensitive (
-                GTK_WIDGET (gui->prefsgui->wordwrap_button), TRUE);
+        while (tab) {
+            gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
+                    (GU_TAB_CONTEXT (tab->data)->editor->view), GTK_WRAP_CHAR);
+            tab = g_list_next (tab);
+        }
+        gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->wordwrap_button),
+                                  TRUE);
     } else {
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
-                    gui->prefsgui->wordwrap_button), FALSE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                (gui->prefsgui->wordwrap_button), FALSE);
         /* NOTE: gtk_text_vew_set_wrap_mode () must be placed after
          * gtk_toggle_button_set_active () since gtk_toggle_button_set_active ()
          * will trigger the 'activate' event of the corresponding button and
          * cause wrapmode to be changed after we set it */
-        gtk_text_view_set_wrap_mode (g_e_view, GTK_WRAP_NONE);
-        gtk_widget_set_sensitive (
-                GTK_WIDGET (gui->prefsgui->wordwrap_button), FALSE);
+        while (tab) {
+            gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
+                    (GU_TAB_CONTEXT (tab->data)->editor->view), GTK_WRAP_NONE);
+            tab = g_list_next (tab);
+        }
+        gtk_widget_set_sensitive
+            (GTK_WIDGET (gui->prefsgui->wordwrap_button), FALSE);
     }
 }
 
 void toggle_wordwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
 
     config_set_value ("wordwrapping", newval? "True": "False");
-    if (newval)
-        gtk_text_view_set_wrap_mode (g_e_view, GTK_WRAP_WORD);
-    else
-        gtk_text_view_set_wrap_mode (g_e_view, GTK_WRAP_CHAR);
+    while (tab) {
+        if (newval)
+            gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
+                    (GU_TAB_CONTEXT (tab->data)->editor->view), GTK_WRAP_WORD);
+        else
+            gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
+                    (GU_TAB_CONTEXT (tab->data)->editor->view), GTK_WRAP_CHAR);
+        tab = g_list_next (tab);
+    }
 }
 
 void toggle_compilestatus (GtkWidget* widget, void* user) {
@@ -347,19 +375,31 @@ void toggle_compilestatus (GtkWidget* widget, void* user) {
 
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
+
     config_set_value ("spaces_instof_tabs", newval? "True": "False");
-    gtk_source_view_set_insert_spaces_instead_of_tabs (
-            g_active_editor->view, newval);
+    while (tab) {
+        gtk_source_view_set_insert_spaces_instead_of_tabs
+            (GU_TAB_CONTEXT (tab->data)->editor->view, newval);
+        tab = g_list_next (tab);
+    }
 }
 
 void toggle_autoindentation (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    GList* tab = gui->tabmanagergui->tabs;
+
     config_set_value ("autoindentation", newval? "True": "False");
-    gtk_source_view_set_auto_indent (g_active_editor->view, newval);
+    while (tab) {
+        gtk_source_view_set_auto_indent
+            (GU_TAB_CONTEXT (tab->data)->editor->view, newval);
+        tab = g_list_next (tab);
+    }
 }
 
 void toggle_autosaving (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
     config_set_value ("autosaving", newval? "True": "False");
     if (newval) {
         gtk_widget_set_sensitive (
@@ -379,20 +419,20 @@ void toggle_autoexport (GtkWidget* widget, void* user) {
     config_set_value ("autoexport", newval? "True": "False");
 }
 
-
 void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     GtkTextIter start, end;
     gchar* text = NULL;
+
     gtk_text_buffer_get_start_iter (gui->prefsgui->default_buffer, &start);
     gtk_text_buffer_get_end_iter (gui->prefsgui->default_buffer, &end);
     text = gtk_text_buffer_get_text (gui->prefsgui->default_buffer, &start,
-            &end, FALSE);
+                                     &end, FALSE);
     config_set_value ("welcome", text);
     g_free (text);
 
     /* set custom typesetter */
-    const gchar* typesetter = gtk_entry_get_text (
-            gui->prefsgui->custom_typesetter);
+    const gchar* typesetter = gtk_entry_get_text
+                              (gui->prefsgui->custom_typesetter);
     if (strlen (typesetter))
         config_set_value ("typesetter", typesetter);
 
@@ -410,9 +450,14 @@ void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
 void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
+    GList* tab = gui->tabmanagergui->tabs;
 
     config_set_value ("tabwidth", g_ascii_dtostr (buf, 16, (double)newval));
-    gtk_source_view_set_tab_width (g_active_editor->view, newval);
+    while (tab) {
+        gtk_source_view_set_tab_width (GU_TAB_CONTEXT (tab->data)->editor->view,
+                                      newval);
+        tab = g_list_next (tab);
+    }
 }
 
 void on_configure_snippets_clicked (GtkWidget* widget, void* user) {
@@ -437,10 +482,17 @@ void on_compile_value_changed (GtkWidget* widget, void* user) {
 
 void on_editor_font_set (GtkWidget* widget, void* user) {
     const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON (widget));
+    PangoFontDescription* font_desc = pango_font_description_from_string (font);
+    GList* tab = gui->tabmanagergui->tabs;
+
     slog (L_INFO, "setting font to %s\n", font);
     config_set_value ("font", font);
-    PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_modify_font (GTK_WIDGET (g_active_editor->view), font_desc);
+
+    while (tab) {
+        gtk_widget_modify_font (GTK_WIDGET
+                (GU_TAB_CONTEXT (tab->data)->editor->view), font_desc);
+        tab = g_list_next (tab);
+    }
     pango_font_description_free (font_desc);
 }
 
@@ -458,10 +510,17 @@ void on_combo_typesetter_changed (GtkWidget* widget, void* user) {
 void on_combo_language_changed (GtkWidget* widget, void* user) {
 #ifdef USE_GTKSPELL
     gchar* selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
+    GList* tab = gui->tabmanagergui->tabs;
     config_set_value ("spell_language", selected);
+
     if (config_get_value ("spelling")) {
-        editor_activate_spellchecking (g_active_editor, FALSE);
-        editor_activate_spellchecking (g_active_editor, TRUE);
+        while (tab) {
+            editor_activate_spellchecking (GU_TAB_CONTEXT (tab->data)->editor,
+                                           FALSE);
+            editor_activate_spellchecking (GU_TAB_CONTEXT (tab->data)->editor,
+                                           TRUE);
+            tab = g_list_next (tab);
+        }
     }
 #endif
 }
@@ -476,14 +535,19 @@ void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
 
 void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
 {
+    gchar* id = NULL;
+    gchar* name = NULL;
+    GList* tab = gui->tabmanagergui->tabs;
     GtkTreeIter iter;
-    gchar* name;
-    gchar* id;
     GtkTreeModel* model = GTK_TREE_MODEL (gtk_tree_view_get_model (treeview));
     GtkTreeSelection* selection = gtk_tree_view_get_selection (treeview);
 
     gtk_tree_selection_get_selected (selection, &model, &iter);
     gtk_tree_model_get (model, &iter, 0, &name, 1, &id, -1);
-    editor_set_style_scheme_by_id (g_active_editor, id);
+    tab = gui->tabmanagergui->tabs;
+    while (tab) {
+        editor_set_style_scheme_by_id (GU_TAB_CONTEXT (tab->data)->editor, id);
+        tab = g_list_next (tab);
+    }
     config_set_value ("style_scheme", id);
 }
