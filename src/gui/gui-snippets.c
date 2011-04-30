@@ -86,7 +86,7 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
     manager = gtk_source_language_manager_new ();
     lang_dir = g_build_filename (DATADIR, "snippets", NULL);
     langs = g_strdupv ((gchar**)gtk_source_language_manager_get_search_path (
-                manager));
+                       manager));
     len = g_strv_length (langs);
     new_langs = g_new0 (gchar*, len + 2);
     for (i = 0; i < len; ++i)
