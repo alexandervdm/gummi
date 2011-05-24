@@ -1022,9 +1022,14 @@ gint check_for_save (void) {
 
 gchar* get_open_filename (GuFilterType type) {
     GtkFileChooser* chooser = NULL;
-    static gchar* last_filename = NULL;
+    gchar* active_cwd = NULL;
     gchar* filename = NULL;
 
+
+    if (g_active_editor->filename != NULL) {
+       active_cwd = g_path_get_dirname(g_active_editor->filename);
+    }
+    
     const gchar* chooser_title[] = {
         _("Open LaTeX document"),
         "shouldn't happen",
@@ -1042,8 +1047,8 @@ gchar* get_open_filename (GuFilterType type) {
                 NULL));
 
     file_dialog_set_filter (chooser, type);
-    if (last_filename)
-        gtk_file_chooser_set_current_folder (chooser, last_filename);
+    if (active_cwd)
+        gtk_file_chooser_set_current_folder (chooser, active_cwd);
     else
         gtk_file_chooser_set_current_folder (chooser, g_get_home_dir ());
 
@@ -1051,8 +1056,7 @@ gchar* get_open_filename (GuFilterType type) {
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 
     if (filename) {
-        g_free (last_filename);
-        last_filename = g_path_get_dirname (filename);
+        g_free (active_cwd);
     }
 
     gtk_widget_destroy (GTK_WIDGET (chooser));
