@@ -202,8 +202,12 @@ void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
 }
 
 void on_image_file_activate (void) {
-    gchar* filename = get_open_filename (TYPE_IMAGE);
-    importer_imagegui_set_sensitive (filename, TRUE);
+    gchar* filename = NULL;
+    
+    filename = get_open_filename (TYPE_IMAGE);
+    if (filename) {
+        importer_imagegui_set_sensitive (filename, TRUE);
+    }
     g_free (filename);
 }
 
