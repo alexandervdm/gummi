@@ -99,16 +99,17 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
                       G_CALLBACK (on_key_press), p);
     g_signal_connect (p->drawarea, "motion-notify-event",
                       G_CALLBACK (on_motion), p);
-            
-    char* message = g_strdup_printf (_("PDF Preview could not initialize.\n\n"
-            "It appears your LaTeX document contains errors or\n"
-            "the program `%s' was not installed.\n"
-            "Additional information is available on the Error Output tab.\n"
-            "Please correct the listed errors to restore preview."),
-            config_get_value ("typesetter"));
-    p->errorlabel = GTK_LABEL (gtk_label_new (message));
-    gtk_label_set_justify (p->errorlabel, GTK_JUSTIFY_CENTER);
-    g_free (message);
+    
+    /* The error panel is now imported from Glade. The following
+     * functions re-parent the panel widgets for use in Gummi */
+    GtkWidget *holder = 
+        GTK_WIDGET(gtk_builder_get_object (builder, "errorwindow"));
+    p->errorpanel = 
+        GTK_WIDGET(gtk_builder_get_object (builder, "errorpanel"));
+
+    gtk_container_remove(GTK_CONTAINER(holder), p->errorpanel);
+    g_object_unref(holder);
+
 
     slog (L_INFO, "using libpoppler %s ...\n", poppler_get_version ());
     return p;
@@ -214,16 +215,16 @@ void previewgui_start_error_mode (GuPreviewGui* pc) {
     gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
             GTK_WIDGET (pc->drawarea));
     gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->errorlabel));
+            GTK_WIDGET (pc->errorpanel));
     gtk_widget_show_all (GTK_WIDGET (pc->previewgui_viewport));
 }
 
 void previewgui_stop_error_mode (GuPreviewGui* pc) {
     if (!pc->errormode) return;
     pc->errormode = FALSE;
-    g_object_ref (pc->errorlabel);
+    g_object_ref (pc->errorpanel);
     gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->errorlabel));
+            GTK_WIDGET (pc->errorpanel));
     gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
             GTK_WIDGET (pc->drawarea));
 }

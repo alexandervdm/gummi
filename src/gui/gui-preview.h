@@ -50,7 +50,7 @@ struct _GuPreviewGui {
     GtkWidget* page_label;
     GtkWidget* page_input;
     GtkWidget* scrollw;
-    GtkLabel* errorlabel;
+    GtkWidget* errorpanel;
     GtkComboBox* combo_sizes;
 
     gchar *uri;
