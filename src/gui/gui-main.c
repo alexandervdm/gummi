@@ -110,7 +110,17 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent4"));
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
-
+        
+    g->menu_projopen =
+        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_projopen"));
+    g->menu_projsave =
+        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_projsave"));
+    g->menu_include =
+        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_include"));
+    g->menu_input =
+        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_input"));
+    g->menu_detach =
+        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_detach"));
 
     g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
     g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
@@ -742,6 +752,55 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
         config_set_value ("snippets", "False");
     }
 }
+
+
+void on_menu_project_activate (GtkWidget *widget, void *user) {
+    /* Only the menu items that are available from the current active
+     * tab and environment should become sensitive */
+     
+    gchar *save = "Save the active tab to enable this option";
+    gchar *invalid = "The active tab is not a valid LaTeX document";
+    gchar *detach = "You cannot detach the top-level document";
+     
+    if (g_active_editor->filename != NULL) {
+        gtk_widget_set_sensitive(gui->menu_include, TRUE);
+        gtk_widget_set_sensitive(gui->menu_input, TRUE);
+    }
+    else {
+        gtk_widget_set_tooltip_text(gui->menu_include, save);
+        gtk_widget_set_tooltip_text(gui->menu_input, save);
+    }
+}
+
+void on_menu_project_deselect (GtkWidget *widget, void *user) {
+        gtk_widget_set_sensitive(gui->menu_include, FALSE);
+        gtk_widget_set_sensitive(gui->menu_input, FALSE);
+}
+
+
+    
+
+void on_menu_project_include_from_tab (GtkWidget *widget, void *user) {
+    /* select a tab from a popup window with a liststore/treeview
+     * file save dialog when selected top or slave file is not yet
+     * saved" */
+     
+     /* write include command into the buffer at current position */
+}
+
+void on_menu_project_include_new_file (GtkWidget *widget, void *user) {
+    /* Create a new file and tab, popup with file save dialog */
+    
+    /* write include command into the buffer at current position */
+}
+
+void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
+    
+}
+
+
+
+
 
 void on_menu_update_activate (GtkWidget *widget, void * user) {
     gboolean ret = updatecheck (gui->mainwindow);

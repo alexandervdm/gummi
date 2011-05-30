@@ -81,6 +81,12 @@ struct _GummiGui {
     gint insens_widget_size;
     GtkWidget** insens_widgets;
     
+    GtkWidget *menu_projopen;
+    GtkWidget *menu_projsave;
+    GtkWidget *menu_include;
+    GtkWidget *menu_input;
+    GtkWidget *menu_detach;
+    
     guint statusid;
     gchar* recent_list[5];
 };
