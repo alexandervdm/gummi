@@ -107,6 +107,9 @@ inline void editor_scroll_to_cursor (GuEditor* ec);
 void editor_undo_change (GuEditor* ec);
 void editor_redo_change (GuEditor* ec);
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);
+void get_style_colors (GtkSourceStyle *style,
+        gboolean *foreground_set, GdkColor *foreground, 
+        gboolean *background_set, GdkColor *background);
 gint schemes_compare (gconstpointer a, gconstpointer b);
 GList* editor_list_style_scheme_sorted (void);
 

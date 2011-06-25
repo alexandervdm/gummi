@@ -247,9 +247,6 @@ void editor_sourceview_config (GuEditor* ec) {
         wrapmode += 1;
 
     gtk_text_view_set_wrap_mode (ec_view, wrapmode);
-    g_object_set (G_OBJECT (ec->errortag), "background", "red",
-                                           "foreground", "white", NULL);
-    g_object_set (G_OBJECT (ec->searchtag), "background", "yellow", NULL);
 }
 
 
@@ -616,6 +613,12 @@ void editor_redo_change (GuEditor* ec) {
 }
 
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
+    GtkSourceStyle *style = NULL;
+    GdkColor fg;
+    GdkColor bg;
+    gboolean fg_set;
+    gboolean bg_set;
+    
     GtkSourceStyleScheme* scheme =
         gtk_source_style_scheme_manager_get_scheme (ec->stylemanager, id);
     slog (L_INFO, "setting styles scheme to %s\n", id);
@@ -626,9 +629,74 @@ void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
                 "classic");
     }
     gtk_source_buffer_set_style_scheme (ec->buffer, scheme);
+    
+    /* The following tag color related code is contributed by Dion Timmermann */
+
+    /* Copy colors for "search-match"-style to searchtag */
+    style = gtk_source_style_scheme_get_style (scheme, "search-match");
+    get_style_colors (style, &fg_set, &fg, &bg_set, &bg);
+
+    if (!fg_set && !bg_set) {
+        slog (L_ERROR, "style scheme does not define \"search-match\"-style "
+                       "colors, using defaults\n");
+        g_object_set (G_OBJECT (ec->searchtag), "background", "yellow", 
+                                                "foreground", "black", NULL);
+    } else {
+        if (fg_set)
+            g_object_set (G_OBJECT(ec->searchtag), "foreground-gdk", &fg, NULL);
+        if (bg_set)
+            g_object_set (G_OBJECT(ec->searchtag), "background-gdk", &bg, NULL);
+    }
+
+    /* Copy colors for "def:error"-style to errortag */
+    style = gtk_source_style_scheme_get_style (scheme, "def:error");
+    get_style_colors (style, &fg_set, &fg, &bg_set, &bg);
+
+    if (!fg_set && !bg_set) {
+        slog (L_ERROR, "style scheme does not define \"def:error\"-style "
+                       "colors, using defaults\n");
+        g_object_set (G_OBJECT (ec->errortag), "background", "red", 
+                                               "foreground", "white", NULL);
+    } else {
+        if (fg_set)
+            g_object_set (G_OBJECT(ec->errortag), "foreground-gdk", &fg, NULL);
+        if (bg_set)
+            g_object_set (G_OBJECT(ec->errortag), "background-gdk", &bg, NULL);
+    }
 }
 
 /* The following functions are taken from gedit and partially modified */
+
+void get_style_colors (GtkSourceStyle* style,
+        gboolean* foreground_set, GdkColor* foreground,
+        gboolean* background_set, GdkColor* background)
+{
+    gchar *bg = NULL;
+    gchar *fg = NULL;
+
+    if (style == NULL)
+        return;
+        
+    g_object_get (style, 
+                  "foreground-set", foreground_set, 
+                  "foreground", &fg,
+                  "background-set", background_set, 
+                  "background", &bg,
+                  NULL);
+
+    if (*foreground_set) {
+        if (fg == NULL || !gdk_color_parse (fg, foreground))
+            *foreground_set = FALSE;
+    }
+
+    if (*background_set) {
+        if (bg == NULL || !gdk_color_parse (bg, background))
+            *background_set = FALSE;
+    }    
+
+    g_free (fg);
+    g_free (bg);
+}
 
 gint schemes_compare (gconstpointer a, gconstpointer b) {
     GtkSourceStyleScheme *scheme_a = (GtkSourceStyleScheme *)a;
