@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-21 10:58+0800\n"
+"POT-Creation-Date: 2011-06-26 00:22+0800\n"
 "PO-Revision-Date: 2010-09-07 16:25+0200\n"
 "Last-Translator: Alexandru-Eugen Ichim <eugen@alexichim.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,16 +174,20 @@ msgid "Deletes the selected template"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:47
-msgid "Detect"
+msgid "Detach from project"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:48
+msgid "Detect"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:49
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:50
+#: ../data/ui/gummi.glade.h:51
 msgid ""
 "Determines whether the\n"
 "cells have line borders. "
@@ -191,29 +195,29 @@ msgstr ""
 "Determina daca\n"
 "celulele au linii ca mergine."
 
-#: ../data/ui/gummi.glade.h:52
+#: ../data/ui/gummi.glade.h:53
 #, fuzzy
 msgid "Document _Statistics"
 msgstr "Statistici _Document"
 
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:54
 msgid "Double line"
 msgstr "Linie Dubla"
 
-#: ../data/ui/gummi.glade.h:54
+#: ../data/ui/gummi.glade.h:55
 msgid "Enable S_nippets"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:56
 #, fuzzy
 msgid "Enable S_pell checking"
 msgstr "Verifica ortografia pentru limba:"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:57
 msgid "Error output"
 msgstr "Iesire erori"
 
-#: ../data/ui/gummi.glade.h:57
+#: ../data/ui/gummi.glade.h:58
 msgid ""
 "Error status for\n"
 "active document"
@@ -221,287 +225,329 @@ msgstr ""
 "Statutul erorii pentru\n"
 "document activ"
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:60
 msgid "File:"
 msgstr "Fisier:"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:61
 msgid "Filename:"
 msgstr "Nume Fisier:"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:62
 msgid "Find"
 msgstr "Cauta"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:63
 msgid "Find Ne_xt"
 msgstr "Cauta Urmatorul"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:64
 msgid "Find Pre_vious"
 msgstr "Cauta Precedentul"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:65
 msgid "Fit Page Width"
 msgstr "Incadreaza in Latimea Paginii"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:66
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - Editorul de LaTeX"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:67
 msgid "Hello svn user!"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:68
 msgid "Image"
 msgstr "Imagine"
 
-#: ../data/ui/gummi.glade.h:68
+#: ../data/ui/gummi.glade.h:69
+#, fuzzy
+msgid "Include document"
+msgstr "Creeaza un nou document"
+
+#: ../data/ui/gummi.glade.h:70
+#, fuzzy
+msgid "Input document"
+msgstr "Creeaza un nou document"
+
+#: ../data/ui/gummi.glade.h:71
 msgid "Italic text"
 msgstr "Text Inclinat"
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:72
 msgid "Label:"
 msgstr "Eticheta"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:73
 msgid "Load a file"
 msgstr "Deschide un Fisier"
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:74
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:76
 msgid "Match case"
 msgstr "Potriveste capitalizarea"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:77
 msgid "Match entire word only"
 msgstr "Potriveste doar pentru cuvantul intreg"
 
-#: ../data/ui/gummi.glade.h:75
+#: ../data/ui/gummi.glade.h:78
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:76 ../src/gui/gui-main.c:921
+#: ../data/ui/gummi.glade.h:79 ../src/gui/gui-main.c:1008
 msgid "N/A"
 msgstr "Indisponibil"
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:80
 msgid "New"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:81
+#, fuzzy
+msgid "New document"
+msgstr "Creeaza un nou document"
+
+#: ../data/ui/gummi.glade.h:82
 msgid "New from _Template"
 msgstr "Nou din Sablon"
 
-#: ../data/ui/gummi.glade.h:79
+#: ../data/ui/gummi.glade.h:83
 msgid "Next"
 msgstr "Urmatorul"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:84
 msgid "No borders"
 msgstr "Fara margini"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:85
 msgid "Open"
 msgstr "Deschide"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:86
+msgid "Open Project"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:87
+#, fuzzy
+msgid "Open file"
+msgstr "Deschide Fisier..."
+
+#: ../data/ui/gummi.glade.h:88
 msgid "Open the selected template"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:89
+#, fuzzy
+msgid ""
+"PDF Preview could not initialize.\n"
+"It appears your LaTeX document contains errors\n"
+"Additional information is available on the \n"
+"Error Output tab"
+msgstr ""
+"PDF-Previzualizare nu s-a putut initializa\n"
+"\n"
+"Se pare ca documentul LatTeX contine erori sau\n"
+"programul `%s' nu a fost instalat.\n"
+"Informatii aditionale sunt disponibile sunt disponibile in Iesirea de "
+"Erori.\n"
+"Va rog corectati erorile mentionate si faceti click aici\n"
+"pentru a reincarca panoul de previzualizare."
+
+#: ../data/ui/gummi.glade.h:93
 msgid "Parentheses"
 msgstr "Paranteze"
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:94
 msgid "Pause updating the preview pane."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:95
 msgid "Preview Pane"
 msgstr "Panou de Previzualizare"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:96
 msgid "Previous"
 msgstr "Precedentul"
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:97
 msgid "References:"
 msgstr "Referinte:"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:98
 msgid "Replace _All"
 msgstr "Inlocuieste Tot"
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:99
 msgid "Replace with:"
 msgstr "Inlocuieste cu:"
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:100
 msgid "Rows:"
 msgstr "Randuri"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:101
 msgid "Save"
 msgstr "Salveaza"
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:102
+msgid "Save Project"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:103
 msgid "Save _As..."
 msgstr "Salveaza Ca..."
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:104
 msgid "Save the current file"
 msgstr "Salveaza fisierul curent"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:105
 msgid "Scale:"
 msgstr "Scara:"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:106
 msgid "Search backwards"
 msgstr "Cauta in urma"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:107
 msgid "Search for:"
 msgstr "Cauta:"
 
-#: ../data/ui/gummi.glade.h:97
+#: ../data/ui/gummi.glade.h:108
+msgid "Select tab"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:109
 msgid "Single line"
 msgstr "O Singura Linie"
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:110
 msgid "Table"
 msgstr "Tabel"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:111
 msgid "Unbracketed"
 msgstr "Fara Paranteze"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:112
 msgid "Underline text"
 msgstr "Text subliniat"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:113
 msgid "_Compile Bibliography"
 msgstr "_Compileaza Bibliografia"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:114
+#, fuzzy
+msgid "_Document"
+msgstr "Compileaza"
+
+#: ../data/ui/gummi.glade.h:115
 msgid "_Edit"
 msgstr "_Editeaza"
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:116
 msgid "_Export to PDF"
 msgstr "_Exporta ca PDF"
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:117
 msgid "_File"
 msgstr "_Fisier"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:118
 msgid "_Fullscreen"
 msgstr "Ecran Complet"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:119
 msgid "_Help"
 msgstr "Ajutor"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:120
 msgid "_Insert Bibliography"
 msgstr "_Insereaza Bibliografie"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:121
 msgid "_Open..."
 msgstr "Deschide..."
 
-#: ../data/ui/gummi.glade.h:109
-msgid "_Replace"
-msgstr "Inlocuieste"
-
-#: ../data/ui/gummi.glade.h:110
-msgid "_Right Pane"
-msgstr "Panoul Dreapta"
-
-#: ../data/ui/gummi.glade.h:111
-msgid "_Search"
-msgstr "Cauta"
-
-#: ../data/ui/gummi.glade.h:112
-msgid "_Statusbar"
-msgstr "Bara de _Status"
-
-#: ../data/ui/gummi.glade.h:113
-msgid "_Toolbar"
-msgstr "Bara de Unelte"
-
-#: ../data/ui/gummi.glade.h:114
-msgid "_Tools"
-msgstr "Unelte"
-
-#: ../data/ui/gummi.glade.h:115
-msgid "_View"
-msgstr "_Vizualizare"
-
-#: ../data/ui/gummi.glade.h:116
-msgid "author"
-msgstr ""
-
-#: ../data/ui/gummi.glade.h:117
-msgid "filter:"
-msgstr "filtru:"
-
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:919
-msgid "no bibliography file detected"
-msgstr "nu a fost detectat niciun fisier de bibliografie"
-
-#: ../data/ui/gummi.glade.h:119 ../src/gui/gui-main.c:920
-msgid "none"
-msgstr "deloc"
-
-#: ../data/ui/gummi.glade.h:120
-msgid "of 0"
-msgstr "din 0"
-
-#: ../data/ui/gummi.glade.h:121
-msgid "shouldnotseeme"
-msgstr "nuartrebuisamavezi"
-
 #: ../data/ui/gummi.glade.h:122
-msgid "title"
+msgid "_Project"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:123
+msgid "_Replace"
+msgstr "Inlocuieste"
+
+#: ../data/ui/gummi.glade.h:124
+msgid "_Right Pane"
+msgstr "Panoul Dreapta"
+
+#: ../data/ui/gummi.glade.h:125
+msgid "_Search"
+msgstr "Cauta"
+
+#: ../data/ui/gummi.glade.h:126
+msgid "_Statusbar"
+msgstr "Bara de _Status"
+
+#: ../data/ui/gummi.glade.h:127
+msgid "_Toolbar"
+msgstr "Bara de Unelte"
+
+#: ../data/ui/gummi.glade.h:128
+msgid "_View"
+msgstr "_Vizualizare"
+
+#: ../data/ui/gummi.glade.h:129
+msgid "filter:"
+msgstr "filtru:"
+
+#: ../data/ui/gummi.glade.h:130 ../src/gui/gui-main.c:1006
+msgid "no bibliography file detected"
+msgstr "nu a fost detectat niciun fisier de bibliografie"
+
+#: ../data/ui/gummi.glade.h:131 ../src/gui/gui-main.c:1007
+msgid "none"
+msgstr "deloc"
+
+#: ../data/ui/gummi.glade.h:132
+msgid "of 0"
+msgstr "din 0"
+
+#: ../data/ui/gummi.glade.h:133
+msgid "shouldnotseeme"
+msgstr "nuartrebuisamavezi"
+
+#: ../data/ui/gummi.glade.h:134
 msgid "toolbutton1"
 msgstr "butonunelte1"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:135
 msgid "toolbutton2"
 msgstr "butonunelte2"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:136
 msgid "toolbutton3"
 msgstr "butonunelte3"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:137
 msgid "toolbutton5"
 msgstr "butonunelte5"
 
-#: ../data/ui/gummi.glade.h:127
+#: ../data/ui/gummi.glade.h:138
 msgid "toolbutton6"
 msgstr "butonunelte6"
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:139
 msgid "toolbutton7"
 msgstr "butonunelte7"
-
-#: ../data/ui/gummi.glade.h:129
-msgid "year"
-msgstr ""
 
 #: ../data/ui/prefs.glade.h:1
 #, fuzzy
@@ -721,11 +767,11 @@ msgstr ""
 msgid "_Reset"
 msgstr ""
 
-#: ../src/editor.c:509
+#: ../src/editor.c:506
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:516
+#: ../src/editor.c:513
 msgid "Bottom reached, search from top?"
 msgstr ""
 
@@ -750,7 +796,7 @@ msgstr ""
 msgid "Autosaving file %s"
 msgstr "Salvarea fisierului "
 
-#: ../src/latex.c:184 ../src/gui/gui-main.c:372
+#: ../src/latex.c:186 ../src/gui/gui-main.c:403
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
@@ -794,176 +840,174 @@ msgstr ""
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:337
+#: ../src/gui/gui-main.c:365
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:421
+#: ../src/gui/gui-main.c:460
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
 msgstr "Eroare la incarcarea fisierului recent: "
 
-#: ../src/gui/gui-main.c:604
+#: ../src/gui/gui-main.c:649
 #, fuzzy
 msgid "Words in text"
 msgstr "Text ingrosat"
 
-#: ../src/gui/gui-main.c:605
+#: ../src/gui/gui-main.c:650
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:606
+#: ../src/gui/gui-main.c:651
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-main.c:607
+#: ../src/gui/gui-main.c:652
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-main.c:608
+#: ../src/gui/gui-main.c:653
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-main.c:609
+#: ../src/gui/gui-main.c:654
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-main.c:610
+#: ../src/gui/gui-main.c:655
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:671
+#: ../src/gui/gui-main.c:716
 #, fuzzy
 msgid ""
 "This function requires\n"
 "the texcount program.\n"
 msgstr "Aceasta functie necesita activarea\n"
 
-#: ../src/gui/gui-main.c:679
+#: ../src/gui/gui-main.c:724
 #, fuzzy
 msgid "Document Statistics"
 msgstr "Statistici _Document"
 
+#. Only the menu items that are available from the current active
+#. * tab and environment should become sensitive
+#: ../src/gui/gui-main.c:764
+msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/gui/gui-main.c:765
+#, fuzzy
+msgid "The active tab is not a valid LaTeX document"
+msgstr "Creeaza un nou document"
+
+#: ../src/gui/gui-main.c:766
+msgid "You cannot detach the top-level document"
+msgstr ""
+
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:905
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:870
+#: ../src/gui/gui-main.c:957
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:872
+#: ../src/gui/gui-main.c:959
 msgid "bibliography compiled without errors"
 msgstr "bibliografia a fost compilata fara erori"
 
-#: ../src/gui/gui-main.c:874
+#: ../src/gui/gui-main.c:961
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
 "detectata.."
 
-#: ../src/gui/gui-main.c:877
+#: ../src/gui/gui-main.c:964
 msgid "error compiling bibliography file"
 msgstr "eroare in timpul compilarii fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:910
+#: ../src/gui/gui-main.c:997
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:987
+#: ../src/gui/gui-main.c:1074
 msgid "Do you want to save the changes you have made?"
 msgstr "Doriti sa salvati modificarile facute?"
 
-#: ../src/gui/gui-main.c:997
+#: ../src/gui/gui-main.c:1089
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:1000
+#: ../src/gui/gui-main.c:1092
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:1001
+#: ../src/gui/gui-main.c:1093
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:1035
+#: ../src/gui/gui-main.c:1126
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:1036
+#: ../src/gui/gui-main.c:1127
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:1037
+#: ../src/gui/gui-main.c:1128
 msgid "Export to PDF"
 msgstr "Exporta ca PDF"
 
-#: ../src/gui/gui-main.c:1084
+#: ../src/gui/gui-main.c:1175
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Deschide un Fisier"
 
-#: ../src/gui/gui-main.c:1089
+#: ../src/gui/gui-main.c:1180
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:1102
+#: ../src/gui/gui-main.c:1193
 #, fuzzy
 msgid "Image files"
 msgstr "Imagine"
 
-#: ../src/gui/gui-main.c:1109
+#: ../src/gui/gui-main.c:1200
 msgid "Bibtex files"
 msgstr ""
 
-#. g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (my_getsize), NULL);
-#: ../src/gui/gui-preview.c:87
-#, fuzzy, c-format
-msgid ""
-"PDF Preview could not initialize.\n"
-"\n"
-"It appears your LaTeX document contains errors or\n"
-"the program `%s' was not installed.\n"
-"Additional information is available on the Error Output tab.\n"
-"Please correct the listed errors to restore preview."
-msgstr ""
-"PDF-Previzualizare nu s-a putut initializa\n"
-"\n"
-"Se pare ca documentul LatTeX contine erori sau\n"
-"programul `%s' nu a fost instalat.\n"
-"Informatii aditionale sunt disponibile sunt disponibile in Iesirea de "
-"Erori.\n"
-"Va rog corectati erorile mentionate si faceti click aici\n"
-"pentru a reincarca panoul de previzualizare."
-
-#: ../src/gui/gui-preview.c:204
+#: ../src/gui/gui-preview.c:190
 #, c-format
 msgid "of %d"
 msgstr ""
 
-#: ../src/gui/gui-snippets.c:302
+#: ../src/gui/gui-snippets.c:298
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
 
-#: ../src/gui/gui-snippets.c:315
+#: ../src/gui/gui-snippets.c:311
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-snippets.c:318
+#: ../src/gui/gui-snippets.c:314
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
+
+#~ msgid "_Tools"
+#~ msgstr "Unelte"
 
 #~ msgid "_Autocheck Spelling"
 #~ msgstr "Verifica Automat Ortografia"
@@ -976,9 +1020,6 @@ msgstr ""
 
 #~ msgid "PDF Compiling:"
 #~ msgstr "Compilare PDF:"
-
-#~ msgid "Open File..."
-#~ msgstr "Deschide Fisier..."
 
 #~ msgid "Save File..."
 #~ msgstr "Salveaza Fisier..."
