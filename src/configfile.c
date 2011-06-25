@@ -158,7 +158,7 @@ void config_load (void) {
     FILE* fh = 0;
     gchar buf[BUFSIZ];
     gchar* rot = NULL;
-    gchar* seg = NULL;
+    gchar** seg = NULL;
     slist* current = NULL;
     slist* prev = NULL;
 
@@ -176,11 +176,15 @@ void config_load (void) {
     while (fgets (buf, BUFSIZ, fh)) {
         buf[strlen (buf) -1] = 0; /* remove trailing '\n' */
         if (buf[0] != '\t') {
-            seg = strtok (buf, " =");
-            current->first = g_strdup ((seg)? seg: "");
-            /* prevent strtok () from cutting string after '=' */
-            seg = strtok (NULL, "=");
-            current->second = g_strdup ((seg)? seg + 1: NULL);
+            seg = g_strsplit(buf, "=", 2);
+            if (seg[0]) {
+                current->first = g_strdup (g_strstrip(seg[0]));
+                current->second = g_strdup (seg[1]? g_strstrip(seg[1]): NULL);
+            } else {
+                current->first = g_strdup("");
+                current->second = NULL;
+            }
+            g_strfreev(seg);
         } else {
             rot = g_strdup (prev->second);
             g_free (prev->second);
