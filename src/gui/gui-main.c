@@ -378,6 +378,9 @@ void gui_open_file (const gchar* filename) {
 
     if (GTK_RESPONSE_YES != ret)
         gui_create_environment (A_LOAD, filename, NULL);
+
+    if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
+        gui_set_sensitive (TRUE);
 }
 
 void gui_save_file (gboolean saveas) {
