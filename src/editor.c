@@ -362,7 +362,7 @@ void editor_set_selection_textstyle (GuEditor* ec, const gchar* type) {
         }
 
     /* generate regex expression */
-    regexbuf = g_strdup_printf (" (.*)%s%s (.*)%s%s (.*)",
+    regexbuf = g_strdup_printf ("(.*)%s%s(.*)%s%s(.*)",
             (style[selected][1][0] == '\\')? "\\": "",
             style[selected][1],
             (style[selected][2][0] == '\\')? "\\": "",
