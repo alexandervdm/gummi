@@ -217,6 +217,10 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
 }
 
 void previewgui_start_error_mode (GuPreviewGui* pc) {
+    
+    /* update last scroll position to restore it after error mode */
+    pc->prev_y = gtk_adjustment_get_value(pc->vadj);
+    
     if (pc->errormode) return;
     pc->errormode = TRUE;
     gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
@@ -227,6 +231,11 @@ void previewgui_start_error_mode (GuPreviewGui* pc) {
 }
 
 void previewgui_stop_error_mode (GuPreviewGui* pc) {
+    
+    /* restore scroll window position to value before error mode */
+    /* TODO: might want to merge this with synctex funcs in future */
+    gtk_adjustment_set_value(pc->vadj, pc->prev_y);
+    
     if (!pc->errormode) return;
     pc->errormode = FALSE;
     g_object_ref (pc->errorpanel);
