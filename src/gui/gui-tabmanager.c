@@ -185,3 +185,11 @@ void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
                                                   (tm->active_editor->buffer));
     tablabel_update_label_text (tm->active_tab->tablabel, fname, modi);
 }
+
+gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm) {
+    if (g_list_length(tm->tabs) != 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+

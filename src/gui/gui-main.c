@@ -61,9 +61,8 @@ const gchar* insens_widgets_str[] = {
     "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
     "menu_exportpdf", "menu_undo", "menu_redo", "menu_cut", "menu_copy",
-    "menu_paste", "menu_delete", "menu_selectall", "menu_find", "menu_next",
-    "menu_prev", "menu_bibload", "menu_bibcompile", "menu_pdfcompile",
-    "menu_docstat", "menu_spelling", "menu_snippets", "import_tabs"
+    "menu_paste", "menu_delete", "menu_selectall", "import_tabs",
+    "menu_document", "menu_project", "menu_search"
 };
 
 GummiGui* gui_init (GtkBuilder* builder) {
@@ -758,6 +757,7 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
 
 
 void on_menu_project_activate (GtkWidget *widget, void *user) {
+    
     /* Only the menu items that are available from the current active
      * tab and environment should become sensitive */
      

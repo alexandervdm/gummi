@@ -84,5 +84,6 @@ void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position);
 gint tabmanagergui_create_unsavednr (GuTabmanagerGui* tm);
 void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
                                             const gchar* filename);
+gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm);
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */
