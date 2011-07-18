@@ -75,7 +75,15 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->uri = NULL;
     p->doc = NULL;
     p->page = NULL;
-    p->page_zoommode = 1;
+
+    if (g_strcmp0(config_get_value("zoommode"), "bestfit") == 0) {
+        p->page_zoommode = 0;
+        gtk_combo_box_set_active(p->combo_sizes, 0);
+    }
+    else {
+        p->page_zoommode = 1;
+    }
+    
     p->update_timer = 0;
     p->preview_on_idle = FALSE;
     p->page_total = 0;
@@ -109,8 +117,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
     gtk_container_remove(GTK_CONTAINER(holder), p->errorpanel);
     g_object_unref(holder);
-
-
+    
     slog (L_INFO, "using libpoppler %s ...\n", poppler_get_version ());
     return p;
 }
@@ -333,6 +340,9 @@ void previewgui_zoom_change (GtkWidget* widget, void* user) {
     gui->previewgui->page_zoommode = index;
     previewgui_drawarea_resize (gui->previewgui);
     gtk_widget_queue_draw (gui->previewgui->drawarea);
+    
+    if (index == 0) config_set_value("zoommode", "bestfit");
+    if (index == 1) config_set_value("zoommode", "pagewidth");
 }
 
 gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
