@@ -34,7 +34,11 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#define DIR_PERMS (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
+#ifdef WIN32
+	#define DIR_PERMS (S_IRWXU)
+#else
+	#define DIR_PERMS (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
+#endif
 
 #define L_IS_TYPE(level, type) ((level & type) == type)
 #define L_IS_GUI(level) (level & 0xf0)
