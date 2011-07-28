@@ -211,8 +211,9 @@ void gui_main (GtkBuilder* builder) {
         gtk_widget_show (tmp);
         config_set_value ("svnpopup", "popped");
     }*/
-    
+    gdk_threads_enter();
     gtk_main ();
+    gdk_threads_leave();
 }
 
 gboolean gui_quit (void) {
