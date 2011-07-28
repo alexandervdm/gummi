@@ -44,6 +44,15 @@
 #include "utils.h"
 #include "gui/gui-preview.h"
 
+
+#ifdef WIN32
+    const gchar *cmdsep = "&&";
+#else
+    const gchar *cmdsep = ";";
+#endif
+
+
+
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
     l->errormessage = NULL;
@@ -81,7 +90,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
         config_set_value ("typesetter", "pdflatex");
     }
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar* command = g_strdup_printf ("cd \"%s\";"
+    gchar* command = g_strdup_printf ("cd \"%s\"%s"
                                      "env openout_any=a %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
@@ -89,6 +98,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
                                      "%s "
                                      "-output-directory=\"%s\" \"%s\"",
                                      dirname,
+                                     cmdsep,
                                      config_get_value ("typesetter"),
                                      config_get_value ("extra_flags"),
                                      ec->tmpdir,
@@ -140,12 +150,13 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
 void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar* command = g_strdup_printf ("cd \"%s\";"
+    gchar* command = g_strdup_printf ("cd \"%s\"%s"
                                      "env openout_any=a %s "
                                      "--draftmode "
                                      "-interaction=nonstopmode "
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
+                                     cmdsep,
                                      config_get_value ("typesetter"),
                                      ec->tmpdir,
                                      ec->workfile);
