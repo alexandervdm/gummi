@@ -798,9 +798,13 @@ void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
 }
 
 void on_menu_update_activate (GtkWidget *widget, void * user) {
-    gboolean ret = updatecheck (gui->mainwindow);
-    if (!ret)
-        slog (L_G_ERROR, "Update check failed!\n");
+    #ifdef WIN32
+        slog (L_G_INFO, "To be implemented for win32..\n");
+    #else
+        gboolean ret = updatecheck (gui->mainwindow);
+        if (!ret)
+            slog (L_G_ERROR, "Update check failed!\n");
+    #endif
 }
 
 void on_menu_about_activate (GtkWidget *widget, void * user) {
