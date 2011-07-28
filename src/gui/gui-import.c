@@ -95,6 +95,7 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     return i;
 }
 
+G_MODULE_EXPORT
 void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
         guint page_num, void* user) {
     GList* list = NULL;
@@ -136,6 +137,7 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
     }
 }
 
+G_MODULE_EXPORT
 void on_button_import_table_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     gint rows = gtk_adjustment_get_value (g_importgui->table_rows);
@@ -152,6 +154,7 @@ void on_button_import_table_apply_clicked (GtkWidget* widget, void* user) {
     gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
 }
 
+G_MODULE_EXPORT
 void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     const gchar* imagefile = gtk_entry_get_text (g_importgui->image_file);
@@ -185,6 +188,7 @@ void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
     g_free (root_path);
 }
 
+G_MODULE_EXPORT
 void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     gint bracket =
@@ -201,6 +205,7 @@ void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
 }
 
+G_MODULE_EXPORT
 void on_image_file_activate (void) {
     gchar* filename = NULL;
     
@@ -211,6 +216,7 @@ void on_image_file_activate (void) {
     g_free (filename);
 }
 
+G_MODULE_EXPORT
 void importer_imagegui_set_sensitive (const gchar* name, gboolean mode) {
     gtk_widget_set_sensitive (GTK_WIDGET (g_importgui->image_label), mode);
     gtk_widget_set_sensitive (GTK_WIDGET (g_importgui->image_caption), mode);

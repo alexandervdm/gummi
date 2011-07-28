@@ -199,17 +199,20 @@ void snippetsgui_update_snippet (GuSnippets* sc) {
     g_strfreev (configs);
 }
 
+G_MODULE_EXPORT
 void on_snippetsgui_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_hide (GTK_WIDGET (gui->snippetsgui->snippetswindow));
     snippets_save (gummi->snippets);
 }
 
+G_MODULE_EXPORT
 void on_snippetsgui_reset_clicked (GtkWidget* widget, void* user) {
     snippets_set_default (gummi->snippets);
     snippetsgui_load_snippets (gui->snippetsgui);
     snippetsgui_move_cursor_to_row (gui->snippetsgui, 0);
 }
 
+G_MODULE_EXPORT
 void on_button_new_snippet_clicked (GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     GtkTreeIter iter;
@@ -232,6 +235,7 @@ void on_button_new_snippet_clicked (GtkWidget* widget, void* user) {
     gtk_tree_path_free (path);
 }
 
+G_MODULE_EXPORT
 void on_button_remove_snippet_clicked (GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     gchar* path_str = NULL;
@@ -283,6 +287,7 @@ void on_button_remove_snippet_clicked (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 gboolean on_tab_trigger_entry_key_release_event (GtkEntry* entry, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     const gchar* new_key = gtk_entry_get_text (entry);
@@ -305,6 +310,7 @@ gboolean on_tab_trigger_entry_key_release_event (GtkEntry* entry, void* user) {
     return FALSE;
 }
 
+G_MODULE_EXPORT
 void on_accelerator_entry_focus_in_event (GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     if (!strlen (gtk_entry_get_text (s->accelerator_entry)))
@@ -314,6 +320,7 @@ void on_accelerator_entry_focus_in_event (GtkWidget* widget, void* user) {
                 _("Type a new shortcut, or press Backspace to clear"));
 }
 
+G_MODULE_EXPORT
 void on_accelerator_entry_focus_out_event (GtkWidget* widget, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     gchar** configs = NULL;
@@ -322,6 +329,7 @@ void on_accelerator_entry_focus_out_event (GtkWidget* widget, void* user) {
     g_strfreev (configs);
 }
 
+G_MODULE_EXPORT
 gboolean on_accelerator_entry_key_press_event (GtkWidget* widget,
         GdkEventKey* event, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
@@ -350,6 +358,7 @@ gboolean on_accelerator_entry_key_press_event (GtkWidget* widget,
     return TRUE;
 }
 
+G_MODULE_EXPORT
 void on_snippets_tree_view_cursor_changed (GtkTreeView* view, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
     gchar* accel = NULL;
@@ -388,6 +397,7 @@ void on_snippets_tree_view_cursor_changed (GtkTreeView* view, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_snippet_renderer_edited (GtkCellRendererText* renderer, gchar *path,
         gchar* name, void* user) {
     GuSnippetsGui* s = gui->snippetsgui;
@@ -416,6 +426,7 @@ void on_snippet_renderer_edited (GtkCellRendererText* renderer, gchar *path,
     gtk_widget_set_sensitive (GTK_WIDGET (s->button_remove), TRUE);
 }
 
+G_MODULE_EXPORT
 void on_snippet_renderer_editing_canceled (GtkCellRenderer* rend, void* user) {
     on_snippet_renderer_edited (GTK_CELL_RENDERER_TEXT (rend), "", "", NULL);
 }

@@ -296,6 +296,7 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_linenumbers (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -308,6 +309,7 @@ void toggle_linenumbers (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_highlighting (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -320,6 +322,7 @@ void toggle_highlighting (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_textwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -350,6 +353,7 @@ void toggle_textwrapping (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_wordwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -366,6 +370,7 @@ void toggle_wordwrapping (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_compilestatus (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("compile_status", newval? "True": "False");
@@ -373,6 +378,7 @@ void toggle_compilestatus (GtkWidget* widget, void* user) {
     gtk_toggle_tool_button_set_active (gui->previewoff, !newval);
 }
 
+G_MODULE_EXPORT
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -385,6 +391,7 @@ void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_autoindentation (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gui->tabmanagergui->tabs;
@@ -397,6 +404,7 @@ void toggle_autoindentation (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_autosaving (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
@@ -414,11 +422,13 @@ void toggle_autosaving (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_autoexport (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("autoexport", newval? "True": "False");
 }
 
+G_MODULE_EXPORT
 void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     GtkTextIter start, end;
     gchar* text = NULL;
@@ -442,11 +452,13 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_hide (GTK_WIDGET (gui->prefsgui->prefwindow));
 }
 
+G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
     config_set_default ();
     prefsgui_set_current_settings (gui->prefsgui);
 }
 
+G_MODULE_EXPORT
 void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
@@ -460,10 +472,12 @@ void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_configure_snippets_clicked (GtkWidget* widget, void* user) {
     snippetsgui_main (gui->snippetsgui);
 }
 
+G_MODULE_EXPORT
 void on_autosave_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
@@ -472,6 +486,7 @@ void on_autosave_value_changed (GtkWidget* widget, void* user) {
     iofunctions_reset_autosave (g_active_editor->filename);
 }
 
+G_MODULE_EXPORT
 void on_compile_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
@@ -480,6 +495,7 @@ void on_compile_value_changed (GtkWidget* widget, void* user) {
     previewgui_reset (gui->previewgui);
 }
 
+G_MODULE_EXPORT
 void on_editor_font_set (GtkWidget* widget, void* user) {
     const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON (widget));
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
@@ -496,6 +512,7 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
     pango_font_description_free (font_desc);
 }
 
+G_MODULE_EXPORT
 void on_combo_typesetter_changed (GtkWidget* widget, void* user) {
     gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
     const gchar typesetter[][16] = { "pdflatex", "xelatex", "Customize" };
@@ -507,6 +524,7 @@ void on_combo_typesetter_changed (GtkWidget* widget, void* user) {
         gtk_widget_show (GTK_WIDGET (gui->prefsgui->commandbox));
 }
 
+G_MODULE_EXPORT
 void on_combo_language_changed (GtkWidget* widget, void* user) {
 #ifdef USE_GTKSPELL
     gchar* selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
@@ -525,6 +543,7 @@ void on_combo_language_changed (GtkWidget* widget, void* user) {
 #endif
 }
 
+G_MODULE_EXPORT
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
     gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
     const gchar scheme[][16] = { "on_idle", "real_time" };
@@ -533,6 +552,7 @@ void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
     previewgui_reset (gui->previewgui);
 }
 
+G_MODULE_EXPORT
 void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
 {
     gchar* id = NULL;

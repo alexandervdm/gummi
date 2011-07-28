@@ -317,6 +317,7 @@ void previewgui_stop_preview (GuPreviewGui* pc) {
     pc->update_timer = 0;
 }
 
+G_MODULE_EXPORT
 void previewgui_page_input_changed (GtkEntry* entry, void* user) {
     gint newpage = atoi (gtk_entry_get_text (entry));
 
@@ -333,14 +334,17 @@ void previewgui_page_input_changed (GtkEntry* entry, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void previewgui_next_page (GtkWidget* widget, void* user) {
     previewgui_goto_page (gui->previewgui, gui->previewgui->page_current + 1);
 }
 
+G_MODULE_EXPORT
 void previewgui_prev_page (GtkWidget* widget, void* user) {
     previewgui_goto_page (gui->previewgui, gui->previewgui->page_current - 1);
 }
 
+G_MODULE_EXPORT
 void previewgui_zoom_change (GtkWidget* widget, void* user) {
     gint index = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
     if (index < 0)

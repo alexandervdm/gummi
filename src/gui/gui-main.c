@@ -216,6 +216,7 @@ void gui_main (GtkBuilder* builder) {
     gdk_threads_leave();
 }
 
+G_MODULE_EXPORT
 gboolean gui_quit (void) {
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
@@ -310,6 +311,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
     previewgui_reset (gui->previewgui);
 }
 
+G_MODULE_EXPORT
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
     /* very important line */
@@ -427,18 +429,21 @@ void gui_set_sensitive(gboolean enable) {
         gtk_widget_set_sensitive (gui->insens_widgets[i], enable);
 }
 
+G_MODULE_EXPORT
 void on_menu_new_activate (GtkWidget *widget, void* user) {
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_sensitive (TRUE);
     gui_create_environment (A_NONE, NULL, NULL);
 }
 
+G_MODULE_EXPORT
 void on_menu_template_activate (GtkWidget *widget, void * user) {
     gtk_list_store_clear (gummi->templ->list_templates);
     template_setup (gummi->templ);
     gtk_widget_show_all (GTK_WIDGET (gummi->templ->templatewindow));
 }
 
+G_MODULE_EXPORT
 void on_menu_exportpdf_activate (GtkWidget *widget, void * user) {
     gchar* filename = NULL;
 
@@ -448,6 +453,7 @@ void on_menu_exportpdf_activate (GtkWidget *widget, void * user) {
     g_free (filename);
 }
 
+G_MODULE_EXPORT
 void on_menu_recent_activate (GtkWidget *widget, void * user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
@@ -474,6 +480,7 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
     display_recent_files (gui);
 }
 
+G_MODULE_EXPORT
 void on_menu_open_activate (GtkWidget *widget, void* user) {
     gchar *filename = NULL;
     
@@ -485,14 +492,17 @@ void on_menu_open_activate (GtkWidget *widget, void* user) {
         gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 }
 
+G_MODULE_EXPORT
 void on_menu_save_activate (GtkWidget *widget, void* user) {
     gui_save_file (FALSE);
 }
 
+G_MODULE_EXPORT
 void on_menu_saveas_activate (GtkWidget *widget, void* user) {
     gui_save_file (TRUE);
 }
 
+G_MODULE_EXPORT
 void on_menu_close_activate (GtkWidget *widget, void* user) {
     gint ret = check_for_save ();
     GuTabContext* tab = NULL;
@@ -511,6 +521,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
         gui_update_windowtitle ();
 }
 
+G_MODULE_EXPORT
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
     GtkClipboard     *clipboard;
 
@@ -518,12 +529,14 @@ void on_menu_cut_activate (GtkWidget *widget, void* user) {
     gtk_text_buffer_cut_clipboard (g_e_buffer, clipboard, TRUE);
 }
 
+G_MODULE_EXPORT
 void on_menu_copy_activate (GtkWidget *widget, void* user) {
     GtkClipboard     *clipboard;
 
     clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
     gtk_text_buffer_copy_clipboard (g_e_buffer, clipboard);
 }
+G_MODULE_EXPORT
 void on_menu_paste_activate (GtkWidget *widget, void* user) {
     GtkClipboard     *clipboard;
 
@@ -531,28 +544,34 @@ void on_menu_paste_activate (GtkWidget *widget, void* user) {
     gtk_text_buffer_paste_clipboard (g_e_buffer, clipboard, NULL, TRUE);
 }
 
+G_MODULE_EXPORT
 void on_menu_undo_activate (GtkWidget *widget, void* user) {
     editor_undo_change (g_active_editor);
 }
 
+G_MODULE_EXPORT
 void on_menu_redo_activate (GtkWidget *widget, void* user) {
     editor_redo_change (g_active_editor);
 }
 
+G_MODULE_EXPORT
 void on_menu_delete_activate (GtkWidget *widget, void * user) {
     gtk_text_buffer_delete_selection (g_e_buffer, FALSE, TRUE);
 }
 
+G_MODULE_EXPORT
 void on_menu_selectall_activate (GtkWidget *widget, void * user) {
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds (g_e_buffer, &start, &end);
     gtk_text_buffer_select_range (g_e_buffer, &start, &end);
 }
 
+G_MODULE_EXPORT
 void on_menu_preferences_activate (GtkWidget *widget, void * user) {
     prefsgui_main (gui->prefsgui);
 }
 
+G_MODULE_EXPORT
 void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->statusbar));
@@ -563,6 +582,7 @@ void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_menu_toolbar_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->toolbar));
@@ -573,6 +593,7 @@ void on_menu_toolbar_toggled (GtkWidget *widget, void * user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_menu_rightpane_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->rightpane));
@@ -585,25 +606,30 @@ void on_menu_rightpane_toggled (GtkWidget *widget, void * user) {
     }
 }
 
-    void on_menu_fullscreen_toggled (GtkWidget *widget, void * user) {
+    G_MODULE_EXPORT
+void on_menu_fullscreen_toggled (GtkWidget *widget, void * user) {
         if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget)))
             gtk_window_fullscreen (gui->mainwindow);
         else
             gtk_window_unfullscreen (gui->mainwindow);
     }
 
+G_MODULE_EXPORT
 void on_menu_find_activate (GtkWidget *widget, void* user) {
     searchgui_main (gui->searchgui);
 }
 
+G_MODULE_EXPORT
 void on_menu_findnext_activate (GtkWidget *widget, void * user) {
     editor_jumpto_search_result (g_active_editor, 1);
 }
 
+G_MODULE_EXPORT
 void on_menu_findprev_activate (GtkWidget *widget, void * user) {
     editor_jumpto_search_result (g_active_editor, -1);
 }
 
+G_MODULE_EXPORT
 void on_menu_bibload_activate (GtkWidget *widget, void * user) {
     gchar* filename = NULL;
     gchar* basename = NULL;
@@ -625,15 +651,18 @@ void on_menu_bibload_activate (GtkWidget *widget, void * user) {
     g_free (filename);
 }
 
+G_MODULE_EXPORT
 void on_menu_bibupdate_activate (GtkWidget *widget, void * user) {
     biblio_compile_bibliography (gummi->biblio, g_active_editor, gummi->latex);
 }
 
+G_MODULE_EXPORT
 void on_menu_pdfcompile_activate (GtkWidget *widget, void* user) {
     gummi->latex->modified_since_compile = TRUE;
     motion_do_compile (gummi->motion);
 }
 
+G_MODULE_EXPORT
 void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     GtkWidget* dialog = 0;
     gint i = 0;
@@ -733,6 +762,7 @@ cleanup:
     g_free (output);
 }
 
+G_MODULE_EXPORT
 void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 #ifdef USE_GTKSPELL
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
@@ -745,6 +775,7 @@ void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 #endif
 }
 
+G_MODULE_EXPORT
 void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         slog(L_INFO, "snippets activated\n");
@@ -756,6 +787,7 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
 }
 
 
+G_MODULE_EXPORT
 void on_menu_project_activate (GtkWidget *widget, void *user) {
     
     /* Only the menu items that are available from the current active
@@ -775,11 +807,13 @@ void on_menu_project_activate (GtkWidget *widget, void *user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_menu_project_deselect (GtkWidget *widget, void *user) {
     gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_include), FALSE);
     gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_input), FALSE);
 }
 
+G_MODULE_EXPORT
 void on_menu_project_include_from_tab (GtkWidget *widget, void *user) {
     /* select a tab from a popup window with a liststore/treeview
      * file save dialog when selected top or slave file is not yet
@@ -788,16 +822,19 @@ void on_menu_project_include_from_tab (GtkWidget *widget, void *user) {
      /* write include command into the buffer at current position */
 }
 
+G_MODULE_EXPORT
 void on_menu_project_include_new_file (GtkWidget *widget, void *user) {
     /* Create a new file and tab, popup with file save dialog */
     
     /* write include command into the buffer at current position */
 }
 
+G_MODULE_EXPORT
 void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
     
 }
 
+G_MODULE_EXPORT
 void on_menu_update_activate (GtkWidget *widget, void * user) {
     #ifdef WIN32
         slog (L_G_INFO, "To be implemented for win32..\n");
@@ -808,6 +845,7 @@ void on_menu_update_activate (GtkWidget *widget, void * user) {
     #endif
 }
 
+G_MODULE_EXPORT
 void on_menu_about_activate (GtkWidget *widget, void * user) {
     GError* err = NULL;
     gchar* icon_file = g_build_filename (DATADIR, "icons", "gummi.png", NULL);
@@ -856,6 +894,7 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
     gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
+G_MODULE_EXPORT
 void on_tool_previewoff_toggled (GtkWidget *widget, void * user) {
     gboolean value =
         gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (widget));
@@ -866,40 +905,49 @@ void on_tool_previewoff_toggled (GtkWidget *widget, void * user) {
         previewgui_start_preview (gui->previewgui);
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_bold_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_bold");
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_italic_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_italic");
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_underline_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_unline");
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_left_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_left");
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_center_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_center");
 }
 
+G_MODULE_EXPORT
 void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_right");
 }
 
 
 
+G_MODULE_EXPORT
 void on_button_template_add_clicked (GtkWidget* widget, void* user) {
     template_add_new_entry (gummi->templ);
 }
 
+G_MODULE_EXPORT
 void on_button_template_remove_clicked (GtkWidget* widget, void* user) {
     template_remove_entry (gummi->templ);
 }
 
+G_MODULE_EXPORT
 void on_button_template_open_clicked (GtkWidget* widget, void* user) {
     gchar* status = NULL;
     gchar* templ_name = template_get_selected_path (gummi->templ);
@@ -916,6 +964,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
     g_free(templ_name);
 }
 
+G_MODULE_EXPORT
 void on_button_template_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_set_sensitive (GTK_WIDGET (gummi->templ->template_add), TRUE);
     gtk_widget_set_sensitive (GTK_WIDGET (gummi->templ->template_remove), TRUE);
@@ -923,6 +972,7 @@ void on_button_template_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
 }
 
+G_MODULE_EXPORT
 void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
         void* user) {
     GtkTreeIter iter;
@@ -945,6 +995,7 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     g_free (filepath);
 }
 
+G_MODULE_EXPORT
 void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
     gint id = gtk_tree_view_column_get_sort_column_id
         (GTK_TREE_VIEW_COLUMN (widget));
@@ -952,6 +1003,7 @@ void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
         (GTK_TREE_VIEW_COLUMN (widget), id);
 }
 
+G_MODULE_EXPORT
 void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
     g_timeout_add (10, on_bibprogressbar_update, NULL);
@@ -970,6 +1022,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     check_preview_timer ();
 }
 
+G_MODULE_EXPORT
 void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
     gchar* text = 0;
     gchar* str = 0;
@@ -1013,6 +1066,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void on_bibreference_clicked (GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user) {
     GtkTreeIter iter;
@@ -1049,7 +1103,7 @@ static gboolean visible_func (GtkTreeModel *model, GtkTreeIter  *iter, gpointer 
     return row_visible;
 }
 
-
+G_MODULE_EXPORT
 void on_biblio_filter_changed (GtkWidget* widget, void* user) {
     GtkTreeModel *filter;
 
