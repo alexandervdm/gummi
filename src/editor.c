@@ -67,8 +67,18 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->pdffile = NULL;
     ec->workfile = NULL;
     ec->bibfile = NULL;
-    ec->tmpdir = g_strdup (g_get_tmp_dir ());
-
+    
+    #ifdef WIN32
+        /* brb, gonna go punch a wall */
+        gchar *tmp_tmp = "C:\\gummitmp";
+        g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
+        ec->tmpdir = g_strdup (tmp_tmp);
+        /* TODO: find out why Windows's env variables are still
+                 using goddamn 8.3 DOS format style and fix it. */
+    #else
+        ec->tmpdir = g_strdup (g_get_tmp_dir ());
+    #endif
+    
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new ();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,
             "latex");
