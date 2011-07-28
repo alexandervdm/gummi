@@ -30,7 +30,6 @@
 
 #include "iofunctions.h"
 
-#include <iconv.h>
 #include <locale.h>
 #include <stdlib.h>
 #include <string.h>
@@ -188,9 +187,10 @@ char* iofunctions_decode_text (gchar* text) {
         gsize in_size = strlen (text), out_size = in_size * 2;
         gchar* out = (gchar*)g_malloc (out_size);
         gchar* process = out;
-        iconv_t cd = iconv_open ("UTF-8//IGNORE", "ISO−8859-1");
+        /* TODO: replace these calls to the non-raw glib functions */
+        GIConv cd = g_iconv_open ("UTF-8//IGNORE", "ISO−8859-1");
 
-        if (-1 == iconv (cd, &text, &in_size, &process, &out_size)) {
+        if (-1 == g_iconv (cd, &text, &in_size, &process, &out_size)) {
             slog (L_G_ERROR, _("Can not convert text to UTF-8!\n"));
             g_free (out);
             out = NULL;
