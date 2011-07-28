@@ -54,8 +54,7 @@ GuLatex* latex_init (void) {
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter current, start, end;
     gchar *text;
-    GError* err = NULL;
-
+    
     /* save selection */
     editor_get_current_iter (ec, &current);
     gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (ec->buffer), &start,
@@ -66,12 +65,9 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (ec->buffer), &current);
     gtk_text_buffer_select_range (GTK_TEXT_BUFFER (ec->buffer), &end, &start);
     
-    if (!g_file_set_contents(ec->workfile, text, -1, &err)) {
-        slog (L_ERROR, "%s\n", err->message);
-        g_error_free(err);
-        return text;
-    }
-
+    /* write buffer content to the workfile */
+    utils_set_file_contents (ec->workfile, text, -1);
+    
     return text;
 }
 
