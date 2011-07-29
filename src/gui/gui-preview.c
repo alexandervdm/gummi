@@ -133,7 +133,14 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     L_F_DEBUG;
     previewgui_cleanup_fds (pc);
 
-    pc->uri = g_strconcat ("file://", pdffile, NULL);
+    /* set up uri using appropriate formatting for OS 
+       http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
+    #ifdef WIN32 
+        pc->uri = g_strconcat ("file:///", pdffile, NULL);
+    #else 
+        pc->uri = g_strconcat ("file://", pdffile, NULL);
+    #endif
+
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
     g_return_if_fail (pc->doc != NULL);
 
