@@ -692,7 +692,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         "Number of math displayed: ([0-9]*)"
     };
     
-    if (g_find_program_in_path ("texcount")) {
+    if (g_file_test (g_find_program_in_path ("texcount"), G_FILE_TEST_EXISTS)) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
         gchar* tmpfile = g_strdup_printf ("%s.state", g_active_editor->fdname);
@@ -752,6 +752,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     gtk_window_set_title (GTK_WINDOW (dialog), _("Document Statistics"));
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
+    return;
 
 cleanup:
     for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i) {
