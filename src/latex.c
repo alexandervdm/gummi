@@ -47,10 +47,11 @@
 
 #ifdef WIN32
     const gchar *cmdsep = "&&";
+    const gchar *cmdpms = "";
 #else
+    const gchar *cmdpms = "env openout_any=a";
     const gchar *cmdsep = ";";
 #endif
-
 
 
 GuLatex* latex_init (void) {
@@ -90,8 +91,8 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
         config_set_value ("typesetter", "pdflatex");
     }
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar* command = g_strdup_printf ("cd \"%s\"%s"
-                                     "env openout_any=a %s "
+    gchar* command = g_strdup_printf ("cd \"%s\"%s "
+                                     "%s %s "
                                      "-interaction=nonstopmode "
                                      "-file-line-error "
                                      "-halt-on-error"
@@ -99,6 +100,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
                                      "-output-directory=\"%s\" \"%s\"",
                                      dirname,
                                      cmdsep,
+                                     cmdpms,
                                      config_get_value ("typesetter"),
                                      config_get_value ("extra_flags"),
                                      ec->tmpdir,
@@ -151,12 +153,13 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
     gchar* dirname = g_path_get_dirname (ec->workfile);
     gchar* command = g_strdup_printf ("cd \"%s\"%s"
-                                     "env openout_any=a %s "
+                                     "%s %s "
                                      "--draftmode "
                                      "-interaction=nonstopmode "
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
                                      cmdsep,
+                                     cmdpms,
                                      config_get_value ("typesetter"),
                                      ec->tmpdir,
                                      ec->workfile);
