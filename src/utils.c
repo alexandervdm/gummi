@@ -32,6 +32,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <glib/gprintf.h>
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -48,6 +49,23 @@
 
 #include "environment.h"
 #include "utils.h"
+
+#ifdef WIN32
+    static gchar *slogmsg_info = "[Info] ";
+    static gchar *slogmsg_thread = "[Thread]";
+    static gchar *slogmsg_debug = "[Debug] ";
+    static gchar *slogmsg_fatal = "[Fatal] ";
+    static gchar *slogmsg_error = "[Error] ";
+    static gchar *slogmsg_warning = "[Warning] ";
+#else
+    static gchar *slogmsg_info = "\e[1;34m[Info]\e[0m ";
+    static gchar *slogmsg_thread = "\e[1;31m[Thread]\e[0m";
+    static gchar *slogmsg_debug = "\e[1;32m[Debug]\e[0m ";
+    static gchar *slogmsg_fatal = "\e[1;37;41m[Fatal]\e[0m ";
+    static gchar *slogmsg_error = "\e[1;31m[Error]\e[0m ";
+    static gchar *slogmsg_warning = "\e[1;33m[Warning]\e[0m ";
+#endif
+
 
 static gint slog_debug = 0;
 static GtkWindow* parent = 0;
@@ -70,18 +88,18 @@ void slog (gint level, const gchar *fmt, ...) {
     if (L_IS_TYPE (level, L_DEBUG) && !slog_debug) return;
 
     if (g_thread_self () != main_thread)
-        fprintf (stderr, "\e[1;31m[Thread]\e[0m");
+        g_fprintf (stderr, "%s", slogmsg_thread);
 
     if (L_IS_TYPE (level, L_DEBUG))
-        fprintf (stderr, "\e[1;32m[Debug]\e[0m ");
+        g_fprintf (stderr, "%s", slogmsg_debug);
     else if (L_IS_TYPE (level, L_FATAL) || L_IS_TYPE (level, L_G_FATAL))
-        fprintf (stderr, "\e[1;37;41m[Fatal]\e[0m ");
+        g_fprintf (stderr, "%s", slogmsg_fatal);
     else if (L_IS_TYPE (level, L_ERROR) || L_IS_TYPE (level, L_G_ERROR))
-        fprintf (stderr, "\e[1;31m[Error]\e[0m ");
+        g_fprintf (stderr, "%s", slogmsg_error);
     else if (L_IS_TYPE (level, L_WARNING))
-        fprintf (stderr, "\e[1;33m[Warning]\e[0m ");
+        g_fprintf (stderr, "%s", slogmsg_warning);
     else
-        fprintf (stderr, "\e[1;34m[Info]\e[0m ");
+        g_fprintf (stderr, "%s", slogmsg_info);
 
     va_start (vap, fmt);
     vsnprintf (message, BUFSIZ, fmt, vap);
