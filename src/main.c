@@ -117,8 +117,10 @@ int main (int argc, char *argv[]) {
     slog (L_DEBUG, "GummiGui created!\n");
 
     /* Start compile thread */
+    const gchar *typesettercmd = g_find_program_in_path 
+                                    (config_get_value("typesetter"));
     
-    if (g_file_test (config_get_value ("typesetter"), G_FILE_TEST_EXISTS)) {
+    if (g_file_test (typesettercmd, G_FILE_TEST_EXISTS)) {
         motion_start_compile_thread (motion);
         slog (L_DEBUG, "Compile thread started!\n");
         /* TODO: preview error screen - set message */
