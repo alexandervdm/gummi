@@ -47,6 +47,19 @@
 #include "porting.h"
 #include "utils.h"
 
+
+/* set up uri using appropriate formatting for OS 
+   http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
+#ifdef WIN32
+    const gchar *urifrmt = "file:///";
+    gint usize = 8;
+#else
+    const gchar *urifrmt = "file://";
+    gint usize = 7;
+#endif
+
+
+
 static gfloat list_sizes[] = {-1, -1, 0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0,
                               3.0, 4.0};
 
@@ -133,13 +146,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     L_F_DEBUG;
     previewgui_cleanup_fds (pc);
 
-    /* set up uri using appropriate formatting for OS 
-       http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
-    #ifdef WIN32 
-        pc->uri = g_strconcat ("file:///", pdffile, NULL);
-    #else 
-        pc->uri = g_strconcat ("file://", pdffile, NULL);
-    #endif
+    pc->uri = g_strconcat (urifrmt, pdffile, NULL);
 
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
     g_return_if_fail (pc->doc != NULL);
@@ -161,7 +168,7 @@ void previewgui_refresh (GuPreviewGui* pc) {
     if (!g_mutex_trylock (gummi->motion->compile_mutex)) return;
 
     /* This is line is very important, if no pdf exist, preview will fail */
-    if (!pc->uri || !utils_path_exists (pc->uri + 7)) goto unlock;
+    if (!pc->uri || !utils_path_exists (pc->uri + usize)) goto unlock;
 
     previewgui_cleanup_fds (pc);
 
@@ -256,7 +263,7 @@ void previewgui_drawarea_resize (GuPreviewGui* pc) {
     gint width = 0, height = 0;
     cairo_t* cr = NULL;
 
-    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return;
+    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return;
 
     pc->page_scale = list_sizes[pc->page_zoommode];
     height = pc->page_height * pc->page_scale;
@@ -371,7 +378,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     gint width = 0, height = 0, area_width = 0, area_height = 0, x = 0, y = 0;
     cairo_t *cr = NULL;
 
-    if (!pc->uri || !utils_path_exists (pc->uri + 7)) return FALSE;
+    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
 
     if (prev_width != pc->scrollw->allocation.width)
         previewgui_drawarea_resize (gui->previewgui);
