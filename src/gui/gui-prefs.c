@@ -127,12 +127,10 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     gtk_combo_box_set_active (p->combo_languages, 0);
     g_free ((gchar*)pret.second);
 #else
-    /* remove gtkspell related GUIs if not used */
-    GtkHBox* hbox11 = GTK_HBOX (gtk_builder_get_object (builder, "hbox11"));
-    GtkHBox* hbox10 = GTK_HBOX (gtk_builder_get_object (builder, "hbox10"));
-    GtkLabel* label9 = GTK_LABEL (gtk_builder_get_object (builder, "label9"));
-    gtk_container_remove (GTK_CONTAINER (hbox11), GTK_WIDGET (label9));
-    gtk_container_remove(GTK_CONTAINER (hbox10),GTK_WIDGET(p->combo_languages));
+    /* desensitise gtkspell related GUI elements if not used */
+    GtkWidget* box = GTK_WIDGET (
+		gtk_builder_get_object (builder, "box_spellcheck"));
+    gtk_widget_set_sensitive (box, FALSE);
 #endif
     GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
