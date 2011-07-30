@@ -41,14 +41,14 @@ Error Output tab</property>
   <object class="GtkImage" id="im_bibcompile">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="icon_name">gnome-run</property>
+    <property name="stock">gtk-execute</property>
   </object>
   <object class="GtkImage" id="im_bibdetect">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-find</property>
   </object>
-  <object class="GtkImage" id="image1">
+  <object class="GtkImage" id="im_updatechk">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">system-software-update</property>
@@ -1140,7 +1140,7 @@ and update preview.</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
-                        <property name="image">image1</property>
+                        <property name="image">im_updatechk</property>
                         <property name="use_stock">False</property>
                         <signal name="activate" handler="on_menu_update_activate" swapped="no"/>
                       </object>
@@ -2316,9 +2316,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
