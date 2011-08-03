@@ -32,8 +32,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <glib.h>
+#include <glib/gstdio.h>
 #include <glib/gprintf.h>
-
+#include <gtk/gtk.h>
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -43,9 +45,6 @@
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
-
-#include <glib.h>
-#include <gtk/gtk.h>
 
 #include "environment.h"
 #include "utils.h"
