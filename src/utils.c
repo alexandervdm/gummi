@@ -239,8 +239,12 @@ Tuple2 utils_popen_r (const gchar* cmd) {
         else
             ret = g_strdup (buf);
         g_free (rot);
-    }
-    status = WEXITSTATUS (pclose (fp));
+    } /* win32 uses a different range of return codes */
+    #ifdef WIN32
+        status = (pclose (fp));
+    #else
+        status = WEXITSTATUS (pclose (fp));
+    #endif
     return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
 }
 
