@@ -81,11 +81,11 @@ gboolean updatecheck (GtkWindow* parent) {
         return FALSE;
     }
 
-    memcpy ((gchar*)&servaddr.sin_addr.s_addr, (gchar*)hp->h_addr, hp->h_length);
+    memcpy((gchar*)&servaddr.sin_addr.s_addr, (gchar*)hp->h_addr, hp->h_length);
     servaddr.sin_port = htons (80);
     servaddr.sin_family = AF_INET;
 
-    if (0 != connect (sock_fd, (struct sockaddr*)&servaddr, sizeof (servaddr))) {
+    if (0 != connect(sock_fd, (struct sockaddr*)&servaddr, sizeof (servaddr))) {
         slog (L_G_ERROR, "connect () error");
         return FALSE;
     }

@@ -94,9 +94,9 @@ GuEditor* editor_new (GuMotion* mc) {
     gtk_source_view_set_tab_width (ec->view,
             atoi (config_get_value ("tabwidth")));
     gtk_source_view_set_insert_spaces_instead_of_tabs (ec->view,
-            (gboolean)config_get_value ("spaces_instof_tabs"));
+            TO_BOOL (config_get_value ("spaces_instof_tabs")));
     gtk_source_view_set_auto_indent (ec->view,
-            (gboolean)config_get_value ("autoindentation"));
+            TO_BOOL (config_get_value ("autoindentation")));
 
 #ifdef USE_GTKSPELL
     if (config_get_value ("spelling"))
@@ -246,9 +246,9 @@ void editor_sourceview_config (GuEditor* ec) {
     pango_font_description_free (font_desc);
 
     gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (ec->view),
-            (gboolean)config_get_value ("line_numbers"));
+            TO_BOOL (config_get_value ("line_numbers")));
     gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (ec->view),
-        (gboolean)config_get_value ("highlighting"));
+        TO_BOOL (config_get_value ("highlighting")));
 
     /* The condition 'textwrapping=False && wordwrapping=True' can't happen */
     if (config_get_value ("textwrapping"))

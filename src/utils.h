@@ -40,6 +40,8 @@
 	#define DIR_PERMS (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
 #endif
 
+#define TO_BOOL(X) ((X)? TRUE: FALSE)
+
 #define L_IS_TYPE(level, type) ((level & type) == type)
 #define L_IS_GUI(level) (level & 0xf0)
 #define L_INFO      0x00   /* for informative messages */

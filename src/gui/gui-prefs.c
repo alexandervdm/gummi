@@ -174,29 +174,29 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     pango_font_description_free (font_desc);
 
     /* set all checkboxs */
-    value = (gboolean)config_get_value ("textwrapping");
+    value = TO_BOOL (config_get_value ("textwrapping"));
     if (value) {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->textwrap_button),
                 value);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->wordwrap_button),
-                (gboolean)config_get_value ("wordwrapping"));
+                TO_BOOL (config_get_value ("wordwrapping")));
     } else
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->wordwrap_button), FALSE);
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->line_numbers),
-            (gboolean)config_get_value ("line_numbers"));
+            TO_BOOL (config_get_value ("line_numbers")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->highlighting),
-            (gboolean)config_get_value ("highlighting"));
+            TO_BOOL (config_get_value ("highlighting")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autosaving),
-            (gboolean)config_get_value ("autosaving"));
+            TO_BOOL (config_get_value ("autosaving")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
-            (gboolean)config_get_value ("compile_status"));
+            TO_BOOL (config_get_value ("compile_status")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->spaces_instof_tabs),
-            (gboolean)config_get_value ("spaces_instof_tabs"));
+            TO_BOOL (config_get_value ("spaces_instof_tabs")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoindentation),
-            (gboolean)config_get_value ("autoindentation"));
+            TO_BOOL (config_get_value ("autoindentation")));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
-            (gboolean)config_get_value ("autoexport"));
+            TO_BOOL (config_get_value ("autoexport")));
 
     if (!config_get_value ("autosaving"))
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->autosave_timer), FALSE);

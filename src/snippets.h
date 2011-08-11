@@ -43,7 +43,7 @@
 typedef struct _GuSnippetExpandInfo GuSnippetExpandInfo;
 
 struct _GuSnippetExpandInfo {
-    gint group_number;
+    glong group_number;
     GtkTextMark* right_mark;
     GtkTextMark* left_mark;
     gint start;
