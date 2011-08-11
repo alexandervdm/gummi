@@ -58,7 +58,7 @@ fi
 
 cd $package-$version
 
-dh_make -s -b
+dh_make -s
 
 cp $owd/dev/rules $owd/dev/control debian
 cd debian
