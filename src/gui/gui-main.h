@@ -40,6 +40,7 @@
 #include "gui-search.h"
 #include "gui-snippets.h"
 #include "gui-tabmanager.h"
+#include "gui-infoscreen.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
@@ -64,6 +65,7 @@ struct _GummiGui {
     GuSearchGui* searchgui;
     GuSnippetsGui* snippetsgui;
     GuTabmanagerGui* tabmanagergui;
+    GuInfoscreenGui* infoscreengui;
 
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;

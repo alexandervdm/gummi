@@ -119,11 +119,15 @@ int main (int argc, char *argv[]) {
     /* Start compile thread */
     const gchar *typesettercmd = g_find_program_in_path 
                                     (config_get_value("typesetter"));
+
     
     if (g_file_test (typesettercmd, G_FILE_TEST_EXISTS)) {
         motion_start_compile_thread (motion);
         slog (L_DEBUG, "Compile thread started!\n");
-        /* TODO: preview error screen - set message */
+    }
+    else {
+        infoscreengui_enable (gui->infoscreengui, "program_error");
+        slog (L_ERROR, "Could not locate the typesetter program\n");
     }
 
     /* Install acceleration group to mainwindow */

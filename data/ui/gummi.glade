@@ -57,10 +57,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="yalign">0</property>
-                <property name="label" translatable="yes">The active document contains errors. The live preview
-function will resume automatically once these errors
-are resolved. Additional information can be found on 
-the Error Output tab. </property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <property name="wrap_mode">char</property>
@@ -1649,11 +1645,11 @@ active document</property>
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="window_placement_set">True</property>
                             <child>
-                              <object class="GtkViewport" id="previewgui_view">
+                              <object class="GtkViewport" id="preview_vport">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkDrawingArea" id="previewgui_draw">
+                                  <object class="GtkDrawingArea" id="preview_draw">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                   </object>
@@ -2379,9 +2375,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>

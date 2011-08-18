@@ -85,12 +85,15 @@ gpointer motion_compile_thread (gpointer data) {
     GuEditor* editor = NULL;
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
+    GuInfoscreenGui* is = NULL;
     GtkWidget* focus = NULL;
     gboolean precompile_ok;
     gchar *editortext;
 
     latex = gummi_get_latex ();
     pc = gui->previewgui;
+    is = gui->infoscreengui;
+    // we should probably move the errormode boolean to the top strct
 
     while (TRUE) {
         if (!g_mutex_trylock (mc->compile_mutex)) continue;
@@ -116,7 +119,7 @@ gpointer motion_compile_thread (gpointer data) {
         if (!precompile_ok) {
             g_mutex_unlock (mc->compile_mutex);
             gdk_threads_enter();
-            previewgui_start_error_mode (pc);
+            infoscreengui_enable (is, "document_error");
             gdk_threads_leave();
             continue;
         }
@@ -130,11 +133,11 @@ gpointer motion_compile_thread (gpointer data) {
             editor_apply_errortags (editor, latex->errorlines);
             errorbuffer_set_text (latex->errormessage);
 
-            if (!pc->errormode && latex->errorlines[0]) {
+            if (!is->errormode && latex->errorlines[0]) {
                 previewgui_start_error_mode (pc);
             } else if (!latex->errorlines[0] && precompile_ok) {
                 
-                if (pc->errormode) previewgui_stop_error_mode (pc);
+                if (is->errormode) previewgui_stop_error_mode (pc);
                 if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
             }
 

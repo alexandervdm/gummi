@@ -72,11 +72,11 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     GuPreviewGui* p = g_new0 (GuPreviewGui, 1);
     GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->previewgui_viewport =
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "previewgui_view"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     p->statuslight =
         GTK_WIDGET (gtk_builder_get_object (builder, "tool_statuslight"));
     p->drawarea =
-        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_draw"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
     p->scrollw =
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
     p->combo_sizes =
@@ -231,32 +231,16 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
 }
 
 void previewgui_start_error_mode (GuPreviewGui* pc) {
-    
     /* update last scroll position to restore it after error mode */
     pc->prev_y = gtk_adjustment_get_value(pc->vadj);
-    
-    if (pc->errormode) return;
-    pc->errormode = TRUE;
-    gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->drawarea));
-    gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->errorpanel));
-    gtk_widget_show_all (GTK_WIDGET (pc->previewgui_viewport));
+    infoscreengui_enable (gui->infoscreengui, "compile_error");
 }
 
 void previewgui_stop_error_mode (GuPreviewGui* pc) {
-    
     /* restore scroll window position to value before error mode */
     /* TODO: might want to merge this with synctex funcs in future */
     gtk_adjustment_set_value(pc->vadj, pc->prev_y);
-    
-    if (!pc->errormode) return;
-    pc->errormode = FALSE;
-    g_object_ref (pc->errorpanel);
-    gtk_container_remove (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->errorpanel));
-    gtk_container_add (GTK_CONTAINER (pc->previewgui_viewport),
-            GTK_WIDGET (pc->drawarea));
+    infoscreengui_disable (gui->infoscreengui);
 }
 
 void previewgui_drawarea_resize (GuPreviewGui* pc) {

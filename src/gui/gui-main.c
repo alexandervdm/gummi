@@ -127,13 +127,15 @@ GummiGui* gui_init (GtkBuilder* builder) {
     for (i = 0; i < g->insens_widget_size; ++i)
         g->insens_widgets[i] =
             GTK_WIDGET(gtk_builder_get_object (builder, insens_widgets_str[i]));
-
+            
+            
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
     g->searchgui = searchgui_init (builder);
     g->prefsgui = prefsgui_init (g->mainwindow);
     g->snippetsgui = snippetsgui_init (g->mainwindow);
     g->tabmanagergui = tabmanagerguigui_init (builder);
+    g->infoscreengui = infoscreengui_init (builder);
 
     gchar* icon_file = g_build_filename (DATADIR, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);

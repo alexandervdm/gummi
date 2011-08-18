@@ -63,7 +63,6 @@ struct _GuPreviewGui {
     gdouble page_height;
     gdouble page_ratio;
     gboolean preview_on_idle;
-    gboolean errormode;
     
     cairo_surface_t *surface;
     GtkAdjustment* hadj;
