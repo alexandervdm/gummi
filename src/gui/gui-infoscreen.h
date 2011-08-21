@@ -1,10 +1,10 @@
 /**
  * @file   gui-infoscreen.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -39,11 +39,11 @@ typedef struct _GuInfoscreenGui GuInfoscreenGui;
 
 struct _GuInfoscreenGui {
     gboolean errormode;
-    
+
     GtkViewport* viewport;
     GtkWidget* errorpanel;
     GtkWidget* drawarea;
-    
+
     GtkLabel *header;
     GtkImage *image;
     GtkLabel *details;
@@ -52,7 +52,7 @@ struct _GuInfoscreenGui {
 GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder);
 void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg);
 void infoscreengui_disable (GuInfoscreenGui *is);
-void infoscreengui_set_message (GuInfoscreenGui *is, 
+void infoscreengui_set_message (GuInfoscreenGui *is,
                     const gchar *header, const gchar *details);
 
 

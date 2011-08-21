@@ -1,10 +1,10 @@
 /**
  * @file    gui-main.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -53,7 +53,7 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 /* Many of the functions in this file are based on the excellent GTK+
- * tutorials written by Micah Carrick that can be found on: 
+ * tutorials written by Micah Carrick that can be found on:
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
 /* Widgets names to be set insensitive */
@@ -109,7 +109,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent4"));
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
-        
+
     g->menu_projopen =
         GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_projopen"));
     g->menu_projsave =
@@ -127,8 +127,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
     for (i = 0; i < g->insens_widget_size; ++i)
         g->insens_widgets[i] =
             GTK_WIDGET(gtk_builder_get_object (builder, insens_widgets_str[i]));
-            
-            
+
+
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
     g->searchgui = searchgui_init (builder);
@@ -151,14 +151,14 @@ GummiGui* gui_init (GtkBuilder* builder) {
     else
       gtk_window_set_position (g->mainwindow, GTK_WIN_POS_CENTER);
 
-    PangoFontDescription* font_desc = 
+    PangoFontDescription* font_desc =
         pango_font_description_from_string ("Monospace 8");
     gtk_widget_modify_font (GTK_WIDGET (g->errorview), font_desc);
     pango_font_description_free (font_desc);
     gtk_window_get_size (g->mainwindow, &width, &height);
 
     hpaned= GTK_WIDGET (gtk_builder_get_object (builder, "hpaned"));
-    gtk_paned_set_position (GTK_PANED (hpaned), (width/2)); 
+    gtk_paned_set_position (GTK_PANED (hpaned), (width/2));
 
 #ifndef USE_GTKSPELL
     gtk_widget_set_sensitive (GTK_WIDGET (g->menu_spelling), FALSE);
@@ -203,13 +203,13 @@ GummiGui* gui_init (GtkBuilder* builder) {
 }
 
 void gui_main (GtkBuilder* builder) {
-    gtk_builder_connect_signals (builder, NULL);       
+    gtk_builder_connect_signals (builder, NULL);
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
     /*
     if (!strlen (config_get_value ("svnpopup"))) {
         GtkWidget *tmp =
-            GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup")); 
+            GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
         gtk_widget_show (tmp);
         config_set_value ("svnpopup", "popped");
     }*/
@@ -229,7 +229,7 @@ gboolean gui_quit (void) {
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
         tabmanagergui_set_active_tab(gui->tabmanagergui, i);
-        
+
         gint ret = check_for_save ();
         if (GTK_RESPONSE_YES == ret)
             gui_save_file (FALSE);
@@ -251,7 +251,7 @@ gboolean gui_quit (void) {
                     (gui->tabmanagergui->tabs, i))->editor);
 
     printf ("   ___ \n"
-            "  {o,o}    Thanks for using Gummi!\n" 
+            "  {o,o}    Thanks for using Gummi!\n"
             "  |)__)    I welcome your feedback at:\n"
             "  -\"-\"-    http://gummi.midnightcoding.org\n\n");
     return FALSE;
@@ -263,7 +263,7 @@ void gui_update_environment (const gchar* filename) {
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
     tabmanagergui_update_active_tab_label (gui->tabmanagergui, filename);
-    
+
     gummi_new_environment (g_active_editor, filename);
     gui_update_windowtitle ();
     previewgui_reset (gui->previewgui);
@@ -306,7 +306,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
         default:
             slog(L_FATAL, "can't happen bug\n");
     }
-    
+
     gui_update_windowtitle ();
     add_to_recent_list (filename);
 
@@ -320,7 +320,7 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     tabmanagergui_set_active_tab(gui->tabmanagergui, page);
     gui_update_windowtitle();
     previewgui_reset (gui->previewgui);
-    
+
     slog (L_DEBUG, "Switched to environment at page %d\n", page);
 }
 
@@ -328,7 +328,7 @@ void gui_update_windowtitle (void) {
     gchar* dirname = NULL;
     gchar* title = NULL;
     const gchar* labeltext = NULL;
-    
+
     tabmanagergui_update_active_tab_label (gui->tabmanagergui, NULL);
     labeltext =  gtk_label_get_text (g_active_tab->tablabel->label);
 
@@ -361,7 +361,7 @@ void gui_open_file (const gchar* filename) {
      * line before the previewgui_stop_preview, else if the user is using
      * the real_time compile scheme, the compile scheme functions can
      * access fileinfo */
-     
+
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
         slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
@@ -377,7 +377,7 @@ void gui_open_file (const gchar* filename) {
     g_free (dirname);
     g_free (basename);
     g_free (prev_workfile);
-    
+
 
     if (GTK_RESPONSE_YES != ret)
         gui_create_environment (A_LOAD, filename, NULL);
@@ -460,7 +460,7 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
     gint index = name[0] - '0' -1;
-    
+
     if (utils_path_exists (gui->recent_list[index])) {
         gui_open_file (gui->recent_list[index]);
     } else {
@@ -485,7 +485,7 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
 G_MODULE_EXPORT
 void on_menu_open_activate (GtkWidget *widget, void* user) {
     gchar *filename = NULL;
-    
+
     if ( (filename = get_open_filename (TYPE_LATEX)))
         gui_open_file (filename);
     g_free (filename);
@@ -515,7 +515,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
         return;
 
     tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
-    
+
     if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab)) {
         previewgui_start_error_mode (gui->previewgui);
         gui_set_sensitive (FALSE);
@@ -693,7 +693,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         "Number of math inlines: ([0-9]*)",
         "Number of math displayed: ([0-9]*)"
     };
-    
+
     if (g_file_test (g_find_program_in_path ("texcount"), G_FILE_TEST_EXISTS)) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
@@ -729,7 +729,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
                 g_match_info_free (match_info);
             }
         }
-    
+
         output = g_strconcat (terms[0], ": ", res[0], "\n",
                              terms[1], ": ", res[1], "\n",
                              terms[2], ": ", res[2], "\n",
@@ -745,7 +745,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         cmd = NULL;
         output = g_strdup(_("This function requires\nthe texcount program.\n"));
     }
-    
+
     dialog = gtk_message_dialog_new (gui->mainwindow,
             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_INFO,
@@ -792,14 +792,14 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
 
 G_MODULE_EXPORT
 void on_menu_project_activate (GtkWidget *widget, void *user) {
-    
+
     /* Only the menu items that are available from the current active
      * tab and environment should become sensitive */
-     
+
     const gchar *save = _("Save the active tab to enable this option");
     const gchar *invalid = _("The active tab is not a valid LaTeX document");
     const gchar *detach = _("You cannot detach the top-level document");
-     
+
     if (g_active_editor->filename != NULL) {
         gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_include), TRUE);
         gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_input), TRUE);
@@ -821,20 +821,20 @@ void on_menu_project_include_from_tab (GtkWidget *widget, void *user) {
     /* select a tab from a popup window with a liststore/treeview
      * file save dialog when selected top or slave file is not yet
      * saved" */
-     
+
      /* write include command into the buffer at current position */
 }
 
 G_MODULE_EXPORT
 void on_menu_project_include_new_file (GtkWidget *widget, void *user) {
     /* Create a new file and tab, popup with file save dialog */
-    
+
     /* write include command into the buffer at current position */
 }
 
 G_MODULE_EXPORT
 void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
-    
+
 }
 
 G_MODULE_EXPORT
@@ -862,7 +862,7 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
         "Former contributors:",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };
-                
+
     const gchar* translators =
         "Arabic: Hamad Mohammad\n"
         "Brazilian-Portugese: Fernando Cruz & Alexandre Guimarães\n"
@@ -954,13 +954,13 @@ G_MODULE_EXPORT
 void on_button_template_open_clicked (GtkWidget* widget, void* user) {
     gchar* status = NULL;
     gchar* templ_name = template_get_selected_path (gummi->templ);
-    
+
     if (templ_name) {
         /* add Loading message to status bar */
         status = g_strdup_printf (_("Loading template ..."));
         statusbar_set_message (status);
         g_free (status);
-        
+
         gui_create_environment (A_LOAD_OPT, NULL, templ_name);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
@@ -984,10 +984,10 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     gchar* text = NULL;
     gchar* filepath = g_build_filename (g_get_user_config_dir (),
             "gummi", "templates", filenm, NULL);
-    
+
     model = gtk_tree_view_get_model (gummi->templ->templateview);
     selection = gtk_tree_view_get_selection (gummi->templ->templateview);
-    
+
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_list_store_set (gummi->templ->list_templates, &iter, 0, filenm, 1,
                 filepath, -1);
@@ -1044,10 +1044,10 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
             g_error_free (err);
             return;
         }
-        
-        gtk_widget_set_sensitive 
+
+        gtk_widget_set_sensitive
                     (GTK_WIDGET(gummi->biblio->list_filter), TRUE);
-        
+
         number = biblio_parse_entries (gummi->biblio, text);
         basename = g_path_get_basename (g_active_editor->bibfile);
         gtk_label_set_text (gummi->biblio->filenm_label, basename);
@@ -1060,7 +1060,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
         g_free (str);
     }
     else {
-        gtk_widget_set_sensitive 
+        gtk_widget_set_sensitive
                     (GTK_WIDGET(gummi->biblio->list_filter), FALSE);
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
                 _("no bibliography file detected"));
@@ -1098,11 +1098,11 @@ static gboolean visible_func (GtkTreeModel *model, GtkTreeIter  *iter, gpointer 
     if (utils_subinstr (data, title , TRUE)) row_visible = TRUE;
     if (utils_subinstr (data, author , TRUE)) row_visible = TRUE;
     if (utils_subinstr (data, year , TRUE)) row_visible = TRUE;
-    
+
     g_free(title);
     g_free(author);
     g_free(year);
-    
+
     return row_visible;
 }
 
@@ -1115,7 +1115,7 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user) {
             GTK_TREE_MODEL(gummi->biblio->list_biblios),NULL);
     gtk_tree_model_filter_set_visible_func(
             GTK_TREE_MODEL_FILTER(filter), visible_func, (gpointer)entry, NULL);
-    gtk_tree_view_set_model ( 
+    gtk_tree_view_set_model (
             GTK_TREE_VIEW( gummi->biblio->biblio_treeview ),filter);
     g_object_unref (G_OBJECT(filter));
 }
@@ -1145,7 +1145,7 @@ gchar* get_open_filename (GuFilterType type) {
     if (g_active_editor->filename != NULL) {
        active_cwd = g_path_get_dirname(g_active_editor->filename);
     }
-    
+
     const gchar* chooser_title[] = {
         _("Open LaTeX document"),
         "shouldn't happen",
@@ -1325,7 +1325,7 @@ void statusbar_set_message (const gchar *message) {
     gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
     g_timeout_add_seconds (4, statusbar_del_message, NULL);
 }
- 
+
 gboolean statusbar_del_message (void* user) {
     gtk_statusbar_pop (GTK_STATUSBAR (gui->statusbar), gui->statusid);
     return FALSE;
@@ -1339,9 +1339,9 @@ gboolean statusbar_del_message (void* user) {
 void check_preview_timer (void) {
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
-    
+
     gui_update_windowtitle ();
     /* no point in running the whole update title/label procedure */
-    
+
     motion_start_timer (gummi->motion);
 }

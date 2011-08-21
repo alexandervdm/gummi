@@ -1,10 +1,10 @@
 /**
  * @file    gui-infoscreen.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -63,28 +63,28 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuInfoscreenGui* is = g_new0 (GuInfoscreenGui, 1);
-    
-    is->viewport = 
+
+    is->viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     is->errorpanel =
         GTK_WIDGET(gtk_builder_get_object (builder, "errorpanel"));
-    is->drawarea = 
+    is->drawarea =
         GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
-        
-    is->header = 
+
+    is->header =
         GTK_LABEL (gtk_builder_get_object (builder, "error_header"));
-    is->image = 
+    is->image =
         GTK_IMAGE (gtk_builder_get_object (builder, "error_image"));
-    is->details = 
+    is->details =
         GTK_LABEL (gtk_builder_get_object (builder, "error_details"));
     return is;
 }
 
 void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
-    
+
     if (is->errormode) return;
     is->errormode = TRUE;
-    
+
     if (g_strcmp0 (msg, "compile_error") == 0) {
         infoscreengui_set_message (is, compile_error_h, compile_error_d);
     }
@@ -94,8 +94,8 @@ void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
     else {
         infoscreengui_set_message (is, document_error_h, document_error_d);
     }
-    
-    
+
+
     gtk_container_remove (GTK_CONTAINER (is->viewport),
             GTK_WIDGET (is->drawarea));
     gtk_container_add (GTK_CONTAINER (is->viewport),
@@ -104,10 +104,10 @@ void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
 }
 
 void infoscreengui_disable (GuInfoscreenGui *is) {
-    
+
     if (!is->errormode) return;
     is->errormode = FALSE;
-    
+
     g_object_ref (is->errorpanel);
     gtk_container_remove (GTK_CONTAINER (is->viewport),
             GTK_WIDGET (is->errorpanel));
@@ -115,13 +115,9 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
             GTK_WIDGET (is->drawarea));
 }
 
-void infoscreengui_set_message (GuInfoscreenGui *is, 
+void infoscreengui_set_message (GuInfoscreenGui *is,
                         const gchar *header, const gchar *details) {
 
     gtk_label_set_text (is->header, header);
     gtk_label_set_text (is->details, details);
 }
-
-
-
-
