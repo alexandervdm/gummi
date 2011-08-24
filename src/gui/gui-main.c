@@ -319,6 +319,9 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     /* very important line */
     tabmanagergui_set_active_tab(gui->tabmanagergui, page);
     gui_update_windowtitle();
+    
+    gui->infoscreengui->errormode = FALSE;
+    
     previewgui_reset (gui->previewgui);
 
     slog (L_DEBUG, "Switched to environment at page %d\n", page);

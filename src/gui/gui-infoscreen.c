@@ -39,10 +39,10 @@ const gchar *compile_error_d = "\
 The active document contains errors. The live preview\n"
 "function will resume automatically once these errors\n"
 "are resolved. Additional information can be found on\n"
-"the Error Output tab.";
+"the Error Output tab.\n";
 
 // TODO: needs better wording
-const gchar *document_error_h = "Document appears to be empty or invalid.\n";
+const gchar *document_error_h = "Document appears to be empty or invalid.";
 const gchar *document_error_d = "\
 The document that is currently active appears to be an\n"
 "an invalid LaTeX file. You can continue working on it\n"
@@ -81,10 +81,11 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
 }
 
 void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
+    GList* list = NULL;
 
     if (is->errormode) return;
     is->errormode = TRUE;
-
+    
     if (g_strcmp0 (msg, "compile_error") == 0) {
         infoscreengui_set_message (is, compile_error_h, compile_error_d);
     }
@@ -94,12 +95,17 @@ void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
     else {
         infoscreengui_set_message (is, document_error_h, document_error_d);
     }
-
-
-    gtk_container_remove (GTK_CONTAINER (is->viewport),
-            GTK_WIDGET (is->drawarea));
+    
+    list = gtk_container_get_children (GTK_CONTAINER (is->viewport));
+    
+    while (list) {
+        gtk_container_remove (GTK_CONTAINER (is->viewport),
+                GTK_WIDGET (list->data));
+        list = list->next;
+    }
+    
     gtk_container_add (GTK_CONTAINER (is->viewport),
-            GTK_WIDGET (is->errorpanel));
+                GTK_WIDGET (is->errorpanel));
     gtk_widget_show_all (GTK_WIDGET (is->viewport));
 }
 
