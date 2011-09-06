@@ -320,7 +320,7 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     tabmanagergui_set_active_tab(gui->tabmanagergui, page);
     gui_update_windowtitle();
     
-    gui->infoscreengui->errormode = FALSE;
+    //gui->infoscreengui->errormode = FALSE;
     
     previewgui_reset (gui->previewgui);
 
