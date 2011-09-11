@@ -154,6 +154,7 @@
   <object class="GtkImage" id="im_updatechk">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="pixel_size">16</property>
     <property name="icon_name">system-software-update</property>
   </object>
   <object class="GtkImage" id="image1">
@@ -166,31 +167,37 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-refresh</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image11">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image12">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image13">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image14">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image15">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image16">
     <property name="visible">True</property>
@@ -213,11 +220,13 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-execute</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
@@ -235,6 +244,7 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-info</property>
+    <property name="icon-size">1</property>
   </object>
   <object class="GtkImage" id="image7">
     <property name="visible">True</property>
@@ -245,11 +255,13 @@
   <object class="GtkImage" id="image8">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="pixel_size">16</property>
     <property name="icon_name">accessories-dictionary</property>
   </object>
   <object class="GtkImage" id="image9">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="pixel_size">16</property>
     <property name="icon_name">emblem-documents</property>
   </object>
   <object class="GtkViewport" id="image_pane">
