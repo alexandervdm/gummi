@@ -27,9 +27,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "snippets.h"
-#include "latex.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -44,6 +41,7 @@
 #include "gui/gui-main.h"
 #include "gui/gui-preview.h"
 #include "latex.h"
+#include "snippets.h"
 #include "utils.h"
 
 extern GummiGui* gui;
@@ -85,16 +83,13 @@ gpointer motion_compile_thread (gpointer data) {
     GuEditor* editor = NULL;
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
-    GuInfoscreenGui* is = NULL;
     GtkWidget* focus = NULL;
     gboolean precompile_ok;
     gchar *editortext;
 
     latex = gummi_get_latex ();
     pc = gui->previewgui;
-    is = gui->infoscreengui;
-    // we should probably move the errormode boolean to the top strct
-
+    
     while (TRUE) {
         if (!g_mutex_trylock (mc->compile_mutex)) continue;
         slog (L_DEBUG, "Compile thread sleeping...\n");

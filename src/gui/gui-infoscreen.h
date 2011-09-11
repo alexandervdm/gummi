@@ -38,8 +38,6 @@
 typedef struct _GuInfoscreenGui GuInfoscreenGui;
 
 struct _GuInfoscreenGui {
-    gboolean errormode;
-
     GtkViewport* viewport;
     GtkWidget* errorpanel;
     GtkWidget* drawarea;

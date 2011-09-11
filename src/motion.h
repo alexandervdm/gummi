@@ -43,7 +43,7 @@ struct _GuMotion {
     GThread* compile_thread;
     GCond* compile_cv;
     
-    gboolean *errormode;
+    gboolean errormode;
 };
 
 GuMotion* motion_init (void);
