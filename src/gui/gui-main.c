@@ -320,8 +320,6 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     tabmanagergui_set_active_tab(gui->tabmanagergui, page);
     gui_update_windowtitle();
     
-    //gui->infoscreengui->errormode = FALSE;
-    
     previewgui_reset (gui->previewgui);
 
     slog (L_DEBUG, "Switched to environment at page %d\n", page);
@@ -520,7 +518,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
 
     if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab)) {
-        previewgui_start_error_mode (gui->previewgui);
+        motion_start_errormode (gummi->motion, ""); // TODO: empty screen
         gui_set_sensitive (FALSE);
     } else
         gui_update_windowtitle ();
@@ -941,6 +939,12 @@ void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_right");
 }
 
+G_MODULE_EXPORT
+void on_button_info_tabattach_clicked (GtkWidget* widget, void* user) {
+    printf("hallo\n");
+    
+    
+}
 
 
 G_MODULE_EXPORT

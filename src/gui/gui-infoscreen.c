@@ -32,6 +32,11 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "gui/gui-tabmanager.h"
+#include "gui/gui-main.h"
+
+extern GummiGui* gui;
+
 /* Current info/warning messages - TODO: i18n? */
 
 const gchar *compile_error_h = "PDF preview could not initialise.";
@@ -59,6 +64,8 @@ The selected compilation program could not be located.\n"
 "is restarted.\n";
 
 
+
+
 GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
@@ -70,6 +77,13 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
         GTK_WIDGET(gtk_builder_get_object (builder, "errorpanel"));
     is->drawarea =
         GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
+        
+    is->tabstree = 
+        GTK_TREE_VIEW (gtk_builder_get_object (builder, "error_tabstree"));
+    is->tabslist =
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_tabs"));
+    is->tabsbox =
+        GTK_VBOX (gtk_builder_get_object (builder, "error_tabsbox"));
 
     is->header =
         GTK_LABEL (gtk_builder_get_object (builder, "error_header"));
@@ -80,23 +94,12 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     return is;
 }
 
-void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
+void infoscreengui_enable (GuInfoscreenGui *is, const gchar *msg) {
     GList* list = NULL;
-
-    if (is->errormode) return;
-    is->errormode = TRUE;
-    
-    if (g_strcmp0 (msg, "compile_error") == 0) {
-        infoscreengui_set_message (is, compile_error_h, compile_error_d);
-    }
-    else if (g_strcmp0 (msg, "program_error") == 0) {
-        infoscreengui_set_message (is, program_error_h, program_error_d);
-    }
-    else {
-        infoscreengui_set_message (is, document_error_h, document_error_d);
-    }
     
     list = gtk_container_get_children (GTK_CONTAINER (is->viewport));
+    
+    infoscreengui_set_message (is, msg);
     
     while (list) {
         gtk_container_remove (GTK_CONTAINER (is->viewport),
@@ -110,10 +113,7 @@ void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg) {
 }
 
 void infoscreengui_disable (GuInfoscreenGui *is) {
-
-    if (!is->errormode) return;
-    is->errormode = FALSE;
-
+    
     g_object_ref (is->errorpanel);
     gtk_container_remove (GTK_CONTAINER (is->viewport),
             GTK_WIDGET (is->errorpanel));
@@ -121,9 +121,39 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
             GTK_WIDGET (is->drawarea));
 }
 
-void infoscreengui_set_message (GuInfoscreenGui *is,
-                        const gchar *header, const gchar *details) {
+void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
+    GList *tablabels = NULL;
+    GtkTreeIter iter;
+    int i;
+    
+    gtk_list_store_clear (is->tabslist);
+    
+    gtk_widget_show (GTK_WIDGET (is->tabsbox));
+    
+    tablabels = tabmanagergui_return_tablabels (gui->tabmanagergui);
+    
+    for (i = 0; i < g_list_length (tablabels); i++) {
+        gtk_list_store_append (is->tabslist, &iter);
+        gchar *tmp = g_list_nth_data(tablabels, i);
+        gtk_list_store_set (is->tabslist, &iter, 0, tmp, -1);
+    }
+}
 
-    gtk_label_set_text (is->header, header);
-    gtk_label_set_text (is->details, details);
+void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
+    
+    gtk_widget_hide (GTK_WIDGET (is->tabsbox));
+    
+    if (g_strcmp0 (msg, "compile_error") == 0) {
+        gtk_label_set_text (is->header, compile_error_h);
+        gtk_label_set_text (is->details, compile_error_d);
+    }
+    else if (g_strcmp0 (msg, "program_error") == 0) {
+        gtk_label_set_text (is->header, program_error_h);
+        gtk_label_set_text (is->details, program_error_d);
+    }
+    else {
+        gtk_label_set_text (is->header, document_error_h);
+        gtk_label_set_text (is->details, document_error_d);
+        infoscreengui_setup_tablist (is);
+    }
 }

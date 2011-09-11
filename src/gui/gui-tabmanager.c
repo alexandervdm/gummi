@@ -118,6 +118,7 @@ gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
 }
 
 void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position) {
+    
     if (position == -1) {
         tm->active_tab = NULL;
         tm->active_editor = NULL;
@@ -184,6 +185,23 @@ void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
     gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
                                                   (tm->active_editor->buffer));
     tablabel_update_label_text (tm->active_tab->tablabel, fname, modi);
+}
+
+GList* tabmanagergui_return_tablabels(GuTabmanagerGui* tm) {
+    GList *labelnames = NULL;
+    GuTabContext *tab = NULL;
+    const gchar *text;
+    guint items, i;
+
+    items = g_list_length (tm->tabs);
+    
+    for (i = 0; i < items; i++) {
+        
+        tab = g_list_nth_data (tm->tabs, i);
+        text = gtk_label_get_text (tab->tablabel->label);
+        labelnames = g_list_append (labelnames, (gpointer)text);
+    }
+    return labelnames;
 }
 
 gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm) {

@@ -43,6 +43,9 @@ struct _GuInfoscreenGui {
     GtkViewport* viewport;
     GtkWidget* errorpanel;
     GtkWidget* drawarea;
+    GtkTreeView *tabstree;
+    GtkListStore *tabslist;
+    GtkVBox *tabsbox;
 
     GtkLabel *header;
     GtkImage *image;
@@ -50,10 +53,10 @@ struct _GuInfoscreenGui {
 };
 
 GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder);
-void infoscreengui_enable (GuInfoscreenGui *is, gchar *msg);
+void infoscreengui_enable (GuInfoscreenGui *is, const gchar *msg);
 void infoscreengui_disable (GuInfoscreenGui *is);
-void infoscreengui_set_message (GuInfoscreenGui *is,
-                    const gchar *header, const gchar *details);
+void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg);
+void infoscreengui_setup_tablist (GuInfoscreenGui *is);
 
 
 #endif /* __GUMMI_GUI_ERRORSCREEN_H__ */

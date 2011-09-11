@@ -230,17 +230,15 @@ void previewgui_goto_page (GuPreviewGui* pc, int page_number) {
     previewgui_refresh (pc);
 }
 
-void previewgui_start_error_mode (GuPreviewGui* pc) {
+void previewgui_save_position (GuPreviewGui* pc) {
     /* update last scroll position to restore it after error mode */
     pc->prev_y = gtk_adjustment_get_value(pc->vadj);
-    infoscreengui_enable (gui->infoscreengui, "compile_error");
 }
 
-void previewgui_stop_error_mode (GuPreviewGui* pc) {
+void previewgui_restore_position (GuPreviewGui* pc) {
     /* restore scroll window position to value before error mode */
     /* TODO: might want to merge this with synctex funcs in future */
     gtk_adjustment_set_value(pc->vadj, pc->prev_y);
-    infoscreengui_disable (gui->infoscreengui);
 }
 
 void previewgui_drawarea_resize (GuPreviewGui* pc) {
@@ -274,6 +272,7 @@ void previewgui_drawarea_resize (GuPreviewGui* pc) {
 
 void previewgui_reset (GuPreviewGui* pc) {
     L_F_DEBUG;
+    
     /* reset uri */
     g_free (pc->uri);
     pc->uri = NULL;

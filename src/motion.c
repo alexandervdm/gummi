@@ -110,8 +110,8 @@ gpointer motion_compile_thread (gpointer data) {
         focus = gtk_window_get_focus (gui->mainwindow);
         editortext = latex_update_workfile (latex, editor);
         
-        precompile_ok = latex_precompile_check(editortext);
-        g_free(editortext);
+        precompile_ok = latex_precompile_check (editortext);
+        g_free (editortext);
 
         gtk_widget_grab_focus (focus);
         gdk_threads_leave();
@@ -119,7 +119,7 @@ gpointer motion_compile_thread (gpointer data) {
         if (!precompile_ok) {
             g_mutex_unlock (mc->compile_mutex);
             gdk_threads_enter();
-            infoscreengui_enable (is, "document_error");
+            motion_start_errormode (mc, "document_error");
             gdk_threads_leave();
             continue;
         }
@@ -133,18 +133,39 @@ gpointer motion_compile_thread (gpointer data) {
             editor_apply_errortags (editor, latex->errorlines);
             errorbuffer_set_text (latex->errormessage);
 
-            if (!is->errormode && latex->errorlines[0]) {
-                previewgui_start_error_mode (pc);
+            if (latex->errorlines[0]) {
+                motion_start_errormode  (mc, "compile_error");
             } else if (!latex->errorlines[0] && precompile_ok) {
-                
-                if (is->errormode) previewgui_stop_error_mode (pc);
+                if (mc->errormode) motion_stop_errormode (mc);
                 if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
             }
-
             previewgui_refresh (gui->previewgui);
             gdk_threads_leave ();
         }
     }
+}
+
+void motion_start_errormode (GuMotion *mc, const gchar *msg) {
+    
+    if (mc->errormode) {
+        infoscreengui_set_message (gui->infoscreengui, msg);
+    return;
+    }
+
+    previewgui_save_position (gui->previewgui);
+    
+    infoscreengui_enable (gui->infoscreengui, msg);
+    mc->errormode = TRUE;
+}
+
+void motion_stop_errormode (GuMotion *mc) {
+    
+    if (!mc->errormode) return;
+
+    previewgui_restore_position (gui->previewgui);
+    
+    infoscreengui_disable (gui->infoscreengui);
+    mc->errormode = FALSE;
 }
 
 gboolean motion_idle_cb (gpointer user) {
