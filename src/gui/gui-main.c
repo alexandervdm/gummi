@@ -245,10 +245,11 @@ gboolean gui_quit (void) {
     config_set_value ("mainwindow_h", g_ascii_dtostr (buf, 16, (double)height));
 
     gtk_main_quit ();
-
+    /*
     for(i = 0; i < length; i++)
         editor_destroy (GU_TAB_CONTEXT (g_list_nth_data
                     (gui->tabmanagergui->tabs, i))->editor);
+    */
 
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n"
