@@ -2,7 +2,7 @@
  * @file    environment.h
  * @brief   
  *
- * Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
  * 
  * Permission is hereby granted, free of charge, to any person
@@ -44,7 +44,7 @@
                         "Alexander van der Mey\n"\
                         "Wei-Ning Huang"
 #define PACKAGE_LICENSE \
-"Copyright (C) 2010 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
+"Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
 "All Rights reserved.\n" \
 "\n" \
 "Permission is hereby granted, free of charge, to any person\n" \
