@@ -693,6 +693,9 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     GMatchInfo* match_info;
     GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
     gchar* res[TEXCOUNT_OUTPUT_LINES] = { 0 };
+    
+    
+    /* TODO: can we deprecate this? */
     const gchar* terms[] = {
         _("Words in text"),
         _("Words in headers"),
@@ -702,6 +705,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         _("Number of math inlines"),
         _("Number of math displayed")
     };
+    
     const gchar* terms_regex[] = {
         "Words in text: ([0-9]*)",
         "Words in headers: ([0-9]*)",
@@ -711,6 +715,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         "Number of math inlines: ([0-9]*)",
         "Number of math displayed: ([0-9]*)"
     };
+
 
     /* TODO: move to non gui class (latex perhaps) */
     if (g_file_test (g_find_program_in_path ("texcount"), G_FILE_TEST_EXISTS)) {
@@ -753,7 +758,8 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     }
     else {
         cmd = NULL;
-        output = g_strdup(_("This function requires\nthe texcount program.\n"));
+        slog (L_G_ERROR, "The 'texcount' utility could not be found.\n");
+        return;
     }
 
     gchararray items[6] = {"stats_words", "stats_head", "stats_float", 
