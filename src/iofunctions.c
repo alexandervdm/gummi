@@ -156,7 +156,6 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 }
 
 void iofunctions_start_autosave (void) {
-    
     /*
     static gchar* filename = NULL;
     if (filename) {
@@ -167,10 +166,18 @@ void iofunctions_start_autosave (void) {
     */
     sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, NULL);
+    slog (L_DEBUG, "Autosaving function started..\n");
 }
 
 void iofunctions_stop_autosave (void) {
-    if (sid > 0) g_source_remove (sid);
+    if (sid > 0) {
+        g_source_remove (sid);
+        slog (L_DEBUG, "Autosaving function stopped..\n");
+        return;
+    }
+    else {
+        slog (L_ERROR, "Error occured stopping autosaving..");
+    }
 }
 
 void iofunctions_reset_autosave (const gchar* name) {

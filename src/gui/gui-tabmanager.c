@@ -32,6 +32,23 @@
 #include "gui-main.h"
 #include "environment.h"
 
+
+GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
+
+    GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
+
+    tm->notebook =
+        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
+
+    g_object_set (tm->notebook, "tab-border", 0, NULL);
+
+    tm->tabs = NULL;
+    tm->active_editor = NULL;
+    tm->active_page = NULL;
+    return tm;
+}
+
 GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename) {
     static unsigned count = 0;
     GtkRcStyle* rcstyle = NULL;
@@ -84,22 +101,6 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
     gtk_label_set_text (tl->label, labeltext);
     g_free (labelname);
     g_free (labeltext);
-}
-
-GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
-    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
-
-    GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
-
-    tm->notebook =
-        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
-
-    g_object_set (tm->notebook, "tab-border", 0, NULL);
-
-    tm->tabs = NULL;
-    tm->active_editor = NULL;
-    tm->active_page = NULL;
-    return tm;
 }
 
 gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
