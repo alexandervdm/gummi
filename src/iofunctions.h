@@ -40,7 +40,6 @@ typedef struct _GuIOFunc GuIOFunc;
 
 struct _GuIOFunc {
   GObject* sig_hook;
-  GObject* savecontext;
 };
 
 

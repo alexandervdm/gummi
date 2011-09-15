@@ -54,7 +54,6 @@ GuIOFunc* iofunctions_init (void) {
     GuIOFunc* io = g_new0(GuIOFunc, 1);
 
     io->sig_hook = g_object_new(G_TYPE_OBJECT, NULL);
-    io->savecontext = g_object_new(G_TYPE_OBJECT, NULL);
 
     /* Connect signals */
     g_signal_connect (io->sig_hook, "document-load",
@@ -119,10 +118,12 @@ void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text) {
     statusbar_set_message (status);    
     g_free (status);
     
-    g_object_set_data (io->savecontext, "filename", filename);
-    g_object_set_data (io->savecontext, "text", text);
+    GObject *savecontext = g_object_new(G_TYPE_OBJECT, NULL);
     
-    g_signal_emit_by_name (io->sig_hook, "document-write", io->savecontext);
+    g_object_set_data (savecontext, "filename", filename);
+    g_object_set_data (savecontext, "text", text);
+    
+    g_signal_emit_by_name (io->sig_hook, "document-write", savecontext);
 }
 
 void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
@@ -153,6 +154,7 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 
     g_free (encoded);
     g_free (text); 
+    g_object_unref (savecontext);
 }
 
 void iofunctions_start_autosave (void) {
