@@ -40,6 +40,7 @@ typedef struct _GuIOFunc GuIOFunc;
 
 struct _GuIOFunc {
   GObject* sig_hook;
+  GObject* savecontext;
 };
 
 
@@ -47,10 +48,10 @@ struct _GuIOFunc {
 GuIOFunc* iofunctions_init (void);
 void iofunctions_load_default_text (void);
 void iofunctions_load_file (GuIOFunc* io, const gchar* filename);
-void iofunctions_save_file (GuIOFunc* io, const gchar* filename);
-void iofunctions_start_autosave (const gchar* name);
+void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text);
+void iofunctions_start_autosave (void);
 void iofunctions_stop_autosave (void);
 void iofunctions_reset_autosave (const gchar* name);
-gboolean iofunctions_autosave_cb (gpointer name);
+gboolean iofunctions_autosave_cb (void *user);
 
 #endif /* __GUMMI_IOFUNCTIONS_H__ */

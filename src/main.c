@@ -137,6 +137,8 @@ int main (int argc, char *argv[]) {
         gui_create_environment (A_DEFAULT, NULL, NULL);
     else
         gui_create_environment (A_LOAD, argv[1], NULL);
+        
+    if (config_get_value ("autosaving")) iofunctions_start_autosave ();
 
     gui_main (builder);
     config_save ();

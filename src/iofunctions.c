@@ -46,22 +46,23 @@ static guint sid = 0;
 
 /* private functions */
 void iofunctions_real_load_file (GObject* hook, const gchar* filename);
-void iofunctions_real_save_file (GObject* hook, const gchar* filename);
+void iofunctions_real_save_file (GObject* hook, GObject* savecontext);
 gchar* iofunctions_decode_text (gchar* text);
 gchar* iofunctions_encode_text (gchar* text);
 
 GuIOFunc* iofunctions_init (void) {
-  GuIOFunc* io = g_new0(GuIOFunc, 1);
+    GuIOFunc* io = g_new0(GuIOFunc, 1);
 
-  io->sig_hook = g_object_new(G_TYPE_OBJECT, NULL);
+    io->sig_hook = g_object_new(G_TYPE_OBJECT, NULL);
+    io->savecontext = g_object_new(G_TYPE_OBJECT, NULL);
 
-  /* Connect signals */
-  g_signal_connect (io->sig_hook, "document-load",
-      G_CALLBACK(iofunctions_real_load_file), NULL);
-  g_signal_connect (io->sig_hook, "document-write",
-      G_CALLBACK(iofunctions_real_save_file), NULL);
+    /* Connect signals */
+    g_signal_connect (io->sig_hook, "document-load",
+        G_CALLBACK(iofunctions_real_load_file), NULL);
+    g_signal_connect (io->sig_hook, "document-write",
+        G_CALLBACK(iofunctions_real_save_file), NULL);
 
-  return io;
+    return io;
 }
 
 void iofunctions_load_default_text (void) {
@@ -111,28 +112,29 @@ cleanup:
     g_free (text); 
 }
 
-void iofunctions_save_file (GuIOFunc* io, const gchar* filename) {
+void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text) {
     gchar* status = NULL;
 
     status = g_strdup_printf (_("Saving %s..."), filename);
     statusbar_set_message (status);    
     g_free (status);
     
-    g_signal_emit_by_name (io->sig_hook, "document-write", filename);
+    g_object_set_data (io->savecontext, "filename", filename);
+    g_object_set_data (io->savecontext, "text", text);
+    
+    g_signal_emit_by_name (io->sig_hook, "document-write", io->savecontext);
 }
 
-void iofunctions_real_save_file (GObject* hook, const gchar* filename) {
+void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
+    
     gboolean result = FALSE;
+    gchar* filename = NULL;
     gchar* encoded = NULL;
     gchar* text = NULL;
     GError* err = NULL;
-    GtkWidget* focus = NULL;
-    GuEditor* ec = NULL;
 
-    ec = gummi_get_active_editor();
-    focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
-    text = editor_grab_buffer (ec);
-    gtk_widget_grab_focus (focus);
+    filename = g_object_get_data (savecontext, "filename");
+    text = g_object_get_data (savecontext, "text");
 
     encoded = iofunctions_encode_text (text);
     
@@ -148,21 +150,23 @@ void iofunctions_real_save_file (GObject* hook, const gchar* filename) {
         slog (L_G_ERROR, _("%s\nPlease try again later."), err->message);
         g_error_free (err);
     }
-    gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
 
     g_free (encoded);
     g_free (text); 
 }
 
-void iofunctions_start_autosave (const gchar* name) {
+void iofunctions_start_autosave (void) {
+    
+    /*
     static gchar* filename = NULL;
     if (filename) {
-        g_free (filename);
+        g_free (filename);                  Wait, what? -Alex
         filename = NULL;
     }
     filename = g_strdup (name);
+    */
     sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
-            iofunctions_autosave_cb, filename);
+            iofunctions_autosave_cb, NULL);
 }
 
 void iofunctions_stop_autosave (void) {
@@ -172,7 +176,7 @@ void iofunctions_stop_autosave (void) {
 void iofunctions_reset_autosave (const gchar* name) {
     iofunctions_stop_autosave ();
     if (config_get_value ("autosaving"))
-        iofunctions_start_autosave (name);
+        iofunctions_start_autosave ();
 }
 
 char* iofunctions_decode_text (gchar* text) {
@@ -214,18 +218,31 @@ gchar* iofunctions_encode_text (gchar* text) {
     return result;
 }
 
-gboolean iofunctions_autosave_cb (gpointer name) {
-    char* fname = (char*)name;
-    char* buf = g_strdup_printf (_("Autosaving file %s"), fname);
-    if (fname) {
-        iofunctions_save_file (gummi_get_io(), fname);
-        gtk_text_buffer_set_modified (
-                GTK_TEXT_BUFFER (gummi_get_active_editor ()->buffer),
-                FALSE);
-        statusbar_set_message (buf);
-        g_free (buf);
-        return TRUE;
+gboolean iofunctions_autosave_cb (void *user) {
+    GuEditor *ec;
+    GtkWidget *focus;
+    gint i, tabnr;
+    gchar *text;
+    
+    GList *tabs = gummi_get_all_tabs();
+    tabnr = g_list_length(tabs);
+    
+    for (i=0; i < tabnr; i++) {
+        
+        ec = GU_TAB_CONTEXT (g_list_nth_data (tabs, i))->editor;
+       
+        if ((ec->filename) && editor_buffer_changed (ec)) {
+            
+            focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
+            text = editor_grab_buffer (ec);
+            gtk_widget_grab_focus (focus);
+            
+            
+            
+            iofunctions_save_file (gummi->io, ec->filename, text);
+            gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
+            slog (L_DEBUG, "Autosaving document: %s\n", ec->filename);
+       }
     }
-    g_free (buf);
-    return FALSE;
+    return TRUE;
 }

@@ -308,6 +308,13 @@ gchar* editor_grab_buffer (GuEditor* ec) {
     return pstr;
 }
 
+gboolean* editor_buffer_changed (GuEditor* ec) {
+    if (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (ec->buffer))) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 void editor_insert_package (GuEditor* ec, const gchar* package) {
     GtkTextIter start, mstart, mend, sstart, send;
     gchar* pkgstr = g_strdup_printf ("\\usepackage{%s}\n", package);

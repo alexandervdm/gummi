@@ -410,8 +410,15 @@ void gui_save_file (gboolean saveas) {
             }
         } else goto cleanup;
     }
-    iofunctions_save_file (gummi->io, filename);
+    
+    gchar *text;
+    GtkWidget* focus = NULL;
 
+    focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
+    text = editor_grab_buffer (g_active_editor);
+    gtk_widget_grab_focus (focus);
+    
+    iofunctions_save_file (gummi->io, filename, text);
 
     if (config_get_value ("autoexport")) {
         pdfname = g_strdup (filename);

@@ -57,7 +57,7 @@ void gummi_new_environment (GuEditor* ec, const gchar* filename) {
     slog (L_INFO, "TMP: %s\n", ec->workfile);
     slog (L_INFO, "PDF: %s\n", ec->pdffile); 
 
-    iofunctions_reset_autosave (filename);
+    //iofunctions_reset_autosave (filename);
 }
 
 GummiGui* gummi_get_gui (void) {
@@ -66,6 +66,10 @@ GummiGui* gummi_get_gui (void) {
 
 GuEditor* gummi_get_active_editor (void) {
     return gui->tabmanagergui->active_editor;
+}
+
+GList* gummi_get_all_tabs (void) {
+    return gui->tabmanagergui->tabs;
 }
 
 GuIOFunc* gummi_get_io (void) {
