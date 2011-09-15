@@ -53,6 +53,10 @@
 #define g_active_editor gui->tabmanagergui->active_editor
 #define g_active_page gui->tabmanagergui->active_page
 
+/* this needs cleanup */
+#define g_active_tabname gui->tabmanagergui->active_tab->tablabel->label
+
+
 
 
 #define GUMMI_GUI(x) ((GummiGui*)x)
@@ -82,6 +86,8 @@ struct _GummiGui {
     GtkMenuItem* recent[5];
     gint insens_widget_size;
     GtkWidget** insens_widgets;
+    GtkBuilder *builder;
+    GtkWidget *docstatswindow;
     
     GtkMenuItem *menu_projopen;
     GtkMenuItem *menu_projsave;

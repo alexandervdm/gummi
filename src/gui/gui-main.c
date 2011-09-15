@@ -72,6 +72,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
     gint i = 0, wx = 0, wy = 0, width = 0, height = 0;
 
     GummiGui* g = g_new0 (GummiGui, 1);
+    
+    g->builder = builder;
 
     g->mainwindow =
         GTK_WINDOW (gtk_builder_get_object (builder, "mainwindow"));
@@ -120,6 +122,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_input"));
     g->menu_detach =
         GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_detach"));
+    g->docstatswindow =
+        GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
 
     g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
     g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
@@ -674,8 +678,13 @@ void on_menu_pdfcompile_activate (GtkWidget *widget, void* user) {
 }
 
 G_MODULE_EXPORT
+gboolean on_docstats_close_clicked (GtkWidget* widget, void* user) {
+    gtk_widget_hide (GTK_WIDGET (gui->docstatswindow));
+    return TRUE;
+}
+
+G_MODULE_EXPORT
 void on_menu_docstat_activate (GtkWidget *widget, void * user) {
-    GtkWidget* dialog = 0;
     gint i = 0;
     gchar* output = 0;
     gchar* cmd = 0;
@@ -703,6 +712,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         "Number of math displayed: ([0-9]*)"
     };
 
+    /* TODO: move to non gui class (latex perhaps) */
     if (g_file_test (g_find_program_in_path ("texcount"), G_FILE_TEST_EXISTS)) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
@@ -738,15 +748,6 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
                 g_match_info_free (match_info);
             }
         }
-
-        output = g_strconcat (terms[0], ": ", res[0], "\n",
-                             terms[1], ": ", res[1], "\n",
-                             terms[2], ": ", res[2], "\n",
-                             terms[3], ": ", res[3], "\n",
-                             terms[4], ": ", res[4], "\n",
-                             terms[4], ": ", res[5], "\n",
-                             terms[6], ": ", res[6], "\n",
-                             NULL);
         g_free (result.second);
         g_free (tmpfile);
     }
@@ -755,14 +756,21 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         output = g_strdup(_("This function requires\nthe texcount program.\n"));
     }
 
-    dialog = gtk_message_dialog_new (gui->mainwindow,
-            GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_INFO,
-            GTK_BUTTONS_OK,
-            "%s", output);
-    gtk_window_set_title (GTK_WINDOW (dialog), _("Document Statistics"));
-    gtk_dialog_run (GTK_DIALOG (dialog));
-    gtk_widget_destroy (dialog);
+    gchararray items[6] = {"stats_words", "stats_head", "stats_float", 
+                           "stats_nrhead", "stats_nrfloat", "stats_nrmath"};
+    int j = 0;
+    GtkLabel *tmp;
+        
+    for (j = 0; j < 6; j++) {
+        gchar *value = items[j];
+        tmp = GTK_LABEL(gtk_builder_get_object (gui->builder, value));
+        gtk_label_set_text (tmp, res[j]);
+    }
+    
+    /* TODO: make nice functions for retrieving tab labels */
+    gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (gui->builder, 
+                    "stats_filename")), gtk_label_get_text(g_active_tabname));
+    gtk_widget_show (gui->docstatswindow);
     return;
 
 cleanup:
