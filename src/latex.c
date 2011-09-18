@@ -40,9 +40,9 @@
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
-#include "latex.h"
-#include "utils.h"
 #include "gui/gui-preview.h"
+#include "utils.h"
+
 
 
 #ifdef WIN32
@@ -85,7 +85,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value ("typesetter");
-    if (!g_find_program_in_path (typesetter)) {
+    if (!utils_program_exists (typesetter)) {
         slog (L_G_ERROR, "Typesetter command `%s' not found, setting to "
                 "pdflatex.\n", typesetter);
         config_set_value ("typesetter", "pdflatex");

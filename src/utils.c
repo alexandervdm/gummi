@@ -171,6 +171,16 @@ gboolean utils_path_exists (const gchar* path) {
     return result;
 }
 
+gboolean utils_program_exists (const gchar* cmdname) {
+
+    const gchar *fullpath = g_find_program_in_path (cmdname);
+    
+    if (g_file_test (fullpath, G_FILE_TEST_EXISTS)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 gboolean utils_set_file_contents (const gchar *filename, 
                                   const gchar *text, 
                                   gssize length) {
