@@ -41,21 +41,11 @@
 #include "editor.h"
 #include "environment.h"
 #include "gui/gui-preview.h"
+#include "porting.h"
 #include "utils.h"
-
-
-#ifdef WIN32
-    const gchar *cmdsep = "&&";
-    const gchar *cmdpms = "";
-#else
-
-    const gchar *cmdpms = "env openout_any=a";
-    const gchar *cmdsep = ";";
-#endif
 
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
-
 
 
 GuLatex* latex_init (void) {
@@ -107,12 +97,12 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     
     const gchar *typesetter = config_get_value ("typesetter");
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, cmdsep, cmdpms);
+    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, P_CMDSEP, P_TEXSEC);
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
     if (g_strcmp0 (typesetter, "rubber") == 0) {
-        flags = g_strdup_printf("-d -q ");
+        flags = g_strdup_printf("-d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
     else { /* pdflatex/xelatex */
@@ -204,8 +194,8 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
                                      "-interaction=nonstopmode "
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
-                                     cmdsep,
-                                     cmdpms,
+                                     P_CMDSEP,
+                                     P_TEXSEC,
                                      config_get_value ("typesetter"),
                                      ec->tmpdir,
                                      ec->workfile);

@@ -49,3 +49,14 @@
 #ifndef GDK_KEY_ISO_Left_Tab
 #define GDK_KEY_ISO_Left_Tab GDK_ISO_Left_Tab
 #endif
+
+/* Platform dependant constants used by other functions: */
+
+#ifdef WIN32
+    #define P_CMDSEP "&&"
+    #define P_TEXSEC ""
+#else
+    #define P_CMDSEP ";"
+    #define P_TEXSEC "env openout_any=a"
+#endif
+
