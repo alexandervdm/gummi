@@ -44,21 +44,40 @@
 #include "utils.h"
 
 
-
 #ifdef WIN32
     const gchar *cmdsep = "&&";
     const gchar *cmdpms = "";
 #else
+
     const gchar *cmdpms = "env openout_any=a";
     const gchar *cmdsep = ";";
 #endif
+
+/* supported latex typesetting programs */
+gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
+
 
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
     l->errormessage = NULL;
     l->modified_since_compile = FALSE;
+    l->typesetters = get_available_typesetters ();
     return l;
+}
+
+GList* get_available_typesetters (void) {
+    int i;
+    GList *typesetters = NULL;
+
+    for (i = 0; i < 3; i++) {
+        if (utils_program_exists(supported_cmds[i])) {
+            typesetters = g_list_append (typesetters, supported_cmds[i]);
+            slog (L_INFO, "Typesetter detected: %s\n", supported_cmds[i]);
+            /*TODO: print out program version */
+        }
+    }
+    return typesetters;
 }
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
@@ -81,37 +100,64 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     return text;
 }
 
+
+
+
+gchar* latex_set_compile_cmd (GuEditor* ec) {
+    
+    const gchar *typesetter = config_get_value ("typesetter");
+    gchar* dirname = g_path_get_dirname (ec->workfile);
+    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, cmdsep, cmdpms);
+    gchar *flags = NULL;
+    gchar *outdir = NULL;
+    
+    if (g_strcmp0 (typesetter, "rubber") == 0) {
+        flags = g_strdup_printf("-d -q ");
+        outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
+    }
+    else { /* pdflatex/xelatex */
+        flags = g_strdup_printf("-interaction=nonstopmode "
+                                     "-file-line-error "
+                                     "-halt-on-error");
+        outdir = g_strdup_printf("-output-directory=\"%s\"", ec->tmpdir);
+    }
+    
+    gchar* command = g_strdup_printf ("%s %s %s %s \"%s\"", 
+                                        setup, 
+                                        typesetter, 
+                                        flags, 
+                                        outdir, 
+                                        ec->workfile);
+    
+    g_free (dirname);
+    g_free (flags);
+    g_free (outdir);
+    return command;
+}
+
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value ("typesetter");
     if (!utils_program_exists (typesetter)) {
-        slog (L_G_ERROR, "Typesetter command `%s' not found, setting to "
-                "pdflatex.\n", typesetter);
+        /* L_G_ERROR inside the thread freezes up 
+        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
+                "pdflatex.\n", typesetter);*/
+                
+        /* Set to default first detected typesetter */
         config_set_value ("typesetter", "pdflatex");
     }
-    gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar* command = g_strdup_printf ("cd \"%s\"%s "
-                                     "%s %s "
-                                     "-interaction=nonstopmode "
-                                     "-file-line-error "
-                                     "-halt-on-error"
-                                     "%s "
-                                     "-output-directory=\"%s\" \"%s\"",
-                                     dirname,
-                                     cmdsep,
-                                     cmdpms,
-                                     config_get_value ("typesetter"),
-                                     config_get_value ("extra_flags"),
-                                     ec->tmpdir,
-                                     ec->workfile);
-    g_free (dirname);
 
+    /* create compile command */
+    gchar *command = latex_set_compile_cmd (ec);
+    
     previewgui_update_statuslight ("gtk-refresh");
  
     g_free (lc->errormessage);
 
+    /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command);
+    
     memset (lc->errorlines, 0, BUFSIZ);
     lc->errormessage = (gchar*)cresult.second;
     lc->modified_since_compile = FALSE;

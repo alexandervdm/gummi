@@ -44,6 +44,8 @@ struct _GuLatex {
     gint errorlines[BUFSIZ];
     gchar* errormessage;
     gboolean modified_since_compile;
+    
+    GList *typesetters;
 };
 
 GuLatex* latex_init (void);
@@ -53,5 +55,7 @@ void latex_update_pdffile (GuLatex* mc, GuEditor* ec);
 void latex_update_auxfile (GuLatex* mc, GuEditor* ec);
 void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
         gboolean prompt_overrite);
+        
+GList* get_available_typesetters (void);
 
 #endif /* __GUMMI_LATEX_H__ */

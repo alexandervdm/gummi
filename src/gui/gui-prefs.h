@@ -57,16 +57,14 @@ struct _GuPrefsGui {
     GtkTextView* default_text;
     GtkTextBuffer* default_buffer;
     GtkComboBox* typesetter;
-    GtkEntry* custom_typesetter;
-    GtkEntry* extra_flags;
     GtkFontButton* editor_font;
     GtkComboBox* compile_scheme;
     GtkSpinButton* compile_timer;
+    GtkListStore* list_typesetters;
 
     GtkVBox* view_box;
     GtkHBox* editor_box;
     GtkHBox* compile_box;
-    GtkHBox* commandbox;
 };
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow);

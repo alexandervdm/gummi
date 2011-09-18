@@ -38,6 +38,7 @@
 #include "configfile.h"
 #include "environment.h"
 #include "gui/gui-main.h"
+#include "latex.h"
 #include "utils.h"
 
 extern Gummi* gummi;
@@ -89,10 +90,6 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         gtk_text_view_get_buffer (p->default_text);
     p->typesetter =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_typesetter"));
-    p->custom_typesetter =
-        GTK_ENTRY (gtk_builder_get_object (builder, "custom_typesetter"));
-    p->extra_flags = 
-        GTK_ENTRY (gtk_builder_get_object (builder, "extra_flags"));
     p->editor_font =
         GTK_FONT_BUTTON (gtk_builder_get_object (builder, "editor_font"));
     p->compile_scheme =
@@ -100,12 +97,13 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->compile_timer =
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "compile_timer"));
     p->autoexport =
-        GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "auto_export")); 
+        GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "auto_export"));
+    p->list_typesetters =
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_typesetters"));
         
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
     p->compile_box = GTK_HBOX (gtk_builder_get_object (builder, "compile_box"));
-    p->commandbox = GTK_HBOX (gtk_builder_get_object (builder, "commandbox"));
 
     gtk_window_set_transient_for (GTK_WINDOW (p->prefwindow), mainwindow);
 
@@ -217,18 +215,22 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     gtk_text_buffer_set_text (prefs->default_buffer,
             config_get_value ("welcome"), strlen(config_get_value ("welcome")));
 
-    /* set combo boxes */
-    /* typesetter */
+    /* set available typesetters TODO: import once from latex.c */
+    GtkTreeIter iterb;
+    gint listlength = g_list_length (gummi->latex->typesetters);
+    gint i;
+    
+    gtk_list_store_clear (prefs->list_typesetters);
+    
     const gchar* typesetter = config_get_value ("typesetter");
-    gtk_widget_hide (GTK_WIDGET (gui->prefsgui->commandbox));
-    if (0 == strcmp (typesetter, "pdflatex"))
-        gtk_combo_box_set_active (prefs->typesetter, 0);
-    else if (0 == strcmp (typesetter, "xelatex"))
-        gtk_combo_box_set_active (prefs->typesetter, 1);
-    else {
-        gtk_widget_show (GTK_WIDGET (gui->prefsgui->commandbox));
-        gtk_entry_set_text (prefs->custom_typesetter, typesetter);
-        gtk_combo_box_set_active (prefs->typesetter, 2);
+    
+    for (i=0; i<listlength; i++) {
+        gchar *tmp = g_list_nth_data (gummi->latex->typesetters, i);
+        gtk_list_store_append (prefs->list_typesetters, &iterb);
+        gtk_list_store_set (prefs->list_typesetters, &iterb, 0, tmp, -1);
+        if (0 == strcmp (typesetter, tmp)) {
+            gtk_combo_box_set_active (prefs->typesetter, i);
+        }
     }
 
     /* compile scheme */
@@ -252,9 +254,6 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
 
     /* set style scheme */
     prefsgui_apply_style_scheme(prefs);
-
-    /* set extra flags */
-    gtk_entry_set_text (prefs->extra_flags, config_get_value ("extra_flags"));
 }
 
 void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
@@ -438,15 +437,6 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     config_set_value ("welcome", text);
     g_free (text);
 
-    /* set custom typesetter */
-    const gchar* typesetter = gtk_entry_get_text
-                              (gui->prefsgui->custom_typesetter);
-    if (strlen (typesetter))
-        config_set_value ("typesetter", typesetter);
-
-    const gchar* flags = gtk_entry_get_text (gui->prefsgui->extra_flags);
-    config_set_value ("extra_flags", flags);
-
     gtk_widget_hide (GTK_WIDGET (gui->prefsgui->prefwindow));
 }
 
@@ -512,14 +502,10 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_combo_typesetter_changed (GtkWidget* widget, void* user) {
-    gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-    const gchar typesetter[][16] = { "pdflatex", "xelatex", "Customize" };
-    if (selected != 2) {
-        config_set_value ("typesetter", typesetter[selected]);
-        gtk_entry_set_text (gui->prefsgui->custom_typesetter, "");
-        gtk_widget_hide (GTK_WIDGET (gui->prefsgui->commandbox));
-    } else
-        gtk_widget_show (GTK_WIDGET (gui->prefsgui->commandbox));
+    
+    gchar *selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
+    
+    config_set_value ("typesetter", selected);
 }
 
 G_MODULE_EXPORT
