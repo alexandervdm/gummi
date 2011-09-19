@@ -257,6 +257,14 @@ Tuple2 utils_popen_r (const gchar* cmd) {
     return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
 }
 
+gchar* utils_get_version (const gchar* program) {
+    /* TODO: force it to quit */
+    Tuple2 getv = utils_popen_r (g_strdup_printf("%s --version", program));
+    gchar *output = (gchar*)getv.second;
+    gchar **lines = g_strsplit(output, "\n", BUFSIZ);
+    return lines[0];
+}
+
 gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
     gchar* tstr = NULL;
     if ( (root != NULL) && (0 == strncmp (target, root, strlen (root))))

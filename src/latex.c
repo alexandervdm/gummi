@@ -63,8 +63,7 @@ GList* get_available_typesetters (void) {
     for (i = 0; i < 3; i++) {
         if (utils_program_exists(supported_cmds[i])) {
             typesetters = g_list_append (typesetters, supported_cmds[i]);
-            slog (L_INFO, "Typesetter detected: %s\n", supported_cmds[i]);
-            /*TODO: print out program version */
+            slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (supported_cmds[i]));
         }
     }
     return typesetters;

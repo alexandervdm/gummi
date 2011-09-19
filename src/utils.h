@@ -157,6 +157,8 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
  */
 gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens);
 
+gchar* utils_get_version (const gchar* program);
+
 /**
  * slist_find:
  * @head: the list head
