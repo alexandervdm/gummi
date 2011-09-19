@@ -47,6 +47,8 @@
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
 
+static gboolean rubber_active (void);
+//static gboolean latexmk_active (void);
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
@@ -55,6 +57,21 @@ GuLatex* latex_init (void) {
     l->typesetters = get_available_typesetters ();
     return l;
 }
+
+static gboolean rubber_active (void) {
+    if (g_strcmp0 (config_get_value("typesetter"), "rubber") == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/*
+static gboolean latexmk_active (void) {
+    if (g_strcmp0 (config_get_value("typesetter"), "latexmk") == 0) {
+        return TRUE;
+    }
+    return FALSE;    
+}*/
 
 GList* get_available_typesetters (void) {
     int i;
@@ -100,7 +117,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
-    if (g_strcmp0 (typesetter, "rubber") == 0) {
+    if (rubber_active()) {
         flags = g_strdup_printf("-d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
@@ -124,6 +141,66 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     return command;
 }
 
+gchar* latex_analyse_log (gchar *compile_log) {
+    
+    /* Rubber does not post the pdftex compilation output to tty, so we will
+     * have to open the log file and retrieve it I guess */
+    if (rubber_active()) {
+        gchar* logname = NULL;
+        /* TODO: integrate - retrieve from functions */
+        gchar *filename = g_strdup (gummi_get_active_editor()->filename);
+        gchar *workfile = g_strdup (gummi_get_active_editor()->workfile);
+        gchar *pdffile = g_strdup (gummi_get_active_editor()->pdffile);
+
+        if (filename == NULL) {
+            logname = g_strconcat (workfile, ".log", NULL);
+            }
+        else {
+            logname = g_strdup (pdffile);
+            logname[strlen (logname) -4] = 0;
+            logname = g_strconcat (logname, ".log", NULL);
+            }
+            
+        g_file_get_contents (logname, &compile_log, NULL, NULL);
+        g_free (filename);
+        g_free (workfile);
+        g_free (pdffile);
+    }
+    return compile_log;
+}
+
+            
+    
+
+void latex_analyse_errors (GuLatex* lc) {
+    gchar* result = NULL;
+    GError* err = NULL;
+    GRegex* match_str = NULL;
+    GMatchInfo* match_info;
+
+    if (! (match_str = g_regex_new (":(\\d+):", G_REGEX_DOTALL, 0, &err))) {
+        slog (L_ERROR, "g_regex_new (): %s\n", err->message);
+        g_error_free (err);
+        return;
+    }
+
+    if (g_regex_match (match_str, lc->errormessage, 0, &match_info)) {
+        gint count = 0;
+        while (g_match_info_matches (match_info)) {
+            if (count + 1 == BUFSIZ) break;
+            result = g_match_info_fetch (match_info, 1);
+            lc->errorlines[count++] = atoi (result);
+            g_free (result);
+            g_match_info_next (match_info, NULL);
+        }
+    }
+    if (!lc->errorlines[0])
+        lc->errorlines[0] = -1;
+    g_match_info_free (match_info);
+    g_regex_unref (match_str);
+    
+}
+
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
 
@@ -139,49 +216,25 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
     /* create compile command */
     gchar *command = latex_set_compile_cmd (ec);
-    
-    previewgui_update_statuslight ("gtk-refresh");
- 
-    g_free (lc->errormessage);
 
+    g_free (lc->errormessage);
+    memset (lc->errorlines, 0, BUFSIZ);
+    
     /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command);
+    gboolean cerrors = (gint)cresult.first;
+    gchar* coutput = (gchar*)cresult.second;
     
-    memset (lc->errorlines, 0, BUFSIZ);
-    lc->errormessage = (gchar*)cresult.second;
+    lc->errormessage = latex_analyse_log (coutput);
     lc->modified_since_compile = FALSE;
-
+    
     /* find error line */
-    if ((gint)cresult.first) {
-        gchar* result = NULL;
-        GError* err = NULL;
-        GRegex* match_str = NULL;
-        GMatchInfo* match_info;
-
-        if (! (match_str = g_regex_new (":(\\d+):", G_REGEX_DOTALL, 0, &err))) {
-            slog (L_ERROR, "g_regex_new (): %s\n", err->message);
-            g_error_free (err);
-            return;
-        }
-
-        if (g_regex_match (match_str, (gchar*)cresult.second, 0, &match_info)) {
-            gint count = 0;
-            while (g_match_info_matches (match_info)) {
-                if (count + 1 == BUFSIZ) break;
-                result = g_match_info_fetch (match_info, 1);
-                lc->errorlines[count++] = atoi (result);
-                g_free (result);
-                g_match_info_next (match_info, NULL);
-            }
-        }
-        if (!lc->errorlines[0])
-            lc->errorlines[0] = -1;
-        g_match_info_free (match_info);
-        g_regex_unref (match_str);
-
+    if (cerrors) {
+        latex_analyse_errors (lc);
         previewgui_update_statuslight ("gtk-no");
     } else
         previewgui_update_statuslight ("gtk-yes");
+    
     g_free (command);
 }
 
