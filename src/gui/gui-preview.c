@@ -131,7 +131,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     gtk_container_remove(GTK_CONTAINER(holder), p->errorpanel);
     g_object_unref(holder);
     
-    slog (L_INFO, "using libpoppler %s ...\n", poppler_get_version ());
+    slog (L_INFO, "using libpoppler %s\n", poppler_get_version ());
     return p;
 }
 

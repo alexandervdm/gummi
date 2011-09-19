@@ -118,6 +118,7 @@ int main (int argc, char *argv[]) {
 
     /* Start compile thread */
     if (utils_program_exists (config_get_value("typesetter"))) {
+        slog (L_INFO, "using typesetter %s\n", config_get_value("typesetter"));
         motion_start_compile_thread (motion);
         slog (L_DEBUG, "Compile thread started!\n");
     }
