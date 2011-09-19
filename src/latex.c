@@ -142,35 +142,13 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     return command;
 }
 
-void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
-    if (!lc->modified_since_compile) return;
-
-    const gchar* typesetter = config_get_value ("typesetter");
-    if (!utils_program_exists (typesetter)) {
-        /* L_G_ERROR inside the thread freezes up 
-        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
-                "pdflatex.\n", typesetter);*/
-                
-        /* TODO: Set to default first detected typesetter */
-        config_set_value ("typesetter", "pdflatex");
-    }
-
-    /* create compile command */
-    gchar *command = latex_set_compile_cmd (ec);
+gboolean latex_analyse_output (GuLatex* lc, int cresult) {
     
-    previewgui_update_statuslight ("gtk-refresh");
- 
     g_free (lc->errormessage);
-
-    /* run pdf compilation */
-    Tuple2 cresult = utils_popen_r (command);
     
-    memset (lc->errorlines, 0, BUFSIZ);
-    lc->errormessage = (gchar*)cresult.second;
-    lc->modified_since_compile = FALSE;
-
-    /* find error line */
-    if ((gint)cresult.first) {
+    
+        /* find error line */
+    if (cresult) {
         gchar* result = NULL;
         GError* err = NULL;
         GRegex* match_str = NULL;
@@ -199,7 +177,40 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
         previewgui_update_statuslight ("gtk-no");
     } else
+    
+    
+}
+
+void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
+    if (!lc->modified_since_compile) return;
+
+    const gchar* typesetter = config_get_value ("typesetter");
+    if (!utils_program_exists (typesetter)) {
+        /* L_G_ERROR inside the thread freezes up 
+        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
+                "pdflatex.\n", typesetter);*/
+                
+        /* TODO: Set to default first detected typesetter */
+        config_set_value ("typesetter", "pdflatex");
+    }
+
+    /* create compile command */
+    gchar *command = latex_set_compile_cmd (ec);
+    
+    previewgui_update_statuslight ("gtk-refresh");
+ 
+    /* run pdf compilation */
+    Tuple2 cresult = utils_popen_r (command);
+    memset (lc->errorlines, 0, BUFSIZ);
+    lc->errormessage = (gchar*)cresult.second;
+    lc->modified_since_compile = FALSE;
+
+    if (latex_analyse_output (lc,(gint)cresult.first)) {
+        previewgui_update_statuslight ("gtk-no");
+    else {
         previewgui_update_statuslight ("gtk-yes");
+    }
+
     g_free (command);
 }
 
