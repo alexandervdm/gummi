@@ -47,6 +47,8 @@
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
 
+static gboolean rubber_active (void);
+//static gboolean latexmk_active (void);
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
@@ -68,6 +70,22 @@ GList* get_available_typesetters (void) {
     }
     return typesetters;
 }
+
+static gboolean rubber_active (void) {
+    if (g_strcmp0 (config_get_value("typesetter"), "rubber") == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/*
+static gboolean latexmk_active (void) {
+    if (g_strcmp0 (config_get_value("typesetter"), "latexmk") == 0) {
+        return TRUE;
+    }
+    return FALSE;    
+}*/
+
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter current, start, end;
@@ -100,7 +118,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
-    if (g_strcmp0 (typesetter, "rubber") == 0) {
+    if (rubber_active()) {
         flags = g_strdup_printf("-d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
@@ -133,7 +151,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
         slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
                 "pdflatex.\n", typesetter);*/
                 
-        /* Set to default first detected typesetter */
+        /* TODO: Set to default first detected typesetter */
         config_set_value ("typesetter", "pdflatex");
     }
 
