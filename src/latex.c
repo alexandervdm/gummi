@@ -47,8 +47,6 @@
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
 
-static gboolean rubber_active (void);
-//static gboolean latexmk_active (void);
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
@@ -70,22 +68,6 @@ GList* get_available_typesetters (void) {
     }
     return typesetters;
 }
-
-static gboolean rubber_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "rubber") == 0) {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-/*
-static gboolean latexmk_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "latexmk") == 0) {
-        return TRUE;
-    }
-    return FALSE;    
-}*/
-
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter current, start, end;
@@ -118,7 +100,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
-    if (rubber_active()) {
+    if (g_strcmp0 (typesetter, "rubber") == 0) {
         flags = g_strdup_printf("-d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
@@ -142,13 +124,35 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     return command;
 }
 
-gboolean latex_analyse_output (GuLatex* lc, int cresult) {
+void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
+    if (!lc->modified_since_compile) return;
+
+    const gchar* typesetter = config_get_value ("typesetter");
+    if (!utils_program_exists (typesetter)) {
+        /* L_G_ERROR inside the thread freezes up 
+        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
+                "pdflatex.\n", typesetter);*/
+                
+        /* Set to default first detected typesetter */
+        config_set_value ("typesetter", "pdflatex");
+    }
+
+    /* create compile command */
+    gchar *command = latex_set_compile_cmd (ec);
     
+    previewgui_update_statuslight ("gtk-refresh");
+ 
     g_free (lc->errormessage);
+
+    /* run pdf compilation */
+    Tuple2 cresult = utils_popen_r (command);
     
-    
-        /* find error line */
-    if (cresult) {
+    memset (lc->errorlines, 0, BUFSIZ);
+    lc->errormessage = (gchar*)cresult.second;
+    lc->modified_since_compile = FALSE;
+
+    /* find error line */
+    if ((gint)cresult.first) {
         gchar* result = NULL;
         GError* err = NULL;
         GRegex* match_str = NULL;
@@ -177,40 +181,7 @@ gboolean latex_analyse_output (GuLatex* lc, int cresult) {
 
         previewgui_update_statuslight ("gtk-no");
     } else
-    
-    
-}
-
-void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
-    if (!lc->modified_since_compile) return;
-
-    const gchar* typesetter = config_get_value ("typesetter");
-    if (!utils_program_exists (typesetter)) {
-        /* L_G_ERROR inside the thread freezes up 
-        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
-                "pdflatex.\n", typesetter);*/
-                
-        /* TODO: Set to default first detected typesetter */
-        config_set_value ("typesetter", "pdflatex");
-    }
-
-    /* create compile command */
-    gchar *command = latex_set_compile_cmd (ec);
-    
-    previewgui_update_statuslight ("gtk-refresh");
- 
-    /* run pdf compilation */
-    Tuple2 cresult = utils_popen_r (command);
-    memset (lc->errorlines, 0, BUFSIZ);
-    lc->errormessage = (gchar*)cresult.second;
-    lc->modified_since_compile = FALSE;
-
-    if (latex_analyse_output (lc,(gint)cresult.first)) {
-        previewgui_update_statuslight ("gtk-no");
-    else {
         previewgui_update_statuslight ("gtk-yes");
-    }
-
     g_free (command);
 }
 
