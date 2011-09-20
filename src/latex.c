@@ -127,7 +127,8 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *outdir = NULL;
     
     if (latex_typesetter_active("rubber")) {
-        flags = g_strdup_printf("-d -q");
+        if (latex_method_active("texpdf")) flags = g_strdup_printf("-d -q");
+        if (latex_method_active("texdvipspdf")) flags = g_strdup_printf("-p -d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
     else { /* pdflatex/xelatex */
