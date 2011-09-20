@@ -47,6 +47,13 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
+static void set_all_tab_settings (GuPrefsGui* prefs);
+static void set_tab_view_settings (GuPrefsGui* prefs);
+static void set_tab_editor_settings (GuPrefsGui* prefs);
+static void set_tab_fontcolor_settings (GuPrefsGui* prefs);
+static void set_tab_defaulttext_settings (GuPrefsGui* prefs);
+static void set_tab_compilation_settings (GuPrefsGui* prefs);
+static void set_tab_miscellaneous_settings (GuPrefsGui* prefs);
 
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
@@ -169,17 +176,18 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 
 void prefsgui_main (GuPrefsGui* prefs) {
 
+    set_all_tab_settings (prefs);
+    gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
+}
+
+static void set_all_tab_settings (GuPrefsGui* prefs) {
     set_tab_view_settings (prefs);
     set_tab_editor_settings (prefs);
     set_tab_fontcolor_settings (prefs);
     set_tab_defaulttext_settings (prefs);
     set_tab_compilation_settings (prefs);
     set_tab_miscellaneous_settings (prefs);
-
-    gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
 }
-
-
 
 static void set_tab_view_settings (GuPrefsGui* prefs) {
     gboolean value = FALSE;
@@ -489,13 +497,7 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
     config_set_default ();
-    /* TODO: I broke this in svn 880 */
-    set_tab_view_settings (gui->prefsgui);
-    set_tab_editor_settings (gui->prefsgui);
-    set_tab_fontcolor_settings (gui->prefsgui);
-    set_tab_defaulttext_settings (gui->prefsgui);
-    set_tab_compilation_settings (gui->prefsgui);
-    set_tab_miscellaneous_settings (gui->prefsgui);
+    set_all_tab_settings (gui->prefsgui);
 }
 
 G_MODULE_EXPORT

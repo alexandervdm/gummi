@@ -96,13 +96,7 @@ void on_combo_compilescheme_changed (GtkWidget* widget, void* user);
 void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user);
 
 
-/* i'll move these */
-static void set_tab_view_settings (GuPrefsGui* prefs);
-static void set_tab_editor_settings (GuPrefsGui* prefs);
-static void set_tab_fontcolor_settings (GuPrefsGui* prefs);
-static void set_tab_defaulttext_settings (GuPrefsGui* prefs);
-static void set_tab_compilation_settings (GuPrefsGui* prefs);
-static void set_tab_miscellaneous_settings (GuPrefsGui* prefs);
+
 
 
 #endif /* __GUMMI_GUI_PREFS_H__ */
