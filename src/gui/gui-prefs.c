@@ -41,8 +41,15 @@
 #include "latex.h"
 #include "utils.h"
 
+
+/* TODO: needs mayor cleanup */
+
 extern Gummi* gummi;
 extern GummiGui* gui;
+
+
+static void set_tab_compilation_settings (GuPrefsGui* prefs);
+
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GuPrefsGui* p = g_new0 (GuPrefsGui, 1);
@@ -103,6 +110,13 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_xelatex"));
     p->typ_rubber =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_rubber"));
+
+    p->method_texpdf =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "method_texpdf"));
+    p->method_texdvipdf =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "method_texdvipdf"));
+    p->method_texdvipspdf =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "method_texdvipspdf"));
         
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
@@ -159,6 +173,39 @@ void prefsgui_main (GuPrefsGui* prefs) {
     prefsgui_set_current_settings (prefs);
     
     gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
+}
+
+static void set_tab_compilation_settings (GuPrefsGui* prefs) {
+    /* Setting available typesetters and the active one */
+    /* TODO: iterate the available typesetter list and gtk_builder the objects
+     * maybe.. or not.. */
+    if (latex_typesetter_detected(gummi->latex, "pdflatex")) {
+        if (latex_typesetter_active("pdflatex")) 
+            gtk_toggle_button_set_active (prefs->typ_pdflatex, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_pdflatex), TRUE);
+    }
+    
+    if (latex_typesetter_detected(gummi->latex, "xelatex")) {
+        if (latex_typesetter_active("xelatex")) 
+            gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
+    }
+    
+    if (latex_typesetter_detected(gummi->latex, "rubber")) {
+        if (latex_typesetter_active("rubber")) 
+            gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
+    }
+
+    if (latex_method_active ("texpdf")) {
+        gtk_toggle_button_set_active (prefs->method_texpdf, TRUE);
+    }    
+    else if (latex_method_active ("texdvipdf")) {
+        gtk_toggle_button_set_active (prefs->method_texdvipdf, TRUE);
+    }
+    else if (latex_method_active ("texdvipspdf")) {
+        gtk_toggle_button_set_active (prefs->method_texdvipspdf, TRUE);
+    }    
 }
 
 void prefsgui_set_current_settings (GuPrefsGui* prefs) {
@@ -219,27 +266,10 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
             config_get_value ("welcome"), strlen(config_get_value ("welcome")));
 
 
-    /* Setting available typesetters and the active one */
-    /* TODO: iterate the available typesetter list and gtk_builder the objects
-     * maybe.. or not.. */
-    if (latex_typesetter_detected(gummi->latex, "pdflatex")) {
-        if (latex_typesetter_active("pdflatex")) 
-            gtk_toggle_button_set_active (prefs->typ_pdflatex, TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_pdflatex), TRUE);
-    }
+    /* set all settings for compilation tab */
+    set_tab_compilation_settings (prefs);
     
-    if (latex_typesetter_detected(gummi->latex, "xelatex")) {
-        if (latex_typesetter_active("xelatex")) 
-            gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
-    }
-    
-    if (latex_typesetter_detected(gummi->latex, "rubber")) {
-        if (latex_typesetter_active("rubber")) 
-            gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
-    }
-            
+
     /* compile scheme */
     if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
         gtk_combo_box_set_active (prefs->compile_scheme, 1);
@@ -531,6 +561,28 @@ void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
         slog (L_INFO, "Changed typesetter to \"rubber\"\n");
     }
 }
+
+void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("compile_method", "texpdf");
+        slog (L_INFO, "Changed compile method to \"tex->pdf\"\n");
+    }
+    
+}
+void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("compile_method", "texdvipdf");
+        slog (L_INFO, "Changed compile method to \"tex->dvi->pdf\"\n");
+    }
+
+}
+
+void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("compile_method", "texdvipspdf");
+        slog (L_INFO, "Changed compile method to \"tex->dvi->ps->pdf\"\n");
+    }
+}   
 
 
 G_MODULE_EXPORT

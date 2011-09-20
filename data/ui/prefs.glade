@@ -979,7 +979,7 @@
                   <object class="GtkVBox" id="box_typesetter">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="spacing">6</property>
+                    <property name="spacing">5</property>
                     <child>
                       <object class="GtkLabel" id="label8">
                         <property name="visible">True</property>
@@ -1026,6 +1026,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_typ_pdflatex_toggled" swapped="no"/>
                               </object>
@@ -1067,6 +1068,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">typ_pdflatex</property>
                                 <signal name="toggled" handler="on_typ_xelatex_toggled" swapped="no"/>
@@ -1109,6 +1111,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">typ_pdflatex</property>
                                 <signal name="toggled" handler="on_typ_rubber_toggled" swapped="no"/>
@@ -1151,6 +1154,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
+                                <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">typ_pdflatex</property>
                               </object>
@@ -1172,20 +1176,6 @@
                         <property name="expand">True</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label32">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">This is a textual description of the chosen typesetter.
-It will probably be a total of two lines maximum.</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -1293,16 +1283,16 @@ It will probably be a total of two lines maximum.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="box_pdfcompile">
+                  <object class="GtkVBox" id="box_cmpmethod">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">3</property>
                     <child>
-                      <object class="GtkLabel" id="label13">
+                      <object class="GtkLabel" id="label43">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">PDF Compiling</property>
+                        <property name="label" translatable="yes">Compilation method</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
@@ -1315,90 +1305,61 @@ It will probably be a total of two lines maximum.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="box_compile">
+                      <object class="GtkVBox" id="box_compile2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkHBox" id="compile_box">
+                          <object class="GtkRadioButton" id="method_texpdf">
+                            <property name="label" translatable="yes">TeX --&gt; PDF</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkCheckButton" id="compile_status">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <signal name="toggled" handler="toggle_compilestatus" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">11</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="combo_compilescheme">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="model">list_compileschemes</property>
-                                <property name="active">0</property>
-                                <signal name="changed" handler="on_combo_compilescheme_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSpinButton" id="compile_timer">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="xalign">0.5</property>
-                                <property name="invisible_char_set">True</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                                <property name="adjustment">pdfcompile_time</property>
-                                <signal name="value-changed" handler="on_compile_value_changed" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">10</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="label14">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">seconds</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">5</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="on_method_texpdf_toggled" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="method_texdvipdf">
+                            <property name="label" translatable="yes">TeX --&gt; DVI --&gt; PDF</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">method_texpdf</property>
+                            <signal name="toggled" handler="on_method_texdvipdf_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="method_texdvipspdf">
+                            <property name="label" translatable="yes">TeX --&gt; DVI --&gt; PS --&gt; PDF</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">True</property>
+                            <property name="group">method_texpdf</property>
+                            <signal name="toggled" handler="on_method_texdvipspdf_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -1590,7 +1551,127 @@ It will probably be a total of two lines maximum.</property>
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkVBox" id="box_pdfcompile">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkLabel" id="label13">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">PDF Compiling</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="padding">5</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkVBox" id="box_compile">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkHBox" id="compile_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkCheckButton" id="compile_status">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="toggle_compilestatus" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">11</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combo_compilescheme">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">list_compileschemes</property>
+                                <property name="active">0</property>
+                                <signal name="changed" handler="on_combo_compilescheme_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSpinButton" id="compile_timer">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="invisible_char">●</property>
+                                <property name="xalign">0.5</property>
+                                <property name="invisible_char_set">True</property>
+                                <property name="primary_icon_activatable">False</property>
+                                <property name="secondary_icon_activatable">False</property>
+                                <property name="primary_icon_sensitive">True</property>
+                                <property name="secondary_icon_sensitive">True</property>
+                                <property name="adjustment">pdfcompile_time</property>
+                                <signal name="value-changed" handler="on_compile_value_changed" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">10</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label14">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">seconds</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">5</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
                 </child>
                 <child>
                   <placeholder/>

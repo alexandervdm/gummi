@@ -66,6 +66,13 @@ gboolean latex_typesetter_active (gchar* typesetter) {
     return FALSE;    
 }
 
+gboolean latex_method_active (gchar* method) {
+    if (g_strcmp0 (config_get_value("compile_method"), method) == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter) {
     if (g_list_find_custom (lc->typesetters, 
                             typesetter, (GCompareFunc)strcmp) == NULL) {
