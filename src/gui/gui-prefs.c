@@ -176,7 +176,21 @@ void prefsgui_main (GuPrefsGui* prefs) {
 }
 
 static void set_tab_view_settings (GuPrefsGui* prefs) {
-    
+    gboolean value = FALSE;
+
+    value = TO_BOOL (config_get_value ("textwrapping"));
+    if (value) {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->textwrap_button),
+                value);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->wordwrap_button),
+                TO_BOOL (config_get_value ("wordwrapping")));
+    } else
+        gtk_widget_set_sensitive (GTK_WIDGET (prefs->wordwrap_button), FALSE);
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->line_numbers),
+            TO_BOOL (config_get_value ("line_numbers")));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->highlighting),
+            TO_BOOL (config_get_value ("highlighting")));    
     
 }
 
@@ -219,13 +233,15 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     GtkTreeIter iter;
     const gchar* lang = 0;
     gint count = 0;
-    gboolean value = FALSE, valid = FALSE;
+    gboolean valid = FALSE;
     const gchar* font = config_get_value ("font");
 
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
     gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
     pango_font_description_free (font_desc);
 
+    /* set all settings for view tab */
+    set_tab_view_settings (prefs);
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autosaving),
             TO_BOOL (config_get_value ("autosaving")));
