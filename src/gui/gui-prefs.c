@@ -48,8 +48,6 @@ extern Gummi* gummi;
 extern GummiGui* gui;
 
 
-static void set_tab_compilation_settings (GuPrefsGui* prefs);
-
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GuPrefsGui* p = g_new0 (GuPrefsGui, 1);
@@ -170,10 +168,18 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 }
 
 void prefsgui_main (GuPrefsGui* prefs) {
-    prefsgui_set_current_settings (prefs);
-    
+
+    set_tab_view_settings (prefs);
+    set_tab_editor_settings (prefs);
+    set_tab_fontcolor_settings (prefs);
+    set_tab_defaulttext_settings (prefs);
+    set_tab_compilation_settings (prefs);
+    set_tab_miscellaneous_settings (prefs);
+
     gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
 }
+
+
 
 static void set_tab_view_settings (GuPrefsGui* prefs) {
     gboolean value = FALSE;
@@ -195,8 +201,35 @@ static void set_tab_view_settings (GuPrefsGui* prefs) {
 }
 
 static void set_tab_editor_settings (GuPrefsGui* prefs) {
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoindentation),
+            TO_BOOL (config_get_value ("autoindentation")));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->spaces_instof_tabs),
+            TO_BOOL (config_get_value ("spaces_instof_tabs")));
+    gtk_spin_button_set_value (prefs->tabwidth,
+                               atoi (config_get_value ("tabwidth")));
+    gtk_spin_button_set_value (prefs->autosave_timer,
+                               atoi (config_get_value ("autosave_timer")));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autosaving),
+            TO_BOOL (config_get_value ("autosaving")));
+    if (!config_get_value ("autosaving"))
+        gtk_widget_set_sensitive (GTK_WIDGET (prefs->autosave_timer), FALSE);
+}
+
+static void set_tab_fontcolor_settings (GuPrefsGui* prefs) {
+    const gchar* font = config_get_value ("font");
+
+    PangoFontDescription* font_desc = pango_font_description_from_string (font);
+    gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
+    pango_font_description_free (font_desc);
     
-    
+    gtk_font_button_set_font_name (prefs->editor_font, 
+                                        config_get_value ("font"));
+    prefsgui_apply_style_scheme(prefs);
+}
+
+static void set_tab_defaulttext_settings (GuPrefsGui* prefs) {
+    gtk_text_buffer_set_text (prefs->default_buffer,
+            config_get_value ("welcome"), strlen(config_get_value ("welcome")));    
 }
 
 static void set_tab_compilation_settings (GuPrefsGui* prefs) {
@@ -229,63 +262,15 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     }
     else if (latex_method_active ("texdvipspdf")) {
         gtk_toggle_button_set_active (prefs->method_texdvipspdf, TRUE);
-    }    
+    }
 }
 
-void prefsgui_set_current_settings (GuPrefsGui* prefs) {
-    /* set font */
+static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
     GtkTreeModel* combo_lang = 0;
     GtkTreeIter iter;
     const gchar* lang = 0;
     gint count = 0;
     gboolean valid = FALSE;
-    const gchar* font = config_get_value ("font");
-
-    PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
-    pango_font_description_free (font_desc);
-
-    /* set all settings for view tab */
-    set_tab_view_settings (prefs);
-
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autosaving),
-            TO_BOOL (config_get_value ("autosaving")));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
-            TO_BOOL (config_get_value ("compile_status")));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->spaces_instof_tabs),
-            TO_BOOL (config_get_value ("spaces_instof_tabs")));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoindentation),
-            TO_BOOL (config_get_value ("autoindentation")));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
-            TO_BOOL (config_get_value ("autoexport")));
-
-    if (!config_get_value ("autosaving"))
-        gtk_widget_set_sensitive (GTK_WIDGET (prefs->autosave_timer), FALSE);
-
-    if (!config_get_value ("compile_status"))
-        gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
-
-    /* set spin button */
-    gtk_spin_button_set_value (prefs->autosave_timer,
-                               atoi (config_get_value ("autosave_timer")));
-    gtk_spin_button_set_value (prefs->compile_timer,
-                               atoi (config_get_value ("compile_timer")));
-    gtk_spin_button_set_value (prefs->tabwidth,
-                               atoi (config_get_value ("tabwidth")));
-
-    gtk_font_button_set_font_name (prefs->editor_font,
-                                   config_get_value ("font"));
-    gtk_text_buffer_set_text (prefs->default_buffer,
-            config_get_value ("welcome"), strlen(config_get_value ("welcome")));
-
-
-    /* set all settings for compilation tab */
-    set_tab_compilation_settings (prefs);
-    
-
-    /* compile scheme */
-    if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
-        gtk_combo_box_set_active (prefs->compile_scheme, 1);
 
     combo_lang = gtk_combo_box_get_model (prefs->combo_languages);
 
@@ -300,10 +285,21 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
         }
         ++count;
         valid = gtk_tree_model_iter_next (combo_lang, &iter);
-    }
+    }    
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
+            TO_BOOL (config_get_value ("compile_status")));
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
+            TO_BOOL (config_get_value ("autoexport")));
 
-    /* set style scheme */
-    prefsgui_apply_style_scheme(prefs);
+    if (!config_get_value ("compile_status"))
+        gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
+        
+    gtk_spin_button_set_value (prefs->compile_timer,
+                               atoi (config_get_value ("compile_timer")));
+    /* compile scheme */
+    if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
+        gtk_combo_box_set_active (prefs->compile_scheme, 1);
+                               
 }
 
 void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
@@ -493,7 +489,13 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
     config_set_default ();
-    prefsgui_set_current_settings (gui->prefsgui);
+    /* TODO: I broke this in svn 880 */
+    set_tab_view_settings (gui->prefsgui);
+    set_tab_editor_settings (gui->prefsgui);
+    set_tab_fontcolor_settings (gui->prefsgui);
+    set_tab_defaulttext_settings (gui->prefsgui);
+    set_tab_compilation_settings (gui->prefsgui);
+    set_tab_miscellaneous_settings (gui->prefsgui);
 }
 
 G_MODULE_EXPORT
