@@ -74,7 +74,7 @@ struct _GuPrefsGui {
 };
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow);
-void prefsgui_main (GuPrefsGui* prefs);
+void prefsgui_main (GuPrefsGui* prefs, int page);
 void prefsgui_apply_style_scheme(GuPrefsGui* prefs);
 void toggle_linenumbers (GtkWidget* widget, void* user);
 void toggle_highlighting (GtkWidget* widget, void* user);

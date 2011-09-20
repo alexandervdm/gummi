@@ -174,8 +174,10 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     return p;
 }
 
-void prefsgui_main (GuPrefsGui* prefs) {
+void prefsgui_main (GuPrefsGui* prefs, int page) {
 
+    gtk_notebook_set_current_page(prefs->notebook, page);
+    
     set_all_tab_settings (prefs);
     gtk_widget_show_all (GTK_WIDGET (prefs->prefwindow));
 }

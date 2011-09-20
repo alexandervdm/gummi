@@ -583,7 +583,7 @@ void on_menu_selectall_activate (GtkWidget *widget, void * user) {
 
 G_MODULE_EXPORT
 void on_menu_preferences_activate (GtkWidget *widget, void * user) {
-    prefsgui_main (gui->prefsgui);
+    prefsgui_main (gui->prefsgui, 0);
 }
 
 G_MODULE_EXPORT
