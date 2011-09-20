@@ -194,6 +194,11 @@ static void set_tab_view_settings (GuPrefsGui* prefs) {
     
 }
 
+static void set_tab_editor_settings (GuPrefsGui* prefs) {
+    
+    
+}
+
 static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     /* Setting available typesetters and the active one */
     /* TODO: iterate the available typesetter list and gtk_builder the objects
