@@ -56,11 +56,14 @@ struct _GuPrefsGui {
     GtkListStore* list_styleschemes;
     GtkTextView* default_text;
     GtkTextBuffer* default_buffer;
-    GtkComboBox* typesetter;
     GtkFontButton* editor_font;
     GtkComboBox* compile_scheme;
     GtkSpinButton* compile_timer;
-    GtkListStore* list_typesetters;
+    
+    GtkToggleButton* typ_pdflatex;
+    GtkToggleButton* typ_xelatex;
+    GtkToggleButton* typ_rubber;
+    
 
     GtkVBox* view_box;
     GtkHBox* editor_box;

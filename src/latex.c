@@ -47,8 +47,8 @@
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
 
-static gboolean rubber_active (void);
-//static gboolean latexmk_active (void);
+
+static GList* get_available_typesetters (void);
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
@@ -58,22 +58,24 @@ GuLatex* latex_init (void) {
     return l;
 }
 
-static gboolean rubber_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "rubber") == 0) {
-        return TRUE;
-    }
-    return FALSE;
-}
 
-/*
-static gboolean latexmk_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "latexmk") == 0) {
+gboolean latex_typesetter_active (gchar* typesetter) {
+    if (g_strcmp0 (config_get_value("typesetter"), typesetter) == 0) {
         return TRUE;
     }
     return FALSE;    
-}*/
+}
 
-GList* get_available_typesetters (void) {
+gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter) {
+    if (g_list_find_custom (lc->typesetters, 
+                            typesetter, (GCompareFunc)strcmp) == NULL) {
+        return FALSE;
+    }
+    return TRUE;
+    
+}
+
+static GList* get_available_typesetters (void) {
     int i;
     GList *typesetters = NULL;
 
@@ -117,7 +119,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
-    if (rubber_active()) {
+    if (latex_typesetter_active("rubber")) {
         flags = g_strdup_printf("-d -q");
         outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
     }
@@ -145,7 +147,7 @@ gchar* latex_analyse_log (gchar *compile_log) {
     
     /* Rubber does not post the pdftex compilation output to tty, so we will
      * have to open the log file and retrieve it I guess */
-    if (rubber_active()) {
+    if (latex_typesetter_active("rubber")) {
         gchar* logname = NULL;
         /* TODO: integrate - retrieve from functions */
         gchar *filename = g_strdup (gummi_get_active_editor()->filename);

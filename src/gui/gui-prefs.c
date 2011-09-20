@@ -88,8 +88,6 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_TEXT_VIEW (gtk_builder_get_object (builder, "default_text"));
     p->default_buffer = 
         gtk_text_view_get_buffer (p->default_text);
-    p->typesetter =
-        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_typesetter"));
     p->editor_font =
         GTK_FONT_BUTTON (gtk_builder_get_object (builder, "editor_font"));
     p->compile_scheme =
@@ -98,8 +96,13 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "compile_timer"));
     p->autoexport =
         GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "auto_export"));
-    p->list_typesetters =
-        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_typesetters"));
+        
+    p->typ_pdflatex =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_pdflatex"));
+    p->typ_xelatex =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_xelatex"));
+    p->typ_rubber =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_rubber"));
         
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
@@ -215,24 +218,28 @@ void prefsgui_set_current_settings (GuPrefsGui* prefs) {
     gtk_text_buffer_set_text (prefs->default_buffer,
             config_get_value ("welcome"), strlen(config_get_value ("welcome")));
 
-    /* set available typesetters TODO: import once from latex.c */
-    GtkTreeIter iterb;
-    gint listlength = g_list_length (gummi->latex->typesetters);
-    gint i;
-    
-    gtk_list_store_clear (prefs->list_typesetters);
-    
-    const gchar* typesetter = config_get_value ("typesetter");
-    
-    for (i=0; i<listlength; i++) {
-        gchar *tmp = g_list_nth_data (gummi->latex->typesetters, i);
-        gtk_list_store_append (prefs->list_typesetters, &iterb);
-        gtk_list_store_set (prefs->list_typesetters, &iterb, 0, tmp, -1);
-        if (0 == strcmp (typesetter, tmp)) {
-            gtk_combo_box_set_active (prefs->typesetter, i);
-        }
-    }
 
+    /* Setting available typesetters and the active one */
+    /* TODO: iterate the available typesetter list and gtk_builder the objects
+     * maybe.. or not.. */
+    if (latex_typesetter_detected(gummi->latex, "pdflatex")) {
+        if (latex_typesetter_active("pdflatex")) 
+            gtk_toggle_button_set_active (prefs->typ_pdflatex, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_pdflatex), TRUE);
+    }
+    
+    if (latex_typesetter_detected(gummi->latex, "xelatex")) {
+        if (latex_typesetter_active("xelatex")) 
+            gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
+    }
+    
+    if (latex_typesetter_detected(gummi->latex, "rubber")) {
+        if (latex_typesetter_active("rubber")) 
+            gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
+    }
+            
     /* compile scheme */
     if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
         gtk_combo_box_set_active (prefs->compile_scheme, 1);
@@ -500,13 +507,31 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
     pango_font_description_free (font_desc);
 }
 
+
 G_MODULE_EXPORT
-void on_combo_typesetter_changed (GtkWidget* widget, void* user) {
-    
-    gchar *selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
-    
-    config_set_value ("typesetter", selected);
+void on_typ_pdflatex_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("typesetter", "pdflatex");
+        slog (L_INFO, "Changed typesetter to \"pdflatex\"\n");
+    }
 }
+
+G_MODULE_EXPORT
+void on_typ_xelatex_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("typesetter", "xelatex");
+        slog (L_INFO, "Changed typesetter to \"xelatex\"\n");
+    }
+}
+
+G_MODULE_EXPORT
+void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("typesetter", "rubber");
+        slog (L_INFO, "Changed typesetter to \"rubber\"\n");
+    }
+}
+
 
 G_MODULE_EXPORT
 void on_combo_language_changed (GtkWidget* widget, void* user) {
