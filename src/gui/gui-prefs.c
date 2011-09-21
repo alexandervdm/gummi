@@ -48,7 +48,6 @@
 
 /* TODO: needs mayor cleanup */
 
-extern Gummi* gummi;
 extern GummiGui* gui;
 
 static void set_all_tab_settings (GuPrefsGui* prefs);
@@ -250,19 +249,21 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     /* Setting available typesetters and the active one */
     /* TODO: iterate the available typesetter list and gtk_builder the objects
      * maybe.. or not.. */
-    if (latex_typesetter_detected(gummi->latex, "pdflatex")) {
+     
+    
+    if (pdflatex_detected()) {
         if (pdflatex_active()) 
             gtk_toggle_button_set_active (prefs->typ_pdflatex, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_pdflatex), TRUE);
     }
     
-    if (latex_typesetter_detected(gummi->latex, "xelatex")) {
+    if (xelatex_detected()) {
         if (xelatex_active()) 
             gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
     }
     
-    if (latex_typesetter_detected(gummi->latex, "rubber")) {
+    if (rubber_detected()) {
         if (rubber_active()) 
             gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);

@@ -27,5 +27,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
+#include <glib.h>
+
+void texlive_init (void);
+
 gboolean pdflatex_active (void);
 gboolean xelatex_active (void);
+
+gboolean pdflatex_detected (void);
+gboolean xelatex_detected (void);

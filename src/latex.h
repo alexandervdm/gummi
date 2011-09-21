@@ -44,8 +44,6 @@ struct _GuLatex {
     gint errorlines[BUFSIZ];
     gchar* errormessage;
     gboolean modified_since_compile;
-    
-    GList *typesetters;
 };
 
 GuLatex* latex_init (void);

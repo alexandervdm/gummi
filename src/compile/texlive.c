@@ -30,7 +30,27 @@
 #include <glib.h>
 
 #include "configfile.h"
+#include "constants.h"
+#include "utils.h"
 
+gboolean pdf_detected = FALSE;
+gboolean xel_detected = FALSE;
+
+
+/* All the functions for "pure" building with texlive only tools */
+
+void texlive_init (void) {
+    // TODO: check if supported version
+    if (utils_program_exists (C_PDFLATEX)) {
+        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_PDFLATEX));
+        pdf_detected = TRUE;
+    }
+    if (utils_program_exists (C_XELATEX)) {
+        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_XELATEX));
+        xel_detected = TRUE;
+    }
+    
+}
 
 gboolean pdflatex_active (void) {
     if (g_strcmp0 (config_get_value("typesetter"), "pdflatex") == 0) {
@@ -46,6 +66,13 @@ gboolean xelatex_active (void) {
     return FALSE;
 }
 
+gboolean pdflatex_detected (void) {
+    return pdf_detected;
+}
+
+gboolean xelatex_detected (void) {
+    return xel_detected;
+}
 
 
 

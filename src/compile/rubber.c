@@ -27,11 +27,22 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <glib.h>
+#include "rubber.h"
 
 #include "configfile.h"
 #include "constants.h"
+#include "utils.h"
 
+gboolean detected = FALSE;
+
+void rubber_init (void) {
+    
+    if (utils_program_exists (C_RUBBER)) {
+        // TODO: check if supported version
+        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_RUBBER));
+        detected = TRUE;
+    }
+}
 
 gboolean rubber_active (void) {
     if (g_strcmp0 (config_get_value("typesetter"), C_RUBBER) == 0) {
@@ -40,14 +51,18 @@ gboolean rubber_active (void) {
     return FALSE;
 }
 
-
-
+gboolean rubber_detected (void) {
+    return detected;
+}
 
 /* base form : 
  * 
  * cd "/tmp"; env openout_any=a rubber -p -d -q --into="/tmp" "/tmp/gummi_4I2B2V"
  * 
  */
+
+
+
 
 
 

@@ -50,21 +50,14 @@
 
 
 
-/* supported latex typesetting programs */
-gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
-
-
-
-static GList* get_available_typesetters (void);
-
-
-
-
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
     l->errormessage = NULL;
     l->modified_since_compile = FALSE;
-    l->typesetters = get_available_typesetters ();
+    
+    texlive_init ();
+    rubber_init ();
+    
     return l;
 }
 
@@ -75,28 +68,6 @@ gboolean latex_method_active (gchar* method) {
         return TRUE;
     }
     return FALSE;
-}
-
-gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter) {
-    if (g_list_find_custom (lc->typesetters, 
-                            typesetter, (GCompareFunc)strcmp) == NULL) {
-        return FALSE;
-    }
-    return TRUE;
-    
-}
-
-static GList* get_available_typesetters (void) {
-    int i;
-    GList *typesetters = NULL;
-
-    for (i = 0; i < 3; i++) {
-        if (utils_program_exists(supported_cmds[i])) {
-            typesetters = g_list_append (typesetters, supported_cmds[i]);
-            slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (supported_cmds[i]));
-        }
-    }
-    return typesetters;
 }
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {

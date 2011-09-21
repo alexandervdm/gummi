@@ -27,4 +27,14 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <glib.h>
+
+
+
+
+void rubber_init (void);
 gboolean rubber_active (void);
+gboolean rubber_detected (void);
+
+
+

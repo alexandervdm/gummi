@@ -28,6 +28,8 @@
  */
 
 
+#define C_PDFLATEX "pdflatex"
+#define C_XELATEX "xelatex"
 #define C_RUBBER "rubber"
 #define C_LATEXMK "latexmk"
 
