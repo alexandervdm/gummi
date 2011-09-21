@@ -44,11 +44,21 @@
 #include "gui/gui-preview.h"
 #include "utils.h"
 
+#include "compile/rubber.h"
+#include "compile/latexmk.h"
+#include "compile/texlive.h"
+
+
+
 /* supported latex typesetting programs */
 gchararray supported_cmds[3] = {"pdflatex", "xelatex", "rubber"};
 
 
+
 static GList* get_available_typesetters (void);
+
+
+
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
@@ -59,12 +69,6 @@ GuLatex* latex_init (void) {
 }
 
 
-gboolean latex_typesetter_active (gchar* typesetter) {
-    if (g_strcmp0 (config_get_value("typesetter"), typesetter) == 0) {
-        return TRUE;
-    }
-    return FALSE;    
-}
 
 gboolean latex_method_active (gchar* method) {
     if (g_strcmp0 (config_get_value("compile_method"), method) == 0) {
@@ -126,7 +130,11 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
-    if (latex_typesetter_active("rubber")) {
+    if (rubber_active()) {
+        
+
+            
+        
         if (latex_method_active("texpdf")) flags = g_strdup_printf("-d -q");
         if (latex_method_active("texdvipspdf")) flags = g_strdup_printf("-p -d -q");
         outdir = g_strdup_printf("--into=\"%s\"", C_TMPDIR);
@@ -155,7 +163,7 @@ gchar* latex_analyse_log (gchar *compile_log) {
     
     /* Rubber does not post the pdftex compilation output to tty, so we will
      * have to open the log file and retrieve it I guess */
-    if (latex_typesetter_active("rubber")) {
+    if (rubber_active()) {
         gchar* logname = NULL;
         /* TODO: integrate - retrieve from functions */
         gchar *filename = g_strdup (gummi_get_active_editor()->filename);

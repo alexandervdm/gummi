@@ -1,6 +1,6 @@
 /**
- * @file   constants.h
- * @brief  Constants used throughout the program
+ * @file   latexmk.c
+ * @brief  
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -27,27 +27,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <glib.h>
 
-#define C_RUBBER "rubber"
-#define C_LATEXMK "latexmk"
+#include "configfile.h"
+#include "constants.h"
+
+gboolean latexmk_active (void) {
+    if (g_strcmp0 (config_get_value("typesetter"), C_LATEXMK) == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
 
 
-/* Platform dependant constants : */
 
-#ifdef WIN32
-    /* brb, gonna go punch a wall */
-    gchar *tmp_tmp = "C:\\gummitmp";
-    g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
-    /* TODO: find out why Windows's env variables are still
-             using goddamn 8.3 DOS format style and fix it. */
-    #define C_TMPDIR tmp_tmp
-    #define C_CMDSEP "&&"
-    #define C_TEXSEC ""
-#else
-    #define C_TMPDIR g_get_tmp_dir()
-    #define C_CMDSEP ";"
-    #define C_TEXSEC "env openout_any=a"
-#endif
+
 
 
 

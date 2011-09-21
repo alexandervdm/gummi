@@ -41,6 +41,10 @@
 #include "latex.h"
 #include "utils.h"
 
+#include "compile/rubber.h"
+#include "compile/latexmk.h"
+#include "compile/texlive.h"
+
 
 /* TODO: needs mayor cleanup */
 
@@ -247,19 +251,19 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     /* TODO: iterate the available typesetter list and gtk_builder the objects
      * maybe.. or not.. */
     if (latex_typesetter_detected(gummi->latex, "pdflatex")) {
-        if (latex_typesetter_active("pdflatex")) 
+        if (pdflatex_active()) 
             gtk_toggle_button_set_active (prefs->typ_pdflatex, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_pdflatex), TRUE);
     }
     
     if (latex_typesetter_detected(gummi->latex, "xelatex")) {
-        if (latex_typesetter_active("xelatex")) 
+        if (xelatex_active()) 
             gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
     }
     
     if (latex_typesetter_detected(gummi->latex, "rubber")) {
-        if (latex_typesetter_active("rubber")) 
+        if (rubber_active()) 
             gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
     }

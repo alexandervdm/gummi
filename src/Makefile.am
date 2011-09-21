@@ -11,6 +11,9 @@ gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
+		compile/texlive.c compile/texlive.h \
+		compile/latexmk.c compile/latexmk.h \
+		compile/rubber.c compile/rubber.h \
 		gui/gui-tabmanager.c gui/gui-tabmanager.h \
 		gui/gui-import.c gui/gui-import.h \
 		gui/gui-main.c gui/gui-main.h \
