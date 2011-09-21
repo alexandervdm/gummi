@@ -38,10 +38,10 @@
 #include <glib.h>
 
 #include "configfile.h"
+#include "constants.h"
 #include "editor.h"
 #include "environment.h"
 #include "gui/gui-preview.h"
-#include "porting.h"
 #include "utils.h"
 
 /* supported latex typesetting programs */
@@ -122,20 +122,20 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     
     const gchar *typesetter = config_get_value ("typesetter");
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, P_CMDSEP, P_TEXSEC);
+    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, C_CMDSEP, C_TEXSEC);
     gchar *flags = NULL;
     gchar *outdir = NULL;
     
     if (latex_typesetter_active("rubber")) {
         if (latex_method_active("texpdf")) flags = g_strdup_printf("-d -q");
         if (latex_method_active("texdvipspdf")) flags = g_strdup_printf("-p -d -q");
-        outdir = g_strdup_printf("--into=\"%s\"", ec->tmpdir);
+        outdir = g_strdup_printf("--into=\"%s\"", C_TMPDIR);
     }
     else { /* pdflatex/xelatex */
         flags = g_strdup_printf("-interaction=nonstopmode "
                                      "-file-line-error "
                                      "-halt-on-error");
-        outdir = g_strdup_printf("-output-directory=\"%s\"", ec->tmpdir);
+        outdir = g_strdup_printf("-output-directory=\"%s\"", C_TMPDIR);
     }
     
     gchar* command = g_strdup_printf ("%s %s %s %s \"%s\"", 
@@ -256,10 +256,10 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
                                      "-interaction=nonstopmode "
                                      "--output-directory=\"%s\" \"%s\"",
                                      dirname,
-                                     P_CMDSEP,
-                                     P_TEXSEC,
+                                     C_CMDSEP,
+                                     C_TEXSEC,
                                      config_get_value ("typesetter"),
-                                     ec->tmpdir,
+                                     C_TMPDIR,
                                      ec->workfile);
     g_free (dirname);
     Tuple2 res = utils_popen_r (command);

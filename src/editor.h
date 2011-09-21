@@ -57,7 +57,6 @@ struct _GuEditor {
     gchar* pdffile;
     gchar* workfile;
     gchar* bibfile;
-    const gchar* tmpdir;
 
     /* GUI related members */
     GtkSourceView* view;

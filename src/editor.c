@@ -45,6 +45,7 @@
 #include <gtk/gtk.h>
 
 #include "configfile.h"
+#include "constants.h"
 #include "environment.h"
 #include "utils.h"
 
@@ -68,16 +69,7 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->workfile = NULL;
     ec->bibfile = NULL;
     
-    #ifdef WIN32
-        /* brb, gonna go punch a wall */
-        gchar *tmp_tmp = "C:\\gummitmp";
-        g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
-        ec->tmpdir = g_strdup (tmp_tmp);
-        /* TODO: find out why Windows's env variables are still
-                 using goddamn 8.3 DOS format style and fix it. */
-    #else
-        ec->tmpdir = g_strdup (g_get_tmp_dir ());
-    #endif
+
     
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new ();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,
@@ -168,7 +160,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
     if (ec->workfd != -1)
         editor_fileinfo_cleanup (ec);
 
-    ec->fdname = g_build_filename (ec->tmpdir, "gummi_XXXXXX", NULL);
+    ec->fdname = g_build_filename (C_TMPDIR, "gummi_XXXXXX", NULL);
     ec->workfd = g_mkstemp (ec->fdname); 
 
     if (filename) {
@@ -177,7 +169,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
         ec->filename = g_strdup (filename);
         ec->workfile = g_strdup_printf ("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
                                        basename);
-        ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", ec->tmpdir,
+        ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", C_TMPDIR,
                                        G_DIR_SEPARATOR, basename);
         g_free (basename);
         g_free (dirname);
@@ -194,9 +186,9 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname (ec->filename);
         gchar* basename = g_path_get_basename (ec->filename);
-        auxfile = g_strdup_printf ("%s%c.%s.aux", ec->tmpdir,
+        auxfile = g_strdup_printf ("%s%c.%s.aux", C_TMPDIR,
                 G_DIR_SEPARATOR, basename);
-        logfile = g_strdup_printf ("%s%c.%s.log", ec->tmpdir,
+        logfile = g_strdup_printf ("%s%c.%s.log", C_TMPDIR,
                 G_DIR_SEPARATOR, basename);
         g_free (basename);
         g_free (dirname);

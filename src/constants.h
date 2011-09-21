@@ -1,6 +1,6 @@
 /**
- * @file   porting.h
- * @brief  Porting layer of different platforms 
+ * @file   constants.h
+ * @brief  Constants used throughout the program
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -27,28 +27,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* Fix GDK_KEY_foo for Gtk < 2.22 */
-#include <gdk/gdkkeysyms.h>
 
-#ifndef GDK_KEY_BackSpace
-    #define GDK_KEY_BackSpace GDK_BackSpace
+#ifdef WIN32
+    /* brb, gonna go punch a wall */
+    gchar *tmp_tmp = "C:\\gummitmp";
+    g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
+    /* TODO: find out why Windows's env variables are still
+             using goddamn 8.3 DOS format style and fix it. */
+    #define C_TMPDIR tmp_tmp
+    #define C_CMDSEP "&&"
+    #define C_TEXSEC ""
+#else
+    #define C_TMPDIR g_get_tmp_dir()
+    #define C_CMDSEP ";"
+    #define C_TEXSEC "env openout_any=a"
 #endif
-
-#ifndef GDK_KEY_Escape
-    #define GDK_KEY_Escape GDK_Escape
-#endif
-
-#ifndef GDK_KEY_Tab
-    #define GDK_KEY_Tab GDK_Tab
-#endif
-
-#ifndef GDK_KEY_Delete
-    #define GDK_KEY_Delete GDK_Delete
-#endif
-
-#ifndef GDK_KEY_ISO_Left_Tab
-    #define GDK_KEY_ISO_Left_Tab GDK_ISO_Left_Tab
-#endif
-
 
 
