@@ -95,35 +95,31 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 
 gchar* latex_set_compile_cmd (GuEditor* ec) {
     
-    const gchar *typesetter = config_get_value ("typesetter");
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar *setup = g_strdup_printf("cd \"%s\"%s %s", dirname, C_CMDSEP, C_TEXSEC);
-    gchar *flags = NULL;
-    gchar *outdir = NULL;
+    const gchar* typesetter = config_get_value ("typesetter");
+    const gchar* method = config_get_value ("compile_method");
+    const gchar* precommand = g_strdup_printf ("cd \"%s\"%s%s", 
+                                                C_TMPDIR, C_CMDSEP, C_TEXSEC);
+                                                
+    gchar* flags = NULL;
+    gchar* outdir = NULL;
     
     if (rubber_active()) {
-        
-
-            
-        
-        if (latex_method_active("texpdf")) flags = g_strdup_printf("-d -q");
-        if (latex_method_active("texdvipspdf")) flags = g_strdup_printf("-p -d -q");
+        flags = rubber_get_flags (method);
         outdir = g_strdup_printf("--into=\"%s\"", C_TMPDIR);
     }
-    else { /* pdflatex/xelatex */
-        flags = g_strdup_printf("-interaction=nonstopmode "
-                                     "-file-line-error "
-                                     "-halt-on-error");
+    else {
+        flags = texlive_get_flags (method);
         outdir = g_strdup_printf("-output-directory=\"%s\"", C_TMPDIR);
     }
-    
+
     gchar* command = g_strdup_printf ("%s %s %s %s \"%s\"", 
-                                        setup, 
+                                        precommand, 
                                         typesetter, 
                                         flags, 
                                         outdir, 
                                         ec->workfile);
-    
+
     g_free (dirname);
     g_free (flags);
     g_free (outdir);
@@ -283,3 +279,4 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
 
     g_free (savepath);
 }
+

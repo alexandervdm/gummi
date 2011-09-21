@@ -37,3 +37,5 @@ gboolean xelatex_active (void);
 
 gboolean pdflatex_detected (void);
 gboolean xelatex_detected (void);
+
+gchar* texlive_get_flags (const gchar *method);

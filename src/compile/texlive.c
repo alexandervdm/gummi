@@ -74,6 +74,22 @@ gboolean xelatex_detected (void) {
     return xel_detected;
 }
 
+gchar* texlive_get_flags (const gchar *method) {
+    gchar *texflags;
+    if (g_strcmp0 (method, "texpdf") == 0) {
+        texflags = g_strdup_printf("-interaction=nonstopmode "
+                                "-file-line-error "
+                                "-halt-on-error");
+    }
+    else {
+        texflags = g_strdup_printf("-interaction=nonstopmode "
+                                "-file-line-error "
+                                "-halt-on-error");
+        slog (L_WARNING, "Method not supported yet for pdflatex/xelatex.\n");
+    }
+    return texflags;
+}
+
 
 
 

@@ -55,6 +55,17 @@ gboolean rubber_detected (void) {
     return detected;
 }
 
+gchar* rubber_get_flags (const gchar *method) {
+    gchar *rubflags;
+    if (g_strcmp0 (method, "texpdf") == 0) {
+        rubflags = g_strdup_printf("-d -q");
+    }
+    else {
+        rubflags = g_strdup_printf("-p -d -q");
+    }
+    return rubflags;
+}
+
 /* base form : 
  * 
  * cd "/tmp"; env openout_any=a rubber -p -d -q --into="/tmp" "/tmp/gummi_4I2B2V"
