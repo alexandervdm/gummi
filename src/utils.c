@@ -274,6 +274,14 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
     return tstr;
 }
 
+gboolean utils_strequal (const gchar* str1, const gchar* str2) {
+    /* TODO: replace "strcmp" calls */
+    if (g_strcmp0 (str1, str2) == 0) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens) {
     if (target != NULL && substr != NULL) {
         if (case_sens == TRUE) {

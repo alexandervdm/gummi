@@ -89,7 +89,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->doc = NULL;
     p->page = NULL;
 
-    if (g_strcmp0(config_get_value("zoommode"), "bestfit") == 0) {
+    if (utils_strequal(config_get_value("zoommode"), "bestfit")) {
         p->page_zoommode = 0;
         gtk_combo_box_set_active(p->combo_sizes, 0);
     }

@@ -156,6 +156,7 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
  * is passed as TRUE, case sensitivity of the two strings is ignored.
  */
 gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens);
+gboolean utils_strequal (const gchar* str1, const gchar* str2);
 
 gchar* utils_get_version (const gchar* program);
 

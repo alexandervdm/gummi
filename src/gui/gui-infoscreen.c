@@ -143,11 +143,11 @@ void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     
     gtk_widget_hide (GTK_WIDGET (is->tabsbox));
     
-    if (g_strcmp0 (msg, "compile_error") == 0) {
+    if (utils_strequal (msg, "compile_error")) {
         gtk_label_set_text (is->header, compile_error_h);
         gtk_label_set_text (is->details, compile_error_d);
     }
-    else if (g_strcmp0 (msg, "program_error") == 0) {
+    else if (utils_strequal (msg, "program_error")) {
         gtk_label_set_text (is->header, program_error_h);
         gtk_label_set_text (is->details, program_error_d);
     }

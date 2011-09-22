@@ -64,7 +64,7 @@ GuLatex* latex_init (void) {
 
 
 gboolean latex_method_active (gchar* method) {
-    if (g_strcmp0 (config_get_value("compile_method"), method) == 0) {
+    if (utils_strequal (config_get_value ("compile_method"), method)) {
         return TRUE;
     }
     return FALSE;

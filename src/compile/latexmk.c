@@ -27,13 +27,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "latexmk.h"
+
 #include <glib.h>
 
 #include "configfile.h"
 #include "constants.h"
+#include "utils.h"
 
 gboolean latexmk_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), C_LATEXMK) == 0) {
+    if (utils_strequal (config_get_value("typesetter"), C_LATEXMK)) {
         return TRUE;
     }
     return FALSE;

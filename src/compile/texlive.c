@@ -55,14 +55,14 @@ void texlive_init (void) {
 }
 
 gboolean pdflatex_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "pdflatex") == 0) {
+    if (utils_strequal (config_get_value("typesetter"), "pdflatex")) {
         return TRUE;
     }
     return FALSE;
 }
 
 gboolean xelatex_active (void) {
-    if (g_strcmp0 (config_get_value("typesetter"), "xelatex") == 0) {
+    if (utils_strequal (config_get_value("typesetter"), "xelatex")) {
         return TRUE;
     }
     return FALSE;
@@ -90,7 +90,7 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     
     gchar *flags = texlive_get_flags("texpdf");
     
-    if (g_strcmp0 (method, "texpdf") == 0) {
+    if (utils_strequal (method, "texpdf")) {
 
         texcmd = g_strdup_printf("%s %s %s \"%s\"", typesetter, 
                                                 flags,
