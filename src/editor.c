@@ -65,6 +65,7 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->workfd = -1;
     ec->fdname = NULL;
     ec->filename = NULL;   /* current opened file name in workspace */
+    ec->basename = NULL;   /* use this to form .dvi/.ps/.log etc. files */
     ec->pdffile = NULL;
     ec->workfile = NULL;
     ec->bibfile = NULL;
@@ -120,18 +121,6 @@ void editor_destroy (GuEditor* ec) {
     g_free(ec);
 }
 
-gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename) {
-    g_free (ec->bibfile);
-
-    if (ec->filename && !g_path_is_absolute (filename)) {
-        gchar* dirname = g_path_get_dirname (ec->filename);
-        ec->bibfile = g_build_filename (dirname, filename, NULL);
-        g_free (dirname);
-    } else
-        ec->bibfile = g_strdup (filename);
-    return utils_path_exists (ec->bibfile);
-}
-
 /* FileInfo:
  * When a TeX document includes materials from other files (image, documents,
  * bibliography ... etc), pdflatex will try to find those files under the
@@ -161,22 +150,35 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
         editor_fileinfo_cleanup (ec);
 
     ec->fdname = g_build_filename (C_TMPDIR, "gummi_XXXXXX", NULL);
-    ec->workfd = g_mkstemp (ec->fdname); 
+    ec->workfd = g_mkstemp (ec->fdname);
 
     if (filename) {
-        gchar* basename = g_path_get_basename (filename);
-        gchar* dirname = g_path_get_dirname (filename);
+        gchar* base = g_path_get_basename (filename);
+        gchar* dir = g_path_get_dirname (filename);
         ec->filename = g_strdup (filename);
-        ec->workfile = g_strdup_printf ("%s%c.%s.swp", dirname, G_DIR_SEPARATOR,
-                                       basename);
+        ec->basename = g_strdup_printf ("%s%c.%s", dir, G_DIR_SEPARATOR, base);
+        ec->workfile = g_strdup_printf ("%s.swp", ec->basename);
         ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", C_TMPDIR,
-                                       G_DIR_SEPARATOR, basename);
-        g_free (basename);
-        g_free (dirname);
+                                       G_DIR_SEPARATOR, base);
+        g_free (base);
+        g_free (dir);
     } else {
         ec->workfile = g_strdup (ec->fdname);
+        ec->basename = g_strdup (ec->fdname);
         ec->pdffile =  g_strdup_printf ("%s.pdf", ec->fdname);
     }
+}
+
+gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename) {
+    g_free (ec->bibfile);
+
+    if (ec->filename && !g_path_is_absolute (filename)) {
+        gchar* dirname = g_path_get_dirname (ec->filename);
+        ec->bibfile = g_build_filename (dirname, filename, NULL);
+        g_free (dirname);
+    } else
+        ec->bibfile = g_strdup (filename);
+    return utils_path_exists (ec->bibfile);
 }
 
 void editor_fileinfo_cleanup (GuEditor* ec) {
@@ -209,6 +211,7 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     g_remove (ec->fdname);
     g_remove (ec->workfile);
     g_remove (ec->pdffile);
+    g_remove (ec->basename);
 
     g_free (auxfile);
     g_free (logfile);
@@ -216,11 +219,13 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     g_free (ec->filename);
     g_free (ec->workfile);
     g_free (ec->pdffile);
+    g_free (ec->basename);
 
     ec->fdname = NULL;
     ec->filename = NULL;
     ec->workfile = NULL;
     ec->pdffile = NULL;
+    ec->basename = NULL;
 }
 
 void editor_sourceview_config (GuEditor* ec) {

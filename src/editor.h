@@ -54,6 +54,7 @@ struct _GuEditor {
     gint workfd;
     gchar* fdname;
     gchar* filename;
+    gchar *basename;
     gchar* pdffile;
     gchar* workfile;
     gchar* bibfile;
