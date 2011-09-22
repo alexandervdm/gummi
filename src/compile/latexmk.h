@@ -27,4 +27,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <glib.h>
+
 gboolean latexmk_active (void);
