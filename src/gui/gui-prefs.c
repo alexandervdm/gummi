@@ -586,6 +586,8 @@ void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT /* TODO: this function sets the value when the conf value is
+                         created on first run, should come from non-gui */
 void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("compile_method", "texpdf");
@@ -593,6 +595,8 @@ void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
     }
     
 }
+
+G_MODULE_EXPORT
 void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("compile_method", "texdvipdf");
@@ -601,6 +605,7 @@ void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
 
 }
 
+G_MODULE_EXPORT
 void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("compile_method", "texdvipspdf");
