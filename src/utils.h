@@ -160,6 +160,8 @@ gboolean utils_strequal (const gchar* str1, const gchar* str2);
 
 gchar* utils_get_version (const gchar* program);
 
+gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
+
 /**
  * slist_find:
  * @head: the list head

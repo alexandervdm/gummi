@@ -274,6 +274,18 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
     return tstr;
 }
 
+gchar* utils_get_tmp_tmp_dir (void) {
+/* brb, gonna go punch a wall */
+    gchar *tmp_tmp = "C:\\gummitmp";
+    g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
+    /* TODO: find out why Windows's env variables are still
+             using goddamn 8.3 DOS format style and fix it. */
+    return tmp_tmp;
+}  
+
+
+
+
 gboolean utils_strequal (const gchar* str1, const gchar* str2) {
     /* TODO: replace "strcmp" calls */
     if (g_strcmp0 (str1, str2) == 0) {
