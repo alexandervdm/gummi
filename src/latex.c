@@ -95,35 +95,26 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 
 gchar* latex_set_compile_cmd (GuEditor* ec) {
     
-    gchar* dirname = g_path_get_dirname (ec->workfile);
-    const gchar* typesetter = config_get_value ("typesetter");
     const gchar* method = config_get_value ("compile_method");
     const gchar* precommand = g_strdup_printf ("cd \"%s\"%s%s", 
                                                 C_TMPDIR, C_CMDSEP, C_TEXSEC);
                                                 
-    gchar* flags = NULL;
-    gchar* outdir = NULL;
+    gchar* texcmd = NULL;
     
     if (rubber_active()) {
-        flags = rubber_get_flags (method);
-        outdir = g_strdup_printf("--into=\"%s\"", C_TMPDIR);
+        texcmd = rubber_get_command (method, ec->workfile);
     }
     else {
-        flags = texlive_get_flags (method);
-        outdir = g_strdup_printf("-output-directory=\"%s\"", C_TMPDIR);
+        texcmd = texlive_get_command (method, ec->workfile, ec->basename);
     }
 
-    gchar* command = g_strdup_printf ("%s %s %s %s \"%s\"", 
+    gchar* combined = g_strdup_printf ("%s %s", 
                                         precommand, 
-                                        typesetter, 
-                                        flags, 
-                                        outdir, 
-                                        ec->workfile);
+                                        texcmd);
+                                        
+    //printf("cmd is\n%s\n", combined);
 
-    g_free (dirname);
-    g_free (flags);
-    g_free (outdir);
-    return command;
+    return combined;
 }
 
 gchar* latex_analyse_log (gchar *compile_log) {

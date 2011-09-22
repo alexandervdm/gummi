@@ -27,6 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "texlive.h"
+
 #include <glib.h>
 
 #include "configfile.h"
@@ -74,20 +76,50 @@ gboolean xelatex_detected (void) {
     return xel_detected;
 }
 
-gchar* texlive_get_flags (const gchar *method) {
-    gchar *texflags;
+
+gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basename) {
+    
+    const gchar* outdir = g_strdup_printf("-output-directory=\"%s\"", C_TMPDIR);
+    
+    
+    gchar *typesetter = NULL;
+    gchar *texcmd = NULL;
+    
+    if (pdflatex_active()) typesetter = C_PDFLATEX;
+    else typesetter = C_XELATEX;
+    
+    gchar *flags = texlive_get_flags("texpdf");
+    
     if (g_strcmp0 (method, "texpdf") == 0) {
-        texflags = g_strdup_printf("-interaction=nonstopmode "
-                                "-file-line-error "
-                                "-halt-on-error");
-    }
+
+        texcmd = g_strdup_printf("%s %s %s \"%s\"", typesetter, 
+                                                flags,
+                                                outdir, 
+                                                workfile);
+    } 
     else {
-        texflags = g_strdup_printf("-interaction=nonstopmode "
+        gchar *dviname = g_strdup_printf("%s.dvi", basename);
+        gchar *psname = g_strdup_printf("%s.ps", basename);
+        texcmd = g_strdup_printf("latex %s %s \"%s\" %s dvips -q \"%s\" %s ps2pdf \"%s\"",
+                                                flags, 
+                                                outdir, 
+                                                workfile,
+                                                C_CMDSEP,
+                                                dviname,
+                                                C_CMDSEP,
+                                                psname);
+    }
+    return texcmd;
+}
+
+
+
+
+gchar* texlive_get_flags (const gchar* method) {
+    /* no custom flags yet */
+    return g_strdup_printf("-interaction=nonstopmode "
                                 "-file-line-error "
                                 "-halt-on-error");
-        slog (L_WARNING, "Method not supported yet for pdflatex/xelatex.\n");
-    }
-    return texflags;
 }
 
 

@@ -55,6 +55,17 @@ gboolean rubber_detected (void) {
     return detected;
 }
 
+gchar* rubber_get_command (const gchar* method, gchar* workfile) {
+    
+    const gchar* outdir = g_strdup_printf ("--into=\"%s\"", C_TMPDIR);
+    const gchar* flags = rubber_get_flags (method);
+    gchar* rubcmd;
+    
+    rubcmd = g_strdup_printf("rubber %s %s \"%s\"", flags, outdir, workfile);
+    
+    return rubcmd;
+}
+
 gchar* rubber_get_flags (const gchar *method) {
     gchar *rubflags;
     if (g_strcmp0 (method, "texpdf") == 0) {
