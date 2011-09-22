@@ -1346,6 +1346,7 @@
                             <property name="use_action_appearance">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+                            <property name="group">method_texpdf</property>
                             <signal name="toggled" handler="on_method_texdvipdf_toggled" swapped="no"/>
                           </object>
                           <packing>
@@ -1363,6 +1364,7 @@
                             <property name="use_action_appearance">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
+                            <property name="group">method_texpdf</property>
                             <signal name="toggled" handler="on_method_texdvipspdf_toggled" swapped="no"/>
                           </object>
                           <packing>
