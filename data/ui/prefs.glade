@@ -1292,7 +1292,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Compilation method</property>
+                        <property name="label" translatable="yes">Compilation steps</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
@@ -1310,15 +1310,26 @@
                         <property name="can_focus">False</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkRadioButton" id="method_texpdf">
-                            <property name="label" translatable="yes">TeX --&gt; PDF</property>
+                          <object class="GtkHBox" id="hbox14">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
-                            <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_method_texpdf_toggled" swapped="no"/>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkRadioButton" id="method_texpdf">
+                                <property name="label" translatable="yes">TeX → PDF</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="on_method_texpdf_toggled" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -1328,14 +1339,13 @@
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="method_texdvipdf">
-                            <property name="label" translatable="yes">TeX --&gt; DVI --&gt; PDF</property>
+                            <property name="label" translatable="yes">TeX → DVI → PDF</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_action_appearance">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="group">method_texpdf</property>
                             <signal name="toggled" handler="on_method_texdvipdf_toggled" swapped="no"/>
                           </object>
                           <packing>
@@ -1346,14 +1356,13 @@
                         </child>
                         <child>
                           <object class="GtkRadioButton" id="method_texdvipspdf">
-                            <property name="label" translatable="yes">TeX --&gt; DVI --&gt; PS --&gt; PDF</property>
+                            <property name="label" translatable="yes">TeX → DVI → PS → PDF</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_action_appearance">False</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="group">method_texpdf</property>
                             <signal name="toggled" handler="on_method_texdvipspdf_toggled" swapped="no"/>
                           </object>
                           <packing>
