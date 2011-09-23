@@ -41,11 +41,12 @@
 #include <math.h>
 
 #include "configfile.h"
-#include "environment.h"
 #include "gui/gui-main.h"
+#include "environment.h"
+
 #include "motion.h"
 #include "porting.h"
-#include "utils.h"
+
 
 
 /* set up uri using appropriate formatting for OS 

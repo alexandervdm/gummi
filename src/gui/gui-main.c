@@ -45,7 +45,6 @@
 #include "editor.h"
 #include "environment.h"
 #include "importer.h"
-#include "updatecheck.h"
 #include "utils.h"
 #include "template.h"
 
@@ -419,33 +418,6 @@ void gui_set_sensitive(gboolean enable) {
 }
 
 G_MODULE_EXPORT
-void on_menu_recent_activate (GtkWidget *widget, void * user) {
-    const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
-    gchar* tstr;
-    gint index = name[0] - '0' -1;
-
-    if (utils_path_exists (gui->recent_list[index])) {
-        gui_open_file (gui->recent_list[index]);
-    } else {
-        tstr = g_strdup_printf (_("Error loading recent file: %s"),
-                gui->recent_list[index]);
-        slog (L_ERROR, "%s\n", tstr);
-        slog (L_G_ERROR, "Could not find the file %s.\n",
-             gui->recent_list[index]);
-        statusbar_set_message (tstr);
-        g_free (tstr);
-        g_free (gui->recent_list[index]);
-        gui->recent_list[index] = NULL;
-        while (index < RECENT_FILES_NUM -1) {
-            gui->recent_list[index] = gui->recent_list[index+1];
-            ++index;
-        }
-        gui->recent_list[RECENT_FILES_NUM -1] = g_strdup ("__NULL__");
-    }
-    display_recent_files (gui);
-}
-
-G_MODULE_EXPORT
 void on_menu_bibupdate_activate (GtkWidget *widget, void * user) {
     biblio_compile_bibliography (gummi->biblio, g_active_editor, gummi->latex);
 }
@@ -454,17 +426,6 @@ G_MODULE_EXPORT
 gboolean on_docstats_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_hide (GTK_WIDGET (gui->docstatswindow));
     return TRUE;
-}
-
-G_MODULE_EXPORT
-void on_menu_update_activate (GtkWidget *widget, void * user) {
-    #ifdef WIN32
-        slog (L_G_INFO, "To be implemented for win32..\n");
-    #else
-        gboolean ret = updatecheck (gui->mainwindow);
-        if (!ret)
-            slog (L_G_ERROR, "Update check failed!\n");
-    #endif
 }
 
 G_MODULE_EXPORT

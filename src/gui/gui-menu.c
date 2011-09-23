@@ -32,6 +32,7 @@
 #include "configfile.h"
 #include "environment.h"
 #include "gui-main.h"
+#include "updatecheck.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;
@@ -91,6 +92,33 @@ void on_menu_export_activate (GtkWidget *widget, void * user) {
     if (filename)
         latex_export_pdffile (gummi->latex, g_active_editor, filename, TRUE);
     g_free (filename);
+}
+
+G_MODULE_EXPORT
+void on_menu_recent_activate (GtkWidget *widget, void * user) {
+    const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
+    gchar* tstr;
+    gint index = name[0] - '0' -1;
+
+    if (utils_path_exists (gui->recent_list[index])) {
+        gui_open_file (gui->recent_list[index]);
+    } else {
+        tstr = g_strdup_printf (_("Error loading recent file: %s"),
+                gui->recent_list[index]);
+        slog (L_ERROR, "%s\n", tstr);
+        slog (L_G_ERROR, "Could not find the file %s.\n",
+             gui->recent_list[index]);
+        statusbar_set_message (tstr);
+        g_free (tstr);
+        g_free (gui->recent_list[index]);
+        gui->recent_list[index] = NULL;
+        while (index < RECENT_FILES_NUM -1) {
+            gui->recent_list[index] = gui->recent_list[index+1];
+            ++index;
+        }
+        gui->recent_list[RECENT_FILES_NUM -1] = g_strdup ("__NULL__");
+    }
+    display_recent_files (gui);
 }
 
 G_MODULE_EXPORT
@@ -496,7 +524,18 @@ void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
  * HELP MENU                                                                   *
  ******************************************************************************/
 
- G_MODULE_EXPORT
+G_MODULE_EXPORT
+void on_menu_update_activate (GtkWidget *widget, void * user) {
+    #ifdef WIN32
+        slog (L_G_INFO, "To be implemented for win32..\n");
+    #else
+        gboolean ret = updatecheck (gui->mainwindow);
+        if (!ret)
+            slog (L_G_ERROR, "Update check failed!\n");
+    #endif
+}
+
+G_MODULE_EXPORT
 void on_menu_about_activate (GtkWidget *widget, void * user) {
     GError* err = NULL;
     gchar* icon_file = g_build_filename (DATADIR, "icons", "gummi.png", NULL);
