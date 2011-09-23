@@ -33,7 +33,7 @@
 #include "environment.h"
 
 
-GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder) {
+GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);

@@ -72,7 +72,7 @@ GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename);
 void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
                                  gboolean modified);
 
-GuTabmanagerGui* tabmanagerguigui_init (GtkBuilder* builder);
+GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
                                     const gchar* filename);
 gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,

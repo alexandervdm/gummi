@@ -41,6 +41,7 @@
 #include "gui-snippets.h"
 #include "gui-tabmanager.h"
 #include "gui-infoscreen.h"
+#include "gui-menu.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
@@ -70,11 +71,13 @@ struct _GummiGui {
     GuSnippetsGui* snippetsgui;
     GuTabmanagerGui* tabmanagergui;
     GuInfoscreenGui* infoscreengui;
+    GuMenuGui* menugui;
 
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;
     GtkTextView* errorview;
-    GtkVBox* rightpane;
+        GtkVBox* rightpane;
+
     GtkHBox* toolbar;
     GtkStatusbar* statusbar;
     GtkToggleToolButton* previewoff;
@@ -127,37 +130,8 @@ void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);
 void gui_set_sensitive(gboolean enable);
 
-
-void on_menu_close_activate (GtkWidget* widget, void* user);
-void on_menu_new_activate (GtkWidget* widget, void* user);
-void on_menu_open_activate (GtkWidget* widget, void* user);
-void on_menu_save_activate (GtkWidget* widget, void* user);
-void on_menu_saveas_activate (GtkWidget* widget, void* user);
-void on_menu_find_activate (GtkWidget* widget, void* user);
-void on_menu_cut_activate (GtkWidget* widget, void* user);
-void on_menu_copy_activate (GtkWidget* widget, void* user);
-void on_menu_paste_activate (GtkWidget* widget, void* user);
-void on_menu_undo_activate (GtkWidget* widget, void* user);
-void on_menu_redo_activate (GtkWidget* widget, void* user);
-void on_menu_delete_activate (GtkWidget *widget, void* user);
-void on_menu_selectall_activate (GtkWidget *widget, void* user);
-void on_menu_preferences_activate (GtkWidget *widget, void* user);
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget* nbpage,
         int page, void* data);
-void on_menu_statusbar_toggled (GtkWidget *widget, void* user);
-void on_menu_toolbar_toggled (GtkWidget *widget, void* user);
-void on_menu_rightpane_toggled (GtkWidget *widget, void* user);
-void on_menu_fullscreen_toggled (GtkWidget *widget, void* user);
-void on_menu_find_activate (GtkWidget *widget, void* user);
-void on_menu_findnext_activate (GtkWidget *widget, void* user);
-void on_menu_findprev_activate (GtkWidget *widget, void* user);
-void on_menu_bibload_activate (GtkWidget *widget, void* user);
-void on_menu_bibupdate_activate (GtkWidget *widget, void* user);
-void on_menu_pdfcompile_activate (GtkWidget *widget, void* user);
-void on_menu_docstat_activate (GtkWidget *widget, void* user);
-void on_menu_spelling_toggled (GtkWidget *widget, void* user);
-void on_menu_update_activate (GtkWidget *widget, void* user);
-void on_menu_about_activate (GtkWidget *widget, void* user);
 void on_tool_previewoff_toggled (GtkWidget *widget, void * user);
 void on_tool_textstyle_bold_activate (GtkWidget* widget, void* user);
 void on_tool_textstyle_italic_activate (GtkWidget* widget, void* user);
