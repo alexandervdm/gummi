@@ -71,7 +71,6 @@ struct _GummiGui {
     GuSnippetsGui* snippetsgui;
     GuTabmanagerGui* tabmanagergui;
     GuInfoscreenGui* infoscreengui;
-    GuMenuGui* menugui;
 
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;

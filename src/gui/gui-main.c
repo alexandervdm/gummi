@@ -52,8 +52,6 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
-extern GuMenuGui* guimenu;
-
 /* Many of the functions in this file are based on the excellent GTK+
  * tutorials written by Micah Carrick that can be found on:
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
@@ -134,7 +132,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
         g->insens_widgets[i] =
             GTK_WIDGET(gtk_builder_get_object (builder, insens_widgets_str[i]));
 
-    g->menugui = menugui_init (builder);
+    menugui_init (builder);
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
     g->searchgui = searchgui_init (builder);
