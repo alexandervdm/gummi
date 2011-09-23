@@ -124,6 +124,9 @@ void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text) {
     g_object_set_data (savecontext, "text", text);
     
     g_signal_emit_by_name (io->sig_hook, "document-write", savecontext);
+    
+    gtk_text_buffer_set_modified 
+                (GTK_TEXT_BUFFER(gummi_get_active_editor()->buffer), FALSE);
 }
 
 void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
@@ -158,7 +161,7 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 }
 
 void iofunctions_start_autosave (void) {
-    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
+    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 3,
             iofunctions_autosave_cb, NULL);
     slog (L_DEBUG, "Autosaving function started..\n");
 }
@@ -240,5 +243,6 @@ gboolean iofunctions_autosave_cb (void *user) {
             slog (L_DEBUG, "Autosaving document: %s\n", ec->filename);
        }
     }
+    gui_update_filenm_display (gummi_get_active_editor()->filename);
     return TRUE;
 }

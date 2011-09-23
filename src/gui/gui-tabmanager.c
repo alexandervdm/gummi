@@ -93,6 +93,7 @@ GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename) {
 
 void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
                                  gboolean modified) {
+                       
     gchar* labeltext = NULL; 
     gchar* labelname = NULL;
     labelname = (filename)? g_path_get_basename (filename):
@@ -148,8 +149,8 @@ GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
 
 gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
                                       const gchar* filename) {
+                                          
     tm->active_tab->editor = ec;
-    tabmanagergui_update_active_tab_label (tm, filename);
     editor_destroy(tm->active_editor);
     gtk_container_remove (GTK_CONTAINER (tm->active_tab->page),
                           GTK_WIDGET (tm->active_editor->view));
@@ -179,14 +180,7 @@ void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos) {
     gtk_notebook_set_current_page(tm->notebook, pos);
 }
 
-void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
-                                            const gchar* filename) {
-    const gchar* fname = (filename && tm->active_editor)?
-                            filename: tm->active_editor->filename;
-    gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
-                                                  (tm->active_editor->buffer));
-    tablabel_update_label_text (tm->active_tab->tablabel, fname, modi);
-}
+
 
 GList* tabmanagergui_return_tablabels(GuTabmanagerGui* tm) {
     GList *labelnames = NULL;

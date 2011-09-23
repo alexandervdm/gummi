@@ -121,6 +121,7 @@ gboolean gui_quit (void);
 void gui_create_environment (OpenAct act, const gchar* filename,
                              const gchar* opt);
 void gui_update_environment (const gchar* filename);
+void gui_update_filenm_display (const gchar* filename);
 void gui_update_windowtitle (void);
 void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);

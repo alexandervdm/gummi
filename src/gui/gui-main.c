@@ -267,10 +267,11 @@ void gui_update_environment (const gchar* filename) {
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
-    tabmanagergui_update_active_tab_label (gui->tabmanagergui, filename);
-
+    
+    gui_update_filenm_display (filename);
+    
     gummi_new_environment (g_active_editor, filename);
-    gui_update_windowtitle ();
+
     previewgui_reset (gui->previewgui);
 }
 
@@ -312,7 +313,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
             slog(L_FATAL, "can't happen bug\n");
     }
 
-    gui_update_windowtitle ();
+    gui_update_filenm_display (filename);
     add_to_recent_list (filename);
 
     previewgui_reset (gui->previewgui);
@@ -323,11 +324,24 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int page, void *data) {
     /* very important line */
     tabmanagergui_set_active_tab(gui->tabmanagergui, page);
-    gui_update_windowtitle();
+
+    gui_update_windowtitle ();
     
     previewgui_reset (gui->previewgui);
 
     slog (L_DEBUG, "Switched to environment at page %d\n", page);
+}
+
+void gui_update_filenm_display (const gchar* filename) {
+    /* TODO: the whole procedure is a mess, but let's fix that after 0.6.0 */
+    
+    const gchar* fname = (filename && gui->tabmanagergui->active_editor)?
+                            filename: gui->tabmanagergui->active_editor->filename;
+    gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
+                            (gui->tabmanagergui->active_editor->buffer));
+
+    tablabel_update_label_text (gui->tabmanagergui->active_tab->tablabel, fname, modi);
+    gui_update_windowtitle ();
 }
 
 void gui_update_windowtitle (void) {
@@ -335,7 +349,7 @@ void gui_update_windowtitle (void) {
     gchar* title = NULL;
     const gchar* labeltext = NULL;
 
-    tabmanagergui_update_active_tab_label (gui->tabmanagergui, NULL);
+
     labeltext =  gtk_label_get_text (g_active_tab->tablabel->label);
 
     if (!g_active_editor) {
@@ -430,7 +444,7 @@ void gui_save_file (gboolean saveas) {
         latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
     }
     if (new) gui_update_environment (filename);
-    gui_update_windowtitle ();
+    gui_update_filenm_display (filename);
     gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 
 cleanup:
@@ -1368,9 +1382,8 @@ gboolean statusbar_del_message (void* user) {
 void check_preview_timer (void) {
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
-
-    gui_update_windowtitle ();
-    /* no point in running the whole update title/label procedure */
+    
+    gui_update_filenm_display (g_active_editor->filename);
 
     motion_start_timer (gummi->motion);
 }
