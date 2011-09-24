@@ -161,7 +161,7 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 }
 
 void iofunctions_start_autosave (void) {
-    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 3,
+    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, NULL);
     slog (L_DEBUG, "Autosaving function started..\n");
 }
