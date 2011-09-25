@@ -40,9 +40,10 @@
 #endif
 
 #define PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+ users"
-#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2011\n"\
+#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2011\n\n"\
                         "Alexander van der Mey\n"\
-                        "Wei-Ning Huang"
+                        "Wei-Ning Huang\n"\
+                        "Dion Timmermann"
 #define PACKAGE_LICENSE \
 "Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
 "All Rights reserved.\n" \
