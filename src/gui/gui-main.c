@@ -679,7 +679,10 @@ gchar* get_open_filename (GuFilterType type) {
     gchar* filename = NULL;
 
 
-    if (g_active_editor->filename != NULL) {
+    /* check if both active_editor and filename are defined. when zero tabs
+     * are open, the g_active_editor object is destroyed causing a segfault
+     * on the (filename != null) check. */
+    if (g_active_editor != NULL && g_active_editor->filename != NULL) {
        active_cwd = g_path_get_dirname(g_active_editor->filename);
     }
 
