@@ -33,14 +33,14 @@
 #include "constants.h"
 #include "utils.h"
 
-gboolean detected = FALSE;
+gboolean rub_detected = FALSE;
 
 void rubber_init (void) {
     
     if (utils_program_exists (C_RUBBER)) {
         // TODO: check if supported version
         slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_RUBBER));
-        detected = TRUE;
+        rub_detected = TRUE;
     }
 }
 
@@ -52,7 +52,7 @@ gboolean rubber_active (void) {
 }
 
 gboolean rubber_detected (void) {
-    return detected;
+    return rub_detected;
 }
 
 gchar* rubber_get_command (const gchar* method, gchar* workfile) {

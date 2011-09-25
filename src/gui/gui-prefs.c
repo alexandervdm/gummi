@@ -118,6 +118,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_xelatex"));
     p->typ_rubber =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_rubber"));
+    p->typ_latexmk =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_latexmk"));
 
     p->method_texpdf =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "method_texpdf"));
@@ -267,6 +269,12 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
         if (rubber_active()) 
             gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
+    }
+    
+    if (latexmk_detected()) {
+        if (latexmk_active()) 
+            gtk_toggle_button_set_active (prefs->typ_latexmk, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_latexmk), TRUE);
     }
 
     if (latex_method_active ("texpdf")) {
@@ -583,6 +591,14 @@ void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("typesetter", "rubber");
         slog (L_INFO, "Changed typesetter to \"rubber\"\n");
+    }
+}
+
+G_MODULE_EXPORT
+void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_value ("typesetter", "latexmk");
+        slog (L_INFO, "Changed typesetter to \"latexmk\"\n");
     }
 }
 

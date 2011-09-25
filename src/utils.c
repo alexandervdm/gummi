@@ -262,7 +262,10 @@ gchar* utils_get_version (const gchar* program) {
     Tuple2 getv = utils_popen_r (g_strdup_printf("%s --version", program));
     gchar *output = (gchar*)getv.second;
     gchar **lines = g_strsplit(output, "\n", BUFSIZ);
-    return lines[0];
+    if (utils_strequal(program, "latexmk")) 
+        return lines[1];
+    else 
+        return lines[0];
 }
 
 gchar* utils_path_to_relative (const gchar* root, const gchar* target) {

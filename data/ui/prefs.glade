@@ -1157,6 +1157,7 @@
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">typ_pdflatex</property>
+                                <signal name="toggled" handler="on_typ_latexmk_toggled" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">True</property>

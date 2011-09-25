@@ -57,6 +57,7 @@ GuLatex* latex_init (void) {
     
     texlive_init ();
     rubber_init ();
+    latexmk_init ();
     
     return l;
 }
@@ -103,6 +104,9 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     
     if (rubber_active()) {
         texcmd = rubber_get_command (method, ec->workfile);
+    }
+    else if (latexmk_active()) {
+        texcmd = latexmk_get_command (method, ec->workfile);
     }
     else {
         texcmd = texlive_get_command (method, ec->workfile, ec->basename);
