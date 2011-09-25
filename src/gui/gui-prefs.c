@@ -606,7 +606,7 @@ G_MODULE_EXPORT /* TODO: this function sets the value when the conf value is
                          created on first run, should come from non-gui */
 void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_method", "texpdf");
+        config_set_value ("compile_steps", "texpdf");
         slog (L_INFO, "Changed compile method to \"tex->pdf\"\n");
     }
     
@@ -615,7 +615,7 @@ void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_method", "texdvipdf");
+        config_set_value ("compile_steps", "texdvipdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->pdf\"\n");
     }
 
@@ -624,7 +624,7 @@ void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_method", "texdvipspdf");
+        config_set_value ("compile_steps", "texdvipspdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->ps->pdf\"\n");
     }
 }   

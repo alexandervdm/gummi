@@ -78,7 +78,7 @@ const gchar config_str[] =
 "\n"
 "[Compile]\n"
 "typesetter = pdflatex\n"
-"compile_method = texpdf\n"
+"compile_steps = texpdf\n"
 "compile_status = True\n"
 "compile_scheme = on_idle\n"
 "compile_timer = 1\n"
@@ -155,6 +155,7 @@ void config_set_value (const gchar* term, const gchar* value) {
     g_free (index->second);
 
     index->second = g_strdup (value? value: "");
+    config_save ();
 }
 
 void config_load (void) {

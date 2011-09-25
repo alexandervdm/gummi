@@ -59,13 +59,19 @@ GuLatex* latex_init (void) {
     rubber_init ();
     latexmk_init ();
     
+    /* TODO: Temp hard set of compilation options for migrating configs */
+    if (strlen(config_get_value("typesetter")) == 0)
+        config_set_value("typesetter", "pdflatex");
+    if (strlen(config_get_value("compile_steps")) == 0)
+        config_set_value("compile_steps", "texpdf");
+    
     return l;
 }
 
 
 
 gboolean latex_method_active (gchar* method) {
-    if (utils_strequal (config_get_value ("compile_method"), method)) {
+    if (utils_strequal (config_get_value ("compile_steps"), method)) {
         return TRUE;
     }
     return FALSE;
@@ -96,7 +102,7 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 
 gchar* latex_set_compile_cmd (GuEditor* ec) {
     
-    const gchar* method = config_get_value ("compile_method");
+    const gchar* method = config_get_value ("compile_steps");
     const gchar* precommand = g_strdup_printf ("cd \"%s\"%s%s", 
                                                 C_TMPDIR, C_CMDSEP, C_TEXSEC);
                                                 
