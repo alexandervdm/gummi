@@ -1112,7 +1112,6 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) {
         
-        slog(L_INFO, "RETURNING from on_expose\n");
         return FALSE;
     }
 
