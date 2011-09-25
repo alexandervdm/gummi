@@ -1379,6 +1379,50 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkMenuItem" id="menu_page_layout">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="label" translatable="yes">Page Layout in Preview</property>
+                        <property name="use_underline">True</property>
+                        <child type="submenu">
+                          <object class="GtkMenu" id="page_layout_menu">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkRadioMenuItem" id="page_layout_single_page">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="label" translatable="yes">Single Page</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_as_radio">True</property>
+                                <signal name="toggled" handler="previewgui_page_layout_radio_changed" swapped="no"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkRadioMenuItem" id="page_layout_one_column">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="label" translatable="yes">Continuous, One Column</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_as_radio">True</property>
+                                <property name="group">page_layout_single_page</property>
+                                <signal name="toggled" handler="previewgui_page_layout_radio_changed" swapped="no"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="menuitem2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkCheckMenuItem" id="menu_fullscreen">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -1401,7 +1445,7 @@
                 <property name="label" translatable="yes">_Search</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu3">
+                  <object class="GtkMenu" id="menu4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -1450,7 +1494,7 @@
                 <property name="label" translatable="yes">_Document</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu4">
+                  <object class="GtkMenu" id="menu5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -1517,7 +1561,7 @@ and update preview.</property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSeparatorMenuItem" id="menuitem2">
+                      <object class="GtkSeparatorMenuItem" id="menuitem5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -1707,7 +1751,7 @@ and update preview.</property>
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
-                  <object class="GtkMenu" id="menu5">
+                  <object class="GtkMenu" id="menu11">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -2239,7 +2283,6 @@ active document</property>
                                     <property name="label" translatable="yes">Previous</property>
                                     <property name="use_underline">True</property>
                                     <property name="stock_id">gtk-go-back</property>
-                                    <signal name="clicked" handler="previewgui_prev_page" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2255,7 +2298,6 @@ active document</property>
                                     <property name="label" translatable="yes">Next</property>
                                     <property name="use_underline">True</property>
                                     <property name="stock_id">gtk-go-forward</property>
-                                    <signal name="clicked" handler="previewgui_next_page" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2295,7 +2337,6 @@ active document</property>
                                             <property name="secondary_icon_activatable">False</property>
                                             <property name="primary_icon_sensitive">True</property>
                                             <property name="secondary_icon_sensitive">True</property>
-                                            <signal name="changed" handler="previewgui_page_input_changed" swapped="no"/>
                                           </object>
                                           <packing>
                                             <property name="expand">True</property>
@@ -2343,7 +2384,6 @@ active document</property>
                                         <property name="can_focus">False</property>
                                         <property name="model">list_sizes</property>
                                         <property name="active">1</property>
-                                        <signal name="changed" handler="previewgui_zoom_change" swapped="no"/>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext3"/>
                                           <attributes>

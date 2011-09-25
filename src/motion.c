@@ -131,10 +131,15 @@ gpointer motion_compile_thread (gpointer data) {
             if (latex->errorlines[0]) {
                 motion_start_errormode  (mc, "compile_error");
             } else if (!latex->errorlines[0] && precompile_ok) {
+                if (!pc->uri) {
+                	previewgui_set_pdffile (pc, editor->pdffile);
+                } else {
+                	previewgui_refresh (gui->previewgui);
+                }
                 if (mc->errormode) motion_stop_errormode (mc);
-                if (!pc->uri) previewgui_set_pdffile (pc, editor->pdffile);
+            } else {
+            	previewgui_refresh (gui->previewgui);
             }
-            previewgui_refresh (gui->previewgui);
             gdk_threads_leave ();
         }
     }
