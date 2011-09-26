@@ -182,21 +182,8 @@ void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos) {
 
 
 
-GList* tabmanagergui_return_tablabels(GuTabmanagerGui* tm) {
-    GList *labelnames = NULL;
-    GuTabContext *tab = NULL;
-    const gchar *text;
-    guint items, i;
-
-    items = g_list_length (tm->tabs);
-    
-    for (i = 0; i < items; i++) {
-        
-        tab = g_list_nth_data (tm->tabs, i);
-        text = gtk_label_get_text (tab->tablabel->label);
-        labelnames = g_list_append (labelnames, (gpointer)text);
-    }
-    return labelnames;
+GList* tabmanagergui_get_all_tabs(GuTabmanagerGui* tm) {
+    return tm->tabs;
 }
 
 gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm) {

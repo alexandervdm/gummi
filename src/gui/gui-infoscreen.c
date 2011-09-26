@@ -122,22 +122,36 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
 }
 
 void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
-    GList *tablabels = NULL;
+    GuTabContext* tab = NULL;
+    GList* tabobjects = NULL;
     GtkTreeIter iter;
-    int i;
-    
+    gint counter = 0;
+    gint totalnr, i;
+
     gtk_list_store_clear (is->tabslist);
+    gtk_widget_set_sensitive (GTK_WIDGET(is->tabstree), TRUE);
     
-    gtk_widget_show (GTK_WIDGET (is->tabsbox));
+    tabobjects = tabmanagergui_get_all_tabs (gui->tabmanagergui);
+    totalnr = g_list_length (tabobjects);
     
-    tablabels = tabmanagergui_return_tablabels (gui->tabmanagergui);
-    
-    for (i = 0; i < g_list_length (tablabels); i++) {
-        gtk_list_store_append (is->tabslist, &iter);
-        gchar *tmp = g_list_nth_data(tablabels, i);
-        gtk_list_store_set (is->tabslist, &iter, 0, tmp, -1);
+    for (i = 0; i < totalnr; i++) {
+        tab = g_list_nth_data (tabobjects, i);
+        
+        if (tab->editor->filename != NULL && (tab != g_active_tab)) {
+            const gchar* text = gtk_label_get_text (tab->tablabel->label);
+            gtk_list_store_append (is->tabslist, &iter);
+            gtk_list_store_set (is->tabslist, &iter, 0, text, -1);
+            counter = counter + 1;
+        }
     }
+    
+    if (counter == 0) {
+        gtk_widget_set_sensitive (GTK_WIDGET(is->tabstree), FALSE); 
+    }
+
+    gtk_widget_show (GTK_WIDGET (is->tabsbox));
 }
+    
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     
