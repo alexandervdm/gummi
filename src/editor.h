@@ -58,6 +58,7 @@ struct _GuEditor {
     gchar* pdffile;
     gchar* workfile;
     gchar* bibfile;
+    gchar* masterfile;
 
     /* GUI related members */
     GtkSourceView* view;

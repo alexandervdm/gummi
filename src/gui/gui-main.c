@@ -471,11 +471,36 @@ void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_button_info_tabattach_clicked (GtkWidget* widget, void* user) {
-    printf("hallo\n");
+    GtkTreeSelection* selection;
+    GtkTreeModel* model;
+    GtkTreeIter iter;
+    gchar* workfile;
+    gchar* value;
     
+    selection = gtk_tree_view_get_selection (gui->infoscreengui->tabstree);
+    gtk_tree_selection_get_selected (selection, &model, &iter);
+    gtk_tree_model_get (model, &iter, 1, &value, -1);
     
+    GList* tabobjects;
+    gint totalnr, i;
+    GuTabContext* tab = NULL;
+    tabobjects = tabmanagergui_get_all_tabs (gui->tabmanagergui);
+    
+    totalnr = g_list_length (tabobjects);
+    
+    for (i = 0; i < totalnr; i++) {
+        tab = g_list_nth_data (tabobjects, i);
+        workfile = tab->editor->workfile;
+        
+        if (utils_strequal (value, workfile)) {
+            g_active_editor->masterfile = workfile;
+            slog (L_INFO, "Setting masterfile for %s to %s\n", 
+                                            g_active_tabname, workfile);
+            motion_stop_errormode (gummi->motion);
+            break;
+        }
+    }
 }
-
 
 G_MODULE_EXPORT
 void on_button_template_add_clicked (GtkWidget* widget, void* user) {

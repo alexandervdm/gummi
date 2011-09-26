@@ -84,6 +84,8 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_tabs"));
     is->tabsbox =
         GTK_VBOX (gtk_builder_get_object (builder, "error_tabsbox"));
+    is->tabsattach =
+        GTK_BUTTON (gtk_builder_get_object (builder, "info_tabattach"));
 
     is->header =
         GTK_LABEL (gtk_builder_get_object (builder, "error_header"));
@@ -130,6 +132,7 @@ void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
 
     gtk_list_store_clear (is->tabslist);
     gtk_widget_set_sensitive (GTK_WIDGET(is->tabstree), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET(is->tabsattach), TRUE);
     
     tabobjects = tabmanagergui_get_all_tabs (gui->tabmanagergui);
     totalnr = g_list_length (tabobjects);
@@ -139,14 +142,16 @@ void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
         
         if (tab->editor->filename != NULL && (tab != g_active_tab)) {
             const gchar* text = gtk_label_get_text (tab->tablabel->label);
+            const gchar* workfile = tab->editor->workfile;
             gtk_list_store_append (is->tabslist, &iter);
-            gtk_list_store_set (is->tabslist, &iter, 0, text, -1);
+            gtk_list_store_set (is->tabslist, &iter, 0, text, 1, workfile, -1);
             counter = counter + 1;
         }
     }
     
     if (counter == 0) {
-        gtk_widget_set_sensitive (GTK_WIDGET(is->tabstree), FALSE); 
+        gtk_widget_set_sensitive (GTK_WIDGET(is->tabstree), FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET(is->tabsattach), FALSE);
     }
 
     gtk_widget_show (GTK_WIDGET (is->tabsbox));

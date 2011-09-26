@@ -437,7 +437,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
     
     /* TODO: make nice functions for retrieving tab labels */
     gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (gui->builder, 
-                    "stats_filename")), gtk_label_get_text(g_active_tabname));
+                    "stats_filename")), g_active_tabname);
     gtk_widget_show (gui->docstatswindow);
     return;
 

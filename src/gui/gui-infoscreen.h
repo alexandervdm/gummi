@@ -41,9 +41,11 @@ struct _GuInfoscreenGui {
     GtkViewport* viewport;
     GtkWidget* errorpanel;
     GtkWidget* drawarea;
+    GtkButton* tabsattach; 
     GtkTreeView *tabstree;
     GtkListStore *tabslist;
     GtkVBox *tabsbox;
+
 
     GtkLabel *header;
     GtkImage *image;
