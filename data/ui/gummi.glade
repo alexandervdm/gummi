@@ -649,6 +649,12 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-apply</property>
   </object>
+  <object class="GtkImage" id="image19">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-preferences</property>
+    <property name="icon-size">1</property>
+  </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -1540,6 +1546,17 @@ and update preview.</property>
                         <property name="use_stock">False</property>
                         <accelerator key="F9" signal="activate"/>
                         <signal name="activate" handler="on_menu_pdfcompile_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_compileopts">
+                        <property name="label" translatable="yes">Set Compilation Options</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="image">image19</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="on_menu_compileopts_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -2986,9 +3003,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
