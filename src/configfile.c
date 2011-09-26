@@ -175,7 +175,18 @@ void config_load (void) {
         config_set_default ();
         return config_load ();
     }
-
+    
+    /* In the occurence of a crash, the config file can be left open and the
+     * contents wiped. Gummi segfaults at the start when the file is empty */
+    gchar* contents;
+    g_file_get_contents(config_filename, &contents, NULL, NULL);
+    if (strlen(contents) == 0) {
+        printf("goes in it\n");
+        slog (L_ERROR, "config file appears empty, reseting to default\n");
+        config_set_default ();
+        return config_load ();
+    }
+    
     current = config_head = prev = g_new0 (slist, 1);
 
     while (fgets (buf, BUFSIZ, fh)) {
