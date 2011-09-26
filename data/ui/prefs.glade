@@ -1024,6 +1024,7 @@
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
@@ -1066,6 +1067,7 @@
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
@@ -1109,6 +1111,7 @@
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
@@ -1152,6 +1155,7 @@
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
