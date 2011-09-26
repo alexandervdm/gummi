@@ -2,6 +2,34 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.0 (??, 2011):
+
+(listed up to svn 910)
+
+	Bugs fixed:
+	* Improved preview scaling performance
+	* Importer file choosers now default to CWD
+	* Fixed image import warning
+	* Fixed rare segfault on gummi start
+	* Search results colour depends on color theme
+	* Preview scroll position restored after error
+	* Replaced all win32 incompatible code
+	* Correct encoded text is written on file save
+	* Several GUI and icon related problems
+	* Several memory leaks
+
+	Features added:
+	* Multi-tab/document support
+	* LaTeX build systems (rubber/latexmk)
+	* Compiling through DVI/Postscript
+	* Continuous PDF preview
+	* Filter function for bibliographies
+	* Improved document statistics
+	* More configurable options
+
+
+
+
 Gummi 0.5.8 (March 17th, 2011):
 
 	Bugs fixed:
