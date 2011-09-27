@@ -435,9 +435,10 @@ static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
     page = MAX(0, page);
     page = MIN(page, pc->n_pages-1);
     
-    if (pc->current_page == page) {
-        return;
-    }
+    // Always run the code below, in case the document has changed
+    //if (pc->current_page == page) {
+    //    return;
+    //}
     L_F_DEBUG;
     
     pc->current_page = page;
@@ -754,6 +755,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_100);
     }
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
+    
     
     previewgui_goto_page (pc, 0);
 }
