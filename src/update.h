@@ -1,5 +1,5 @@
 /**
- * @file    updatecheck.h
+ * @file    update.h
  * @brief   
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>

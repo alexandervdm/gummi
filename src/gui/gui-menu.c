@@ -32,7 +32,7 @@
 #include "configfile.h"
 #include "environment.h"
 #include "gui-main.h"
-#include "updatecheck.h"
+#include "update.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;

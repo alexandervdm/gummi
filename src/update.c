@@ -1,6 +1,6 @@
 /**
- * @file   updatecheck.c
- * @brief  
+ * @file   update.c
+ * @brief  functions related to releases and upgrading between them
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -27,7 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "updatecheck.h"
+#include "update.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -104,6 +104,8 @@ gboolean updatecheck (GtkWindow* parent) {
     
     slog (L_INFO, "Currently installed: "PACKAGE_VERSION"\n");
     slog (L_INFO, "Currently available: %s", avail_version);
+    
+    /* TODO: move gtk part to gui-menu.c */
 
     dialog = gtk_message_dialog_new (parent, 
         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,

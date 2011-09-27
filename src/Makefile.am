@@ -30,7 +30,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		signals.c signals.h \
 		snippets.c snippets.h \
 		template.c template.h \
-		updatecheck.c updatecheck.h \
+		update.c update.h \
 		utils.c utils.h \
 		constants.h porting.h \
 		main.c

@@ -46,13 +46,15 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
-	editor.$(OBJEXT) environment.$(OBJEXT) \
+	editor.$(OBJEXT) environment.$(OBJEXT) texlive.$(OBJEXT) \
+	latexmk.$(OBJEXT) rubber.$(OBJEXT) gui-menu.$(OBJEXT) \
 	gui-tabmanager.$(OBJEXT) gui-import.$(OBJEXT) \
 	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
-	gui-search.$(OBJEXT) gui-snippets.$(OBJEXT) importer.$(OBJEXT) \
+	gui-search.$(OBJEXT) gui-snippets.$(OBJEXT) \
+	gui-infoscreen.$(OBJEXT) importer.$(OBJEXT) \
 	iofunctions.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
 	signals.$(OBJEXT) snippets.$(OBJEXT) template.$(OBJEXT) \
-	updatecheck.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
+	update.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -198,6 +200,10 @@ gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
 		editor.c editor.h \
 		environment.c environment.h \
+		compile/texlive.c compile/texlive.h \
+		compile/latexmk.c compile/latexmk.h \
+		compile/rubber.c compile/rubber.h \
+		gui/gui-menu.c gui/gui-menu.h \
 		gui/gui-tabmanager.c gui/gui-tabmanager.h \
 		gui/gui-import.c gui/gui-import.h \
 		gui/gui-main.c gui/gui-main.h \
@@ -205,6 +211,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-preview.c gui/gui-preview.h \
 		gui/gui-search.c gui/gui-search.h \
 		gui/gui-snippets.c gui/gui-snippets.h \
+		gui/gui-infoscreen.c gui/gui-infoscreen.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		latex.c latex.h \
@@ -212,9 +219,9 @@ gummi_SOURCES = biblio.c  biblio.h \
 		signals.c signals.h \
 		snippets.c snippets.h \
 		template.c template.h \
-		updatecheck.c updatecheck.h \
+		update.c update.h \
 		utils.c utils.h \
-		porting.h \
+		constants.h porting.h \
 		main.c
 
 all: all-am
@@ -303,7 +310,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/environment.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-import.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-infoscreen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-preview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
@@ -312,12 +321,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iofunctions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/latex.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/latexmk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/motion.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rubber.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/signals.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snippets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/updatecheck.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texlive.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/update.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 
 .c.o:
@@ -333,6 +345,62 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+texlive.o: compile/texlive.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT texlive.o -MD -MP -MF $(DEPDIR)/texlive.Tpo -c -o texlive.o `test -f 'compile/texlive.c' || echo '$(srcdir)/'`compile/texlive.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/texlive.Tpo $(DEPDIR)/texlive.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/texlive.c' object='texlive.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o texlive.o `test -f 'compile/texlive.c' || echo '$(srcdir)/'`compile/texlive.c
+
+texlive.obj: compile/texlive.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT texlive.obj -MD -MP -MF $(DEPDIR)/texlive.Tpo -c -o texlive.obj `if test -f 'compile/texlive.c'; then $(CYGPATH_W) 'compile/texlive.c'; else $(CYGPATH_W) '$(srcdir)/compile/texlive.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/texlive.Tpo $(DEPDIR)/texlive.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/texlive.c' object='texlive.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o texlive.obj `if test -f 'compile/texlive.c'; then $(CYGPATH_W) 'compile/texlive.c'; else $(CYGPATH_W) '$(srcdir)/compile/texlive.c'; fi`
+
+latexmk.o: compile/latexmk.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT latexmk.o -MD -MP -MF $(DEPDIR)/latexmk.Tpo -c -o latexmk.o `test -f 'compile/latexmk.c' || echo '$(srcdir)/'`compile/latexmk.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/latexmk.Tpo $(DEPDIR)/latexmk.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/latexmk.c' object='latexmk.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o latexmk.o `test -f 'compile/latexmk.c' || echo '$(srcdir)/'`compile/latexmk.c
+
+latexmk.obj: compile/latexmk.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT latexmk.obj -MD -MP -MF $(DEPDIR)/latexmk.Tpo -c -o latexmk.obj `if test -f 'compile/latexmk.c'; then $(CYGPATH_W) 'compile/latexmk.c'; else $(CYGPATH_W) '$(srcdir)/compile/latexmk.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/latexmk.Tpo $(DEPDIR)/latexmk.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/latexmk.c' object='latexmk.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o latexmk.obj `if test -f 'compile/latexmk.c'; then $(CYGPATH_W) 'compile/latexmk.c'; else $(CYGPATH_W) '$(srcdir)/compile/latexmk.c'; fi`
+
+rubber.o: compile/rubber.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT rubber.o -MD -MP -MF $(DEPDIR)/rubber.Tpo -c -o rubber.o `test -f 'compile/rubber.c' || echo '$(srcdir)/'`compile/rubber.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/rubber.Tpo $(DEPDIR)/rubber.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/rubber.c' object='rubber.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o rubber.o `test -f 'compile/rubber.c' || echo '$(srcdir)/'`compile/rubber.c
+
+rubber.obj: compile/rubber.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT rubber.obj -MD -MP -MF $(DEPDIR)/rubber.Tpo -c -o rubber.obj `if test -f 'compile/rubber.c'; then $(CYGPATH_W) 'compile/rubber.c'; else $(CYGPATH_W) '$(srcdir)/compile/rubber.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/rubber.Tpo $(DEPDIR)/rubber.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='compile/rubber.c' object='rubber.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o rubber.obj `if test -f 'compile/rubber.c'; then $(CYGPATH_W) 'compile/rubber.c'; else $(CYGPATH_W) '$(srcdir)/compile/rubber.c'; fi`
+
+gui-menu.o: gui/gui-menu.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-menu.o -MD -MP -MF $(DEPDIR)/gui-menu.Tpo -c -o gui-menu.o `test -f 'gui/gui-menu.c' || echo '$(srcdir)/'`gui/gui-menu.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-menu.Tpo $(DEPDIR)/gui-menu.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-menu.c' object='gui-menu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-menu.o `test -f 'gui/gui-menu.c' || echo '$(srcdir)/'`gui/gui-menu.c
+
+gui-menu.obj: gui/gui-menu.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-menu.obj -MD -MP -MF $(DEPDIR)/gui-menu.Tpo -c -o gui-menu.obj `if test -f 'gui/gui-menu.c'; then $(CYGPATH_W) 'gui/gui-menu.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-menu.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-menu.Tpo $(DEPDIR)/gui-menu.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-menu.c' object='gui-menu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-menu.obj `if test -f 'gui/gui-menu.c'; then $(CYGPATH_W) 'gui/gui-menu.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-menu.c'; fi`
 
 gui-tabmanager.o: gui/gui-tabmanager.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-tabmanager.o -MD -MP -MF $(DEPDIR)/gui-tabmanager.Tpo -c -o gui-tabmanager.o `test -f 'gui/gui-tabmanager.c' || echo '$(srcdir)/'`gui/gui-tabmanager.c
@@ -431,6 +499,20 @@ gui-snippets.obj: gui/gui-snippets.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-snippets.c' object='gui-snippets.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-snippets.obj `if test -f 'gui/gui-snippets.c'; then $(CYGPATH_W) 'gui/gui-snippets.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-snippets.c'; fi`
+
+gui-infoscreen.o: gui/gui-infoscreen.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-infoscreen.o -MD -MP -MF $(DEPDIR)/gui-infoscreen.Tpo -c -o gui-infoscreen.o `test -f 'gui/gui-infoscreen.c' || echo '$(srcdir)/'`gui/gui-infoscreen.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-infoscreen.Tpo $(DEPDIR)/gui-infoscreen.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-infoscreen.c' object='gui-infoscreen.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-infoscreen.o `test -f 'gui/gui-infoscreen.c' || echo '$(srcdir)/'`gui/gui-infoscreen.c
+
+gui-infoscreen.obj: gui/gui-infoscreen.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-infoscreen.obj -MD -MP -MF $(DEPDIR)/gui-infoscreen.Tpo -c -o gui-infoscreen.obj `if test -f 'gui/gui-infoscreen.c'; then $(CYGPATH_W) 'gui/gui-infoscreen.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-infoscreen.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-infoscreen.Tpo $(DEPDIR)/gui-infoscreen.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-infoscreen.c' object='gui-infoscreen.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-infoscreen.obj `if test -f 'gui/gui-infoscreen.c'; then $(CYGPATH_W) 'gui/gui-infoscreen.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-infoscreen.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

@@ -4492,6 +4492,7 @@ fi
 
 
 
+
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
 	if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
@@ -4663,14 +4664,14 @@ else
 int
 main ()
 {
-  int major, minor, micro;
+  unsigned int major, minor, micro;
   char *tmp_version;
 
   fclose (fopen ("conf.glibtest", "w"));
 
   /* HP/UX 9 (%@#!) writes to sscanf strings */
   tmp_version = g_strdup("$min_glib_version");
-  if (sscanf(tmp_version, "%d.%d.%d", &major, &minor, &micro) != 3) {
+  if (sscanf(tmp_version, "%u.%u.%u", &major, &minor, &micro) != 3) {
      printf("%s, bad version string\n", "$min_glib_version");
      exit(1);
    }
@@ -4709,9 +4710,9 @@ main ()
        }
      else
       {
-        printf("\n*** An old version of GLIB (%d.%d.%d) was found.\n",
+        printf("\n*** An old version of GLIB (%u.%u.%u) was found.\n",
                glib_major_version, glib_minor_version, glib_micro_version);
-        printf("*** You need a version of GLIB newer than %d.%d.%d. The latest version of\n",
+        printf("*** You need a version of GLIB newer than %u.%u.%u. The latest version of\n",
 	       major, minor, micro);
         printf("*** GLIB is always available from ftp://ftp.gtk.org.\n");
         printf("***\n");
@@ -5090,6 +5091,7 @@ if test -n "$gtksourceview_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_gtksourceview_CFLAGS=`$PKG_CONFIG --cflags "gtksourceview-2.0 >= 2.2.1" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5106,6 +5108,7 @@ if test -n "$gtksourceview_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_gtksourceview_LIBS=`$PKG_CONFIG --libs "gtksourceview-2.0 >= 2.2.1" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5125,9 +5128,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        gtksourceview_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gtksourceview-2.0 >= 2.2.1" 2>&1`
+	        gtksourceview_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gtksourceview-2.0 >= 2.2.1" 2>&1`
         else
-	        gtksourceview_PKG_ERRORS=`$PKG_CONFIG --print-errors "gtksourceview-2.0 >= 2.2.1" 2>&1`
+	        gtksourceview_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gtksourceview-2.0 >= 2.2.1" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$gtksourceview_PKG_ERRORS" >&5
@@ -5162,6 +5165,7 @@ if test -n "$poppler_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_poppler_CFLAGS=`$PKG_CONFIG --cflags "poppler-glib" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5178,6 +5182,7 @@ if test -n "$poppler_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_poppler_LIBS=`$PKG_CONFIG --libs "poppler-glib" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5197,9 +5202,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        poppler_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "poppler-glib" 2>&1`
+	        poppler_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "poppler-glib" 2>&1`
         else
-	        poppler_PKG_ERRORS=`$PKG_CONFIG --print-errors "poppler-glib" 2>&1`
+	        poppler_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "poppler-glib" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$poppler_PKG_ERRORS" >&5
@@ -5235,6 +5240,7 @@ if test -n "$gtkspell_CFLAGS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_gtkspell_CFLAGS=`$PKG_CONFIG --cflags "gtkspell-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5251,6 +5257,7 @@ if test -n "$gtkspell_LIBS"; then
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
   pkg_cv_gtkspell_LIBS=`$PKG_CONFIG --libs "gtkspell-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
 fi
@@ -5270,9 +5277,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        gtkspell_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "gtkspell-2.0" 2>&1`
+	        gtkspell_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gtkspell-2.0" 2>&1`
         else
-	        gtkspell_PKG_ERRORS=`$PKG_CONFIG --print-errors "gtkspell-2.0" 2>&1`
+	        gtkspell_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gtkspell-2.0" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$gtkspell_PKG_ERRORS" >&5
