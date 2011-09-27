@@ -778,6 +778,10 @@ void previewgui_refresh (GuPreviewGui* pc) {
     if (pc->doc == NULL) goto unlock;
 
     previewgui_load_document(pc, TRUE);
+    
+    if (pc->current_page >= pc->n_pages) {
+        previewgui_goto_page (pc, pc->n_pages-1);
+    }
 
     gtk_widget_queue_draw (pc->drawarea);
 
