@@ -103,8 +103,9 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 gchar* latex_set_compile_cmd (GuEditor* ec) {
     
     const gchar* method = config_get_value ("compile_steps");
+    const gchar* curdir = g_path_get_dirname (ec->workfile);
     const gchar* precommand = g_strdup_printf ("cd \"%s\"%s%s", 
-                                                C_TMPDIR, C_CMDSEP, C_TEXSEC);
+                                                curdir, C_CMDSEP, C_TEXSEC);
                                                 
     gchar* texcmd = NULL;
     
