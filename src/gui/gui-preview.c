@@ -933,14 +933,13 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
 
     GuPreviewPage *p = pc->pages + page;
     
-    if (!p->rendering != NULL) {
+    if (p->rendering == NULL) {
         PopplerPage* ppage = poppler_document_get_page(pc->doc, page);
         p->rendering = do_render(ppage, pc->scale, p->width, p->height);
         g_object_unref(ppage);
-        return cairo_surface_reference(p->rendering);
     }
     
-    return NULL;
+    return cairo_surface_reference(p->rendering);
 }
 
 void previewgui_reset (GuPreviewGui* pc) {
@@ -1060,36 +1059,11 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
     
     cairo_surface_t* rendering = get_page_rendering(pc, page);
     
-    if (rendering == NULL) {
+    // Paint rendering
+    cairo_set_source_surface (cr, rendering, x, y);
+    cairo_paint (cr);
+    cairo_surface_destroy(rendering);
         
-        slog(L_DEBUG, "Page %i not rendered yet, printing \"Loading...\" message "
-"- this could be optimized\n", page);
-        
-        // Paint loading message background
-        cairo_set_source_rgb (cr, 0.808, 0.808, 0.808);
-        cairo_rectangle (cr, x, y, page_width, page_height);
-        cairo_fill (cr);
-        
-        // Paint loading message text
-        cairo_text_extents_t te;
-        gdouble size = 10;
-        cairo_set_font_size (cr, size);
-        const char *text = _("Loading...");
-        cairo_text_extents (cr, text, &te);
-        size *= 0.6*page_width/te.width;
-        cairo_set_font_size (cr, size);
-        cairo_text_extents (cr, text, &te);
-        cairo_move_to (cr, x+page_width/2-te.width/2, y+page_height/2);
-        cairo_set_source_rgb (cr, 0.302, 0.302, 0.302);
-        cairo_show_text(cr, text);
-    
-    } else {
-        // Paint rendering
-        cairo_set_source_surface (cr, rendering, x, y);
-        cairo_paint (cr);
-        cairo_surface_destroy(rendering);
-        
-    }
     
 }
 
