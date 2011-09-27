@@ -520,7 +520,8 @@ static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
     
     int i;
     for (i = 0; i < pc->n_pages; i++) {
-        (pc->pages + i)->renderingValid = FALSE;
+        cairo_surface_destroy((pc->pages + i)->rendering);
+        (pc->pages + i)->rendering = FALSE;
     }
     
 }
@@ -697,12 +698,8 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdo
 static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
     L_F_DEBUG;
     
-    // This should be done differently
     previewgui_invalidate_renderings(pc);
-    
-    // We destroy these later, in case we need to make a copy first...
-    gint old_n_pages = pc->n_pages;
-    GuPreviewPage *old_pages = pc->pages;
+    g_free(pc->pages);
 
     pc->n_pages = poppler_document_get_n_pages (pc->doc);
     gtk_label_set_text (GTK_LABEL (pc->page_label), 
@@ -718,14 +715,6 @@ static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
         poppler_page_get_size(poppler, &(page->width), &(page->height));
         g_object_unref(poppler);
         poppler = NULL;
-    }
-    
-    if (old_pages != NULL) {
-        for (i=0; i<old_n_pages; i++) {
-            cairo_surface_destroy((old_pages+i)->rendering);
-        }
-        g_free(old_pages);
-        old_pages = NULL;
     }
     
     update_page_sizes(pc);
@@ -944,15 +933,14 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
 
     GuPreviewPage *p = pc->pages + page;
     
-    if (!p->renderingValid) {
+    if (!p->rendering != NULL) {
         PopplerPage* ppage = poppler_document_get_page(pc->doc, page);
-        (pc->pages + page)->rendering = do_render(ppage, pc->scale, 
-                                  p->width, p->height);
-        (pc->pages + page)->renderingValid = TRUE;
+        p->rendering = do_render(ppage, pc->scale, p->width, p->height);
+        g_object_unref(ppage);
+        return cairo_surface_reference(p->rendering);
     }
     
-    return cairo_surface_reference(p->rendering);
-    
+    return NULL;
 }
 
 void previewgui_reset (GuPreviewGui* pc) {

@@ -57,7 +57,6 @@ typedef struct _GuPreviewPage GuPreviewPage;
 struct _GuPreviewPage {
 	
     cairo_surface_t* rendering;
-    gboolean renderingValid;
     
 	double height;
 	double width;
