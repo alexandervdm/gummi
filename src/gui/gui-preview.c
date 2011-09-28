@@ -649,7 +649,8 @@ static void update_scaled_size(GuPreviewGui* pc) {
     pc->width_scaled = pc->width_pages*pc->scale;
 }
 
-static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdouble y) {
+static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
+    gdouble y) {
 
     if (pc->scale == scale) {
         return;
@@ -670,7 +671,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdo
     previewgui_invalidate_renderings(pc);
     
     // TODO: Blocking the expose event is porbably not the best way.
-    // It would be great if we could change all 3 porperties (hadj, vadj & scale)
+    // It would be great if we could change all 3 porperties(hadj, vadj & scale)
     // at the same time.
     // Probably blocking the expose handler causes the gray background of the
     // window to be drawn - but at least we do not scroll to a different page
@@ -683,8 +684,8 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdo
     update_drawarea_size(pc);
     
     if (x >= 0 && y>= 0) {
-        gdouble new_x = old_x * (pc->width_scaled + 2*get_document_margin(pc)) - x;
-        gdouble new_y = old_y * (pc->height_scaled + 2*get_document_margin(pc)) - y;
+        gdouble new_x = old_x*(pc->width_scaled + 2*get_document_margin(pc))-x;
+        gdouble new_y = old_y*(pc->height_scaled + 2*get_document_margin(pc))-y;
 
         previewgui_goto_xy(pc, new_x, new_y);
     }
@@ -881,8 +882,10 @@ void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
 void previewgui_scroll_to_xy (GuPreviewGui* pc, int x, int y) {
     L_F_DEBUG;
 
-    x = MIN(x, gtk_adjustment_get_upper(pc->hadj) - gtk_adjustment_get_page_size(pc->hadj));
-    y = MIN(y, gtk_adjustment_get_upper(pc->vadj) - gtk_adjustment_get_page_size(pc->vadj));
+    x = MIN(x, gtk_adjustment_get_upper(pc->hadj) -
+               gtk_adjustment_get_page_size(pc->hadj));
+    y = MIN(y, gtk_adjustment_get_upper(pc->vadj) -
+               gtk_adjustment_get_page_size(pc->vadj));
 
     pc->ascroll_steps_left = ASCROLL_STEPS;
     
@@ -1039,7 +1042,8 @@ void on_combo_sizes_changed (GtkWidget* widget, void* user) {
     
 }
 
-static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y) {
+static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
+{
     if (page < 0 || page >= pc->n_pages) {
         return;
     }
@@ -1051,7 +1055,8 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
 
     // Paint shadow
     cairo_set_source_rgb (cr, 0.302, 0.302, 0.302);
-    cairo_rectangle (cr, x + page_width , y + PAGE_SHADOW_OFFSET , PAGE_SHADOW_WIDTH, page_height);
+    cairo_rectangle (cr, x + page_width , y + PAGE_SHADOW_OFFSET ,
+                     PAGE_SHADOW_WIDTH, page_height);
     cairo_fill (cr);
     cairo_rectangle (cr, x + PAGE_SHADOW_OFFSET , y + page_height, 
                          page_width - PAGE_SHADOW_OFFSET, PAGE_SHADOW_WIDTH);
@@ -1076,7 +1081,8 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
 gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-//    slog(L_INFO, "paint document with scale %f, region (%i, %i), w=%i, h=%i\n", e->area.x, e->area.y, e->area.width, e->area.height);
+//    slog(L_INFO, "paint document with scale %f, region (%i, %i), w=%i,
+//    h=%i\n", e->area.x, e->area.y, e->area.width, e->area.height);
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) {
         
@@ -1086,17 +1092,20 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     gdouble page_width = gtk_adjustment_get_page_size(pc->hadj);
     gdouble page_height = gtk_adjustment_get_page_size(pc->vadj);
         
-    gdouble offset_x = MAX(get_document_margin(pc), (page_width - pc->width_scaled)/2 );
+    gdouble offset_x = MAX(get_document_margin(pc),
+                          (page_width - pc->width_scaled) / 2);
     
     cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(w));
     
     if (is_continuous(pc)) {
         
-        gdouble offset_y = MAX(get_document_margin(pc), (page_height - pc->height_scaled)/2 );
+        gdouble offset_y = MAX(get_document_margin(pc),
+                               (page_height - pc->height_scaled) / 2);
 
         // The page margins are just for safety...
-        gdouble view_start_y = gtk_adjustment_get_value(pc->vadj) - get_page_margin(pc);
-        gdouble view_end_y   = view_start_y + page_height + 2*get_page_margin(pc);
+        gdouble view_start_y = gtk_adjustment_get_value(pc->vadj) -
+                               get_page_margin(pc);
+        gdouble view_end_y = view_start_y + page_height + 2*get_page_margin(pc);
         
         int i;
         for (i=0; i < pc->n_pages; i++) {
@@ -1125,7 +1134,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     } else {    // "Page" Layout...
     
         gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
-        gdouble offset_y = MAX(get_document_margin(pc), (page_height - height)/2 );
+        gdouble offset_y = MAX(get_document_margin(pc), (page_height-height)/2);
         
         paint_page(cr, pc, pc->current_page, 
             page_offset_x(pc, pc->current_page, offset_x),
@@ -1162,8 +1171,8 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
         gint    new_index = -1;
         int i;
         
-        // we only go through the percentage entrys - the fit entrys are not always
-        // uo to date...
+        // we only go through the percentage entrys - the fit entrys are not
+        // always uo to date...
         for (i=0; i<N_ZOOM_SIZES; i++) {
             if (i == ZOOM_FIT_WIDTH || i == ZOOM_FIT_BOTH) {
                 continue;
@@ -1173,7 +1182,8 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
                     new_scale = list_sizes[i];
                     new_index = i;
                 }
-            } else if (list_sizes[i] < old_scale && e->direction == GDK_SCROLL_DOWN) {
+            } else if (list_sizes[i] < old_scale &&
+                       e->direction == GDK_SCROLL_DOWN) {
                 if (new_index == -1 || list_sizes[i] > new_scale) {
                     new_scale = list_sizes[i];
                     new_index = i;
@@ -1188,9 +1198,11 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
                 e->y - gtk_adjustment_get_value(pc->vadj));
             
             set_fit_mode(pc, FIT_NONE);
-            g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
+            g_signal_handler_block(pc->combo_sizes,
+                                   pc->combo_sizes_changed_handler);
             gtk_combo_box_set_active(pc->combo_sizes, new_index);
-            g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
+            g_signal_handler_unblock(pc->combo_sizes,
+                                     pc->combo_sizes_changed_handler);
         
         }
             
