@@ -275,8 +275,8 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
         }
     }
     if (!utils_copy_file (ec->pdffile, savepath, &err)) {
-        slog (L_G_ERROR, _("Unable to export PDF file,\n"
-                           "there might be error in you latex document."));
+        slog (L_G_ERROR, 
+                    _("Unable to export PDF..\nDocument contains errors.\n"));
         g_error_free (err);
     }
 
