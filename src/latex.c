@@ -209,7 +209,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     
     /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command);
-    gboolean cerrors = (gint)cresult.first;
+    gboolean cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
     
     lc->errormessage = latex_analyse_log (coutput);

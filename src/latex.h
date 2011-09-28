@@ -53,13 +53,9 @@ void latex_update_pdffile (GuLatex* mc, GuEditor* ec);
 void latex_update_auxfile (GuLatex* mc, GuEditor* ec);
 void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
         gboolean prompt_overrite);
-        
 
 gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter);
 gboolean latex_typesetter_active (gchar* typesetter);
 gboolean latex_method_active (gchar* method);
-
-
-
 
 #endif /* __GUMMI_LATEX_H__ */

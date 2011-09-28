@@ -233,7 +233,7 @@ Tuple2 utils_popen_r (const gchar* cmd) {
     gchar buf[BUFSIZ];
     gchar* ret = NULL;
     gchar* rot = NULL;
-    gint status = 0, len = 0;
+    glong status = 0, len = 0;
 
     g_assert (cmd != NULL);
 

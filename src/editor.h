@@ -113,6 +113,6 @@ void get_style_colors (GtkSourceStyle *style,
         gboolean *background_set, GdkColor *background);
 gint schemes_compare (gconstpointer a, gconstpointer b);
 GList* editor_list_style_scheme_sorted (void);
-gboolean* editor_buffer_changed (GuEditor* ec);
+gboolean editor_buffer_changed (GuEditor* ec);
 
 #endif /* __GUMMI_EDITOR_H__ */
