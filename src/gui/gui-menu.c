@@ -307,28 +307,6 @@ void on_menu_findprev_activate (GtkWidget *widget, void * user) {
  ******************************************************************************/
 
 G_MODULE_EXPORT
-void on_menu_bibinsert_activate (GtkWidget *widget, void * user) {
-    gchar* filename = NULL;
-    gchar* basename = NULL;
-    gchar* root_path = NULL;
-    gchar* relative_path = NULL;
-
-    filename = get_open_filename (TYPE_BIBLIO);
-    if (filename) {
-        if (g_active_editor->filename)
-            root_path = g_path_get_dirname (g_active_editor->filename);
-        relative_path = utils_path_to_relative (root_path, filename);
-        editor_insert_bib (g_active_editor, relative_path);
-        basename = g_path_get_basename (filename);
-        gtk_label_set_text (gummi->biblio->filenm_label, basename);
-        g_free (relative_path);
-        g_free (root_path);
-        g_free (basename);
-    }
-    g_free (filename);
-}
-
-G_MODULE_EXPORT
 void on_menu_bibcompile_activate (GtkWidget *widget, void * user) {
     //TODO: Merge with button function
     on_button_biblio_compile_clicked (widget, user);

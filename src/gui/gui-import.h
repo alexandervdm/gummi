@@ -42,11 +42,13 @@ struct _GuImportGui {
     GtkHBox* box_image;
     GtkHBox* box_table;
     GtkHBox* box_matrix;
+    GtkHBox* box_biblio;
 
     GtkNotebook* import_tabs;
     GtkViewport* image_pane;
     GtkViewport* table_pane;
     GtkViewport* matrix_pane;
+    GtkViewport* biblio_pane;
 
     GtkEntry* image_file;
     GtkEntry* image_caption;
@@ -62,6 +64,8 @@ struct _GuImportGui {
     GtkAdjustment* matrix_rows;
     GtkAdjustment* matrix_cols;
     GtkComboBox* matrix_combobracket;
+    
+    GtkEntry* biblio_file;
 };
 
 GuImportGui* importgui_init (GtkBuilder* builder);

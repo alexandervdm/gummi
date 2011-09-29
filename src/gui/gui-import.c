@@ -51,6 +51,8 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
         GTK_HBOX (gtk_builder_get_object (builder, "box_table"));
     i->box_matrix =
         GTK_HBOX (gtk_builder_get_object (builder, "box_matrix"));
+    i->box_biblio =
+        GTK_HBOX (gtk_builder_get_object (builder, "box_biblio"));
 
     i->import_tabs =
         GTK_NOTEBOOK (gtk_builder_get_object (builder, "import_tabs"));
@@ -60,6 +62,8 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
         GTK_VIEWPORT (gtk_builder_get_object (builder, "table_pane"));
     i->matrix_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "matrix_pane"));
+    i->biblio_pane = 
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "biblio_pane"));
 
     i->image_file =
         GTK_ENTRY (gtk_builder_get_object (builder, "image_file"));
@@ -87,6 +91,9 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
         GTK_ADJUSTMENT (gtk_builder_get_object (builder, "matrix_cols"));
     i->matrix_combobracket =
         GTK_COMBO_BOX (gtk_builder_get_object (builder,"matrix_combobracket"));
+        
+    i->biblio_file = 
+         GTK_ENTRY (gtk_builder_get_object (builder, "biblio_file"));   
 
     gtk_adjustment_set_value (i->table_cols, 3);
     gtk_adjustment_set_value (i->table_rows, 3);
@@ -101,6 +108,8 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
     GList* list = NULL;
     list = gtk_container_get_children (
             GTK_CONTAINER (g_importgui->box_image));
+            
+    /* TODO: is this really necessary? */
     while (list) {
         gtk_container_remove (GTK_CONTAINER (g_importgui->box_image),
                 GTK_WIDGET (list->data));
@@ -120,6 +129,13 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
                 GTK_WIDGET (list->data));
         list = list->next;
     }
+    list = gtk_container_get_children (
+            GTK_CONTAINER (g_importgui->box_biblio));
+    while (list) {
+        gtk_container_remove (GTK_CONTAINER (g_importgui->box_biblio),
+                GTK_WIDGET (list->data));
+        list = list->next;
+    }
 
     switch (page_num) {
         case 1:
@@ -133,6 +149,9 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
         case 3:
             gtk_container_add (GTK_CONTAINER (g_importgui->box_matrix),
                     GTK_WIDGET (g_importgui->matrix_pane));
+        case 4:
+            gtk_container_add (GTK_CONTAINER (g_importgui->box_biblio),
+                    GTK_WIDGET (g_importgui->biblio_pane));
             break;
     }
 }
@@ -206,6 +225,29 @@ void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
+void on_button_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
+    gchar* basename = NULL;
+    gchar* root_path = NULL;
+    gchar* relative_path = NULL;
+    
+    const gchar* filename = gtk_entry_get_text (g_importgui->biblio_file);
+
+    if ((filename) && (strlen(filename) != 0)) {
+        if (g_active_editor->filename)
+            root_path = g_path_get_dirname (g_active_editor->filename);
+        relative_path = utils_path_to_relative (root_path, filename);
+        editor_insert_bib (g_active_editor, relative_path);
+        basename = g_path_get_basename (filename);
+        gtk_label_set_text (gummi->biblio->filenm_label, basename);
+        g_free (relative_path);
+        g_free (root_path);
+        g_free (basename);
+        gtk_entry_set_text (g_importgui->biblio_file, "");
+    }
+    gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
+}
+
+G_MODULE_EXPORT
 void on_image_file_activate (void) {
     gchar* filename = NULL;
     
@@ -214,6 +256,16 @@ void on_image_file_activate (void) {
         importer_imagegui_set_sensitive (filename, TRUE);
     }
     g_free (filename);
+}
+
+G_MODULE_EXPORT
+void on_biblio_file_activate (GtkWidget *widget, void * user) {
+    gchar* filename = NULL;
+    
+    filename = get_open_filename (TYPE_BIBLIO);
+    if (filename) {
+        gtk_entry_set_text (g_importgui->biblio_file, filename);
+    }
 }
 
 G_MODULE_EXPORT
