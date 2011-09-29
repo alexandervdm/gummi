@@ -57,5 +57,6 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
 gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter);
 gboolean latex_typesetter_active (gchar* typesetter);
 gboolean latex_method_active (gchar* method);
+gboolean latex_run_makeindex (GuEditor* ec);
 
 #endif /* __GUMMI_LATEX_H__ */

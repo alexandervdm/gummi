@@ -296,7 +296,7 @@ gboolean latex_run_makeindex (GuEditor* ec) {
                                          g_path_get_basename(ec->basename));
                                          
         Tuple2 res = utils_popen_r (command);
-        retcode = (int)res.first;
+        retcode = (glong)res.first;
         g_free (command);
     }
     if (retcode == 0) return TRUE;
