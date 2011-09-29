@@ -307,12 +307,6 @@ void on_menu_findprev_activate (GtkWidget *widget, void * user) {
  ******************************************************************************/
 
 G_MODULE_EXPORT
-void on_menu_bibcompile_activate (GtkWidget *widget, void * user) {
-    //TODO: Merge with button function
-    on_button_biblio_compile_clicked (widget, user);
-}
-
-G_MODULE_EXPORT
 void on_menu_pdfcompile_activate (GtkWidget *widget, void* user) {
     gummi->latex->modified_since_compile = TRUE;
     motion_do_compile (gummi->motion);
@@ -321,6 +315,16 @@ void on_menu_pdfcompile_activate (GtkWidget *widget, void* user) {
 G_MODULE_EXPORT
 void on_menu_compileopts_activate (GtkWidget* widget, void* user) {
     prefsgui_main(gui->prefsgui, 4);
+}
+
+G_MODULE_EXPORT
+void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
+
+}
+
+G_MODULE_EXPORT
+void on_menu_runbibtex_activate (GtkWidget *widget, void * user) {
+    on_button_biblio_compile_clicked (widget, user);
 }
 
 G_MODULE_EXPORT
