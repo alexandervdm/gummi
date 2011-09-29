@@ -323,7 +323,7 @@ void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
         statusbar_set_message (_("Running Makeindex.."));
     }
     else {
-        statusbar_set_message (_("Error running Makindex.."));
+        statusbar_set_message (_("Error running Makeindex.."));
     }
     check_preview_timer ();
 }

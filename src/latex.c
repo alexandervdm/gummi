@@ -284,22 +284,22 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
 }
 
 gboolean latex_run_makeindex (GuEditor* ec) {
+    int retcode;
     
     if (g_find_program_in_path ("makeindex")) {
-    
-        const gchar* curdir = g_path_get_dirname (ec->workfile);
+        
         const gchar* precmd = g_strdup_printf ("cd \"%s\"%s%s", 
-                                                    curdir, C_CMDSEP, C_TEXSEC);
+                                                C_TMPDIR, C_CMDSEP, C_TEXSEC);
                                                     
         gchar* command = g_strdup_printf ("%s makeindex \"%s.idx\"",
                                          precmd, 
-                                         ec->basename);
+                                         g_path_get_basename(ec->basename));
                                          
         Tuple2 res = utils_popen_r (command);
-        g_free (res.second);
+        retcode = (int)res.first;
         g_free (command);
-        return TRUE;
     }
+    if (retcode == 0) return TRUE;
     return FALSE;
 }
 
