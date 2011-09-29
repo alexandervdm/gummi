@@ -57,13 +57,13 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     i->import_tabs =
         GTK_NOTEBOOK (gtk_builder_get_object (builder, "import_tabs"));
     i->image_pane =
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "image_pane"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_image"));
     i->table_pane =
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "table_pane"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_table"));
     i->matrix_pane =
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "matrix_pane"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_matrix"));
     i->biblio_pane = 
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "biblio_pane"));
+        GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_biblio"));
 
     i->image_file =
         GTK_ENTRY (gtk_builder_get_object (builder, "image_file"));
@@ -157,7 +157,7 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
 }
 
 G_MODULE_EXPORT
-void on_button_import_table_apply_clicked (GtkWidget* widget, void* user) {
+void on_import_table_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     gint rows = gtk_adjustment_get_value (g_importgui->table_rows);
     gint cols = gtk_adjustment_get_value (g_importgui->table_cols);
@@ -174,7 +174,7 @@ void on_button_import_table_apply_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
+void on_import_image_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     const gchar* imagefile = gtk_entry_get_text (g_importgui->image_file);
     const gchar* caption = gtk_entry_get_text (g_importgui->image_caption);
@@ -208,7 +208,7 @@ void on_button_import_image_apply_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
+void on_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     GtkTextIter current;
     gint bracket =
         gtk_combo_box_get_active (g_importgui->matrix_combobracket);
@@ -225,7 +225,7 @@ void on_button_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_button_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
+void on_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
     gchar* basename = NULL;
     gchar* root_path = NULL;
     gchar* relative_path = NULL;
