@@ -283,3 +283,24 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
     g_free (savepath);
 }
 
+gboolean latex_run_makeindex (GuEditor* ec) {
+    
+    if (g_find_program_in_path ("makeindex")) {
+    
+        const gchar* curdir = g_path_get_dirname (ec->workfile);
+        const gchar* precmd = g_strdup_printf ("cd \"%s\"%s%s", 
+                                                    curdir, C_CMDSEP, C_TEXSEC);
+                                                    
+        gchar* command = g_strdup_printf ("%s makeindex \"%s.idx\"",
+                                         precmd, 
+                                         ec->basename);
+                                         
+        Tuple2 res = utils_popen_r (command);
+        g_free (res.second);
+        g_free (command);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+

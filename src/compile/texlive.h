@@ -32,6 +32,7 @@
 
 void texlive_init (void);
 
+gboolean texlive_active (void);
 gboolean pdflatex_active (void);
 gboolean xelatex_active (void);
 

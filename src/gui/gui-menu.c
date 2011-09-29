@@ -319,8 +319,20 @@ void on_menu_compileopts_activate (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
-
+    if (latex_run_makeindex (g_active_editor)) {
+        statusbar_set_message (_("Running Makeindex.."));
+    }
+    else {
+        statusbar_set_message (_("Error running Makindex.."));
+    }
+    check_preview_timer ();
 }
+
+
+
+
+
+
 
 G_MODULE_EXPORT
 void on_menu_runbibtex_activate (GtkWidget *widget, void * user) {

@@ -91,11 +91,13 @@ struct _GummiGui {
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
     
-    GtkMenuItem *menu_projopen;
-    GtkMenuItem *menu_projsave;
-    GtkMenuItem *menu_include;
-    GtkMenuItem *menu_input;
-    GtkMenuItem *menu_detach;
+    GtkMenuItem* menu_projopen;
+    GtkMenuItem* menu_projsave;
+    GtkMenuItem* menu_include;
+    GtkMenuItem* menu_input;
+    GtkMenuItem* menu_detach;
+    GtkWidget* menu_runbibtex;
+    GtkWidget* menu_runmakeindex;
     
     guint statusid;
     gchar* recent_list[5];
@@ -164,6 +166,8 @@ void display_recent_files (GummiGui* gui);
 void errorbuffer_set_text (const gchar *message);
 void statusbar_set_message (const gchar* message);
 gboolean statusbar_del_message (void* user);
+
+void typesetter_setup (void);
 
 void check_preview_timer (void);
 

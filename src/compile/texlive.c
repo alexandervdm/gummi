@@ -54,6 +54,13 @@ void texlive_init (void) {
     
 }
 
+gboolean texlive_active (void) {
+    if (pdflatex_active() || xelatex_active()) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 gboolean pdflatex_active (void) {
     if (utils_strequal (config_get_value("typesetter"), "pdflatex")) {
         return TRUE;

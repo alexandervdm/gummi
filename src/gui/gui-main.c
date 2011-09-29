@@ -123,6 +123,9 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_detach"));
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
+        
+    g->menu_runbibtex = gtk_builder_get_object (builder, "menu_runbibtex");
+    g->menu_runmakeindex = gtk_builder_get_object (builder, "menu_runmakeindex");
 
     g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
     g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
@@ -680,6 +683,18 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user) {
     gtk_tree_view_set_model (
             GTK_TREE_VIEW( gummi->biblio->biblio_treeview ),filter);
     g_object_unref (G_OBJECT(filter));
+}
+
+void typesetter_setup (void) {
+    if (texlive_active() == TRUE) {
+        gtk_widget_set_sensitive (gui->menu_runbibtex, TRUE);
+        gtk_widget_set_sensitive (gui->menu_runmakeindex, TRUE);
+    }
+    else {
+        gtk_widget_set_sensitive (gui->menu_runbibtex, FALSE);
+        gtk_widget_set_sensitive (gui->menu_runmakeindex, FALSE); 
+    }
+    slog (L_INFO, "Typesetter %s configured.\n", config_get_value("typesetter"));
 }
 
 gboolean on_bibprogressbar_update (void* user) {

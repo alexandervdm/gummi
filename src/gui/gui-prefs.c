@@ -578,7 +578,7 @@ G_MODULE_EXPORT
 void on_typ_pdflatex_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("typesetter", "pdflatex");
-        slog (L_INFO, "Changed typesetter to \"pdflatex\"\n");
+        typesetter_setup ();
     }
 }
 
@@ -586,15 +586,16 @@ G_MODULE_EXPORT
 void on_typ_xelatex_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("typesetter", "xelatex");
-        slog (L_INFO, "Changed typesetter to \"xelatex\"\n");
+        typesetter_setup ();
     }
+
 }
 
 G_MODULE_EXPORT
 void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("typesetter", "rubber");
-        slog (L_INFO, "Changed typesetter to \"rubber\"\n");
+        typesetter_setup ();
     }
 }
 
@@ -602,7 +603,7 @@ G_MODULE_EXPORT
 void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("typesetter", "latexmk");
-        slog (L_INFO, "Changed typesetter to \"latexmk\"\n");
+        typesetter_setup ();
     }
 }
 
