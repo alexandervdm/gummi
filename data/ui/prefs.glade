@@ -1019,7 +1019,7 @@
                             </child>
                             <child>
                               <object class="GtkRadioButton" id="typ_pdflatex">
-                                <property name="label" translatable="yes">PdfTex (pdflatex)</property>
+                                <property name="label" translatable="yes">TeXLive with PdfTeX</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1062,7 +1062,7 @@
                             </child>
                             <child>
                               <object class="GtkRadioButton" id="typ_xelatex">
-                                <property name="label" translatable="yes">XeTeX (xelatex)</property>
+                                <property name="label" translatable="yes">TeXLive with XeTeX</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
