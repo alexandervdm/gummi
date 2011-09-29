@@ -84,6 +84,8 @@ const gchar config_str[] =
 "compile_scheme = on_idle\n"
 "compile_timer = 1\n"
 "\n"
+"[CompileOpts]\n"
+"shellescape = True\n"
 "[Misc]\n"
 "recent1 = __NULL__\n"
 "recent2 = __NULL__\n"

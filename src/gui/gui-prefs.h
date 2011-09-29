@@ -46,6 +46,7 @@ struct _GuPrefsGui {
     GtkCheckButton* autosaving;
     GtkCheckButton* autoexport;
     GtkCheckButton* compile_status;
+    GtkToggleButton* opt_shellescape;
     GtkSpinButton* tabwidth;
     GtkCheckButton* spaces_instof_tabs;
     GtkCheckButton* autoindentation;

@@ -689,10 +689,12 @@ void typesetter_setup (void) {
     if (texlive_active() == TRUE) {
         gtk_widget_set_sensitive (gui->menu_runbibtex, TRUE);
         gtk_widget_set_sensitive (gui->menu_runmakeindex, TRUE);
+        gtk_widget_set_sensitive (gui->prefsgui->opt_shellescape, TRUE);
     }
     else {
         gtk_widget_set_sensitive (gui->menu_runbibtex, FALSE);
-        gtk_widget_set_sensitive (gui->menu_runmakeindex, FALSE); 
+        gtk_widget_set_sensitive (gui->menu_runmakeindex, FALSE);
+        gtk_widget_set_sensitive (gui->prefsgui->opt_shellescape, FALSE);
     }
     slog (L_INFO, "Typesetter %s configured.\n", config_get_value("typesetter"));
 }

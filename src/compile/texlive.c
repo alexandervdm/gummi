@@ -136,10 +136,17 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
 
 
 gchar* texlive_get_flags (const gchar* method) {
-    /* no custom flags yet */
-    return g_strdup_printf("-interaction=nonstopmode "
-                                "-file-line-error "
-                                "-halt-on-error");
+    gchar* defaults = g_strdup_printf("-interaction=nonstopmode "
+                                      "-file-line-error "
+                                      "-halt-on-error");
+                                          
+    if (!config_get_value("shellescape")) {
+        gchar* optflags = g_strdup_printf("%s %s", 
+                                      defaults, 
+                                      "--no-shell-escape");
+        return optflags;
+    }
+    return defaults;
 }
 
 

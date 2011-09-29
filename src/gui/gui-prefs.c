@@ -128,6 +128,9 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->method_texdvipspdf =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "method_texdvipspdf"));
         
+    p->opt_shellescape = 
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "opt_shellescape"));
+        
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
     p->compile_box = GTK_HBOX (gtk_builder_get_object (builder, "compile_box"));
@@ -289,6 +292,12 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     }
     else if (latex_method_active ("texdvipspdf")) {
         gtk_toggle_button_set_active (prefs->method_texdvipspdf, TRUE);
+    }
+    
+    if (!config_get_value("shellescape"))
+        gtk_toggle_button_set_active (prefs->opt_shellescape, FALSE);
+    else {
+        gtk_toggle_button_set_active (prefs->opt_shellescape, TRUE);
     }
 }
 
@@ -607,8 +616,7 @@ void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
     }
 }
 
-G_MODULE_EXPORT /* TODO: this function sets the value when the conf value is
-                         created on first run, should come from non-gui */
+G_MODULE_EXPORT
 void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_value ("compile_steps", "texpdf");
@@ -623,7 +631,6 @@ void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
         config_set_value ("compile_steps", "texdvipdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->pdf\"\n");
     }
-
 }
 
 G_MODULE_EXPORT
@@ -632,7 +639,12 @@ void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
         config_set_value ("compile_steps", "texdvipspdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->ps->pdf\"\n");
     }
-}   
+}
+
+void toggle_shellescape (GtkToggleButton* widget, void* user) {
+    gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    config_set_value ("shellescape", newval? "True": "False");
+}
 
 
 G_MODULE_EXPORT
