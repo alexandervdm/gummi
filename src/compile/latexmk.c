@@ -60,7 +60,7 @@ gchar* latexmk_get_command (const gchar* method, gchar* workfile) {
     const gchar* flags = latexmk_get_flags (method);
     gchar* lmkcmd;
     
-    lmkcmd = g_strdup_printf("latexmk %s %s", flags, workfile);
+    lmkcmd = g_strdup_printf("latexmk %s \"%s\"", flags, workfile);
     return lmkcmd;
     
     /*
