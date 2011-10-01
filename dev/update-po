@@ -1,8 +1,6 @@
+#!/bin/bash
 
-if [[ ! -e "README" ]]; then
-	echo "This script should be run from the trunk root directory."
-	exit
-fi
+absolute_dir=$(cd "$( dirname "$0" )" && pwd)
 
-cd po
+cd $absolute_dir/../po
 for i in `ls *.po`; do intltool-update ${i%.po}; done
