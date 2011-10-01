@@ -1,0 +1,8 @@
+
+if [[ ! -e "README" ]]; then
+	echo "This script should be run from the trunk root directory."
+	exit
+fi
+
+cd po
+for i in `ls *.po`; do intltool-update ${i%.po}; done

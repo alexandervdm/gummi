@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ ! -e "README" ]]; then
+	echo "This script should be run from the trunk root directory."
+	exit
+fi
+
 export DEBFULLNAME="Wei-Ning Huang (AZ)"
 export DEBEMAIL="aitjcize@gmail.com"
 
