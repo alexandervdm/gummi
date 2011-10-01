@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 18:50+0800\n"
+"POT-Creation-Date: 2011-10-01 19:22+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -304,8 +304,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
-#: ../src/gui/gui-main.c:638
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c:641
 msgid "N/A"
 msgstr "無"
 
@@ -546,13 +545,11 @@ msgstr "標頭內總字數"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
-#: ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:639
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
-#: ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c:640
 msgid "none"
 msgstr "無"
 
@@ -873,132 +870,132 @@ msgstr "輸入新的捷徑"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "輸入新的捷徑, 或按後退鍵清除"
 
-#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
-#, c-format
-msgid "Swap file exits for %s, do you want to recover from it?"
-msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
-
-#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
-msgid "The file already exists. Overwrite?"
-msgstr "檔案已存在, 覆蓋嗎?"
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
-#, c-format
-msgid "Loading template ..."
-msgstr "載入模版中..."
-
-#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
-msgid "Compiling bibliography file..."
-msgstr "正在編譯參考文獻..."
-
-#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
-msgid "bibliography compiled without errors"
-msgstr "參考文獻已成功編譯"
-
-#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
-msgid "Error compiling bibliography file or none detected..."
-msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
-
-#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
-msgid "error compiling bibliography file"
-msgstr "編譯參考文獻過程發生錯誤"
-
-#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
-#, c-format
-msgid "%s loaded"
-msgstr "已載入%s"
-
-#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
-msgid "Do you want to save the changes you have made?"
-msgstr "是否儲存變更?"
-
-#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
-msgid "Open LaTeX document"
-msgstr "開啟LaTeX文件"
-
-#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
-msgid "Select an image to insert"
-msgstr "選擇要插入的影像"
-
-#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
-msgid "Select bibliography file"
-msgstr "選擇參考文獻檔案"
-
-#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
-msgid "Save LaTeX document"
-msgstr "儲存LaTeX文件"
-
-#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
-msgid "Save as LaTeX document"
-msgstr "另存為LaTeX文件"
-
-#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
-msgid "Export to PDF"
-msgstr "匯出為PDF"
-
-#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
-msgid "LaTeX files"
-msgstr "LaTeX 文件"
-
-#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
-msgid "Text files"
-msgstr "純文字文件"
-
-#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
-msgid "Image files"
-msgstr "影像檔"
-
-#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
-msgid "Bibtex files"
-msgstr "參考文獻"
-
 #: ../src/gui/gui-menu.c:106
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui/gui-menu.c:323
+#: ../src/gui/gui-menu.c:327
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:326
+#: ../src/gui/gui-menu.c:330
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:356
+#: ../src/gui/gui-menu.c:360
 msgid "Words in text"
 msgstr "純文字數"
 
-#: ../src/gui/gui-menu.c:357
+#: ../src/gui/gui-menu.c:361
 msgid "Words in headers"
 msgstr "標頭內總字數"
 
-#: ../src/gui/gui-menu.c:358
+#: ../src/gui/gui-menu.c:362
 msgid "Words in float captions"
 msgstr "浮動標題內總字數"
 
-#: ../src/gui/gui-menu.c:359
+#: ../src/gui/gui-menu.c:363
 msgid "Number of headers"
 msgstr "標頭總數"
 
-#: ../src/gui/gui-menu.c:360
+#: ../src/gui/gui-menu.c:364
 msgid "Number of floats"
 msgstr "浮動元件總數"
 
-#: ../src/gui/gui-menu.c:361
+#: ../src/gui/gui-menu.c:365
 msgid "Number of math inlines"
 msgstr "行內數學式總數"
 
-#: ../src/gui/gui-menu.c:362
+#: ../src/gui/gui-menu.c:366
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
 #. Only the menu items that are available from the current active
 #. * tab and environment should become sensitive
-#: ../src/gui/gui-menu.c:481
+#: ../src/gui/gui-menu.c:485
 msgid "Save the active tab to enable this option"
 msgstr ""
+
+#: ../src/gui/gui-main.c:358
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
+
+#: ../src/gui/gui-main.c:396 ../src/latex.c:271
+msgid "The file already exists. Overwrite?"
+msgstr "檔案已存在, 覆蓋嗎?"
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:533
+#, c-format
+msgid "Loading template ..."
+msgstr "載入模版中..."
+
+#: ../src/gui/gui-main.c:589
+msgid "Compiling bibliography file..."
+msgstr "正在編譯參考文獻..."
+
+#: ../src/gui/gui-main.c:591
+msgid "bibliography compiled without errors"
+msgstr "參考文獻已成功編譯"
+
+#: ../src/gui/gui-main.c:593
+msgid "Error compiling bibliography file or none detected..."
+msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
+
+#: ../src/gui/gui-main.c:596
+msgid "error compiling bibliography file"
+msgstr "編譯參考文獻過程發生錯誤"
+
+#: ../src/gui/gui-main.c:630
+#, c-format
+msgid "%s loaded"
+msgstr "已載入%s"
+
+#: ../src/gui/gui-main.c:717
+msgid "Do you want to save the changes you have made?"
+msgstr "是否儲存變更?"
+
+#: ../src/gui/gui-main.c:735
+msgid "Open LaTeX document"
+msgstr "開啟LaTeX文件"
+
+#: ../src/gui/gui-main.c:738
+msgid "Select an image to insert"
+msgstr "選擇要插入的影像"
+
+#: ../src/gui/gui-main.c:739
+msgid "Select bibliography file"
+msgstr "選擇參考文獻檔案"
+
+#: ../src/gui/gui-main.c:772
+msgid "Save LaTeX document"
+msgstr "儲存LaTeX文件"
+
+#: ../src/gui/gui-main.c:773
+msgid "Save as LaTeX document"
+msgstr "另存為LaTeX文件"
+
+#: ../src/gui/gui-main.c:774
+msgid "Export to PDF"
+msgstr "匯出為PDF"
+
+#: ../src/gui/gui-main.c:821
+msgid "LaTeX files"
+msgstr "LaTeX 文件"
+
+#: ../src/gui/gui-main.c:826
+msgid "Text files"
+msgstr "純文字文件"
+
+#: ../src/gui/gui-main.c:839
+msgid "Image files"
+msgstr "影像檔"
+
+#: ../src/gui/gui-main.c:846
+msgid "Bibtex files"
+msgstr "參考文獻"
 
 #: ../src/editor.c:521
 msgid "Top reached, search from bottom?"

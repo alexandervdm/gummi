@@ -26,9 +26,7 @@ src/gui/gui-preview.h
 src/gui/gui-snippets.h
 src/gui/gui-menu.h
 src/gui/gui-snippets.c
-src/gui/gui-main.c.orig
 src/gui/gui-menu.c
-src/gui/gui-main.h.orig
 src/gui/gui-search.c
 src/gui/gui-prefs.h
 src/gui/gui-main.h

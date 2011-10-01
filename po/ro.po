@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 18:50+0800\n"
+"POT-Creation-Date: 2011-10-01 19:22+0800\n"
 "PO-Revision-Date: 2010-09-07 16:25+0200\n"
 "Last-Translator: Alexandru-Eugen Ichim <eugen@alexichim.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -317,8 +317,7 @@ msgstr "Potriveste doar pentru cuvantul intreg"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
-#: ../src/gui/gui-main.c:638
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c:641
 msgid "N/A"
 msgstr "Indisponibil"
 
@@ -561,13 +560,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
-#: ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:639
 msgid "no bibliography file detected"
 msgstr "nu a fost detectat niciun fisier de bibliografie"
 
-#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
-#: ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c:640
 msgid "none"
 msgstr "deloc"
 
@@ -900,142 +897,142 @@ msgstr "Creeaza un nou document"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
+#: ../src/gui/gui-menu.c:106
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Eroare la incarcarea fisierului recent: "
+
+#: ../src/gui/gui-menu.c:327
+msgid "Running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:330
+msgid "Error running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:360
+#, fuzzy
+msgid "Words in text"
+msgstr "Text ingrosat"
+
+#: ../src/gui/gui-menu.c:361
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:362
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:363
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:364
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:365
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:366
+msgid "Number of math displayed"
+msgstr ""
+
+#. Only the menu items that are available from the current active
+#. * tab and environment should become sensitive
+#: ../src/gui/gui-menu.c:485
+msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/gui/gui-main.c:358
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
+#: ../src/gui/gui-main.c:396 ../src/latex.c:271
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:533
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
+#: ../src/gui/gui-main.c:589
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
+#: ../src/gui/gui-main.c:591
 msgid "bibliography compiled without errors"
 msgstr "bibliografia a fost compilata fara erori"
 
-#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
+#: ../src/gui/gui-main.c:593
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
 "detectata.."
 
-#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:596
 msgid "error compiling bibliography file"
 msgstr "eroare in timpul compilarii fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
+#: ../src/gui/gui-main.c:630
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
+#: ../src/gui/gui-main.c:717
 msgid "Do you want to save the changes you have made?"
 msgstr "Doriti sa salvati modificarile facute?"
 
-#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
+#: ../src/gui/gui-main.c:735
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
+#: ../src/gui/gui-main.c:738
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
+#: ../src/gui/gui-main.c:739
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
+#: ../src/gui/gui-main.c:772
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
+#: ../src/gui/gui-main.c:773
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
+#: ../src/gui/gui-main.c:774
 msgid "Export to PDF"
 msgstr "Exporta ca PDF"
 
-#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
+#: ../src/gui/gui-main.c:821
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Deschide un Fisier"
 
-#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:826
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
+#: ../src/gui/gui-main.c:839
 #, fuzzy
 msgid "Image files"
 msgstr "Imagine"
 
-#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
+#: ../src/gui/gui-main.c:846
 msgid "Bibtex files"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:106
-#, fuzzy, c-format
-msgid "Error loading recent file: %s"
-msgstr "Eroare la incarcarea fisierului recent: "
-
-#: ../src/gui/gui-menu.c:323
-msgid "Running Makeindex.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:326
-msgid "Error running Makeindex.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:356
-#, fuzzy
-msgid "Words in text"
-msgstr "Text ingrosat"
-
-#: ../src/gui/gui-menu.c:357
-msgid "Words in headers"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:358
-msgid "Words in float captions"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:359
-msgid "Number of headers"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:360
-msgid "Number of floats"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:361
-msgid "Number of math inlines"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:362
-msgid "Number of math displayed"
-msgstr ""
-
-#. Only the menu items that are available from the current active
-#. * tab and environment should become sensitive
-#: ../src/gui/gui-menu.c:481
-msgid "Save the active tab to enable this option"
 msgstr ""
 
 #: ../src/editor.c:521

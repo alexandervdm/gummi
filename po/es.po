@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi ES Language\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 18:50+0800\n"
+"POT-Creation-Date: 2011-10-01 19:22+0800\n"
 "PO-Revision-Date: 2011-03-18 17:46-0300\n"
 "Last-Translator: C.Salas <csalasc@gmail.com>\n"
 "Language-Team: Carlos Salas Contreras <csalasc@gmail.com>\n"
@@ -316,8 +316,7 @@ msgstr "Coincidir solo palabra completa"
 msgid "Matrix"
 msgstr "Matriz"
 
-#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
-#: ../src/gui/gui-main.c:638
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c:641
 msgid "N/A"
 msgstr "N/A"
 
@@ -561,13 +560,11 @@ msgstr "Palabras en cabeceras"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
-#: ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:639
 msgid "no bibliography file detected"
 msgstr "No se ha detectado bibliografía"
 
-#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
-#: ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c:640
 msgid "none"
 msgstr "ninguno"
 
@@ -892,133 +889,133 @@ msgstr "Crear documento nuevo"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Escriba nuevo acceso directo, o presione retroceso para borrar"
 
-#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
-#, c-format
-msgid "Swap file exits for %s, do you want to recover from it?"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
-msgid "The file already exists. Overwrite?"
-msgstr "El archivo ya existe, ¿Sobrescribir?"
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
-#, c-format
-msgid "Loading template ..."
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
-msgid "Compiling bibliography file..."
-msgstr "Compilando archivo de bibliografía..."
-
-#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
-msgid "bibliography compiled without errors"
-msgstr "bibliografía compilada con errores"
-
-#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Error compilando la bibliografía o archivo no detectado..."
-
-#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
-msgid "error compiling bibliography file"
-msgstr "error compilando archivo de bibliografía"
-
-#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
-#, c-format
-msgid "%s loaded"
-msgstr "%s cargado"
-
-#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
-msgid "Do you want to save the changes you have made?"
-msgstr "¿Desea guardar los cambios efectuados?"
-
-#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
-msgid "Open LaTeX document"
-msgstr "Crear documento nuevo"
-
-#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
-msgid "Select an image to insert"
-msgstr "Seleccione una imagen para insertar"
-
-#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
-msgid "Select bibliography file"
-msgstr "Compilando archivo de bibliografía..."
-
-#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
-msgid "Save LaTeX document"
-msgstr "Crear documento nuevo"
-
-#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
-msgid "Save as LaTeX document"
-msgstr "Crear documento nuevo"
-
-#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
-msgid "Export to PDF"
-msgstr "_Exportar como PDF"
-
-#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
-#, fuzzy
-msgid "LaTeX files"
-msgstr "Cargar Archivo"
-
-#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
-msgid "Text files"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
-#, fuzzy
-msgid "Image files"
-msgstr "Imagen"
-
-#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
-msgid "Bibtex files"
-msgstr ""
-
 #: ../src/gui/gui-menu.c:106
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Error cargando archivo reciente: %s"
 
-#: ../src/gui/gui-menu.c:323
+#: ../src/gui/gui-menu.c:327
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:326
+#: ../src/gui/gui-menu.c:330
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:356
+#: ../src/gui/gui-menu.c:360
 msgid "Words in text"
 msgstr "Palabras en texto"
 
-#: ../src/gui/gui-menu.c:357
+#: ../src/gui/gui-menu.c:361
 msgid "Words in headers"
 msgstr "Palabras en cabeceras"
 
-#: ../src/gui/gui-menu.c:358
+#: ../src/gui/gui-menu.c:362
 msgid "Words in float captions"
 msgstr "Palabras en leyenda flotante"
 
-#: ../src/gui/gui-menu.c:359
+#: ../src/gui/gui-menu.c:363
 msgid "Number of headers"
 msgstr "Número de cabeceras"
 
-#: ../src/gui/gui-menu.c:360
+#: ../src/gui/gui-menu.c:364
 msgid "Number of floats"
 msgstr "Número de flotantes"
 
-#: ../src/gui/gui-menu.c:361
+#: ../src/gui/gui-menu.c:365
 msgid "Number of math inlines"
 msgstr "Número de math en líneas"
 
-#: ../src/gui/gui-menu.c:362
+#: ../src/gui/gui-menu.c:366
 msgid "Number of math displayed"
 msgstr "Número de math mostrados"
 
 #. Only the menu items that are available from the current active
 #. * tab and environment should become sensitive
-#: ../src/gui/gui-menu.c:481
+#: ../src/gui/gui-menu.c:485
 msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/gui/gui-main.c:358
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr ""
+
+#: ../src/gui/gui-main.c:396 ../src/latex.c:271
+msgid "The file already exists. Overwrite?"
+msgstr "El archivo ya existe, ¿Sobrescribir?"
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:533
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:589
+msgid "Compiling bibliography file..."
+msgstr "Compilando archivo de bibliografía..."
+
+#: ../src/gui/gui-main.c:591
+msgid "bibliography compiled without errors"
+msgstr "bibliografía compilada con errores"
+
+#: ../src/gui/gui-main.c:593
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Error compilando la bibliografía o archivo no detectado..."
+
+#: ../src/gui/gui-main.c:596
+msgid "error compiling bibliography file"
+msgstr "error compilando archivo de bibliografía"
+
+#: ../src/gui/gui-main.c:630
+#, c-format
+msgid "%s loaded"
+msgstr "%s cargado"
+
+#: ../src/gui/gui-main.c:717
+msgid "Do you want to save the changes you have made?"
+msgstr "¿Desea guardar los cambios efectuados?"
+
+#: ../src/gui/gui-main.c:735
+msgid "Open LaTeX document"
+msgstr "Crear documento nuevo"
+
+#: ../src/gui/gui-main.c:738
+msgid "Select an image to insert"
+msgstr "Seleccione una imagen para insertar"
+
+#: ../src/gui/gui-main.c:739
+msgid "Select bibliography file"
+msgstr "Compilando archivo de bibliografía..."
+
+#: ../src/gui/gui-main.c:772
+msgid "Save LaTeX document"
+msgstr "Crear documento nuevo"
+
+#: ../src/gui/gui-main.c:773
+msgid "Save as LaTeX document"
+msgstr "Crear documento nuevo"
+
+#: ../src/gui/gui-main.c:774
+msgid "Export to PDF"
+msgstr "_Exportar como PDF"
+
+#: ../src/gui/gui-main.c:821
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Cargar Archivo"
+
+#: ../src/gui/gui-main.c:826
+msgid "Text files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:839
+#, fuzzy
+msgid "Image files"
+msgstr "Imagen"
+
+#: ../src/gui/gui-main.c:846
+msgid "Bibtex files"
 msgstr ""
 
 #: ../src/editor.c:521

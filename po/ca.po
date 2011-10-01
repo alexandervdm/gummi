@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 18:50+0800\n"
+"POT-Creation-Date: 2011-10-01 19:22+0800\n"
 "PO-Revision-Date: 2010-10-17 23:13+0200\n"
 "Last-Translator: Marc Vinyals <marcvinyals@velodius.com>\n"
 "Language-Team: CA <marcvinyals@velodius.com>\n"
@@ -316,8 +316,7 @@ msgstr "Només coincideix la paraula sencera"
 msgid "Matrix"
 msgstr "Matriu"
 
-#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
-#: ../src/gui/gui-main.c:638
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c:641
 msgid "N/A"
 msgstr "N/D"
 
@@ -562,13 +561,11 @@ msgstr "Paraules a capçaleres"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
-#: ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:639
 msgid "no bibliography file detected"
 msgstr "no s'ha detectat cap fitxer de bibliografia"
 
-#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
-#: ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c:640
 msgid "none"
 msgstr "cap"
 
@@ -904,139 +901,139 @@ msgstr "Crea un document nou"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
-#, c-format
-msgid "Swap file exits for %s, do you want to recover from it?"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
-msgid "The file already exists. Overwrite?"
-msgstr "El fitxer ja existeix. El voleu sobreescriure?"
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
-#, c-format
-msgid "Loading template ..."
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
-msgid "Compiling bibliography file..."
-msgstr "S'està compilant la bibliografia..."
-
-#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
-msgid "bibliography compiled without errors"
-msgstr "s'ha compilat la bibliografia sense errors"
-
-#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
-msgid "Error compiling bibliography file or none detected..."
-msgstr ""
-"S'ha produït un error mentre es compilava la bibliografia o no s'ha detectat"
-
-#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
-msgid "error compiling bibliography file"
-msgstr "s'ha produït un error mentre es compilava la bibliografia"
-
-#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
-#, c-format
-msgid "%s loaded"
-msgstr "s'ha carregat %s"
-
-#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
-msgid "Do you want to save the changes you have made?"
-msgstr "Voleu desar els canvis?"
-
-#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
-#, fuzzy
-msgid "Open LaTeX document"
-msgstr "Crea un document nou"
-
-#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
-msgid "Select an image to insert"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
-#, fuzzy
-msgid "Select bibliography file"
-msgstr "S'està compilant la bibliografia..."
-
-#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
-#, fuzzy
-msgid "Save LaTeX document"
-msgstr "Crea un document nou"
-
-#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
-#, fuzzy
-msgid "Save as LaTeX document"
-msgstr "Crea un document nou"
-
-#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
-#, fuzzy
-msgid "Export to PDF"
-msgstr "_Exporta a PDF"
-
-#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
-#, fuzzy
-msgid "LaTeX files"
-msgstr "Carrega un fitxer"
-
-#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
-msgid "Text files"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
-#, fuzzy
-msgid "Image files"
-msgstr "Imatge"
-
-#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
-msgid "Bibtex files"
-msgstr ""
-
 #: ../src/gui/gui-menu.c:106
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "S'ha produït un error mentre s'estava carregant el fitxer recent %s"
 
-#: ../src/gui/gui-menu.c:323
+#: ../src/gui/gui-menu.c:327
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:326
+#: ../src/gui/gui-menu.c:330
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:356
+#: ../src/gui/gui-menu.c:360
 msgid "Words in text"
 msgstr "Paraules del text"
 
-#: ../src/gui/gui-menu.c:357
+#: ../src/gui/gui-menu.c:361
 msgid "Words in headers"
 msgstr "Paraules a capçaleres"
 
-#: ../src/gui/gui-menu.c:358
+#: ../src/gui/gui-menu.c:362
 msgid "Words in float captions"
 msgstr "Paraules a descripcions d'objectes flotants"
 
-#: ../src/gui/gui-menu.c:359
+#: ../src/gui/gui-menu.c:363
 msgid "Number of headers"
 msgstr "Nombre de capçaleres"
 
-#: ../src/gui/gui-menu.c:360
+#: ../src/gui/gui-menu.c:364
 msgid "Number of floats"
 msgstr "Nombre d'objectes flotants"
 
-#: ../src/gui/gui-menu.c:361
+#: ../src/gui/gui-menu.c:365
 msgid "Number of math inlines"
 msgstr "Nombre de fórmules en línia"
 
-#: ../src/gui/gui-menu.c:362
+#: ../src/gui/gui-menu.c:366
 msgid "Number of math displayed"
 msgstr "Nombre de fórmules a part"
 
 #. Only the menu items that are available from the current active
 #. * tab and environment should become sensitive
-#: ../src/gui/gui-menu.c:481
+#: ../src/gui/gui-menu.c:485
 msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/gui/gui-main.c:358
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr ""
+
+#: ../src/gui/gui-main.c:396 ../src/latex.c:271
+msgid "The file already exists. Overwrite?"
+msgstr "El fitxer ja existeix. El voleu sobreescriure?"
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:533
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:589
+msgid "Compiling bibliography file..."
+msgstr "S'està compilant la bibliografia..."
+
+#: ../src/gui/gui-main.c:591
+msgid "bibliography compiled without errors"
+msgstr "s'ha compilat la bibliografia sense errors"
+
+#: ../src/gui/gui-main.c:593
+msgid "Error compiling bibliography file or none detected..."
+msgstr ""
+"S'ha produït un error mentre es compilava la bibliografia o no s'ha detectat"
+
+#: ../src/gui/gui-main.c:596
+msgid "error compiling bibliography file"
+msgstr "s'ha produït un error mentre es compilava la bibliografia"
+
+#: ../src/gui/gui-main.c:630
+#, c-format
+msgid "%s loaded"
+msgstr "s'ha carregat %s"
+
+#: ../src/gui/gui-main.c:717
+msgid "Do you want to save the changes you have made?"
+msgstr "Voleu desar els canvis?"
+
+#: ../src/gui/gui-main.c:735
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Crea un document nou"
+
+#: ../src/gui/gui-main.c:738
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui/gui-main.c:739
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "S'està compilant la bibliografia..."
+
+#: ../src/gui/gui-main.c:772
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Crea un document nou"
+
+#: ../src/gui/gui-main.c:773
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Crea un document nou"
+
+#: ../src/gui/gui-main.c:774
+#, fuzzy
+msgid "Export to PDF"
+msgstr "_Exporta a PDF"
+
+#: ../src/gui/gui-main.c:821
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Carrega un fitxer"
+
+#: ../src/gui/gui-main.c:826
+msgid "Text files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:839
+#, fuzzy
+msgid "Image files"
+msgstr "Imatge"
+
+#: ../src/gui/gui-main.c:846
+msgid "Bibtex files"
 msgstr ""
 
 #: ../src/editor.c:521

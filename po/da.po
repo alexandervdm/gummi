@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-01 18:50+0800\n"
+"POT-Creation-Date: 2011-10-01 19:22+0800\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -309,8 +309,7 @@ msgstr "Find kun blandt hele ord"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
-#: ../src/gui/gui-main.c:638
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c:641
 msgid "N/A"
 msgstr "N/A"
 
@@ -553,13 +552,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
-#: ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:639
 msgid "no bibliography file detected"
 msgstr "ingen bibliografi-fil fundet"
 
-#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
-#: ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c:640
 msgid "none"
 msgstr "ingen"
 
@@ -893,140 +890,140 @@ msgstr "Opret et nyt dokument"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
-#, c-format
-msgid "Swap file exits for %s, do you want to recover from it?"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
-msgid "The file already exists. Overwrite?"
-msgstr ""
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
-#, c-format
-msgid "Loading template ..."
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
-#, fuzzy
-msgid "Compiling bibliography file..."
-msgstr "Kompilerer bibliografi-filen"
-
-#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
-msgid "bibliography compiled without errors"
-msgstr "bibliografien kompilerede uden fejl"
-
-#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
-#, fuzzy
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
-
-#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
-msgid "error compiling bibliography file"
-msgstr "fejl ved kompilering af bibliografi-filen"
-
-#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
-#, c-format
-msgid "%s loaded"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
-msgid "Do you want to save the changes you have made?"
-msgstr "Ønsker du at gemme dine ændringer?"
-
-#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
-#, fuzzy
-msgid "Open LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
-msgid "Select an image to insert"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
-#, fuzzy
-msgid "Select bibliography file"
-msgstr "Kompilerer bibliografi-filen"
-
-#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
-#, fuzzy
-msgid "Save LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
-#, fuzzy
-msgid "Save as LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
-msgid "Export to PDF"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
-#, fuzzy
-msgid "LaTeX files"
-msgstr "Åben en fil"
-
-#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
-msgid "Text files"
-msgstr ""
-
-#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
-#, fuzzy
-msgid "Image files"
-msgstr "Billede"
-
-#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
-msgid "Bibtex files"
-msgstr ""
-
 #: ../src/gui/gui-menu.c:106
 #, fuzzy, c-format
 msgid "Error loading recent file: %s"
 msgstr "Fejl ved indlæsning af nyere fil: "
 
-#: ../src/gui/gui-menu.c:323
+#: ../src/gui/gui-menu.c:327
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:326
+#: ../src/gui/gui-menu.c:330
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:356
+#: ../src/gui/gui-menu.c:360
 #, fuzzy
 msgid "Words in text"
 msgstr "Fremhævet tekst"
 
-#: ../src/gui/gui-menu.c:357
+#: ../src/gui/gui-menu.c:361
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:358
+#: ../src/gui/gui-menu.c:362
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:359
+#: ../src/gui/gui-menu.c:363
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:360
+#: ../src/gui/gui-menu.c:364
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:361
+#: ../src/gui/gui-menu.c:365
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:362
+#: ../src/gui/gui-menu.c:366
 msgid "Number of math displayed"
 msgstr ""
 
 #. Only the menu items that are available from the current active
 #. * tab and environment should become sensitive
-#: ../src/gui/gui-menu.c:481
+#: ../src/gui/gui-menu.c:485
 msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/gui/gui-main.c:358
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr ""
+
+#: ../src/gui/gui-main.c:396 ../src/latex.c:271
+msgid "The file already exists. Overwrite?"
+msgstr ""
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:533
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:589
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Kompilerer bibliografi-filen"
+
+#: ../src/gui/gui-main.c:591
+msgid "bibliography compiled without errors"
+msgstr "bibliografien kompilerede uden fejl"
+
+#: ../src/gui/gui-main.c:593
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
+
+#: ../src/gui/gui-main.c:596
+msgid "error compiling bibliography file"
+msgstr "fejl ved kompilering af bibliografi-filen"
+
+#: ../src/gui/gui-main.c:630
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui/gui-main.c:717
+msgid "Do you want to save the changes you have made?"
+msgstr "Ønsker du at gemme dine ændringer?"
+
+#: ../src/gui/gui-main.c:735
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:738
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui/gui-main.c:739
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "Kompilerer bibliografi-filen"
+
+#: ../src/gui/gui-main.c:772
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:773
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:774
+msgid "Export to PDF"
+msgstr ""
+
+#: ../src/gui/gui-main.c:821
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Åben en fil"
+
+#: ../src/gui/gui-main.c:826
+msgid "Text files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:839
+#, fuzzy
+msgid "Image files"
+msgstr "Billede"
+
+#: ../src/gui/gui-main.c:846
+msgid "Bibtex files"
 msgstr ""
 
 #: ../src/editor.c:521
