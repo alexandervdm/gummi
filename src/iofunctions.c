@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "constants.h"
 #include "configfile.h"
 #include "editor.h"
 #include "environment.h"
@@ -65,20 +66,15 @@ GuIOFunc* iofunctions_init (void) {
 }
 
 void iofunctions_load_default_text (gboolean loopedonce) {
-    gchar* conffile = NULL;
-    gchar* datafile = NULL;
-    gchar* text = NULL;
     GError* readerr = NULL;
     GError* copyerr = NULL;
+    gchar* text = NULL;
 
     GuEditor* ec = gummi_get_active_editor();
-    datafile = g_build_filename (DATADIR, "misc", "default.tex", NULL);
-    conffile = g_build_filename ( g_get_user_config_dir (), 
-                                  "gummi", "welcome.tex", NULL);
-                                  
-    if (!g_file_get_contents (conffile, &text, NULL, &readerr)) {
+
+    if (!g_file_get_contents (C_WELCOMETEXT, &text, NULL, &readerr)) {
         slog (L_WARNING, "Could not find default welcome text, resetting..\n");
-        utils_copy_file (datafile, conffile, &copyerr);
+        utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, &copyerr);
         if (!loopedonce) return iofunctions_load_default_text (TRUE);
     }
     

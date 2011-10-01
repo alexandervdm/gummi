@@ -35,6 +35,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "constants.h"
 #include "configfile.h"
 #include "environment.h"
 #include "gui/gui-main.h"
@@ -246,8 +247,15 @@ static void set_tab_fontcolor_settings (GuPrefsGui* prefs) {
 }
 
 static void set_tab_defaulttext_settings (GuPrefsGui* prefs) {
-    gtk_text_buffer_set_text (prefs->default_buffer,
-            config_get_value ("welcome"), strlen(config_get_value ("welcome")));    
+    
+    gchar* text = NULL;
+    
+    if (!g_file_get_contents (C_WELCOMETEXT, &text, NULL, NULL)) {
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->default_text), FALSE);
+        return;
+    }
+    gtk_text_buffer_set_text (prefs->default_buffer, text, -1);
+    g_free (text);
 }
 
 static void set_tab_compilation_settings (GuPrefsGui* prefs) {
@@ -512,11 +520,14 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     GtkTextIter start, end;
     gchar* text = NULL;
 
-    gtk_text_buffer_get_start_iter (gui->prefsgui->default_buffer, &start);
-    gtk_text_buffer_get_end_iter (gui->prefsgui->default_buffer, &end);
-    text = gtk_text_buffer_get_text (gui->prefsgui->default_buffer, &start,
-                                     &end, FALSE);
-    config_set_value ("welcome", text);
+    if (gtk_text_buffer_get_modified (gui->prefsgui->default_buffer)) {
+        gtk_text_buffer_get_start_iter (gui->prefsgui->default_buffer, &start);
+        gtk_text_buffer_get_end_iter (gui->prefsgui->default_buffer, &end);
+        text = gtk_text_buffer_get_text (gui->prefsgui->default_buffer, &start,
+                                         &end, FALSE);
+                                         
+        utils_set_file_contents (C_WELCOMETEXT, text, -1);  
+    }
     g_free (text);
 
     gtk_widget_hide (GTK_WIDGET (gui->prefsgui->prefwindow));
@@ -525,6 +536,8 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
     config_set_default ();
+    utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, NULL);
+    
     set_all_tab_settings (gui->prefsgui);
 }
 
