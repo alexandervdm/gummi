@@ -145,8 +145,10 @@ gboolean on_menu_quit_activate (void) {
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
     int i = 0;
-
     gint length = g_list_length (gui->tabmanagergui->tabs);
+
+    /* Stop compile thread */
+    motion_stop_compile_thread (gummi->motion);
 
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
@@ -171,11 +173,9 @@ gboolean on_menu_quit_activate (void) {
 
     gtk_main_quit ();
 
-    /*
     for(i = 0; i < length; i++)
         editor_destroy (GU_TAB_CONTEXT (g_list_nth_data
                     (gui->tabmanagergui->tabs, i))->editor);
-    */
 
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n"

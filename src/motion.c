@@ -53,6 +53,7 @@ GuMotion* motion_init (void) {
     m->signal_mutex = g_mutex_new ();
     m->compile_mutex = g_mutex_new ();
     m->compile_cv = g_cond_new ();
+    m->keep_running = TRUE;
 
     return m;
 }
@@ -60,9 +61,15 @@ GuMotion* motion_init (void) {
 void motion_start_compile_thread (GuMotion* m) {
     GError* err = NULL;
 
-    m->compile_thread = g_thread_create (motion_compile_thread, m, FALSE, &err); 
+    m->compile_thread = g_thread_create (motion_compile_thread, m, TRUE, &err);
     if (!m->compile_thread)
         slog (L_G_FATAL, "Can not create new thread: %s\n", err->message);
+}
+
+void motion_stop_compile_thread (GuMotion* m) {
+    m->keep_running = FALSE;
+    motion_do_compile(m);
+    g_thread_join(m->compile_thread);
 }
 
 gboolean motion_do_compile (gpointer user) {
@@ -99,6 +106,10 @@ gpointer motion_compile_thread (gpointer data) {
         if (!(editor = gummi_get_active_editor ())) {
             g_mutex_unlock (mc->compile_mutex);
             continue;
+        }
+
+        if (!mc->keep_running) {
+            g_thread_exit (NULL);
         }
 
         gdk_threads_enter ();

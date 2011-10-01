@@ -43,11 +43,13 @@ struct _GuMotion {
     GThread* compile_thread;
     GCond* compile_cv;
     
+    gboolean keep_running;
     gboolean errormode;
 };
 
 GuMotion* motion_init (void);
 void motion_start_compile_thread (GuMotion* m);
+void motion_stop_compile_thread (GuMotion* m);
 gboolean motion_do_compile (gpointer user);
 gpointer motion_compile_thread (gpointer data);
 gboolean motion_idle_cb (gpointer user);
