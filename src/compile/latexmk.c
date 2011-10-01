@@ -62,25 +62,15 @@ gchar* latexmk_get_command (const gchar* method, gchar* workfile) {
     
     lmkcmd = g_strdup_printf("latexmk %s \"%s\"", flags, workfile);
     return lmkcmd;
-    
-    /*
-    const gchar* outdir = g_strdup_printf ("--into=\"%s\"", C_TMPDIR);
-    const gchar* flags = rubber_get_flags (method);
-    gchar* rubcmd;
-    
-    rubcmd = g_strdup_printf("rubber %s %s \"%s\"", flags, outdir, workfile);
-    
-    return rubcmd;
-    */
 }
 
 gchar* latexmk_get_flags (const gchar *method) {
     gchar *lmkflags;
     if (utils_strequal (method, "texpdf")) {
-        lmkflags = g_strdup_printf("-pdf");
+        lmkflags = g_strdup_printf("-silent -pdf");
     }
     else if (utils_strequal (method, "texdvipdf")){
-        lmkflags = g_strdup_printf("-pdfdvi");
+        lmkflags = g_strdup_printf("-silent -pdfdvi");
     }
     else {
         lmkflags = "-pdfps";
