@@ -96,8 +96,8 @@ struct _GummiGui {
     GtkMenuItem* menu_include;
     GtkMenuItem* menu_input;
     GtkMenuItem* menu_detach;
-    GtkWidget* menu_runbibtex;
-    GtkWidget* menu_runmakeindex;
+    GtkMenuItem* menu_runbibtex;
+    GtkMenuItem* menu_runmakeindex;
     
     guint statusid;
     gchar* recent_list[5];

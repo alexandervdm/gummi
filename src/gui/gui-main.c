@@ -117,20 +117,22 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
 
     g->menu_projopen =
-        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_projopen"));
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_projopen"));
     g->menu_projsave =
-        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_projsave"));
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_projsave"));
     g->menu_include =
-        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_include"));
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_include"));
     g->menu_input =
-        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_input"));
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_input"));
     g->menu_detach =
-        GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_detach"));
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_detach"));
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
         
-    g->menu_runbibtex = gtk_builder_get_object (builder, "menu_runbibtex");
-    g->menu_runmakeindex = gtk_builder_get_object (builder, "menu_runmakeindex");
+    g->menu_runbibtex =
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_runbibtex"));
+    g->menu_runmakeindex =
+        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_runmakeindex"));
 
     g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
     g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
@@ -692,19 +694,12 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user) {
 }
 
 void typesetter_setup (void) {
-    if (texlive_active() == TRUE) {
-        gtk_widget_set_sensitive (gui->menu_runbibtex, TRUE);
-        gtk_widget_set_sensitive (gui->menu_runmakeindex, TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET(
-                                    gui->prefsgui->opt_shellescape), TRUE);
-    }
-    else {
-        gtk_widget_set_sensitive (gui->menu_runbibtex, FALSE);
-        gtk_widget_set_sensitive (gui->menu_runmakeindex, FALSE);
-        gtk_widget_set_sensitive (GTK_WIDGET(
-                                    gui->prefsgui->opt_shellescape), FALSE);
-    }
-    slog (L_INFO, "Typesetter %s configured.\n", config_get_value("typesetter"));
+    gboolean status = texlive_active();
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_runbibtex), status);
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_runmakeindex), status);
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_shellescape),
+                              status);
+    slog (L_INFO, "Typesetter %s configured.\n",config_get_value("typesetter"));
 }
 
 gboolean on_bibprogressbar_update (void* user) {
