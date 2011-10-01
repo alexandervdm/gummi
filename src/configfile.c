@@ -86,22 +86,13 @@ const gchar config_str[] =
 "\n"
 "[CompileOpts]\n"
 "shellescape = True\n"
+"\n"
 "[Misc]\n"
 "recent1 = __NULL__\n"
 "recent2 = __NULL__\n"
 "recent3 = __NULL__\n"
 "recent4 = __NULL__\n"
-"recent5 = __NULL__\n"
-"welcome = \\documentclass{article}\n"
-"	\\begin{document}\n"
-"	\\begin{center}\n"
-"	\\Huge{Welcome to Gummi} \\\\\\\n"
-"	\\\\\n"
-"	\\LARGE{You are using the "PACKAGE_VERSION" version.\\\\\n"
-"	I welcome your suggestions at\\\\\n"
-"	http://gummi.midnightcoding.org}\\\\\n"
-"	\\end{center}\n"
-"	\\end{document}\n";
+"recent5 = __NULL__\n";
 
 void config_init (const gchar* filename) {
     const gchar* config_version = NULL;
@@ -126,8 +117,9 @@ void config_init (const gchar* filename) {
     } else if (0 != strcmp (PACKAGE_VERSION, config_version)) {
         slog (L_INFO, "updating version tag in configuration file...\n");
         config_set_value ("config_version", PACKAGE_VERSION);
+    } else {
+        config_save ();
     }
-    config_save ();
 }
 
 void config_set_default (void) {
@@ -164,7 +156,6 @@ void config_set_value (const gchar* term, const gchar* value) {
 void config_load (void) {
     FILE* fh = 0;
     gchar buf[BUFSIZ];
-    gchar* rot = NULL;
     gchar** seg = NULL;
     slist* current = NULL;
     slist* prev = NULL;
@@ -183,7 +174,6 @@ void config_load (void) {
     gchar* contents;
     g_file_get_contents(config_filename, &contents, NULL, NULL);
     if (strlen(contents) == 0) {
-        printf("goes in it\n");
         slog (L_ERROR, "config file appears empty, reseting to default\n");
         config_set_default ();
         return config_load ();
@@ -193,24 +183,15 @@ void config_load (void) {
 
     while (fgets (buf, BUFSIZ, fh)) {
         buf[strlen (buf) -1] = 0; /* remove trailing '\n' */
-        if (buf[0] != '\t') {
-            seg = g_strsplit(buf, "=", 2);
-            if (seg[0]) {
-                current->first = g_strdup (g_strstrip(seg[0]));
-                current->second = g_strdup (seg[1]? g_strstrip(seg[1]): NULL);
-            } else {
-                current->first = g_strdup("");
-                current->second = NULL;
-            }
-            g_strfreev(seg);
+        seg = g_strsplit(buf, "=", 2);
+        if (seg[0]) {
+            current->first = g_strdup (g_strstrip(seg[0]));
+            current->second = g_strdup (seg[1]? g_strstrip(seg[1]): NULL);
         } else {
-            rot = g_strdup (prev->second);
-            g_free (prev->second);
-            prev->second = g_strconcat (rot, "\n", buf + 1, NULL);
-            g_free (rot);
-            g_free (current);
-            current = prev;
+            current->first = g_strdup("");
+            current->second = NULL;
         }
+        g_strfreev(seg);
         prev = current;
         current->next = g_new0 (slist, 1);
         current = current->next;
@@ -223,8 +204,6 @@ void config_load (void) {
 void config_save (void) {
     FILE* fh = 0;
     slist* current = config_head;
-    gint i = 0, count = 0, len = 0;
-    gchar* buf = 0;
 
     if (! (fh = fopen (config_filename, "w")))
         slog (L_FATAL, "can't open config for writing... abort\n");
@@ -233,22 +212,10 @@ void config_save (void) {
         fputs (current->first, fh);
         if (current->second) {
             fputs (" = ", fh);
-            len = strlen (current->second) + 1;
-            buf = (gchar*)g_malloc (len * 2);
-            memset (buf, 0, len * 2);
-            /* replace '\n' with '\n\t' for options with multi-line content */
-            for (i = 0; i < len; ++i) {
-                if (count + 2 == len * 2) break;
-                buf[count++] = current->second[i];
-                if (i != len -2 && '\n' == current->second[i])
-                    buf[count++] = '\t';
-            }
-            fputs (buf, fh);
-            g_free (buf);
+            fputs (current->second, fh);
         }
         fputs ("\n", fh);
         current = current->next;
-        count = 0;
     }
     fclose (fh);
 }

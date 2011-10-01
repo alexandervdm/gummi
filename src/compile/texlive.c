@@ -44,11 +44,13 @@ gboolean xel_detected = FALSE;
 void texlive_init (void) {
     // TODO: check if supported version
     if (utils_program_exists (C_PDFLATEX)) {
-        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_PDFLATEX));
+        slog (L_INFO, "Typesetter detected: %s\n",
+              utils_get_version (C_PDFLATEX));
         pdf_detected = TRUE;
     }
     if (utils_program_exists (C_XELATEX)) {
-        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_XELATEX));
+        slog (L_INFO, "Typesetter detected: %s\n",
+              utils_get_version (C_XELATEX));
         xel_detected = TRUE;
     }
     
@@ -82,7 +84,6 @@ gboolean pdflatex_detected (void) {
 gboolean xelatex_detected (void) {
     return xel_detected;
 }
-
 
 gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basename) {
     
@@ -132,9 +133,6 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     return texcmd;
 }
 
-
-
-
 gchar* texlive_get_flags (const gchar* method) {
     gchar* defaults = g_strdup_printf("-interaction=nonstopmode "
                                       "-file-line-error "
@@ -148,9 +146,3 @@ gchar* texlive_get_flags (const gchar* method) {
     }
     return defaults;
 }
-
-
-
-
-
-
