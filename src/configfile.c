@@ -43,6 +43,8 @@
 static gchar* config_filename = 0;
 static slist* config_head = 0;
 
+static gboolean transaction = FALSE;
+
 const gchar config_str[] =
 "[Global]\n"
 "config_version = "PACKAGE_VERSION"\n"
@@ -150,7 +152,17 @@ void config_set_value (const gchar* term, const gchar* value) {
     g_free (index->second);
 
     index->second = g_strdup (value? value: "");
-    config_save ();
+    if (!transaction)
+        config_save ();
+}
+
+void config_begin (void) {
+    transaction = TRUE;
+}
+
+void config_commit (void) {
+    transaction = FALSE;
+    config_save();
 }
 
 void config_load (void) {

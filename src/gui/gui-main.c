@@ -307,7 +307,8 @@ void gui_update_filenm_display (const gchar* filename) {
     gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
                             (gui->tabmanagergui->active_editor->buffer));
 
-    tablabel_update_label_text (gui->tabmanagergui->active_tab->tablabel, fname, modi);
+    tablabel_update_label_text (gui->tabmanagergui->active_tab->tablabel,
+                                fname, modi);
     gui_update_windowtitle ();
 }
 

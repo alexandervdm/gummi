@@ -47,11 +47,23 @@ void config_set_default (void);
 const gchar* config_get_value (const gchar* term);
 
 /**
- * @brief set value of a setting
+ * @brief set value of a setting, the settings will be write back immediately
  * @param term the name of the setting
  * @param value the value of the setting
  */
 void config_set_value (const gchar* term, const gchar* value);
+
+/**
+ * @brief begin a series of config_set_value operation. The changes won't be
+ * written back until config_commit() is called.
+ */
+void config_begin (void);
+
+/**
+ * @brief Terminate a series of config_set_value operation and write changes
+ * back to the file.
+ */
+void config_commit (void);
 
 void config_load (void);
 void config_save (void);

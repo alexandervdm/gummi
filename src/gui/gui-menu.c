@@ -161,12 +161,16 @@ gboolean on_menu_quit_activate (void) {
 
     gtk_window_get_size (gui->mainwindow, &width, &height);
     gtk_window_get_position (gui->mainwindow, &wx, &wy);
+
+    config_begin();
     config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
     config_set_value ("mainwindow_y", g_ascii_dtostr (buf, 16, (double)wy));
     config_set_value ("mainwindow_w", g_ascii_dtostr (buf, 16, (double)width));
     config_set_value ("mainwindow_h", g_ascii_dtostr (buf, 16, (double)height));
+    config_commit();
 
     gtk_main_quit ();
+
     /*
     for(i = 0; i < length; i++)
         editor_destroy (GU_TAB_CONTEXT (g_list_nth_data
