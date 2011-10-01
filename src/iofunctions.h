@@ -45,7 +45,7 @@ struct _GuIOFunc {
 
 /* Public functions */
 GuIOFunc* iofunctions_init (void);
-void iofunctions_load_default_text (void);
+void iofunctions_load_default_text (gboolean loopedonce);
 void iofunctions_load_file (GuIOFunc* io, const gchar* filename);
 void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text);
 void iofunctions_start_autosave (void);

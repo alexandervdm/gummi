@@ -64,12 +64,28 @@ GuIOFunc* iofunctions_init (void) {
     return io;
 }
 
-void iofunctions_load_default_text (void) {
+void iofunctions_load_default_text (gboolean loopedonce) {
+    gchar* conffile = NULL;
+    gchar* datafile = NULL;
+    gchar* text = NULL;
+    GError* readerr = NULL;
+    GError* copyerr = NULL;
+
     GuEditor* ec = gummi_get_active_editor();
-    gchar* str = g_strdup (config_get_value ("welcome"));
-    editor_fill_buffer (ec, str);
+    datafile = g_build_filename (DATADIR, "misc", "default.tex", NULL);
+    conffile = g_build_filename ( g_get_user_config_dir (), 
+                                  "gummi", "welcome.tex", NULL);
+                                  
+    if (!g_file_get_contents (conffile, &text, NULL, &readerr)) {
+        slog (L_WARNING, "Could not find default welcome text, resetting..\n");
+        utils_copy_file (datafile, conffile, &copyerr);
+        if (!loopedonce) return iofunctions_load_default_text (TRUE);
+    }
+    
+    if (text) editor_fill_buffer (ec, text);
+    
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
-    g_free (str);
+    g_free (text);
 }
 
 void iofunctions_load_file (GuIOFunc* io, const gchar* filename) {
@@ -97,7 +113,7 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
         g_error_free (err);
-        iofunctions_load_default_text ();
+        iofunctions_load_default_text (FALSE);
         goto cleanup;
     }
     if (NULL == (decoded = iofunctions_decode_text (text)))

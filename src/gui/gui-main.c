@@ -270,7 +270,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
         case A_NONE:
             break;
         case A_DEFAULT:
-            iofunctions_load_default_text ();
+            iofunctions_load_default_text (FALSE);
             break;
         case A_LOAD:
             iofunctions_load_file (gummi->io, filename);
