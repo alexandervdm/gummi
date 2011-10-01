@@ -110,6 +110,24 @@ void config_init (const gchar* filename) {
 
     config_load ();
     config_version = config_get_value ("config_version");
+    
+    
+    /* Migration from earlier version to newer version (first run only) */
+    if (utils_subinstr("0.5", (gchar*)config_version, FALSE)) {
+        const gchar* text = config_get_value ("welcome");
+        gchar* templname = g_strdup_printf("oldwelcome%s", config_version);
+        const char* filename = g_build_filename (g_get_user_config_dir (),
+            "gummi", "templates", templname, NULL);
+            
+        if (!g_file_test (filename, G_FILE_TEST_EXISTS) &&
+        utils_set_file_contents (filename, text, -1)) {
+            slog (L_WARNING, "Old welcome text succesfully backed up..\n");
+        }
+        else {
+            slog (L_WARNING, "Could not backup old welcome text..\n");
+        }
+        g_free (templname);
+    }
 
     /* config_version field is not in gummi.cfg before 0.5.0 */
     if (0 == config_version[0]) {
