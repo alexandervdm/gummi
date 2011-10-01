@@ -2,85 +2,89 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-26 00:22+0800\n"
+"POT-Creation-Date: 2011-10-01 18:50+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/ui/gummi.glade.h:1
-msgid "        "
+#, fuzzy
+msgid "       "
 msgstr "        "
 
 #: ../data/ui/gummi.glade.h:2
+#, fuzzy
+msgid "         "
+msgstr "        "
+
+#: ../data/ui/gummi.glade.h:3
 msgid "0"
 msgstr "0"
 
-#: ../data/ui/gummi.glade.h:4
+#: ../data/ui/gummi.glade.h:5
 #, no-c-format
 msgid "100%"
 msgstr "100%"
 
-#: ../data/ui/gummi.glade.h:6
+#: ../data/ui/gummi.glade.h:7
 #, no-c-format
 msgid "125%"
 msgstr "125%"
 
-#: ../data/ui/gummi.glade.h:8
+#: ../data/ui/gummi.glade.h:9
 #, no-c-format
 msgid "150%"
 msgstr "150%"
 
-#: ../data/ui/gummi.glade.h:10
+#: ../data/ui/gummi.glade.h:11
 #, no-c-format
 msgid "200%"
 msgstr "200%"
 
-#: ../data/ui/gummi.glade.h:12
+#: ../data/ui/gummi.glade.h:13
 #, no-c-format
 msgid "300%"
 msgstr "300%"
 
-#: ../data/ui/gummi.glade.h:14
+#: ../data/ui/gummi.glade.h:15
 #, no-c-format
 msgid "400%"
 msgstr "400%"
 
-#: ../data/ui/gummi.glade.h:16
+#: ../data/ui/gummi.glade.h:17
 #, no-c-format
 msgid "50%"
 msgstr "50%"
 
-#: ../data/ui/gummi.glade.h:18
+#: ../data/ui/gummi.glade.h:19
 #, no-c-format
 msgid "70%"
 msgstr "70%"
 
-#: ../data/ui/gummi.glade.h:20
+#: ../data/ui/gummi.glade.h:21
 #, no-c-format
 msgid "85%"
 msgstr "85%"
 
-#: ../data/ui/gummi.glade.h:21
+#: ../data/ui/gummi.glade.h:22
 msgid "Align center"
 msgstr "置中"
 
-#: ../data/ui/gummi.glade.h:22
+#: ../data/ui/gummi.glade.h:23
 msgid "Align left"
 msgstr "向左對齊"
 
-#: ../data/ui/gummi.glade.h:23
+#: ../data/ui/gummi.glade.h:24
 msgid "Align right"
 msgstr "向右對齊"
 
-#: ../data/ui/gummi.glade.h:24
-msgid ""
-"Alignment of the\n"
-"cell content."
-msgstr "表格的對齊方式"
+#: ../data/ui/gummi.glade.h:25
+msgid "Attach"
+msgstr ""
 
 #: ../data/ui/gummi.glade.h:26
 msgid "Best Fit"
@@ -115,94 +119,110 @@ msgid "Brackets"
 msgstr "方括弧"
 
 #: ../data/ui/gummi.glade.h:34
+msgid "Build log"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:35
 msgid "Caption:"
 msgstr "標題:"
 
-#: ../data/ui/gummi.glade.h:35
+#: ../data/ui/gummi.glade.h:36
 msgid "Center text"
 msgstr "置中"
 
-#: ../data/ui/gummi.glade.h:36
+#: ../data/ui/gummi.glade.h:37
 msgid "Check _Updates"
 msgstr "檢查更新(_U)"
 
-#: ../data/ui/gummi.glade.h:37
+#: ../data/ui/gummi.glade.h:38
 msgid "Columns:"
 msgstr "行:"
 
-#: ../data/ui/gummi.glade.h:38
+#: ../data/ui/gummi.glade.h:39
 msgid "Compile"
 msgstr "編譯"
 
-#: ../data/ui/gummi.glade.h:39
+#: ../data/ui/gummi.glade.h:40
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
 msgstr "更新LaTeX文件及預覽"
 
-#: ../data/ui/gummi.glade.h:41
+#: ../data/ui/gummi.glade.h:42
 msgid "Compile _Document"
 msgstr "編譯_PDF"
 
-#: ../data/ui/gummi.glade.h:42
+#: ../data/ui/gummi.glade.h:43
 msgid ""
 "Compile the active \n"
 "bibliography database"
 msgstr "編譯目前的參考文獻"
 
-#: ../data/ui/gummi.glade.h:44
+#: ../data/ui/gummi.glade.h:45
+msgid "Continuous, One Column"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:46
 msgid "Create a new document"
 msgstr "建立新文件"
 
-#: ../data/ui/gummi.glade.h:45
+#: ../data/ui/gummi.glade.h:47
 msgid "Create new document from template.."
 msgstr "從模版建立新文件.."
 
-#: ../data/ui/gummi.glade.h:46
+#: ../data/ui/gummi.glade.h:48
 msgid "Deletes the selected template"
 msgstr "刪除選擇的模版"
 
-#: ../data/ui/gummi.glade.h:47
+#: ../data/ui/gummi.glade.h:49
+msgid "Detach"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:50
 msgid "Detach from project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:48
+#: ../data/ui/gummi.glade.h:51
 msgid "Detect"
 msgstr "偵測"
 
-#: ../data/ui/gummi.glade.h:49
+#: ../data/ui/gummi.glade.h:52
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr "偵測在文件中出現的參考文獻"
 
-#: ../data/ui/gummi.glade.h:51
-msgid ""
-"Determines whether the\n"
-"cells have line borders. "
-msgstr "設定表格格線"
-
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:54
 msgid "Document _Statistics"
 msgstr "文件資訊(_S)"
 
-#: ../data/ui/gummi.glade.h:54
+#: ../data/ui/gummi.glade.h:55
+msgid "Document is attached to master file \"document.tex\""
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:56
+#, fuzzy
+msgid "Document name"
+msgstr "文件(_D)"
+
+#: ../data/ui/gummi.glade.h:57
+#, fuzzy
+msgid "Document statistics"
+msgstr "文件資訊"
+
+#: ../data/ui/gummi.glade.h:58
 msgid "Double line"
 msgstr "雙線"
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:59
 msgid "Enable S_nippets"
 msgstr "啟用文字片段"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:60
 msgid "Enable S_pell checking"
 msgstr "啟用拼字檢查(_A)"
 
-#: ../data/ui/gummi.glade.h:57
-msgid "Error output"
-msgstr "錯誤輸出"
-
-#: ../data/ui/gummi.glade.h:58
+#: ../data/ui/gummi.glade.h:61
 msgid ""
 "Error status for\n"
 "active document"
@@ -210,318 +230,366 @@ msgstr ""
 "目前文件的錯誤輸出\n"
 " "
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:63
 msgid "File:"
 msgstr "檔案:"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:64
 msgid "Filename:"
 msgstr "檔名:"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:65
 msgid "Find"
 msgstr "搜尋"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:66
 msgid "Find Ne_xt"
 msgstr "找下一個(_X)"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:67
 msgid "Find Pre_vious"
 msgstr "找前一個(_V)"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:68
 msgid "Fit Page Width"
 msgstr "符合頁寬"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:69
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - LaTex 編輯器"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:70
 msgid "Hello svn user!"
 msgstr "SVN使用者你好!"
 
-#: ../data/ui/gummi.glade.h:68
+#: ../data/ui/gummi.glade.h:71
 msgid "Image"
 msgstr "影像"
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:72
 msgid "Include document"
 msgstr "引入文件"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:73
 msgid "Input document"
 msgstr "輸入文件"
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:74
 msgid "Italic text"
 msgstr "斜體"
 
-#: ../data/ui/gummi.glade.h:72
+#: ../data/ui/gummi.glade.h:75
 msgid "Label:"
 msgstr "標籤"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:76
 msgid "Load a file"
 msgstr "載入檔案"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:77
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr "從目前編輯的文件產生模版."
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:79
 msgid "Match case"
 msgstr "區分大小寫"
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:80
 msgid "Match entire word only"
 msgstr "只配對此單字"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:81
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/ui/gummi.glade.h:79 ../src/gui/gui-main.c:1008
+#: ../data/ui/gummi.glade.h:82 ../src/gui/gui-main.c.orig:630
+#: ../src/gui/gui-main.c:638
 msgid "N/A"
 msgstr "無"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:83
 msgid "New"
 msgstr "新增"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:84
 msgid "New document"
 msgstr "建立新文件"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:85
 msgid "New from _Template"
 msgstr "從模版新增(_T)"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:86
 msgid "Next"
 msgstr "下一個"
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:87
 msgid "No borders"
 msgstr "無邊框"
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:88
+#, fuzzy
+msgid "Number of:"
+msgstr "浮動元件總數"
+
+#: ../data/ui/gummi.glade.h:89
+msgid "Only saved files can be selected as master document."
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:90
 msgid "Open"
 msgstr "開啟"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:91
 msgid "Open Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:92
 msgid "Open file"
 msgstr "開啟檔案"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:93
 msgid "Open the selected template"
 msgstr "打開選擇的模版"
 
-#: ../data/ui/gummi.glade.h:89
-msgid ""
-"PDF Preview could not initialize.\n"
-"It appears your LaTeX document contains errors\n"
-"Additional information is available on the \n"
-"Error Output tab"
+#: ../data/ui/gummi.glade.h:94
+msgid "PDF Preview could not initialise."
 msgstr ""
-"無法啟動PDF預覽.\n"
-"\n"
-"您的LaTeX文件中包含錯誤或是%s未被案裝.\n"
-"更多的訊息請參照錯誤輸出欄.\n"
-"預覽將在錯誤修正後自動啟動."
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:95
+msgid "Page Layout in Preview"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:96
 msgid "Parentheses"
 msgstr "括號"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:97
 msgid "Pause updating the preview pane."
 msgstr "暫停更新預覽"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:98
 msgid "Preview Pane"
 msgstr "預覽"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:99
 msgid "Previous"
 msgstr "前一個"
 
-#: ../data/ui/gummi.glade.h:97
+#: ../data/ui/gummi.glade.h:100
 msgid "References:"
 msgstr "參考:"
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:101
 msgid "Replace _All"
 msgstr "全部取代(_A)"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:102
 msgid "Replace with:"
 msgstr "取代為:"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:103
 msgid "Rows:"
 msgstr "列:"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:104
+msgid "Run _BibTeX"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:105
+msgid "Run _Makeindex"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:106
 msgid "Save"
 msgstr "儲存"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:107
 msgid "Save Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:108
 msgid "Save _As..."
 msgstr "另存新檔...(_A)"
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:109
 msgid "Save the current file"
 msgstr "儲存目前檔案"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:110
 msgid "Scale:"
 msgstr "縮放:"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:111
 msgid "Search backwards"
 msgstr "向後搜尋"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:112
 msgid "Search for:"
 msgstr "尋找:"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:113
 msgid "Select tab"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:114
+msgid "Set Compilation Options"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:115
+#, fuzzy
+msgid "Single Page"
+msgstr "單線"
+
+#: ../data/ui/gummi.glade.h:116
 msgid "Single line"
 msgstr "單線"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:117
+msgid "Style:"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:118
 msgid "Table"
 msgstr "表格"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:119
 msgid "Unbracketed"
 msgstr "無括弧"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:120
 msgid "Underline text"
 msgstr "底線"
 
-#: ../data/ui/gummi.glade.h:113
-msgid "_Compile Bibliography"
-msgstr "編譯參考文獻(_C)"
+#: ../data/ui/gummi.glade.h:121
+#, fuzzy
+msgid "Words in:"
+msgstr "純文字數"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:122
 msgid "_Document"
 msgstr "文件(_D)"
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:123
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: ../data/ui/gummi.glade.h:116
+#: ../data/ui/gummi.glade.h:124
 msgid "_Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:125
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:126
 msgid "_Fullscreen"
 msgstr "全螢幕(_T)"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:127
 msgid "_Help"
 msgstr "幫助(_H)"
 
-#: ../data/ui/gummi.glade.h:120
-msgid "_Insert Bibliography"
-msgstr "插入參考文獻(_I)"
-
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:128
 msgid "_Open..."
 msgstr "開啟...(_O)"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:129
 msgid "_Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:130
 msgid "_Replace"
 msgstr "取代"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:131
 msgid "_Right Pane"
 msgstr "右側欄"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:132
 msgid "_Search"
 msgstr "搜尋(_S)"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:133
 msgid "_Statusbar"
 msgstr "狀態列(_S)"
 
-#: ../data/ui/gummi.glade.h:127
+#: ../data/ui/gummi.glade.h:134
 msgid "_Toolbar"
 msgstr "工具列(_T)"
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:135
 msgid "_View"
 msgstr "檢視(_V)"
 
-#: ../data/ui/gummi.glade.h:129
+#: ../data/ui/gummi.glade.h:136
 msgid "filter:"
 msgstr "篩選:"
 
-#: ../data/ui/gummi.glade.h:130 ../src/gui/gui-main.c:1006
+#: ../data/ui/gummi.glade.h:137
+#, fuzzy
+msgid "float captions"
+msgstr "浮動標題內總字數"
+
+#: ../data/ui/gummi.glade.h:138
+msgid "floats"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:139
+#, fuzzy
+msgid "headers"
+msgstr "標頭內總字數"
+
+#: ../data/ui/gummi.glade.h:140
+msgid "math environments"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c.orig:628
+#: ../src/gui/gui-main.c:636
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/ui/gummi.glade.h:131 ../src/gui/gui-main.c:1007
+#: ../data/ui/gummi.glade.h:142 ../src/gui/gui-main.c.orig:629
+#: ../src/gui/gui-main.c:637
 msgid "none"
 msgstr "無"
 
-#: ../data/ui/gummi.glade.h:132
+#: ../data/ui/gummi.glade.h:143
 msgid "of 0"
 msgstr "/ 0"
 
-#: ../data/ui/gummi.glade.h:133
+#: ../data/ui/gummi.glade.h:144
 msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
-#: ../data/ui/gummi.glade.h:134
+#: ../data/ui/gummi.glade.h:145
+#, fuzzy
+msgid "text"
+msgstr "粗體"
+
+#: ../data/ui/gummi.glade.h:146
 msgid "toolbutton1"
 msgstr "toolbutton1"
 
-#: ../data/ui/gummi.glade.h:135
+#: ../data/ui/gummi.glade.h:147
 msgid "toolbutton2"
 msgstr "toolbutton2"
 
-#: ../data/ui/gummi.glade.h:136
+#: ../data/ui/gummi.glade.h:148
 msgid "toolbutton3"
 msgstr "toolbutton3"
 
-#: ../data/ui/gummi.glade.h:137
+#: ../data/ui/gummi.glade.h:149
 msgid "toolbutton5"
 msgstr "toolbutton5"
 
-#: ../data/ui/gummi.glade.h:138
+#: ../data/ui/gummi.glade.h:150
 msgid "toolbutton6"
 msgstr "toolbutton6"
 
-#: ../data/ui/gummi.glade.h:139
+#: ../data/ui/gummi.glade.h:151
 msgid "toolbutton7"
 msgstr "toolbutton7"
 
@@ -533,169 +601,199 @@ msgstr "  "
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/prefs.glade.h:3
+#: ../data/ui/prefs.glade.h:3 ../data/ui/snippets.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: ../data/ui/prefs.glade.h:4
+msgid "--shell-escape"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:5
 msgid "Automatic Indentation"
 msgstr "自動縮排"
 
-#: ../data/ui/prefs.glade.h:4
+#: ../data/ui/prefs.glade.h:6
 msgid "Automatically export PDF on document save"
 msgstr "存檔時自動匯出 PDF"
 
-#: ../data/ui/prefs.glade.h:5
+#: ../data/ui/prefs.glade.h:7
 msgid "Color Scheme"
 msgstr "色彩配置"
 
-#: ../data/ui/prefs.glade.h:6
-msgid "Command: "
-msgstr "指令: "
+#: ../data/ui/prefs.glade.h:8
+#, fuzzy
+msgid "Compilation"
+msgstr "確認"
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:9
+msgid "Compilation steps"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:10
 msgid "Configure snippets"
 msgstr "設定文字片段"
 
-#: ../data/ui/prefs.glade.h:8
-msgid "Customize"
-msgstr "自訂指令"
-
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:11
 msgid "Default Text"
 msgstr "預設文字"
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:12
 msgid "Display line numbers"
 msgstr "顯示行號"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:13
 msgid "Do not split words over two lines"
 msgstr "換行時不將字詞拆開"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:14
 msgid "Editor"
 msgstr "編輯器"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:15
 msgid "Editor font"
 msgstr "編輯器字體"
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:16
 msgid "Enable text wrapping"
 msgstr "啟用文字換行"
 
-#: ../data/ui/prefs.glade.h:15
-msgid "Extra flags:"
-msgstr "額外選項:"
-
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:17
 msgid "File saving"
 msgstr "存檔"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:18
 msgid "Font & Colors"
 msgstr "字型及顏色"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:19
 msgid "Gummi Preferences"
 msgstr "Gummi 偏好設定"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:20
 msgid "Highlight current line"
 msgstr "標示當前的行"
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:21
 msgid "Highlighting"
 msgstr "強調"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:22
 msgid "Insert _spaces instead of tabs"
 msgstr "插入空格來替代Tab字符(_S)"
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:23
+msgid "Latexmk"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:24
 msgid "Line numbers"
 msgstr "行號"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:25
 msgid "Miscellaneous"
 msgstr "雜項"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:26
 msgid "None"
 msgstr "無"
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:27
 msgid "PDF Compiling"
 msgstr "PDF編譯"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:28
 msgid "PDF Exporting"
 msgstr "PDF 匯出"
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:29
+msgid "Rubber"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:30
 msgid "Snippets"
 msgstr "文字片段"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:31
 msgid "Spell check language"
 msgstr "拼字檢查語言"
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:32
 msgid "Tab stops"
 msgstr "Tab 停止位置"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:33
 msgid "Tab width:"
 msgstr "Tab 字符寬度:"
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:34
+msgid "TeX → DVI → PDF"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:35
+msgid "TeX → DVI → PS → PDF"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:36
+msgid "TeX → PDF"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:37
+msgid "TeXLive with PdfTeX"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:38
+msgid "TeXLive with XeTeX"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:39
 msgid "Text wrapping"
 msgstr "文字換行"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:40
+msgid "This program was not found on your system."
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:41
 msgid "Typesetter command"
 msgstr "排版指令:"
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:42
+#, fuzzy
+msgid "Typesetter options"
+msgstr "排版指令:"
+
+#: ../data/ui/prefs.glade.h:43
 msgid "View"
 msgstr "檢視"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:44
 msgid "_Autosave files every"
 msgstr "自動儲存間隔(_A)"
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:45
 msgid "_Enable automatic indentation"
 msgstr "啟用自動縮排功能(_E)"
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:46
 msgid "_Reset defaults"
 msgstr "重設為預設(_R)"
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:47
 msgid "compile every"
 msgstr "自動編譯間隔"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:48
 msgid "compile when idle for "
 msgstr "自動編譯: 當閒罝"
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:49
 msgid "minutes"
 msgstr "分鐘"
 
-#: ../data/ui/prefs.glade.h:40
-msgid "pdflatex"
-msgstr "pdflatex"
-
-#: ../data/ui/prefs.glade.h:41
+#: ../data/ui/prefs.glade.h:50
 msgid "seconds"
 msgstr "秒"
-
-#: ../data/ui/prefs.glade.h:42
-msgid "xelatex"
-msgstr "xelatex"
-
-#: ../data/ui/snippets.glade.h:1
-msgid "    "
-msgstr "    "
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Activation"
@@ -729,20 +827,12 @@ msgstr "Tab 觸發:"
 msgid "_Reset"
 msgstr "重設(_R)"
 
-#: ../src/editor.c:506
-msgid "Top reached, search from bottom?"
-msgstr "已搜尋到文首, 從文末開始尋找?"
-
-#: ../src/editor.c:513
-msgid "Bottom reached, search from top?"
-msgstr "已搜尋到文末, 從文首開始尋找?"
-
-#: ../src/iofunctions.c:118
+#: ../src/iofunctions.c:117
 #, c-format
 msgid "Saving %s..."
 msgstr "儲存%s中..."
 
-#: ../src/iofunctions.c:149
+#: ../src/iofunctions.c:154
 #, c-format
 msgid ""
 "%s\n"
@@ -751,20 +841,180 @@ msgstr ""
 "%s\n"
 "請稍後重試."
 
-#: ../src/iofunctions.c:194
+#: ../src/iofunctions.c:202
 msgid "Can not convert text to UTF-8!\n"
 msgstr "無法轉換文字為UTF-8格式!\n"
 
-#: ../src/iofunctions.c:219
+#: ../src/gui/gui-import.c:189
 #, c-format
-msgid "Autosaving file %s"
-msgstr "正在儲存%s"
+msgid "%s: No such file or directory\n"
+msgstr "%s: 找不到此檔案或目錄\n"
 
-#: ../src/latex.c:186 ../src/gui/gui-main.c:403
+#: ../src/gui/gui-preview.c:711
+#, c-format
+msgid "of %d"
+msgstr "之 %d"
+
+#: ../src/gui/gui-tabmanager.c:100
+#, c-format
+msgid "Unsaved Document %d"
+msgstr "未儲存文件 %d"
+
+#: ../src/gui/gui-snippets.c:303
+msgid ""
+"Duplicate activation tab trigger dectected! Please choose another one.\n"
+msgstr "Tab觸發字串重覆! 請選擇另一個字串.\n"
+
+#: ../src/gui/gui-snippets.c:317
+msgid "Type a new shortcut"
+msgstr "輸入新的捷徑"
+
+#: ../src/gui/gui-snippets.c:320
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "輸入新的捷徑, 或按後退鍵清除"
+
+#: ../src/gui/gui-main.c.orig:347 ../src/gui/gui-main.c:355
+#, c-format
+msgid "Swap file exits for %s, do you want to recover from it?"
+msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
+
+#: ../src/gui/gui-main.c.orig:385 ../src/gui/gui-main.c:393 ../src/latex.c:271
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
-#: ../src/updatecheck.c:112
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c.orig:522 ../src/gui/gui-main.c:530
+#, c-format
+msgid "Loading template ..."
+msgstr "載入模版中..."
+
+#: ../src/gui/gui-main.c.orig:578 ../src/gui/gui-main.c:586
+msgid "Compiling bibliography file..."
+msgstr "正在編譯參考文獻..."
+
+#: ../src/gui/gui-main.c.orig:580 ../src/gui/gui-main.c:588
+msgid "bibliography compiled without errors"
+msgstr "參考文獻已成功編譯"
+
+#: ../src/gui/gui-main.c.orig:582 ../src/gui/gui-main.c:590
+msgid "Error compiling bibliography file or none detected..."
+msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
+
+#: ../src/gui/gui-main.c.orig:585 ../src/gui/gui-main.c:593
+msgid "error compiling bibliography file"
+msgstr "編譯參考文獻過程發生錯誤"
+
+#: ../src/gui/gui-main.c.orig:619 ../src/gui/gui-main.c:627
+#, c-format
+msgid "%s loaded"
+msgstr "已載入%s"
+
+#: ../src/gui/gui-main.c.orig:697 ../src/gui/gui-main.c:721
+msgid "Do you want to save the changes you have made?"
+msgstr "是否儲存變更?"
+
+#: ../src/gui/gui-main.c.orig:715 ../src/gui/gui-main.c:739
+msgid "Open LaTeX document"
+msgstr "開啟LaTeX文件"
+
+#: ../src/gui/gui-main.c.orig:718 ../src/gui/gui-main.c:742
+msgid "Select an image to insert"
+msgstr "選擇要插入的影像"
+
+#: ../src/gui/gui-main.c.orig:719 ../src/gui/gui-main.c:743
+msgid "Select bibliography file"
+msgstr "選擇參考文獻檔案"
+
+#: ../src/gui/gui-main.c.orig:752 ../src/gui/gui-main.c:776
+msgid "Save LaTeX document"
+msgstr "儲存LaTeX文件"
+
+#: ../src/gui/gui-main.c.orig:753 ../src/gui/gui-main.c:777
+msgid "Save as LaTeX document"
+msgstr "另存為LaTeX文件"
+
+#: ../src/gui/gui-main.c.orig:754 ../src/gui/gui-main.c:778
+msgid "Export to PDF"
+msgstr "匯出為PDF"
+
+#: ../src/gui/gui-main.c.orig:801 ../src/gui/gui-main.c:825
+msgid "LaTeX files"
+msgstr "LaTeX 文件"
+
+#: ../src/gui/gui-main.c.orig:806 ../src/gui/gui-main.c:830
+msgid "Text files"
+msgstr "純文字文件"
+
+#: ../src/gui/gui-main.c.orig:819 ../src/gui/gui-main.c:843
+msgid "Image files"
+msgstr "影像檔"
+
+#: ../src/gui/gui-main.c.orig:826 ../src/gui/gui-main.c:850
+msgid "Bibtex files"
+msgstr "參考文獻"
+
+#: ../src/gui/gui-menu.c:106
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "載入最近使用文件時發生錯誤: %s"
+
+#: ../src/gui/gui-menu.c:323
+msgid "Running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:326
+msgid "Error running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:356
+msgid "Words in text"
+msgstr "純文字數"
+
+#: ../src/gui/gui-menu.c:357
+msgid "Words in headers"
+msgstr "標頭內總字數"
+
+#: ../src/gui/gui-menu.c:358
+msgid "Words in float captions"
+msgstr "浮動標題內總字數"
+
+#: ../src/gui/gui-menu.c:359
+msgid "Number of headers"
+msgstr "標頭總數"
+
+#: ../src/gui/gui-menu.c:360
+msgid "Number of floats"
+msgstr "浮動元件總數"
+
+#: ../src/gui/gui-menu.c:361
+msgid "Number of math inlines"
+msgstr "行內數學式總數"
+
+#: ../src/gui/gui-menu.c:362
+msgid "Number of math displayed"
+msgstr "顯示的數學式總數"
+
+#. Only the menu items that are available from the current active
+#. * tab and environment should become sensitive
+#: ../src/gui/gui-menu.c:481
+msgid "Save the active tab to enable this option"
+msgstr ""
+
+#: ../src/editor.c:521
+msgid "Top reached, search from bottom?"
+msgstr "已搜尋到文首, 從文末開始尋找?"
+
+#: ../src/editor.c:528
+msgid "Bottom reached, search from top?"
+msgstr "已搜尋到文末, 從文首開始尋找?"
+
+#: ../src/latex.c:279
+msgid ""
+"Unable to export PDF..\n"
+"Document contains errors.\n"
+msgstr ""
+
+#: ../src/update.c:114
 #, c-format
 msgid ""
 "Currently installed:\n"
@@ -779,11 +1029,11 @@ msgstr ""
 "最新版本:\n"
 "%s"
 
-#: ../src/updatecheck.c:114
+#: ../src/update.c:116
 msgid "Update Check"
 msgstr "檢查更新"
 
-#: ../src/utils.c:95
+#: ../src/utils.c:112
 #, c-format
 msgid ""
 "%s has encountered a serious error and will require a restart. Your working "
@@ -793,172 +1043,68 @@ msgstr ""
 "%s 遭遇到了一個嚴重的錯誤必須重新啟動. 你的文件將在重新開啟時被復原. 請到 "
 "http://dev.midnightcoding.org 回報這個錯誤."
 
-#: ../src/utils.c:141
+#: ../src/utils.c:158
 msgid "Confirmation"
 msgstr "確認"
 
-#: ../src/gui/gui-tabmanager.c:82
-#, c-format
-msgid "Unsaved Document %d"
-msgstr "未儲存文件 %d"
+#~ msgid ""
+#~ "Alignment of the\n"
+#~ "cell content."
+#~ msgstr "表格的對齊方式"
 
-#: ../src/gui/gui-import.c:167
-#, c-format
-msgid "%s: No such file or directory\n"
-msgstr "%s: 找不到此檔案或目錄\n"
+#~ msgid ""
+#~ "Determines whether the\n"
+#~ "cells have line borders. "
+#~ msgstr "設定表格格線"
 
-#: ../src/gui/gui-main.c:365
-#, c-format
-msgid "Swap file exits for %s, do you want to recover from it?"
-msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
+#~ msgid "Error output"
+#~ msgstr "錯誤輸出"
 
-#: ../src/gui/gui-main.c:460
-#, c-format
-msgid "Error loading recent file: %s"
-msgstr "載入最近使用文件時發生錯誤: %s"
+#~ msgid ""
+#~ "PDF Preview could not initialize.\n"
+#~ "It appears your LaTeX document contains errors\n"
+#~ "Additional information is available on the \n"
+#~ "Error Output tab"
+#~ msgstr ""
+#~ "無法啟動PDF預覽.\n"
+#~ "\n"
+#~ "您的LaTeX文件中包含錯誤或是%s未被案裝.\n"
+#~ "更多的訊息請參照錯誤輸出欄.\n"
+#~ "預覽將在錯誤修正後自動啟動."
 
-#: ../src/gui/gui-main.c:649
-msgid "Words in text"
-msgstr "純文字數"
+#~ msgid "_Compile Bibliography"
+#~ msgstr "編譯參考文獻(_C)"
 
-#: ../src/gui/gui-main.c:650
-msgid "Words in headers"
-msgstr "標頭內總字數"
+#~ msgid "_Insert Bibliography"
+#~ msgstr "插入參考文獻(_I)"
 
-#: ../src/gui/gui-main.c:651
-msgid "Words in float captions"
-msgstr "浮動標題內總字數"
+#~ msgid "Command: "
+#~ msgstr "指令: "
 
-#: ../src/gui/gui-main.c:652
-msgid "Number of headers"
-msgstr "標頭總數"
+#~ msgid "Customize"
+#~ msgstr "自訂指令"
 
-#: ../src/gui/gui-main.c:653
-msgid "Number of floats"
-msgstr "浮動元件總數"
+#~ msgid "Extra flags:"
+#~ msgstr "額外選項:"
 
-#: ../src/gui/gui-main.c:654
-msgid "Number of math inlines"
-msgstr "行內數學式總數"
+#~ msgid "pdflatex"
+#~ msgstr "pdflatex"
 
-#: ../src/gui/gui-main.c:655
-msgid "Number of math displayed"
-msgstr "顯示的數學式總數"
+#~ msgid "xelatex"
+#~ msgstr "xelatex"
 
-#: ../src/gui/gui-main.c:716
-msgid ""
-"This function requires\n"
-"the texcount program.\n"
-msgstr ""
-"這項功能需要\n"
-"texcount才能執行\n"
+#~ msgid "Autosaving file %s"
+#~ msgstr "正在儲存%s"
 
-#: ../src/gui/gui-main.c:724
-msgid "Document Statistics"
-msgstr "文件資訊"
+#~ msgid ""
+#~ "This function requires\n"
+#~ "the texcount program.\n"
+#~ msgstr ""
+#~ "這項功能需要\n"
+#~ "texcount才能執行\n"
 
-#. Only the menu items that are available from the current active
-#. * tab and environment should become sensitive
-#: ../src/gui/gui-main.c:764
-msgid "Save the active tab to enable this option"
-msgstr ""
-
-#: ../src/gui/gui-main.c:765
-msgid "The active tab is not a valid LaTeX document"
-msgstr "分頁文件內容不是一個有效的LaTeX文件"
-
-#: ../src/gui/gui-main.c:766
-msgid "You cannot detach the top-level document"
-msgstr ""
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c:905
-#, c-format
-msgid "Loading template ..."
-msgstr "載入模版中..."
-
-#: ../src/gui/gui-main.c:957
-msgid "Compiling bibliography file..."
-msgstr "正在編譯參考文獻..."
-
-#: ../src/gui/gui-main.c:959
-msgid "bibliography compiled without errors"
-msgstr "參考文獻已成功編譯"
-
-#: ../src/gui/gui-main.c:961
-msgid "Error compiling bibliography file or none detected..."
-msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
-
-#: ../src/gui/gui-main.c:964
-msgid "error compiling bibliography file"
-msgstr "編譯參考文獻過程發生錯誤"
-
-#: ../src/gui/gui-main.c:997
-#, c-format
-msgid "%s loaded"
-msgstr "已載入%s"
-
-#: ../src/gui/gui-main.c:1074
-msgid "Do you want to save the changes you have made?"
-msgstr "是否儲存變更?"
-
-#: ../src/gui/gui-main.c:1089
-msgid "Open LaTeX document"
-msgstr "開啟LaTeX文件"
-
-#: ../src/gui/gui-main.c:1092
-msgid "Select an image to insert"
-msgstr "選擇要插入的影像"
-
-#: ../src/gui/gui-main.c:1093
-msgid "Select bibliography file"
-msgstr "選擇參考文獻檔案"
-
-#: ../src/gui/gui-main.c:1126
-msgid "Save LaTeX document"
-msgstr "儲存LaTeX文件"
-
-#: ../src/gui/gui-main.c:1127
-msgid "Save as LaTeX document"
-msgstr "另存為LaTeX文件"
-
-#: ../src/gui/gui-main.c:1128
-msgid "Export to PDF"
-msgstr "匯出為PDF"
-
-#: ../src/gui/gui-main.c:1175
-msgid "LaTeX files"
-msgstr "LaTeX 文件"
-
-#: ../src/gui/gui-main.c:1180
-msgid "Text files"
-msgstr "純文字文件"
-
-#: ../src/gui/gui-main.c:1193
-msgid "Image files"
-msgstr "影像檔"
-
-#: ../src/gui/gui-main.c:1200
-msgid "Bibtex files"
-msgstr "參考文獻"
-
-#: ../src/gui/gui-preview.c:190
-#, c-format
-msgid "of %d"
-msgstr "之 %d"
-
-#: ../src/gui/gui-snippets.c:298
-msgid ""
-"Duplicate activation tab trigger dectected! Please choose another one.\n"
-msgstr "Tab觸發字串重覆! 請選擇另一個字串.\n"
-
-#: ../src/gui/gui-snippets.c:311
-msgid "Type a new shortcut"
-msgstr "輸入新的捷徑"
-
-#: ../src/gui/gui-snippets.c:314
-msgid "Type a new shortcut, or press Backspace to clear"
-msgstr "輸入新的捷徑, 或按後退鍵清除"
+#~ msgid "The active tab is not a valid LaTeX document"
+#~ msgstr "分頁文件內容不是一個有效的LaTeX文件"
 
 #~ msgid "_Tools"
 #~ msgstr "工具(_T)"
