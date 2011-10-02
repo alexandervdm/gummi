@@ -80,6 +80,7 @@ gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
 gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
 gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab);
 void tabmanagergui_switch_tab (GuTabmanagerGui* tm, gint pos);
+gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm);
 void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position);
 gint tabmanagergui_create_unsavednr (GuTabmanagerGui* tm);
 void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,

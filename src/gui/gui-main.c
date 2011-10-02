@@ -116,16 +116,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
 
-    g->menu_projopen =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_projopen"));
-    g->menu_projsave =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_projsave"));
-    g->menu_include =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_include"));
-    g->menu_input =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_input"));
-    g->menu_detach =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_detach"));
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
         
@@ -141,7 +131,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
         g->insens_widgets[i] =
             GTK_WIDGET(gtk_builder_get_object (builder, insens_widgets_str[i]));
 
-    menugui_init (builder);
+    g->menugui = menugui_init (builder);
     g->importgui = importgui_init (builder);
     g->previewgui = previewgui_init (builder);
     g->searchgui = searchgui_init (builder);
@@ -848,8 +838,13 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
+        case TYPE_PROJECT:
+            gtk_file_filter_set_name (filter, _("Gummi project files"));
+            gtk_file_filter_add_pattern (filter, "*.gprj");
+            gtk_file_chooser_add_filter (dialog, filter);
+            gtk_file_chooser_set_filter (dialog, filter);
+            break;   
     }
-
 }
 
 void add_to_recent_list (const gchar* filename) {

@@ -64,6 +64,7 @@
 typedef struct _GummiGui GummiGui; 
 
 struct _GummiGui {
+    GuMenuGui* menugui;
     GuImportGui* importgui;
     GuPrefsGui* prefsgui;
     GuPreviewGui* previewgui;
@@ -91,11 +92,6 @@ struct _GummiGui {
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
     
-    GtkMenuItem* menu_projopen;
-    GtkMenuItem* menu_projsave;
-    GtkMenuItem* menu_include;
-    GtkMenuItem* menu_input;
-    GtkMenuItem* menu_detach;
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;
     
@@ -115,7 +111,8 @@ typedef enum _GuFilterType {
     TYPE_LATEX_SAVEAS,
     TYPE_PDF,
     TYPE_IMAGE,
-    TYPE_BIBLIO
+    TYPE_BIBLIO,
+    TYPE_PROJECT
 } GuFilterType;
 
 /* Main GUI */

@@ -25,6 +25,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-infoscreen.c gui/gui-infoscreen.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
+		project.c project.h \
 		latex.c latex.h \
 		motion.c motion.h \
 		signals.c signals.h \

@@ -119,7 +119,11 @@ gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
     return (total != 1);
 }
 
-void tabmanagergui_set_active_tab(GuTabmanagerGui* tm, gint position) {
+gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm) {
+    return gtk_notebook_get_current_page (tm->notebook);
+}
+
+void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position) {
     
     if (position == -1) {
         tm->active_tab = NULL;

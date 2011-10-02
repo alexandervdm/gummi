@@ -32,6 +32,7 @@
 #include "configfile.h"
 #include "environment.h"
 #include "gui-main.h"
+#include "project.h"
 #include "update.h"
 
 extern Gummi* gummi;
@@ -40,8 +41,17 @@ extern GummiGui* gui;
 /* TODO: split the gui struct up into smaller pieces and try to remove all
  * non-gui functions and the "extern gummi" from this file */
 
-void menugui_init (GtkBuilder* builder) {
+GuMenuGui* menugui_init (GtkBuilder* builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
+    GuMenuGui* m = g_new0 (GuMenuGui, 1);
+    
+    m->menu_projcreate = GTK_MENU_ITEM(
+                        gtk_builder_get_object (builder, "menu_projcreate"));
+    m->menu_projopen = GTK_MENU_ITEM(
+                        gtk_builder_get_object (builder, "menu_projopen"));
+    
+    return m;
 }
 
 /*******************************************************************************
@@ -478,49 +488,42 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
 
 G_MODULE_EXPORT
 void on_menu_project_activate (GtkWidget *widget, void *user) {
-
-    /* Only the menu items that are available from the current active
-     * tab and environment should become sensitive */
-
-    const gchar *save = _("Save the active tab to enable this option");
-    //const gchar *invalid = _("The active tab is not a valid LaTeX document");
-    //const gchar *detach = _("You cannot detach the top-level document");
-
+    // TODO: perhaps use text to run pre compile check */
     if (g_active_editor->filename != NULL) {
-        gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_include), TRUE);
-        gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_input), TRUE);
-    }
-    else {
-        gtk_widget_set_tooltip_text(GTK_WIDGET (gui->menu_include), save);
-        gtk_widget_set_tooltip_text(GTK_WIDGET (gui->menu_input), save);
+        gtk_widget_set_sensitive (GTK_WIDGET
+                                 (gui->menugui->menu_projcreate), TRUE);
     }
 }
 
 G_MODULE_EXPORT
 void on_menu_project_deselect (GtkWidget *widget, void *user) {
-    gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_include), FALSE);
-    gtk_widget_set_sensitive(GTK_WIDGET (gui->menu_input), FALSE);
+     gtk_widget_set_sensitive (GTK_WIDGET(
+                               gui->menugui->menu_projcreate), FALSE);
 }
 
 G_MODULE_EXPORT
-void on_menu_project_include_from_tab (GtkWidget *widget, void *user) {
-    /* select a tab from a popup window with a liststore/treeview
-     * file save dialog when selected top or slave file is not yet
-     * saved" */
+void on_menu_projcreate_activate (GtkWidget *widget, void *user) {
 
-     /* write include command into the buffer at current position */
+    gchar* filename = get_save_filename (TYPE_PROJECT);
+    if (!filename) return;
+    
+    project_create_new (filename);
 }
 
 G_MODULE_EXPORT
-void on_menu_project_include_new_file (GtkWidget *widget, void *user) {
-    /* Create a new file and tab, popup with file save dialog */
+void on_menu_projopen_activate (GtkWidget *widget, void *user) {
+    
+    gchar* filename = get_open_filename (TYPE_PROJECT);
+    if (!filename) return;
 
-    /* write include command into the buffer at current position */
-}
-
-G_MODULE_EXPORT
-void on_menu_project_include_open_file (GtkWidget *widget, void *user) {
-
+    if (project_open_existing (filename)) {
+        statusbar_set_message (g_strdup_printf("Loading project %s", filename));
+    }
+    else {
+        statusbar_set_message (g_strdup_printf("An error ocurred while\
+                                                loading project %s", filename));
+    }
+    g_free (filename);
 }
 
 /*******************************************************************************

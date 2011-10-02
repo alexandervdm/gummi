@@ -1,10 +1,10 @@
 /**
- * @file   gui-menu.h
- * @brief
+ * @file   project.h
+ * @brief  
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- *
+ * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -27,26 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __GUMMI_GUI_MENU_H__
-#define __GUMMI_GUI_MENU_H__
-
 #include <glib.h>
-#include <gtk/gtk.h>
 
-#define g_menugui gui->menugui
-
-#define GU_MENU_GUI(x) ((GuMenuGui*)x)
-typedef struct _GuMenuGui GuMenuGui;
-
-struct _GuMenuGui {
-    GtkMenuItem* menu_projcreate;
-    GtkMenuItem* menu_projopen;
-};
-
-GuMenuGui* menugui_init (GtkBuilder* builder);
-void on_menu_close_activate (GtkWidget *widget, void* user);
-
-#endif /* __GUMMI_GUI_MENU_H__ */
-
-
-
+gboolean project_create_new (const gchar* filename);
+gboolean project_open_existing (const gchar* filename);
