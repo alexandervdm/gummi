@@ -1,10 +1,23 @@
 #!/bin/bash
 
+echo "packaging utility for ubuntu ppa.."
+
 absolute_dir=$(cd "$( dirname "$0" )" && pwd)
 cd $absolute_dir/..
 
-export DEBFULLNAME="Wei-Ning Huang (AZ)"
-export DEBEMAIL="aitjcize@gmail.com"
+echo "(1) Wei-Ning Huang"
+echo "(2) Alexander van der Mey"
+echo "Who are you? (1/2)"
+
+read -e WHO
+
+if [ "$WHO" = "1" ]; then
+    export DEBFULLNAME="Wei-Ning Huang (AZ)"
+    export DEBEMAIL="aitjcize@gmail.com"
+else
+    export DEBFULLNAME="Alexander van der Mey"
+    export DEBEMAIL="alexvandermey@gmail.com"
+fi
 
 notex=0
 
