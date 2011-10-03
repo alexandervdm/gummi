@@ -260,7 +260,7 @@ inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc) {
 
 G_MODULE_EXPORT
 void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(radioitem))) {
         return;
@@ -281,7 +281,7 @@ void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data)
 }
 
 static gboolean previewgui_animated_scroll_step(gpointer data) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(data);
 
     if (pc->ascroll_steps_left == 0) {
@@ -324,7 +324,7 @@ static void update_fit_scale(GuPreviewGui* pc) {
     if (pc->fit_mode == FIT_NONE) {
         return;
     }
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     gdouble width_scaling;
     gdouble height_scaling;
@@ -445,7 +445,7 @@ static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
     //if (pc->current_page == page) {
     //    return;
     //}
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     pc->current_page = page;
 
@@ -480,7 +480,7 @@ static void update_current_page(GuPreviewGui* pc) {
     if (!is_continuous(pc)) {
         return;
     }
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     gdouble offset_y = MAX(get_document_margin(pc), (gtk_adjustment_get_page_size(pc->vadj) - pc->height_scaled)/2 );
 
@@ -523,7 +523,7 @@ inline static gdouble get_page_width(GuPreviewGui* pc, int page) {
 }
 
 static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     int i;
     for (i = 0; i < pc->n_pages; i++) {
@@ -534,7 +534,7 @@ static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
 }
 
 static void update_drawarea_size(GuPreviewGui *pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     gint width = 1;
     gint height = 1;
@@ -607,7 +607,7 @@ static void update_page_sizes(GuPreviewGui* pc) {
 
 void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout)
 {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     if (pageLayout == POPPLER_PAGE_LAYOUT_UNSET) {
         return;
@@ -624,7 +624,7 @@ static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode) {
     if (pc->fit_mode == fit_mode) {
         return;
     }
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     pc->fit_mode = fit_mode;
 
@@ -647,7 +647,7 @@ static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode) {
 }
 
 static void update_scaled_size(GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     if (is_continuous(pc)) {
         pc->height_scaled = pc->height_pages*pc->scale + (pc->n_pages-1) * get_page_margin(pc);
@@ -664,7 +664,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     if (pc->scale == scale) {
         return;
     }
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     slog(L_DEBUG, "Changing scale\n");
 
@@ -707,7 +707,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
 }
 
 static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     previewgui_invalidate_renderings(pc);
     g_free(pc->pages);
@@ -733,7 +733,7 @@ static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
 }
 
 void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     previewgui_cleanup_fds (pc);
 
     pc->uri = g_strconcat (urifrmt, pdffile, NULL);
@@ -771,7 +771,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
 }
 
 void previewgui_refresh (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
      * compiling. Also prevent PDF from changing (compiling) when previewing */
@@ -800,7 +800,7 @@ unlock:
 }
 
 void previewgui_goto_page (GuPreviewGui* pc, int page) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     page = MAX(page, 0);
     page = MIN(page, pc->n_pages-1);
 
@@ -828,7 +828,7 @@ void previewgui_goto_page (GuPreviewGui* pc, int page) {
 }
 
 void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     if (!is_continuous(pc)) {
         // We do not scroll in single page mode...
@@ -853,7 +853,7 @@ void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
 }
 
 void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     GtkRequisition requisition;
     gtk_widget_size_request (pc->drawarea, &requisition);
@@ -889,7 +889,7 @@ void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
 }
 
 void previewgui_scroll_to_xy (GuPreviewGui* pc, int x, int y) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     x = MIN(x, gtk_adjustment_get_upper(pc->hadj) -
                gtk_adjustment_get_page_size(pc->hadj));
@@ -909,7 +909,7 @@ void previewgui_scroll_to_xy (GuPreviewGui* pc, int x, int y) {
 }
 
 void previewgui_save_position (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     /* update last scroll position to restore it after error mode */
     pc->restore_y = gtk_adjustment_get_value(pc->vadj);
     pc->restore_x = gtk_adjustment_get_value(pc->hadj);
@@ -919,7 +919,7 @@ void previewgui_save_position (GuPreviewGui* pc) {
 }
 
 void previewgui_restore_position (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     /* restore scroll window position to value before error mode */
     /* TODO: might want to merge this with synctex funcs in future */
 
@@ -961,7 +961,7 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
 }
 
 void previewgui_reset (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     /* reset uri */
     g_free (pc->uri);
     pc->uri = NULL;
@@ -979,7 +979,7 @@ void previewgui_quit(GuPreviewGui* pc) {
 }
 
 void previewgui_cleanup_fds (GuPreviewGui* pc) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     if (pc->doc) {
         g_object_unref (pc->doc);
@@ -1006,7 +1006,7 @@ void previewgui_stop_preview (GuPreviewGui* pc) {
 
 G_MODULE_EXPORT
 void on_page_input_changed (GtkEntry* entry, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
 
     gint newpage = atoi (gtk_entry_get_text (entry));
     newpage -= 1;
@@ -1019,7 +1019,7 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
 
 G_MODULE_EXPORT
 void on_next_page_clicked (GtkWidget* widget, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
     previewgui_scroll_to_page (pc, pc->next_page);
@@ -1027,7 +1027,7 @@ void on_next_page_clicked (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_prev_page_clicked (GtkWidget* widget, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
     previewgui_scroll_to_page (pc, pc->prev_page);
@@ -1035,7 +1035,7 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_combo_sizes_changed (GtkWidget* widget, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     gint index = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
     if (index == 0) {
@@ -1154,7 +1154,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
 }
 
 gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
     // Abort any animated scrolls that might be running...
@@ -1166,7 +1166,7 @@ gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
 }
 
 gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
@@ -1282,7 +1282,7 @@ gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
 }
 
 gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
-    L_F_DEBUG;
+    //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;

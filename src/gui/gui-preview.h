@@ -65,68 +65,64 @@ struct _GuPreviewPage {
 typedef struct _GuPreviewGui GuPreviewGui;
 
 struct _GuPreviewGui {
-  PopplerDocument* doc;
-  GtkViewport* previewgui_viewport;
-  GtkWidget* statuslight;
-  GtkWidget* drawarea;
-  GtkWidget* page_next;
-  GtkWidget* page_prev;
-  GtkWidget* page_label;
-  GtkWidget* page_input;
-  GtkWidget* scrollw;
-  GtkWidget* errorpanel;
-  GtkComboBox* combo_sizes;
-  
-  gulong page_input_changed_handler;
-  gulong combo_sizes_changed_handler;
-  gulong on_resize_handler;
-  gulong on_expose_handler;
-  gulong hvalue_changed_handler;
-	gulong vvalue_changed_handler;
-	gulong hchanged_handler;
-	gulong vchanged_handler;
-    
-	GtkRadioMenuItem *page_layout_single_page;
-	GtkRadioMenuItem *page_layout_one_column;
-	GtkRadioMenuItem *page_layout_two_column_right;
-	GtkRadioMenuItem *page_layout_two_column_left;
-	GtkRadioMenuItem *page_layout_two_page_right;
-	GtkRadioMenuItem *page_layout_two_page_left;
-	
-  gchar *uri;
-  gint update_timer;
-  gboolean preview_on_idle;
-  
-  GtkAdjustment* hadj;
-  GtkAdjustment* vadj;
-  gdouble prev_x;
-  gdouble prev_y;
-  gdouble restore_x;
-  gdouble restore_y;
-  
-  gint n_pages;
-  gint current_page;
-  gdouble max_page_height;
-  gdouble height_pages;
-  gdouble width_pages;
-  gdouble height_scaled;
-  gdouble width_scaled;
-  gdouble width_left;
-  gdouble width_no_scale;
-  gdouble scale;
-  PopplerPageLayout pageLayout;
-  GuPreviewPage *pages;
-  enum GuPreviewFitMode fit_mode;
-  
-  gint next_page;
-  gint prev_page;
-    
-	gint ascroll_steps_left;
-	gint ascroll_end_x;
-	gint ascroll_end_y;
-	gint ascroll_dist_x;
-	gint ascroll_dist_y;
-    
+    PopplerDocument* doc;
+    GtkViewport* previewgui_viewport;
+    GtkWidget* statuslight;
+    GtkWidget* drawarea;
+    GtkWidget* page_next;
+    GtkWidget* page_prev;
+    GtkWidget* page_label;
+    GtkWidget* page_input;
+    GtkWidget* scrollw;
+    GtkWidget* errorpanel;
+    GtkComboBox* combo_sizes;
+
+    gulong page_input_changed_handler;
+    gulong combo_sizes_changed_handler;
+    gulong on_resize_handler;
+    gulong on_expose_handler;
+    gulong hvalue_changed_handler;
+    gulong vvalue_changed_handler;
+    gulong hchanged_handler;
+    gulong vchanged_handler;
+
+    GtkRadioMenuItem *page_layout_single_page;
+    GtkRadioMenuItem *page_layout_one_column;
+
+    gchar *uri;
+    gint update_timer;
+    gboolean preview_on_idle;
+
+    GtkAdjustment* hadj;
+    GtkAdjustment* vadj;
+    gdouble prev_x;
+    gdouble prev_y;
+    gdouble restore_x;
+    gdouble restore_y;
+
+    gint n_pages;
+    gint current_page;
+    gdouble max_page_height;
+    gdouble height_pages;
+    gdouble width_pages;
+    gdouble height_scaled;
+    gdouble width_scaled;
+    gdouble width_left;
+    gdouble width_no_scale;
+    gdouble scale;
+    PopplerPageLayout pageLayout;
+    GuPreviewPage *pages;
+    enum GuPreviewFitMode fit_mode;
+
+    gint next_page;
+    gint prev_page;
+
+    gint ascroll_steps_left;
+    gint ascroll_end_x;
+    gint ascroll_end_y;
+    gint ascroll_dist_x;
+    gint ascroll_dist_y;
+
 };
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder);
