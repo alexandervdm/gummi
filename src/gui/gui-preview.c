@@ -354,12 +354,22 @@ static void update_fit_scale(GuPreviewGui* pc) {
     gtk_widget_size_request(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
     gint hscrollbar_height = spacing + req.height;
 
-    gint view_width_without_bar = gdk_window_get_width(GDK_WINDOW(gtk_viewport_get_bin_window(pc->previewgui_viewport)));
+
+    #if GTK_MINOR_VERSION >= 24 // gdk_window_get_width is gtk-2.24 or higher.
+    gint view_width_without_bar = gdk_window_get_width(pc->previewgui_viewport->view_window);
+    gint view_height_without_bar = gdk_window_get_height(pc->previewgui_viewport->view_window);
+    #else
+        gint view_width_without_bar, view_height_without_bar;
+        gdk_drawable_get_size (pc->previewgui_viewport->view_window, 
+                                &view_width_without_bar, 
+                                &view_height_without_bar);
+    #endif
+    
+
     if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_width_without_bar += vscrollbar_width;
     }
 
-    gint view_height_without_bar = gdk_window_get_height(GDK_WINDOW(gtk_viewport_get_bin_window(pc->previewgui_viewport)));
     if (gtk_widget_get_visible(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_height_without_bar += hscrollbar_height;
     }
@@ -858,7 +868,7 @@ void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
     GtkRequisition requisition;
     gtk_widget_size_request (pc->drawarea, &requisition);
 
-    GdkWindow *w = gtk_viewport_get_bin_window(pc->previewgui_viewport);
+    GdkWindow *w = pc->previewgui_viewport->view_window;
     
     #if GTK_MINOR_VERSION >= 24
         gdouble page_x = gdk_window_get_width(w);
