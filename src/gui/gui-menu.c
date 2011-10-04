@@ -158,7 +158,7 @@ gboolean on_menu_quit_activate (void) {
     gint length = g_list_length (gui->tabmanagergui->tabs);
 
     /* Stop compile thread */
-    motion_stop_compile_thread (gummi->motion);
+    if (length > 0) motion_stop_compile_thread (gummi->motion);
 
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
