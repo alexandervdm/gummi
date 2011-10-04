@@ -209,13 +209,10 @@ void gui_main (GtkBuilder* builder) {
     gtk_builder_connect_signals (builder, NULL);
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
-    /*
-    if (!strlen (config_get_value ("svnpopup"))) {
-        GtkWidget *tmp =
-            GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-        gtk_widget_show (tmp);
-        config_set_value ("svnpopup", "popped");
-    }*/
+
+    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    gtk_widget_show (tmp);
+
     gdk_threads_enter();
     gtk_main ();
     gdk_threads_leave();

@@ -32,15 +32,15 @@ if test "$spellcheck" = yes; then
 fi
 AC_SUBST(USE_GTKSPELL)
 
-AM_PATH_GLIB_2_0([2.18.0], [
+AM_PATH_GLIB_2_0([2.20.0], [
 	 GUI_CFLAGS="$GUI_CFLAGS $GLIB_CFLAGS"
 	 GUI_LIBS="$GUI_LIBS $GLIB_LIBS"
-	], [AC_MSG_ERROR([You need Glib >= 2.18.0 to build $PACKAGE])]) 
+	], [AC_MSG_ERROR([You need Glib >= 2.20.0 to build $PACKAGE])]) 
 
-AM_PATH_GTK_2_0([2.18.0], [
+AM_PATH_GTK_2_0([2.20.0], [
 	 GUI_CFLAGS="$GUI_CFLAGS $GTK_CFLAGS"
 	 GUI_LIBS="$GUI_LIBS $GTK_LIBS"
-	], [AC_MSG_ERROR([You need Gtk+ >= 2.18.0 to build $PACKAGE])]) 
+	], [AC_MSG_ERROR([You need Gtk+ >= 2.20.0 to build $PACKAGE])]) 
 
 PKG_CHECK_MODULES(gtksourceview, [gtksourceview-2.0 >= 2.2.1],,
 	[AC_MSG_ERROR([You need gtksourceview-2 >= 2.2.1 to build $PACKAGE])]) 

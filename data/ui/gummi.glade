@@ -3489,31 +3489,24 @@ bibliography database</property>
   <object class="GtkMessageDialog" id="svnpopup">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Hello svn user!</property>
+    <property name="title" translatable="yes">Save early.. save often!</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">mainwindow</property>
     <property name="message_type">warning</property>
-    <property name="text">You are using the unstable branch of Gummi. 
-This is a friendly warning that we will be pushing a number
-of patches  to this branch within the coming days that will 
-affect Gummi's internal mechanisms a great deal. 
+    <property name="text">Thank you for testing Gummi 0.5.999!
 
-This could lead to a more unstable experience than you 
-are used to. Should you experience a crash, rest assured 
-that Gummi always stores a hidden temporary file with the
-(live) content of the document you are working on. It is 
-stored in your TMPDIR for unsaved documents, and for all
-other cases as a hidden file in the same directory as the 
-document you are working on. 
+This release is meant as a public beta version for the upcoming
+Gummi 0.6.0 release. It is NOT meant for production use. 
 
-Run "gummi" or "gummi -d" from the command line to see
-more information. Should you encounter any problems, we 
-as always appreciate bug reports.
-
-This message shouldn't bother you again. Thanks!</property>
+Your feedback on this release is highly appreciated. Should you 
+encounter any problems, please create a bug report on our 
+website or email us on alexvandermey@gmail.com. Running 
+"gummi" or "gummi-d"  from the command line will provide 
+more information. 
+</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
