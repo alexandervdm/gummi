@@ -354,12 +354,12 @@ static void update_fit_scale(GuPreviewGui* pc) {
     gtk_widget_size_request(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
     gint hscrollbar_height = spacing + req.height;
 
-    gint view_width_without_bar = gdk_window_get_width(GDK_WINDOW(gtk_viewport_get_view_window(pc->previewgui_viewport)));
+    gint view_width_without_bar = gdk_window_get_width(GDK_WINDOW(gtk_viewport_get_bin_window(pc->previewgui_viewport)));
     if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_width_without_bar += vscrollbar_width;
     }
 
-    gint view_height_without_bar = gdk_window_get_height(GDK_WINDOW(gtk_viewport_get_view_window(pc->previewgui_viewport)));
+    gint view_height_without_bar = gdk_window_get_height(GDK_WINDOW(gtk_viewport_get_bin_window(pc->previewgui_viewport)));
     if (gtk_widget_get_visible(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_height_without_bar += hscrollbar_height;
     }
@@ -858,9 +858,17 @@ void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
     GtkRequisition requisition;
     gtk_widget_size_request (pc->drawarea, &requisition);
 
-    GdkWindow *w = gtk_viewport_get_view_window(pc->previewgui_viewport);
-    gdouble page_x = gdk_window_get_width(w);
-    gdouble page_y = gdk_window_get_height(w);
+    GdkWindow *w = gtk_viewport_get_bin_window(pc->previewgui_viewport);
+    
+    #if GTK_MINOR_VERSION >= 24
+        gdouble page_x = gdk_window_get_width(w);
+        gdouble page_y = gdk_window_get_height(w);
+    #else
+        gint tmp_x, tmp_y;
+        gdk_drawable_get_size (w, &tmp_x, &tmp_y);
+        gdouble page_x = (gdouble)tmp_x;
+        gdouble page_y = (gdouble)tmp_y;
+    #endif
 
     gdouble upper_x = MAX(page_x, requisition.width);
     gdouble upper_y = MAX(page_y, requisition.height);
