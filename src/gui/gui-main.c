@@ -176,11 +176,19 @@ GummiGui* gui_init (GtkBuilder* builder) {
     if (config_get_value ("toolbar")) {
         gtk_check_menu_item_set_active (g->menu_toolbar, TRUE);
         gtk_widget_show (GTK_WIDGET (g->toolbar));
+    } else {
+        config_set_value ("toolbar", "False");
+        gtk_check_menu_item_set_active (g->menu_toolbar, FALSE);
+        gtk_widget_hide (GTK_WIDGET (g->toolbar));
     }
 
     if (config_get_value ("statusbar")) {
         gtk_check_menu_item_set_active (g->menu_statusbar, TRUE);
         gtk_widget_show (GTK_WIDGET (g->statusbar));
+    } else {
+        config_set_value ("statusbar", "False");
+        gtk_check_menu_item_set_active (g->menu_statusbar, FALSE);
+        gtk_widget_hide (GTK_WIDGET (g->statusbar));
     }
 
     if (config_get_value ("rightpane")) {
@@ -188,7 +196,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_widget_show (GTK_WIDGET (g->rightpane));
     } else {
         config_set_value ("compile_status", "False");
-        gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
+        gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
+        gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
 
     if (!config_get_value ("compile_status"))
