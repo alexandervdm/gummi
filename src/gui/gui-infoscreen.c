@@ -173,6 +173,6 @@ void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     else {
         gtk_label_set_text (is->header, document_error_h);
         gtk_label_set_text (is->details, document_error_d);
-        infoscreengui_setup_tablist (is);
+        //infoscreengui_setup_tablist (is);
     }
 }
