@@ -31,15 +31,16 @@
 
 #include "configfile.h"
 #include "constants.h"
+#include "external.h"
 #include "utils.h"
 
 gboolean lmk_detected = FALSE;
 
 void latexmk_init (void) {
     
-    if (utils_program_exists (C_LATEXMK)) {
+    if (external_exists (C_LATEXMK)) {
         // TODO: check if supported version
-        slog (L_INFO, "Typesetter detected: %s\n", utils_get_version (C_LATEXMK));
+        slog (L_INFO, "Typesetter detected: %s\n", external_version (C_LATEXMK));
         lmk_detected = TRUE;
     }
 }

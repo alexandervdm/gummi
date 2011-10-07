@@ -41,6 +41,7 @@
 #include "constants.h"
 #include "editor.h"
 #include "environment.h"
+#include "external.h"
 #include "gui/gui-preview.h"
 #include "utils.h"
 
@@ -192,7 +193,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
 
     const gchar* typesetter = config_get_value ("typesetter");
-    if (!utils_program_exists (typesetter)) {
+    if (!external_exists (typesetter)) {
         /* L_G_ERROR inside the thread freezes up 
         slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
                 "pdflatex.\n", typesetter);*/

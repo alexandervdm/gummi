@@ -1,6 +1,6 @@
 /**
- * @file   constants.h
- * @brief  Constants used throughout the program
+ * @file   external.h
+ * @brief  existence and compability checks for external tools
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -27,31 +27,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "utils.h"
+#include <glib.h>
 
+typedef struct {
+    gboolean exists;
+    gchar* version;
+} External;
 
-/* File constants */
-#define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)
-#define C_DEFAULTTEXT g_build_filename (DATADIR, "misc", "default.tex", NULL)
-
-#define C_LATEX "latex"
-#define C_PDFLATEX "pdflatex"
-#define C_XELATEX "xelatex"
-#define C_RUBBER "rubber"
-#define C_LATEXMK "latexmk"
-
-
-/* Platform dependant constants : */
-
-#ifdef WIN32
-    #define C_TMPDIR utils_get_tmp_tmp_dir()
-    #define C_CMDSEP "&&"
-    #define C_TEXSEC ""
-#else
-    #define C_TMPDIR g_get_tmp_dir()
-    #define C_CMDSEP ";"
-    #define C_TEXSEC "env openout_any=a"
-#endif
-
-
-
+gboolean external_exists (const gchar* program);
+gboolean external_hasflag (const gchar* program, const gchar* flag);
+gchar* external_version (const gchar* program);

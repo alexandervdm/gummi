@@ -388,7 +388,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
 
 
     /* TODO: move to non gui class (latex perhaps) */
-    if (utils_program_exists ("texcount")) {
+    if (external_exists ("texcount")) {
         /* Copy workfile to /tmp to remove any spaces in filename to avoid
          * segfaults */
         gchar* tmpfile = g_strdup_printf ("%s.state", g_active_editor->fdname);

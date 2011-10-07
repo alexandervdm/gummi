@@ -34,6 +34,7 @@
 #include "configfile.h"
 #include "constants.h"
 #include "utils.h"
+#include "external.h"
 
 gboolean pdf_detected = FALSE;
 gboolean xel_detected = FALSE;
@@ -42,15 +43,25 @@ gboolean xel_detected = FALSE;
 /* All the functions for "pure" building with texlive only tools */
 
 void texlive_init (void) {
-    // TODO: check if supported version
-    if (utils_program_exists (C_PDFLATEX)) {
+
+    /* pdfTeX 3.1415926-1.40.10 (TeX Live 2009)
+       pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
+       pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2011)
+    */
+    
+    if (external_exists (C_LATEX)) {
+        slog (L_INFO, "%s was found installed..\n", external_version(C_LATEX));
+    }
+    
+    if (external_exists (C_PDFLATEX)) {
         slog (L_INFO, "Typesetter detected: %s\n",
-              utils_get_version (C_PDFLATEX));
+              external_version (C_PDFLATEX));
         pdf_detected = TRUE;
     }
-    if (utils_program_exists (C_XELATEX)) {
+    
+    if (external_exists (C_XELATEX)) {
         slog (L_INFO, "Typesetter detected: %s\n",
-              utils_get_version (C_XELATEX));
+              external_version (C_XELATEX));
         xel_detected = TRUE;
     }
     

@@ -116,7 +116,6 @@ void slog_set_gui_parent (GtkWindow* p);
 void slog (gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog (const gchar* message);
 gboolean utils_path_exists (const gchar* path);
-gboolean utils_program_exists (const gchar *cmdname);
 gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
         gssize length);
 
@@ -158,8 +157,6 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
  */
 gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens);
 gboolean utils_strequal (const gchar* str1, const gchar* str2);
-
-gchar* utils_get_version (const gchar* program);
 
 gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
 

@@ -38,6 +38,7 @@
 #include "biblio.h"
 #include "configfile.h"
 #include "environment.h"
+#include "external.h"
 #include "gui/gui-main.h"
 #include "iofunctions.h"
 #include "motion.h"
@@ -117,7 +118,7 @@ int main (int argc, char *argv[]) {
     slog (L_DEBUG, "GummiGui created!\n");
 
     /* Start compile thread */
-    if (utils_program_exists (config_get_value("typesetter"))) {
+    if (external_exists (config_get_value("typesetter"))) {
         typesetter_setup ();
         motion_start_compile_thread (motion);
         slog (L_DEBUG, "Compile thread started!\n");

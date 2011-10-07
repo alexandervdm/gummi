@@ -1,6 +1,6 @@
 /**
- * @file   rubber.c
- * @brief  
+ * @file   external.c
+ * @brief  existence and compability checks for external tools
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -26,67 +26,55 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
-#include "rubber.h"
-
-#include "configfile.h"
-#include "constants.h"
+ 
 #include "external.h"
+
+#include "constants.h"
 #include "utils.h"
 
-gboolean rub_detected = FALSE;
+/* local functions */
+static gchar* version_texlive (const gchar* output);
 
-void rubber_init (void) {
+gboolean external_exists (const gchar* program) {
+    const gchar *fullpath = g_find_program_in_path (program);
     
-    if (external_exists (C_RUBBER)) {
-        // TODO: check if supported version
-        slog (L_INFO, "Typesetter detected: %s\n", external_version (C_RUBBER));
-        rub_detected = TRUE;
-    }
-}
-
-gboolean rubber_active (void) {
-    if (utils_strequal (config_get_value("typesetter"), C_RUBBER)) {
+    if (g_file_test (fullpath, G_FILE_TEST_EXISTS)) {
         return TRUE;
     }
     return FALSE;
 }
 
-gboolean rubber_detected (void) {
-    return rub_detected;
+gboolean external_hasflag (const gchar* program, const gchar* flag) {
+    return TRUE;
 }
 
-gchar* rubber_get_command (const gchar* method, gchar* workfile) {
+gchar* external_version (const gchar* program) {
+    const gchar* getversion = g_strdup_printf("%s --version", program);
+    Tuple2 cmdgetv = utils_popen_r (getversion);
+    gchar* result = NULL;
     
-    const gchar* outdir = g_strdup_printf ("--into=\"%s\"", C_TMPDIR);
-    const gchar* flags = rubber_get_flags (method);
-    gchar* rubcmd;
+    gchar* output = (gchar*)cmdgetv.second;
+    gchar** lines = g_strsplit(output, "\n", BUFSIZ);
+    result = lines[0];
     
-    rubcmd = g_strdup_printf("rubber %s %s \"%s\"", flags, outdir, workfile);
-    
-    return rubcmd;
-}
-
-gchar* rubber_get_flags (const gchar *method) {
-    gchar *rubflags;
-    if (utils_strequal (method, "texpdf")) {
-        rubflags = g_strdup_printf("-d -q");
+    /* the output for some programs needs tweaking, use local functions */
+    if (utils_strequal (program, C_LATEX)) {
+        result = version_texlive (result);
     }
-    else {
-        rubflags = g_strdup_printf("-p -d -q");
+    else if (utils_strequal (program, C_LATEXMK)) {
+        result = lines[1];
     }
-    return rubflags;
+
+    if (result == NULL) result = "Unknown";
+    return result;
 }
 
-/* base form : 
- * 
- * cd "/tmp"; env openout_any=a rubber -p -d -q --into="/tmp" "/tmp/gummi_4I2B2V"
- * 
- */
+static gchar* version_texlive (const gchar* output) {
+    gchar** parts = g_strsplit(output, " ", BUFSIZ);
+    
+    gchar* version = g_strdup_printf("%s %s %s", parts[2], parts[3], parts[4]);
 
+    return version;
+}
 
-
-
-
-
-
+    
