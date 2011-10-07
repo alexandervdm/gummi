@@ -34,6 +34,8 @@
 
 /* local functions */
 static gchar* version_texlive (const gchar* output);
+static gchar* version_latexmk (const gchar* output);
+static gchar* version_rubber (const gchar* output);
 
 gboolean external_exists (const gchar* program) {
     const gchar *fullpath = g_find_program_in_path (program);
@@ -51,9 +53,11 @@ gboolean external_hasflag (const gchar* program, const gchar* flag) {
 gchar* external_version (const gchar* program) {
     const gchar* getversion = g_strdup_printf("%s --version", program);
     Tuple2 cmdgetv = utils_popen_r (getversion);
-    gchar* result = NULL;
-    
     gchar* output = (gchar*)cmdgetv.second;
+    gchar* result = g_strdup ("Unknown, please report a bug");
+    
+    if (output == NULL) return result;
+    
     gchar** lines = g_strsplit(output, "\n", BUFSIZ);
     result = lines[0];
     
@@ -61,20 +65,37 @@ gchar* external_version (const gchar* program) {
     if (utils_strequal (program, C_LATEX)) {
         result = version_texlive (result);
     }
-    else if (utils_strequal (program, C_LATEXMK)) {
-        result = lines[1];
+    else if (utils_strequal (program, C_RUBBER)) {
+        result = version_rubber (result);
     }
-
-    if (result == NULL) result = "Unknown";
+    else if (utils_strequal (program, C_LATEXMK)) {
+        result = version_latexmk (lines[1]);
+    }
+    
     return result;
 }
 
 static gchar* version_texlive (const gchar* output) {
     gchar** parts = g_strsplit(output, " ", BUFSIZ);
-    
+    /* if we start splitting the year number from this string, please keep
+     * in mind that debian/ubuntu like themselves a lot: (TeX Live 2009/Debian)
+     * */
     gchar* version = g_strdup_printf("%s %s %s", parts[2], parts[3], parts[4]);
-
     return version;
+}
+
+static gchar* version_rubber (const gchar* output) {
+    /* format: Rubber version: 1.1 */
+    gchar** version = g_strsplit (output, " ", BUFSIZ);
+    return version[2];
+}
+
+static gchar* version_latexmk (const gchar* output) {
+    /* latexmk --version seems to print the requested information after a \n
+       format: Latexmk, John Collins, 24 March 2011. Version 4.23a */
+
+    gchar** version = g_strsplit (output, " ", BUFSIZ);
+    return version[7];
 }
 
     
