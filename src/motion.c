@@ -145,11 +145,11 @@ gpointer motion_compile_thread (gpointer data) {
                 if (!pc->uri) {
                 	previewgui_set_pdffile (pc, editor->pdffile);
                 } else {
-                	previewgui_refresh (gui->previewgui);
+                	previewgui_refresh (gui->previewgui, editor->sync_to_last_edit ? &(editor->last_edit) : NULL, editor->workfile);
                 }
                 if (mc->errormode) motion_stop_errormode (mc);
             } else {
-            	previewgui_refresh (gui->previewgui);
+            	previewgui_refresh (gui->previewgui, editor->sync_to_last_edit ? &(editor->last_edit) : NULL, editor->workfile);
             }
             gdk_threads_leave ();
         }

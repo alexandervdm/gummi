@@ -72,7 +72,10 @@ struct _GuEditor {
     gboolean backwards;
     gboolean wholeword;
     gboolean matchcase;
-    gint sigid[3];
+    gint sigid[5];
+    
+    GtkTextIter last_edit;
+    gboolean sync_to_last_edit;
 };
 
 GuEditor* editor_new (GuMotion* mc);

@@ -2419,6 +2419,21 @@ and update preview.</property>
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkToggleToolButton" id="tool_autosync">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="tooltip_text" translatable="yes">Always scroll preview to last change.</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="label" translatable="yes">toolbutton1</property>
+                    <property name="use_underline">True</property>
+                    <property name="stock_id">gtk-jump-to</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkToolButton" id="tool_statuslight">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>

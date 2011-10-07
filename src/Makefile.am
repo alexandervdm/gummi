@@ -23,6 +23,8 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-search.c gui/gui-search.h \
 		gui/gui-snippets.c gui/gui-snippets.h \
 		gui/gui-infoscreen.c gui/gui-infoscreen.h \
+		syncTeX/synctex_parser.c syncTeX/synctex_parser.h \
+		syncTeX/synctex_parser_utils.c syncTeX/synctex_parser_utils.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		external.c external.h \

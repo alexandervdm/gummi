@@ -47,6 +47,7 @@
 #include "motion.h"
 #include "porting.h"
 
+#include "syncTeX/synctex_parser.h"
 
 
 /* set up uri using appropriate formatting for OS
@@ -80,6 +81,14 @@ static gfloat list_sizes[] = {-1, -1, 0.50, 0.70, 0.85, 1.0, 1.25, 1.5, 2.0,
 extern Gummi* gummi;
 extern GummiGui* gui;
 
+typedef struct {
+    gint page;
+    gint x; // of lower left corner
+    gint y; // of lower left corner
+    gint width;
+    gint height;
+    gint score;
+} SyncNode;
 
 static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdouble y);
 
@@ -119,6 +128,14 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc,
 static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
 
 
+static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
+static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to);
+static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node);
+static SyncNode* synctex_one_node_found(GuPreviewGui* pc);
+static void synctex_merge_nodes(GuPreviewGui* pc);
+static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
+                                                        gpointer user_data);
+
 GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
@@ -134,6 +151,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
     p->combo_sizes =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_sizes"));
+    p->tool_autosync = 
+        GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object (builder, "tool_autosync"));
     p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
@@ -217,9 +236,30 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(p->page_layout_one_column), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
     }
+    
+    if (strcmp (config_get_value ("autosync"), "true") == 0) {
+         gtk_toggle_tool_button_set_active(p->tool_autosync, TRUE);
+    } else  {
+         gtk_toggle_tool_button_set_active(p->tool_autosync, FALSE);
+    }
+    on_tool_autosync_toggled(p->tool_autosync, NULL);
+    g_signal_connect (p->tool_autosync, "toggled",
+                      G_CALLBACK (on_tool_autosync_toggled), NULL);
+    
+    p->sync_nodes = NULL;
 
     slog (L_INFO, "using libpoppler %s\n", poppler_get_version ());
     return p;
+}
+
+G_MODULE_EXPORT
+static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
+                                                        gpointer user_data) {
+    if (gtk_toggle_tool_button_get_active(tool_autosync)) {
+        config_set_value("autosync", "true");
+    } else {
+        config_set_value("autosync", "true");
+    }
 }
 
 inline static gint get_document_margin(GuPreviewGui* pc) {
@@ -756,6 +796,10 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
 
     previewgui_load_document(pc, FALSE);   
 
+    // This is mainly for debugging - to make sure the boxes in the preview disappear.    
+    g_slist_free_full(pc->sync_nodes, g_free);
+    pc->sync_nodes = NULL;
+
     // Restore scale and fit mode
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
     if (strcmp (config_get_value ("zoommode"), "pagewidth") == 0) {
@@ -780,7 +824,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     previewgui_goto_page (pc, 0);
 }
 
-void previewgui_refresh (GuPreviewGui* pc) {
+void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
     //L_F_DEBUG;
 
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
@@ -799,14 +843,315 @@ void previewgui_refresh (GuPreviewGui* pc) {
 
     previewgui_load_document(pc, TRUE);
 
-    if (pc->current_page >= pc->n_pages) {
-        previewgui_goto_page (pc, pc->n_pages-1);
+    if (gtk_toggle_tool_button_get_active(pc->tool_autosync) && 
+            synctex_run_parser(pc, sync_to, tex_file)) {
+        
+        SyncNode *node;
+        if ((node = synctex_one_node_found(pc)) == NULL) {
+            // See if the nodes are so close they all fit in the window 
+            // in that case we just merge them
+            synctex_merge_nodes(pc);
+        }
+        if ((node = synctex_one_node_found(pc)) == NULL) {
+            // Search for words in the pdf
+            synctex_filter_results(pc, sync_to);
+        }
+        // Here we could try merging again - but only with nodes which 
+        // contained the searched text
+        
+        // If we have only one node left/selected, scroll ot it.
+        if ((node = synctex_one_node_found(pc)) != NULL) {
+           synctex_scroll_to_node(pc, node);
+        }
+        
+    } else {
+        
+        // This is mainly for debugging - to make sure the boxes in the preview disappear.    
+        g_slist_free_full(pc->sync_nodes, g_free);
+        pc->sync_nodes = NULL;
+        
+        if (pc->current_page >= pc->n_pages) {
+            previewgui_goto_page (pc, pc->n_pages-1);
+        }
+
     }
 
     gtk_widget_queue_draw (pc->drawarea);
 
 unlock:
     g_mutex_unlock (gummi->motion->compile_mutex);
+}
+
+static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
+
+    if (sync_to == NULL || tex_file == NULL) {
+        return FALSE;
+    }
+
+    // sync to position...
+    gint line = gtk_text_iter_get_line(sync_to)+1; // SyncTeX lines are 1 based, TextBuffer lines are 0 based
+    gint column = gtk_text_iter_get_line_offset(sync_to);
+    slog(L_DEBUG, "Syncing to %s, line %i, column %i\n", tex_file, line, column);
+
+    synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, "/tmp/", 1);
+
+    g_slist_free_full(pc->sync_nodes, g_free);
+    pc->sync_nodes = NULL;
+
+    if(synctex_display_query(sync_scanner, tex_file, line, column)>0) {
+        synctex_node_t node;
+        /*
+         * SyncTeX can return several nodes. It seems best to use the last one, as
+         * this one rarely is below (usually slighly above) the edited line.
+         */
+         
+        while ((node = synctex_next_result(sync_scanner))) {
+        
+            SyncNode *sn = g_new0(SyncNode, 1);
+        
+            sn->page = synctex_node_page(node) - 1; // syncTeX counts from 1, but poppler from 0
+            sn->x = synctex_node_box_visible_h(node);
+            sn->y = synctex_node_box_visible_v(node);
+            sn->width = synctex_node_box_visible_width(node);
+            sn->height = synctex_node_box_visible_height(node);
+            sn->y -= sn->height;    // We want y to be the upper value
+            
+            pc->sync_nodes = g_slist_append(pc->sync_nodes, sn);
+            
+        }
+    }
+
+    synctex_scanner_free(sync_scanner);
+    
+    return TRUE;    
+}
+
+static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to) {
+
+    // First look if we even have to filter...
+    if (g_slist_length(pc->sync_nodes) == 0) {
+        return;
+    }
+
+    GtkTextIter wordStart = *sync_to;
+    int i;
+    for (i=0; i<5; i++) {
+    
+        gtk_text_iter_backward_word_start(&wordStart);
+        
+        GtkTextIter wordEnd = wordStart;
+        gtk_text_iter_forward_word_end(&wordEnd);
+        
+
+        if (gtk_text_iter_compare(&wordStart, &wordEnd) >= 0) {
+            break;
+        }
+            
+        gchar *word = g_strconcat("\\b", gtk_text_iter_get_text(&wordStart, &wordEnd), "\\b", NULL);
+        
+        //gchar *pattern g_strconcat
+        
+        slog(L_DEBUG, "Searching for word \"%s\"\n", word);
+
+        GSList *nl = pc->sync_nodes;
+        
+        while (nl != NULL) {
+        
+            SyncNode *sn =  nl->data;
+            
+            PopplerRectangle selection;
+            selection.x1 = sn->x;               // lower left corner
+            selection.y1 = sn->y + sn->height;  // lower left corner
+            selection.x2 = sn->x + sn->width;   // upper right corner
+            selection.y2 = sn->y;               // upper right corner
+            
+            PopplerPage* ppage = poppler_document_get_page(pc->doc, sn->page);
+            gchar *node_text = poppler_page_get_selected_text(ppage, 
+                        POPPLER_SELECTION_WORD, &selection);
+            
+            //slog(L_DEBUG, "Node contains text\"%s\"\n", node_text);
+            
+            if (g_regex_match_simple(word, node_text, 0, 0)) {
+                sn->score += 1;
+            }
+            
+            g_free(node_text);
+            g_object_unref(ppage);
+        
+            nl = nl->next;
+        }
+        
+        g_free(word);
+    }
+}
+
+
+static SyncNode* synctex_one_node_found(GuPreviewGui* pc) {
+    
+    if (g_slist_length(pc->sync_nodes) == 1) {
+        SyncNode *node = g_slist_nth_data(pc->sync_nodes, 0);
+        node->score = -1;
+        return node;
+    }
+    
+    // See if we have found a single match
+    GSList *nl = pc->sync_nodes;
+    
+    gint score_max_id = -1;
+    gint score_other = 0;
+    gint n = 0;
+    while (nl != NULL) {
+        SyncNode *sn =  nl->data;
+    
+        if (sn->score > score_other) {
+            score_other = sn->score;
+            score_max_id = n;
+        } else if (sn->score == score_other) {
+            // If we find a second node with the same score, we forget about
+            // the first one..
+            score_max_id = -1;
+        }
+    
+        nl = nl->next;
+        n++;
+    }
+    
+    if (score_max_id >= 0) {
+        SyncNode *node = g_slist_nth_data(pc->sync_nodes, score_max_id);
+        node->score = -1;
+        return node;
+    }
+    
+    return NULL;
+}
+
+static void synctex_merge_nodes(GuPreviewGui* pc) {
+
+    gint x1 = INT_MAX;   // upper left corner
+    gint y1 = INT_MAX;   // upper left corner
+    gint x2 = -1;   // lower right corner
+    gint y2 = -1;   // lower right corner
+    
+    gint page = -1;
+    
+    GSList *nl = pc->sync_nodes;
+    
+    while (nl != NULL) {
+    
+        SyncNode *sn =  nl->data;
+        
+        
+        slog(L_DEBUG, "Nodes (%i, %i), w=%i, h=%i, P=%i\n", sn->x, sn->y, sn->width, sn->height, sn->page);
+        
+        if (page == -1) {
+            page = sn->page;
+        } else if (page != sn->page) {
+            return; // The Nodes are on different pages. We don't hande this for now...
+        }
+        
+        x1 = MIN(x1, sn->x);
+        y1 = MIN(y1, sn->y);
+        x2 = MAX(x2, sn->x + sn->width);
+        y2 = MAX(y2, sn->y + sn->height);
+    
+        nl = nl->next;
+    }
+    
+    if ((y2-y1)*pc->scale < gtk_adjustment_get_page_size(pc->vadj)/3) {
+        SyncNode *sn = g_new0(SyncNode, 1);
+        sn->y = y1;
+        sn->x = x1;
+        
+        sn->width = x2 - x1;
+        sn->height = y2 - y1;
+        sn->page = page;
+        
+        slog(L_DEBUG, "Merged nodes to (%i, %i), w=%i, h=%i, p=%i\n", sn->x, sn->y, sn->width, sn->height, sn->page);
+        
+        g_slist_free_full(pc->sync_nodes, g_free);
+        pc->sync_nodes = NULL;
+        pc->sync_nodes = g_slist_append(pc->sync_nodes, sn);
+    }
+    
+}
+
+static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
+
+    gint adjpage_width = gtk_adjustment_get_page_size(pc->hadj);
+    gint adjpage_height = gtk_adjustment_get_page_size(pc->vadj);
+
+    gdouble node_x = MAX(get_document_margin(pc),
+                          (adjpage_width - pc->width_scaled) / 2);
+    gdouble node_y;
+    
+    if (is_continuous(pc)) {
+        node_y = MAX(get_document_margin(pc),
+                               (adjpage_height - pc->height_scaled) / 2);
+
+        int i;
+        for (i=0; i < node->page; i++) {
+            node_y += get_page_height(pc, i)*pc->scale + get_page_margin(pc);
+        }
+    } else {
+        gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
+        node_y = MAX(get_document_margin(pc), (adjpage_height-height)/2);
+    }
+    
+    node_y += node->y * pc->scale;
+    node_x += node->x * pc->scale;
+    gdouble node_height = node->height * pc->scale;
+    gdouble node_width = node->width * pc->scale;
+
+    gdouble target_x = gtk_adjustment_get_value(pc->hadj);
+    gdouble target_width = adjpage_width;
+    gdouble target_y = gtk_adjustment_get_value(pc->vadj) + adjpage_height/3;
+    gdouble target_height = adjpage_height/3;
+    
+    gdouble diff_top = node_y - target_y;
+    gdouble diff_left = node_x - target_x;
+    gdouble diff_bottom = target_y + target_height - (node_y+node_height);
+    gdouble diff_right = target_x + target_width - (node_x+node_width);
+    
+    slog(L_DEBUG, "node: (%f, %f), w=%f, h=%f\n", node_x, node_y, node_width, node_height);
+    slog(L_DEBUG, "target: (%f, %f), w=%f, h=%f\n", target_x, target_y, target_width, target_height);
+    
+    slog(L_DEBUG, "diff: top=%f, left=%f, bottom=%f, right=%f\n", diff_top, diff_left, diff_bottom, diff_right);
+        
+    gdouble to_y = gtk_adjustment_get_value(pc->vadj);
+    gdouble to_x = gtk_adjustment_get_value(pc->hadj);
+    
+    if (floor(diff_top) < 0) {
+        to_y = node_y + node_height - target_height;
+    } else if (floor(diff_bottom) < 0) {
+        to_y = node_y;
+    }
+    
+    if (floor(diff_left) < 0 && floor(diff_right) > 0) {
+        to_x += MIN(ABS(diff_left), ABS(diff_right));
+    } else if (floor(diff_left) > 0 && floor(diff_right) < 0) {
+        to_x -= MIN(ABS(diff_left), ABS(diff_right));
+    }
+    
+    if (!is_continuous(pc) && pc->current_page != node->page) {
+    
+        previewgui_goto_page (pc, node->page);
+        
+        to_y = to_y - (adjpage_height - target_height)/2;
+        to_x = to_x - (adjpage_width - target_width)/2;
+        
+        previewgui_goto_xy(pc, to_x, to_y);
+    
+    } else {
+        if (to_y != gtk_adjustment_get_value(pc->vadj) || 
+            to_x != gtk_adjustment_get_value(pc->hadj)) {
+            
+            to_y = to_y - (adjpage_height - target_height)/2;
+            to_x = to_x - (adjpage_width - target_width)/2;
+            
+            previewgui_scroll_to_xy(pc, to_x, to_y);
+        }
+    }
+
 }
 
 void previewgui_goto_page (GuPreviewGui* pc, int page) {
@@ -1100,9 +1445,38 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
     // Paint rendering
     cairo_set_source_surface (cr, rendering, x, y);
     cairo_paint (cr);
+
+
+    GSList *nl = pc->sync_nodes;
+    while (nl != NULL && in_debug_mode()) {
+    
+        SyncNode *sn =  nl->data;
+    
+        if (sn->page == page) {
+            gint mark_x = sn->x * pc->scale;
+            gint mark_y = sn->y * pc->scale;
+            gint mark_width = sn->width * pc->scale;
+            gint mark_height = sn->height * pc->scale;
+        
+            cairo_set_line_width (cr, 1);
+            if (sn->score < 0) {
+                cairo_set_source_rgb (cr, 1, 0, 0); // Mark selected node red
+            } else if (sn->score > 0) {
+                cairo_set_source_rgb (cr, 0, 1, 0); // Mark nodes with matches green
+            } else {
+                cairo_set_source_rgb (cr, 0, 0, 1); // Mark other nodes blue
+            }
+            cairo_rectangle (cr, x+mark_x-1, y+mark_y-1, mark_width+2, mark_height+2);
+            cairo_stroke (cr);
+        }
+        
+        nl = nl->next;
+    }
+    
     cairo_surface_destroy(rendering);
 }
 
+G_MODULE_EXPORT
 gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
@@ -1171,6 +1545,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     return TRUE;
 }
 
+G_MODULE_EXPORT
 gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
@@ -1183,6 +1558,7 @@ gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
     return TRUE;
 }
 
+G_MODULE_EXPORT
 gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
@@ -1276,6 +1652,7 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
     return FALSE;
 }
 
+G_MODULE_EXPORT
 gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
@@ -1286,6 +1663,7 @@ gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user) {
     return FALSE;
 }
 
+G_MODULE_EXPORT
 gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
@@ -1299,6 +1677,7 @@ gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
     return TRUE;
 }
 
+G_MODULE_EXPORT
 gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);

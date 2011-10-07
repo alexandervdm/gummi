@@ -76,6 +76,8 @@ struct _GuPreviewGui {
     GtkWidget* scrollw;
     GtkWidget* errorpanel;
     GtkComboBox* combo_sizes;
+    
+    GtkToggleToolButton *tool_autosync;
 
     gulong page_input_changed_handler;
     gulong combo_sizes_changed_handler;
@@ -123,12 +125,13 @@ struct _GuPreviewGui {
     gint ascroll_dist_x;
     gint ascroll_dist_y;
 
+    GSList *sync_nodes;
 };
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder);
 void previewgui_update_statuslight (const gchar* type);
 void previewgui_set_pdffile (GuPreviewGui* prev, const gchar *pdffile);
-void previewgui_refresh (GuPreviewGui* prev);
+void previewgui_refresh (GuPreviewGui* prev, GtkTextIter *sync_to, gchar* tex_file);
 void previewgui_set_pagedata (GuPreviewGui* prev);
 void previewgui_goto_page (GuPreviewGui* prev, int page_number);
 void previewgui_scroll_to_page (GuPreviewGui* pc, int page);

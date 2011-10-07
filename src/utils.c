@@ -75,6 +75,10 @@ void slog_init (gint debug) {
     main_thread = g_thread_self ();
 }
 
+gboolean in_debug_mode() {
+    return slog_debug;
+}
+
 void slog_set_gui_parent (GtkWindow* p) {
     parent = p;
 }

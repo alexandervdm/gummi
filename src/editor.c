@@ -49,6 +49,11 @@
 #include "environment.h"
 #include "utils.h"
 
+static void on_inserted_text(GtkTextBuffer *textbuffer,GtkTextIter *location,
+                             gchar *text,gint len, gpointer user_data);
+static void on_delete_range(GtkTextBuffer *textbuffer,GtkTextIter *start,
+                             GtkTextIter *end, gpointer user_data);
+                             
 const gchar style[][3][20] = {
     { "tool_bold", "\\textbf{", "}" },
     { "tool_italic", "\\emph{", "}" },
@@ -108,6 +113,11 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->sigid[2] = g_signal_connect (ec->buffer, "changed",
                 G_CALLBACK (check_preview_timer), NULL);
 
+    ec->sigid[3] = g_signal_connect_after(ec->buffer, "insert-text", 
+                G_CALLBACK(on_inserted_text), ec);
+    ec->sigid[4] = g_signal_connect_after(ec->buffer, "delete-range", 
+                G_CALLBACK(on_delete_range), ec);
+
     return ec;
 }
 
@@ -116,10 +126,35 @@ void editor_destroy (GuEditor* ec) {
 
     for (i = 0; i < 2; ++i)
         g_signal_handler_disconnect (ec->view, ec->sigid[i]);
-    g_signal_handler_disconnect (ec->buffer, ec->sigid[2]);
+    for (i = 2; i < 5; ++i)
+        g_signal_handler_disconnect (ec->buffer, ec->sigid[i]);
 
     editor_fileinfo_cleanup (ec);
     g_free(ec);
+}
+
+static void on_inserted_text(GtkTextBuffer *textbuffer,GtkTextIter *location,
+                             gchar *text,gint len, gpointer user_data) {
+
+    if (location == NULL || user_data == NULL) {
+        return;
+    }
+    GuEditor* e = GU_EDITOR(user_data);
+    
+    e->last_edit = *location;
+    e->sync_to_last_edit = TRUE;
+}
+
+static void on_delete_range(GtkTextBuffer *textbuffer,GtkTextIter *start,
+                             GtkTextIter *end, gpointer user_data) {
+
+    if (start == NULL || user_data == NULL) {
+        return;
+    }
+    GuEditor* e = GU_EDITOR(user_data);
+    
+    e->last_edit = *start;
+    e->sync_to_last_edit = TRUE;
 }
 
 /* FileInfo:
@@ -295,6 +330,7 @@ void editor_fill_buffer (GuEditor* ec, const gchar* text) {
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
     gtk_text_buffer_place_cursor (ec_buffer, &start);
     gtk_widget_grab_focus (GTK_WIDGET (ec->view));
+    ec->sync_to_last_edit = FALSE;
 }
 
 gchar* editor_grab_buffer (GuEditor* ec) {

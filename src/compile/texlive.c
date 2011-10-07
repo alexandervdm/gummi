@@ -147,7 +147,8 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
 gchar* texlive_get_flags (const gchar* method) {
     gchar* defaults = g_strdup_printf("-interaction=nonstopmode "
                                       "-file-line-error "
-                                      "-halt-on-error");
+                                      "-halt-on-error "
+                                      "-synctex=1");
                                           
     if (!config_get_value("shellescape")) {
         gchar* optflags = g_strdup_printf("%s %s", 

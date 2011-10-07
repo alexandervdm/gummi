@@ -73,6 +73,7 @@ const gchar config_str[] =
 "[Preview]\n"
 "zoommode = pagewidth\n"
 "pagelayout = one_column\n"
+"autosync = true\n"
 "\n"
 "[File]\n"
 "autosaving = False\n"
