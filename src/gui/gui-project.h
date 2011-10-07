@@ -65,7 +65,7 @@
 #include <gtk/gtk.h>
 
 void projectgui_set_rootfile (gint position);
-void projectgui_list_projopend (GtkComboBox* combo, GtkListStore* store);
+void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store);
 void projectgui_list_projfiles (GtkListStore* store, gchar* active_proj);
 
 

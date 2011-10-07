@@ -106,7 +106,6 @@ GList* project_list_files (const gchar* content) {
     return filelist;
 }
     
-
 gboolean project_load_files (const gchar* projfile, const gchar* content) {
     gint rootpos, i;
     gchar* filename;

@@ -124,7 +124,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
                                         precommand, 
                                         texcmd);
                                         
-    printf("cmd is\n%s\n", combined);
+    //printf("cmd is\n%s\n", combined);
 
     return combined;
 }

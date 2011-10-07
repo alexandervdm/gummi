@@ -226,8 +226,8 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    //gtk_widget_show (tmp);
+    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
@@ -309,7 +309,7 @@ void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                    int page, void *data) {
     
     if (page == 2) { // projects tab
-        projectgui_list_projopend (gui->combo_projects, gui->list_projopened);
+        projectgui_list_projopened (gui->combo_projects, gui->list_projopened);
     }
 }
 

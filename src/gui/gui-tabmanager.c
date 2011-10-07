@@ -104,6 +104,16 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
     g_free (labeltext);
 }
 
+void tablabel_set_bold_text (GuTabmanagerGui* tm, gint position) {
+    gchar* markup;
+    // TODO: would be better to depend on position rather than active tab
+    const gchar* cur = gtk_label_get_text (tm->active_tab->tablabel->label);
+    markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", cur);
+    gtk_label_set_markup (GTK_LABEL (tm->active_tab->tablabel->label), markup);
+    g_free (markup);
+    
+}
+
 gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
     gint position = g_list_index (tm->tabs, tab);
     gint total = gtk_notebook_get_n_pages (tm->notebook);

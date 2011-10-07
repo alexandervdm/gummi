@@ -39,17 +39,11 @@
 extern GummiGui* gui;
 
 void projectgui_set_rootfile (gint position) {
-    gchar* markup;
-    
     tabmanagergui_switch_tab (gui->tabmanagergui, position);
-    // TODO: would be better to depend on position rather than active tab
-    const gchar* cur = gtk_label_get_text (gui->tabmanagergui->active_tab->tablabel->label);
-    markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", cur);
-    gtk_label_set_markup (GTK_LABEL (gui->tabmanagergui->active_tab->tablabel->label), markup);
-    g_free (markup);
+    tablabel_set_bold_text (gui->tabmanagergui, position);
 }
 
-void projectgui_list_projopend (GtkComboBox* combo, GtkListStore* store) {
+void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
     GtkTreeIter iter;
     gint i, tabnr;
     GuEditor *ec;
