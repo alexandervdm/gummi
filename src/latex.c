@@ -114,7 +114,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
         texcmd = rubber_get_command (method, ec->workfile);
     }
     else if (latexmk_active()) {
-        texcmd = latexmk_get_command (method, ec->workfile);
+        texcmd = latexmk_get_command (method, ec->workfile, ec->basename);
     }
     else {
         texcmd = texlive_get_command (method, ec->workfile, ec->basename);
@@ -124,7 +124,7 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
                                         precommand, 
                                         texcmd);
                                         
-    //printf("cmd is\n%s\n", combined);
+    printf("cmd is\n%s\n", combined);
 
     return combined;
 }

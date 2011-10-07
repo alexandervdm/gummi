@@ -33,5 +33,5 @@ void latexmk_init (void);
 gboolean latexmk_active (void);
 gboolean latexmk_detected (void);
 
-gchar* latexmk_get_command (const gchar* method, gchar* workfile);
+gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basename);
 gchar* latexmk_get_flags (const gchar *method);

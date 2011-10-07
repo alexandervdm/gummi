@@ -57,12 +57,20 @@ gboolean latexmk_detected (void) {
     return lmk_detected;
 }
 
-gchar* latexmk_get_command (const gchar* method, gchar* workfile) {
+gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basename) {
+    gchar* outdir = g_strdup("");
+    gchar* base;
+
+    /* reroute output files to our temp directory */
+    if (!utils_strequal (C_TMPDIR, g_path_get_dirname (workfile))) {
+        base = g_path_get_basename (basename);
+        outdir = g_strdup_printf ("-jobname=\"%s/%s\"", C_TMPDIR, base);
+    }
     
     const gchar* flags = latexmk_get_flags (method);
     gchar* lmkcmd;
     
-    lmkcmd = g_strdup_printf("latexmk %s \"%s\"", flags, workfile);
+    lmkcmd = g_strdup_printf("latexmk %s %s \"%s\"", flags, outdir, workfile);
     return lmkcmd;
 }
 
