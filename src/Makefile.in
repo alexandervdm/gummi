@@ -51,11 +51,12 @@ am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	gui-tabmanager.$(OBJEXT) gui-import.$(OBJEXT) \
 	gui-main.$(OBJEXT) gui-prefs.$(OBJEXT) gui-preview.$(OBJEXT) \
 	gui-search.$(OBJEXT) gui-snippets.$(OBJEXT) \
-	gui-infoscreen.$(OBJEXT) importer.$(OBJEXT) \
-	iofunctions.$(OBJEXT) external.$(OBJEXT) project.$(OBJEXT) \
-	latex.$(OBJEXT) motion.$(OBJEXT) signals.$(OBJEXT) \
-	snippets.$(OBJEXT) template.$(OBJEXT) update.$(OBJEXT) \
-	utils.$(OBJEXT) main.$(OBJEXT)
+	gui-infoscreen.$(OBJEXT) gui-project.$(OBJEXT) \
+	synctex_parser.$(OBJEXT) synctex_parser_utils.$(OBJEXT) \
+	importer.$(OBJEXT) iofunctions.$(OBJEXT) external.$(OBJEXT) \
+	project.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
+	signals.$(OBJEXT) snippets.$(OBJEXT) template.$(OBJEXT) \
+	update.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -213,6 +214,9 @@ gummi_SOURCES = biblio.c  biblio.h \
 		gui/gui-search.c gui/gui-search.h \
 		gui/gui-snippets.c gui/gui-snippets.h \
 		gui/gui-infoscreen.c gui/gui-infoscreen.h \
+		gui/gui-project.c gui/gui-project.h \
+		syncTeX/synctex_parser.c syncTeX/synctex_parser.h \
+		syncTeX/synctex_parser_utils.c syncTeX/synctex_parser_utils.h \
 		importer.c importer.h \
 		iofunctions.c iofunctions.h \
 		external.c external.h \
@@ -319,6 +323,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-prefs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-preview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-project.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-snippets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gui-tabmanager.Po@am__quote@
@@ -332,6 +337,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rubber.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/signals.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snippets.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/synctex_parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/synctex_parser_utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texlive.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/update.Po@am__quote@
@@ -518,6 +525,48 @@ gui-infoscreen.obj: gui/gui-infoscreen.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-infoscreen.c' object='gui-infoscreen.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-infoscreen.obj `if test -f 'gui/gui-infoscreen.c'; then $(CYGPATH_W) 'gui/gui-infoscreen.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-infoscreen.c'; fi`
+
+gui-project.o: gui/gui-project.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-project.o -MD -MP -MF $(DEPDIR)/gui-project.Tpo -c -o gui-project.o `test -f 'gui/gui-project.c' || echo '$(srcdir)/'`gui/gui-project.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-project.Tpo $(DEPDIR)/gui-project.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-project.c' object='gui-project.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-project.o `test -f 'gui/gui-project.c' || echo '$(srcdir)/'`gui/gui-project.c
+
+gui-project.obj: gui/gui-project.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gui-project.obj -MD -MP -MF $(DEPDIR)/gui-project.Tpo -c -o gui-project.obj `if test -f 'gui/gui-project.c'; then $(CYGPATH_W) 'gui/gui-project.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-project.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/gui-project.Tpo $(DEPDIR)/gui-project.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gui/gui-project.c' object='gui-project.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gui-project.obj `if test -f 'gui/gui-project.c'; then $(CYGPATH_W) 'gui/gui-project.c'; else $(CYGPATH_W) '$(srcdir)/gui/gui-project.c'; fi`
+
+synctex_parser.o: syncTeX/synctex_parser.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT synctex_parser.o -MD -MP -MF $(DEPDIR)/synctex_parser.Tpo -c -o synctex_parser.o `test -f 'syncTeX/synctex_parser.c' || echo '$(srcdir)/'`syncTeX/synctex_parser.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/synctex_parser.Tpo $(DEPDIR)/synctex_parser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='syncTeX/synctex_parser.c' object='synctex_parser.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o synctex_parser.o `test -f 'syncTeX/synctex_parser.c' || echo '$(srcdir)/'`syncTeX/synctex_parser.c
+
+synctex_parser.obj: syncTeX/synctex_parser.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT synctex_parser.obj -MD -MP -MF $(DEPDIR)/synctex_parser.Tpo -c -o synctex_parser.obj `if test -f 'syncTeX/synctex_parser.c'; then $(CYGPATH_W) 'syncTeX/synctex_parser.c'; else $(CYGPATH_W) '$(srcdir)/syncTeX/synctex_parser.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/synctex_parser.Tpo $(DEPDIR)/synctex_parser.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='syncTeX/synctex_parser.c' object='synctex_parser.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o synctex_parser.obj `if test -f 'syncTeX/synctex_parser.c'; then $(CYGPATH_W) 'syncTeX/synctex_parser.c'; else $(CYGPATH_W) '$(srcdir)/syncTeX/synctex_parser.c'; fi`
+
+synctex_parser_utils.o: syncTeX/synctex_parser_utils.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT synctex_parser_utils.o -MD -MP -MF $(DEPDIR)/synctex_parser_utils.Tpo -c -o synctex_parser_utils.o `test -f 'syncTeX/synctex_parser_utils.c' || echo '$(srcdir)/'`syncTeX/synctex_parser_utils.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/synctex_parser_utils.Tpo $(DEPDIR)/synctex_parser_utils.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='syncTeX/synctex_parser_utils.c' object='synctex_parser_utils.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o synctex_parser_utils.o `test -f 'syncTeX/synctex_parser_utils.c' || echo '$(srcdir)/'`syncTeX/synctex_parser_utils.c
+
+synctex_parser_utils.obj: syncTeX/synctex_parser_utils.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT synctex_parser_utils.obj -MD -MP -MF $(DEPDIR)/synctex_parser_utils.Tpo -c -o synctex_parser_utils.obj `if test -f 'syncTeX/synctex_parser_utils.c'; then $(CYGPATH_W) 'syncTeX/synctex_parser_utils.c'; else $(CYGPATH_W) '$(srcdir)/syncTeX/synctex_parser_utils.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/synctex_parser_utils.Tpo $(DEPDIR)/synctex_parser_utils.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='syncTeX/synctex_parser_utils.c' object='synctex_parser_utils.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o synctex_parser_utils.obj `if test -f 'syncTeX/synctex_parser_utils.c'; then $(CYGPATH_W) 'syncTeX/synctex_parser_utils.c'; else $(CYGPATH_W) '$(srcdir)/syncTeX/synctex_parser_utils.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

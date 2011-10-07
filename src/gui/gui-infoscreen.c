@@ -50,9 +50,9 @@ The active document contains errors. The live preview\n"
 const gchar *document_error_h = "Document appears to be empty or invalid.";
 const gchar *document_error_d = "\
 The document that is currently active appears to be an\n"
-"an invalid LaTeX file. You can continue working on it\n"
-"or use the options below to add it to an existing\n"
-"master document.\n";
+"an invalid LaTeX file. You can continue working on it,\n"
+"load the default text or use the Project menu to add\n"
+"it to an active project.\n";
 
 // TODO: needs better wording
 const gchar *program_error_h = "Compilation program is missing.";
@@ -78,15 +78,6 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     is->drawarea =
         GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
         
-    is->tabstree = 
-        GTK_TREE_VIEW (gtk_builder_get_object (builder, "error_tabstree"));
-    is->tabslist =
-        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_tabs"));
-    is->tabsbox =
-        GTK_VBOX (gtk_builder_get_object (builder, "error_tabsbox"));
-    is->tabsattach =
-        GTK_BUTTON (gtk_builder_get_object (builder, "info_tabattach"));
-
     is->header =
         GTK_LABEL (gtk_builder_get_object (builder, "error_header"));
     is->image =
@@ -123,6 +114,7 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
             GTK_WIDGET (is->drawarea));
 }
 
+/*
 void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
     GuTabContext* tab = NULL;
     GList* tabobjects = NULL;
@@ -155,13 +147,10 @@ void infoscreengui_setup_tablist (GuInfoscreenGui *is) {
     }
 
     gtk_widget_show (GTK_WIDGET (is->tabsbox));
-}
+}*/
     
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
-    
-    gtk_widget_hide (GTK_WIDGET (is->tabsbox));
-    
     if (utils_strequal (msg, "compile_error")) {
         gtk_label_set_text (is->header, compile_error_h);
         gtk_label_set_text (is->details, compile_error_d);
@@ -173,6 +162,5 @@ void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     else {
         gtk_label_set_text (is->header, document_error_h);
         gtk_label_set_text (is->details, document_error_d);
-        //infoscreengui_setup_tablist (is);
     }
 }

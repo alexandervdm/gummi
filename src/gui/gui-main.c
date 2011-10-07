@@ -66,7 +66,7 @@ const gchar* insens_widgets_str[] = {
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
     "menu_exportpdf", "menu_undo", "menu_redo", "menu_cut", "menu_copy",
     "menu_paste", "menu_delete", "menu_selectall", "import_tabs",
-    "menu_document", "menu_project", "menu_search"
+    "menu_document", "menu_search"
 };
 
 GummiGui* gui_init (GtkBuilder* builder) {
@@ -115,6 +115,13 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent4"));
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
+
+    g->combo_projects =
+        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_projects"));
+    g->list_projopened =
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_projopened"));
+    g->list_projfiles =
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_projfiles"));
 
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
@@ -219,8 +226,8 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    gtk_widget_show (tmp);
+    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    //gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
@@ -295,6 +302,28 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     previewgui_reset (gui->previewgui);
 
     slog (L_DEBUG, "Switched to environment at page %d\n", page);
+}
+
+G_MODULE_EXPORT
+void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
+                                   int page, void *data) {
+    
+    if (page == 2) { // projects tab
+        projectgui_list_projopend (gui->combo_projects, gui->list_projopened);
+    }
+}
+
+G_MODULE_EXPORT
+void on_combo_projects_changed (GtkComboBox* widget, void* user) {
+    GtkTreeIter iter;
+    GtkTreeModel *model;
+    gchar* fullpath;
+    
+    if (gtk_combo_box_get_active_iter (widget, &iter)) {
+        model = gtk_combo_box_get_model (widget);
+        gtk_tree_model_get (model, &iter, 1, &fullpath, -1);
+        projectgui_list_projfiles (gui->list_projfiles, fullpath);
+    }
 }
 
 void gui_update_filenm_display (const gchar* filename) {
@@ -476,6 +505,7 @@ void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_right");
 }
 
+/*
 G_MODULE_EXPORT
 void on_button_info_tabattach_clicked (GtkWidget* widget, void* user) {
     GtkTreeSelection* selection;
@@ -507,7 +537,7 @@ void on_button_info_tabattach_clicked (GtkWidget* widget, void* user) {
             break;
         }
     }
-}
+}*/
 
 G_MODULE_EXPORT
 void on_button_template_add_clicked (GtkWidget* widget, void* user) {
@@ -846,7 +876,7 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             break;
         case TYPE_PROJECT:
             gtk_file_filter_set_name (filter, _("Gummi project files"));
-            gtk_file_filter_add_pattern (filter, "*.gprj");
+            gtk_file_filter_add_pattern (filter, "*.gummi");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;   

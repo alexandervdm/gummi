@@ -42,6 +42,7 @@
 #include "gui-tabmanager.h"
 #include "gui-infoscreen.h"
 #include "gui-menu.h"
+#include "gui-project.h"
 
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
@@ -91,6 +92,10 @@ struct _GummiGui {
     GtkWidget** insens_widgets;
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
+    
+    GtkComboBox* combo_projects;
+    GtkListStore* list_projopened;
+    GtkListStore* list_projfiles;
     
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;

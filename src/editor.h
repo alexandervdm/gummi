@@ -54,11 +54,11 @@ struct _GuEditor {
     gint workfd;
     gchar* fdname;
     gchar* filename;
-    gchar *basename;
+    gchar* basename;
     gchar* pdffile;
     gchar* workfile;
     gchar* bibfile;
-    gchar* masterfile;
+    gchar* projfile;
 
     /* GUI related members */
     GtkSourceView* view;

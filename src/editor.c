@@ -74,7 +74,7 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->pdffile = NULL;
     ec->workfile = NULL;
     ec->bibfile = NULL;
-    ec->masterfile = NULL;
+    ec->projfile = NULL;
     
 
     

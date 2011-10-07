@@ -31,3 +31,9 @@
 
 gboolean project_create_new (const gchar* filename);
 gboolean project_open_existing (const gchar* filename);
+
+
+gboolean project_file_integrity (const gchar* content);
+gboolean project_load_files (const gchar* projfile, const gchar* content);
+GList* project_list_files (const gchar* content);
+gchar* project_get_value (const gchar* content, const gchar* item);

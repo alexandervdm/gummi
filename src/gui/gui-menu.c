@@ -488,7 +488,10 @@ void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
 
 G_MODULE_EXPORT
 void on_menu_project_activate (GtkWidget *widget, void *user) {
-    // TODO: perhaps use text to run pre compile check */
+    // TODO: perhaps use buffer to run pre compile check */
+    
+    g_return_if_fail (g_active_editor != NULL);
+
     if (g_active_editor->filename != NULL) {
         gtk_widget_set_sensitive (GTK_WIDGET
                                  (gui->menugui->menu_projcreate), TRUE);
@@ -520,8 +523,8 @@ void on_menu_projopen_activate (GtkWidget *widget, void *user) {
         statusbar_set_message (g_strdup_printf("Loading project %s", filename));
     }
     else {
-        statusbar_set_message (g_strdup_printf("An error ocurred while\
-                                                loading project %s", filename));
+        statusbar_set_message (g_strdup_printf("An error ocurred while "
+                                               "loading project %s", filename));
     }
     g_free (filename);
 }
