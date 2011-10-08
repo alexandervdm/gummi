@@ -463,9 +463,16 @@ static void update_fit_scale(GuPreviewGui* pc) {
 
     slog(L_DEBUG, "Document size wrong for fitting, changing scale from %f to %f.\n", pc->scale, scale);
 
+    // We do not really know where to center the scroll that might appear, 
+    // passing the center of the window causes the toolbar to not be darn 
+    // (don't ask me why).
+    // Passing NAN as position to center the scrolling on, causes no 
+    // scrolling to happen (this is checked in previewgui_goto_xy)
+    // So this is basically a bugfix - but I could not see any unwanted side
+    // effects up till now...
     previewgui_set_scale(pc, scale,
-        gtk_adjustment_get_page_size(pc->hadj)/2,
-        gtk_adjustment_get_page_size(pc->vadj)/2);
+        NAN,
+        NAN);
 }
 
 inline static gboolean is_continuous(GuPreviewGui* pc) {
@@ -830,8 +837,8 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     } else {
         set_fit_mode(pc, FIT_NONE);
         previewgui_set_scale(pc, list_sizes[ZOOM_100],
-                gtk_adjustment_get_page_size(pc->hadj)/2,
-                gtk_adjustment_get_page_size(pc->vadj)/2);
+                NAN,    // We pass NAN as this causes no scrolling to happen
+                NAN);   // This is checked in previewgui_goto_xy()
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_100);
     }
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
@@ -1235,6 +1242,10 @@ void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
 }
 
 void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
+
+    if (isnan(x) || isnan(y)) {
+        return;
+    }
     //L_F_DEBUG;
 
     x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) - 
@@ -1253,6 +1264,10 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 }
 
 void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
+
+    if (isnan(x) || isnan(y)) {
+        return;
+    }
     //L_F_DEBUG;
 
     x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) -
