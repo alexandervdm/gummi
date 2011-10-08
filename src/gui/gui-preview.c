@@ -100,6 +100,7 @@ static void update_current_page(GuPreviewGui* pc);
 static void update_drawarea_size(GuPreviewGui *pc);
 static void update_page_sizes(GuPreviewGui* pc);
 static void update_prev_next_page(GuPreviewGui* pc);
+static void update_page_input(GuPreviewGui* pc);
 
 /* Simplicity functions for page layout */
 inline static gboolean is_continuous(GuPreviewGui* pc);
@@ -119,6 +120,9 @@ inline static gint get_page_margin(GuPreviewGui* pc);
 static void block_handlers_current_page(GuPreviewGui* pc);
 static void unblock_handlers_current_page(GuPreviewGui* pc);
 static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
+
+static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
+                                         gpointer   user_data);
 
 /* Functions for layout and painting */
 static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x);
@@ -179,6 +183,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
     p->page_input_changed_handler = g_signal_connect (p->page_input,
             "changed", G_CALLBACK (on_page_input_changed), p);
+    g_signal_connect (p->page_input,
+            "focus-out-event", G_CALLBACK(on_page_input_lost_focus), p);
     p->combo_sizes_changed_handler = g_signal_connect (p->combo_sizes,
             "changed", G_CALLBACK (on_combo_sizes_changed), p);
     g_signal_connect (p->page_prev,
@@ -499,15 +505,29 @@ static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
     //L_F_DEBUG;
 
     pc->current_page = page;
+    
+    update_page_input(pc);
 
-    gchar* num = g_strdup_printf ("%d", page+1);
-    g_signal_handler_block(pc->page_input, pc->page_input_changed_handler);
-    gtk_entry_set_text (GTK_ENTRY(pc->page_input), num);
-    g_signal_handler_unblock(pc->page_input, pc->page_input_changed_handler);
-    g_free (num);
+}
+
+static void update_page_input(GuPreviewGui* pc) {
+
+    if (!gtk_widget_has_focus(pc->page_input)) {
+        gchar* num = g_strdup_printf ("%d", pc->current_page+1);
+        g_signal_handler_block(pc->page_input, pc->page_input_changed_handler);
+        gtk_entry_set_text (GTK_ENTRY(pc->page_input), num);
+        g_signal_handler_unblock(pc->page_input, pc->page_input_changed_handler);
+        g_free (num);
+    }
 
     update_prev_next_page(pc);
 
+}
+
+static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
+                                         gpointer   user_data) {
+    update_page_input(user_data);
+    return FALSE;
 }
 
 static void update_prev_next_page(GuPreviewGui* pc) {
