@@ -771,8 +771,6 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
 
     gtk_widget_queue_draw (pc->drawarea);
 
-
-
 }
 
 static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
@@ -1254,12 +1252,12 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
 }
 
-void previewgui_scroll_to_xy (GuPreviewGui* pc, int x, int y) {
+void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
     //L_F_DEBUG;
 
-    x = MIN(x, gtk_adjustment_get_upper(pc->hadj) -
+    x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) -
                gtk_adjustment_get_page_size(pc->hadj));
-    y = MIN(y, gtk_adjustment_get_upper(pc->vadj) -
+    y = CLAMP(y, 0, gtk_adjustment_get_upper(pc->vadj) -
                gtk_adjustment_get_page_size(pc->vadj));
 
     pc->ascroll_steps_left = ASCROLL_STEPS;

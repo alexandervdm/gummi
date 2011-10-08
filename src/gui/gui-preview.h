@@ -136,7 +136,7 @@ void previewgui_set_pagedata (GuPreviewGui* prev);
 void previewgui_goto_page (GuPreviewGui* prev, int page_number);
 void previewgui_scroll_to_page (GuPreviewGui* pc, int page);
 void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y);
-void previewgui_scroll_to_xy (GuPreviewGui* pc, int x, int y);
+void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y);
 void previewgui_save_position (GuPreviewGui* pc);
 void previewgui_restore_position (GuPreviewGui* pc);
 void previewgui_reset (GuPreviewGui* pc);
