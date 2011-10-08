@@ -155,7 +155,7 @@ gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user);
 gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user);
 gboolean on_scroll_child(GtkScrolledWindow *scrolledwindow, GtkScrollType type,
                          gboolean isHorizontal, gpointer *user);
-gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user);
+void on_adj_changed(GtkAdjustment *adjustment, gpointer user);
 void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem,gpointer data);
 void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout);
 

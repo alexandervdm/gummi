@@ -1546,7 +1546,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
 }
 
 G_MODULE_EXPORT
-gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
+void on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
@@ -1554,8 +1554,6 @@ gboolean on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
     pc->ascroll_steps_left = 0;
 
     update_current_page(pc);
-
-    return TRUE;
 }
 
 G_MODULE_EXPORT
