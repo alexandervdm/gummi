@@ -737,8 +737,6 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     }
     //L_F_DEBUG;
 
-    slog(L_DEBUG, "Changing scale\n");
-
     gdouble old_x = (gtk_adjustment_get_value(pc->hadj) + x) /
             (pc->width_scaled + 2*get_document_margin(pc));
     gdouble old_y = (gtk_adjustment_get_value(pc->vadj) + y) /
@@ -1238,40 +1236,14 @@ void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
                            page_offset_y(pc, page, y));
 }
 
-void previewgui_goto_xy (GuPreviewGui* pc, int x, int y) {
+void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
     //L_F_DEBUG;
 
-    GtkRequisition requisition;
-    gtk_widget_size_request (pc->drawarea, &requisition);
-
-    GdkWindow *w = pc->previewgui_viewport->view_window;
-    
-    #if GTK_MINOR_VERSION >= 24
-        gdouble page_x = gdk_window_get_width(w);
-        gdouble page_y = gdk_window_get_height(w);
-    #else
-        gint tmp_x, tmp_y;
-        gdk_drawable_get_size (w, &tmp_x, &tmp_y);
-        gdouble page_x = (gdouble)tmp_x;
-        gdouble page_y = (gdouble)tmp_y;
-    #endif
-
-    gdouble upper_x = MAX(page_x, requisition.width);
-    gdouble upper_y = MAX(page_y, requisition.height);
-
-    x = MIN(x, upper_x - page_x);
-    y = MIN(y, upper_y - page_y);
-/*
-    gtk_adjustment_configure(pc->hadj, x, 0, upper_x,
-            gtk_adjustment_get_step_increment(pc->hadj),
-            gtk_adjustment_get_page_increment(pc->hadj),
-            page_x);
-    gtk_adjustment_configure(pc->vadj, y, 0, upper_y,
-            gtk_adjustment_get_step_increment(pc->vadj),
-            gtk_adjustment_get_page_increment(pc->vadj),
-            page_y);
-    */
-
+    x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) - 
+                    gtk_adjustment_get_page_size(pc->hadj));
+    y = CLAMP(y, 0, gtk_adjustment_get_upper(pc->vadj) - 
+                    gtk_adjustment_get_page_size(pc->vadj));
+        
     // Minimize the number of calls to on_adjustment_changed
     block_handlers_current_page(pc);
     gtk_adjustment_set_value(pc->hadj, x);
@@ -1406,7 +1378,6 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
     newpage -= 1;
     newpage = MAX(newpage, 0);
     newpage = MIN(newpage, gui->previewgui->n_pages);
-    slog(L_INFO, "page set to %i\n", newpage);
     previewgui_scroll_to_page (gui->previewgui, newpage);
 
 }
