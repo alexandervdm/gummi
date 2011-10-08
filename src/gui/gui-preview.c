@@ -127,12 +127,13 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc,
                        gint page, gint x, gint y);
 static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
 
-
+/* Functions for scronizing editor and preview via SyncTeX */
 static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
 static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to);
 static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node);
 static SyncNode* synctex_one_node_found(GuPreviewGui* pc);
 static void synctex_merge_nodes(GuPreviewGui* pc);
+static void synctex_clear_sync_nodes(GuPreviewGui* pc);
 static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
                                                         gpointer user_data);
 
@@ -797,8 +798,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     previewgui_load_document(pc, FALSE);   
 
     // This is mainly for debugging - to make sure the boxes in the preview disappear.    
-    g_slist_free_full(pc->sync_nodes, g_free);
-    pc->sync_nodes = NULL;
+    synctex_clear_sync_nodes(pc);
 
     // Restore scale and fit mode
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
@@ -866,9 +866,8 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
         
     } else {
         
-        // This is mainly for debugging - to make sure the boxes in the preview disappear.    
-        g_slist_free_full(pc->sync_nodes, g_free);
-        pc->sync_nodes = NULL;
+        // This is mainly for debugging - to make sure the boxes in the preview disappear.  
+        synctex_clear_sync_nodes(pc);
         
         if (pc->current_page >= pc->n_pages) {
             previewgui_goto_page (pc, pc->n_pages-1);
@@ -895,8 +894,7 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
 
     synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, "/tmp/", 1);
 
-    g_slist_free_full(pc->sync_nodes, g_free);
-    pc->sync_nodes = NULL;
+    synctex_clear_sync_nodes(pc);
 
     if(synctex_display_query(sync_scanner, tex_file, line, column)>0) {
         synctex_node_t node;
@@ -1068,11 +1066,24 @@ static void synctex_merge_nodes(GuPreviewGui* pc) {
         
         slog(L_DEBUG, "Merged nodes to (%i, %i), w=%i, h=%i, p=%i\n", sn->x, sn->y, sn->width, sn->height, sn->page);
         
-        g_slist_free_full(pc->sync_nodes, g_free);
-        pc->sync_nodes = NULL;
+        synctex_clear_sync_nodes(pc);
         pc->sync_nodes = g_slist_append(pc->sync_nodes, sn);
     }
     
+}
+
+static void synctex_clear_sync_nodes(GuPreviewGui* pc) {
+    GSList *el = pc->sync_nodes;
+    while (el != NULL) {
+        SyncNode *node = el->data;
+        g_free(node);
+        node = NULL;
+        
+        el = el->next;
+    }
+    
+    g_slist_free (pc->sync_nodes);
+    pc->sync_nodes = NULL;
 }
 
 static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
