@@ -133,7 +133,9 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
 
 /* Functions for scronizing editor and preview via SyncTeX */
 static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
+#if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
 static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to);
+#endif
 static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node);
 static SyncNode* synctex_one_node_found(GuPreviewGui* pc);
 static void synctex_merge_nodes(GuPreviewGui* pc);
@@ -875,12 +877,15 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
             // in that case we just merge them
             synctex_merge_nodes(pc);
         }
+        
+#if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
         if ((node = synctex_one_node_found(pc)) == NULL) {
             // Search for words in the pdf
             synctex_filter_results(pc, sync_to);
         }
         // Here we could try merging again - but only with nodes which 
         // contained the searched text
+#endif
         
         // If we have only one node left/selected, scroll ot it.
         if ((node = synctex_one_node_found(pc)) != NULL) {
@@ -947,6 +952,7 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
     return TRUE;    
 }
 
+#if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
 static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to) {
 
     // First look if we even have to filter...
@@ -1005,6 +1011,7 @@ static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to) {
         g_free(word);
     }
 }
+#endif
 
 
 static SyncNode* synctex_one_node_found(GuPreviewGui* pc) {
