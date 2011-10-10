@@ -30,6 +30,7 @@
 #include "gui-menu.h"
 
 #include "configfile.h"
+#include "editor.h"
 #include "environment.h"
 #include "external.h"
 #include "gui-main.h"
@@ -462,13 +463,28 @@ cleanup:
 G_MODULE_EXPORT
 void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 #ifdef USE_GTKSPELL
-    if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
-        editor_activate_spellchecking (g_active_editor, TRUE);
-        config_set_value ("spelling", "True");
-    } else {
-        editor_activate_spellchecking (g_active_editor, FALSE);
-        config_set_value ("spelling", "False");
+    GList *editors;
+    GuEditor* ec;
+    int ectotal, i;
+    
+    gboolean activate = gtk_check_menu_item_get_active 
+                        (GTK_CHECK_MENU_ITEM (widget));
+    
+    editors = gummi_get_all_editors ();
+    ectotal = g_list_length (editors);
+    
+    for (i=0; i<ectotal; i++) {
+        ec = g_list_nth_data (editors, i);
+        if (activate) {
+            editor_activate_spellchecking (ec, TRUE);
+        }
+        else { 
+            editor_activate_spellchecking (ec, FALSE);
+        }
     }
+    if (activate) config_set_value ("spelling", "True");
+    else { config_set_value ("spelling", "False"); }
+            
 #endif
 }
 

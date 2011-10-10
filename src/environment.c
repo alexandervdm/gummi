@@ -72,6 +72,21 @@ GList* gummi_get_all_tabs (void) {
     return gui->tabmanagergui->tabs;
 }
 
+GList* gummi_get_all_editors (void) {
+    int tabtotal, i;
+    GuEditor* ec;
+    GList* editors = NULL;
+    
+    GList *tabs = gummi_get_all_tabs();
+    tabtotal = g_list_length(tabs);
+    
+    for (i=0; i<tabtotal; i++) {
+        ec = GU_TAB_CONTEXT (g_list_nth_data (tabs, i))->editor;
+        editors = g_list_append (editors, ec);
+    }
+    return editors;
+}
+
 GuIOFunc* gummi_get_io (void) {
     return gummi->io;
 }

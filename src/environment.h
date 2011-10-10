@@ -121,6 +121,8 @@ GuLatex* gummi_get_latex (void);
 GuBiblio* gummi_get_biblio (void);
 GuTemplate* gummi_get_template (void);
 GuSnippets* gummi_get_snippets (void);
+
 GList* gummi_get_all_tabs (void);
+GList* gummi_get_all_editors (void);
 
 #endif /* GUMMI_ENVIRONMENT_H */
