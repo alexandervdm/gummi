@@ -240,7 +240,7 @@ void gui_update_environment (const gchar* filename) {
      * to match the new filename and its location and a gui update*/
     add_to_recent_list (filename);
     
-    gui_update_filenm_display (filename);
+    gui_update_filenm_display (g_active_editor, g_active_tab);
     
     gummi_new_environment (g_active_editor, filename);
 
@@ -285,7 +285,7 @@ void gui_create_environment (OpenAct act, const gchar* filename,
             slog(L_FATAL, "can't happen bug\n");
     }
 
-    gui_update_filenm_display (filename);
+    gui_update_filenm_display (g_active_editor, g_active_tab);
     add_to_recent_list (filename);
 
     previewgui_reset (gui->previewgui);
@@ -326,17 +326,20 @@ void on_combo_projects_changed (GtkComboBox* widget, void* user) {
     }
 }
 
-void gui_update_filenm_display (const gchar* filename) {
-    /* TODO: the whole procedure is a mess, but let's fix that after 0.6.0 */
+void gui_update_filenm_display (GuEditor* ec, GuTabContext* tc) {
+    gboolean modified;
     
-    const gchar* fname = (filename && gui->tabmanagergui->active_editor)?
-                            filename: gui->tabmanagergui->active_editor->filename;
-    gboolean modi = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER
-                            (gui->tabmanagergui->active_editor->buffer));
+    modified = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (ec->buffer));
 
-    tablabel_update_label_text (gui->tabmanagergui->active_tab->tablabel,
-                                fname, modi);
-    gui_update_windowtitle ();
+    
+    const gchar* fname = (ec->filename && g_active_editor)?
+                            ec->filename: g_active_editor->filename;
+                            
+    tablabel_update_label_text (tc->tablabel, fname, modified);
+    
+    if (ec == g_active_editor) {
+        gui_update_windowtitle ();
+    }
 }
 
 void gui_update_windowtitle (void) {
@@ -439,7 +442,7 @@ void gui_save_file (gboolean saveas) {
         latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
     }
     if (new) gui_update_environment (filename);
-    gui_update_filenm_display (filename);
+    gui_update_filenm_display (g_active_editor, g_active_tab);
     gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 
 cleanup:
@@ -956,7 +959,7 @@ void check_preview_timer (void) {
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
     
-    gui_update_filenm_display (g_active_editor->filename);
+    gui_update_filenm_display (g_active_editor, g_active_tab);
 
     motion_start_timer (gummi->motion);
 }

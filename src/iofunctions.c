@@ -173,7 +173,7 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 }
 
 void iofunctions_start_autosave (void) {
-    sid = g_timeout_add (atoi(config_get_value ("autosave_timer")) * 2000,
+    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, NULL);
     slog (L_DEBUG, "Autosaving function started..\n");
 }
@@ -235,29 +235,32 @@ gchar* iofunctions_encode_text (gchar* text) {
 }
 
 gboolean iofunctions_autosave_cb (void *user) {
-    GuEditor *ec;
+    gint tabtotal, i;
     GtkWidget *focus;
-    gint i, ectotal;
+    GuTabContext* tab;
+    GuEditor *ec;
     gchar *text;
 
-    GList *editors = gummi_get_all_editors();
-    ectotal = g_list_length(editors);
+    GList *tabs = gummi_get_all_tabs();
+    tabtotal = g_list_length(tabs);
     
     /* skip the autosave procedure when there are no tabs open */
-    if (ectotal == 0) return TRUE; 
+    if (tabtotal == 0) return TRUE; 
 
-    for (i=0; i < ectotal; i++) {
-        ec = g_list_nth_data (editors, i);
+    for (i=0; i < tabtotal; i++) {
+        tab = g_list_nth_data (tabs, i);
+        ec = tab->editor;
+        
+        printf("%s has changed %d\n", ec->filename, editor_buffer_changed(ec));
         if ((ec->filename) && editor_buffer_changed (ec)) {
             focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
             text = editor_grab_buffer (ec);
             gtk_widget_grab_focus (focus);
-
             iofunctions_save_file (gummi->io, ec->filename, text);
             gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
             slog (L_DEBUG, "Autosaving document: %s\n", ec->filename);
+            gui_update_filenm_display (ec, tab);
        }
     }
-    gui_update_filenm_display (gummi_get_active_editor()->filename);
     return TRUE;
 }
