@@ -173,7 +173,7 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 }
 
 void iofunctions_start_autosave (void) {
-    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
+    sid = g_timeout_add (atoi(config_get_value ("autosave_timer")) * 2000,
             iofunctions_autosave_cb, NULL);
     slog (L_DEBUG, "Autosaving function started..\n");
 }
@@ -237,14 +237,17 @@ gchar* iofunctions_encode_text (gchar* text) {
 gboolean iofunctions_autosave_cb (void *user) {
     GuEditor *ec;
     GtkWidget *focus;
-    gint i, tabnr;
+    gint i, ectotal;
     gchar *text;
 
-    GList *tabs = gummi_get_all_tabs();
-    tabnr = g_list_length(tabs);
+    GList *editors = gummi_get_all_editors();
+    ectotal = g_list_length(editors);
+    
+    /* skip the autosave procedure when there are no tabs open */
+    if (ectotal == 0) return TRUE; 
 
-    for (i=0; i < tabnr; i++) {
-        ec = GU_TAB_CONTEXT (g_list_nth_data (tabs, i))->editor;
+    for (i=0; i < ectotal; i++) {
+        ec = g_list_nth_data (editors, i);
         if ((ec->filename) && editor_buffer_changed (ec)) {
             focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
             text = editor_grab_buffer (ec);
