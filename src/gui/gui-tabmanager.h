@@ -44,6 +44,7 @@ struct _GuTabLabel {
     GtkHBox* hbox;
     GtkLabel* text;
     unsigned unsave;
+    gboolean bold;
 };
 
 #define GU_TAB_CONTEXT(x) ((GuTabContext*)x)
@@ -71,6 +72,7 @@ struct _GuTabmanagerGui {
 GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename);
 void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
                                  gboolean modified);
+void tablabel_set_bold_text (GuTabLabel* tl);
 
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,

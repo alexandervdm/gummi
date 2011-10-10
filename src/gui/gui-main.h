@@ -56,7 +56,7 @@
 #define g_active_page gui->tabmanagergui->active_page
 
 /* this needs cleanup */
-#define g_active_tabname gtk_label_get_text(gui->tabmanagergui->active_tab->tablabel->label)
+#define g_active_tabname gtk_label_get_text(gui->tabmanagergui->active_tab->tablabel->text)
 
 
 

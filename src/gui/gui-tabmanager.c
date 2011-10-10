@@ -58,6 +58,7 @@ GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename) {
     tl->unsave = ++count;
     tl->ebox = gtk_event_box_new ();
     tl->hbox = GTK_HBOX (gtk_hbox_new (FALSE, 0));
+    tl->bold = FALSE;
 
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (tl->ebox), FALSE);
     gtk_container_add (GTK_CONTAINER(tl->ebox), GTK_WIDGET (tl->hbox));
@@ -100,18 +101,20 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
                         g_strdup_printf(_("Unsaved Document %d"), tl->unsave);
     labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), labelname);
     gtk_label_set_text (tl->text, labeltext);
+    if (tl->bold) {
+        tablabel_set_bold_text (tl);
+    }
     g_free (labelname);
     g_free (labeltext);
 }
 
-void tablabel_set_bold_text (GuTabmanagerGui* tm, gint position) {
+void tablabel_set_bold_text (GuTabLabel* tl) {
     gchar* markup;
-    // TODO: would be better to depend on position rather than active tab
-    const gchar* cur = gtk_label_get_text (tm->active_tab->tablabel->text);
+    const gchar* cur = gtk_label_get_text (tl->text);
     markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", cur);
-    gtk_label_set_markup (GTK_LABEL (tm->active_tab->tablabel->text), markup);
+    gtk_label_set_markup (GTK_LABEL (tl->text), markup);
     g_free (markup);
-    
+    if (!tl->bold) tl->bold = TRUE;
 }
 
 gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {

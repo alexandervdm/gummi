@@ -345,7 +345,7 @@ void gui_update_windowtitle (void) {
     const gchar* labeltext = NULL;
 
 
-    labeltext =  gtk_label_get_text (g_active_tab->tablabel->label);
+    labeltext =  gtk_label_get_text (g_active_tab->tablabel->text);
 
     if (!g_active_editor) {
         gtk_window_set_title(gui->mainwindow, "Gummi");

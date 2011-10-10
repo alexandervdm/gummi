@@ -31,6 +31,7 @@
 
 #include "configfile.h"
 #include "environment.h"
+#include "external.h"
 #include "gui-main.h"
 #include "project.h"
 #include "update.h"
