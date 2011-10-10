@@ -62,10 +62,10 @@ GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename) {
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (tl->ebox), FALSE);
     gtk_container_add (GTK_CONTAINER(tl->ebox), GTK_WIDGET (tl->hbox));
 
-    tl->label = GTK_LABEL (gtk_label_new (filename));
+    tl->text = GTK_LABEL (gtk_label_new (filename));
     tablabel_update_label_text (tl, filename, FALSE);
 
-    gtk_box_pack_start (GTK_BOX (tl->hbox), GTK_WIDGET (tl->label), TRUE,
+    gtk_box_pack_start (GTK_BOX (tl->hbox), GTK_WIDGET (tl->text), TRUE,
                         TRUE, 5);
 
     tl->close = GTK_BUTTON (gtk_button_new());
@@ -99,7 +99,7 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
     labelname = (filename)? g_path_get_basename (filename):
                         g_strdup_printf(_("Unsaved Document %d"), tl->unsave);
     labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), labelname);
-    gtk_label_set_text (tl->label, labeltext);
+    gtk_label_set_text (tl->text, labeltext);
     g_free (labelname);
     g_free (labeltext);
 }
@@ -107,9 +107,9 @@ void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
 void tablabel_set_bold_text (GuTabmanagerGui* tm, gint position) {
     gchar* markup;
     // TODO: would be better to depend on position rather than active tab
-    const gchar* cur = gtk_label_get_text (tm->active_tab->tablabel->label);
+    const gchar* cur = gtk_label_get_text (tm->active_tab->tablabel->text);
     markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", cur);
-    gtk_label_set_markup (GTK_LABEL (tm->active_tab->tablabel->label), markup);
+    gtk_label_set_markup (GTK_LABEL (tm->active_tab->tablabel->text), markup);
     g_free (markup);
     
 }

@@ -42,7 +42,7 @@ struct _GuTabLabel {
     GtkWidget* ebox;
     GtkButton* close;
     GtkHBox* hbox;
-    GtkLabel* label;
+    GtkLabel* text;
     unsigned unsave;
 };
 
