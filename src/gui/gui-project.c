@@ -51,13 +51,16 @@ void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
     gtk_list_store_clear (store);
     GList* tabs = tabmanagergui_get_all_tabs(gui->tabmanagergui);
     tabnr = g_list_length(tabs);
+    GList* filter = NULL;
 
     for (i=0; i < tabnr; i++) {
         ec = GU_TAB_CONTEXT (g_list_nth_data (tabs, i))->editor;
-        if (ec->projfile != NULL) {
+        if ((ec->projfile) && !utils_glist_is_member (filter, ec->projfile)) {
             gchar* basename = g_path_get_basename (ec->projfile);
             gtk_list_store_append (store, &iter);
             gtk_list_store_set (store, &iter, 0, basename, 1, ec->projfile, -1);
+            gtk_widget_set_tooltip_text (combo, ec->projfile);
+            filter = g_list_append (filter, ec->projfile);
         }
     }
     gtk_combo_box_set_active (combo, 0);

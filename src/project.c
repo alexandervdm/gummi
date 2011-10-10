@@ -55,6 +55,7 @@ gboolean project_create_new (const gchar* filename) {
         filename = g_strdup_printf ("%s.gummi", filename);
     }
 
+    statusbar_set_message (g_strdup_printf("Creating project file: %s", filename));
     utils_set_file_contents (filename, content, -1);
     return TRUE;
 }

@@ -251,7 +251,6 @@ gboolean iofunctions_autosave_cb (void *user) {
         tab = g_list_nth_data (tabs, i);
         ec = tab->editor;
         
-        printf("%s has changed %d\n", ec->filename, editor_buffer_changed(ec));
         if ((ec->filename) && editor_buffer_changed (ec)) {
             focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
             text = editor_grab_buffer (ec);

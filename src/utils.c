@@ -270,7 +270,17 @@ gchar* utils_get_tmp_tmp_dir (void) {
 }  
 
 
-
+gboolean utils_glist_is_member (GList* list, gchar* item) {
+    int nrofitems = g_list_length (list);
+    int i;
+    
+    for (i=0;i<nrofitems;i++) {
+        if (utils_strequal (item, g_list_nth_data (list,i))) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 gboolean utils_strequal (const gchar* str1, const gchar* str2) {
     /* TODO: replace "strcmp" calls */

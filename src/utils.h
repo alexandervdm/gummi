@@ -161,6 +161,9 @@ gboolean utils_strequal (const gchar* str1, const gchar* str2);
 
 gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
 
+
+gboolean utils_glist_is_member (GList *list, gchar* item);
+
 /**
  * slist_find:
  * @head: the list head
