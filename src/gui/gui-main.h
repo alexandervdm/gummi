@@ -49,12 +49,17 @@
 
 /* These macros should be only used in GUI related classes 
  * which acted as syntax sugar */
-
-
+/* These macros should be only used in GUI related classes 
+ * which acted as syntax sugar */
+#define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
+#define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
+#define g_active_tab gui->tabmanagergui->active_tab
+#define g_active_editor gui->tabmanagergui->active_editor
 #define g_active_page gui->tabmanagergui->active_page
 
+
 /* this needs cleanup */
-#define g_active_tabname gtk_label_get_text(gummi->tabmanager->active_tab->tablabel->text)
+#define g_active_tabname gtk_label_get_text(gui->tabmanagergui->active_tab->tablabel->text)
 
 
 

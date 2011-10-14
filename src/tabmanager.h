@@ -35,12 +35,6 @@
 #include "editor.h"
 #include "gui/gui-tabmanager.h"
 
-#define g_tabs gummi->tabmanager->tabs
-#define g_active_tab gummi->tabmanager->active_tab
-#define g_active_editor gummi->tabmanager->active_tab->editor
-
-#define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
-#define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
 
 
 
@@ -53,8 +47,6 @@ struct _GuTabContext {
 */
 
 typedef struct _Tabmanager {
-    GuTabContext* active_tab;
-    GList* tabs;
 
 } GuTabmanager;
 

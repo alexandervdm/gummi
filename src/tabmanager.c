@@ -36,18 +36,18 @@ extern Gummi* gummi;
 GuTabmanager* tabmanager_init (void) {
     GuTabmanager* tm = g_new0 (GuTabmanager, 1);
     
-    tm->tabs = NULL;
-    tm->active_tab = NULL; // ALEX: new
+
     return tm;
 }
 
 void tabmanager_foreach_editor (GFunc func, gpointer user_data) {
+    /*
     GList* tabs = g_tabs;
     while (tabs) {
         GList *next = tabs->next;
         (*func) (GU_TAB_CONTEXT (tabs->data)->editor, user_data);
         tabs = next;
-    }
+    }*/
 }
 
 

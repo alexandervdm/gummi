@@ -32,8 +32,6 @@
 #include "gui-main.h"
 #include "environment.h"
 
-extern Gummi* gummi;
-
 
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
@@ -45,6 +43,8 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
 
     g_object_set (tm->notebook, "tab-border", 0, NULL);
 
+    tm->tabs = NULL;
+    tm->active_editor = NULL;
     tm->active_page = NULL;
     return tm;
 }
@@ -118,12 +118,12 @@ void tablabel_set_bold_text (GuTabLabel* tl) {
 }
 
 gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
-    gint position = g_list_index (gummi->tabmanager->tabs, tab);
+    gint position = g_list_index (tm->tabs, tab);
     gint total = gtk_notebook_get_n_pages (tm->notebook);
 
     if (total == 0) return FALSE;
 
-    gummi->tabmanager->tabs = g_list_remove (gummi->tabmanager->tabs, tab);
+    tm->tabs = g_list_remove (tm->tabs, tab);
     tabmanagergui_set_active_tab (tm, total -2);
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (tm->notebook, position);
@@ -139,16 +139,16 @@ gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm) {
 void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position) {
     
     if (position == -1) {
-        gummi->tabmanager->active_tab = NULL;
-        gummi->tabmanager->active_tab->editor = NULL;
+        tm->active_tab = NULL;
+        tm->active_editor = NULL;
         tm->active_page = NULL;
     } else {
-        gummi->tabmanager->active_tab =
-            GU_TAB_CONTEXT (g_list_nth_data (gummi->tabmanager->tabs, position));
-        gummi->tabmanager->active_tab->editor =
-            GU_TAB_CONTEXT (g_list_nth_data (gummi->tabmanager->tabs, position))->editor;
+        tm->active_tab =
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position));
+        tm->active_editor =
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position))->editor;
         tm->active_page =
-            GU_TAB_CONTEXT (g_list_nth_data (gummi->tabmanager->tabs, position))->page;
+            GU_TAB_CONTEXT (g_list_nth_data (tm->tabs, position))->page;
     }
 }
 
@@ -167,11 +167,11 @@ GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
 gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
                                       const gchar* filename) {
                                           
-    gummi->tabmanager->active_tab->editor = ec;
-    editor_destroy(gummi->tabmanager->active_tab->editor);
-    gtk_container_remove (GTK_CONTAINER (gummi->tabmanager->active_tab->page),
-                          GTK_WIDGET (gummi->tabmanager->active_tab->editor->view));
-    gtk_container_add (GTK_CONTAINER (gummi->tabmanager->active_tab->page),
+    tm->active_tab->editor = ec;
+    editor_destroy(tm->active_editor);
+    gtk_container_remove (GTK_CONTAINER (tm->active_tab->page),
+                          GTK_WIDGET (tm->active_editor->view));
+    gtk_container_add (GTK_CONTAINER (tm->active_tab->page),
                        GTK_WIDGET (ec->view));
     gtk_widget_show(GTK_WIDGET(ec->view));
     return gtk_notebook_page_num(tm->notebook, tm->active_page);
@@ -180,7 +180,7 @@ gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
 gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc) {
     gint pos = 0;
 
-    gummi->tabmanager->tabs = g_list_append(gummi->tabmanager->tabs, tc);
+    tm->tabs = g_list_append(tm->tabs, tc);
     gtk_container_add (GTK_CONTAINER (tc->page),
                        GTK_WIDGET(tc->editor->view));
     pos = gtk_notebook_append_page (GTK_NOTEBOOK (tm->notebook), tc->page,
@@ -200,11 +200,11 @@ void tabmanagergui_switch_tab(GuTabmanagerGui* tm, gint pos) {
 
 
 GList* tabmanagergui_get_all_tabs(GuTabmanagerGui* tm) {
-    return gummi->tabmanager->tabs;
+    return tm->tabs;
 }
 
 gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm) {
-    if (g_list_length(gummi->tabmanager->tabs) != 0) {
+    if (g_list_length(tm->tabs) != 0) {
         return TRUE;
     }
     return FALSE;
