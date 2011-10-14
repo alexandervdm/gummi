@@ -36,7 +36,7 @@ Gummi* gummi = 0;
 GummiGui* gui = 0;
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
-                   GuTemplate* tpl, GuSnippets* snip) {
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm) {
     
     Gummi* g = g_new0 (Gummi, 1);
     g->io = io;
@@ -45,10 +45,12 @@ Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
     g->biblio = bib;
     g->templ = tpl;
     g->snippets = snip;
+    g->tabmanager = tabm;
     return g;
 }
 
-void gummi_new_environment (GuEditor* ec, const gchar* filename) {
+GuEditor* gummi_new_environment (const gchar* filename) {
+    GuEditor* ec = editor_new (gummi->motion);
     editor_fileinfo_update (ec, filename);
     
     slog (L_INFO, "\n");
@@ -56,8 +58,7 @@ void gummi_new_environment (GuEditor* ec, const gchar* filename) {
     slog (L_INFO, "TEX: %s\n", ec->filename);
     slog (L_INFO, "TMP: %s\n", ec->workfile);
     slog (L_INFO, "PDF: %s\n", ec->pdffile); 
-
-    //iofunctions_reset_autosave (filename);
+    return ec;
 }
 
 GummiGui* gummi_get_gui (void) {
@@ -65,11 +66,18 @@ GummiGui* gummi_get_gui (void) {
 }
 
 GuEditor* gummi_get_active_editor (void) {
-    return gui->tabmanagergui->active_editor;
+    if (g_active_tab != NULL) {
+        return g_active_editor;
+    }
+    else {
+        printf("NULLLLL!!!\n");
+        return NULL;
+    }
+    //return gummi->tabmanager->active_editor;
 }
 
 GList* gummi_get_all_tabs (void) {
-    return gui->tabmanagergui->tabs;
+    return gummi->tabmanager->tabs;
 }
 
 GList* gummi_get_all_editors (void) {

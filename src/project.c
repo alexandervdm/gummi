@@ -32,11 +32,13 @@
 #include <string.h>
 
 #include "configfile.h"
+#include "environment.h"
 #include "gui/gui-main.h"
 #include "gui/gui-project.h"
 #include "utils.h"
 
 extern GummiGui* gui;
+extern Gummi* gummi;
 
 
 gboolean project_create_new (const gchar* filename) {

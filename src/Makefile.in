@@ -56,7 +56,8 @@ am_gummi_OBJECTS = biblio.$(OBJEXT) configfile.$(OBJEXT) \
 	importer.$(OBJEXT) iofunctions.$(OBJEXT) external.$(OBJEXT) \
 	project.$(OBJEXT) latex.$(OBJEXT) motion.$(OBJEXT) \
 	signals.$(OBJEXT) snippets.$(OBJEXT) template.$(OBJEXT) \
-	update.$(OBJEXT) utils.$(OBJEXT) main.$(OBJEXT)
+	update.$(OBJEXT) utils.$(OBJEXT) tabmanager.$(OBJEXT) \
+	main.$(OBJEXT)
 gummi_OBJECTS = $(am_gummi_OBJECTS)
 am__DEPENDENCIES_1 =
 gummi_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -228,6 +229,7 @@ gummi_SOURCES = biblio.c  biblio.h \
 		template.c template.h \
 		update.c update.h \
 		utils.c utils.h \
+		tabmanager.c tabmanager.h \
 		constants.h porting.h \
 		main.c
 
@@ -339,6 +341,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/snippets.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/synctex_parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/synctex_parser_utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tabmanager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/template.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texlive.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/update.Po@am__quote@

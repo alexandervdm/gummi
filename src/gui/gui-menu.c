@@ -157,7 +157,7 @@ gboolean on_menu_quit_activate (void) {
     gint wx = 0, wy = 0, width = 0, height = 0;
     gchar buf[16];
     int i = 0;
-    gint length = g_list_length (gui->tabmanagergui->tabs);
+    gint length = g_list_length (gummi->tabmanager->tabs);
 
     /* Stop compile thread */
     if (length > 0) motion_stop_compile_thread (gummi->motion);
@@ -187,7 +187,7 @@ gboolean on_menu_quit_activate (void) {
 
     for(i = 0; i < length; i++)
         editor_destroy (GU_TAB_CONTEXT (g_list_nth_data
-                    (gui->tabmanagergui->tabs, i))->editor);
+                    (gummi->tabmanager->tabs, i))->editor);
 
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n"

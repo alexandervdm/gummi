@@ -44,6 +44,7 @@
 #include "motion.h"
 #include "signals.h"
 #include "snippets.h"
+#include "tabmanager.h"
 #include "template.h"
 #include "utils.h"
 
@@ -105,9 +106,10 @@ int main (int argc, char *argv[]) {
     GuLatex* latex = latex_init (); 
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
+    GuTabmanager* tabm = tabmanager_init ();
 
     GuSnippets* snippets = snippets_init (snippetsname);
-    gummi = gummi_init (motion, io, latex, biblio, templ, snippets);
+    gummi = gummi_init (motion, io, latex, biblio, templ, snippets, tabm);
     slog (L_DEBUG, "Gummi created!\n");
     g_free (snippetsname);
 

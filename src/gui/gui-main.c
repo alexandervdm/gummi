@@ -242,18 +242,17 @@ void gui_update_environment (const gchar* filename) {
     
     gui_update_filenm_display (g_active_editor, g_active_tab);
     
-    gummi_new_environment (g_active_editor, filename);
+    editor_fileinfo_update (g_active_editor, filename);
 
     previewgui_reset (gui->previewgui);
 }
 
 void gui_create_environment (OpenAct act, const gchar* filename,
                              const gchar* opt) {
-    GuEditor* editor = editor_new (gummi->motion);
     GuTabContext* t = NULL;
     gint pos = 0;
 
-    gummi_new_environment (editor, filename);
+    GuEditor* editor = gummi_new_environment (filename);
 
     /* Remove a tab if it's a new one and haven't been modified yet */
     if ((act == A_LOAD || act == A_LOAD_OPT) &&
@@ -301,7 +300,7 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     
     previewgui_reset (gui->previewgui);
 
-    slog (L_DEBUG, "Switched to environment at page %d\n", page);
+    slog (L_INFO, "Switched to environment at page %d\n", page);
 }
 
 G_MODULE_EXPORT

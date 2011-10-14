@@ -79,6 +79,7 @@
 #include "latex.h"
 #include "motion.h"
 #include "snippets.h"
+#include "tabmanager.h"
 #include "template.h"
 
 #include "gui/gui-main.h"
@@ -102,11 +103,12 @@ struct _Gummi {
     GuBiblio* biblio;
     GuTemplate* templ;
     GuSnippets* snippets;
+    GuTabmanager* tabmanager;
 };
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib, 
-                   GuTemplate* tpl, GuSnippets* snip);
-void gummi_new_environment (GuEditor* ec, const gchar* filename);
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm);
+GuEditor* gummi_new_environment (const gchar* filename);
 
 /**
  * Following APIs is used to eliminate the need of exposing global Gummi to
