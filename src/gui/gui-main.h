@@ -53,13 +53,14 @@
  * which acted as syntax sugar */
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
-#define g_active_tab gui->tabmanagergui->active_tab
-#define g_active_editor gui->tabmanagergui->active_editor
-#define g_active_page gui->tabmanagergui->active_page
+#define g_active_tab gummi->tabmanager->active_tab
+#define g_active_editor gummi->tabmanager->active_editor
+#define g_tabs gummi->tabmanager->tabs
 
 
 /* this needs cleanup */
-#define g_active_tabname gtk_label_get_text(gui->tabmanagergui->active_tab->tablabel->text)
+#define g_active_page gui->tabmanagergui->active_page
+#define g_active_tabname gtk_label_get_text(gummi->tabmanager->active_tab->tablabel->text)
 
 
 

@@ -50,6 +50,7 @@
 /* TODO: needs mayor cleanup */
 
 extern GummiGui* gui;
+extern Gummi* gummi;
 
 static void set_all_tab_settings (GuPrefsGui* prefs);
 static void set_tab_view_settings (GuPrefsGui* prefs);
@@ -350,7 +351,7 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
     const gchar* scheme = config_get_value ("style_scheme");
     GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
     gint column = 0;
     GtkTreePath* treepath;
 
@@ -386,7 +387,7 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
 G_MODULE_EXPORT
 void toggle_linenumbers (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("line_numbers", newval? "True": "False");
     while (tab) {
@@ -399,7 +400,7 @@ void toggle_linenumbers (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_highlighting (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("highlighting", newval? "True": "False");
     while (tab) {
@@ -412,7 +413,7 @@ void toggle_highlighting (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_textwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("textwrapping", newval? "True": "False");
     if (newval) {
@@ -443,7 +444,7 @@ void toggle_textwrapping (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_wordwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("wordwrapping", newval? "True": "False");
     while (tab) {
@@ -468,7 +469,7 @@ void toggle_compilestatus (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("spaces_instof_tabs", newval? "True": "False");
     while (tab) {
@@ -481,7 +482,7 @@ void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_autoindentation (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("autoindentation", newval? "True": "False");
     while (tab) {
@@ -545,7 +546,7 @@ G_MODULE_EXPORT
 void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
     gchar buf[16];
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("tabwidth", g_ascii_dtostr (buf, 16, (double)newval));
     while (tab) {
@@ -582,7 +583,7 @@ G_MODULE_EXPORT
 void on_editor_font_set (GtkWidget* widget, void* user) {
     const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON (widget));
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
 
     slog (L_INFO, "setting font to %s\n", font);
     config_set_value ("font", font);
@@ -664,7 +665,7 @@ G_MODULE_EXPORT
 void on_combo_language_changed (GtkWidget* widget, void* user) {
 #ifdef USE_GTKSPELL
     gchar* selected = gtk_combo_box_get_active_text (GTK_COMBO_BOX (widget));
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
     config_set_value ("spell_language", selected);
 
     if (config_get_value ("spelling")) {
@@ -693,14 +694,14 @@ void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
 {
     gchar* id = NULL;
     gchar* name = NULL;
-    GList* tab = gui->tabmanagergui->tabs;
+    GList* tab = gummi->tabmanager->tabs;
     GtkTreeIter iter;
     GtkTreeModel* model = GTK_TREE_MODEL (gtk_tree_view_get_model (treeview));
     GtkTreeSelection* selection = gtk_tree_view_get_selection (treeview);
 
     gtk_tree_selection_get_selected (selection, &model, &iter);
     gtk_tree_model_get (model, &iter, 0, &name, 1, &id, -1);
-    tab = gui->tabmanagergui->tabs;
+    tab = gummi->tabmanager->tabs;
     while (tab) {
         editor_set_style_scheme_by_id (GU_TAB_CONTEXT (tab->data)->editor, id);
         tab = g_list_next (tab);

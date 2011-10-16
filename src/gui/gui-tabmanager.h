@@ -61,12 +61,8 @@ typedef struct _GuTabmanagerGui GuTabmanagerGui;
 
 struct _GuTabmanagerGui {
     GtkNotebook *notebook;
-
-    GuTabContext* active_tab;
-    GuEditor* active_editor;
     GtkWidget* active_page;
 
-    GList* tabs;
 };
 
 GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename);

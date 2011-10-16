@@ -47,7 +47,9 @@ struct _GuTabContext {
 */
 
 typedef struct _Tabmanager {
-
+    GuEditor* active_editor;
+    GuTabContext* active_tab;
+    GList* tabs;
 } GuTabmanager;
 
 

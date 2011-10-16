@@ -77,7 +77,7 @@ GuEditor* gummi_get_active_editor (void) {
 }
 
 GList* gummi_get_all_tabs (void) {
-    return gui->tabmanagergui->tabs;
+    return gummi->tabmanager->tabs;
 }
 
 GList* gummi_get_all_editors (void) {

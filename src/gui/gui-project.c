@@ -32,15 +32,17 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "environment.h"
 #include "gui-main.h"
 #include "gui-tabmanager.h"
 #include "project.h"
 
 extern GummiGui* gui;
+extern Gummi* gummi;
 
 void projectgui_set_rootfile (gint position) {
     tabmanagergui_switch_tab (gui->tabmanagergui, position);
-    tablabel_set_bold_text (gui->tabmanagergui->active_tab->tablabel);
+    tablabel_set_bold_text (gummi->tabmanager->active_tab->tablabel);
 }
 
 void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
@@ -59,7 +61,7 @@ void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
             gchar* basename = g_path_get_basename (ec->projfile);
             gtk_list_store_append (store, &iter);
             gtk_list_store_set (store, &iter, 0, basename, 1, ec->projfile, -1);
-            gtk_widget_set_tooltip_text (combo, ec->projfile);
+            gtk_widget_set_tooltip_text (GTK_WIDGET(combo), ec->projfile);
             filter = g_list_append (filter, ec->projfile);
         }
     }

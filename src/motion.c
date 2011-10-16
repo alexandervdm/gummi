@@ -107,7 +107,6 @@ gpointer motion_compile_thread (gpointer data) {
             g_mutex_unlock (mc->compile_mutex);
             continue;
         }
-
         if (!mc->keep_running) {
             g_thread_exit (NULL);
         }
