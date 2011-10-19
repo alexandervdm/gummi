@@ -258,7 +258,7 @@ gboolean iofunctions_autosave_cb (void *user) {
             iofunctions_save_file (gummi->io, ec->filename, text);
             gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
             slog (L_DEBUG, "Autosaving document: %s\n", ec->filename);
-            gui_update_filenm_display (ec, tab);
+            gui_set_filename_display (tab, TRUE, TRUE);
        }
     }
     return TRUE;

@@ -33,18 +33,19 @@
 #include <glib.h>
 
 #include "editor.h"
+
 #include "gui/gui-tabmanager.h"
 
+#define g_tabs gummi->tabmanager->tabs
+
+typedef enum _OpenAct {
+    A_NONE = 0,
+    A_DEFAULT,
+    A_LOAD,
+    A_LOAD_OPT,
+} OpenAct;
 
 
-
-/*
-#define GU_TAB_CONTEXT(x) ((GuTabContext*)x)
-typedef struct _GuTabContext GuTabContext;
-struct _GuTabContext {
-    
-};
-*/
 
 typedef struct _Tabmanager {
     GuEditor* active_editor;
@@ -55,7 +56,13 @@ typedef struct _Tabmanager {
 
 GuTabmanager* tabmanager_init (void);
 void tabmanager_foreach_editor (GFunc func, gpointer user_data);
+gchar* tabmanager_get_tabname (GuEditor* ec);
+void tabmanager_set_active_tab (int position);
 
+/*------------------------------------------------------------------------*/
+
+void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt);
+void tabmanager_update_tab (const gchar* filename);
 
 
 #endif /* __GUMMI_TABMANAGER_H__ */

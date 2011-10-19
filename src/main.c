@@ -134,9 +134,9 @@ int main (int argc, char *argv[]) {
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
     if (argc != 2)
-        gui_create_environment (A_DEFAULT, NULL, NULL);
+        tabmanager_create_tab (A_DEFAULT, NULL, NULL);
     else
-        gui_create_environment (A_LOAD, argv[1], NULL);
+        tabmanager_create_tab (A_LOAD, argv[1], NULL);
         
     if (config_get_value ("autosaving")) iofunctions_start_autosave ();
 

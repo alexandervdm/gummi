@@ -28,10 +28,12 @@
  */
 
 #include "tabmanager.h"
-
 #include "environment.h"
 
 extern Gummi* gummi;
+extern GummiGui* gui;
+
+static gboolean current_tab_replaceable (OpenAct act);
 
 GuTabmanager* tabmanager_init (void) {
     GuTabmanager* tm = g_new0 (GuTabmanager, 1);
@@ -51,3 +53,106 @@ void tabmanager_foreach_editor (GFunc func, gpointer user_data) {
         tabs = next;
     }
 }
+
+static gboolean current_tab_replaceable (OpenAct act) {
+    if ((act == A_LOAD || act == A_LOAD_OPT))
+        if (g_active_editor && !g_active_editor->filename)
+            if (!editor_buffer_changed (g_active_editor)) 
+                return TRUE;
+    return FALSE;
+}
+
+gchar* tabmanager_get_tabname (GuEditor* ec) {
+    gchar* labeltext;
+    gchar* filetext;
+    gboolean modified;
+
+    if (ec->filename) {
+        filetext = g_path_get_basename (ec->filename);
+    } else {
+        filetext = g_strdup_printf (_("Unsaved Document %d"), g_unsavednr);
+    }
+    
+    modified = editor_buffer_changed (ec);
+    
+    labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), filetext);
+    g_free (filetext);
+    return labeltext;
+}
+
+
+/*--------------------------------------------------------------------------*/
+
+
+void tabmanager_set_active_tab (int position) {
+    if (position == -1) {
+        g_active_tab = NULL;
+        g_active_editor = NULL;
+    } else {
+        g_active_tab = GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position));
+        g_active_editor = 
+            GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position))->editor;
+    }
+}
+
+
+void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
+    gint pos = 0;
+    
+    GuEditor* editor = gummi_new_environment (filename);
+
+    if (current_tab_replaceable (act)) {
+        pos = tabmanagergui_replace_page (g_active_tab, editor);
+    } else {
+        GuTabContext* tc = g_new0(GuTabContext, 1);
+        tc->editor = editor;
+        g_tabs = g_list_append(g_tabs, tc);
+        tc->page = tabmanagergui_create_page (tc->editor);
+        pos = tc->page->position;
+        tabmanagergui_switch_to_page (pos);
+
+           g_signal_connect (tc->page->button,
+                      "clicked",
+                      G_CALLBACK (on_menu_close_activate),
+                      tc);
+
+    }
+    
+    tabmanager_set_active_tab (pos);
+
+    switch (act) {
+        case A_NONE:
+            break;
+        case A_DEFAULT:
+            iofunctions_load_default_text (FALSE);
+            break;
+        case A_LOAD:
+            iofunctions_load_file (gummi->io, filename);
+            break;
+        case A_LOAD_OPT:
+            iofunctions_load_file (gummi->io, opt);
+            break;
+        default:
+            slog(L_FATAL, "can't happen bug\n");
+    }
+
+    gui_set_filename_display (g_active_tab, TRUE, TRUE);
+    add_to_recent_list (filename);
+
+    previewgui_reset (gui->previewgui);
+}
+
+void tabmanager_update_tab (const gchar* filename) {
+    /* this function is called when the document is saved. no new editor
+     * or tab object has to be initialised, but we'll need a fileinfo env
+     * to match the new filename and its location and a gui update*/
+     
+    add_to_recent_list (filename);
+    gui_set_filename_display (g_active_tab, TRUE, TRUE);
+    
+    editor_fileinfo_update (g_active_tab->editor, filename);
+    slog (L_INFO, "Environment updated for %s\n", g_active_tab->editor->filename);
+    previewgui_reset (gui->previewgui);    
+}
+
+

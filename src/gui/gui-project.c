@@ -41,8 +41,8 @@ extern GummiGui* gui;
 extern Gummi* gummi;
 
 void projectgui_set_rootfile (gint position) {
-    tabmanagergui_switch_tab (gui->tabmanagergui, position);
-    tablabel_set_bold_text (gummi->tabmanager->active_tab->tablabel);
+    //tabmanagergui_switch_tab (gui->tabmanagergui, position);
+    //tablabel_set_bold_text (gummi->tabmanager->active_tab->tablabel);
 }
 
 void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {

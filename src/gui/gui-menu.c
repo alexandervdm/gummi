@@ -64,7 +64,7 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
 void on_menu_new_activate (GtkWidget *widget, void* user) {
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_sensitive (TRUE);
-    gui_create_environment (A_NONE, NULL, NULL);
+    tabmanager_create_tab (A_NONE, NULL, NULL);
 }
 
 G_MODULE_EXPORT
@@ -144,12 +144,14 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
         return;
 
     tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
+    
+    printf("removing %s\n", tab->editor->workfile);
 
     if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab)) {
         motion_start_errormode (gummi->motion, ""); // TODO: empty screen
         gui_set_sensitive (FALSE);
     } else
-        gui_update_windowtitle ();
+        gui_set_filename_display (g_active_tab, TRUE, FALSE);
 }
 
 G_MODULE_EXPORT
@@ -164,7 +166,7 @@ gboolean on_menu_quit_activate (void) {
 
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
-        tabmanagergui_set_active_tab(gui->tabmanagergui, i);
+        tabmanager_set_active_tab (i);
 
         gint ret = check_for_save ();
         if (GTK_RESPONSE_YES == ret)
@@ -445,9 +447,9 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         gtk_label_set_text (tmp, res[j]);
     }
     
-    /* TODO: make nice functions for retrieving tab labels */
+
     gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (gui->builder, 
-                    "stats_filename")), g_active_tabname);
+                    "stats_filename")), tabmanagergui_get_labeltext (g_active_tab->page));
     gtk_widget_show (gui->docstatswindow);
     return;
 

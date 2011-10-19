@@ -226,81 +226,25 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    gtk_widget_show (tmp);
+    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    //gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
     gdk_threads_leave();
 }
 
-void gui_update_environment (const gchar* filename) {
-    /* this function is called when the document is saved. no new editor
-     * or tab object has to be initialised, but we'll need a fileinfo env
-     * to match the new filename and its location and a gui update*/
-    add_to_recent_list (filename);
-    
-    gui_update_filenm_display (g_active_editor, g_active_tab);
-    
-    editor_fileinfo_update (g_active_editor, filename);
-
-    previewgui_reset (gui->previewgui);
-}
-
-void gui_create_environment (OpenAct act, const gchar* filename,
-                             const gchar* opt) {
-    GuTabContext* t = NULL;
-    gint pos = 0;
-
-    GuEditor* editor = gummi_new_environment (filename);
-
-    /* Remove a tab if it's a new one and haven't been modified yet */
-    if ((act == A_LOAD || act == A_LOAD_OPT) &&
-        (g_active_editor && !g_active_editor->filename &&
-                !gtk_text_buffer_get_modified (g_e_buffer)))
-        pos = tabmanagergui_tab_replace_active(gui->tabmanagergui, editor,
-                                               filename);
-    else {
-        t = tabmanagergui_create_tab (gui->tabmanagergui, editor, filename);
-        pos = tabmanagergui_tab_push (gui->tabmanagergui, t);
-    }
-
-    tabmanagergui_switch_tab (gui->tabmanagergui, pos);
-    tabmanagergui_set_active_tab (gui->tabmanagergui, pos);
-
-    switch (act) {
-        case A_NONE:
-            break;
-        case A_DEFAULT:
-            iofunctions_load_default_text (FALSE);
-            break;
-        case A_LOAD:
-            iofunctions_load_file (gummi->io, filename);
-            break;
-        case A_LOAD_OPT:
-            iofunctions_load_file (gummi->io, opt);
-            break;
-        default:
-            slog(L_FATAL, "can't happen bug\n");
-    }
-
-    gui_update_filenm_display (g_active_editor, g_active_tab);
-    add_to_recent_list (filename);
-
-    previewgui_reset (gui->previewgui);
-}
-
 G_MODULE_EXPORT
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
-                                 int page, void *data) {
+                                 int pagenr, void *data) {
     /* very important line */
-    tabmanagergui_set_active_tab(gui->tabmanagergui, page);
+    tabmanager_set_active_tab (pagenr);
 
-    gui_update_windowtitle ();
+    gui_set_filename_display (g_active_tab, TRUE, FALSE);
     
     previewgui_reset (gui->previewgui);
 
-    slog (L_INFO, "Switched to environment at page %d\n", page);
+    slog (L_INFO, "Switched to environment at page %d\n", pagenr);
 }
 
 G_MODULE_EXPORT
@@ -325,47 +269,33 @@ void on_combo_projects_changed (GtkComboBox* widget, void* user) {
     }
 }
 
-void gui_update_filenm_display (GuEditor* ec, GuTabContext* tc) {
-    gboolean modified;
+void gui_set_filename_display (GuTabContext* tc, 
+                                        gboolean title, gboolean label) {
+                                            
     
-    modified = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (ec->buffer));
-
+    gchar* filetext = tabmanager_get_tabname (tc->editor);
     
-    const gchar* fname = (ec->filename && g_active_editor)?
-                            ec->filename: g_active_editor->filename;
-                            
-    tablabel_update_label_text (tc->tablabel, fname, modified);
+    if (label) tabmanagergui_update_label (tc->page, filetext);
+    if (title) gui_set_window_title (tc->editor->filename, filetext);
     
-    if (ec == g_active_editor) {
-        gui_update_windowtitle ();
-    }
 }
 
-void gui_update_windowtitle (void) {
-    gchar* dirname = NULL;
-    gchar* title = NULL;
-    const gchar* labeltext = NULL;
+void gui_set_window_title (const gchar* filename, const gchar* text) {
+    gchar* dirname;
+    gchar* title;
 
-
-    labeltext =  gtk_label_get_text (g_active_tab->tablabel->text);
-
-    if (!g_active_editor) {
-        gtk_window_set_title(gui->mainwindow, "Gummi");
-        return;
-    }
-
-    if (g_active_editor->filename) {
-        dirname = g_path_get_dirname (g_active_editor->filename);
-        title = g_strdup_printf ("%s (%s) - %s", labeltext, dirname,
+    if (filename != NULL) {
+        dirname = g_strdup_printf("(%s)", g_path_get_dirname (filename));
+        title = g_strdup_printf ("%s %s - %s", text, dirname,
                                                  PACKAGE_NAME);
-        g_free (dirname);
-    } else {
-        title = g_strdup_printf ("%s - %s", labeltext, PACKAGE_NAME);
+    }
+    else {
+        title = g_strdup_printf ("%s - %s", text, PACKAGE_NAME);
     }
     gtk_window_set_title (gui->mainwindow, title);
-
     g_free (title);
 }
+
 
 void gui_open_file (const gchar* filename) {
     gint ret = 0;
@@ -387,7 +317,7 @@ void gui_open_file (const gchar* filename) {
 
         ret = utils_yes_no_dialog (message);
         if (GTK_RESPONSE_YES == ret)
-            gui_create_environment (A_LOAD_OPT, filename, prev_workfile);
+            tabmanager_create_tab (A_LOAD_OPT, filename, prev_workfile);
         g_free (message);
     }
 
@@ -397,7 +327,7 @@ void gui_open_file (const gchar* filename) {
 
 
     if (GTK_RESPONSE_YES != ret)
-        gui_create_environment (A_LOAD, filename, NULL);
+        tabmanager_create_tab (A_LOAD, filename, NULL);
 
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_sensitive (TRUE);
@@ -440,8 +370,8 @@ void gui_save_file (gboolean saveas) {
         pdfname[strlen (pdfname) -4] = 0;
         latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
     }
-    if (new) gui_update_environment (filename);
-    gui_update_filenm_display (g_active_editor, g_active_tab);
+    if (new) tabmanager_update_tab (filename);
+    gui_set_filename_display (g_active_tab, TRUE, TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
 
 cleanup:
@@ -507,40 +437,6 @@ void on_tool_textstyle_right_activate (GtkWidget* widget, void* user) {
     editor_set_selection_textstyle (g_active_editor, "tool_right");
 }
 
-/*
-G_MODULE_EXPORT
-void on_button_info_tabattach_clicked (GtkWidget* widget, void* user) {
-    GtkTreeSelection* selection;
-    GtkTreeModel* model;
-    GtkTreeIter iter;
-    gchar* workfile;
-    gchar* value;
-    
-    selection = gtk_tree_view_get_selection (gui->infoscreengui->tabstree);
-    gtk_tree_selection_get_selected (selection, &model, &iter);
-    gtk_tree_model_get (model, &iter, 1, &value, -1);
-    
-    GList* tabobjects;
-    gint totalnr, i;
-    GuTabContext* tab = NULL;
-    tabobjects = tabmanagergui_get_all_tabs (gui->tabmanagergui);
-    
-    totalnr = g_list_length (tabobjects);
-    
-    for (i = 0; i < totalnr; i++) {
-        tab = g_list_nth_data (tabobjects, i);
-        workfile = tab->editor->workfile;
-        
-        if (utils_strequal (value, workfile)) {
-            g_active_editor->masterfile = workfile;
-            slog (L_INFO, "Setting masterfile for %s to %s\n", 
-                                            g_active_tabname, workfile);
-            motion_stop_errormode (gummi->motion);
-            break;
-        }
-    }
-}*/
-
 G_MODULE_EXPORT
 void on_button_template_add_clicked (GtkWidget* widget, void* user) {
     template_add_new_entry (gummi->templ);
@@ -562,7 +458,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         statusbar_set_message (status);
         g_free (status);
 
-        gui_create_environment (A_LOAD_OPT, NULL, templ_name);
+        tabmanager_create_tab (A_LOAD_OPT, NULL, templ_name);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
     g_free(templ_name);
@@ -958,7 +854,7 @@ void check_preview_timer (void) {
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
     
-    gui_update_filenm_display (g_active_editor, g_active_tab);
+    gui_set_filename_display (g_active_tab, TRUE, TRUE);
 
     motion_start_timer (gummi->motion);
 }

@@ -58,13 +58,6 @@
 #define g_tabs gummi->tabmanager->tabs
 
 
-/* this needs cleanup */
-#define g_active_page gui->tabmanagergui->active_page
-#define g_active_tabname gtk_label_get_text(gummi->tabmanager->active_tab->tablabel->text)
-
-
-
-
 #define GUMMI_GUI(x) ((GummiGui*)x)
 typedef struct _GummiGui GummiGui; 
 
@@ -108,13 +101,6 @@ struct _GummiGui {
     gchar* recent_list[5];
 };
 
-typedef enum _OpenAct {
-    A_NONE = 0,
-    A_DEFAULT,
-    A_LOAD,
-    A_LOAD_OPT,
-} OpenAct;
-
 typedef enum _GuFilterType {
     TYPE_LATEX = 0,
     TYPE_LATEX_SAVEAS,
@@ -128,15 +114,13 @@ typedef enum _GuFilterType {
 GummiGui* gui_init (GtkBuilder* builder);
 void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
-void gui_create_environment (OpenAct act, const gchar* filename,
-                             const gchar* opt);
-void gui_update_environment (const gchar* filename);
 
 
+void gui_set_filename_display (GuTabContext* tc, 
+                                        gboolean title, gboolean label);
+void gui_set_window_title (const gchar* filename, const gchar* text);
 
-void gui_update_filenm_display (GuEditor* ec, GuTabContext* tc);
 
-void gui_update_windowtitle (void);
 void gui_open_file (const gchar* filename);
 void gui_save_file (gboolean saveas);
 void gui_set_sensitive(gboolean enable);

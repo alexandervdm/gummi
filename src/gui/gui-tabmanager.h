@@ -35,25 +35,28 @@
 
 #include "editor.h"
 
-#define GU_TAB_LABEL(x) ((GuTabLabel*)x)
-typedef struct _GuTabLabel GuTabLabel;
+#define g_tabnotebook gui->tabmanagergui->notebook
+#define g_unsavednr gui->tabmanagergui->unsavednr
 
-struct _GuTabLabel {
-    GtkWidget* ebox;
-    GtkButton* close;
-    GtkHBox* hbox;
-    GtkLabel* text;
-    unsigned unsave;
-    gboolean bold;
+
+#define GU_TAB_PAGE(x) ((GuTabPage*)x)
+typedef struct _GuTabPage GuTabPage;
+
+struct _GuTabPage {
+    GtkWidget* scroll;
+    GtkWidget* labelbox;
+    GtkLabel* label;
+    gint position;
+    GtkButton* button;
 };
+
 
 #define GU_TAB_CONTEXT(x) ((GuTabContext*)x)
 typedef struct _GuTabContext GuTabContext;
 
 struct _GuTabContext {
     GuEditor* editor;
-    GtkWidget* page;
-    GuTabLabel* tablabel;
+    GuTabPage* page;
 };
 
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
@@ -61,17 +64,25 @@ typedef struct _GuTabmanagerGui GuTabmanagerGui;
 
 struct _GuTabmanagerGui {
     GtkNotebook *notebook;
-    GtkWidget* active_page;
+    int unsavednr;
 
 };
 
-GuTabLabel* tablabel_new (GuTabContext* tab, const gchar* filename);
-void tablabel_update_label_text (GuTabLabel* tl, const gchar* filename,
-                                 gboolean modified);
-void tablabel_set_bold_text (GuTabLabel* tl);
+
+GuTabPage* tabmanagergui_create_page (GuEditor* editor);
+void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext);
+gchar* tabmanagergui_get_labeltext (GuTabPage* tp);
+gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec);
+void tabmanagergui_switch_to_page (gint position);
+void tabmanagergui_update_label (GuTabPage* tp, const gchar* text);
+
+/*--------------------------------------------------------------------------*/
+
+
+//void tablabel_set_bold_text (GuTabLabel* tl);
 
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
-GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuEditor* ec,
+GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuTabContext* tab, GuEditor* ec,
                                     const gchar* filename);
 gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
                                    const gchar* filename);
