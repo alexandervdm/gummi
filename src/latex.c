@@ -123,6 +123,8 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
     gchar* combined = g_strdup_printf ("%s %s", 
                                         precommand, 
                                         texcmd);
+                                        
+    printf("%s\n", combined);
 
     return combined;
 }

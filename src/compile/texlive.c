@@ -120,25 +120,23 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
                                                 workfile);
     }
     else if (utils_strequal (method, "texdvipdf")) {
-        texcmd = g_strdup_printf("latex %s %s \"%s\" %s %s%sdvipdf -q \"%s\"",
+        texcmd = g_strdup_printf("latex %s %s \"%s\" %s %s dvipdf -q \"%s\"",
                                                 flags, 
                                                 outdir, 
                                                 workfile,
                                                 C_CMDSEP,
                                                 C_CD_TMPDIR,
-                                                C_CMDSEP,
                                                 dviname);
     }
     else {
-        texcmd = g_strdup_printf("latex %s %s \"%s\" %s \
-                                  %s%s dvips -q \"%s\" %s \
-                                  ps2pdf \"%s\"",
+        texcmd = g_strdup_printf("latex %s %s \"%s\" %s"
+                                 "%s dvips -q \"%s\" %s"
+                                 "ps2pdf \"%s\"",
                                                 flags, 
                                                 outdir, 
                                                 workfile,
                                                 C_CMDSEP,
                                                 C_CD_TMPDIR,
-                                                C_CMDSEP,
                                                 dviname,
                                                 C_CMDSEP,
                                                 psname);
