@@ -35,7 +35,18 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
+GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
+    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
+    GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
+
+    tm->notebook =
+        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
+    g_object_set (tm->notebook, "tab-border", 0, NULL);
+    
+    tm->unsavednr = 0;
+    return tm;
+}
 
 GuTabPage* tabmanagergui_create_page (GuEditor* editor) {
     GuTabPage* tp = g_new0(GuTabPage, 1);
@@ -49,7 +60,7 @@ GuTabPage* tabmanagergui_create_page (GuEditor* editor) {
     tabmanagergui_create_label (tp, labeltext);
 
     gtk_container_add (GTK_CONTAINER (tp->scroll), GTK_WIDGET (editor->view));
-    tp->position = gtk_notebook_append_page (GTK_NOTEBOOK (gui->tabmanagergui->notebook), tp->scroll,
+    tp->position = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), tp->scroll,
                                     GTK_WIDGET (tp->labelbox));
 
     gtk_widget_show(tp->scroll);
@@ -114,12 +125,14 @@ void tabmanagergui_switch_to_page (gint position) {
     gtk_notebook_set_current_page (g_tabnotebook, position);
 }
 
+void tabmanagergui_update_label (GuTabPage* tp, const gchar* text) {
+    g_return_if_fail (tp != NULL);
+    gtk_label_set_text (tp->label, text);
+}
 
 /*----------------------------------------------------------------------------*/
 
-void tabmanagergui_update_label (GuTabPage* tp, const gchar* text) {
-    gtk_label_set_text (tp->label, text);
-}
+
 
 
 
@@ -129,20 +142,7 @@ void tabmanagergui_update_label (GuTabPage* tp, const gchar* text) {
 /*---------------------------------------------------------------------------*/
 
 
-GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
-    g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
-    GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
-
-    tm->notebook =
-        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
-
-    g_object_set (tm->notebook, "tab-border", 0, NULL);
-
-    //gummi->tabmanager->tabs = NULL;
-    //tm->active_editor = NULL;
-    return tm;
-}
 
 
 
@@ -157,21 +157,6 @@ void tablabel_set_bold_text (GuTabLabel* tl) {
     if (!tl->bold) tl->bold = TRUE;
 
 }*/
-
-gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab) {
-    gint position = g_list_index (gummi->tabmanager->tabs, tab);
-    gint total = gtk_notebook_get_n_pages (tm->notebook);
-
-    if (total == 0) return FALSE;
-
-    gummi->tabmanager->tabs = g_list_remove (gummi->tabmanager->tabs, tab);
-    tabmanager_set_active_tab (total -2);
-    editor_destroy (tab->editor);
-    gtk_notebook_remove_page (tm->notebook, position);
-    g_free (tab);
-
-    return (total != 1);
-}
 
 gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm) {
     return gtk_notebook_get_current_page (tm->notebook);

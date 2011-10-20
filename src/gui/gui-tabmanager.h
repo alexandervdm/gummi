@@ -63,7 +63,7 @@ struct _GuTabContext {
 typedef struct _GuTabmanagerGui GuTabmanagerGui;
 
 struct _GuTabmanagerGui {
-    GtkNotebook *notebook;
+    GtkNotebook* notebook;
     int unsavednr;
 
 };

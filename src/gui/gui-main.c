@@ -851,6 +851,8 @@ gboolean statusbar_del_message (void* user) {
  * Also set_modified for buffer
  */
 void check_preview_timer (void) {
+    g_return_if_fail (g_active_tab != NULL);
+    
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
     

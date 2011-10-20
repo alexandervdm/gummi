@@ -80,7 +80,20 @@ gchar* tabmanager_get_tabname (GuEditor* ec) {
     return labeltext;
 }
 
+gboolean tabmanager_remove_tab (GuTabContext* tab) {
+    gint position = g_list_index (g_tabs, tab);
+    gint total = gtk_notebook_get_n_pages (g_tabnotebook); //TODO: make func
 
+    if (total == 0) return FALSE;
+
+    g_tabs = g_list_remove (g_tabs, tab);
+    tabmanager_set_active_tab (total - 2);
+    editor_destroy (tab->editor);
+    gtk_notebook_remove_page (g_tabnotebook, position);
+    g_free (tab);
+    return (total != 1);
+}
+    
 /*--------------------------------------------------------------------------*/
 
 
@@ -108,13 +121,9 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
         tc->editor = editor;
         g_tabs = g_list_append(g_tabs, tc);
         tc->page = tabmanagergui_create_page (tc->editor);
-        pos = tc->page->position;
-        tabmanagergui_switch_to_page (pos);
-
-           g_signal_connect (tc->page->button,
-                      "clicked",
-                      G_CALLBACK (on_menu_close_activate),
-                      tc);
+        tabmanagergui_switch_to_page (tc->page->position);
+        g_signal_connect (tc->page->button, "clicked", 
+                          G_CALLBACK (on_menu_close_activate), tc);
 
     }
     

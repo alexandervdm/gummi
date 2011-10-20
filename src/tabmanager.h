@@ -55,9 +55,13 @@ typedef struct _Tabmanager {
 
 
 GuTabmanager* tabmanager_init (void);
+
 void tabmanager_foreach_editor (GFunc func, gpointer user_data);
+
 gchar* tabmanager_get_tabname (GuEditor* ec);
 void tabmanager_set_active_tab (int position);
+
+gboolean tabmanager_remove_tab (GuTabContext* tab);
 
 /*------------------------------------------------------------------------*/
 

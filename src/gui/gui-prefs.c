@@ -403,6 +403,7 @@ void toggle_highlighting (GtkWidget* widget, void* user) {
     GList* tab = gummi->tabmanager->tabs;
 
     config_set_value ("highlighting", newval? "True": "False");
+    
     while (tab) {
         gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
                 (GU_TAB_CONTEXT (tab->data)->editor->view), newval);

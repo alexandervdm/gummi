@@ -147,7 +147,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     
     printf("removing %s\n", tab->editor->workfile);
 
-    if (!tabmanagergui_tab_pop (gui->tabmanagergui, tab)) {
+    if (!tabmanager_remove_tab (tab)) {
         motion_start_errormode (gummi->motion, ""); // TODO: empty screen
         gui_set_sensitive (FALSE);
     } else

@@ -105,6 +105,7 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     GuEditor* ec = NULL;
 
     ec = gummi_get_active_editor();
+    
     /* get the file contents */
     if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
