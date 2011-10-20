@@ -48,8 +48,10 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
     return tm;
 }
 
-GuTabPage* tabmanagergui_create_page (GuEditor* editor) {
+int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     GuTabPage* tp = g_new0(GuTabPage, 1);
+    tc->page = tp;
+    int pos;
     
     tp->scroll = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tp->scroll),
@@ -58,16 +60,16 @@ GuTabPage* tabmanagergui_create_page (GuEditor* editor) {
     g_unsavednr = g_unsavednr + 1;
     gchar* labeltext = tabmanager_get_tabname (editor);
     tabmanagergui_create_label (tp, labeltext);
+    g_signal_connect (tp->button, "clicked", 
+                      G_CALLBACK (on_menu_close_activate), tc);
 
     gtk_container_add (GTK_CONTAINER (tp->scroll), GTK_WIDGET (editor->view));
-    tp->position = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), tp->scroll,
+    pos = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), tp->scroll,
                                     GTK_WIDGET (tp->labelbox));
 
-    gtk_widget_show(tp->scroll);
-    gtk_widget_show(GTK_WIDGET(editor->view));
-    //gtk_widget_grab_focus(GTK_WIDGET(tc->editor->view));
-
-    return tp;
+    gtk_widget_show (tp->scroll);
+    gtk_widget_show (GTK_WIDGET(editor->view));
+    return pos;
 }
 
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
@@ -121,59 +123,28 @@ gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec) {
     return pos;
 }
 
-void tabmanagergui_switch_to_page (gint position) {
+void tabmanagergui_set_current_page (gint position) {
     gtk_notebook_set_current_page (g_tabnotebook, position);
+}
+
+gint tabmanagergui_get_current_page (void) {
+    return gtk_notebook_get_current_page (g_tabnotebook);
 }
 
 void tabmanagergui_update_label (GuTabPage* tp, const gchar* text) {
     g_return_if_fail (tp != NULL);
     gtk_label_set_text (tp->label, text);
+    if (tp->bold) tablabel_set_bold_text (tp);
 }
 
-/*----------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-/*---------------------------------------------------------------------------*/
-
-
-
-
-
-
-/*
-void tablabel_set_bold_text (GuTabLabel* tl) {
-
+void tablabel_set_bold_text (GuTabPage* tp) {
     gchar* markup;
-    const gchar* cur = gtk_label_get_text (tl->text);
+    const gchar* cur = gtk_label_get_text (tp->label);
     markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", cur);
-    gtk_label_set_markup (GTK_LABEL (tl->text), markup);
+    gtk_label_set_markup (GTK_LABEL (tp->label), markup);
     g_free (markup);
-    if (!tl->bold) tl->bold = TRUE;
-
-}*/
-
-gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm) {
-    return gtk_notebook_get_current_page (tm->notebook);
+    if (!tp->bold) tp->bold = TRUE;
 }
 
 
-
-
-
-GList* tabmanagergui_get_all_tabs(GuTabmanagerGui* tm) {
-    return gummi->tabmanager->tabs;
-}
-
-gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm) {
-    if (g_list_length(gummi->tabmanager->tabs) != 0) {
-        return TRUE;
-    }
-    return FALSE;
-}
 

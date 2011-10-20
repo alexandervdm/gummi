@@ -76,8 +76,6 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->bibfile = NULL;
     ec->projfile = NULL;
     
-
-    
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new ();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,
             "latex");

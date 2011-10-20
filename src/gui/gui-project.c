@@ -41,8 +41,8 @@ extern GummiGui* gui;
 extern Gummi* gummi;
 
 void projectgui_set_rootfile (gint position) {
-    //tabmanagergui_switch_tab (gui->tabmanagergui, position);
-    //tablabel_set_bold_text (gummi->tabmanager->active_tab->tablabel);
+    tabmanagergui_set_current_page (position);
+    tablabel_set_bold_text (g_active_tab->page);
 }
 
 void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
@@ -51,7 +51,8 @@ void projectgui_list_projopened (GtkComboBox* combo, GtkListStore* store) {
     GuEditor *ec;
     
     gtk_list_store_clear (store);
-    GList* tabs = tabmanagergui_get_all_tabs(gui->tabmanagergui);
+    
+    GList* tabs = gummi->tabmanager->tabs;
     tabnr = g_list_length(tabs);
     GList* filter = NULL;
 

@@ -121,14 +121,14 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
         filename = g_list_nth_data (filelist, i);
         if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
             
-            tabmanager_create_tab (A_LOAD, filename, NULL);
-            //gui_open_file (filename);
+            //tabmanager_create_tab (A_LOAD, filename, NULL);
+            gui_open_file (filename);
             
             // TODO: no direct calling this:
             g_active_editor->projfile = g_strdup (projfile);
         }
         if (i == 0) {
-            rootpos = tabmanagergui_get_active_tab (gui->tabmanagergui);
+            rootpos = tabmanagergui_get_current_page ();
         }
     }
     projectgui_set_rootfile (rootpos);

@@ -48,6 +48,8 @@ struct _GuTabPage {
     GtkLabel* label;
     gint position;
     GtkButton* button;
+    
+    gboolean bold;
 };
 
 
@@ -68,33 +70,16 @@ struct _GuTabmanagerGui {
 
 };
 
-
-GuTabPage* tabmanagergui_create_page (GuEditor* editor);
+GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
+int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor);
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext);
+
 gchar* tabmanagergui_get_labeltext (GuTabPage* tp);
 gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec);
-void tabmanagergui_switch_to_page (gint position);
+void tabmanagergui_set_current_page (gint position);
+gint tabmanagergui_get_current_page (void);
 void tabmanagergui_update_label (GuTabPage* tp, const gchar* text);
+void tablabel_set_bold_text (GuTabPage* tp);
 
-/*--------------------------------------------------------------------------*/
-
-
-//void tablabel_set_bold_text (GuTabLabel* tl);
-
-GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
-GuTabContext* tabmanagergui_create_tab(GuTabmanagerGui* tm, GuTabContext* tab, GuEditor* ec,
-                                    const gchar* filename);
-gint tabmanagergui_tab_replace_active(GuTabmanagerGui* tm, GuEditor* ec,
-                                   const gchar* filename);
-gint tabmanagergui_tab_push(GuTabmanagerGui* tm, GuTabContext* tc);
-gboolean tabmanagergui_tab_pop (GuTabmanagerGui* tm, GuTabContext* tab);
-void tabmanagergui_switch_tab (GuTabmanagerGui* tm, gint pos);
-gint tabmanagergui_get_active_tab (GuTabmanagerGui* tm);
-void tabmanagergui_set_active_tab (GuTabmanagerGui* tm, gint position);
-gint tabmanagergui_create_unsavednr (GuTabmanagerGui* tm);
-void tabmanagergui_update_active_tab_label (GuTabmanagerGui* tm,
-                                            const gchar* filename);
-gboolean tabmanagergui_existing_tabs (GuTabmanagerGui* tm);
-GList* tabmanagergui_get_all_tabs(GuTabmanagerGui* tm);
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */
