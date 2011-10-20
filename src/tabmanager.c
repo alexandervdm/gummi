@@ -62,18 +62,19 @@ static gboolean current_tab_replaceable (OpenAct act) {
     return FALSE;
 }
 
-gchar* tabmanager_get_tabname (GuEditor* ec) {
+gchar* tabmanager_get_tabname (GuTabContext* tc) {
     gchar* labeltext;
     gchar* filetext;
     gboolean modified;
 
-    if (ec->filename) {
-        filetext = g_path_get_basename (ec->filename);
+    if (tc->editor->filename) {
+        filetext = g_path_get_basename (tc->editor->filename);
     } else {
-        filetext = g_strdup_printf (_("Unsaved Document %d"), g_unsavednr);
+        filetext = g_strdup_printf (_("Unsaved Document %d"), 
+                                       tc->page->unsavednr);
     }
     
-    modified = editor_buffer_changed (ec);
+    modified = editor_buffer_changed (tc->editor);
     
     labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), filetext);
     g_free (filetext);
@@ -82,7 +83,7 @@ gchar* tabmanager_get_tabname (GuEditor* ec) {
 
 gboolean tabmanager_remove_tab (GuTabContext* tab) {
     gint position = g_list_index (g_tabs, tab);
-    gint total = gtk_notebook_get_n_pages (g_tabnotebook); //TODO: make func
+    gint total = tabmanagergui_get_n_pages ();
 
     if (total == 0) return FALSE;
 

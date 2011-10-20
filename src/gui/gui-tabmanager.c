@@ -57,8 +57,7 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tp->scroll),
                                     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
                                     
-    g_unsavednr = g_unsavednr + 1;
-    gchar* labeltext = tabmanager_get_tabname (editor);
+    gchar* labeltext = tabmanager_get_tabname (tc);
     tabmanagergui_create_label (tp, labeltext);
     g_signal_connect (tp->button, "clicked", 
                       G_CALLBACK (on_menu_close_activate), tc);
@@ -73,12 +72,14 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
 }
 
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
+    static unsigned count = 0;
     GtkRcStyle* rcstyle = NULL;
     GtkWidget* image = NULL;
     GtkHBox* hbox;
 
     tp->labelbox = gtk_event_box_new ();
     hbox = GTK_HBOX (gtk_hbox_new (FALSE, 0));
+    tp->unsavednr = ++count;
     
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (tp->labelbox), FALSE);
     gtk_container_add (GTK_CONTAINER(tp->labelbox), GTK_WIDGET (hbox));
@@ -129,6 +130,10 @@ void tabmanagergui_set_current_page (gint position) {
 
 gint tabmanagergui_get_current_page (void) {
     return gtk_notebook_get_current_page (g_tabnotebook);
+}
+
+gint tabmanagergui_get_n_pages (void) {
+    return gtk_notebook_get_n_pages (g_tabnotebook);
 }
 
 void tabmanagergui_update_label (GuTabPage* tp, const gchar* text) {

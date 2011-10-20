@@ -36,8 +36,6 @@
 #include "editor.h"
 
 #define g_tabnotebook gui->tabmanagergui->notebook
-#define g_unsavednr gui->tabmanagergui->unsavednr
-
 
 #define GU_TAB_PAGE(x) ((GuTabPage*)x)
 typedef struct _GuTabPage GuTabPage;
@@ -48,7 +46,7 @@ struct _GuTabPage {
     GtkLabel* label;
     gint position;
     GtkButton* button;
-    
+    unsigned unsavednr;
     gboolean bold;
 };
 
@@ -78,6 +76,7 @@ gchar* tabmanagergui_get_labeltext (GuTabPage* tp);
 gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec);
 void tabmanagergui_set_current_page (gint position);
 gint tabmanagergui_get_current_page (void);
+gint tabmanagergui_get_n_pages (void);
 void tabmanagergui_update_label (GuTabPage* tp, const gchar* text);
 void tablabel_set_bold_text (GuTabPage* tp);
 
