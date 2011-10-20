@@ -40,6 +40,8 @@
 #define C_RUBBER "rubber"
 #define C_LATEXMK "latexmk"
 
+#define C_CD_TMPDIR g_strdup_printf ("cd \"%s\"%s%s",C_TMPDIR,C_CMDSEP,C_TEXSEC)
+
 
 /* Platform dependant constants : */
 
