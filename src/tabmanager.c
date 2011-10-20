@@ -122,6 +122,7 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
         g_tabs = g_list_append(g_tabs, tc);
         tc->page = tabmanagergui_create_page (tc->editor);
         tabmanagergui_switch_to_page (tc->page->position);
+        pos = tc->page->position;
         g_signal_connect (tc->page->button, "clicked", 
                           G_CALLBACK (on_menu_close_activate), tc);
 

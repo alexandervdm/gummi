@@ -110,7 +110,7 @@ GList* project_list_files (const gchar* content) {
 }
     
 gboolean project_load_files (const gchar* projfile, const gchar* content) {
-    /*
+    
     gint rootpos, i;
     gchar* filename;
 
@@ -132,7 +132,7 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
         }
     }
     projectgui_set_rootfile (rootpos);
-    */
+    
     return TRUE;
 }
 
