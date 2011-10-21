@@ -53,7 +53,7 @@
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
-    l->errormessage = NULL;
+    l->compilelog = NULL;
     l->modified_since_compile = FALSE;
     
     texlive_init ();
@@ -160,8 +160,10 @@ void latex_analyse_errors (GuLatex* lc) {
         g_error_free (err);
         return;
     }
+    
+    if (lc->compilelog == NULL) printf("null\n");
 
-    if (g_regex_match (match_str, lc->errormessage, 0, &match_info)) {
+    if (g_regex_match (match_str, lc->compilelog, 0, &match_info)) {
         gint count = 0;
         while (g_match_info_matches (match_info)) {
             if (count + 1 == BUFSIZ) break;
@@ -175,7 +177,6 @@ void latex_analyse_errors (GuLatex* lc) {
         lc->errorlines[0] = -1;
     g_match_info_free (match_info);
     g_regex_unref (match_str);
-    
 }
 
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
@@ -192,7 +193,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     /* create compile command */
     gchar *command = latex_set_compile_cmd (ec);
 
-    g_free (lc->errormessage);
+    g_free (lc->compilelog);
     memset (lc->errorlines, 0, BUFSIZ);
     
     /* run pdf compilation */
@@ -200,12 +201,14 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     gboolean cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
     
-    lc->errormessage = latex_analyse_log (coutput, filename, basename);
+    lc->compilelog = latex_analyse_log (coutput, filename, basename);
     lc->modified_since_compile = FALSE;
     
     /* find error line */
     if (cerrors) {
-        latex_analyse_errors (lc);
+        if (g_utf8_strlen (lc->compilelog, -1) != 0) {
+            latex_analyse_errors (lc);
+        }
         previewgui_update_statuslight ("gtk-no");
     } else
         previewgui_update_statuslight ("gtk-yes");

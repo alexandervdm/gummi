@@ -42,7 +42,7 @@ struct _GuLatex {
     gchar* typesetter;
     /* use fixed size for errorlines in consider of performance */
     gint errorlines[BUFSIZ];
-    gchar* errormessage;
+    gchar* compilelog;
     gboolean modified_since_compile;
 };
 

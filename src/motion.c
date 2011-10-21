@@ -136,7 +136,7 @@ gpointer motion_compile_thread (gpointer data) {
         if (editor == gummi_get_active_editor()) {
             gdk_threads_enter ();
             editor_apply_errortags (editor, latex->errorlines);
-            errorbuffer_set_text (latex->errormessage);
+            errorbuffer_set_text (latex->compilelog);
 
             if (latex->errorlines[0]) {
                 motion_start_errormode  (mc, "compile_error");
