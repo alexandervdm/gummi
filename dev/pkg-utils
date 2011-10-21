@@ -27,6 +27,9 @@ case $2 in
 	natty)
 		poppler_glib_ver=6
 		;;
+	oneiric)
+		poppler_glib_ver=6
+		;;
 esac
 
 if [ -e configure.ac ]; then
