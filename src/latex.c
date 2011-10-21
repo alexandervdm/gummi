@@ -124,37 +124,26 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
                                         precommand, 
                                         texcmd);
                                         
-    printf("%s\n", combined);
+    //printf("%s\n", combined);
 
     return combined;
 }
 
-gchar* latex_analyse_log (gchar *compile_log) {
-    
+gchar* latex_analyse_log (gchar* log, gchar* filename, gchar* basename) {
     /* Rubber does not post the pdftex compilation output to tty, so we will
      * have to open the log file and retrieve it I guess */
     if (rubber_active()) {
-        gchar* logname = NULL;
-        /* TODO: integrate - retrieve from functions */
-        gchar *filename = g_strdup (gummi_get_active_editor()->filename);
-        gchar *workfile = g_strdup (gummi_get_active_editor()->workfile);
-        gchar *pdffile = g_strdup (gummi_get_active_editor()->pdffile);
-
+        gchar* logpath = NULL;
         if (filename == NULL) {
-            logname = g_strconcat (workfile, ".log", NULL);
-            }
+            logpath = g_strconcat (basename, ".log", NULL);
+        }
         else {
-            logname = g_strdup (pdffile);
-            logname[strlen (logname) -4] = 0;
-            logname = g_strconcat (logname, ".log", NULL);
-            }
-            
-        g_file_get_contents (logname, &compile_log, NULL, NULL);
-        g_free (filename);
-        g_free (workfile);
-        g_free (pdffile);
+            logpath = g_strconcat (C_TMPDIR, C_DIRSEP, 
+                                   g_path_get_basename(basename), ".log", NULL);
+        }
+        g_file_get_contents (logpath, &log, NULL, NULL);
     }
-    return compile_log;
+    return log;
 }
 
             
@@ -191,13 +180,11 @@ void latex_analyse_errors (GuLatex* lc) {
 
 void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
+    gchar* basename = ec->basename;
+    gchar* filename = ec->filename;
 
     const gchar* typesetter = config_get_value ("typesetter");
     if (!external_exists (typesetter)) {
-        /* L_G_ERROR inside the thread freezes up 
-        slog (L_G_ERROR, "Typesetter command \"%s\" not found, setting to "
-                "pdflatex.\n", typesetter);*/
-                
         /* Set to default first detected typesetter */
         config_set_value ("typesetter", "pdflatex");
     }
@@ -213,7 +200,7 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     gboolean cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
     
-    lc->errormessage = latex_analyse_log (coutput);
+    lc->errormessage = latex_analyse_log (coutput, filename, basename);
     lc->modified_since_compile = FALSE;
     
     /* find error line */

@@ -41,6 +41,7 @@
 #define C_LATEXMK "latexmk"
 
 #define C_CD_TMPDIR g_strdup_printf ("cd \"%s\"%s%s",C_TMPDIR,C_CMDSEP,C_TEXSEC)
+#define C_DIRSEP G_DIR_SEPARATOR_S
 
 
 /* Platform dependant constants : */
