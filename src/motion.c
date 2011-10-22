@@ -98,8 +98,6 @@ gpointer motion_compile_thread (gpointer data) {
     latex = gummi_get_latex ();
     pc = gui->previewgui;
     
-    printf("compile\n");
-    
     while (TRUE) {
         if (!g_mutex_trylock (mc->compile_mutex)) continue;
         slog (L_DEBUG, "Compile thread sleeping...\n");

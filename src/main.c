@@ -123,7 +123,6 @@ int main (int argc, char *argv[]) {
     if (external_exists (config_get_value("typesetter"))) {
         typesetter_setup ();
         motion_start_compile_thread (motion);
-        slog (L_DEBUG, "Compile thread started!\n");
     }
     else {
         infoscreengui_enable (gui->infoscreengui, "program_error");
