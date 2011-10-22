@@ -159,7 +159,7 @@ gchar* texlive_get_flags (const gchar* method) {
         flags = tmp;
     }
     
-    if (config_get_value("synctex_enabled")) {
+    if (config_get_value("synctex")) {
         gchar* tmp = g_strconcat(flags, " -synctex=1", NULL);
         g_free(flags);
         flags = tmp;
