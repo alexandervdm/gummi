@@ -32,45 +32,20 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include "environment.h"
 #include "gui/gui-tabmanager.h"
 #include "gui/gui-main.h"
 
 extern GummiGui* gui;
 
-/* Current info/warning messages - TODO: i18n? */
-
-const gchar *compile_error_h = "PDF preview could not initialise.";
-const gchar *compile_error_d = "\
-The active document contains errors. The live preview\n"
-"function will resume automatically once these errors\n"
-"are resolved. Additional information can be found on\n"
-"the Error Output tab.\n";
-
-// TODO: needs better wording
-const gchar *document_error_h = "Document appears to be empty or invalid.";
-const gchar *document_error_d = "\
-The document that is currently active appears to be an\n"
-"an invalid LaTeX file. You can continue working on it,\n"
-"load the default text or use the Project menu to add\n"
-"it to an active project.\n";
-
-// TODO: needs better wording
-const gchar *program_error_h = "Compilation program is missing.";
-const gchar *program_error_d = "\
-The selected compilation program could not be located.\n"
-"Please restore the program or select an alternative\n"
-"typesetter command from the Preferences menu. The\n"
-"live preview function will not resume until Gummi\n"
-"is restarted.\n";
-
-
-
+static const gchar* get_infoheader (int id);
+static const gchar* get_infodetails (int id);
 
 GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuInfoscreenGui* is = g_new0 (GuInfoscreenGui, 1);
-
+    
     is->viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     is->errorpanel =
@@ -116,15 +91,47 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     if (utils_strequal (msg, "compile_error")) {
-        gtk_label_set_text (is->header, compile_error_h);
-        gtk_label_set_text (is->details, compile_error_d);
+        gtk_label_set_text (is->header, get_infoheader(1));
+        gtk_label_set_text (is->details, get_infodetails(1));
     }
-    else if (utils_strequal (msg, "program_error")) {
-        gtk_label_set_text (is->header, program_error_h);
-        gtk_label_set_text (is->details, program_error_d);
+    else if (utils_strequal (msg, "document_error")) {
+        gtk_label_set_text (is->header, get_infoheader(2));
+        gtk_label_set_text (is->details, get_infodetails(2));
     }
     else {
-        gtk_label_set_text (is->header, document_error_h);
-        gtk_label_set_text (is->details, document_error_d);
+        gtk_label_set_text (is->header, get_infoheader(3));
+        gtk_label_set_text (is->details, get_infoheader(3));
     }
 }
+
+static const gchar* get_infoheader (int id) {
+    switch (id) {
+        case 1: return _("PDF preview could not initialise.");
+        case 2: return _("Document appears to be empty or invalid.");
+        case 3: return _("Compilation program is missing.");
+        default: return "This should not have happened, bug!";
+    }
+}
+
+static const gchar* get_infodetails (int id) {
+    switch (id) {
+        case 1: return _(
+        "The active document contains errors. The live preview\n"
+        "function will resume automatically once these errors\n"
+        "are resolved. Additional information is available on\n"
+        "the Build log tab.\n");
+        case 2: return _(
+        "The document that is currently active appears to be an\n"
+        "an invalid LaTeX file. You can continue working on it,\n"
+        "load the default text or use the Project menu to add\n"
+        "it to an active project.\n");
+        case 3: return _(
+        "The selected compilation program could not be located.\n"
+        "Please restore the program or select an alternative\n"
+        "typesetter command from the Preferences menu. The\n"
+        "live preview function will not resume until Gummi\n"
+        "is restarted.\n");
+        default: return "This should not have happened, bug!";
+    }
+}
+
