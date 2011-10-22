@@ -255,13 +255,17 @@ void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
 G_MODULE_EXPORT
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int pagenr, void *data) {
-    /* very important line */
+
+    /* set the active tab/editor pointers */
     tabmanager_set_active_tab (pagenr);
 
+    /* update the title of the mainwindow */
     gui_set_filename_display (g_active_tab, TRUE, FALSE);
     
+    /* clear the build log output window */
+    gui_buildlog_set_text ("");
+    
     previewgui_reset (gui->previewgui);
-
     slog (L_INFO, "Switched to environment at page %d\n", pagenr);
 }
 
@@ -844,7 +848,7 @@ void display_recent_files (GummiGui* gui) {
     }
 }
 
-void errorbuffer_set_text (const gchar *message) {
+void gui_buildlog_set_text (const gchar *message) {
     if (message) {
         GtkTextIter iter;
         gtk_text_buffer_set_text (gui->errorbuff, message, -1);

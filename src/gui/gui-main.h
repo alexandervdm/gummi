@@ -158,7 +158,7 @@ gint check_for_save (void);
 void add_to_recent_list (const gchar* filename);
 void display_recent_files (GummiGui* gui);
 
-void errorbuffer_set_text (const gchar *message);
+void gui_buildlog_set_text (const gchar *message);
 void statusbar_set_message (const gchar* message);
 gboolean statusbar_del_message (void* user);
 
