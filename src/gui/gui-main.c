@@ -537,7 +537,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
                 _("error compiling bibliography file"));
     }
-    check_preview_timer ();
+    motion_force_compile (gummi->motion);
 }
 
 G_MODULE_EXPORT
