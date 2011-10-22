@@ -343,7 +343,7 @@ void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
     else {
         statusbar_set_message (_("Error running Makeindex.."));
     }
-    check_preview_timer ();
+    motion_force_compile (gummi->motion);
 }
 
 

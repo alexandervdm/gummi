@@ -51,10 +51,13 @@ GuMotion* motion_init (void);
 void motion_start_compile_thread (GuMotion* m);
 void motion_stop_compile_thread (GuMotion* m);
 gboolean motion_do_compile (gpointer user);
+void motion_force_compile (GuMotion *mc);
 gpointer motion_compile_thread (gpointer data);
 gboolean motion_idle_cb (gpointer user);
 void motion_start_timer (GuMotion* mc);
 void motion_stop_timer (GuMotion* mc);
+
+
 
 void motion_start_errormode (GuMotion *mc, const gchar *msg);
 void motion_stop_errormode (GuMotion *mc);

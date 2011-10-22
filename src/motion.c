@@ -45,6 +45,7 @@
 #include "utils.h"
 
 extern GummiGui* gui;
+extern Gummi* gummi;
 
 GuMotion* motion_init (void) {
     GuMotion* m = g_new0 (GuMotion, 1);
@@ -96,6 +97,8 @@ gpointer motion_compile_thread (gpointer data) {
 
     latex = gummi_get_latex ();
     pc = gui->previewgui;
+    
+    printf("compile\n");
     
     while (TRUE) {
         if (!g_mutex_trylock (mc->compile_mutex)) continue;
@@ -153,6 +156,13 @@ gpointer motion_compile_thread (gpointer data) {
             gdk_threads_leave ();
         }
     }
+}
+
+void motion_force_compile (GuMotion *mc) {
+    /* sort-of signal to force a compile run after certain actions that
+     * don't trigger the regular editor content change signals */
+    gummi->latex->modified_since_compile = TRUE;
+    motion_start_timer (gummi->motion);
 }
 
 void motion_start_errormode (GuMotion *mc, const gchar *msg) {
