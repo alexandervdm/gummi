@@ -53,6 +53,23 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name column1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Always</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Only when syncing preview with editor</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Never</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkAdjustment" id="pdfcompile_time">
     <property name="lower">1</property>
     <property name="upper">60</property>
@@ -1441,6 +1458,224 @@
               </packing>
             </child>
             <child>
+              <object class="GtkVBox" id="top_viewbox1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">12</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkVBox" id="box_pdfcompile">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkLabel" id="label13">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">PDF Compiling</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="padding">5</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkVBox" id="box_compile">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkHBox" id="compile_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkCheckButton" id="compile_status">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="toggle_compilestatus" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">11</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="combo_compilescheme">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="model">list_compileschemes</property>
+                                <property name="active">0</property>
+                                <signal name="changed" handler="on_combo_compilescheme_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSpinButton" id="compile_timer">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="invisible_char">●</property>
+                                <property name="xalign">0.5</property>
+                                <property name="invisible_char_set">True</property>
+                                <property name="primary_icon_activatable">False</property>
+                                <property name="secondary_icon_activatable">False</property>
+                                <property name="primary_icon_sensitive">True</property>
+                                <property name="secondary_icon_sensitive">True</property>
+                                <property name="adjustment">pdfcompile_time</property>
+                                <signal name="value-changed" handler="on_compile_value_changed" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">10</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label14">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">seconds</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="padding">5</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkVBox" id="box_animatescroll">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkLabel" id="label45">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Use animated scroll</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="padding">5</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox16">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkLabel" id="label46">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">    </property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="combo_animated_scroll">
+                            <property name="width_request">300</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="model">liststore1</property>
+                            <property name="active">0</property>
+                            <signal name="changed" handler="on_combo_animated_scroll_changed" swapped="no"/>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="label44">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Preview</property>
+              </object>
+              <packing>
+                <property name="position">5</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkVBox" id="top_miscbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -1598,135 +1833,9 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkVBox" id="box_pdfcompile">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">3</property>
-                    <child>
-                      <object class="GtkLabel" id="label13">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">PDF Compiling</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="padding">5</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkVBox" id="box_compile">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkHBox" id="compile_box">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkCheckButton" id="compile_status">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="draw_indicator">True</property>
-                                <signal name="toggled" handler="toggle_compilestatus" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">11</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="combo_compilescheme">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="model">list_compileschemes</property>
-                                <property name="active">0</property>
-                                <signal name="changed" handler="on_combo_compilescheme_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSpinButton" id="compile_timer">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="xalign">0.5</property>
-                                <property name="invisible_char_set">True</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                                <property name="adjustment">pdfcompile_time</property>
-                                <signal name="value-changed" handler="on_compile_value_changed" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">10</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="label14">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">seconds</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="padding">5</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
               </object>
               <packing>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
             <child type="tab">
@@ -1736,7 +1845,7 @@
                 <property name="label" translatable="yes">Miscellaneous</property>
               </object>
               <packing>
-                <property name="position">5</property>
+                <property name="position">6</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>

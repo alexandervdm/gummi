@@ -238,6 +238,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     if (utils_strequal (config_get_value("zoommode"), "")) {
         config_set_value("zoommode", "pagewidth");
     }
+    
+    if (utils_strequal (config_get_value("animated_scroll"), "")) {
+        config_set_value("animated_scroll", "always");
+    }
 
     if (strcmp (config_get_value ("pagelayout"), "single_page") == 0) {
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
@@ -1171,7 +1175,12 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
             to_y = to_y - (adjpage_height - target_height)/2;
             to_x = to_x - (adjpage_width - target_width)/2;
             
-            previewgui_scroll_to_xy(pc, to_x, to_y);
+            if (0 == strcmp (config_get_value ("animated_scroll"), "always") || 
+                0 == strcmp (config_get_value ("animated_scroll"), "autosync")) {
+                previewgui_scroll_to_xy(pc, to_x, to_y);
+            } else {
+                previewgui_goto_xy(pc, to_x, to_y);
+            }
         }
     }
 
@@ -1380,7 +1389,12 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
     newpage -= 1;
     newpage = MAX(newpage, 0);
     newpage = MIN(newpage, gui->previewgui->n_pages);
-    previewgui_scroll_to_page (gui->previewgui, newpage);
+    
+    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+        previewgui_scroll_to_page (gui->previewgui, newpage);
+    } else {
+        previewgui_goto_page (gui->previewgui, newpage);
+    }
 
 }
 
@@ -1389,7 +1403,11 @@ void on_next_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    previewgui_scroll_to_page (pc, pc->next_page);
+    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+        previewgui_scroll_to_page (pc, pc->next_page);
+    } else {
+        previewgui_goto_page (pc, pc->next_page);
+    }
 }
 
 G_MODULE_EXPORT
@@ -1397,7 +1415,11 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    previewgui_scroll_to_page (pc, pc->prev_page);
+    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+        previewgui_scroll_to_page (pc, pc->prev_page);
+    } else {
+        previewgui_goto_page (pc, pc->prev_page);
+    }
 }
 
 G_MODULE_EXPORT
@@ -1633,14 +1655,14 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
                 case GDK_SCROLL_UP:
 
                     if (pc->prev_page != -1) {
-                        previewgui_scroll_to_page (pc, pc->prev_page);
+                        previewgui_goto_page (pc, pc->prev_page);
                     }
 
                     break;
                 case GDK_SCROLL_DOWN:
 
                     if (pc->next_page != -1) {
-                        previewgui_scroll_to_page (pc, pc->next_page);
+                        previewgui_goto_page (pc, pc->next_page);
                     }
                     break;
 

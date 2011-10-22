@@ -71,6 +71,8 @@ struct _GuPrefsGui {
     GtkToggleButton* method_texdvipdf;
     GtkToggleButton* method_texdvipspdf;    
 
+    GtkComboBox* combo_animated_scroll;
+    
     GtkVBox* view_box;
     GtkHBox* editor_box;
     GtkHBox* compile_box;
@@ -96,6 +98,7 @@ void on_editor_font_set (GtkWidget* widget, void* user);
 void on_combo_typesetter_changed (GtkWidget* widget, void* user);
 void on_combo_language_changed (GtkWidget* widget, void* user);
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user);
+void on_combo_animated_scroll_changed (GtkWidget* widget, void* user);
 void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user);
 
 

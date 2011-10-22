@@ -58,6 +58,7 @@ static void set_tab_editor_settings (GuPrefsGui* prefs);
 static void set_tab_fontcolor_settings (GuPrefsGui* prefs);
 static void set_tab_defaulttext_settings (GuPrefsGui* prefs);
 static void set_tab_compilation_settings (GuPrefsGui* prefs);
+static void set_tab_preview_settings (GuPrefsGui* prefs);
 static void set_tab_miscellaneous_settings (GuPrefsGui* prefs);
 
 
@@ -135,6 +136,9 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->opt_synctex = 
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "opt_synctex"));
         
+    p->combo_animated_scroll =
+        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_animated_scroll"));
+        
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
     p->compile_box = GTK_HBOX (gtk_builder_get_object (builder, "compile_box"));
@@ -200,6 +204,7 @@ static void set_all_tab_settings (GuPrefsGui* prefs) {
     set_tab_fontcolor_settings (prefs);
     set_tab_defaulttext_settings (prefs);
     set_tab_compilation_settings (prefs);
+    set_tab_preview_settings (prefs);
     set_tab_miscellaneous_settings (prefs);
 }
 
@@ -318,6 +323,29 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     }
 }
 
+static void set_tab_preview_settings (GuPrefsGui* prefs) {
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
+            TO_BOOL (config_get_value ("compile_status")));
+
+    if (!config_get_value ("compile_status"))
+        gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
+        
+    gtk_spin_button_set_value (prefs->compile_timer,
+                               atoi (config_get_value ("compile_timer")));
+    /* compile scheme */
+    if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
+        gtk_combo_box_set_active (prefs->compile_scheme, 1);
+                               
+    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+        gtk_combo_box_set_active (prefs->combo_animated_scroll, 0);
+    } else if (0 == strcmp (config_get_value ("animated_scroll"), "never")) {
+        gtk_combo_box_set_active (prefs->combo_animated_scroll, 2);
+    } else {
+        gtk_combo_box_set_active (prefs->combo_animated_scroll, 1);
+    }
+}
+
 static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
     GtkTreeModel* combo_lang = 0;
     GtkTreeIter iter;
@@ -339,20 +367,10 @@ static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
         ++count;
         valid = gtk_tree_model_iter_next (combo_lang, &iter);
     }    
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
-            TO_BOOL (config_get_value ("compile_status")));
+    
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
             TO_BOOL (config_get_value ("autoexport")));
 
-    if (!config_get_value ("compile_status"))
-        gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
-        
-    gtk_spin_button_set_value (prefs->compile_timer,
-                               atoi (config_get_value ("compile_timer")));
-    /* compile scheme */
-    if (0 == strcmp (config_get_value ("compile_scheme"), "real_time"))
-        gtk_combo_box_set_active (prefs->compile_scheme, 1);
-                               
 }
 
 void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
@@ -700,6 +718,13 @@ void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
     slog (L_INFO, "compile scheme set to %s\n", scheme[selected]);
     config_set_value ("compile_scheme", scheme[selected]);
     previewgui_reset (gui->previewgui);
+}
+
+G_MODULE_EXPORT
+void on_combo_animated_scroll_changed (GtkWidget* widget, void* user) {
+    gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+    const gchar scheme[][16] = { "always", "autosync", "never" };
+    config_set_value ("animated_scroll", scheme[selected]);
 }
 
 G_MODULE_EXPORT
