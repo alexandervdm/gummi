@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-20 19:30+0200\n"
+"POT-Creation-Date: 2011-10-22 10:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -379,217 +379,229 @@ msgid "References:"
 msgstr "Referenties:"
 
 #: ../data/ui/gummi.glade.h:99
+msgid ""
+"Remove the selected document\n"
+"from the active project."
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:101
 msgid "Replace _All"
 msgstr "Alles vervangen"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:102
 msgid "Replace with:"
 msgstr "Vervangen door:"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:103
 msgid "Rows:"
 msgstr "Rijen:"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:104
 msgid "Run _BibTeX"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:105
 msgid "Run _Makeindex"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:106
 msgid "Save"
 msgstr "Opslaan"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:107
 msgid "Save _As..."
 msgstr "Opslaan als"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:108
 msgid "Save early.. save often!"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:109
 #, fuzzy
 msgid "Save the current file"
 msgstr "Creer nieuw document"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:110
 msgid "Scale:"
 msgstr "Schaal:"
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:111
 msgid "Search backwards"
 msgstr "Achterwaards zoeken"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:112
 msgid "Search for:"
 msgstr "Zoeken naar:"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:113
+msgid ""
+"Select a document to add\n"
+"to the active project. "
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:115
 msgid "Set Compilation Options"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:116
 #, fuzzy
 msgid "Single Page"
 msgstr "Enkele lijn"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:117
 msgid "Single line"
 msgstr "Enkele lijn"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:118
 msgid "Style:"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:119
 msgid "Table"
 msgstr "Tabel"
 
-#: ../data/ui/gummi.glade.h:116
+#: ../data/ui/gummi.glade.h:120
 #, fuzzy
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
 msgstr "Deze functie vereist een actieve\n"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:122
 #, fuzzy
 msgid "Unbracketed"
 msgstr "Bracket:"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:123
 msgid "Underline text"
 msgstr "Onderstreep tekst"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:124
 #, fuzzy
 msgid "Words in:"
 msgstr "Vette tekst"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:125
 #, fuzzy
 msgid "_Document"
 msgstr "Compileer"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:126
 msgid "_Edit"
 msgstr "Wijzig"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:127
 msgid "_Export to PDF"
 msgstr "Exporteer naar PDF"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:128
 msgid "_File"
 msgstr "Bestand"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:129
 msgid "_Fullscreen"
 msgstr "Volledig scherm"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:130
 msgid "_Help"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:127
+#: ../data/ui/gummi.glade.h:131
 #, fuzzy
 msgid "_Open..."
 msgstr "Openen"
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:132
 msgid "_Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:129
+#: ../data/ui/gummi.glade.h:133
 msgid "_Replace"
 msgstr "Vervang"
 
-#: ../data/ui/gummi.glade.h:130
+#: ../data/ui/gummi.glade.h:134
 msgid "_Right Pane"
 msgstr "Zijpaneel"
 
-#: ../data/ui/gummi.glade.h:131
+#: ../data/ui/gummi.glade.h:135
 msgid "_Search"
 msgstr "Zoeken"
 
-#: ../data/ui/gummi.glade.h:132
+#: ../data/ui/gummi.glade.h:136
 msgid "_Statusbar"
 msgstr "Statusbalk"
 
-#: ../data/ui/gummi.glade.h:133
+#: ../data/ui/gummi.glade.h:137
 msgid "_Toolbar"
 msgstr "Werkbalk"
 
-#: ../data/ui/gummi.glade.h:134
+#: ../data/ui/gummi.glade.h:138
 msgid "_View"
 msgstr "Bekijk"
 
-#: ../data/ui/gummi.glade.h:135
+#: ../data/ui/gummi.glade.h:139
 #, fuzzy
 msgid "filter:"
 msgstr "Bestand:"
 
-#: ../data/ui/gummi.glade.h:136
+#: ../data/ui/gummi.glade.h:140
 msgid "float captions"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:137
+#: ../data/ui/gummi.glade.h:141
 msgid "floats"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:138
+#: ../data/ui/gummi.glade.h:142
 msgid "headers"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:139
+#: ../data/ui/gummi.glade.h:143
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:140 ../src/gui/gui-main.c:563
+#: ../data/ui/gummi.glade.h:144 ../src/gui/gui-main.c:563
 msgid "no bibliography file detected"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../data/ui/gummi.glade.h:141 ../src/gui/gui-main.c:564
+#: ../data/ui/gummi.glade.h:145 ../src/gui/gui-main.c:564
 msgid "none"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:146
 msgid "of 0"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:147
 msgid "shouldnotseeme"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:148
 #, fuzzy
 msgid "text"
 msgstr "Vette tekst"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:149
 msgid "toolbutton1"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:150
 msgid "toolbutton2"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:147
+#: ../data/ui/gummi.glade.h:151
 msgid "toolbutton3"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:152
 msgid "toolbutton5"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:153
 msgid "toolbutton6"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150
+#: ../data/ui/gummi.glade.h:154
 msgid "toolbutton7"
 msgstr ""
 
@@ -927,7 +939,7 @@ msgstr ""
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:353 ../src/latex.c:272
+#: ../src/gui/gui-main.c:353 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
@@ -1025,7 +1037,7 @@ msgstr ""
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/latex.c:280
+#: ../src/latex.c:270
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"
@@ -1060,6 +1072,11 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Onderschrift:"
+
+#: ../src/tabmanager.c:73
+#, c-format
+msgid "Unsaved Document %d"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Include document"

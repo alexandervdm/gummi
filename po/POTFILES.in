@@ -55,3 +55,5 @@ src/configfile.h
 src/iofunctions.h
 src/environment.c
 src/template.h
+src/tabmanager.c
+src/tabmanager.h
