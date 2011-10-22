@@ -1822,7 +1822,7 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Use SyncTeX to scroll preview to the part of the document that was last edited.</property>
                         <property name="use_action_appearance">False</property>
-                        <property name="label" translatable="yes">Sync Preview to Editor</property>
+                        <property name="label" translatable="yes">Sync Preview with Editor</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_menu_autosync_toggled" swapped="no"/>
                       </object>
@@ -3375,9 +3375,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
