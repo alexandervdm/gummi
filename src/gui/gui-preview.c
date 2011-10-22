@@ -161,8 +161,6 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
     p->combo_sizes =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_sizes"));
-    p->tool_autosync = 
-        GTK_TOGGLE_TOOL_BUTTON(gtk_builder_get_object (builder, "tool_autosync"));
     p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
@@ -249,29 +247,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
     }
     
-    if (strcmp (config_get_value ("autosync"), "true") == 0) {
-         gtk_toggle_tool_button_set_active(p->tool_autosync, TRUE);
-    } else  {
-         gtk_toggle_tool_button_set_active(p->tool_autosync, FALSE);
-    }
-    on_tool_autosync_toggled(p->tool_autosync, NULL);
-    g_signal_connect (p->tool_autosync, "toggled",
-                      G_CALLBACK (on_tool_autosync_toggled), NULL);
-    
     p->sync_nodes = NULL;
 
     slog (L_INFO, "using libpoppler %s\n", poppler_get_version ());
     return p;
-}
-
-G_MODULE_EXPORT
-static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
-                                                        gpointer user_data) {
-    if (gtk_toggle_tool_button_get_active(tool_autosync)) {
-        config_set_value("autosync", "true");
-    } else {
-        config_set_value("autosync", "true");
-    }
 }
 
 inline static gint get_document_margin(GuPreviewGui* pc) {
@@ -871,7 +850,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
 
     previewgui_load_document(pc, TRUE);
 
-    if (gtk_toggle_tool_button_get_active(pc->tool_autosync) && 
+    if (config_get_value ("synctex") && config_get_value ("autosync") && 
             synctex_run_parser(pc, sync_to, tex_file)) {
         
         SyncNode *node;

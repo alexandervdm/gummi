@@ -1769,7 +1769,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="menu8">
+              <object class="GtkMenuItem" id="menu_view">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
@@ -1814,6 +1814,17 @@
                       <object class="GtkSeparatorMenuItem" id="menuitem1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_autosync">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Use SyncTeX to scroll preview to the part of the document that was last edited.</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="label" translatable="yes">Sync Preview to Editor</property>
+                        <property name="use_underline">True</property>
+                        <signal name="toggled" handler="on_menu_autosync_toggled" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -2336,21 +2347,6 @@ active document to be saved. </property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-media-pause</property>
                     <signal name="toggled" handler="on_tool_previewoff_toggled" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToggleToolButton" id="tool_autosync">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="tooltip_text" translatable="yes">Always scroll preview to last change.</property>
-                    <property name="use_action_appearance">False</property>
-                    <property name="label" translatable="yes">toolbutton1</property>
-                    <property name="use_underline">True</property>
-                    <property name="stock_id">gtk-jump-to</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

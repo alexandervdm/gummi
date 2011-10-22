@@ -206,6 +206,15 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
         gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
+    
+    GtkCheckMenuItem *menu_autosync =
+        GTK_WIDGET(gtk_builder_get_object (builder, "menu_autosync"));
+    if (config_get_value ("autosync")) {
+        gtk_check_menu_item_set_active(menu_autosync, TRUE);
+    } else  {
+        config_set_value ("autosync", "False");
+        gtk_check_menu_item_set_active(menu_autosync, FALSE);
+    }
 
     if (!config_get_value ("compile_status"))
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
@@ -232,6 +241,15 @@ void gui_main (GtkBuilder* builder) {
     gdk_threads_enter();
     gtk_main ();
     gdk_threads_leave();
+}
+
+G_MODULE_EXPORT
+void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
+    if (gtk_check_menu_item_get_active(menu_autosync)) {
+        config_set_value("autosync", "True");
+    } else {
+        config_set_value("autosync", "False");
+    }
 }
 
 G_MODULE_EXPORT

@@ -89,6 +89,7 @@ const gchar config_str[] =
 "\n"
 "[CompileOpts]\n"
 "shellescape = True\n"
+"synctex = True\n"
 "\n"
 "[Misc]\n"
 "recent1 = __NULL__\n"
@@ -153,6 +154,12 @@ void config_set_default (void) {
     config_load ();
 }
 
+/**
+ *  Returns the String assigned to a config parameter.
+ *  If the String is "False", NULL is returned, thus in the case of a boolean 
+ *  parameter it is possible to write
+ *      if (config_get_value("parameter_name")) {...}
+ */
 const gchar* config_get_value (const gchar* term) {
     gchar* ret  = NULL;
     slist* index = slist_find (config_head, term, FALSE, TRUE);

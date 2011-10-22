@@ -132,6 +132,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         
     p->opt_shellescape = 
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "opt_shellescape"));
+    p->opt_synctex = 
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "opt_synctex"));
         
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
@@ -307,6 +309,12 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
         gtk_toggle_button_set_active (prefs->opt_shellescape, FALSE);
     else {
         gtk_toggle_button_set_active (prefs->opt_shellescape, TRUE);
+    }
+    
+    if (!config_get_value("synctex"))
+        gtk_toggle_button_set_active (prefs->opt_synctex, FALSE);
+    else {
+        gtk_toggle_button_set_active (prefs->opt_synctex, TRUE);
     }
 }
 
@@ -661,6 +669,10 @@ void toggle_shellescape (GtkToggleButton* widget, void* user) {
     config_set_value ("shellescape", newval? "True": "False");
 }
 
+void on_synctex_toggled (GtkToggleButton* widget, void* user) {
+    gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    config_set_value ("synctex", newval? "True": "False");
+}
 
 G_MODULE_EXPORT
 void on_combo_language_changed (GtkWidget* widget, void* user) {

@@ -140,6 +140,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user);
 void on_button_template_close_clicked (GtkWidget* widget, void* user);
 void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
         void* user);
+void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user);
 
 void on_button_biblio_compile_clicked (GtkWidget* widget, void* user);
 void on_button_biblio_detect_clicked (GtkWidget* widget, void* user);

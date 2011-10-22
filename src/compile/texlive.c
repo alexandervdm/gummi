@@ -149,16 +149,21 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
 }
 
 gchar* texlive_get_flags (const gchar* method) {
-    gchar* defaults = g_strdup_printf("-interaction=nonstopmode "
+    gchar* flags = g_strdup_printf("-interaction=nonstopmode "
                                       "-file-line-error "
-                                      "-halt-on-error "
-                                      "-synctex=1");
+                                      "-halt-on-error");
                                           
     if (!config_get_value("shellescape")) {
-        gchar* optflags = g_strdup_printf("%s %s", 
-                                      defaults, 
-                                      "--no-shell-escape");
-        return optflags;
+        gchar* tmp = g_strconcat(flags, " --no-shell-escape", NULL);
+        g_free(flags);
+        flags = tmp;
     }
-    return defaults;
+    
+    if (config_get_value("synctex_enabled")) {
+        gchar* tmp = g_strconcat(flags, " -synctex=1", NULL);
+        g_free(flags);
+        flags = tmp;
+    }
+    
+    return flags;
 }
