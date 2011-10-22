@@ -108,6 +108,7 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
         gboolean matchcase);
 void editor_get_current_iter (GuEditor* ec, GtkTextIter* current);
 inline void editor_scroll_to_cursor (GuEditor* ec);
+void editor_scroll_to_line (GuEditor* ec, gint line);
 void editor_undo_change (GuEditor* ec);
 void editor_redo_change (GuEditor* ec);
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);

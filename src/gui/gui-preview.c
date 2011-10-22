@@ -123,6 +123,9 @@ static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
 
 static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
                                          gpointer   user_data);
+                                         
+                                         
+static gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user);
 
 /* Functions for layout and painting */
 static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x);
@@ -199,7 +202,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->on_expose_handler = g_signal_connect (p->drawarea, "expose-event", G_CALLBACK (on_expose), p);
 
     g_signal_connect (p->drawarea, "button-press-event",
-                      G_CALLBACK (on_key_press), p);
+                      G_CALLBACK (on_button_pressed), p);
     g_signal_connect (p->drawarea, "motion-notify-event",
                       G_CALLBACK (on_motion), p);
 
@@ -1672,11 +1675,81 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
     return FALSE;
 }
 
+static void draw2page(GuPreviewGui* pc, gint dx, gint dy, gint *pp, gint *px, gint *py) {
+
+    *px = dx;
+    *py = dy;
+    *pp = 0;
+
+    gint adjpage_width = gtk_adjustment_get_page_size(pc->hadj);
+    gint adjpage_height = gtk_adjustment_get_page_size(pc->vadj);
+
+    *px -= MAX(get_document_margin(pc),
+                          (adjpage_width - pc->width_scaled) / 2);
+    
+    if (is_continuous(pc)) {
+        *py -= MAX(get_document_margin(pc),
+                               (adjpage_height - pc->height_scaled) / 2);
+
+        int i;
+        for (i=0; i < pc->n_pages-1; i++) {
+            gint pheight = get_page_height(pc, i)*pc->scale + get_page_margin(pc);
+            if (*py > pheight) {
+                *py -= pheight;
+                *pp += 1;
+            }
+        }
+    } else {
+        gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
+        *py -= MAX(get_document_margin(pc), (adjpage_height-height)/2);
+        *pp += pc->current_page;
+    }
+    
+    //TODO Check if we still are inside a page...
+}
+
 G_MODULE_EXPORT
-gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user) {
+gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
+
+    // Check where the user clicked
+    gint page;
+    gint x;
+    gint y;
+    draw2page(pc, e->x, e->y, &page, &x, &y);
+    
+    if (e->state & GDK_CONTROL_MASK) {
+    
+        
+        slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
+    
+        synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, "/tmp/", 1);
+        
+        if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
+            synctex_node_t node;
+            /*
+             * SyncTeX can return several nodes. It seems best to use the last one, as
+             * this one rarely is below (usually slighly above) the edited line.
+             */
+             
+            if ((node = synctex_next_result(sync_scanner))) {
+            
+                const gchar *file = synctex_scanner_get_name(sync_scanner, synctex_node_tag(node));
+                gint line = synctex_node_line(node);
+            
+                slog(L_DEBUG, "File \"%s\", Line %i\n", file, line);
+                
+                // FIXME: Go to the editor containing the file "file"!
+                editor_scroll_to_line(gummi_get_active_editor(), line-1);
+                
+            }
+        }
+
+        synctex_scanner_free(sync_scanner);
+    
+    }
 
     pc->prev_x = e->x;
     pc->prev_y = e->y;

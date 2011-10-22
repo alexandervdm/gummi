@@ -152,7 +152,6 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user);
 gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user);
 gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user);
 gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user);
-gboolean on_key_press (GtkWidget* w, GdkEventButton* e, void* user);
 gboolean on_scroll_child(GtkScrolledWindow *scrolledwindow, GtkScrollType type,
                          gboolean isHorizontal, gpointer *user);
 void on_adj_changed(GtkAdjustment *adjustment, gpointer user);

@@ -641,6 +641,17 @@ void editor_scroll_to_cursor (GuEditor* ec) {
                                  0.25, FALSE, 0.0, 0.0);
 }
 
+void editor_scroll_to_line (GuEditor* ec, gint line) {
+    if (ec == NULL) {
+        return;
+    }
+    GtkTextIter iter;
+    gtk_text_buffer_get_iter_at_line(ec_buffer, &iter, line);
+    gtk_text_buffer_place_cursor(ec_buffer, &iter);
+    editor_scroll_to_cursor(ec);
+    ec->sync_to_last_edit = FALSE;
+}
+
 void editor_undo_change (GuEditor* ec) {
     GtkTextIter current;
     if (gtk_source_buffer_can_undo (ec->buffer)) {
