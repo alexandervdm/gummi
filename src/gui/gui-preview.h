@@ -44,21 +44,47 @@
 #define ASCROLL_CONST_A (ASCROLL_CONST_C - 3./2)
 
 
+#define BYTES_PER_PIXEL 4
+
+/**
+ *  These "Layered" Rectangles are just like normal GdkRectangles, except the 
+ *  have a layer assigned. 2 Rectangles can only intersect or be unioned if they
+ *  are on the same layer.
+ * 
+ *  In the future these structs should be used to describe the position of a 
+ *  page. In continuous mode all pages are on the same layer (0). In Paged mode, 
+ *  they are on different layers. The field of view (fov) rectangle, that 
+ *  describes the portion of the preview that is currently visible is on the 
+ *  layer/page that should currently be displayed (0 in continuous mode).
+ */
+typedef struct _LayeredRectangle LayeredRectangle;
+struct _LayeredRectangle {
+    gint x;
+    gint y;
+    gint width;
+    gint height;
+    gint layer;
+};
+
 enum GuPreviewFitMode {
-	FIT_NONE = 0, 
-	FIT_WIDTH, 
-	FIT_HEIGHT, 
-	FIT_BOTH
+    FIT_NONE = 0, 
+    FIT_WIDTH, 
+    FIT_HEIGHT, 
+    FIT_BOTH
 };
 
 #define GU_PREVIEW_PAGE(x) ((GuPreviewPage*)(x))
 typedef struct _GuPreviewPage GuPreviewPage;
 
 struct _GuPreviewPage {
-  cairo_surface_t* rendering;
+    cairo_surface_t* rendering;
     
-	double height;
-	double width;
+    double height;
+    double width;
+    
+    LayeredRectangle inner; // Position of the page itself
+    LayeredRectangle outer; // Position of the page + border & shadow
+    
 };
 
 #define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
@@ -113,6 +139,12 @@ struct _GuPreviewGui {
     PopplerPageLayout pageLayout;
     GuPreviewPage *pages;
     enum GuPreviewFitMode fit_mode;
+    gint cache_size;
+    
+    gint document_width_scaling;
+    gint document_height_scaling;
+    gint document_width_non_scaling;
+    gint document_height_non_scaling;
 
     gint next_page;
     gint prev_page;
@@ -156,6 +188,7 @@ void on_adj_changed(GtkAdjustment *adjustment, gpointer user);
 void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem,gpointer data);
 void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout);
 
+gboolean run_garbage_collector(GuPreviewGui* pc);
 
 
 #endif /* __GUMMI_GUI_PREVIEW_H__ */

@@ -75,6 +75,7 @@ const gchar config_str[] =
 "pagelayout = one_column\n"
 "autosync = true\n"
 "animated_scroll = always\n"
+"cache_size = 150\n"
 "\n"
 "[File]\n"
 "autosaving = False\n"

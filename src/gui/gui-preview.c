@@ -146,6 +146,18 @@ static void synctex_clear_sync_nodes(GuPreviewGui* pc);
 static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
                                                         gpointer user_data);
 
+/**/
+static inline LayeredRectangle get_fov(GuPreviewGui* pc);
+static inline LayeredRectangle* page_inner(GuPreviewGui* pc, gint page);
+static void update_page_positions(GuPreviewGui* pc);
+static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
+                                            const LayeredRectangle *src2,
+                                            LayeredRectangle *dest);
+static gboolean layered_rectangle_union(const LayeredRectangle *src1,
+                                        const LayeredRectangle *src2,
+                                        LayeredRectangle *dest);
+static gboolean remove_page_rendering(GuPreviewGui* pc, gint page);
+
 GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
@@ -241,6 +253,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     
     if (utils_strequal (config_get_value("animated_scroll"), "")) {
         config_set_value("animated_scroll", "always");
+    }
+    
+    if (utils_strequal (config_get_value("cache_size"), "")) {
+        config_set_value("cache_size", "150");
     }
 
     if (strcmp (config_get_value ("pagelayout"), "single_page") == 0) {
@@ -519,6 +535,60 @@ static void update_page_input(GuPreviewGui* pc) {
 
 }
 
+#define page_inner(pc,i) (((pc)->pages + (i))->inner)
+#define page_outer(pc,i) (((pc)->pages + (i))->outer)
+
+static void update_page_positions(GuPreviewGui* pc) {
+
+    LayeredRectangle fov = get_fov(pc);
+    int i;
+
+    if (is_continuous(pc)) {
+        gint y = get_document_margin(pc);
+        
+        for (i=0; i<pc->n_pages; i++) {
+            page_inner(pc, i).y = y;
+            page_inner(pc, i).width = get_page_width(pc, i)*pc->scale;
+            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2, 
+                                       get_document_margin(pc));
+            page_inner(pc, i).height = get_page_height(pc, i)*pc->scale;
+            page_inner(pc, i).layer = 0;
+            
+            y += page_inner(pc, i).height + get_page_margin(pc);
+        }
+        
+        y -= get_page_margin(pc);
+        y += get_document_margin(pc);
+        
+        if (y < fov.height) {
+            gint diff = (fov.height - y) / 2;
+            for (i=0; i<pc->n_pages; i++) {
+                page_inner(pc, i).y += diff;
+            }
+        }
+    } else {
+        
+        for (i=0; i<pc->n_pages; i++) {
+            page_inner(pc, i).height = get_page_height(pc, i)*pc->scale;
+            page_inner(pc, i).width = get_page_width(pc, i)*pc->scale;
+            page_inner(pc, i).y = MAX((fov.height - page_inner(pc, i).height)/2, 
+                                       get_document_margin(pc));
+            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2, 
+                                       get_document_margin(pc));
+            page_inner(pc, i).layer = i;
+        }
+        
+    }
+    
+    for (i=0; i<pc->n_pages; i++) {
+        page_outer(pc, i).x = page_inner(pc, i).x - 1;
+        page_outer(pc, i).y = page_inner(pc, i).y - 1;
+        page_outer(pc, i).width = page_inner(pc, i).width + PAGE_SHADOW_WIDTH;
+        page_outer(pc, i).height = page_inner(pc, i).height + PAGE_SHADOW_WIDTH;
+        page_outer(pc, i).layer = page_inner(pc, i).layer;
+    }
+}
+
 static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
                                          gpointer   user_data) {
     update_page_input(user_data);
@@ -593,10 +663,27 @@ static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
 
     int i;
     for (i = 0; i < pc->n_pages; i++) {
-        cairo_surface_destroy((pc->pages + i)->rendering);
-        (pc->pages + i)->rendering = FALSE;
+        remove_page_rendering(pc, i);
     }
+    
+    if (pc->cache_size != 0) {
+        slog(L_ERROR, "Cleared all page renderings, but cache not empty. Cache size is %iB.\n", pc->cache_size);
+    }
+    
+}
 
+static gboolean remove_page_rendering(GuPreviewGui* pc, gint page) {
+    if ((pc->pages + page)->rendering == NULL) {
+        return FALSE;
+    }
+    //L_F_DEBUG;
+
+    cairo_surface_destroy((pc->pages + page)->rendering);
+    (pc->pages + page)->rendering = NULL;
+    pc->cache_size -= page_inner(pc, page).width * 
+            page_inner(pc, page).height * BYTES_PER_PIXEL; 
+            
+    return TRUE;
 }
 
 static void update_drawarea_size(GuPreviewGui *pc) {
@@ -710,6 +797,7 @@ static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode) {
     }
 
     update_fit_scale(pc);
+    update_page_positions(pc);
 }
 
 static void update_scaled_size(GuPreviewGui* pc) {
@@ -720,6 +808,8 @@ static void update_scaled_size(GuPreviewGui* pc) {
     } else {
         pc->height_scaled = get_page_height(pc, pc->current_page) * pc->scale;
     }
+    
+    
 
     pc->width_scaled = pc->width_pages*pc->scale;
 }
@@ -737,11 +827,14 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     gdouble old_y = (gtk_adjustment_get_value(pc->vadj) + y) /
             (pc->height_scaled + 2*get_document_margin(pc));
 
+    // We have to do this before changing the scale, as otherwise the cache 
+    // size would be calcualted wrong!
+    previewgui_invalidate_renderings(pc);
+
     pc->scale = scale;
 
     update_scaled_size(pc);
-
-    previewgui_invalidate_renderings(pc);
+    update_page_positions(pc);
 
     // TODO: Blocking the expose event is porbably not the best way.
     // It would be great if we could change all 3 porperties(hadj, vadj & scale)
@@ -768,7 +861,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
 
 }
 
-static void previewgui_load_document(GuPreviewGui* pc, gboolean update) {
+static void load_document(GuPreviewGui* pc, gboolean update) {
     //L_F_DEBUG;
 
     previewgui_invalidate_renderings(pc);
@@ -806,7 +899,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     pc->restore_x = -1;
     pc->restore_y = -1;
 
-    previewgui_load_document(pc, FALSE);   
+    load_document(pc, FALSE);   
 
     // This is mainly for debugging - to make sure the boxes in the preview disappear.    
     synctex_clear_sync_nodes(pc);
@@ -852,7 +945,8 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
     /* release mutex and return when poppler doc is damaged or missing */
     if (pc->doc == NULL) goto unlock;
 
-    previewgui_load_document(pc, TRUE);
+    load_document(pc, TRUE);
+    update_page_positions(pc);
 
     if (config_get_value ("synctex") && config_get_value ("autosync") && 
             synctex_run_parser(pc, sync_to, tex_file)) {
@@ -1332,6 +1426,11 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
         PopplerPage* ppage = poppler_document_get_page(pc->doc, page);
         p->rendering = do_render(ppage, pc->scale, p->width, p->height);
         g_object_unref(ppage);
+        pc->cache_size += page_inner(pc, page).width * 
+                page_inner(pc, page).height * BYTES_PER_PIXEL;
+    
+        // Trigger the garbage collector to be run - it will exit if nothing is TBD.    
+        g_idle_add(run_garbage_collector, pc);
     }
 
     return cairo_surface_reference(p->rendering);
@@ -1500,6 +1599,168 @@ static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
     }
     
     cairo_surface_destroy(rendering);
+}
+
+static inline LayeredRectangle get_fov(GuPreviewGui* pc) {
+    LayeredRectangle fov;
+    fov.x = gtk_adjustment_get_value(pc->hadj);
+    fov.y = gtk_adjustment_get_value(pc->vadj);
+    fov.width = gtk_adjustment_get_page_size(pc->hadj); // TODO: Validate this is alsways correct
+    fov.height = gtk_adjustment_get_page_size(pc->vadj);// TODO: Validate this is alsways correct
+    if (is_continuous(pc)) {
+        fov.layer = 0;
+    } else {
+        fov.layer = pc->current_page;
+    }
+    
+    return fov;
+}
+
+/**
+ *  Tests for the intersection of both rectangles src1 and src2.
+ *  If dest is set and there is a intersection, it will be the intersecting, 
+ *  rectangle. If dest is set but src1 and src2 do not intersect, dest's width
+ *  and height will be set to 0. All other values will be undefined. Dest may be
+ *  the same as src1 or src2.
+ *
+ *  Set dest to NULL, if you are only interested in the boolean result.
+ */
+static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
+                                            const LayeredRectangle *src2,
+                                            LayeredRectangle *dest) {
+
+    if (src1 == NULL || src2 == NULL) {
+        if (dest) {
+            dest->width = 0;
+            dest->height = 0;
+        }
+        return FALSE;
+    }
+                                  
+    if (src1->layer == src2->layer) {
+   
+        gint dest_x = MAX (src1->x, src2->x);
+        gint dest_y = MAX (src1->y, src2->y);
+        gint dest_x2 = MIN (src1->x + src1->width, src2->x + src2->width);
+        gint dest_y2 = MIN (src1->y + src1->height, src2->y + src2->height);
+        
+        if (dest_x2 > dest_x && dest_y2 > dest_y) {
+            if (dest) {
+                dest->x = dest_x;
+                dest->y = dest_y;
+                dest->width = dest_x2 - dest_x;
+                dest->height = dest_y2 - dest_y;
+                dest->layer = src1->layer;
+            }
+            return TRUE;
+        }
+    }
+    
+    if (dest) {
+        dest->width = 0;
+        dest->height = 0;
+    }
+    return FALSE;
+}
+
+/**
+ *  Calculates the union of the rectangles src1 and src2.
+ *  If dest is NULL, FALSE will be returned.
+ *  If no union is possible (one of the src's is NULL or they are on different 
+ *  layers), FALSE is returned. If dest's with and height will be 0, all
+ *  other values undefined.
+ *  If a union is possible, it will be saved to dest.
+ */
+static gboolean layered_rectangle_union(const LayeredRectangle *src1,
+                                        const LayeredRectangle *src2,
+                                        LayeredRectangle *dest) {
+
+    if (dest == NULL) {
+        return FALSE;
+    }
+
+    if (src1 == NULL || src2 == NULL || src1->layer != src2->layer) {
+        dest->width = 0;
+        dest->height = 0;
+        return FALSE;
+    }
+            
+    gint dest_x = MIN (src1->x, src2->x);
+    gint dest_y = MIN (src1->y, src2->y);
+    gint dest_x2 = MAX (src1->x + src1->width, src2->x + src2->width);
+    gint dest_y2 = MAX (src1->y + src1->height, src2->y + src2->height);
+    
+    dest->x = dest_x;
+    dest->y = dest_y;
+    dest->width = dest_x2 - dest_x;
+    dest->height = dest_y2 - dest_y;
+    dest->layer = src1->layer;
+    return TRUE;
+}
+
+gboolean run_garbage_collector(GuPreviewGui* pc) {
+    
+    gint max_cache_size = atoi (config_get_value ("cache_size")) * 1024 * 1024;
+    
+    if (pc->cache_size < max_cache_size) {
+        return FALSE;
+    }
+    
+    LayeredRectangle fov = get_fov(pc);
+    
+    gint first = -1;
+    gint last = -1;
+    
+    gint i;
+    for (i=0; i < pc->n_pages; i++) {
+        if (layered_rectangle_intersect(&fov, &(page_inner(pc, i)), NULL)) {
+            if (first == -1) {
+                first = i;
+            }
+            last = i;
+        }
+    }
+    
+    if (first == -1) {
+        slog(L_ERROR, "No pages are shown. Clearing whole cache.\n");
+        previewgui_invalidate_renderings(pc);
+    }
+    
+    gint n=0;
+    gint dist = MAX(first, pc->n_pages - 1 - last);
+    for (; dist > 0; dist--) {
+        gint up = first - dist;
+        if (up >= 0 && up < pc->n_pages) {
+            if (!layered_rectangle_intersect(&fov, &(page_inner(pc, up)), NULL)) {
+                if (remove_page_rendering(pc, up)) {
+                    n += 1;
+                }
+            }
+        }
+        if (pc->cache_size < max_cache_size / 2) {
+            break;
+        }
+        
+        gint down = last + dist;
+        if (down < pc->n_pages && down >= 0) {
+            if (!layered_rectangle_intersect(&fov, &(page_inner(pc, down)), NULL)) {
+                if (remove_page_rendering(pc, down)) {
+                    n += 1;
+                }
+            }
+        }
+        if (pc->cache_size < max_cache_size / 2) {
+            break;
+        }
+    }
+    
+    if (n == 0) {
+        slog(L_DEBUG, "Could not delete any pages from cache. All pages are currently visible.\n");
+    } else {
+        slog(L_DEBUG, "Deleted %i pages from cache.\n", n);
+    }
+        
+    return FALSE;   // We only want this to run once - so always return false!
 }
 
 G_MODULE_EXPORT
@@ -1779,6 +2040,7 @@ gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
 
     update_fit_scale(pc);
+    update_page_positions(pc);
 
     return FALSE;
 }

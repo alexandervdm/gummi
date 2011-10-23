@@ -61,6 +61,7 @@ struct _GuPrefsGui {
     GtkFontButton* editor_font;
     GtkComboBox* compile_scheme;
     GtkSpinButton* compile_timer;
+    GtkSpinButton* spin_cache_size;
     
     GtkToggleButton* typ_pdflatex;
     GtkToggleButton* typ_xelatex;
@@ -99,6 +100,7 @@ void on_combo_typesetter_changed (GtkWidget* widget, void* user);
 void on_combo_language_changed (GtkWidget* widget, void* user);
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user);
 void on_combo_animated_scroll_changed (GtkWidget* widget, void* user);
+void on_cache_size_value_changed(GtkWidget* widget, void* user);
 void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user);
 
 

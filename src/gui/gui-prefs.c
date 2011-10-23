@@ -138,6 +138,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         
     p->combo_animated_scroll =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_animated_scroll"));
+    p->spin_cache_size =
+        GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "spin_cache_size"));
         
     p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
     p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
@@ -344,6 +346,9 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
     } else {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 1);
     }
+    
+    gtk_spin_button_set_value (prefs->spin_cache_size,
+                               atoi (config_get_value ("cache_size")));
 }
 
 static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
@@ -604,6 +609,17 @@ void on_compile_value_changed (GtkWidget* widget, void* user) {
 
     config_set_value("compile_timer", g_ascii_dtostr (buf, 16, (double)newval));
     previewgui_reset (gui->previewgui);
+}
+
+G_MODULE_EXPORT
+void on_cache_size_value_changed(GtkWidget* widget, void* user) {
+    gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+    gchar buf[16];
+
+    config_set_value("cache_size", g_ascii_dtostr (buf, 16, (double)newval));
+    
+     
+    g_idle_add(run_garbage_collector, gui->previewgui);
 }
 
 G_MODULE_EXPORT
