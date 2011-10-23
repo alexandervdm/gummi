@@ -133,6 +133,7 @@ static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble x);
 static void paint_page(cairo_t *cr, GuPreviewGui* pc,
                        gint page, gint x, gint y);
 static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
+static gboolean remove_page_rendering(GuPreviewGui* pc, gint page);
 
 /* Functions for scronizing editor and preview via SyncTeX */
 static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
@@ -146,9 +147,8 @@ static void synctex_clear_sync_nodes(GuPreviewGui* pc);
 static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
                                                         gpointer user_data);
 
-/**/
+/* (Page) Layout functions */
 static inline LayeredRectangle get_fov(GuPreviewGui* pc);
-static inline LayeredRectangle* page_inner(GuPreviewGui* pc, gint page);
 static void update_page_positions(GuPreviewGui* pc);
 static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
                                             const LayeredRectangle *src2,
@@ -156,7 +156,8 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
 static gboolean layered_rectangle_union(const LayeredRectangle *src1,
                                         const LayeredRectangle *src2,
                                         LayeredRectangle *dest);
-static gboolean remove_page_rendering(GuPreviewGui* pc, gint page);
+#define page_inner(pc,i) (((pc)->pages + (i))->inner)
+#define page_outer(pc,i) (((pc)->pages + (i))->outer)
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
@@ -534,9 +535,6 @@ static void update_page_input(GuPreviewGui* pc) {
     update_prev_next_page(pc);
 
 }
-
-#define page_inner(pc,i) (((pc)->pages + (i))->inner)
-#define page_outer(pc,i) (((pc)->pages + (i))->outer)
 
 static void update_page_positions(GuPreviewGui* pc) {
 
