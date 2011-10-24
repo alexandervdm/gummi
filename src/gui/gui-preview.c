@@ -1298,7 +1298,10 @@ void previewgui_goto_page (GuPreviewGui* pc, int page) {
         }
     }
 
-    previewgui_goto_xy(pc, page_offset_x(pc, page, x),
+    //previewgui_goto_xy(pc, page_offset_x(pc, page, x),
+    //                       page_offset_y(pc, page, y));
+    // We do not want to scroll horizontally.
+    previewgui_goto_xy(pc, gtk_adjustment_get_value(pc->hadj),
                            page_offset_y(pc, page, y));
 
     if (!is_continuous(pc)) {
@@ -1327,7 +1330,10 @@ void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
         y += get_page_height(pc, i)*pc->scale + get_page_margin(pc);
     }
 
-    previewgui_scroll_to_xy(pc, page_offset_x(pc, page, x),
+    //previewgui_scroll_to_xy(pc, page_offset_x(pc, page, x),
+    //                       page_offset_y(pc, page, y));
+    // We do not want to scroll horizontally in single paged mode...
+    previewgui_scroll_to_xy(pc, gtk_adjustment_get_value(pc->hadj),
                            page_offset_y(pc, page, y));
 }
 
