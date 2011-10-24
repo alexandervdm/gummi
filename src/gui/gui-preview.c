@@ -922,8 +922,10 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     }
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
 
-
-    previewgui_goto_page (pc, 0);
+    // Dion: I believe this line caused Bug #252 
+    // It was only for the case where the first page is not at the top left 
+    // (it is not as wide as the others or we are in two paged layout).
+    //previewgui_goto_page (pc, 0);
 }
 
 void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
