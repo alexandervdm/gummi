@@ -100,7 +100,7 @@ void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     }
     else {
         gtk_label_set_text (is->header, get_infoheader(3));
-        gtk_label_set_text (is->details, get_infoheader(3));
+        gtk_label_set_text (is->details, get_infodetails(3));
     }
 }
 
