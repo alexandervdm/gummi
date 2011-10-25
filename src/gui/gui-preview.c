@@ -144,8 +144,6 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node);
 static SyncNode* synctex_one_node_found(GuPreviewGui* pc);
 static void synctex_merge_nodes(GuPreviewGui* pc);
 static void synctex_clear_sync_nodes(GuPreviewGui* pc);
-static void on_tool_autosync_toggled (GtkToggleToolButton *tool_autosync,
-                                                        gpointer user_data);
 
 /* (Page) Layout functions */
 static inline LayeredRectangle get_fov(GuPreviewGui* pc);
@@ -1288,7 +1286,6 @@ void previewgui_goto_page (GuPreviewGui* pc, int page) {
     previewgui_set_current_page(pc, page);
 
     gint i;
-    gdouble x = 0;
     gdouble y = 0;
 
     if (!is_continuous(pc)) {
@@ -1300,7 +1297,7 @@ void previewgui_goto_page (GuPreviewGui* pc, int page) {
         }
     }
 
-    //previewgui_goto_xy(pc, page_offset_x(pc, page, x),
+    //previewgui_goto_xy(pc, page_offset_x(pc, page, 0),
     //                       page_offset_y(pc, page, y));
     // We do not want to scroll horizontally.
     previewgui_goto_xy(pc, gtk_adjustment_get_value(pc->hadj),
@@ -1326,13 +1323,12 @@ void previewgui_scroll_to_page (GuPreviewGui* pc, int page) {
     previewgui_set_current_page(pc, page);
 
     gint i;
-    gdouble x = 0;
     gdouble y = 0;
     for (i=0; i < page; i++) {
         y += get_page_height(pc, i)*pc->scale + get_page_margin(pc);
     }
 
-    //previewgui_scroll_to_xy(pc, page_offset_x(pc, page, x),
+    //previewgui_scroll_to_xy(pc, page_offset_x(pc, page, 0),
     //                       page_offset_y(pc, page, y));
     // We do not want to scroll horizontally in single paged mode...
     previewgui_scroll_to_xy(pc, gtk_adjustment_get_value(pc->hadj),
@@ -1436,7 +1432,7 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
                 page_inner(pc, page).height * BYTES_PER_PIXEL;
     
         // Trigger the garbage collector to be run - it will exit if nothing is TBD.    
-        g_idle_add(run_garbage_collector, pc);
+        g_idle_add( (GSourceFunc) run_garbage_collector, pc);
     }
 
     return cairo_surface_reference(p->rendering);
@@ -1671,36 +1667,42 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
 
 /**
  *  Calculates the union of the rectangles src1 and src2.
- *  If dest is NULL, FALSE will be returned.
- *  If no union is possible (one of the src's is NULL or they are on different 
- *  layers), FALSE is returned. If dest's with and height will be 0, all
- *  other values undefined.
- *  If a union is possible, it will be saved to dest.
+ *
+ *  Returns TRUE if both src rectangles are defined and on the same layer.
+ *  If dest is not NULL, it will be the union of both rectangles, if however the
+ *  src rectangles are on different layers, dest's layer will be undefined.
  */
 static gboolean layered_rectangle_union(const LayeredRectangle *src1,
                                         const LayeredRectangle *src2,
                                         LayeredRectangle *dest) {
 
-    if (dest == NULL) {
+    if (src1 == NULL || src2 == NULL) {
+        if (dest) {
+            dest->width = 0;
+            dest->height = 0;
+        }
         return FALSE;
     }
-
-    if (src1 == NULL || src2 == NULL || src1->layer != src2->layer) {
-        dest->width = 0;
-        dest->height = 0;
-        return FALSE;
-    }
-            
-    gint dest_x = MIN (src1->x, src2->x);
-    gint dest_y = MIN (src1->y, src2->y);
-    gint dest_x2 = MAX (src1->x + src1->width, src2->x + src2->width);
-    gint dest_y2 = MAX (src1->y + src1->height, src2->y + src2->height);
     
-    dest->x = dest_x;
-    dest->y = dest_y;
-    dest->width = dest_x2 - dest_x;
-    dest->height = dest_y2 - dest_y;
-    dest->layer = src1->layer;
+    if (dest) {
+    
+        gint dest_x = MIN (src1->x, src2->x);
+        gint dest_y = MIN (src1->y, src2->y);
+        gint dest_x2 = MAX (src1->x + src1->width, src2->x + src2->width);
+        gint dest_y2 = MAX (src1->y + src1->height, src2->y + src2->height);
+    
+        dest->x = dest_x;
+        dest->y = dest_y;
+        dest->width = dest_x2 - dest_x;
+        dest->height = dest_y2 - dest_y;
+        if (src1->layer == src2->layer) {
+            dest->layer = src1->layer;
+        }
+    }
+    
+    if (src1->layer != src2->layer) {
+        return FALSE;
+    }
     return TRUE;
 }
 

@@ -208,7 +208,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
     }
     
     GtkCheckMenuItem *menu_autosync =
-        GTK_WIDGET(gtk_builder_get_object (builder, "menu_autosync"));
+        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_autosync"));
     if (config_get_value ("autosync")) {
         gtk_check_menu_item_set_active(menu_autosync, TRUE);
     } else  {

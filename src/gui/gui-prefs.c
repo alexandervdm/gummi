@@ -619,7 +619,7 @@ void on_cache_size_value_changed(GtkWidget* widget, void* user) {
     config_set_value("cache_size", g_ascii_dtostr (buf, 16, (double)newval));
     
      
-    g_idle_add(run_garbage_collector, gui->previewgui);
+    g_idle_add((GSourceFunc) run_garbage_collector, gui->previewgui);
 }
 
 G_MODULE_EXPORT
