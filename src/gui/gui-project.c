@@ -92,12 +92,34 @@ void projectgui_list_projfiles (gchar* active_proj) {
     amount = g_list_length (files);
     
     for (i=0; i < amount; i++) {
+        GdkPixbuf* pic = NULL;
         gchar* tmp = g_list_nth_data (files, i);
         name = g_path_get_basename (tmp);
         path = g_path_get_dirname (tmp);
         gtk_list_store_append (store, &iter);
-        // the whole path is stored in a hidden 3rd column -A
-        gtk_list_store_set (store, &iter, 0, name, 1, path, 2, tmp, -1);
+        
+        if (i == 0) pic = projectgui_get_status_pixbuf (ROOT);
+        if (!g_file_test (tmp, G_FILE_TEST_EXISTS))
+                    pic = projectgui_get_status_pixbuf (ERROR);
+
+        gtk_list_store_set (store, &iter, 0, pic, 1, name, 2, path, 3, tmp, -1);
+    }
+}
+
+GdkPixbuf* projectgui_get_status_pixbuf (ProjFileStatus status) {
+    GtkWidget* iv = GTK_WIDGET (gtk_invisible_new());
+
+    switch (status) {
+        case ROOT:
+            return gtk_widget_render_icon (iv, GTK_STOCK_HOME,
+                                               GTK_ICON_SIZE_MENU,
+                                               NULL);
+        case ERROR:
+            return gtk_widget_render_icon (iv, GTK_STOCK_STOP,
+                                               GTK_ICON_SIZE_MENU,
+                                               NULL);
+        default:
+            return NULL;
     }
 }
 
@@ -142,7 +164,7 @@ void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
                                          (gui->projectgui->proj_treeview);
                                          
     gtk_tree_selection_get_selected (selection, &model, &iter);
-    gtk_tree_model_get (model, &iter, 2, &value, -1);
+    gtk_tree_model_get (model, &iter, 3, &value, -1);
     
     if (project_remove_document (gummi->project->projfile, value)) {
         projectgui_list_projfiles (gummi->project->projfile);

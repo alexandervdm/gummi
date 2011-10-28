@@ -229,8 +229,8 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    //gtk_widget_show (tmp);
+    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
@@ -260,7 +260,7 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     gui_buildlog_set_text ("");
     
     previewgui_reset (gui->previewgui);
-    slog (L_INFO, "Switched to environment at page %d\n", pagenr);
+    slog (L_DEBUG, "Switched to environment at page %d\n", pagenr);
 }
 
 G_MODULE_EXPORT

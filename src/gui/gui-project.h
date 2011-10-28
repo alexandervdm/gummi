@@ -53,11 +53,17 @@ struct _GuProjectGui {
     
 };
 
+typedef enum _ProjFileStatus {
+    ROOT = 0,
+    ERROR,
+} ProjFileStatus;
+
 GuProjectGui* projectgui_init (GtkBuilder* builder);
 
 void projectgui_enable (GuProject* pr, GuProjectGui* prgui);
 void projectgui_disable (GuProject* pr, GuProjectGui* prgui);
 
+GdkPixbuf* projectgui_get_status_pixbuf (ProjFileStatus status);
 
 void projectgui_set_rootfile (gint position);
 

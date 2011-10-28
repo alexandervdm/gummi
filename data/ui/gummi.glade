@@ -495,15 +495,15 @@
       </object>
     </child>
   </object>
-  <object class="GtkImage" id="im_bibcompile">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-execute</property>
-  </object>
   <object class="GtkImage" id="im_bibdetect">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-find</property>
+  </object>
+  <object class="GtkImage" id="im_bibcompile">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-execute</property>
   </object>
   <object class="GtkImage" id="im_updatechk">
     <property name="visible">True</property>
@@ -995,6 +995,11 @@
       </object>
     </child>
   </object>
+  <object class="GtkAdjustment" id="matrix_rows">
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkViewport" id="imp_pane_matrix">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -1363,6 +1368,8 @@
   </object>
   <object class="GtkListStore" id="list_projfiles">
     <columns>
+      <!-- column-name status -->
+      <column type="GdkPixbuf"/>
       <!-- column-name docname -->
       <column type="gchararray"/>
       <!-- column-name docpath -->
@@ -2912,12 +2919,23 @@ active document</property>
                             <property name="headers_clickable">False</property>
                             <property name="search_column">0</property>
                             <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                                <property name="title" translatable="yes">   </property>
+                                <child>
+                                  <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                                  <attributes>
+                                    <attribute name="pixbuf">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
                               <object class="GtkTreeViewColumn" id="col_docname">
                                 <property name="title" translatable="yes">Document</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext9"/>
                                   <attributes>
-                                    <attribute name="text">0</attribute>
+                                    <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
                               </object>
@@ -2928,7 +2946,7 @@ active document</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext10"/>
                                   <attributes>
-                                    <attribute name="text">1</attribute>
+                                    <attribute name="text">2</attribute>
                                   </attributes>
                                 </child>
                               </object>
@@ -3350,11 +3368,6 @@ bibliography database</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="matrix_rows">
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
   <object class="GtkWindow" id="searchwindow">
     <property name="can_focus">False</property>
     <property name="border_width">15</property>
@@ -3403,9 +3416,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
