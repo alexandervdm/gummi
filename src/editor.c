@@ -673,11 +673,6 @@ void editor_redo_change (GuEditor* ec) {
 }
 
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
-    GtkSourceStyle *style = NULL;
-    GdkColor fg;
-    GdkColor bg;
-    gboolean fg_set;
-    gboolean bg_set;
     
     GtkSourceStyleScheme* scheme =
         gtk_source_style_scheme_manager_get_scheme (ec->stylemanager, id);
@@ -690,73 +685,118 @@ void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
     }
     gtk_source_buffer_set_style_scheme (ec->buffer, scheme);
     
-    /* The following tag color related code is contributed by Dion Timmermann */
-
-    /* Copy colors for "search-match"-style to searchtag */
-    style = gtk_source_style_scheme_get_style (scheme, "search-match");
-    get_style_colors (style, &fg_set, &fg, &bg_set, &bg);
-
-    if (!fg_set && !bg_set) {
-        slog (L_ERROR, "style scheme does not define \"search-match\"-style "
-                       "colors, using defaults\n");
-        g_object_set (G_OBJECT (ec->searchtag), "background", "yellow", 
-                                                "foreground", "black", NULL);
-    } else {
-        if (fg_set)
-            g_object_set (G_OBJECT(ec->searchtag), "foreground-gdk", &fg, NULL);
-        if (bg_set)
-            g_object_set (G_OBJECT(ec->searchtag), "background-gdk", &bg, NULL);
-    }
-
-    /* Copy colors for "def:error"-style to errortag */
-    style = gtk_source_style_scheme_get_style (scheme, "def:error");
-    get_style_colors (style, &fg_set, &fg, &bg_set, &bg);
-
-    if (!fg_set && !bg_set) {
-        slog (L_ERROR, "style scheme does not define \"def:error\"-style "
-                       "colors, using defaults\n");
-        g_object_set (G_OBJECT (ec->errortag), "background", "red", 
-                                               "foreground", "white", NULL);
-    } else {
-        if (fg_set)
-            g_object_set (G_OBJECT(ec->errortag), "foreground-gdk", &fg, NULL);
-        if (bg_set)
-            g_object_set (G_OBJECT(ec->errortag), "background-gdk", &bg, NULL);
-    }
+    set_style_fg_bg(G_OBJECT (ec->searchtag), scheme, "search-match", "yellow");
+    set_style_fg_bg(G_OBJECT (ec->errortag), scheme,"def:error",  "red");
 }
 
-/* The following functions are taken from gedit and partially modified */
 
-void get_style_colors (GtkSourceStyle* style,
-        gboolean* foreground_set, GdkColor* foreground,
-        gboolean* background_set, GdkColor* background)
+static inline gdouble gdkcolor_luminance(GdkColor c) {
+    return (0.2126 * c.red + 0.7152 * c.green + 0.0722 * c.blue) / G_MAXUINT16;
+}
+
+
+/**
+ *  Sets a object's fore- and background color to that of scheme's style 
+ *  "styleName". If no background color is defined in the style, defaultBG is 
+ *  used. defaultBG can be any valid parameter to gdk_color_parse().
+ *  If only a foreground color was defined and it has not enough contrast to the
+ *  default background, it will be overwritten. The foreground color will either 
+ *  be white or black, which has more contrast.
+ */
+void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme, 
+                      gchar* styleName, gchar* defaultBG)
 {
+    GtkSourceStyle *style = NULL;
+    
     gchar *bg = NULL;
     gchar *fg = NULL;
+    gboolean foreground_set;
+    gboolean background_set;
+    GdkColor foreground;
+    GdkColor background;
 
-    if (style == NULL)
-        return;
-        
+
+    if (scheme == NULL) {
+        goto set_style_fg_bg_return_defaults;
+    }
+    
+    style = gtk_source_style_scheme_get_style (scheme, styleName);
+    
+    if (style == NULL) {
+        goto set_style_fg_bg_return_defaults;
+    }
+    
+    // Get properties of style
     g_object_get (style, 
-                  "foreground-set", foreground_set, 
+                  "foreground-set", &foreground_set, 
                   "foreground", &fg,
-                  "background-set", background_set, 
+                  "background-set", &background_set, 
                   "background", &bg,
                   NULL);
 
-    if (*foreground_set) {
-        if (fg == NULL || !gdk_color_parse (fg, foreground))
-            *foreground_set = FALSE;
+    if (foreground_set) {
+        if (fg == NULL || !gdk_color_parse (fg, &foreground))
+            foreground_set = FALSE;
     }
 
-    if (*background_set) {
-        if (bg == NULL || !gdk_color_parse (bg, background))
-            *background_set = FALSE;
+    if (background_set) {
+        if (bg == NULL || !gdk_color_parse (bg, &background))
+            background_set = FALSE;
     }    
 
-    g_free (fg);
-    g_free (bg);
+    g_free(fg);
+    g_free(bg);
+    
+    if (background_set && foreground_set) {
+        // We trust the style to set both to good values
+        // Do nothing
+    } else if (!background_set && foreground_set) {
+        // Set bg to default and check if fg has enough contrast
+        gdk_color_parse(defaultBG, &background);
+        gdouble diff = ABS(gdkcolor_luminance(foreground) - gdkcolor_luminance(background));
+        if (diff < 0.5) {
+            slog(L_INFO, "Style \"%s\" defines a foreground, but no background "
+                         "color. As the fourground color has not enough "
+                         "contrast to Gummis default background color, the "
+                         "foreground color has been adjusted.\n", styleName);
+            if (gdkcolor_luminance(background) > 0.5) {
+                gdk_color_parse("black", &foreground);
+            } else {
+                gdk_color_parse("white", &foreground);
+            }
+        }
+    } else if (background_set && !foreground_set) {
+        // Choose a fg = white or black, which has more contrast   
+        if (gdkcolor_luminance(background) > 0.5) {
+            gdk_color_parse("black", &foreground);
+        } else {
+            gdk_color_parse("white", &foreground);
+        }
+    } else {
+        // none set, set defaults
+        goto set_style_fg_bg_return_defaults;
+    }
+    
+    g_object_set (obj, "foreground-gdk", &foreground, 
+                        "background-gdk", &background, NULL);
+    return;
+                        
+set_style_fg_bg_return_defaults:
+
+    // No valid style, set defaults
+    gdk_color_parse(defaultBG, &background);
+    if (gdkcolor_luminance(background) > 0.5) {
+        gdk_color_parse("black", &foreground);
+    } else {
+        gdk_color_parse("white", &foreground);
+    }
+    
+    g_object_set (obj, "foreground-gdk", &foreground, 
+                        "background-gdk", &background, NULL);
+                        
 }
+
+/* The following functions are taken from gedit and partially modified */
 
 gint schemes_compare (gconstpointer a, gconstpointer b) {
     GtkSourceStyleScheme *scheme_a = (GtkSourceStyleScheme *)a;
