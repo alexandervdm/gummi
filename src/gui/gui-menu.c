@@ -570,6 +570,13 @@ void on_menu_projopen_activate (GtkWidget *widget, void *user) {
 G_MODULE_EXPORT
 void on_menu_projclose_activate (GtkWidget *widget, void *user) {
     
+    if (!gummi->project->projfile) return;
+    
+    if (project_close ()) {
+        projectgui_disable (gummi->project, gui->projectgui);
+    }
+    
+    
 }
 
 /*******************************************************************************

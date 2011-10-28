@@ -134,9 +134,13 @@ void projectgui_enable (GuProject* pr, GuProjectGui* prgui) {
                         
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_addbutton), TRUE);
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), TRUE);
+    tablabel_set_bold_text (g_active_tab->page);
 }
 
 void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
+    
+    gtk_list_store_clear (gui->projectgui->list_projfiles);
+    
     gtk_label_set_text (prgui->proj_name, "");
     gtk_label_set_text (prgui->proj_path, "");
     gtk_label_set_text (prgui->proj_nroffiles, "");
@@ -151,8 +155,8 @@ void on_projfile_add_clicked (GtkWidget* widget, void* user) {
     
     if (project_add_document (gummi->project->projfile, selected_file)) {
         projectgui_list_projfiles (gummi->project->projfile);
-        
     }
+    gui_open_file (selected_file);
 }
 
 void on_projfile_rem_clicked (GtkWidget* widget, void* user) {

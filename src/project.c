@@ -93,6 +93,24 @@ gboolean project_open_existing (const gchar* filename) {
     return TRUE;
 }
 
+gboolean project_close (void) {
+    GList *tabs;
+    int tabtotal, i;
+    
+    tabs = gummi_get_all_tabs ();
+    tabtotal = g_list_length (tabs);
+    
+    for (i=0; i<tabtotal; i++) {
+        GuTabContext* tab = GU_TAB_CONTEXT (g_list_nth_data (tabs, i));
+        
+        if (tab->editor->projfile != NULL) {
+            printf("supposed to close %s\n", tab->editor->filename);
+            tab->editor->projfile == NULL;
+        }
+    }
+    return TRUE;
+}
+
 gboolean project_file_integrity (const gchar* content) {
     if (strlen (content) == 0) {
         return FALSE;

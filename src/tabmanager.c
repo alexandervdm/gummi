@@ -89,6 +89,7 @@ gboolean tabmanager_remove_tab (GuTabContext* tab) {
 
     g_tabs = g_list_remove (g_tabs, tab);
     tabmanager_set_active_tab (total - 2);
+    
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (g_tabnotebook, position);
     g_free (tab);
