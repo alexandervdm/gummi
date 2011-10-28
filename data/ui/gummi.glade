@@ -610,6 +610,23 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-remove</property>
   </object>
+  <object class="GtkImage" id="image25">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-add</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image26">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-add</property>
+  </object>
+  <object class="GtkImage" id="image27">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-close</property>
+    <property name="icon-size">1</property>
+  </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -1350,13 +1367,7 @@
       <column type="gchararray"/>
       <!-- column-name docpath -->
       <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="list_projopened">
-    <columns>
-      <!-- column-name basename -->
-      <column type="gchararray"/>
-      <!-- column-name dirname -->
+      <!-- column-name wholefilepath -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -2088,6 +2099,18 @@ active document to be saved. </property>
                         <signal name="activate" handler="on_menu_projopen_activate" swapped="no"/>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_projclose">
+                        <property name="label" translatable="yes">Close Project</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">image27</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="on_menu_projclose_activate" swapped="no"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -2786,43 +2809,92 @@ active document</property>
                         <property name="border_width">5</property>
                         <property name="spacing">5</property>
                         <child>
-                          <object class="GtkHBox" id="hbox15">
+                          <object class="GtkTable" id="proj_properties">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="n_rows">3</property>
+                            <property name="n_columns">2</property>
+                            <property name="row_spacing">5</property>
+                            <child>
+                              <object class="GtkLabel" id="label14">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="xpad">10</property>
+                                <property name="label" translatable="yes">Nr of files:</property>
+                              </object>
+                              <packing>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options">GTK_FILL</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label13">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="xpad">10</property>
+                                <property name="label" translatable="yes">Root path:</property>
+                              </object>
+                              <packing>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                                <property name="x_options">GTK_FILL</property>
+                              </packing>
+                            </child>
                             <child>
                               <object class="GtkLabel" id="label26">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Currently open projects:    </property>
+                                <property name="label" translatable="yes">Project name:</property>
                                 <attributes>
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
+                                <property name="x_options">GTK_SHRINK | GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="combo_projects">
+                              <object class="GtkLabel" id="proj_name">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="model">list_projopened</property>
-                                <property name="focus_on_click">False</property>
-                                <signal name="changed" handler="on_combo_projects_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText" id="cellrenderertext8"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
+                                <property name="xalign">0</property>
+                                <property name="xpad">10</property>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="proj_path">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="xpad">10</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">1</property>
+                                <property name="bottom_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="proj_nroffiles">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="xpad">10</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
                               </packing>
                             </child>
                           </object>
@@ -2833,7 +2905,7 @@ active document</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTreeView" id="treeview1">
+                          <object class="GtkTreeView" id="proj_treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="model">list_projfiles</property>
@@ -2875,14 +2947,18 @@ active document</property>
                             <property name="spacing">10</property>
                             <property name="layout_style">end</property>
                             <child>
-                              <object class="GtkButton" id="button6">
+                              <object class="GtkButton" id="proj_addbutton">
                                 <property name="label">gtk-add</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Select a file to add it 
+to the active project. </property>
                                 <property name="use_stock">True</property>
                                 <property name="focus_on_click">False</property>
+                                <signal name="clicked" handler="on_projfile_add_clicked" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2891,14 +2967,18 @@ active document</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="button7">
+                              <object class="GtkButton" id="proj_rembutton">
                                 <property name="label">gtk-remove</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Remove the selected
+file from the project.</property>
                                 <property name="use_stock">True</property>
                                 <property name="focus_on_click">False</property>
+                                <signal name="clicked" handler="on_projfile_rem_clicked" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -2922,7 +3002,7 @@ active document</property>
                       <object class="GtkLabel" id="label25">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Projects</property>
+                        <property name="label" translatable="yes">Project</property>
                       </object>
                       <packing>
                         <property name="position">2</property>
@@ -3323,9 +3403,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
