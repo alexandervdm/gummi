@@ -70,6 +70,7 @@ struct _GummiGui {
     GuSnippetsGui* snippetsgui;
     GuTabmanagerGui* tabmanagergui;
     GuInfoscreenGui* infoscreengui;
+    GuProjectGui* projectgui;
 
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;
@@ -89,10 +90,6 @@ struct _GummiGui {
     GtkWidget** insens_widgets;
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
-    
-    GtkComboBox* combo_projects;
-    GtkListStore* list_projopened;
-    GtkListStore* list_projfiles;
     
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;

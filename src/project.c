@@ -41,6 +41,17 @@ extern GummiGui* gui;
 extern Gummi* gummi;
 
 
+GuProject* project_init (void) {
+    GuProject* p = g_new0 (GuProject, 1);
+
+    p->projfile = NULL;
+    p->rootfile = NULL;
+    p->nroffiles = 1;
+
+    return p;
+}
+
+
 gboolean project_create_new (const gchar* filename) {
     const gchar* version = g_strdup ("0.6.0");
     const gchar* csetter = config_get_value ("typesetter");
@@ -50,7 +61,7 @@ gboolean project_create_new (const gchar* filename) {
     const gchar* content = g_strdup_printf("version=%s\n"
                                            "typesetter=%s\n"
                                            "steps=%s\n"
-                                           "rootfile=%s\n", 
+                                           "root=%s\n", 
                                             version, csetter, csteps, rootfile);
     
     if (strcmp (filename + strlen (filename) -6, ".gummi")) {
@@ -59,6 +70,9 @@ gboolean project_create_new (const gchar* filename) {
 
     statusbar_set_message (g_strdup_printf("Creating project file: %s", filename));
     utils_set_file_contents (filename, content, -1);
+    
+    gummi->project->projfile = g_strdup (filename);
+    
     return TRUE;
 }
 
@@ -74,6 +88,8 @@ gboolean project_open_existing (const gchar* filename) {
     if (!project_file_integrity (content)) return FALSE;
     if (!project_load_files (filename, content)) return FALSE;
     
+    gummi->project->projfile = g_strdup (filename);
+
     return TRUE;
 }
 
@@ -85,11 +101,44 @@ gboolean project_file_integrity (const gchar* content) {
 }
 
 gboolean project_add_document (const gchar* project, const gchar* fname) {
-    return TRUE;
+    gchar* oldcontent;
+    gchar* newcontent;
+    GError* err;
+    
+    if (!g_file_get_contents (project, &oldcontent, NULL, &err)) {
+        slog (L_ERROR, "%s\n", err->message);
+        return FALSE;
+    }
+    
+    newcontent = g_strconcat (oldcontent, "\nfile=", fname, NULL);
+    
+    if (g_file_test (project, G_FILE_TEST_EXISTS)) {
+        utils_set_file_contents (project, newcontent, -1);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 gboolean project_remove_document (const gchar* project, const gchar* fname) {
-    return TRUE;
+    gchar* oldcontent;
+    gchar* newcontent;
+    GError* err;
+    
+    if (!g_file_get_contents (project, &oldcontent, NULL, &err)) {
+        slog (L_ERROR, "%s\n", err->message);
+        return FALSE;
+    }
+    
+    gchar* delimiter = g_strdup_printf ("file=%s", fname);
+    
+    gchar** splitcontent = g_strsplit (oldcontent, delimiter, 2);
+    newcontent = g_strconcat (splitcontent[0], splitcontent[1], NULL);
+    
+    if (g_file_test (project, G_FILE_TEST_EXISTS)) {
+        utils_set_file_contents (project, newcontent, -1);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 GList* project_list_files (const gchar* content) {
@@ -97,13 +146,15 @@ GList* project_list_files (const gchar* content) {
     GList* filelist = NULL;
     gint i;
     
-    for (i=0;i<g_strv_length(splcontent)-1;i++) {
+    for (i=0;i<g_strv_length(splcontent);i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
         if (utils_strequal ("file", line[0])) {
             filelist = g_list_append (filelist, line[1]);
+            gummi->project->nroffiles += 1;
         }
-        if (utils_strequal ("rootfile", line[0])) {
+        if (utils_strequal ("root", line[0])) {
             filelist = g_list_prepend (filelist, line[1]);
+            gummi->project->rootfile = g_strdup (line[1]);
         }
     }
     return filelist;

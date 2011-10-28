@@ -27,13 +27,37 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef __GUMMI_PROJECT_H__
+#define __GUMMI_PROJECT_H__
+
 #include <glib.h>
 
+typedef struct _Project {
+    gchar* projfile;
+    gchar* rootfile;
+    
+    int nroffiles;
+
+} GuProject;
+
+
+GuProject* project_init (void);
 gboolean project_create_new (const gchar* filename);
 gboolean project_open_existing (const gchar* filename);
-
 
 gboolean project_file_integrity (const gchar* content);
 gboolean project_load_files (const gchar* projfile, const gchar* content);
 GList* project_list_files (const gchar* content);
-gchar* project_get_value (const gchar* content, const gchar* item);
+gchar* project_get_value (const gchar* content, const gchar* item);   
+  
+gboolean project_add_document (const gchar* project, const gchar* fname);
+gboolean project_remove_document (const gchar* project, const gchar* fname);
+
+
+
+#endif /* __GUMMI_PROJECT_H__ */
+
+
+
+
+

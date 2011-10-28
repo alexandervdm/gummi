@@ -81,6 +81,7 @@
 #include "snippets.h"
 #include "tabmanager.h"
 #include "template.h"
+#include "project.h"
 
 #include "gui/gui-main.h"
 
@@ -104,10 +105,12 @@ struct _Gummi {
     GuTemplate* templ;
     GuSnippets* snippets;
     GuTabmanager* tabmanager;
+    GuProject* project;
 };
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib, 
-                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm);
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm, 
+                   GuProject* proj);
 GuEditor* gummi_new_environment (const gchar* filename);
 
 /**
@@ -115,6 +118,9 @@ GuEditor* gummi_new_environment (const gchar* filename);
  * non-GUI classes.
  * Please only use this functions if not avoidable.
  */
+ 
+gboolean gummi_project_active (void); 
+ 
 GummiGui* gummi_get_gui (void);
 GuEditor* gummi_get_active_editor (void);
 GuIOFunc* gummi_get_io (void);

@@ -52,6 +52,8 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
                         gtk_builder_get_object (builder, "menu_projcreate"));
     m->menu_projopen = GTK_MENU_ITEM(
                         gtk_builder_get_object (builder, "menu_projopen"));
+    m->menu_projclose = GTK_MENU_ITEM(
+                        gtk_builder_get_object (builder, "menu_projclose"));
     
     return m;
 }
@@ -511,9 +513,17 @@ void on_menu_project_activate (GtkWidget *widget, void *user) {
     
     g_return_if_fail (g_active_editor != NULL);
 
-    if (g_active_editor->filename != NULL) {
+    if (!gummi_project_active()) {
         gtk_widget_set_sensitive (GTK_WIDGET
+                                 (gui->menugui->menu_projopen), TRUE);
+        if (g_active_editor->filename != NULL) {
+            gtk_widget_set_sensitive (GTK_WIDGET
                                  (gui->menugui->menu_projcreate), TRUE);
+        }
+    }
+    else {
+        gtk_widget_set_sensitive (GTK_WIDGET
+                                 (gui->menugui->menu_projclose), TRUE);
     }
 }
 
@@ -521,6 +531,10 @@ G_MODULE_EXPORT
 void on_menu_project_deselect (GtkWidget *widget, void *user) {
      gtk_widget_set_sensitive (GTK_WIDGET(
                                gui->menugui->menu_projcreate), FALSE);
+     gtk_widget_set_sensitive (GTK_WIDGET(
+                               gui->menugui->menu_projopen), FALSE);
+     gtk_widget_set_sensitive (GTK_WIDGET(
+                               gui->menugui->menu_projclose), FALSE);
 }
 
 G_MODULE_EXPORT
@@ -529,7 +543,10 @@ void on_menu_projcreate_activate (GtkWidget *widget, void *user) {
     gchar* filename = get_save_filename (TYPE_PROJECT);
     if (!filename) return;
     
-    project_create_new (filename);
+    if (project_create_new (filename)) {
+        projectgui_enable (gummi->project, gui->projectgui);
+        projectgui_list_projfiles (gummi->project->projfile);
+    }
 }
 
 G_MODULE_EXPORT
@@ -540,12 +557,19 @@ void on_menu_projopen_activate (GtkWidget *widget, void *user) {
 
     if (project_open_existing (filename)) {
         statusbar_set_message (g_strdup_printf("Loading project %s", filename));
+        projectgui_enable (gummi->project, gui->projectgui);
+        projectgui_list_projfiles (gummi->project->projfile);
     }
     else {
         statusbar_set_message (g_strdup_printf("An error ocurred while "
                                                "loading project %s", filename));
     }
     g_free (filename);
+}
+
+G_MODULE_EXPORT
+void on_menu_projclose_activate (GtkWidget *widget, void *user) {
+    
 }
 
 /*******************************************************************************

@@ -36,7 +36,7 @@ Gummi* gummi = 0;
 GummiGui* gui = 0;
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
-                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm) {
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm, GuProject* proj) {
     
     Gummi* g = g_new0 (Gummi, 1);
     g->io = io;
@@ -46,7 +46,18 @@ Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
     g->templ = tpl;
     g->snippets = snip;
     g->tabmanager = tabm;
+    g->project = proj;
+    
     return g;
+}
+
+gboolean gummi_project_active (void) {
+    if (gummi->project->projfile) return TRUE;
+    return FALSE;
+}
+
+gchar* gummi_get_projectfile (void) {
+    return gummi->project->projfile;
 }
 
 GuEditor* gummi_new_environment (const gchar* filename) {

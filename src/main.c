@@ -42,6 +42,7 @@
 #include "gui/gui-main.h"
 #include "iofunctions.h"
 #include "motion.h"
+#include "project.h"
 #include "signals.h"
 #include "snippets.h"
 #include "tabmanager.h"
@@ -101,15 +102,17 @@ int main (int argc, char *argv[]) {
     gchar* snippetsname = g_build_filename (g_get_user_config_dir (), "gummi",
             "snippets.cfg", NULL);
 
+    // why do we not load this from environment, like gui-main does? -A
     GuMotion* motion = motion_init ();
     GuIOFunc* io = iofunctions_init();
     GuLatex* latex = latex_init (); 
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
     GuTabmanager* tabm = tabmanager_init ();
+    GuProject* proj = project_init ();
 
     GuSnippets* snippets = snippets_init (snippetsname);
-    gummi = gummi_init (motion, io, latex, biblio, templ, snippets, tabm);
+    gummi = gummi_init (motion, io, latex, biblio, templ, snippets, tabm, proj);
     slog (L_DEBUG, "Gummi created!\n");
     g_free (snippetsname);
 

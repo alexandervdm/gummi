@@ -41,6 +41,7 @@ typedef struct _GuMenuGui GuMenuGui;
 struct _GuMenuGui {
     GtkMenuItem* menu_projcreate;
     GtkMenuItem* menu_projopen;
+    GtkMenuItem* menu_projclose;
 };
 
 GuMenuGui* menugui_init (GtkBuilder* builder);

@@ -116,13 +116,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->recent[4] =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
 
-    g->combo_projects =
-        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_projects"));
-    g->list_projopened =
-        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_projopened"));
-    g->list_projfiles =
-        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_projfiles"));
-
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
         
@@ -146,6 +139,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->snippetsgui = snippetsgui_init (g->mainwindow);
     g->tabmanagergui = tabmanagergui_init (builder);
     g->infoscreengui = infoscreengui_init (builder);
+    g->projectgui = projectgui_init (builder);
 
     gchar* icon_file = g_build_filename (DATADIR, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);
@@ -235,8 +229,8 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    gtk_widget_show (tmp);
+    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    //gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
@@ -273,21 +267,13 @@ G_MODULE_EXPORT
 void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                    int page, void *data) {
     
-    if (page == 2) { // projects tab
-        projectgui_list_projopened (gui->combo_projects, gui->list_projopened);
-    }
-}
-
-G_MODULE_EXPORT
-void on_combo_projects_changed (GtkComboBox* widget, void* user) {
-    GtkTreeIter iter;
-    GtkTreeModel *model;
-    gchar* fullpath;
-    
-    if (gtk_combo_box_get_active_iter (widget, &iter)) {
-        model = gtk_combo_box_get_model (widget);
-        gtk_tree_model_get (model, &iter, 1, &fullpath, -1);
-        projectgui_list_projfiles (gui->list_projfiles, fullpath);
+    if (page == 2) {
+        if (gummi_project_active ()) {
+            //projectgui_enable (gummi->project, gui->projectgui);
+        }
+        else {
+            //projectgui_disable (gummi->project, gui->projectgui);
+        }
     }
 }
 
