@@ -229,8 +229,8 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 
-    GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    gtk_widget_show (tmp);
+    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
+    //gtk_widget_show (tmp);
 
     gdk_threads_enter();
     gtk_main ();
@@ -341,14 +341,14 @@ void gui_open_file (const gchar* filename) {
         gui_set_sensitive (TRUE);
 }
 
-void gui_save_file (gboolean saveas) {
+void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gboolean new = FALSE;
     gchar* filename = NULL;
     gchar* pdfname = NULL;
     gchar* prev = NULL;
     gint ret = 0;
 
-    if (saveas || !(filename = g_active_editor->filename)) {
+    if (saveas || !(filename = tab->editor->filename)) {
         if ((filename = get_save_filename (TYPE_LATEX))) {
             new = TRUE;
             if (strcmp (filename + strlen (filename) -4, ".tex")) {
@@ -368,7 +368,7 @@ void gui_save_file (gboolean saveas) {
     GtkWidget* focus = NULL;
 
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
-    text = editor_grab_buffer (g_active_editor);
+    text = editor_grab_buffer (tab->editor);
     gtk_widget_grab_focus (focus);
     
     iofunctions_save_file (gummi->io, filename, text);
@@ -376,11 +376,11 @@ void gui_save_file (gboolean saveas) {
     if (config_get_value ("autoexport")) {
         pdfname = g_strdup (filename);
         pdfname[strlen (pdfname) -4] = 0;
-        latex_export_pdffile (gummi->latex, g_active_editor, pdfname, FALSE);
+        latex_export_pdffile (gummi->latex, tab->editor, pdfname, FALSE);
     }
     if (new) tabmanager_update_tab (filename);
-    gui_set_filename_display (g_active_tab, TRUE, TRUE);
-    gtk_widget_grab_focus (GTK_WIDGET (g_active_editor->view));
+    gui_set_filename_display (tab, TRUE, TRUE);
+    gtk_widget_grab_focus (GTK_WIDGET (tab->editor->view));
 
 cleanup:
     if (new) g_free (filename);
@@ -641,10 +641,10 @@ gboolean on_bibprogressbar_update (void* user) {
     return ! (gummi->biblio->progressval > 60);
 }
 
-gint check_for_save (void) {
+gint check_for_save (GuEditor* editor) {
     gint ret = 0;
 
-    if (g_active_editor && gtk_text_buffer_get_modified (g_e_buffer))
+    if (editor && editor_buffer_changed (editor))
         ret = utils_yes_no_dialog (
                 _("Do you want to save the changes you have made?"));
     return ret;

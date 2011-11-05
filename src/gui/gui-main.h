@@ -119,7 +119,7 @@ void gui_set_window_title (const gchar* filename, const gchar* text);
 
 
 void gui_open_file (const gchar* filename);
-void gui_save_file (gboolean saveas);
+void gui_save_file (GuTabContext* tab, gboolean saveas);
 void gui_set_sensitive(gboolean enable);
 
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget* nbpage,
@@ -150,7 +150,7 @@ gboolean on_bibprogressbar_update (void* user);
 gchar* get_open_filename (GuFilterType type);
 gchar* get_save_filename (GuFilterType type);
 void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type);
-gint check_for_save (void);
+gint check_for_save (GuEditor* editor);
 
 void add_to_recent_list (const gchar* filename);
 void display_recent_files (GummiGui* gui);

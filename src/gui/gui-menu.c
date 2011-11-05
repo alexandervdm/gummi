@@ -90,12 +90,12 @@ void on_menu_open_activate (GtkWidget *widget, void* user) {
 
 G_MODULE_EXPORT
 void on_menu_save_activate (GtkWidget *widget, void* user) {
-    gui_save_file (FALSE);
+    gui_save_file (g_active_tab, FALSE);
 }
 
 G_MODULE_EXPORT
 void on_menu_saveas_activate (GtkWidget *widget, void* user) {
-    gui_save_file (TRUE);
+    gui_save_file (g_active_tab, TRUE);
 }
 
 G_MODULE_EXPORT
@@ -137,15 +137,16 @@ void on_menu_recent_activate (GtkWidget *widget, void * user) {
 
 G_MODULE_EXPORT
 void on_menu_close_activate (GtkWidget *widget, void* user) {
-    gint ret = check_for_save ();
     GuTabContext* tab = NULL;
-
+    
+    tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
+    
+    gint ret = check_for_save (tab->editor);
+    
     if (GTK_RESPONSE_YES == ret)
-        gui_save_file (FALSE);
+        gui_save_file (tab, FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-
-    tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
     
     printf("removing %s\n", tab->editor->workfile);
 
@@ -170,9 +171,9 @@ gboolean on_menu_quit_activate (void) {
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
         tabmanager_set_active_tab (i);
 
-        gint ret = check_for_save ();
+        gint ret = check_for_save (g_active_editor);
         if (GTK_RESPONSE_YES == ret)
-            gui_save_file (FALSE);
+            gui_save_file (g_active_tab, FALSE);
         else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
             return TRUE;
     }
