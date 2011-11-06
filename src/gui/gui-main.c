@@ -839,7 +839,11 @@ void gui_buildlog_set_text (const gchar *message) {
         GtkTextIter iter;
         gtk_text_buffer_set_text (gui->errorbuff, message, -1);
         gtk_text_buffer_get_end_iter (gui->errorbuff, &iter);
-        gtk_text_view_scroll_to_iter (gui->errorview, &iter, 0.25, FALSE, 0, 0);
+		// The following lines are commented out, as they seem to cause 
+		// Bug #252.
+        //GtkTextMark *mark = gtk_text_buffer_create_mark(gui->errorbuff, NULL, &iter, FALSE);
+        //gtk_text_view_scroll_to_mark (gui->errorview, mark, 0.25, FALSE, 0, 0);
+        //gtk_text_view_scroll_to_iter (gui->errorview, &iter, 0.25, FALSE, 0, 0);
     }
 }
 

@@ -916,6 +916,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
         previewgui_set_scale(pc, list_sizes[ZOOM_100],
                 NAN,    // We pass NAN as this causes no scrolling to happen
                 NAN);   // This is checked in previewgui_goto_xy()
+                        // This might also have caused Bug #252.
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_100);
     }
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
