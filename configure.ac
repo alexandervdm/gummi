@@ -42,6 +42,9 @@ AM_PATH_GTK_2_0([2.20.0], [
 	 GUI_LIBS="$GUI_LIBS $GTK_LIBS"
 	], [AC_MSG_ERROR([You need Gtk+ >= 2.20.0 to build $PACKAGE])]) 
 
+PKG_CHECK_MODULES(zlib, [zlib],,
+	[AC_MSG_ERROR([You need zlib to build $PACKAGE])]) 	
+
 PKG_CHECK_MODULES(gtksourceview, [gtksourceview-2.0 >= 2.2.1],,
 	[AC_MSG_ERROR([You need gtksourceview-2 >= 2.2.1 to build $PACKAGE])]) 
 GUI_CFLAGS="$GUI_CFLAGS $gtksourceview_CFLAGS"
