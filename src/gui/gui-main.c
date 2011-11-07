@@ -66,7 +66,7 @@ const gchar* insens_widgets_str[] = {
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
     "menu_exportpdf", "menu_undo", "menu_redo", "menu_cut", "menu_copy",
     "menu_paste", "menu_delete", "menu_selectall", "import_tabs",
-    "menu_document", "menu_search"
+    "menu_document", "menu_search", "menu_export", "menu_close"
 };
 
 GummiGui* gui_init (GtkBuilder* builder) {
