@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 22:33+0200\n"
+"POT-Creation-Date: 2011-11-07 09:24+0100\n"
 "PO-Revision-Date: 2011-03-22 21:15+0100\n"
 "Last-Translator: Joachim Wiedorn <ad_debian@joonet.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -18,134 +18,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: German\n"
 
-#: ../data/ui/gummi.glade.h:1
+#: ../data/ui/gummi.glade.h:1 ../data/ui/prefs.glade.h:2
+msgid "   "
+msgstr "   "
+
+#: ../data/ui/gummi.glade.h:2
 #, fuzzy
 msgid "       "
 msgstr "        "
 
-#: ../data/ui/gummi.glade.h:2
+#: ../data/ui/gummi.glade.h:3
 #, fuzzy
 msgid "         "
 msgstr "        "
 
-#: ../data/ui/gummi.glade.h:3
+#: ../data/ui/gummi.glade.h:4
 msgid "0"
 msgstr "0"
 
-#: ../data/ui/gummi.glade.h:5
+#: ../data/ui/gummi.glade.h:6
 #, no-c-format
 msgid "100%"
 msgstr "100%"
 
-#: ../data/ui/gummi.glade.h:7
+#: ../data/ui/gummi.glade.h:8
 #, no-c-format
 msgid "125%"
 msgstr "125%"
 
-#: ../data/ui/gummi.glade.h:9
+#: ../data/ui/gummi.glade.h:10
 #, no-c-format
 msgid "150%"
 msgstr "150%"
 
-#: ../data/ui/gummi.glade.h:11
+#: ../data/ui/gummi.glade.h:12
 #, no-c-format
 msgid "200%"
 msgstr "200%"
 
-#: ../data/ui/gummi.glade.h:13
+#: ../data/ui/gummi.glade.h:14
 #, no-c-format
 msgid "300%"
 msgstr "300%"
 
-#: ../data/ui/gummi.glade.h:15
+#: ../data/ui/gummi.glade.h:16
 #, no-c-format
 msgid "400%"
 msgstr "400%"
 
-#: ../data/ui/gummi.glade.h:17
+#: ../data/ui/gummi.glade.h:18
 #, no-c-format
 msgid "50%"
 msgstr "50%"
 
-#: ../data/ui/gummi.glade.h:19
+#: ../data/ui/gummi.glade.h:20
 #, no-c-format
 msgid "70%"
 msgstr "70%"
 
-#: ../data/ui/gummi.glade.h:21
+#: ../data/ui/gummi.glade.h:22
 #, no-c-format
 msgid "85%"
 msgstr "85%"
 
-#: ../data/ui/gummi.glade.h:22
+#: ../data/ui/gummi.glade.h:23
 msgid "Align center"
 msgstr "zentriert"
 
-#: ../data/ui/gummi.glade.h:23
+#: ../data/ui/gummi.glade.h:24
 msgid "Align left"
 msgstr "linksbündig"
 
-#: ../data/ui/gummi.glade.h:24
+#: ../data/ui/gummi.glade.h:25
 msgid "Align right"
 msgstr "rechtsbündig"
 
-#: ../data/ui/gummi.glade.h:25
+#: ../data/ui/gummi.glade.h:26
 msgid "Best Fit"
 msgstr "Eingepasst"
 
-#: ../data/ui/gummi.glade.h:26
+#: ../data/ui/gummi.glade.h:27
 msgid "Bibliography"
 msgstr "Bibliografie"
 
-#: ../data/ui/gummi.glade.h:27
+#: ../data/ui/gummi.glade.h:28
 msgid "Bold text"
 msgstr "Fett"
 
-#: ../data/ui/gummi.glade.h:28
+#: ../data/ui/gummi.glade.h:29
 msgid "Border all cells"
 msgstr "Alle Zellen umranden"
 
-#: ../data/ui/gummi.glade.h:29
+#: ../data/ui/gummi.glade.h:30
 msgid "Border outline"
 msgstr "Äußere Umrandung"
 
-#: ../data/ui/gummi.glade.h:30
+#: ../data/ui/gummi.glade.h:31
 msgid "Braces"
 msgstr "geschweifte Klammern"
 
-#: ../data/ui/gummi.glade.h:31
+#: ../data/ui/gummi.glade.h:32
 msgid "Bracket:"
 msgstr "Klammer:"
 
-#: ../data/ui/gummi.glade.h:32
+#: ../data/ui/gummi.glade.h:33
 msgid "Brackets"
 msgstr "Klammern"
 
-#: ../data/ui/gummi.glade.h:33
+#: ../data/ui/gummi.glade.h:34
 msgid "Build log"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:34
+#: ../data/ui/gummi.glade.h:35
 msgid "Caption:"
 msgstr "Titel:"
 
-#: ../data/ui/gummi.glade.h:35
+#: ../data/ui/gummi.glade.h:36
 msgid "Center text"
 msgstr "zentrieren"
 
-#: ../data/ui/gummi.glade.h:36
+#: ../data/ui/gummi.glade.h:37
 msgid "Check _Updates"
 msgstr "Auf Updates überprüfen"
 
-#: ../data/ui/gummi.glade.h:37
+#: ../data/ui/gummi.glade.h:38
+#, fuzzy
+msgid "Close Project"
+msgstr "Erstelle neues Dokument"
+
+#: ../data/ui/gummi.glade.h:39
 msgid "Columns:"
 msgstr "Spalten:"
 
-#: ../data/ui/gummi.glade.h:38
+#: ../data/ui/gummi.glade.h:40
 msgid "Compile"
 msgstr "Kompilieren"
 
-#: ../data/ui/gummi.glade.h:39
+#: ../data/ui/gummi.glade.h:41
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
@@ -153,11 +162,11 @@ msgstr ""
 "LaTeX-Dokument kompilieren\n"
 "und Vorschau aktualisieren."
 
-#: ../data/ui/gummi.glade.h:41
+#: ../data/ui/gummi.glade.h:43
 msgid "Compile _Document"
 msgstr "_Dokument kompilieren"
 
-#: ../data/ui/gummi.glade.h:42
+#: ../data/ui/gummi.glade.h:44
 msgid ""
 "Compile the active \n"
 "bibliography database"
@@ -165,36 +174,32 @@ msgstr ""
 "Kompiliere aktive \n"
 "Bibliografie-Datenbank"
 
-#: ../data/ui/gummi.glade.h:44
+#: ../data/ui/gummi.glade.h:46
 msgid "Continuous, One Column"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:45
+#: ../data/ui/gummi.glade.h:47
 msgid "Create a new document"
 msgstr "Erstelle neues Dokument"
 
-#: ../data/ui/gummi.glade.h:46
+#: ../data/ui/gummi.glade.h:48
 #, fuzzy
 msgid "Create new Project"
 msgstr "Erstelle neues Dokument"
 
-#: ../data/ui/gummi.glade.h:47
+#: ../data/ui/gummi.glade.h:49
 msgid "Create new document from template.."
 msgstr "Erstelle neues Dokument von der Vorlage.."
 
-#: ../data/ui/gummi.glade.h:48
-msgid "Currently open projects:    "
-msgstr ""
-
-#: ../data/ui/gummi.glade.h:49
+#: ../data/ui/gummi.glade.h:50
 msgid "Deletes the selected template"
 msgstr "Löscht die ausgewählte Vorlage"
 
-#: ../data/ui/gummi.glade.h:50
+#: ../data/ui/gummi.glade.h:51
 msgid "Detect"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:51
+#: ../data/ui/gummi.glade.h:52
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
@@ -202,38 +207,38 @@ msgstr ""
 "Nennung einer bibtex-Datei \n"
 "im aktuellen Dokument finden."
 
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:54
 #, fuzzy
 msgid "Document"
 msgstr "_Dokument kompilieren"
 
-#: ../data/ui/gummi.glade.h:54
+#: ../data/ui/gummi.glade.h:55
 msgid "Document _Statistics"
 msgstr "Dokument _Statistik"
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:56
 #, fuzzy
 msgid "Document name"
 msgstr "_Dokument kompilieren"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:57
 #, fuzzy
 msgid "Document statistics"
 msgstr "Dokument Statistik"
 
-#: ../data/ui/gummi.glade.h:57
+#: ../data/ui/gummi.glade.h:58
 msgid "Double line"
 msgstr "Doppelte Line"
 
-#: ../data/ui/gummi.glade.h:58
+#: ../data/ui/gummi.glade.h:59
 msgid "Enable S_nippets"
 msgstr "Schnipsel einschalten"
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:60
 msgid "Enable S_pell checking"
 msgstr "Rechtschreibprüfung einschalten"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:61
 msgid ""
 "Error status for\n"
 "active document"
@@ -241,56 +246,56 @@ msgstr ""
 "Fehlerstatus für das\n"
 "aktive Dokument."
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:63
 #, fuzzy
 msgid "File path"
 msgstr "Datei speichern"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:64
 msgid "File:"
 msgstr "Datei:"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:65
 msgid "Filename:"
 msgstr "Dateiname:"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:66
 msgid "Find"
 msgstr "Suchen"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:67
 msgid "Find Ne_xt"
 msgstr "_Nächster Treffer"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:68
 msgid "Find Pre_vious"
 msgstr "_Vorheriger Treffer"
 
-#: ../data/ui/gummi.glade.h:68
+#: ../data/ui/gummi.glade.h:69
 msgid "Fit Page Width"
 msgstr "Auf Seitenbreite anpassen"
 
-#: ../data/ui/gummi.glade.h:69
+#: ../data/ui/gummi.glade.h:70
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - LaTeX Editor"
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:71
 msgid "Image"
 msgstr "Bild"
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:72
 msgid "Italic text"
 msgstr "kursiv"
 
-#: ../data/ui/gummi.glade.h:72
+#: ../data/ui/gummi.glade.h:73
 msgid "Label:"
 msgstr "Label:"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:74
 msgid "Load a file"
 msgstr "Eine Datei laden"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:75
 msgid ""
 "Make a template from the \n"
 "current active document."
@@ -298,162 +303,188 @@ msgstr ""
 "Eine Vorlage vom gerade \n"
 "aktuellen Dokument erstellen."
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:77
 msgid "Match case"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:78
 msgid "Match entire word only"
 msgstr "Nur ganze Wörter finden"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:79
 msgid "Matrix"
 msgstr "Matrix"
 
-#: ../data/ui/gummi.glade.h:79 ../src/gui/gui-main.c:583
+#: ../data/ui/gummi.glade.h:80 ../src/gui/gui-main.c:573
 msgid "N/A"
 msgstr "N/A"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:81
 msgid "New"
 msgstr "Neu"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:82
 msgid "New from _Template"
 msgstr "Neu von Vorlage"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:83
 msgid "Next"
 msgstr "Nächstes"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:84
 msgid "No borders"
 msgstr "keine Umrandung"
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:85
+#, fuzzy
+msgid "Nr of files:"
+msgstr "Anzahl Gleitobjekte"
+
+#: ../data/ui/gummi.glade.h:86
 #, fuzzy
 msgid "Number of:"
 msgstr "Anzahl Gleitobjekte"
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:87
 msgid "Open"
 msgstr "Öffnen"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:88
 msgid "Open Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:89
 msgid "Open the selected template"
 msgstr "Ausgewählte Vorlage öffnen"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:90
 msgid "PDF Preview could not initialise."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:91
 msgid "Page Layout in Preview"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:92
 msgid "Parentheses"
 msgstr "Klammern"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:93
 msgid "Pause updating the preview pane."
 msgstr "Aktualisierung der Vorschau unterbrechen."
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:94
 msgid "Preview Pane"
 msgstr "Vorschau"
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:95
 msgid "Previous"
 msgstr "Vorheriges"
 
-#: ../data/ui/gummi.glade.h:94
-msgid "Projects"
+#: ../data/ui/gummi.glade.h:96
+msgid "Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:97
+#, fuzzy
+msgid "Project name:"
+msgstr "_Dokument kompilieren"
+
+#: ../data/ui/gummi.glade.h:98
 msgid "References:"
 msgstr "Referenzen:"
 
-#: ../data/ui/gummi.glade.h:96
-msgid "Replace _All"
-msgstr "_Alles ersetzen"
-
-#: ../data/ui/gummi.glade.h:97
-msgid "Replace with:"
-msgstr "Ersetzen mit:"
-
-#: ../data/ui/gummi.glade.h:98
-msgid "Rows:"
-msgstr "Zeilen:"
-
 #: ../data/ui/gummi.glade.h:99
-msgid "Run _BibTeX"
-msgstr ""
-
-#: ../data/ui/gummi.glade.h:100
-msgid "Run _Makeindex"
+msgid ""
+"Remove the selected\n"
+"file from the project."
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:101
-msgid "Save"
-msgstr "Speichern"
+msgid "Replace _All"
+msgstr "_Alles ersetzen"
 
 #: ../data/ui/gummi.glade.h:102
-msgid "Save _As..."
-msgstr "Speichern _unter..."
+msgid "Replace with:"
+msgstr "Ersetzen mit:"
 
 #: ../data/ui/gummi.glade.h:103
-msgid "Save early.. save often!"
+msgid "Root path:"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:104
+msgid "Rows:"
+msgstr "Zeilen:"
+
+#: ../data/ui/gummi.glade.h:105
+msgid "Run _BibTeX"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:106
+msgid "Run _Makeindex"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:107
+msgid "Save"
+msgstr "Speichern"
+
+#: ../data/ui/gummi.glade.h:108
+msgid "Save _As..."
+msgstr "Speichern _unter..."
+
+#: ../data/ui/gummi.glade.h:109
+msgid "Save early.. save often!"
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:110
 msgid "Save the current file"
 msgstr "Aktuelle Datei speichern"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:111
 msgid "Scale:"
 msgstr "Skalierung:"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:112
 msgid "Search backwards"
 msgstr "Rückwärts suchen"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:113
 msgid "Search for:"
 msgstr "Suche nach:"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:114
+msgid ""
+"Select a file to add it \n"
+"to the active project. "
+msgstr ""
+
+#: ../data/ui/gummi.glade.h:116
 #, fuzzy
 msgid "Set Compilation Options"
 msgstr "Vorlagenoptionen"
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:117
 #, fuzzy
 msgid "Single Page"
 msgstr "Einfache Linie"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:118
 msgid "Single line"
 msgstr "Einfache Linie"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:119
 msgid "Style:"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:120
 msgid "Sync Preview with Editor"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:121
 msgid "Table"
 msgstr "Tabelle"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:122
 #, fuzzy
 msgid ""
 "This function requires the current\n"
@@ -462,156 +493,152 @@ msgstr ""
 "Diese Funktion benötigt das\n"
 "\"texcount\" Programm.\n"
 
-#: ../data/ui/gummi.glade.h:116
+#: ../data/ui/gummi.glade.h:124
 msgid "Unbracketed"
 msgstr "Ohne Klammern"
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:125
 msgid "Underline text"
 msgstr "unterstrichen"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:126
 msgid ""
 "Use SyncTeX to scroll preview to the part of the document that was last "
 "edited."
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:127
 #, fuzzy
 msgid "Words in:"
 msgstr "Wörter im Text"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:128
 #, fuzzy
 msgid "_Document"
 msgstr "_Dokument kompilieren"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:129
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:130
 msgid "_Export to PDF"
 msgstr "_Exportieren als PDF"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:131
 msgid "_File"
 msgstr "Datei"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:132
 msgid "_Fullscreen"
 msgstr "_Vollbild"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:133
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:134
 msgid "_Open..."
 msgstr "Öffnen"
 
-#: ../data/ui/gummi.glade.h:127
+#: ../data/ui/gummi.glade.h:135
 msgid "_Project"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:136
 msgid "_Replace"
 msgstr "E_rsetzen"
 
-#: ../data/ui/gummi.glade.h:129
+#: ../data/ui/gummi.glade.h:137
 msgid "_Right Pane"
 msgstr "_Rechtes Feld"
 
-#: ../data/ui/gummi.glade.h:130
+#: ../data/ui/gummi.glade.h:138
 msgid "_Search"
 msgstr "_Suche"
 
-#: ../data/ui/gummi.glade.h:131
+#: ../data/ui/gummi.glade.h:139
 msgid "_Statusbar"
 msgstr "_Statusleiste"
 
-#: ../data/ui/gummi.glade.h:132
+#: ../data/ui/gummi.glade.h:140
 msgid "_Toolbar"
 msgstr "_Werkzeugleiste"
 
-#: ../data/ui/gummi.glade.h:133
+#: ../data/ui/gummi.glade.h:141
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../data/ui/gummi.glade.h:134
+#: ../data/ui/gummi.glade.h:142
 msgid "filter:"
 msgstr "Filter:"
 
-#: ../data/ui/gummi.glade.h:135
+#: ../data/ui/gummi.glade.h:143
 #, fuzzy
 msgid "float captions"
 msgstr "Wörter in Objektuntertiteln"
 
-#: ../data/ui/gummi.glade.h:136
+#: ../data/ui/gummi.glade.h:144
 msgid "floats"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:137
+#: ../data/ui/gummi.glade.h:145
 #, fuzzy
 msgid "headers"
 msgstr "Wörter in den Kopfzeilen"
 
-#: ../data/ui/gummi.glade.h:138
+#: ../data/ui/gummi.glade.h:146
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:139 ../src/gui/gui-main.c:581
+#: ../data/ui/gummi.glade.h:147 ../src/gui/gui-main.c:571
 msgid "no bibliography file detected"
 msgstr "Keine Bibliografiedatei gefunden"
 
-#: ../data/ui/gummi.glade.h:140 ../src/gui/gui-main.c:582
+#: ../data/ui/gummi.glade.h:148 ../src/gui/gui-main.c:572
 msgid "none"
 msgstr "Keine"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:149
 msgid "of 0"
 msgstr "von 0"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:150
 msgid "shouldnotseeme"
 msgstr "solltenichtgesehenwerden"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:151
 #, fuzzy
 msgid "text"
 msgstr "Fett"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:152
 msgid "toolbutton1"
 msgstr "werkzeugknopf1"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:153
 msgid "toolbutton2"
 msgstr "werkzeugknopf2"
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:154
 msgid "toolbutton3"
 msgstr "werkzeugknopf3"
 
-#: ../data/ui/gummi.glade.h:147
+#: ../data/ui/gummi.glade.h:155
 msgid "toolbutton5"
 msgstr "werkzeugknopf4"
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:156
 msgid "toolbutton6"
 msgstr "werkzeugknopf6"
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:157
 msgid "toolbutton7"
 msgstr "werkzeugknopf7"
 
 #: ../data/ui/prefs.glade.h:1
 #, fuzzy
 msgid "  "
-msgstr "   "
-
-#: ../data/ui/prefs.glade.h:2
-msgid "   "
 msgstr "   "
 
 #: ../data/ui/prefs.glade.h:3 ../data/ui/snippets.glade.h:1
@@ -623,194 +650,223 @@ msgid "--shell-escape"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:5
+msgid "Always"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:6
 msgid "Automatic Indentation"
 msgstr "Automatischer Einzug"
 
-#: ../data/ui/prefs.glade.h:6
+#: ../data/ui/prefs.glade.h:7
 msgid "Automatically export PDF on document save"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:8
+msgid "Cache size"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:9
 msgid "Color Scheme"
 msgstr "Farbeschema"
 
-#: ../data/ui/prefs.glade.h:8
+#: ../data/ui/prefs.glade.h:10
 #, fuzzy
 msgid "Compilation"
 msgstr "Betätigung"
 
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:11
 msgid "Compilation steps"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:12
 msgid "Configure snippets"
 msgstr "Schnipsel konfigurieren"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:13
 msgid "Default Text"
 msgstr "Vorgabetext"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:14
 msgid "Display line numbers"
 msgstr "Zeilennummern anzeigen"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:15
 msgid "Do not split words over two lines"
 msgstr "Wörter nicht über zwei Zeilen trennen"
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:16
 msgid "Editor"
 msgstr "Editor"
 
-#: ../data/ui/prefs.glade.h:15
+#: ../data/ui/prefs.glade.h:17
 msgid "Editor font"
 msgstr "Editor Schriftart"
 
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:18
 #, fuzzy
 msgid "Enable SyncTeX"
 msgstr "Schnipsel einschalten"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:19
 msgid "Enable text wrapping"
 msgstr "Automatischen Zeilenumbruch aktivieren"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:20
 msgid "File saving"
 msgstr "Datei speichern"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:21
 msgid "Font & Colors"
 msgstr "Schriftart & Farben"
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:22
 msgid "Gummi Preferences"
 msgstr "Gummi Einstellungen"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:23
 msgid "Highlight current line"
 msgstr "Aktuelle Zeile hervorheben"
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:24
 msgid "Highlighting"
 msgstr "Hervorhebung"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:25
 msgid "Insert _spaces instead of tabs"
 msgstr "Leerzeichen _statt Tabulatoren einfügen"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:26
 msgid "Latexmk"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:27
 msgid "Line numbers"
 msgstr "Zeilennummern"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:28
+msgid "MB"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:29
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:30
+msgid "Never"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:31
 msgid "None"
 msgstr "Keine"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:32
+msgid "Only when syncing preview with editor"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:33
 msgid "PDF Compiling"
 msgstr "PDF Erzeugung"
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:34
 #, fuzzy
 msgid "PDF Exporting"
 msgstr "PDF Erzeugung"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:35
+#, fuzzy
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ../data/ui/prefs.glade.h:36
 msgid "Rubber"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:37
 msgid "Snippets"
 msgstr "Schnipsel"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:38
 msgid "Spell check language"
 msgstr "Sprache für Rechtschreibprüfung"
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:39
 msgid "Tab stops"
 msgstr "Tabulatoren"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:40
 msgid "Tab width:"
 msgstr "Tabulatorweite:"
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:41
 msgid "TeX → DVI → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:42
 msgid "TeX → DVI → PS → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:43
 msgid "TeX → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:44
 msgid "TeXLive with PdfTeX"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:45
 msgid "TeXLive with XeTeX"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:40
+#: ../data/ui/prefs.glade.h:46
 msgid "Text wrapping"
 msgstr "Zeilenumbruch"
 
-#: ../data/ui/prefs.glade.h:41
+#: ../data/ui/prefs.glade.h:47
 msgid "This program was not found on your system."
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:42
+#: ../data/ui/prefs.glade.h:48
 msgid "Typesetter command"
 msgstr "Befehl für Schriftensetzen"
 
-#: ../data/ui/prefs.glade.h:43
+#: ../data/ui/prefs.glade.h:49
 #, fuzzy
 msgid "Typesetter options"
 msgstr "Befehl für Schriftensetzen"
 
-#: ../data/ui/prefs.glade.h:44
+#: ../data/ui/prefs.glade.h:50
+msgid "Use animated scroll"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:51
 msgid "View"
 msgstr "Ansicht"
 
-#: ../data/ui/prefs.glade.h:45
+#: ../data/ui/prefs.glade.h:52
 msgid "_Autosave files every"
 msgstr "_Automatisch speichern alle"
 
-#: ../data/ui/prefs.glade.h:46
+#: ../data/ui/prefs.glade.h:53
 msgid "_Enable automatic indentation"
 msgstr "Automatischen Einzug einschalten"
 
-#: ../data/ui/prefs.glade.h:47
+#: ../data/ui/prefs.glade.h:54
 msgid "_Reset defaults"
 msgstr "_Zurücksetzen"
 
-#: ../data/ui/prefs.glade.h:48
+#: ../data/ui/prefs.glade.h:55
 msgid "compile every"
 msgstr "kompilieren alle"
 
-#: ../data/ui/prefs.glade.h:49
+#: ../data/ui/prefs.glade.h:56
 msgid "compile when idle for "
 msgstr "kompilieren, wenn fertig, alle"
 
-#: ../data/ui/prefs.glade.h:50
+#: ../data/ui/prefs.glade.h:57
 msgid "minutes"
 msgstr "Minuten"
 
-#: ../data/ui/prefs.glade.h:51
+#: ../data/ui/prefs.glade.h:58
 msgid "seconds"
 msgstr "Sekunden"
 
@@ -869,24 +925,24 @@ msgstr "Text kann nicht nach UTF-8 konvertiert werden!\n"
 msgid "%s: No such file or directory\n"
 msgstr "%s: Datei oder Verzeichnis nicht gefunden\n"
 
-#: ../src/gui/gui-preview.c:775
+#: ../src/gui/gui-preview.c:868
 #, c-format
 msgid "of %d"
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:109
+#: ../src/gui/gui-infoscreen.c:115
 msgid "PDF preview could not initialise."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:110
+#: ../src/gui/gui-infoscreen.c:116
 msgid "Document appears to be empty or invalid."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:111
+#: ../src/gui/gui-infoscreen.c:117
 msgid "Compilation program is missing."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:119
+#: ../src/gui/gui-infoscreen.c:126
 msgid ""
 "The active document contains errors. The live preview\n"
 "function will resume automatically once these errors\n"
@@ -894,7 +950,7 @@ msgid ""
 "the Build log tab.\n"
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:124
+#: ../src/gui/gui-infoscreen.c:131
 msgid ""
 "The document that is currently active appears to be an\n"
 "an invalid LaTeX file. You can continue working on it,\n"
@@ -902,7 +958,7 @@ msgid ""
 "it to an active project.\n"
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:129
+#: ../src/gui/gui-infoscreen.c:136
 msgid ""
 "The selected compilation program could not be located.\n"
 "Please restore the program or select an alternative\n"
@@ -926,130 +982,130 @@ msgstr "Neue Tastenkombination drücken"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Neue Tastenkombination drücken, oder mit der Rücktaste löschen"
 
-#: ../src/gui/gui-menu.c:118
+#: ../src/gui/gui-menu.c:120
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Fehler beim Laden der aktuellen Datei: %s"
 
-#: ../src/gui/gui-menu.c:341
+#: ../src/gui/gui-menu.c:344
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:344
+#: ../src/gui/gui-menu.c:347
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:374
+#: ../src/gui/gui-menu.c:377
 msgid "Words in text"
 msgstr "Wörter im Text"
 
-#: ../src/gui/gui-menu.c:375
+#: ../src/gui/gui-menu.c:378
 msgid "Words in headers"
 msgstr "Wörter in den Kopfzeilen"
 
-#: ../src/gui/gui-menu.c:376
+#: ../src/gui/gui-menu.c:379
 msgid "Words in float captions"
 msgstr "Wörter in Objektuntertiteln"
 
-#: ../src/gui/gui-menu.c:377
+#: ../src/gui/gui-menu.c:380
 msgid "Number of headers"
 msgstr "Anzahl Kopfzeilen"
 
-#: ../src/gui/gui-menu.c:378
+#: ../src/gui/gui-menu.c:381
 msgid "Number of floats"
 msgstr "Anzahl Gleitobjekte"
 
-#: ../src/gui/gui-menu.c:379
+#: ../src/gui/gui-menu.c:382
 msgid "Number of math inlines"
 msgstr "Anzahl von Mathe \"inlines\""
 
-#: ../src/gui/gui-menu.c:380
+#: ../src/gui/gui-menu.c:383
 msgid "Number of math displayed"
 msgstr "Anzahl von Mathe \"displayed\""
 
-#: ../src/gui/gui-main.c:333
+#: ../src/gui/gui-main.c:323
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:371 ../src/latex.c:262
+#: ../src/gui/gui-main.c:361 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "Die Datei existiert bereits. Überschreiben?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:475
+#: ../src/gui/gui-main.c:465
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:531
+#: ../src/gui/gui-main.c:521
 msgid "Compiling bibliography file..."
 msgstr "Kompiliere Bibliografiedatei.."
 
-#: ../src/gui/gui-main.c:533
+#: ../src/gui/gui-main.c:523
 msgid "bibliography compiled without errors"
 msgstr "Bibliografie ohne Fehler kompiliert"
 
-#: ../src/gui/gui-main.c:535
+#: ../src/gui/gui-main.c:525
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Fehler beim Kompilieren der Bibliografiedatei oder keine gefunden..."
 
-#: ../src/gui/gui-main.c:538
+#: ../src/gui/gui-main.c:528
 msgid "error compiling bibliography file"
 msgstr "Fehler beim Kompilieren der Bibliografiedatei"
 
-#: ../src/gui/gui-main.c:572
+#: ../src/gui/gui-main.c:562
 #, c-format
 msgid "%s loaded"
 msgstr "%s geladen"
 
-#: ../src/gui/gui-main.c:659
+#: ../src/gui/gui-main.c:649
 msgid "Do you want to save the changes you have made?"
 msgstr "Sollen die durchgeführten Änderungen gespeichert werden?"
 
-#: ../src/gui/gui-main.c:677
+#: ../src/gui/gui-main.c:667
 msgid "Open LaTeX document"
 msgstr "LaTeX Dokument öffnen"
 
-#: ../src/gui/gui-main.c:680
+#: ../src/gui/gui-main.c:670
 msgid "Select an image to insert"
 msgstr "Bild auswählen zum Einfügen"
 
-#: ../src/gui/gui-main.c:681
+#: ../src/gui/gui-main.c:671
 msgid "Select bibliography file"
 msgstr "Bibliografiedatei auswählen"
 
-#: ../src/gui/gui-main.c:714
+#: ../src/gui/gui-main.c:704
 msgid "Save LaTeX document"
 msgstr "LaTeX Dokument speichern"
 
-#: ../src/gui/gui-main.c:715
+#: ../src/gui/gui-main.c:705
 msgid "Save as LaTeX document"
 msgstr "Als LaTeX Dokument speichern"
 
-#: ../src/gui/gui-main.c:716
+#: ../src/gui/gui-main.c:706
 msgid "Export to PDF"
 msgstr "Exportieren als PDF"
 
-#: ../src/gui/gui-main.c:763
+#: ../src/gui/gui-main.c:753
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Eine Datei laden"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:758
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:781
+#: ../src/gui/gui-main.c:771
 #, fuzzy
 msgid "Image files"
 msgstr "Bild"
 
-#: ../src/gui/gui-main.c:788
+#: ../src/gui/gui-main.c:778
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:794
+#: ../src/gui/gui-main.c:784
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Gummi Einstellungen"
