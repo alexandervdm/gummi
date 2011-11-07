@@ -90,6 +90,7 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
 }
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
+    gtk_widget_set_visible (GTK_WIDGET(is->image), TRUE);
     if (utils_strequal (msg, "compile_error")) {
         gtk_label_set_text (is->header, get_infoheader(1));
         gtk_label_set_text (is->details, get_infodetails(1));
@@ -98,9 +99,14 @@ void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
         gtk_label_set_text (is->header, get_infoheader(2));
         gtk_label_set_text (is->details, get_infodetails(2));
     }
-    else {
+    else if (utils_strequal (msg, "program_error")) {
         gtk_label_set_text (is->header, get_infoheader(3));
         gtk_label_set_text (is->details, get_infodetails(3));
+    }
+    else {
+        gtk_label_set_text (is->header, get_infoheader(4));
+        gtk_label_set_text (is->details, get_infodetails(4));
+        gtk_widget_set_visible (GTK_WIDGET(is->image), FALSE);
     }
 }
 
@@ -109,6 +115,7 @@ static const gchar* get_infoheader (int id) {
         case 1: return _("PDF preview could not initialise.");
         case 2: return _("Document appears to be empty or invalid.");
         case 3: return _("Compilation program is missing.");
+        case 4: return "";
         default: return "This should not have happened, bug!";
     }
 }
@@ -131,6 +138,7 @@ static const gchar* get_infodetails (int id) {
         "typesetter command from the Preferences menu. The\n"
         "live preview function will not resume until Gummi\n"
         "is restarted.\n");
+        case 4: return ("");
         default: return "This should not have happened, bug!";
     }
 }
