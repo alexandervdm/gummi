@@ -489,7 +489,7 @@ msgid ""
 "active document to be saved. "
 msgstr ""
 "Um diese Funktion nutzen zu können muss\n"
-"das aktive Dokument gespeichert werden.\n"
+"das aktive Dokument gespeichert werden. "
 
 #: ../data/ui/gummi.glade.h:124
 msgid "Unbracketed"
