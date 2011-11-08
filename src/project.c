@@ -105,7 +105,7 @@ gboolean project_close (void) {
         
         if (tab->editor->projfile != NULL) {
             printf("supposed to close %s\n", tab->editor->filename);
-            tab->editor->projfile == NULL;
+            tab->editor->projfile = NULL;
         }
     }
     return TRUE;

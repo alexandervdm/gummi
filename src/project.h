@@ -42,6 +42,8 @@ typedef struct _Project {
 
 
 GuProject* project_init (void);
+gboolean project_close (void);
+
 gboolean project_create_new (const gchar* filename);
 gboolean project_open_existing (const gchar* filename);
 
