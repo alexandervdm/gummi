@@ -495,11 +495,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkAdjustment" id="matrix_rows">
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
   <object class="GtkImage" id="im_bibcompile">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -3215,7 +3210,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">200</property>
-                                        <property name="title">title</property>
+                                        <property name="title">Title</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -3233,7 +3228,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">100</property>
-                                        <property name="title">author</property>
+                                        <property name="title">Author</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -3251,7 +3246,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">50</property>
-                                        <property name="title">year</property>
+                                        <property name="title">Year</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
                                         <signal name="clicked" handler="on_bibcolumn_clicked" swapped="no"/>
@@ -3375,6 +3370,11 @@ bibliography database</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkAdjustment" id="matrix_rows">
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkWindow" id="searchwindow">
     <property name="can_focus">False</property>
     <property name="border_width">15</property>
@@ -3423,9 +3423,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
