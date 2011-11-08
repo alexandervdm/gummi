@@ -3210,7 +3210,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">200</property>
-                                        <property name="title">Title</property>
+                                        <property name="title" translatable="yes">Title</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -3228,7 +3228,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">100</property>
-                                        <property name="title">Author</property>
+                                        <property name="title" translatable="yes">Author</property>
                                         <property name="expand">True</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
@@ -3246,7 +3246,7 @@ bibliography database</property>
                                         <property name="resizable">True</property>
                                         <property name="sizing">fixed</property>
                                         <property name="fixed_width">50</property>
-                                        <property name="title">Year</property>
+                                        <property name="title" translatable="yes">Year</property>
                                         <property name="clickable">True</property>
                                         <property name="sort_order">descending</property>
                                         <signal name="clicked" handler="on_bibcolumn_clicked" swapped="no"/>
@@ -3423,9 +3423,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
