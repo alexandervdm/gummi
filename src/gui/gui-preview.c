@@ -164,6 +164,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->previewgui_viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
+    p->previewgui_toolbar = 
+        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_toolbar"));
     p->statuslight =
         GTK_WIDGET (gtk_builder_get_object (builder, "tool_statuslight"));
     p->drawarea =

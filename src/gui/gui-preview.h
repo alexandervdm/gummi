@@ -93,6 +93,7 @@ typedef struct _GuPreviewGui GuPreviewGui;
 struct _GuPreviewGui {
     PopplerDocument* doc;
     GtkViewport* previewgui_viewport;
+    GtkWidget* previewgui_toolbar;
     GtkWidget* statuslight;
     GtkWidget* drawarea;
     GtkWidget* page_next;
