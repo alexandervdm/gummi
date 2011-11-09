@@ -2,13 +2,13 @@
 # Copyright (C) Alexandre Guimarães 2011
 # This file is distributed under the same license as the Gummi package.
 #
-# Alexandre Guimarães <alexandre.cortes@live.fr>, 2011.
+# Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 10:25+0100\n"
+"POT-Creation-Date: 2011-11-09 21:01+0100\n"
 "PO-Revision-Date: 2011-11-08 13:19-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Portuguese\n"
@@ -144,7 +144,6 @@ msgid "Check _Updates"
 msgstr "Verificar _Actualizações"
 
 #: ../data/ui/gummi.glade.h:39
-#, fuzzy
 msgid "Close Project"
 msgstr "Fechar Projecto"
 
@@ -165,7 +164,6 @@ msgstr ""
 "e actualizar o visualizador"
 
 #: ../data/ui/gummi.glade.h:44
-#, fuzzy
 msgid "Compile _Document"
 msgstr "Compilar _Ficheiro"
 
@@ -186,12 +184,10 @@ msgid "Create a new document"
 msgstr "Criar novo ficheiro"
 
 #: ../data/ui/gummi.glade.h:49
-#, fuzzy
 msgid "Create new Project"
 msgstr "Criar novo Projecto"
 
 #: ../data/ui/gummi.glade.h:50
-#, fuzzy
 msgid "Create new document from template.."
 msgstr "Criar novo ficheiro de um modelo"
 
@@ -212,22 +208,18 @@ msgstr ""
 "bibtex presente no ficheiro"
 
 #: ../data/ui/gummi.glade.h:55
-#, fuzzy
 msgid "Document"
 msgstr "Ficheiro"
 
 #: ../data/ui/gummi.glade.h:56
-#, fuzzy
 msgid "Document _Statistics"
 msgstr "Estatísticas do _Ficheiro"
 
 #: ../data/ui/gummi.glade.h:57
-#, fuzzy
 msgid "Document name"
 msgstr "Nome do ficheiro"
 
 #: ../data/ui/gummi.glade.h:58
-#, fuzzy
 msgid "Document statistics"
 msgstr "Estatísticas do ficheiro"
 
@@ -236,12 +228,10 @@ msgid "Double line"
 msgstr "Linha dupla"
 
 #: ../data/ui/gummi.glade.h:60
-#, fuzzy
 msgid "Enable S_nippets"
 msgstr "Activar P_edaços"
 
 #: ../data/ui/gummi.glade.h:61
-#, fuzzy
 msgid "Enable S_pell checking"
 msgstr "Activar V_erificação Ortográfica"
 
@@ -254,7 +244,6 @@ msgstr ""
 "ficheiro activo"
 
 #: ../data/ui/gummi.glade.h:64
-#, fuzzy
 msgid "File path"
 msgstr "Localização do ficheiro"
 
@@ -343,12 +332,10 @@ msgid "No borders"
 msgstr "Sem margens"
 
 #: ../data/ui/gummi.glade.h:86
-#, fuzzy
 msgid "Nr of files:"
 msgstr "Nº de ficheiros flutuantes"
 
 #: ../data/ui/gummi.glade.h:87
-#, fuzzy
 msgid "Number of:"
 msgstr "Número de:"
 
@@ -393,7 +380,6 @@ msgid "Project"
 msgstr "Projecto"
 
 #: ../data/ui/gummi.glade.h:98
-#, fuzzy
 msgid "Project name:"
 msgstr "Nome do projecto:"
 
@@ -474,7 +460,6 @@ msgid "Set Compilation Options"
 msgstr "Escolher opções de compilação"
 
 #: ../data/ui/gummi.glade.h:118
-#, fuzzy
 msgid "Single Page"
 msgstr "Página única"
 
@@ -495,7 +480,6 @@ msgid "Table"
 msgstr "Tabela"
 
 #: ../data/ui/gummi.glade.h:123
-#, fuzzy
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -523,7 +507,6 @@ msgid ""
 msgstr "Use o SyncTex para rolar o visualizador até aúltima parte editada."
 
 #: ../data/ui/gummi.glade.h:129
-#, fuzzy
 msgid "Words in:"
 msgstr "Palavras no texto:"
 
@@ -532,7 +515,6 @@ msgid "Year"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:131
-#, fuzzy
 msgid "_Document"
 msgstr "_Ficheiro"
 
@@ -593,7 +575,6 @@ msgid "filter:"
 msgstr "filtro:"
 
 #: ../data/ui/gummi.glade.h:146
-#, fuzzy
 msgid "float captions"
 msgstr "legendas flutuantes"
 
@@ -602,7 +583,6 @@ msgid "floats"
 msgstr "flutuantes"
 
 #: ../data/ui/gummi.glade.h:148
-#, fuzzy
 msgid "headers"
 msgstr "cabeçalho"
 
@@ -627,7 +607,6 @@ msgid "shouldnotseeme"
 msgstr "naodevemverme"
 
 #: ../data/ui/gummi.glade.h:154
-#, fuzzy
 msgid "text"
 msgstr "texto"
 
@@ -680,7 +659,6 @@ msgid "Color Scheme"
 msgstr "Esquema de Cores"
 
 #: ../data/ui/prefs.glade.h:8
-#, fuzzy
 msgid "Compilation"
 msgstr "Compilação"
 
@@ -713,7 +691,6 @@ msgid "Editor font"
 msgstr "Fonte do editor"
 
 #: ../data/ui/prefs.glade.h:16
-#, fuzzy
 msgid "Enable SyncTeX"
 msgstr "Activar SyncTex"
 
@@ -771,19 +748,17 @@ msgstr "Nenhum"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Only when syncing preview with editor"
-msgstr "Somente quando sincronizados, visualizador e editor"
+msgstr "Somente quando sincronizados"
 
 #: ../data/ui/prefs.glade.h:31
 msgid "PDF Compiling"
 msgstr "A compilar o PDF"
 
 #: ../data/ui/prefs.glade.h:32
-#, fuzzy
 msgid "PDF Exporting"
-msgstr "A exportar o PDF"
+msgstr "Exportar PDF"
 
 #: ../data/ui/prefs.glade.h:33
-#, fuzzy
 msgid "Preview"
 msgstr "Visualizador"
 
@@ -840,7 +815,6 @@ msgid "Typesetter command"
 msgstr "Comando tipógrafo"
 
 #: ../data/ui/prefs.glade.h:47
-#, fuzzy
 msgid "Typesetter options"
 msgstr "Opções de tipógrafo"
 
@@ -869,7 +843,6 @@ msgid "compile every"
 msgstr "compilar à cada"
 
 #: ../data/ui/prefs.glade.h:54
-#, fuzzy
 msgid "compile when idle for "
 msgstr "compilar quando inactivo por"
 
@@ -1115,7 +1088,6 @@ msgid "Export to PDF"
 msgstr "Exportar para PDF"
 
 #: ../src/gui/gui-main.c:753
-#, fuzzy
 msgid "LaTeX files"
 msgstr "Iniciar um arquivo"
 
@@ -1124,7 +1096,6 @@ msgid "Text files"
 msgstr "Ficheiros de texto"
 
 #: ../src/gui/gui-main.c:771
-#, fuzzy
 msgid "Image files"
 msgstr "Imagem"
 
@@ -1133,7 +1104,6 @@ msgid "Bibtex files"
 msgstr "Ficheiros Bibtex"
 
 #: ../src/gui/gui-main.c:784
-#, fuzzy
 msgid "Gummi project files"
 msgstr "Ficheiros de projecto Gummi"
 
@@ -1198,19 +1168,15 @@ msgstr "Ficheiro não guardado %d"
 #~ msgid "Hello svn user!"
 #~ msgstr "Olá utilizador svn!"
 
-#, fuzzy
 #~ msgid "Include document"
 #~ msgstr "Abrir ficheiro LaTeX"
 
-#, fuzzy
 #~ msgid "Input document"
 #~ msgstr "Abrir ficheiro LaTeX"
 
-#, fuzzy
 #~ msgid "New document"
 #~ msgstr "Criar novo ficheiro"
 
-#, fuzzy
 #~ msgid "Open file"
 #~ msgstr "Abrir"
 

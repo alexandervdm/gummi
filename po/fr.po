@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 10:25+0100\n"
+"POT-Creation-Date: 2011-11-09 21:01+0100\n"
 "PO-Revision-Date: 2011-11-07 20:44+0100\n"
 "Last-Translator: Yvan Duron <yvan.duron@gmail.com>, Olivier Brousse "
 "<obrousse@gmail.com>\n"
@@ -92,7 +92,6 @@ msgid "Align right"
 msgstr "Aligner à droite"
 
 #: ../data/ui/gummi.glade.h:26
-#, fuzzy
 msgid "Author"
 msgstr "Auteur"
 
@@ -129,7 +128,6 @@ msgid "Brackets"
 msgstr "Crochets"
 
 #: ../data/ui/gummi.glade.h:35
-#, fuzzy
 msgid "Build Log"
 msgstr "Log de Construction"
 
@@ -487,12 +485,7 @@ msgstr ""
 "Cette fonction nécessite que le document\n"
 "actuel soit sauvegardé. "
 
-# #
-# OB:changes to add bibliography columns translation
-# to use with the modified version of gummi.glade see diff attached file
-# #
 #: ../data/ui/gummi.glade.h:125
-#, fuzzy
 msgid "Title"
 msgstr "Titre"
 
@@ -517,7 +510,6 @@ msgid "Words in:"
 msgstr "Mots dans:"
 
 #: ../data/ui/gummi.glade.h:130
-#, fuzzy
 msgid "Year"
 msgstr "Année"
 
@@ -577,9 +569,6 @@ msgstr "Barre d'_outils"
 msgid "_View"
 msgstr "_Affichage"
 
-# #
-# OB: end of changes
-# #
 #: ../data/ui/gummi.glade.h:145
 msgid "filter:"
 msgstr "filtre:"
