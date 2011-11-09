@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 07:54+0100\n"
+"POT-Creation-Date: 2011-11-09 10:25+0100\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -123,7 +123,7 @@ msgid "Brackets"
 msgstr "Firkantparantes"
 
 #: ../data/ui/gummi.glade.h:35
-msgid "Build log"
+msgid "Build Log"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:36

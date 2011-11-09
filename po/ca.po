@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 07:54+0100\n"
+"POT-Creation-Date: 2011-11-09 10:25+0100\n"
 "PO-Revision-Date: 2011-11-07 22:16+0100\n"
 "Last-Translator: Marc Vinyals <marcvinyals@velodius.com>\n"
 "Language-Team: Català <marcvinyals@velodius.com>\n"
@@ -125,7 +125,8 @@ msgid "Brackets"
 msgstr "Claudàtors"
 
 #: ../data/ui/gummi.glade.h:35
-msgid "Build log"
+#, fuzzy
+msgid "Build Log"
 msgstr "Registre de muntatge"
 
 #: ../data/ui/gummi.glade.h:36

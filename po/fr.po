@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 07:54+0100\n"
+"POT-Creation-Date: 2011-11-09 10:25+0100\n"
 "PO-Revision-Date: 2011-11-07 20:44+0100\n"
 "Last-Translator: Yvan Duron <yvan.duron@gmail.com>, Olivier Brousse "
 "<obrousse@gmail.com>\n"
@@ -92,6 +92,7 @@ msgid "Align right"
 msgstr "Aligner à droite"
 
 #: ../data/ui/gummi.glade.h:26
+#, fuzzy
 msgid "Author"
 msgstr "Auteur"
 
@@ -128,7 +129,8 @@ msgid "Brackets"
 msgstr "Crochets"
 
 #: ../data/ui/gummi.glade.h:35
-msgid "Build log"
+#, fuzzy
+msgid "Build Log"
 msgstr "Log de Construction"
 
 #: ../data/ui/gummi.glade.h:36
@@ -490,6 +492,7 @@ msgstr ""
 # to use with the modified version of gummi.glade see diff attached file
 # #
 #: ../data/ui/gummi.glade.h:125
+#, fuzzy
 msgid "Title"
 msgstr "Titre"
 
@@ -514,6 +517,7 @@ msgid "Words in:"
 msgstr "Mots dans:"
 
 #: ../data/ui/gummi.glade.h:130
+#, fuzzy
 msgid "Year"
 msgstr "Année"
 
@@ -977,8 +981,8 @@ msgstr "Saisissez un nouveau raccourci clavier"
 #: ../src/gui/gui-snippets.c:320
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
-"Saisissez un nouveau raccourci clavier, ou appuyez sur 'Retour arrière' pour "
-"effacer"
+"Saisissez un nouveau raccourci clavier, ou appuyez sur \"Retour arrière\" "
+"pour effacer"
 
 #: ../src/gui/gui-menu.c:120
 #, c-format
