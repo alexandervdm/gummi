@@ -64,9 +64,8 @@ extern GummiGui* gui;
 const gchar* insens_widgets_str[] = {
     "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
-    "menu_exportpdf", "menu_undo", "menu_redo", "menu_cut", "menu_copy",
-    "menu_paste", "menu_delete", "menu_selectall", "import_tabs",
-    "menu_document", "menu_search", "menu_export", "menu_close"
+    "menu_exportpdf", "import_tabs", "menu_close", "menu_edit",
+    "menu_document", "menu_search", "menu_export"
 };
 
 GummiGui* gui_init (GtkBuilder* builder) {
