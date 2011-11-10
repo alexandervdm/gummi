@@ -74,16 +74,35 @@ gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basenam
     return lmkcmd;
 }
 
+
 gchar* latexmk_get_flags (const gchar *method) {
     gchar *lmkflags;
-    if (utils_strequal (method, "texpdf")) {
-        lmkflags = g_strdup_printf("-silent -pdf");
-    }
-    else if (utils_strequal (method, "texdvipdf")){
-        lmkflags = g_strdup_printf("-silent -pdfdvi");
+    
+    if (config_get_value("synctex")) {
+        if (utils_strequal (method, "texpdf")) {
+            lmkflags = g_strdup_printf("-e \"\\$pdflatex = 'pdflatex -synctex=1'\" -silent");
+        }
+        else {
+            lmkflags = g_strdup_printf("-e \"\\$latex = 'latex -synctex=1'\" -silent");
+        }
     }
     else {
-        lmkflags = "-pdfps";
+        if (utils_strequal (method, "texpdf")) {
+            lmkflags = g_strdup_printf("-e \"\\$pdflatex = 'pdflatex -synctex=0'\" -silent");
+        }
+        else {
+            lmkflags = g_strdup_printf("-e \"\\$latex = 'latex -synctex=0'\" -silent");
+        }
+    }
+    
+    if (utils_strequal (method, "texpdf")) {
+        lmkflags = g_strconcat (lmkflags, " -pdf", NULL);
+    }
+    else if (utils_strequal (method, "texdvipdf")) {
+        lmkflags = g_strconcat (lmkflags, " -pdfdvi", NULL);
+    }
+    else {
+        lmkflags = g_strconcat (lmkflags, " -pdfps", NULL);
     }
     return lmkflags;
 }
