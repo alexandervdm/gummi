@@ -86,7 +86,7 @@ msgstr "Rechts uitlijnen"
 
 #: ../data/ui/gummi.glade.h:26
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: ../data/ui/gummi.glade.h:27
 msgid "Best Fit"
@@ -122,7 +122,7 @@ msgstr "Brackets:"
 
 #: ../data/ui/gummi.glade.h:35
 msgid "Build Log"
-msgstr ""
+msgstr "Bouw Log"
 
 #: ../data/ui/gummi.glade.h:36
 msgid "Caption:"
@@ -139,7 +139,7 @@ msgstr "Controleer _Updates"
 #: ../data/ui/gummi.glade.h:39
 #, fuzzy
 msgid "Close Project"
-msgstr "Creer nieuw document"
+msgstr "Creëer nieuw document"
 
 #: ../data/ui/gummi.glade.h:40
 msgid "Columns:"
@@ -154,6 +154,8 @@ msgid ""
 "Compile LaTeX document\n"
 "and update preview."
 msgstr ""
+"Compileer LaTeX document\n"
+"en update preview."
 
 #: ../data/ui/gummi.glade.h:44
 #, fuzzy
@@ -169,11 +171,11 @@ msgstr "Compileer bibliografie"
 
 #: ../data/ui/gummi.glade.h:47
 msgid "Continuous, One Column"
-msgstr ""
+msgstr "Continue, Eén Column"
 
 #: ../data/ui/gummi.glade.h:48
 msgid "Create a new document"
-msgstr "Creer nieuw document"
+msgstr "Creëer nieuw document"
 
 #: ../data/ui/gummi.glade.h:49
 #, fuzzy
@@ -183,36 +185,38 @@ msgstr "Creer nieuw document"
 #: ../data/ui/gummi.glade.h:50
 #, fuzzy
 msgid "Create new document from template.."
-msgstr "Creer nieuw document"
+msgstr "Creëer nieuw document van template.."
 
 #: ../data/ui/gummi.glade.h:51
 msgid "Deletes the selected template"
-msgstr ""
+msgstr "Verwijder de geselecteerde template"
 
 #: ../data/ui/gummi.glade.h:52
 msgid "Detect"
-msgstr ""
+msgstr "Opsporen"
 
 #: ../data/ui/gummi.glade.h:53
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr ""
+"Spoor vermelding van een bibtex\n"
+"bestand in het huidige document"
 
 #: ../data/ui/gummi.glade.h:55
 #, fuzzy
 msgid "Document"
-msgstr "Compileer"
+msgstr "Document"
 
 #: ../data/ui/gummi.glade.h:56
 #, fuzzy
 msgid "Document _Statistics"
-msgstr "Document statistieken"
+msgstr "Document Statistieken"
 
 #: ../data/ui/gummi.glade.h:57
 #, fuzzy
 msgid "Document name"
-msgstr "Compileer"
+msgstr "Document naam"
 
 #: ../data/ui/gummi.glade.h:58
 #, fuzzy
@@ -225,12 +229,12 @@ msgstr "Dubbele lijn"
 
 #: ../data/ui/gummi.glade.h:60
 msgid "Enable S_nippets"
-msgstr ""
+msgstr "S_nippets inschakelen"
 
 #: ../data/ui/gummi.glade.h:61
 #, fuzzy
 msgid "Enable S_pell checking"
-msgstr "Spell checker taal:"
+msgstr "S_pellchecker inschakelen"
 
 #: ../data/ui/gummi.glade.h:62
 msgid ""
@@ -243,7 +247,7 @@ msgstr ""
 #: ../data/ui/gummi.glade.h:64
 #, fuzzy
 msgid "File path"
-msgstr "Bestanden opslaan:"
+msgstr "Bestandspad:"
 
 #: ../data/ui/gummi.glade.h:65
 msgid "File:"
@@ -294,6 +298,8 @@ msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
+"Maak een template van het\n"
+"huidige actieve document."
 
 #: ../data/ui/gummi.glade.h:78
 msgid "Match case"
@@ -313,7 +319,7 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:82
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 #: ../data/ui/gummi.glade.h:83
 msgid "New from _Template"
@@ -329,11 +335,11 @@ msgstr "Geen omlijning"
 
 #: ../data/ui/gummi.glade.h:86
 msgid "Nr of files:"
-msgstr ""
+msgstr "Aantal bestanden:"
 
 #: ../data/ui/gummi.glade.h:87
 msgid "Number of:"
-msgstr ""
+msgstr "Aantal:"
 
 #: ../data/ui/gummi.glade.h:88
 msgid "Open"
@@ -345,15 +351,15 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:90
 msgid "Open the selected template"
-msgstr ""
+msgstr "Open de geselecteerde template"
 
 #: ../data/ui/gummi.glade.h:91
 msgid "PDF Preview could not initialise."
-msgstr ""
+msgstr "PDF voorbeschouwer kon niet gestart worden"
 
 #: ../data/ui/gummi.glade.h:92
 msgid "Page Layout in Preview"
-msgstr ""
+msgstr "Pagina layout in voorbeschouwer"
 
 #: ../data/ui/gummi.glade.h:93
 msgid "Parentheses"
@@ -361,11 +367,11 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:94
 msgid "Pause updating the preview pane."
-msgstr ""
+msgstr "Pauzeer het updaten van de voorbeschouwer."
 
 #: ../data/ui/gummi.glade.h:95
 msgid "Preview Pane"
-msgstr "Voorproef paneel"
+msgstr "Voorbeschouwer"
 
 #: ../data/ui/gummi.glade.h:96
 msgid "Previous"
@@ -400,7 +406,7 @@ msgstr "Vervangen door:"
 
 #: ../data/ui/gummi.glade.h:104
 msgid "Root path:"
-msgstr ""
+msgstr "Basis pad:"
 
 #: ../data/ui/gummi.glade.h:105
 msgid "Rows:"
@@ -408,11 +414,11 @@ msgstr "Rijen:"
 
 #: ../data/ui/gummi.glade.h:106
 msgid "Run _BibTeX"
-msgstr ""
+msgstr "Uitvoeren van _BibTeX"
 
 #: ../data/ui/gummi.glade.h:107
 msgid "Run _Makeindex"
-msgstr ""
+msgstr "Uitvoeren van _Makeindex"
 
 #: ../data/ui/gummi.glade.h:108
 msgid "Save"
@@ -448,10 +454,12 @@ msgid ""
 "Select a file to add it \n"
 "to the active project. "
 msgstr ""
+"Selecteer een bestand om het \n"
+"toe te voegen aan het project."
 
 #: ../data/ui/gummi.glade.h:117
 msgid "Set Compilation Options"
-msgstr ""
+msgstr "Compileer Instellingen"
 
 #: ../data/ui/gummi.glade.h:118
 #, fuzzy
@@ -468,7 +476,7 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:121
 msgid "Sync Preview with Editor"
-msgstr ""
+msgstr "Sync Voorbeschouwer met Editor"
 
 #: ../data/ui/gummi.glade.h:122
 msgid "Table"
@@ -479,11 +487,13 @@ msgstr "Tabel"
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
-msgstr "Deze functie vereist een actieve\n"
+msgstr ""
+"Deze functie vereist dat het \n"
+"actieve document opgeslagen is."
 
 #: ../data/ui/gummi.glade.h:125
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../data/ui/gummi.glade.h:126
 #, fuzzy
@@ -503,11 +513,11 @@ msgstr ""
 #: ../data/ui/gummi.glade.h:129
 #, fuzzy
 msgid "Words in:"
-msgstr "Vette tekst"
+msgstr "Woorden in:"
 
 #: ../data/ui/gummi.glade.h:130
 msgid "Year"
-msgstr ""
+msgstr "Jaar"
 
 #: ../data/ui/gummi.glade.h:131
 #, fuzzy
@@ -720,7 +730,7 @@ msgstr "Markering:"
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Insert _spaces instead of tabs"
-msgstr ""
+msgstr "Gebruik spaties in plaats van tabs"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Latexmk"
@@ -737,15 +747,15 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:26
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Overigen"
 
 #: ../data/ui/prefs.glade.h:27
 msgid "Never"
-msgstr ""
+msgstr "Nooit"
 
 #: ../data/ui/prefs.glade.h:28
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Only when syncing preview with editor"
@@ -763,7 +773,7 @@ msgstr "PDF Compilatie"
 #: ../data/ui/prefs.glade.h:32
 #, fuzzy
 msgid "Preview"
-msgstr "Voorproef paneel"
+msgstr "Voorbeschouwer"
 
 #: ../data/ui/prefs.glade.h:33
 msgid "Rubber"
