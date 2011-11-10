@@ -33,9 +33,13 @@
 #include "utils.h"
 
 /* local functions */
-static gchar* version_texlive (const gchar* output);
+static gchar* get_version_output (const gchar* command, int linenr);
 static gchar* version_latexmk (const gchar* output);
 static gchar* version_rubber (const gchar* output);
+
+
+static gdouble get_texlive_version (void);
+
 
 gboolean external_exists (const gchar* program) {
     const gchar *fullpath = g_find_program_in_path (program);
@@ -50,10 +54,36 @@ gboolean external_hasflag (const gchar* program, const gchar* flag) {
     return TRUE;
 }
 
-gchar* external_version (const gchar* program) {
-    const gchar* getversion = g_strdup_printf("%s --version", program);
+static gchar* get_version_output (const gchar* command, int linenr) {
+    const gchar* getversion = g_strdup_printf("%s --version", command); 
     Tuple2 cmdgetv = utils_popen_r (getversion);
     gchar* output = (gchar*)cmdgetv.second;
+    gchar* result = g_strdup ("Unknown");
+    
+    if (output == NULL) {
+        slog (L_ERROR, "Error detecting version for %s. "
+                       "Please report a bug\n", command);
+        return result;
+    }
+    
+    gchar** splitted = g_strsplit(output, "\n", BUFSIZ);
+    result = splitted[linenr];
+    return result;
+}
+
+gdouble external_version2 (ExternalProg program) {
+    
+    switch(program) {
+        case EX_TEXLIVE: return get_texlive_version ();
+        default: return -1;
+    }
+}
+
+gchar* external_version (const gchar* program) {
+    const gchar* getversion = g_strdup_printf("%s --version", program); 
+    Tuple2 cmdgetv = utils_popen_r (getversion);
+    gchar* output = (gchar*)cmdgetv.second;
+
     gchar* result = g_strdup ("Unknown, please report a bug");
     
     if (output == NULL) return result;
@@ -61,11 +91,11 @@ gchar* external_version (const gchar* program) {
     gchar** lines = g_strsplit(output, "\n", BUFSIZ);
     result = lines[0];
     
-    /* the output for some programs needs tweaking, use local functions */
-    if (utils_strequal (program, C_LATEX)) {
-        result = version_texlive (result);
-    }
-    else if (utils_strequal (program, C_RUBBER)) {
+    /* pdfTeX 3.1415926-1.40.10 (TeX Live 2009)
+       pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
+       pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2011)
+    */
+    if (utils_strequal (program, C_RUBBER)) {
         result = version_rubber (result);
     }
     else if (utils_strequal (program, C_LATEXMK)) {
@@ -75,12 +105,27 @@ gchar* external_version (const gchar* program) {
     return result;
 }
 
-static gchar* version_texlive (const gchar* output) {
-    gchar** parts = g_strsplit(output, " ", BUFSIZ);
-    /* if we start splitting the year number from this string, please keep
-     * in mind that debian/ubuntu like themselves a lot: (TeX Live 2009/Debian)
-     * */
-    gchar* version = g_strdup_printf("%s %s %s", parts[2], parts[3], parts[4]);
+static gdouble get_texlive_version (void) {
+    gdouble version = 0;
+    gchar* output = get_version_output (C_LATEX, 0);
+
+    /* Keep in mind that Ubuntu/Debian like themselves a lot:
+     * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
+     * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2009/Debian) */
+     
+    gchar** splitted = g_strsplit(output, " ", BUFSIZ);
+    gchar* segment = g_strdup (splitted[4]);
+    gchar* resultstr = "";
+    
+    int n;
+    for (n=0;n<g_utf8_strlen(segment, -1);n++) {    
+        if (g_ascii_isdigit (segment[n])) {
+           gchar* addchar = g_strdup_printf("%c", segment[n]);
+           resultstr = g_strconcat (resultstr, addchar, NULL);
+        }
+    }
+    
+    version = g_ascii_strtod (resultstr, NULL);
     return version;
 }
 

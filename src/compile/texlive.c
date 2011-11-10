@@ -38,19 +38,16 @@
 
 gboolean pdf_detected = FALSE;
 gboolean xel_detected = FALSE;
+int texversion = 0;
 
 
 /* All the functions for "pure" building with texlive only tools */
 
 void texlive_init (void) {
-
-    /* pdfTeX 3.1415926-1.40.10 (TeX Live 2009)
-       pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
-       pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2011)
-    */
     
     if (external_exists (C_LATEX)) {
-        slog (L_INFO, "%s was found installed..\n", external_version(C_LATEX));
+        texversion = external_version2 (EX_TEXLIVE);
+        slog (L_INFO, "Texlive %d was found installed..\n", texversion);
     }
     
     if (external_exists (C_PDFLATEX)) {
@@ -64,7 +61,6 @@ void texlive_init (void) {
               external_version (C_XELATEX));
         xel_detected = TRUE;
     }
-    
 }
 
 gboolean texlive_active (void) {
