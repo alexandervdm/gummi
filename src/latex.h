@@ -59,4 +59,7 @@ gboolean latex_typesetter_active (gchar* typesetter);
 gboolean latex_method_active (gchar* method);
 gboolean latex_run_makeindex (GuEditor* ec);
 
+gboolean latex_use_synctex (void);
+gboolean latex_use_shellescaping (void);
+
 #endif /* __GUMMI_LATEX_H__ */

@@ -1292,7 +1292,7 @@
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="opt_shellescape">
-                                <property name="label" translatable="yes">--shell-escape</property>
+                                <property name="label" translatable="yes">Use shell-escape</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>

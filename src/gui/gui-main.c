@@ -203,7 +203,9 @@ GummiGui* gui_init (GtkBuilder* builder) {
     
     GtkCheckMenuItem *menu_autosync =
         GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_autosync"));
-    if (config_get_value ("autosync")) {
+        
+        
+    if (latex_use_synctex()) {
         gtk_check_menu_item_set_active(menu_autosync, TRUE);
     } else  {
         config_set_value ("autosync", "False");
@@ -626,11 +628,23 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user) {
 }
 
 void typesetter_setup (void) {
+    // change the pref gui options on changing typesetter:
     gboolean status = texlive_active();
     gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_runbibtex), status);
     gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_runmakeindex), status);
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_shellescape),
                               status);
+                              
+    gboolean texormk = (texlive_active() || latexmk_active());
+    if (config_get_value("synctex") && texormk) {
+        gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, TRUE);
+    }
+    else {
+        gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, FALSE);
+    }
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), texormk);
+    
+    
     slog (L_INFO, "Typesetter %s configured.\n",config_get_value("typesetter"));
 }
 

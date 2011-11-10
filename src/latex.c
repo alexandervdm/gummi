@@ -294,4 +294,13 @@ gboolean latex_run_makeindex (GuEditor* ec) {
     return FALSE;
 }
 
+gboolean latex_use_synctex (void) {
+    return (config_get_value("synctex") && config_get_value("autosync"));
+}
+
+gboolean latex_use_shellescaping (void) {
+   return config_get_value ("shellescape"); 
+}
+
+
 

@@ -312,16 +312,16 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
         gtk_toggle_button_set_active (prefs->method_texdvipspdf, TRUE);
     }
     
-    if (!config_get_value("shellescape"))
+    if (!latex_use_shellescaping())
         gtk_toggle_button_set_active (prefs->opt_shellescape, FALSE);
     else {
         gtk_toggle_button_set_active (prefs->opt_shellescape, TRUE);
     }
     
-    if (!config_get_value("synctex"))
-        gtk_toggle_button_set_active (prefs->opt_synctex, FALSE);
-    else {
+    if (config_get_value("synctex") && !rubber_active())
         gtk_toggle_button_set_active (prefs->opt_synctex, TRUE);
+    else {
+        gtk_toggle_button_set_active (prefs->opt_synctex, FALSE);
     }
 }
 
