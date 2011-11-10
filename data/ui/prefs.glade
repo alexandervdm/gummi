@@ -157,10 +157,10 @@
                             <child>
                               <object class="GtkCheckButton" id="textwrapping">
                                 <property name="label" translatable="yes">Enable text wrapping</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_textwrapping" swapped="no"/>
                               </object>
@@ -197,10 +197,10 @@
                             <child>
                               <object class="GtkCheckButton" id="wordwrapping">
                                 <property name="label" translatable="yes">Do not split words over two lines</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_wordwrapping" swapped="no"/>
                               </object>
@@ -273,10 +273,10 @@
                         <child>
                           <object class="GtkCheckButton" id="line_numbers">
                             <property name="label" translatable="yes">Display line numbers</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="toggle_linenumbers" swapped="no"/>
                           </object>
@@ -342,10 +342,10 @@
                         <child>
                           <object class="GtkCheckButton" id="highlighting">
                             <property name="label" translatable="yes">Highlight current line</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="toggle_highlighting" swapped="no"/>
                           </object>
@@ -495,10 +495,10 @@
                         <child>
                           <object class="GtkCheckButton" id="spaces_instof_tabs">
                             <property name="label" translatable="yes">Insert _spaces instead of tabs</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="toggle_spaces_instof_tabs" swapped="no"/>
@@ -565,10 +565,10 @@
                         <child>
                           <object class="GtkCheckButton" id="autoindentation">
                             <property name="label" translatable="yes">_Enable automatic indentation</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
                             <signal name="toggled" handler="toggle_autoindentation" swapped="no"/>
@@ -634,10 +634,10 @@
                         <child>
                           <object class="GtkButton" id="configure_snippets">
                             <property name="label" translatable="yes">Configure snippets</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="xalign">0.49000000953674316</property>
                             <signal name="clicked" handler="on_configure_snippets_clicked" swapped="no"/>
                           </object>
@@ -707,10 +707,10 @@
                             <child>
                               <object class="GtkCheckButton" id="autosaving">
                                 <property name="label" translatable="yes">_Autosave files every</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_autosaving" swapped="no"/>
@@ -837,11 +837,11 @@
                         </child>
                         <child>
                           <object class="GtkFontButton" id="editor_font">
+                            <property name="use_action_appearance">False</property>
                             <property name="width_request">300</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="use_action_appearance">False</property>
                             <signal name="font-set" handler="on_editor_font_set" swapped="no"/>
                           </object>
                           <packing>
@@ -1073,12 +1073,12 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_pdflatex">
                                 <property name="label" translatable="yes">TeXLive with PdfTeX</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
@@ -1117,12 +1117,12 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_xelatex">
                                 <property name="label" translatable="yes">TeXLive with XeTeX</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
@@ -1162,12 +1162,12 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_rubber">
                                 <property name="label" translatable="yes">Rubber</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
@@ -1207,12 +1207,12 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_latexmk">
                                 <property name="label" translatable="yes">Latexmk</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="focus_on_click">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
@@ -1293,11 +1293,11 @@
                             <child>
                               <object class="GtkCheckButton" id="opt_shellescape">
                                 <property name="label" translatable="yes">--shell-escape</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_shellescape" swapped="no"/>
@@ -1335,11 +1335,11 @@
                             <child>
                               <object class="GtkCheckButton" id="opt_synctex">
                                 <property name="label" translatable="yes">Enable SyncTeX</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_synctex_toggled" swapped="no"/>
@@ -1418,10 +1418,10 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texpdf">
                                 <property name="label" translatable="yes">TeX → PDF</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="on_method_texpdf_toggled" swapped="no"/>
@@ -1459,12 +1459,13 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texdvipdf">
                                 <property name="label" translatable="yes">TeX → DVI → PDF</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <property name="group">method_texpdf</property>
                                 <signal name="toggled" handler="on_method_texdvipdf_toggled" swapped="no"/>
                               </object>
                               <packing>
@@ -1500,12 +1501,13 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texdvipspdf">
                                 <property name="label" translatable="yes">TeX → DVI → PS → PDF</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <property name="group">method_texpdf</property>
                                 <signal name="toggled" handler="on_method_texdvipspdf_toggled" swapped="no"/>
                               </object>
                               <packing>
@@ -1590,10 +1592,10 @@
                             <property name="can_focus">False</property>
                             <child>
                               <object class="GtkCheckButton" id="compile_status">
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_compilestatus" swapped="no"/>
@@ -1994,10 +1996,10 @@
                             <child>
                               <object class="GtkCheckButton" id="auto_export">
                                 <property name="label" translatable="yes">Automatically export PDF on document save</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                                 <signal name="toggled" handler="toggle_autoexport" swapped="no"/>
                               </object>
@@ -2061,10 +2063,10 @@
             <child>
               <object class="GtkButton" id="prefs_reset">
                 <property name="label" translatable="yes">_Reset defaults</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="image">image1</property>
                 <property name="use_underline">True</property>
                 <signal name="clicked" handler="on_prefs_reset_clicked" swapped="no"/>
@@ -2078,10 +2080,10 @@
             <child>
               <object class="GtkButton" id="prefs_close">
                 <property name="label">gtk-close</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_prefs_close_clicked" swapped="no"/>
