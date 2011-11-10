@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 21:01+0100\n"
+"POT-Creation-Date: 2011-11-10 18:41+0100\n"
 "PO-Revision-Date: 2011-11-08 13:19-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Portuguese\n"
@@ -112,7 +112,7 @@ msgstr "Linhas em todas as células"
 
 #: ../data/ui/gummi.glade.h:31
 msgid "Border outline"
-msgstr "Margem com contorno"
+msgstr "Linhas com contorno"
 
 #: ../data/ui/gummi.glade.h:32
 msgid "Braces"
@@ -129,7 +129,7 @@ msgstr "Colchetes"
 #: ../data/ui/gummi.glade.h:35
 #, fuzzy
 msgid "Build Log"
-msgstr "Log da criação"
+msgstr "Log de compilação"
 
 #: ../data/ui/gummi.glade.h:36
 msgid "Caption:"
@@ -160,12 +160,12 @@ msgid ""
 "Compile LaTeX document\n"
 "and update preview."
 msgstr ""
-"Compile o ficheiro\n"
+"Compile o documento\n"
 "e actualizar o visualizador"
 
 #: ../data/ui/gummi.glade.h:44
 msgid "Compile _Document"
-msgstr "Compilar _Ficheiro"
+msgstr "Compilar _Documento"
 
 #: ../data/ui/gummi.glade.h:45
 msgid ""
@@ -181,7 +181,7 @@ msgstr "Contínuo, Uma Coluna"
 
 #: ../data/ui/gummi.glade.h:48
 msgid "Create a new document"
-msgstr "Criar novo ficheiro"
+msgstr "Criar novo documento"
 
 #: ../data/ui/gummi.glade.h:49
 msgid "Create new Project"
@@ -189,7 +189,7 @@ msgstr "Criar novo Projecto"
 
 #: ../data/ui/gummi.glade.h:50
 msgid "Create new document from template.."
-msgstr "Criar novo ficheiro de um modelo"
+msgstr "Criar novo documento de um modelo"
 
 #: ../data/ui/gummi.glade.h:51
 msgid "Deletes the selected template"
@@ -205,11 +205,11 @@ msgid ""
 "file in the current document"
 msgstr ""
 "Detectar menção a um ficheiro\n"
-"bibtex presente no ficheiro"
+"bibtex presente no documento"
 
 #: ../data/ui/gummi.glade.h:55
 msgid "Document"
-msgstr "Ficheiro"
+msgstr "Documento"
 
 #: ../data/ui/gummi.glade.h:56
 msgid "Document _Statistics"
@@ -217,11 +217,11 @@ msgstr "Estatísticas do _Ficheiro"
 
 #: ../data/ui/gummi.glade.h:57
 msgid "Document name"
-msgstr "Nome do ficheiro"
+msgstr "Nome do documento"
 
 #: ../data/ui/gummi.glade.h:58
 msgid "Document statistics"
-msgstr "Estatísticas do ficheiro"
+msgstr "Estatísticas do documento"
 
 #: ../data/ui/gummi.glade.h:59
 msgid "Double line"
@@ -241,7 +241,7 @@ msgid ""
 "active document"
 msgstr ""
 "Erro no\n"
-"ficheiro activo"
+"documento activo"
 
 #: ../data/ui/gummi.glade.h:64
 msgid "File path"
@@ -289,7 +289,7 @@ msgstr "Etiqueta:"
 
 #: ../data/ui/gummi.glade.h:75
 msgid "Load a file"
-msgstr "Iniciar um arquivo"
+msgstr "Abrir um ficheiro"
 
 #: ../data/ui/gummi.glade.h:76
 msgid ""
@@ -297,7 +297,7 @@ msgid ""
 "current active document."
 msgstr ""
 "Criar um modelo a partir\n"
-"do ficheiro actual."
+"do documento actual."
 
 #: ../data/ui/gummi.glade.h:78
 msgid "Match case"
@@ -311,7 +311,7 @@ msgstr "Equivaler apenas a palavra completa"
 msgid "Matrix"
 msgstr "Matriz"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
 msgid "N/A"
 msgstr "N/A"
 
@@ -484,7 +484,7 @@ msgid ""
 "This function requires the current\n"
 "active document to be saved. "
 msgstr ""
-"Esta função requer o ficheiro\n"
+"Esta função requer o documento\n"
 "actual para ser guardado."
 
 #: ../data/ui/gummi.glade.h:125
@@ -516,7 +516,7 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:131
 msgid "_Document"
-msgstr "_Ficheiro"
+msgstr "_Documento"
 
 #: ../data/ui/gummi.glade.h:132
 msgid "_Edit"
@@ -590,11 +590,11 @@ msgstr "cabeçalho"
 msgid "math environments"
 msgstr "ambientes matemáticos"
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:571
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
 msgid "no bibliography file detected"
 msgstr "ficheiro de bibliografia não encontrado"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
 msgid "none"
 msgstr "nenhum"
 
@@ -635,192 +635,193 @@ msgid "toolbutton7"
 msgstr "toolbutton7"
 
 #: ../data/ui/prefs.glade.h:2
-msgid "--shell-escape"
-msgstr "--shell-escape"
-
-#: ../data/ui/prefs.glade.h:3
 msgid "Always"
 msgstr "Sempre"
 
-#: ../data/ui/prefs.glade.h:4
+#: ../data/ui/prefs.glade.h:3
 msgid "Automatic Indentation"
 msgstr "Indentação Automática"
 
-#: ../data/ui/prefs.glade.h:5
+#: ../data/ui/prefs.glade.h:4
 msgid "Automatically export PDF on document save"
-msgstr "Exportar automaticamente para PDF, quando guardar o ficheiro"
+msgstr "Exportar automaticamente para PDF, quando guardar o documento"
 
-#: ../data/ui/prefs.glade.h:6
+#: ../data/ui/prefs.glade.h:5
 msgid "Cache size"
 msgstr "Tamanho do cache"
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:6
 msgid "Color Scheme"
 msgstr "Esquema de Cores"
 
-#: ../data/ui/prefs.glade.h:8
+#: ../data/ui/prefs.glade.h:7
 msgid "Compilation"
 msgstr "Compilação"
 
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:8
 msgid "Compilation steps"
 msgstr "Passos da compilação"
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:9
 msgid "Configure snippets"
 msgstr "Configurar pedaços"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:10
 msgid "Default Text"
 msgstr "Texto Padrão"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:11
 msgid "Display line numbers"
 msgstr "Mostrar número das linhas"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:12
 msgid "Do not split words over two lines"
 msgstr "Não dividir palavras em duas linhas"
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:13
 msgid "Editor"
 msgstr "Editor"
 
-#: ../data/ui/prefs.glade.h:15
+#: ../data/ui/prefs.glade.h:14
 msgid "Editor font"
 msgstr "Fonte do editor"
 
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:15
 msgid "Enable SyncTeX"
 msgstr "Activar SyncTex"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:16
 msgid "Enable text wrapping"
 msgstr "Activar quebra de texto"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:17
 msgid "File saving"
 msgstr "A guardar"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:18
 msgid "Font & Colors"
 msgstr "Fontes e Cores"
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:19
 msgid "Gummi Preferences"
 msgstr "Preferências"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:20
 msgid "Highlight current line"
 msgstr "Realçar linha actual"
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:21
 msgid "Highlighting"
 msgstr "A realçar"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:22
 msgid "Insert _spaces instead of tabs"
 msgstr "Inserir _espaços em vez de parágrafos"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:23
 msgid "Latexmk"
 msgstr "Latexmk"
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:24
 msgid "Line numbers"
 msgstr "Números de linhas"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:25
 msgid "MB"
 msgstr "MB"
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:26
 msgid "Miscellaneous"
 msgstr "Diversos"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:27
 msgid "Never"
 msgstr "Nunca"
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:28
 msgid "None"
 msgstr "Nenhum"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:29
 msgid "Only when syncing preview with editor"
 msgstr "Somente quando sincronizados"
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:30
 msgid "PDF Compiling"
 msgstr "A compilar o PDF"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:31
 msgid "PDF Exporting"
 msgstr "Exportar PDF"
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:32
 msgid "Preview"
 msgstr "Visualizador"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:33
 msgid "Rubber"
 msgstr "Apagador"
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:34
 msgid "Snippets"
 msgstr "Pedaços"
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:35
 msgid "Spell check language"
 msgstr "Linguagem da verificação ortográfica"
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:36
 msgid "Tab stops"
 msgstr "Paragens do tabulador"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:37
 msgid "Tab width:"
 msgstr "Largura do tabulador:"
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:38
 msgid "TeX → DVI → PDF"
 msgstr "TeX → DVI → PDF"
 
-#: ../data/ui/prefs.glade.h:40
+#: ../data/ui/prefs.glade.h:39
 msgid "TeX → DVI → PS → PDF"
 msgstr "TeX → DVI → PS → PDF"
 
-#: ../data/ui/prefs.glade.h:41
+#: ../data/ui/prefs.glade.h:40
 msgid "TeX → PDF"
 msgstr "TeX → PDF"
 
-#: ../data/ui/prefs.glade.h:42
+#: ../data/ui/prefs.glade.h:41
 msgid "TeXLive with PdfTeX"
 msgstr "TexLive com PdfTex"
 
-#: ../data/ui/prefs.glade.h:43
+#: ../data/ui/prefs.glade.h:42
 msgid "TeXLive with XeTeX"
 msgstr "TexLive com XeTex"
 
-#: ../data/ui/prefs.glade.h:44
+#: ../data/ui/prefs.glade.h:43
 msgid "Text wrapping"
 msgstr "Quebra de texto"
 
-#: ../data/ui/prefs.glade.h:45
+#: ../data/ui/prefs.glade.h:44
 msgid "This program was not found on your system."
 msgstr "O programa não foi encontrado."
 
-#: ../data/ui/prefs.glade.h:46
+#: ../data/ui/prefs.glade.h:45
 msgid "Typesetter command"
 msgstr "Comando tipógrafo"
 
-#: ../data/ui/prefs.glade.h:47
+#: ../data/ui/prefs.glade.h:46
 msgid "Typesetter options"
 msgstr "Opções de tipógrafo"
 
-#: ../data/ui/prefs.glade.h:48
+#: ../data/ui/prefs.glade.h:47
 msgid "Use animated scroll"
 msgstr "Utilizar rolagem animada"
+
+#: ../data/ui/prefs.glade.h:48
+#, fuzzy
+msgid "Use shell-escape"
+msgstr "--shell-escape"
 
 #: ../data/ui/prefs.glade.h:49
 msgid "View"
@@ -913,48 +914,48 @@ msgstr "Não é possível converter o texto para UTF-8!\n"
 msgid "%s: No such file or directory\n"
 msgstr "%s: Ficheiro ou pasta não encontrado\n"
 
-#: ../src/gui/gui-preview.c:868
+#: ../src/gui/gui-preview.c:871
 #, c-format
 msgid "of %d"
 msgstr "de %d"
 
-#: ../src/gui/gui-infoscreen.c:115
+#: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
 msgstr "O visualizador de PDF não pode ser iniciado."
 
-#: ../src/gui/gui-infoscreen.c:116
+#: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
-msgstr "O ficheiro parace estar vazio ou é inválido."
+msgstr "O documento parace estar vazio ou é inválido."
 
-#: ../src/gui/gui-infoscreen.c:117
+#: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
 msgstr "Programa para copilação não encontrado."
 
-#: ../src/gui/gui-infoscreen.c:126
+#: ../src/gui/gui-infoscreen.c:128
 msgid ""
 "The active document contains errors. The live preview\n"
 "function will resume automatically once these errors\n"
 "are resolved. Additional information is available on\n"
 "the Build log tab.\n"
 msgstr ""
-"O ficheiro actual contêm erros. O visualizador\n"
+"O documento actual contêm erros. O visualizador\n"
 "reiniciará automaticamente quando os erros forem\n"
 "resolvidos. Pode encontrar informações adicionais\n"
 "no log de criação.\n"
 
-#: ../src/gui/gui-infoscreen.c:131
+#: ../src/gui/gui-infoscreen.c:133
 msgid ""
 "The document that is currently active appears to be an\n"
 "an invalid LaTeX file. You can continue working on it,\n"
 "load the default text or use the Project menu to add\n"
 "it to an active project.\n"
 msgstr ""
-"O ficheiro actual parece ser inválido.\n"
+"O documento actual parece ser inválido.\n"
 "Para continuar a trabalhar,\n"
 "inicie o texto padrão ou use a opção Projecto\n"
 "para adicioná-lo a um projecto.\n"
 
-#: ../src/gui/gui-infoscreen.c:136
+#: ../src/gui/gui-infoscreen.c:138
 msgid ""
 "The selected compilation program could not be located.\n"
 "Please restore the program or select an alternative\n"
@@ -1023,97 +1024,97 @@ msgstr "Número de fórmulas em modo interno"
 msgid "Number of math displayed"
 msgstr "Número de fórmulas em modo externo"
 
-#: ../src/gui/gui-main.c:323
+#: ../src/gui/gui-main.c:324
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Arquivo de Swap já existente para %s, utilizar este?"
 
-#: ../src/gui/gui-main.c:361 ../src/latex.c:262
+#: ../src/gui/gui-main.c:362 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "O ficheiro já existe. Guardar novamente?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:465
+#: ../src/gui/gui-main.c:466
 #, c-format
 msgid "Loading template ..."
 msgstr "Iniciando o modelo ..."
 
-#: ../src/gui/gui-main.c:521
+#: ../src/gui/gui-main.c:522
 msgid "Compiling bibliography file..."
 msgstr "A compilar o ficheiro de bibliografia"
 
-#: ../src/gui/gui-main.c:523
+#: ../src/gui/gui-main.c:524
 msgid "bibliography compiled without errors"
 msgstr "bibliografia compilada sem erros"
 
-#: ../src/gui/gui-main.c:525
+#: ../src/gui/gui-main.c:526
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Erro ao compilar a bibliografia ou ficheiro não encontrado..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:529
 msgid "error compiling bibliography file"
 msgstr "erro ao compilar a bibliografia"
 
-#: ../src/gui/gui-main.c:562
+#: ../src/gui/gui-main.c:563
 #, c-format
 msgid "%s loaded"
 msgstr "%s iniciados"
 
-#: ../src/gui/gui-main.c:649
+#: ../src/gui/gui-main.c:662
 msgid "Do you want to save the changes you have made?"
 msgstr "Guardar as mudanças que foram feitas?"
 
-#: ../src/gui/gui-main.c:667
+#: ../src/gui/gui-main.c:680
 msgid "Open LaTeX document"
-msgstr "Abrir ficheiro LaTeX"
+msgstr "Abrir documento LaTeX"
 
-#: ../src/gui/gui-main.c:670
+#: ../src/gui/gui-main.c:683
 msgid "Select an image to insert"
 msgstr "Seleccione uma imagem para inserir"
 
-#: ../src/gui/gui-main.c:671
+#: ../src/gui/gui-main.c:684
 msgid "Select bibliography file"
 msgstr "Seleccione o arquivo de bibliografia"
 
-#: ../src/gui/gui-main.c:704
+#: ../src/gui/gui-main.c:717
 msgid "Save LaTeX document"
-msgstr "Guardar ficheiro LaTeX"
+msgstr "Guardar documento LaTeX"
 
-#: ../src/gui/gui-main.c:705
+#: ../src/gui/gui-main.c:718
 msgid "Save as LaTeX document"
-msgstr "Guardar como ficheiro LaTeX"
+msgstr "Guardar como documento LaTeX"
 
-#: ../src/gui/gui-main.c:706
+#: ../src/gui/gui-main.c:719
 msgid "Export to PDF"
 msgstr "Exportar para PDF"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:766
 msgid "LaTeX files"
 msgstr "Iniciar um arquivo"
 
-#: ../src/gui/gui-main.c:758
+#: ../src/gui/gui-main.c:771
 msgid "Text files"
 msgstr "Ficheiros de texto"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:784
 msgid "Image files"
 msgstr "Imagem"
 
-#: ../src/gui/gui-main.c:778
+#: ../src/gui/gui-main.c:791
 msgid "Bibtex files"
 msgstr "Ficheiros Bibtex"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:797
 msgid "Gummi project files"
 msgstr "Ficheiros de projecto Gummi"
 
-#: ../src/editor.c:555
+#: ../src/editor.c:563
 msgid "Top reached, search from bottom?"
-msgstr "Início do ficheiro alcançado, procurar do final?"
+msgstr "Início alcançado, procurar do final?"
 
-#: ../src/editor.c:562
+#: ../src/editor.c:570
 msgid "Bottom reached, search from top?"
-msgstr "Final do ficheiro alcançado, buscar do início?"
+msgstr "Final alcançado, buscar do início?"
 
 #: ../src/latex.c:270
 msgid ""
@@ -1121,7 +1122,7 @@ msgid ""
 "Document contains errors.\n"
 msgstr ""
 "Não é possível exportar para PDF..\n"
-"O ficheiro contêm errors.\n"
+"O documento contêm errors.\n"
 
 #: ../src/update.c:114
 #, c-format
@@ -1150,7 +1151,7 @@ msgid ""
 "http://dev.midnightcoding.org"
 msgstr ""
 "%s foram encontrados erros, é necessário reiniciar. Seu trabalho será "
-"restaurado quando o ficheiro reiniciar. Por favor, reporte bugs a: http://"
+"restaurado quando o documento reiniciar. Por favor, reporte bugs a: http://"
 "dev.midnightcoding.org"
 
 #: ../src/utils.c:162
@@ -1160,7 +1161,7 @@ msgstr "Confirmação"
 #: ../src/tabmanager.c:73
 #, c-format
 msgid "Unsaved Document %d"
-msgstr "Ficheiro não guardado %d"
+msgstr "Documento não guardado %d"
 
 #~ msgid "  "
 #~ msgstr "  "

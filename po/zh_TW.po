@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 21:01+0100\n"
+"POT-Creation-Date: 2011-11-10 18:42+0100\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -305,7 +305,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
 msgid "N/A"
 msgstr "無"
 
@@ -588,11 +588,11 @@ msgstr "標頭內總字數"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:571
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
 msgid "none"
 msgstr "無"
 
@@ -634,195 +634,195 @@ msgid "toolbutton7"
 msgstr "toolbutton7"
 
 #: ../data/ui/prefs.glade.h:2
-msgid "--shell-escape"
-msgstr ""
-
-#: ../data/ui/prefs.glade.h:3
 msgid "Always"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:4
+#: ../data/ui/prefs.glade.h:3
 msgid "Automatic Indentation"
 msgstr "自動縮排"
 
-#: ../data/ui/prefs.glade.h:5
+#: ../data/ui/prefs.glade.h:4
 msgid "Automatically export PDF on document save"
 msgstr "存檔時自動匯出 PDF"
 
-#: ../data/ui/prefs.glade.h:6
+#: ../data/ui/prefs.glade.h:5
 msgid "Cache size"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:7
+#: ../data/ui/prefs.glade.h:6
 msgid "Color Scheme"
 msgstr "色彩配置"
 
-#: ../data/ui/prefs.glade.h:8
+#: ../data/ui/prefs.glade.h:7
 #, fuzzy
 msgid "Compilation"
 msgstr "確認"
 
-#: ../data/ui/prefs.glade.h:9
+#: ../data/ui/prefs.glade.h:8
 msgid "Compilation steps"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:10
+#: ../data/ui/prefs.glade.h:9
 msgid "Configure snippets"
 msgstr "設定文字片段"
 
-#: ../data/ui/prefs.glade.h:11
+#: ../data/ui/prefs.glade.h:10
 msgid "Default Text"
 msgstr "預設文字"
 
-#: ../data/ui/prefs.glade.h:12
+#: ../data/ui/prefs.glade.h:11
 msgid "Display line numbers"
 msgstr "顯示行號"
 
-#: ../data/ui/prefs.glade.h:13
+#: ../data/ui/prefs.glade.h:12
 msgid "Do not split words over two lines"
 msgstr "換行時不將字詞拆開"
 
-#: ../data/ui/prefs.glade.h:14
+#: ../data/ui/prefs.glade.h:13
 msgid "Editor"
 msgstr "編輯器"
 
-#: ../data/ui/prefs.glade.h:15
+#: ../data/ui/prefs.glade.h:14
 msgid "Editor font"
 msgstr "編輯器字體"
 
-#: ../data/ui/prefs.glade.h:16
+#: ../data/ui/prefs.glade.h:15
 #, fuzzy
 msgid "Enable SyncTeX"
 msgstr "啟用文字片段"
 
-#: ../data/ui/prefs.glade.h:17
+#: ../data/ui/prefs.glade.h:16
 msgid "Enable text wrapping"
 msgstr "啟用文字換行"
 
-#: ../data/ui/prefs.glade.h:18
+#: ../data/ui/prefs.glade.h:17
 msgid "File saving"
 msgstr "存檔"
 
-#: ../data/ui/prefs.glade.h:19
+#: ../data/ui/prefs.glade.h:18
 msgid "Font & Colors"
 msgstr "字型及顏色"
 
-#: ../data/ui/prefs.glade.h:20
+#: ../data/ui/prefs.glade.h:19
 msgid "Gummi Preferences"
 msgstr "Gummi 偏好設定"
 
-#: ../data/ui/prefs.glade.h:21
+#: ../data/ui/prefs.glade.h:20
 msgid "Highlight current line"
 msgstr "標示當前的行"
 
-#: ../data/ui/prefs.glade.h:22
+#: ../data/ui/prefs.glade.h:21
 msgid "Highlighting"
 msgstr "強調"
 
-#: ../data/ui/prefs.glade.h:23
+#: ../data/ui/prefs.glade.h:22
 msgid "Insert _spaces instead of tabs"
 msgstr "插入空格來替代Tab字符(_S)"
 
-#: ../data/ui/prefs.glade.h:24
+#: ../data/ui/prefs.glade.h:23
 msgid "Latexmk"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:25
+#: ../data/ui/prefs.glade.h:24
 msgid "Line numbers"
 msgstr "行號"
 
-#: ../data/ui/prefs.glade.h:26
+#: ../data/ui/prefs.glade.h:25
 msgid "MB"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:27
+#: ../data/ui/prefs.glade.h:26
 msgid "Miscellaneous"
 msgstr "雜項"
 
-#: ../data/ui/prefs.glade.h:28
+#: ../data/ui/prefs.glade.h:27
 msgid "Never"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:29
+#: ../data/ui/prefs.glade.h:28
 msgid "None"
 msgstr "無"
 
-#: ../data/ui/prefs.glade.h:30
+#: ../data/ui/prefs.glade.h:29
 msgid "Only when syncing preview with editor"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:31
+#: ../data/ui/prefs.glade.h:30
 msgid "PDF Compiling"
 msgstr "PDF編譯"
 
-#: ../data/ui/prefs.glade.h:32
+#: ../data/ui/prefs.glade.h:31
 msgid "PDF Exporting"
 msgstr "PDF 匯出"
 
-#: ../data/ui/prefs.glade.h:33
+#: ../data/ui/prefs.glade.h:32
 #, fuzzy
 msgid "Preview"
 msgstr "預覽"
 
-#: ../data/ui/prefs.glade.h:34
+#: ../data/ui/prefs.glade.h:33
 msgid "Rubber"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:35
+#: ../data/ui/prefs.glade.h:34
 msgid "Snippets"
 msgstr "文字片段"
 
-#: ../data/ui/prefs.glade.h:36
+#: ../data/ui/prefs.glade.h:35
 msgid "Spell check language"
 msgstr "拼字檢查語言"
 
-#: ../data/ui/prefs.glade.h:37
+#: ../data/ui/prefs.glade.h:36
 msgid "Tab stops"
 msgstr "Tab 停止位置"
 
-#: ../data/ui/prefs.glade.h:38
+#: ../data/ui/prefs.glade.h:37
 msgid "Tab width:"
 msgstr "Tab 字符寬度:"
 
-#: ../data/ui/prefs.glade.h:39
+#: ../data/ui/prefs.glade.h:38
 msgid "TeX → DVI → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:40
+#: ../data/ui/prefs.glade.h:39
 msgid "TeX → DVI → PS → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:41
+#: ../data/ui/prefs.glade.h:40
 msgid "TeX → PDF"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:42
+#: ../data/ui/prefs.glade.h:41
 msgid "TeXLive with PdfTeX"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:43
+#: ../data/ui/prefs.glade.h:42
 msgid "TeXLive with XeTeX"
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:44
+#: ../data/ui/prefs.glade.h:43
 msgid "Text wrapping"
 msgstr "文字換行"
 
-#: ../data/ui/prefs.glade.h:45
+#: ../data/ui/prefs.glade.h:44
 msgid "This program was not found on your system."
 msgstr ""
 
-#: ../data/ui/prefs.glade.h:46
+#: ../data/ui/prefs.glade.h:45
 msgid "Typesetter command"
 msgstr "排版指令:"
 
-#: ../data/ui/prefs.glade.h:47
+#: ../data/ui/prefs.glade.h:46
 #, fuzzy
 msgid "Typesetter options"
 msgstr "排版指令:"
 
-#: ../data/ui/prefs.glade.h:48
+#: ../data/ui/prefs.glade.h:47
 msgid "Use animated scroll"
+msgstr ""
+
+#: ../data/ui/prefs.glade.h:48
+msgid "Use shell-escape"
 msgstr ""
 
 #: ../data/ui/prefs.glade.h:49
@@ -916,24 +916,24 @@ msgstr "無法轉換文字為UTF-8格式!\n"
 msgid "%s: No such file or directory\n"
 msgstr "%s: 找不到此檔案或目錄\n"
 
-#: ../src/gui/gui-preview.c:868
+#: ../src/gui/gui-preview.c:871
 #, c-format
 msgid "of %d"
 msgstr "之 %d"
 
-#: ../src/gui/gui-infoscreen.c:115
+#: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:116
+#: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:117
+#: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:126
+#: ../src/gui/gui-infoscreen.c:128
 msgid ""
 "The active document contains errors. The live preview\n"
 "function will resume automatically once these errors\n"
@@ -941,7 +941,7 @@ msgid ""
 "the Build log tab.\n"
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:131
+#: ../src/gui/gui-infoscreen.c:133
 msgid ""
 "The document that is currently active appears to be an\n"
 "an invalid LaTeX file. You can continue working on it,\n"
@@ -949,7 +949,7 @@ msgid ""
 "it to an active project.\n"
 msgstr ""
 
-#: ../src/gui/gui-infoscreen.c:136
+#: ../src/gui/gui-infoscreen.c:138
 msgid ""
 "The selected compilation program could not be located.\n"
 "Please restore the program or select an alternative\n"
@@ -1012,96 +1012,96 @@ msgstr "行內數學式總數"
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
-#: ../src/gui/gui-main.c:323
+#: ../src/gui/gui-main.c:324
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
 
-#: ../src/gui/gui-main.c:361 ../src/latex.c:262
+#: ../src/gui/gui-main.c:362 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:465
+#: ../src/gui/gui-main.c:466
 #, c-format
 msgid "Loading template ..."
 msgstr "載入模版中..."
 
-#: ../src/gui/gui-main.c:521
+#: ../src/gui/gui-main.c:522
 msgid "Compiling bibliography file..."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui/gui-main.c:523
+#: ../src/gui/gui-main.c:524
 msgid "bibliography compiled without errors"
 msgstr "參考文獻已成功編譯"
 
-#: ../src/gui/gui-main.c:525
+#: ../src/gui/gui-main.c:526
 msgid "Error compiling bibliography file or none detected..."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:529
 msgid "error compiling bibliography file"
 msgstr "編譯參考文獻過程發生錯誤"
 
-#: ../src/gui/gui-main.c:562
+#: ../src/gui/gui-main.c:563
 #, c-format
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui/gui-main.c:649
+#: ../src/gui/gui-main.c:662
 msgid "Do you want to save the changes you have made?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui/gui-main.c:667
+#: ../src/gui/gui-main.c:680
 msgid "Open LaTeX document"
 msgstr "開啟LaTeX文件"
 
-#: ../src/gui/gui-main.c:670
+#: ../src/gui/gui-main.c:683
 msgid "Select an image to insert"
 msgstr "選擇要插入的影像"
 
-#: ../src/gui/gui-main.c:671
+#: ../src/gui/gui-main.c:684
 msgid "Select bibliography file"
 msgstr "選擇參考文獻檔案"
 
-#: ../src/gui/gui-main.c:704
+#: ../src/gui/gui-main.c:717
 msgid "Save LaTeX document"
 msgstr "儲存LaTeX文件"
 
-#: ../src/gui/gui-main.c:705
+#: ../src/gui/gui-main.c:718
 msgid "Save as LaTeX document"
 msgstr "另存為LaTeX文件"
 
-#: ../src/gui/gui-main.c:706
+#: ../src/gui/gui-main.c:719
 msgid "Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:766
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
-#: ../src/gui/gui-main.c:758
+#: ../src/gui/gui-main.c:771
 msgid "Text files"
 msgstr "純文字文件"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:784
 msgid "Image files"
 msgstr "影像檔"
 
-#: ../src/gui/gui-main.c:778
+#: ../src/gui/gui-main.c:791
 msgid "Bibtex files"
 msgstr "參考文獻"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:797
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Gummi 偏好設定"
 
-#: ../src/editor.c:555
+#: ../src/editor.c:563
 msgid "Top reached, search from bottom?"
 msgstr "已搜尋到文首, 從文末開始尋找?"
 
-#: ../src/editor.c:562
+#: ../src/editor.c:570
 msgid "Bottom reached, search from top?"
 msgstr "已搜尋到文末, 從文首開始尋找?"
 
