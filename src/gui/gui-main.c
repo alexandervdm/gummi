@@ -60,13 +60,19 @@ extern GummiGui* gui;
  * tutorials written by Micah Carrick that can be found on:
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
-/* Widgets names to be set insensitive */
+/* Widgets names to be set insensitive in ZERO TABS situations*/
 const gchar* insens_widgets_str[] = {
     "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
-    "menu_exportpdf", "import_tabs", "menu_close", "menu_edit",
-    "menu_document", "menu_search", "menu_export"
+    "menu_exportpdf", "import_tabs", "menu_close", "menu_export", 
+    "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste", 
+    "menu_delete", "menu_selectall", "menu_preferences", "menu_find",
+    "menu_prev", "menu_next", "menu_pdfcompile", "menu_compileopts",
+    "menu_runmakeindex", "menu_runbibtex", "menu_docstat", "menu_spelling",
+    "menu_snippets", "menu_edit", "menu_document", "menu_search"
 };
+
+
 
 GummiGui* gui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
