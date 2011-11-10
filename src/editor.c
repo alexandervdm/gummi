@@ -218,13 +218,16 @@ gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename) {
 void editor_fileinfo_cleanup (GuEditor* ec) {
     gchar* auxfile = NULL;
     gchar* logfile = NULL;
-
+    gchar* syncfile = NULL;
+    
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname (ec->filename);
         gchar* basename = g_path_get_basename (ec->filename);
         auxfile = g_strdup_printf ("%s%c.%s.aux", C_TMPDIR,
                 G_DIR_SEPARATOR, basename);
         logfile = g_strdup_printf ("%s%c.%s.log", C_TMPDIR,
+                G_DIR_SEPARATOR, basename);
+        syncfile = g_strdup_printf ("%s%c.%s.synctex.gz", C_TMPDIR,
                 G_DIR_SEPARATOR, basename);
         g_free (basename);
         g_free (dirname);
@@ -233,15 +236,19 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
         gchar* basename = g_path_get_basename (ec->workfile);
         auxfile = g_strdup_printf ("%s.aux", ec->fdname);
         logfile = g_strdup_printf ("%s.log", ec->fdname);
+        syncfile = g_strdup_printf ("%s.synctex.gz", ec->fdname);
         g_free (basename);
         g_free (dirname);
     }
+
+    // TODO: make a loop or maybe make register of created files? proc? 
 
     close (ec->workfd);
     ec->workfd = -1;
 
     g_remove (auxfile);
     g_remove (logfile);
+    g_remove (syncfile);
     g_remove (ec->fdname);
     g_remove (ec->workfile);
     g_remove (ec->pdffile);
@@ -249,6 +256,7 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
 
     g_free (auxfile);
     g_free (logfile);
+    g_free (syncfile);
     g_free (ec->fdname);
     g_free (ec->filename);
     g_free (ec->workfile);
