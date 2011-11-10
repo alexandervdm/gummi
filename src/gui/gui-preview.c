@@ -41,6 +41,7 @@
 #include <math.h>
 
 #include "configfile.h"
+#include "constants.h"
 #include "gui/gui-main.h"
 #include "environment.h"
 
@@ -952,6 +953,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
     if (config_get_value ("synctex") && config_get_value ("autosync") && 
             synctex_run_parser(pc, sync_to, tex_file)) {
         
+        
         SyncNode *node;
         if ((node = synctex_one_node_found(pc)) == NULL) {
             // See if the nodes are so close they all fit in the window 
@@ -1001,7 +1003,7 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
     gint column = gtk_text_iter_get_line_offset(sync_to);
     slog(L_DEBUG, "Syncing to %s, line %i, column %i\n", tex_file, line, column);
 
-    synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, "/tmp/", 1);
+    synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
 
     synctex_clear_sync_nodes(pc);
 
@@ -1998,7 +2000,7 @@ gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
         
         slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
     
-        synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, "/tmp/", 1);
+        synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
         
         if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
             synctex_node_t node;

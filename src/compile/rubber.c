@@ -79,13 +79,6 @@ gchar* rubber_get_flags (const gchar *method) {
     return rubflags;
 }
 
-/* base form : 
- * 
- * cd "/tmp"; env openout_any=a rubber -p -d -q --into="/tmp" "/tmp/gummi_4I2B2V"
- * 
- */
-
-
 
 
 
