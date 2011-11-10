@@ -167,11 +167,12 @@ void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
     GtkTreeSelection* selection = gtk_tree_view_get_selection 
                                          (gui->projectgui->proj_treeview);
                                          
-    gtk_tree_selection_get_selected (selection, &model, &iter);
-    gtk_tree_model_get (model, &iter, 3, &value, -1);
+    if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+        gtk_tree_model_get (model, &iter, 3, &value, -1);
     
-    if (project_remove_document (gummi->project->projfile, value)) {
-        projectgui_list_projfiles (gummi->project->projfile);
+        if (project_remove_document (gummi->project->projfile, value)) {
+            projectgui_list_projfiles (gummi->project->projfile);
+        }
     }
 }
 
