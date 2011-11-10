@@ -613,6 +613,9 @@ void on_menu_about_activate (GtkWidget *widget, void * user) {
         "Cameron Grout", NULL };
 
     const gchar* translators =
+        "**  Visit our website for instructions on  **\n"
+        "**  contributing or updating a translation **\n"
+        "\n"
         "Arabic: Hamad Mohammad\n"
         "Brazilian-Portugese: Fernando Cruz & Alexandre Guimarães\n"
         "Catalan: Marc Vinyals\n"
