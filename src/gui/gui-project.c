@@ -71,7 +71,7 @@ void projectgui_set_rootfile (gint position) {
     tablabel_set_bold_text (g_active_tab->page);
 }
 
-void projectgui_list_projfiles (gchar* active_proj) {
+int projectgui_list_projfiles (gchar* active_proj) {
     gchar* content = NULL;
     GtkTreeIter iter;
     GError* err = NULL;
@@ -85,7 +85,7 @@ void projectgui_list_projfiles (gchar* active_proj) {
 
     if (!g_file_get_contents (active_proj, &content, NULL, &err)) {
         slog (L_ERROR, "%s\n", err->message);
-        return;
+        return -1;
     }
     
     files = project_list_files (content);
@@ -104,6 +104,7 @@ void projectgui_list_projfiles (gchar* active_proj) {
 
         gtk_list_store_set (store, &iter, 0, pic, 1, name, 2, path, 3, tmp, -1);
     }
+    return amount;
 }
 
 GdkPixbuf* projectgui_get_status_pixbuf (ProjFileStatus status) {
@@ -154,7 +155,9 @@ void on_projfile_add_clicked (GtkWidget* widget, void* user) {
     gchar* selected_file = get_open_filename (TYPE_LATEX);
     
     if (project_add_document (gummi->project->projfile, selected_file)) {
-        projectgui_list_projfiles (gummi->project->projfile);
+        int amount = projectgui_list_projfiles (gummi->project->projfile);
+        gtk_label_set_text (gui->projectgui->proj_nroffiles, 
+                            g_strdup_printf("%d", amount));
     }
     gui_open_file (selected_file);
 }
@@ -171,7 +174,9 @@ void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
         gtk_tree_model_get (model, &iter, 3, &value, -1);
     
         if (project_remove_document (gummi->project->projfile, value)) {
-            projectgui_list_projfiles (gummi->project->projfile);
+            int amount = projectgui_list_projfiles (gummi->project->projfile);
+            gtk_label_set_text (gui->projectgui->proj_nroffiles, 
+                                g_strdup_printf("%d", amount));
         }
     }
 }

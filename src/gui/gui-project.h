@@ -67,6 +67,6 @@ GdkPixbuf* projectgui_get_status_pixbuf (ProjFileStatus status);
 
 void projectgui_set_rootfile (gint position);
 
-void projectgui_list_projfiles (gchar* active_proj);
+int projectgui_list_projfiles (gchar* active_proj);
 
 #endif /* __GUMMI_GUI_PROJECT_H__ */
