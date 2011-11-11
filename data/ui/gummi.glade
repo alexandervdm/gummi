@@ -955,6 +955,7 @@
               <object class="GtkSpinButton" id="spinbutton3">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="invisible_char_set">True</property>
@@ -975,6 +976,7 @@
               <object class="GtkSpinButton" id="spinbutton4">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="invisible_char_set">True</property>
@@ -1115,6 +1117,7 @@
               <object class="GtkSpinButton" id="spinbutton1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="invisible_char_set">True</property>
@@ -1135,6 +1138,7 @@
               <object class="GtkSpinButton" id="spinbutton2">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="invisible_char_set">True</property>
@@ -3338,9 +3342,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
