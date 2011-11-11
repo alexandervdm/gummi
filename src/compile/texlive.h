@@ -30,7 +30,7 @@
 
 #include <glib.h>
 
-void texlive_init (void);
+int texlive_init (void);
 
 gboolean texlive_active (void);
 gboolean pdflatex_active (void);

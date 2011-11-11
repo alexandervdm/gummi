@@ -85,6 +85,7 @@ struct _GummiGui {
     GtkCheckMenuItem* menu_toolbar;
     GtkCheckMenuItem* menu_statusbar;
     GtkCheckMenuItem* menu_rightpane;
+    GtkCheckMenuItem* menu_autosync;
     GtkMenuItem* recent[5];
     gint insens_widget_size;
     GtkWidget** insens_widgets;

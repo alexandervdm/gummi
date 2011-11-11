@@ -49,14 +49,14 @@
 #include "compile/latexmk.h"
 #include "compile/texlive.h"
 
-
+extern Gummi* gummi;
 
 GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
     l->compilelog = NULL;
     l->modified_since_compile = FALSE;
     
-    texlive_init ();
+    l->tex_version = texlive_init ();
     rubber_init ();
     latexmk_init ();
     
@@ -294,12 +294,23 @@ gboolean latex_run_makeindex (GuEditor* ec) {
     return FALSE;
 }
 
+gboolean latex_can_synctex (void) {
+    if (gummi->latex->tex_version >= 2008) {
+        if (!rubber_active()) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+
 gboolean latex_use_synctex (void) {
     return (config_get_value("synctex") && config_get_value("autosync"));
 }
 
 gboolean latex_use_shellescaping (void) {
-   return config_get_value ("shellescape"); 
+    if (config_get_value ("shellescape")) return TRUE;
+    return FALSE;
 }
 
 

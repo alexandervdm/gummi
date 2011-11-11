@@ -33,17 +33,17 @@
 
 #include "configfile.h"
 #include "constants.h"
+#include "latex.h"
 #include "utils.h"
 #include "external.h"
 
 gboolean pdf_detected = FALSE;
 gboolean xel_detected = FALSE;
-int texversion = 0;
-
 
 /* All the functions for "pure" building with texlive only tools */
 
-void texlive_init (void) {
+int texlive_init (void) {
+    int texversion = 0;
     
     if (external_exists (C_LATEX)) {
         texversion = external_version2 (EX_TEXLIVE);
@@ -61,6 +61,7 @@ void texlive_init (void) {
               external_version (C_XELATEX));
         xel_detected = TRUE;
     }
+    return texversion;
 }
 
 gboolean texlive_active (void) {

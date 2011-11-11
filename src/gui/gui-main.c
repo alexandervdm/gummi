@@ -206,17 +206,15 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
     
-    GtkCheckMenuItem *menu_autosync =
-        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_autosync"));
-        
-        
-    if (latex_use_synctex()) {
-        gtk_check_menu_item_set_active(menu_autosync, TRUE);
-    } else  {
-        config_set_value ("autosync", "False");
-        gtk_check_menu_item_set_active(menu_autosync, FALSE);
+    g->menu_autosync = 
+        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_autosync"));
+    
+    if (latex_can_synctex() && config_get_value ("synctex")) {
+        gtk_widget_set_sensitive (GTK_WIDGET (g->menu_autosync), TRUE);
+        gboolean async = latex_use_synctex();
+        gtk_check_menu_item_set_active (g->menu_autosync, (async? TRUE: FALSE));
     }
-
+        
     if (!config_get_value ("compile_status"))
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
 
@@ -641,6 +639,9 @@ void typesetter_setup (void) {
                               status);
                               
     gboolean texormk = (texlive_active() || latexmk_active());
+    
+    
+    
     if (config_get_value("synctex") && texormk) {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, TRUE);
     }

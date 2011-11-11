@@ -318,10 +318,13 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
         gtk_toggle_button_set_active (prefs->opt_shellescape, TRUE);
     }
     
-    if (config_get_value("synctex") && !rubber_active())
-        gtk_toggle_button_set_active (prefs->opt_synctex, TRUE);
-    else {
-        gtk_toggle_button_set_active (prefs->opt_synctex, FALSE);
+    if (latex_can_synctex()) {
+        if (config_get_value ("synctex")) {
+            gtk_toggle_button_set_active (prefs->opt_synctex, TRUE);
+        }
+        else {
+            gtk_toggle_button_set_active (prefs->opt_synctex, FALSE);
+        }
     }
 }
 
@@ -706,6 +709,7 @@ void toggle_shellescape (GtkToggleButton* widget, void* user) {
 void on_synctex_toggled (GtkToggleButton* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("synctex", newval? "True": "False");
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_autosync), newval);
 }
 
 G_MODULE_EXPORT
