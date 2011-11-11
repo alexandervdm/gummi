@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:41+0100\n"
+"POT-Creation-Date: 2011-11-11 09:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -211,7 +211,7 @@ msgstr "Document"
 #: ../data/ui/gummi.glade.h:56
 #, fuzzy
 msgid "Document _Statistics"
-msgstr "Document Statistieken"
+msgstr "Document _Statistieken"
 
 #: ../data/ui/gummi.glade.h:57
 #, fuzzy
@@ -313,7 +313,7 @@ msgstr "Enkel complete woorden"
 msgid "Matrix"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
 msgid "N/A"
 msgstr ""
 
@@ -598,11 +598,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
 msgid "no bibliography file detected"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
 msgid "none"
 msgstr ""
 
@@ -617,7 +617,7 @@ msgstr ""
 #: ../data/ui/gummi.glade.h:154
 #, fuzzy
 msgid "text"
-msgstr "Vette tekst"
+msgstr "tekst"
 
 #: ../data/ui/gummi.glade.h:155
 msgid "toolbutton1"
@@ -645,36 +645,36 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:2
 msgid "Always"
-msgstr ""
+msgstr "Altijd"
 
 #: ../data/ui/prefs.glade.h:3
 msgid "Automatic Indentation"
-msgstr ""
+msgstr "Automatische indentatie"
 
 #: ../data/ui/prefs.glade.h:4
 msgid "Automatically export PDF on document save"
-msgstr ""
+msgstr "Exporteer PDF automatsch wanneer document opgeslagen"
 
 #: ../data/ui/prefs.glade.h:5
 msgid "Cache size"
-msgstr ""
+msgstr "Cache grootte"
 
 #: ../data/ui/prefs.glade.h:6
 msgid "Color Scheme"
-msgstr ""
+msgstr "Kleur Schema"
 
 #: ../data/ui/prefs.glade.h:7
 #, fuzzy
 msgid "Compilation"
-msgstr "Onderschrift:"
+msgstr "Compilatie"
 
 #: ../data/ui/prefs.glade.h:8
 msgid "Compilation steps"
-msgstr ""
+msgstr "Compileer stappen"
 
 #: ../data/ui/prefs.glade.h:9
 msgid "Configure snippets"
-msgstr ""
+msgstr "Configureer snippets"
 
 #: ../data/ui/prefs.glade.h:10
 msgid "Default Text"
@@ -759,7 +759,7 @@ msgstr "Geen"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Only when syncing preview with editor"
-msgstr ""
+msgstr "Alleen wanneer voorbeschouwer gesyncd is met editor"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "PDF Compiling"
@@ -825,7 +825,7 @@ msgstr "Regelafbreking:"
 
 #: ../data/ui/prefs.glade.h:44
 msgid "This program was not found on your system."
-msgstr ""
+msgstr "Dit programma is niet aangetroffen op uw systeem"
 
 #: ../data/ui/prefs.glade.h:45
 #, fuzzy
@@ -883,12 +883,12 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Activation"
-msgstr ""
+msgstr "Activatie"
 
 #: ../data/ui/snippets.glade.h:3
 #, fuzzy
 msgid "Edit:"
-msgstr "Wijzig"
+msgstr "Wijzig:"
 
 #: ../data/ui/snippets.glade.h:4
 #, fuzzy
@@ -934,7 +934,7 @@ msgstr ""
 #: ../src/gui/gui-import.c:189
 #, c-format
 msgid "%s: No such file or directory\n"
-msgstr ""
+msgstr "%s: Bestand of pad niet gevonden\n"
 
 #: ../src/gui/gui-preview.c:871
 #, c-format
@@ -943,15 +943,15 @@ msgstr ""
 
 #: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
-msgstr ""
+msgstr "Voorbeschouwer kon niet gestart worden."
 
 #: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
-msgstr ""
+msgstr "Document lijkt leeg of ongeldig te zijn."
 
 #: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
-msgstr ""
+msgstr "Compileer programma kon niet gevonden worden."
 
 #: ../src/gui/gui-infoscreen.c:128
 msgid ""
@@ -984,9 +984,8 @@ msgid ""
 msgstr ""
 
 #: ../src/gui/gui-snippets.c:317
-#, fuzzy
 msgid "Type a new shortcut"
-msgstr "Creer nieuw document"
+msgstr ""
 
 #: ../src/gui/gui-snippets.c:320
 msgid "Type a new shortcut, or press Backspace to clear"
@@ -1008,7 +1007,7 @@ msgstr ""
 #: ../src/gui/gui-menu.c:377
 #, fuzzy
 msgid "Words in text"
-msgstr "Vette tekst"
+msgstr "Woorden in tekst"
 
 #: ../src/gui/gui-menu.c:378
 msgid "Words in headers"
@@ -1034,108 +1033,108 @@ msgstr ""
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:324
+#: ../src/gui/gui-main.c:330
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:362 ../src/latex.c:262
+#: ../src/gui/gui-main.c:368 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
-msgstr ""
+msgstr "Dit bestand bestaat al. Overschrijven?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:466
+#: ../src/gui/gui-main.c:472
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:522
+#: ../src/gui/gui-main.c:528
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compileer bibliografie"
 
-#: ../src/gui/gui-main.c:524
+#: ../src/gui/gui-main.c:530
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:532
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui/gui-main.c:529
+#: ../src/gui/gui-main.c:535
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "Compileer bibliografie"
 
-#: ../src/gui/gui-main.c:563
+#: ../src/gui/gui-main.c:569
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:662
+#: ../src/gui/gui-main.c:668
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:680
+#: ../src/gui/gui-main.c:686
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:683
+#: ../src/gui/gui-main.c:689
 msgid "Select an image to insert"
-msgstr ""
+msgstr "Selecteer een plaatje om in te voegen"
 
-#: ../src/gui/gui-main.c:684
+#: ../src/gui/gui-main.c:690
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compileer bibliografie"
 
-#: ../src/gui/gui-main.c:717
+#: ../src/gui/gui-main.c:723
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:718
+#: ../src/gui/gui-main.c:724
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:719
+#: ../src/gui/gui-main.c:725
 msgid "Export to PDF"
 msgstr "Exporteer naar PDF"
 
-#: ../src/gui/gui-main.c:766
+#: ../src/gui/gui-main.c:772
 #, fuzzy
 msgid "LaTeX files"
-msgstr "Openen"
+msgstr "LaTeX bestanden"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:777
 msgid "Text files"
-msgstr ""
+msgstr "Text bestanden"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:790
 #, fuzzy
 msgid "Image files"
 msgstr "Afbeelding"
 
-#: ../src/gui/gui-main.c:791
-msgid "Bibtex files"
-msgstr ""
-
 #: ../src/gui/gui-main.c:797
+msgid "Bibtex files"
+msgstr "Bibtex bestanden"
+
+#: ../src/gui/gui-main.c:803
 #, fuzzy
 msgid "Gummi project files"
-msgstr "Gummi Voorkeuren"
+msgstr "Gummi project bestanden"
 
 #: ../src/editor.c:563
 msgid "Top reached, search from bottom?"
-msgstr ""
+msgstr "Bovenkant bereikt, zoeken vanaf onderkant?"
 
 #: ../src/editor.c:570
 msgid "Bottom reached, search from top?"
-msgstr ""
+msgstr "Onderkant bereikt, zoeken vanaf bovenkant?"
 
 #: ../src/latex.c:270
 msgid ""
@@ -1176,7 +1175,7 @@ msgstr "Onderschrift:"
 #: ../src/tabmanager.c:73
 #, c-format
 msgid "Unsaved Document %d"
-msgstr ""
+msgstr "Niet-opgeslagen Document %d"
 
 #, fuzzy
 #~ msgid "Include document"

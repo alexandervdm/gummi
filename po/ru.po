@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:41+0100\n"
+"POT-Creation-Date: 2011-11-11 09:19+0100\n"
 "PO-Revision-Date: 2010-05-23 16:18+0400\n"
 "Last-Translator: kruvalig <kruvalig@gmail.com>\n"
 "Language-Team: fedora-trans-ru\n"
@@ -310,7 +310,7 @@ msgstr "Полное совпадения слов"
 msgid "Matrix"
 msgstr "Матрица"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
 msgid "N/A"
 msgstr "N/A"
 
@@ -589,11 +589,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
 msgid "none"
 msgstr "отсутствует"
 
@@ -1025,97 +1025,97 @@ msgstr ""
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:324
+#: ../src/gui/gui-main.c:330
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:362 ../src/latex.c:262
+#: ../src/gui/gui-main.c:368 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:466
+#: ../src/gui/gui-main.c:472
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:522
+#: ../src/gui/gui-main.c:528
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:524
+#: ../src/gui/gui-main.c:530
 #, fuzzy
 msgid "bibliography compiled without errors"
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:532
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:529
+#: ../src/gui/gui-main.c:535
 #, fuzzy
 msgid "error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:563
+#: ../src/gui/gui-main.c:569
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:662
+#: ../src/gui/gui-main.c:668
 msgid "Do you want to save the changes you have made?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:680
+#: ../src/gui/gui-main.c:686
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:683
+#: ../src/gui/gui-main.c:689
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:684
+#: ../src/gui/gui-main.c:690
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:717
+#: ../src/gui/gui-main.c:723
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:718
+#: ../src/gui/gui-main.c:724
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:719
+#: ../src/gui/gui-main.c:725
 msgid "Export to PDF"
 msgstr ""
 
-#: ../src/gui/gui-main.c:766
+#: ../src/gui/gui-main.c:772
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Открыть файл"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:777
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:790
 #, fuzzy
 msgid "Image files"
 msgstr "Изображение"
 
-#: ../src/gui/gui-main.c:791
+#: ../src/gui/gui-main.c:797
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:803
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Настройки Gummi"

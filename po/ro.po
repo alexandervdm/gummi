@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:41+0100\n"
+"POT-Creation-Date: 2011-11-11 09:19+0100\n"
 "PO-Revision-Date: 2010-09-07 16:25+0200\n"
 "Last-Translator: Alexandru-Eugen Ichim <eugen@alexichim.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,7 +315,7 @@ msgstr "Potriveste doar pentru cuvantul intreg"
 msgid "Matrix"
 msgstr "Matrice"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
 msgid "N/A"
 msgstr "Indisponibil"
 
@@ -594,11 +594,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
 msgid "no bibliography file detected"
 msgstr "nu a fost detectat niciun fisier de bibliografie"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
 msgid "none"
 msgstr "deloc"
 
@@ -1029,97 +1029,97 @@ msgstr ""
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:324
+#: ../src/gui/gui-main.c:330
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:362 ../src/latex.c:262
+#: ../src/gui/gui-main.c:368 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:466
+#: ../src/gui/gui-main.c:472
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:522
+#: ../src/gui/gui-main.c:528
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:524
+#: ../src/gui/gui-main.c:530
 msgid "bibliography compiled without errors"
 msgstr "bibliografia a fost compilata fara erori"
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:532
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "Eroare in timpul compilarii bibliografiei sau nicio bibliografie nu a fost "
 "detectata.."
 
-#: ../src/gui/gui-main.c:529
+#: ../src/gui/gui-main.c:535
 msgid "error compiling bibliography file"
 msgstr "eroare in timpul compilarii fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:563
+#: ../src/gui/gui-main.c:569
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:662
+#: ../src/gui/gui-main.c:668
 msgid "Do you want to save the changes you have made?"
 msgstr "Doriti sa salvati modificarile facute?"
 
-#: ../src/gui/gui-main.c:680
+#: ../src/gui/gui-main.c:686
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:683
+#: ../src/gui/gui-main.c:689
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:684
+#: ../src/gui/gui-main.c:690
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compilarea fisierului de bibliografie"
 
-#: ../src/gui/gui-main.c:717
+#: ../src/gui/gui-main.c:723
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:718
+#: ../src/gui/gui-main.c:724
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creeaza un nou document"
 
-#: ../src/gui/gui-main.c:719
+#: ../src/gui/gui-main.c:725
 msgid "Export to PDF"
 msgstr "Exporta ca PDF"
 
-#: ../src/gui/gui-main.c:766
+#: ../src/gui/gui-main.c:772
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Deschide un Fisier"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:777
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:790
 #, fuzzy
 msgid "Image files"
 msgstr "Imagine"
 
-#: ../src/gui/gui-main.c:791
+#: ../src/gui/gui-main.c:797
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:803
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Preferinte Gummi"

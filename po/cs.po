@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi SVN700\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-10 18:41+0100\n"
+"POT-Creation-Date: 2011-11-11 09:19+0100\n"
 "PO-Revision-Date: 2011-03-03 19:15+0100\n"
 "Last-Translator: Přemysl Janouch <p.janouch@gmail.com>\n"
 "Language-Team: Czech <p.janouch@gmail.com>\n"
@@ -313,7 +313,7 @@ msgstr "Hledat pouze celá slova"
 msgid "Matrix"
 msgstr "Matice"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:574
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
 msgid "N/A"
 msgstr "nelze aplikovat"
 
@@ -596,11 +596,11 @@ msgstr "Slova v hlavičkách"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:572
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
 msgid "no bibliography file detected"
 msgstr "nenalezen žádný soubor s bibliografií"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:573
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
 msgid "none"
 msgstr "žádný"
 
@@ -1022,89 +1022,89 @@ msgstr "Počet vložených vzorců"
 msgid "Number of math displayed"
 msgstr "Počet zobrazených vzorců"
 
-#: ../src/gui/gui-main.c:324
+#: ../src/gui/gui-main.c:330
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:362 ../src/latex.c:262
+#: ../src/gui/gui-main.c:368 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "Soubor již existuje. Přepsat?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:466
+#: ../src/gui/gui-main.c:472
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:522
+#: ../src/gui/gui-main.c:528
 msgid "Compiling bibliography file..."
 msgstr "Kompiluji soubor s bibliografií..."
 
-#: ../src/gui/gui-main.c:524
+#: ../src/gui/gui-main.c:530
 msgid "bibliography compiled without errors"
 msgstr "bibliografie se zkompilována bez chyb"
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:532
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Chyba při kompilaci souboru s bibliografií nebo nebyl žádný nalezen..."
 
-#: ../src/gui/gui-main.c:529
+#: ../src/gui/gui-main.c:535
 msgid "error compiling bibliography file"
 msgstr "chyba při kompilaci souboru s bibliografií"
 
-#: ../src/gui/gui-main.c:563
+#: ../src/gui/gui-main.c:569
 #, c-format
 msgid "%s loaded"
 msgstr "%s nahráno"
 
-#: ../src/gui/gui-main.c:662
+#: ../src/gui/gui-main.c:668
 msgid "Do you want to save the changes you have made?"
 msgstr "Chcete uložit změny, které jste provedli?"
 
-#: ../src/gui/gui-main.c:680
+#: ../src/gui/gui-main.c:686
 msgid "Open LaTeX document"
 msgstr "Otevřít dokument LaTeX"
 
-#: ../src/gui/gui-main.c:683
+#: ../src/gui/gui-main.c:689
 msgid "Select an image to insert"
 msgstr "Vyberte obrázek pro vložení"
 
-#: ../src/gui/gui-main.c:684
+#: ../src/gui/gui-main.c:690
 msgid "Select bibliography file"
 msgstr "Vyberte soubor s bibliografií"
 
-#: ../src/gui/gui-main.c:717
+#: ../src/gui/gui-main.c:723
 msgid "Save LaTeX document"
 msgstr "Uložit dokument LaTeX"
 
-#: ../src/gui/gui-main.c:718
+#: ../src/gui/gui-main.c:724
 msgid "Save as LaTeX document"
 msgstr "Uložit jako dokument LaTeX"
 
-#: ../src/gui/gui-main.c:719
+#: ../src/gui/gui-main.c:725
 msgid "Export to PDF"
 msgstr "Exportovat do PDF"
 
-#: ../src/gui/gui-main.c:766
+#: ../src/gui/gui-main.c:772
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Nahrát soubor"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:777
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:790
 #, fuzzy
 msgid "Image files"
 msgstr "Obrázek"
 
-#: ../src/gui/gui-main.c:791
+#: ../src/gui/gui-main.c:797
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:803
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Nastavení Gummi"
