@@ -725,7 +725,8 @@ gchar* get_save_filename (GuFilterType type) {
         _("Save as LaTeX document"),
         _("Export to PDF"),
         "shouldn't happen",
-        "shouldn't happen"
+        "shouldn't happen",
+        _("Create project")
     };
 
     chooser = GTK_FILE_CHOOSER (gtk_file_chooser_dialog_new (
