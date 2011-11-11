@@ -45,14 +45,14 @@ typedef enum _OpenAct {
     A_LOAD_OPT,
 } OpenAct;
 
+#define GU_TABMANAGER(x) ((GuTabmanager*)x)
+typedef struct _GuTabmanager GuTabmanager;
 
-
-typedef struct _Tabmanager {
+struct _GuTabmanager {
     GuEditor* active_editor;
     GuTabContext* active_tab;
     GList* tabs;
-} GuTabmanager;
-
+};
 
 GuTabmanager* tabmanager_init (void);
 

@@ -175,6 +175,3 @@ void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
         }
     }
 }
-
-
-

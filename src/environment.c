@@ -36,7 +36,8 @@ Gummi* gummi = 0;
 GummiGui* gui = 0;
 
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
-                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm, GuProject* proj) {
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm,
+                   GuProject* proj) {
     
     Gummi* g = g_new0 (Gummi, 1);
     g->io = io;
@@ -77,14 +78,7 @@ GummiGui* gummi_get_gui (void) {
 }
 
 GuEditor* gummi_get_active_editor (void) {
-    if (g_active_tab != NULL) {
-        return g_active_editor;
-    }
-    else {
-        printf("NULLLLL!!!\n");
-        return NULL;
-    }
-    //return gummi->tabmanager->active_editor;
+    return g_active_editor;
 }
 
 GList* gummi_get_all_tabs (void) {

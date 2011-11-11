@@ -69,13 +69,4 @@ void projectgui_set_rootfile (gint position);
 
 void projectgui_list_projfiles (gchar* active_proj);
 
-
-
-
 #endif /* __GUMMI_GUI_PROJECT_H__ */
-
-
-
-
-
-

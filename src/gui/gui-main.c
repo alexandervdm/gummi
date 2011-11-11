@@ -271,7 +271,6 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
 G_MODULE_EXPORT
 void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                    int page, void *data) {
-    
     if (page == 2) {
         if (gummi_project_active ()) {
             //projectgui_enable (gummi->project, gui->projectgui);
@@ -282,15 +281,12 @@ void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     }
 }
 
-void gui_set_filename_display (GuTabContext* tc, 
-                                        gboolean title, gboolean label) {
-                                            
-    
+void gui_set_filename_display (GuTabContext* tc, gboolean title, gboolean label)
+{
     gchar* filetext = tabmanager_get_tabname (tc);
     
     if (label) tabmanagergui_update_label (tc->page, filetext);
     if (title) gui_set_window_title (tc->editor->filename, filetext);
-    
 }
 
 void gui_set_window_title (const gchar* filename, const gchar* text) {

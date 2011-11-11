@@ -37,9 +37,10 @@
 #include "gui/gui-project.h"
 #include "utils.h"
 
+// XXX: needs refactor, non gui classes should no directly acces gui and gummi
+// structure
 extern GummiGui* gui;
 extern Gummi* gummi;
-
 
 GuProject* project_init (void) {
     GuProject* p = g_new0 (GuProject, 1);
@@ -68,7 +69,8 @@ gboolean project_create_new (const gchar* filename) {
         filename = g_strdup_printf ("%s.gummi", filename);
     }
 
-    statusbar_set_message (g_strdup_printf("Creating project file: %s", filename));
+    statusbar_set_message (g_strdup_printf("Creating project file: %s",
+                filename));
     utils_set_file_contents (filename, content, -1);
     
     gummi->project->projfile = g_strdup (filename);
@@ -94,20 +96,27 @@ gboolean project_open_existing (const gchar* filename) {
 }
 
 gboolean project_close (void) {
-    GList *tabs;
-    int tabtotal, i;
+    GList *tabs = NULL;
+    int i = 0;
+    tabs = g_list_copy(gummi_get_all_tabs());
     
-    tabs = gummi_get_all_tabs ();
-    tabtotal = g_list_length (tabs);
-    
-    for (i=0; i<tabtotal; i++) {
+    // XXX: needs refactor
+    /* Disable compile thread to prevent it from compiling nonexisting editor */
+    motion_stop_compile_thread(gummi->motion);
+    tabmanager_set_active_tab(-1);
+
+    for (i = 0; i < g_list_length (tabs); i++) {
         GuTabContext* tab = GU_TAB_CONTEXT (g_list_nth_data (tabs, i));
-        
-        if (tab->editor->projfile != NULL) {
-            printf("supposed to close %s\n", tab->editor->filename);
-            tab->editor->projfile = NULL;
-        }
+        if (tab->editor->projfile != NULL)
+            on_menu_close_activate(NULL, tab);
     }
+    g_list_free(tabs);
+
+    /* Resume compile by selecting an active tag */
+    if (gummi_get_all_tabs() != NULL)
+        tabmanager_set_active_tab(0);
+    motion_start_compile_thread(gummi->motion);
+
     return TRUE;
 }
 
@@ -218,7 +227,3 @@ gchar* project_get_value (const gchar* content, const gchar* item) {
     }
     return result;
 }
-
-
-
-

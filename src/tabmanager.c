@@ -162,5 +162,3 @@ void tabmanager_update_tab (const gchar* filename) {
     slog (L_INFO, "Environment updated for %s\n", g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);    
 }
-
-

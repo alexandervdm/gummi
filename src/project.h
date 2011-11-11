@@ -55,11 +55,4 @@ gchar* project_get_value (const gchar* content, const gchar* item);
 gboolean project_add_document (const gchar* project, const gchar* fname);
 gboolean project_remove_document (const gchar* project, const gchar* fname);
 
-
-
 #endif /* __GUMMI_PROJECT_H__ */
-
-
-
-
-

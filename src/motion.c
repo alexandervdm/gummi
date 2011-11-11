@@ -62,9 +62,12 @@ GuMotion* motion_init (void) {
 void motion_start_compile_thread (GuMotion* m) {
     GError* err = NULL;
 
+    m->keep_running = TRUE;
     m->compile_thread = g_thread_create (motion_compile_thread, m, TRUE, &err);
-    if (!m->compile_thread)
+    if (!m->compile_thread) {
         slog (L_G_FATAL, "Can not create new thread: %s\n", err->message);
+        g_error_free(err);
+    }
 }
 
 void motion_stop_compile_thread (GuMotion* m) {
@@ -109,6 +112,7 @@ gpointer motion_compile_thread (gpointer data) {
             continue;
         }
         if (!mc->keep_running) {
+            g_mutex_unlock (mc->compile_mutex);
             g_thread_exit (NULL);
         }
 
@@ -143,9 +147,11 @@ gpointer motion_compile_thread (gpointer data) {
                 motion_start_errormode  (mc, "compile_error");
             } else {
                 if (!pc->uri) {
-                	previewgui_set_pdffile (pc, editor->pdffile);
+                    previewgui_set_pdffile (pc, editor->pdffile);
                 } else {
-                	previewgui_refresh (gui->previewgui, editor->sync_to_last_edit ? &(editor->last_edit) : NULL, editor->workfile);
+                    previewgui_refresh (gui->previewgui,
+                            editor->sync_to_last_edit ?
+                            &(editor->last_edit) : NULL, editor->workfile);
                 }
                 if (mc->errormode) motion_stop_errormode (mc);
             }

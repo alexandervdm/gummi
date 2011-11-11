@@ -93,7 +93,7 @@ void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
     gtk_button_set_image (tp->button, image);
     g_object_set (tp->button, "relief", GTK_RELIEF_NONE, 
                          "focus-on-click", FALSE, NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->button), FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->button), FALSE,FALSE,0);
     
     rcstyle = gtk_rc_style_new ();
     rcstyle->xthickness = rcstyle->ythickness = 0;
@@ -150,6 +150,3 @@ void tablabel_set_bold_text (GuTabPage* tp) {
     g_free (markup);
     if (!tp->bold) tp->bold = TRUE;
 }
-
-
-

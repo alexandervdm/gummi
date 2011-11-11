@@ -708,7 +708,7 @@ static inline gdouble gdkcolor_luminance(GdkColor c) {
  *  "styleName". If no background color is defined in the style, defaultBG is 
  *  used. defaultBG can be any valid parameter to gdk_color_parse().
  *  If only a foreground color was defined and it has not enough contrast to the
- *  default background, it will be overwritten. The foreground color will either 
+ *  default background, it will be overwritten. The foreground color will either
  *  be white or black, which has more contrast.
  */
 void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme, 
@@ -761,7 +761,8 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
     } else if (!background_set && foreground_set) {
         // Set bg to default and check if fg has enough contrast
         gdk_color_parse(defaultBG, &background);
-        gdouble diff = ABS(gdkcolor_luminance(foreground) - gdkcolor_luminance(background));
+        gdouble diff = ABS(gdkcolor_luminance(foreground) -
+                gdkcolor_luminance(background));
         if (diff < 0.5) {
             slog(L_INFO, "Style \"%s\" defines a foreground, but no background "
                          "color. As the fourground color has not enough "
