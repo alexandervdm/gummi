@@ -91,7 +91,8 @@ typedef struct {
     gint score;
 } SyncNode;
 
-static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x, gdouble y);
+static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
+                                 gdouble y);
 
 
 /* Update functions, to update cached values and gui-parameters after changes */
@@ -137,7 +138,8 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
 static gboolean remove_page_rendering(GuPreviewGui* pc, gint page);
 
 /* Functions for scronizing editor and preview via SyncTeX */
-static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
+static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to,
+                                   gchar* tex_file);
 #if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
 static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to);
 #endif
@@ -182,8 +184,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->uri = NULL;
     p->doc = NULL;
 
-    p->page_layout_single_page = GTK_RADIO_MENU_ITEM(gtk_builder_get_object (builder, "page_layout_single_page"));
-    p->page_layout_one_column = GTK_RADIO_MENU_ITEM(gtk_builder_get_object (builder, "page_layout_one_column"));
+    p->page_layout_single_page = GTK_RADIO_MENU_ITEM
+        (gtk_builder_get_object (builder, "page_layout_single_page"));
+    p->page_layout_one_column = GTK_RADIO_MENU_ITEM
+        (gtk_builder_get_object (builder, "page_layout_one_column"));
     p->update_timer = 0;
     p->preview_on_idle = FALSE;
     p->hadj = gtk_scrolled_window_get_hadjustment
@@ -209,9 +213,11 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_signal_connect (p->page_next,
             "clicked", G_CALLBACK (on_next_page_clicked), p);
 
-    p->on_resize_handler = g_signal_connect (p->scrollw, "size-allocate", G_CALLBACK (on_resize), p);
+    p->on_resize_handler = g_signal_connect (p->scrollw, "size-allocate",
+            G_CALLBACK (on_resize), p);
     g_signal_connect (p->drawarea, "scroll-event", G_CALLBACK (on_scroll), p);
-    p->on_expose_handler = g_signal_connect (p->drawarea, "expose-event", G_CALLBACK (on_expose), p);
+    p->on_expose_handler = g_signal_connect (p->drawarea, "expose-event",
+            G_CALLBACK (on_expose), p);
 
     g_signal_connect (p->drawarea, "button-press-event",
                       G_CALLBACK (on_button_pressed), p);
@@ -239,7 +245,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_object_unref(holder);
 
     // The scale to correct for the users DPI
-    gdouble poppler_scale = gdk_screen_get_resolution(gdk_screen_get_default())/72.;
+    gdouble poppler_scale = gdk_screen_get_resolution(
+            gdk_screen_get_default()) / 72.0;
     int i;
     for (i=0; i<N_ZOOM_SIZES; i++) {
         list_sizes[i] *= poppler_scale;
@@ -262,10 +269,12 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     }
 
     if (strcmp (config_get_value ("pagelayout"), "single_page") == 0) {
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
+        gtk_check_menu_item_set_active(
+                GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_SINGLE_PAGE;
     } else  {
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(p->page_layout_one_column), TRUE);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
+                    p->page_layout_one_column), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
     }
     
@@ -304,15 +313,18 @@ static void unblock_handlers_current_page(GuPreviewGui* pc) {
 }
 
 inline static gboolean is_vscrollbar_visible(GuPreviewGui* pc) {
-    return pc->scrollw->allocation.width != GTK_WIDGET(pc->previewgui_viewport)->allocation.width;
+    return pc->scrollw->allocation.width !=
+        GTK_WIDGET(pc->previewgui_viewport)->allocation.width;
 }
 
 inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc) {
-    return pc->scrollw->allocation.height != GTK_WIDGET(pc->previewgui_viewport)->allocation.height;
+    return pc->scrollw->allocation.height !=
+        GTK_WIDGET(pc->previewgui_viewport)->allocation.height;
 }
 
 G_MODULE_EXPORT
-void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data) {
+void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data)
+{
     //L_F_DEBUG;
 
     if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(radioitem))) {
@@ -322,7 +334,8 @@ void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data)
     GuPreviewGui* pc = gui->previewgui;
 
     PopplerPageLayout pageLayout;
-    if (gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(pc->page_layout_single_page))) {
+    if (gtk_check_menu_item_get_active(
+                GTK_CHECK_MENU_ITEM(pc->page_layout_single_page))) {
         pageLayout = POPPLER_PAGE_LAYOUT_SINGLE_PAGE;
         config_set_value("pagelayout", "single_page");
     } else {
@@ -353,7 +366,8 @@ static gboolean previewgui_animated_scroll_step(gpointer data) {
         gdouble r = (2.*pc->ascroll_steps_left) / ASCROLL_STEPS - 1;
         gdouble r2 = r*r;
 
-        gdouble rel_dist = 0.5*(ASCROLL_CONST_A * r2 * r2 * r + ASCROLL_CONST_B * r2 * r + ASCROLL_CONST_C * r) + 0.5;
+        gdouble rel_dist = 0.5*(ASCROLL_CONST_A * r2 * r2 * r +
+                ASCROLL_CONST_B * r2 * r + ASCROLL_CONST_C * r) + 0.5;
         gdouble new_x = pc->ascroll_end_x + pc->ascroll_dist_x*rel_dist;
         gdouble new_y = pc->ascroll_end_y + pc->ascroll_dist_y*rel_dist;
 
@@ -396,46 +410,59 @@ static void update_fit_scale(GuPreviewGui* pc) {
     }
 
     gdouble full_height_scaling = pc->height_pages;
-    gdouble full_height_non_scaling = (pc->n_pages-1) * get_page_margin(pc) + 2*get_document_margin(pc);
+    gdouble full_height_non_scaling = (pc->n_pages-1) * get_page_margin(pc) +
+        2*get_document_margin(pc);
 
     gint spacing;
     GtkRequisition req;
     gtk_widget_style_get (pc->scrollw, "scrollbar_spacing", &spacing, NULL);
     // Use gtk_widget_get_preferred_size with GTK+3.0
-    gtk_widget_size_request(gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
+    gtk_widget_size_request(gtk_scrolled_window_get_vscrollbar(
+                GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
     gint vscrollbar_width = spacing + req.width;
-    gtk_widget_size_request(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
+    gtk_widget_size_request(gtk_scrolled_window_get_hscrollbar(
+                GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
     gint hscrollbar_height = spacing + req.height;
 
 
-    #if GTK_MINOR_VERSION >= 24 // gdk_window_get_width is gtk-2.24 or higher.
-    gint view_width_without_bar = gdk_window_get_width(pc->previewgui_viewport->view_window);
-    gint view_height_without_bar = gdk_window_get_height(pc->previewgui_viewport->view_window);
-    #else
+#if GTK_MINOR_VERSION >= 24 // gdk_window_get_width is gtk-2.24 or higher.
+    gint view_width_without_bar = gdk_window_get_width(
+            pc->previewgui_viewport->view_window);
+    gint view_height_without_bar = gdk_window_get_height(
+            pc->previewgui_viewport->view_window);
+#else
         gint view_width_without_bar, view_height_without_bar;
         gdk_drawable_get_size (pc->previewgui_viewport->view_window, 
                                 &view_width_without_bar, 
                                 &view_height_without_bar);
-    #endif
+#endif
     
 
-    if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
+    if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(
+                    GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_width_without_bar += vscrollbar_width;
     }
 
-    if (gtk_widget_get_visible(gtk_scrolled_window_get_hscrollbar(GTK_SCROLLED_WINDOW(pc->scrollw)))) {
+    if (gtk_widget_get_visible(gtk_scrolled_window_get_hscrollbar(
+                    GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_height_without_bar += hscrollbar_height;
     }
     gint view_width_with_bar = view_width_without_bar - vscrollbar_width;
     gint view_height_with_bar = view_height_without_bar - hscrollbar_height;
 
-    gdouble scale_height_without_bar = (view_height_without_bar - height_non_scaling) / height_scaling;
-    gdouble scale_full_height_without_bar = (view_height_without_bar - full_height_non_scaling) / full_height_scaling;
-    gdouble scale_width_without_bar = (view_width_without_bar - width_non_scaling)  / width_scaling;
-    gdouble scale_height_with_bar = (view_height_with_bar - height_non_scaling) / height_scaling;
-    gdouble scale_width_with_bar = (view_width_with_bar - width_non_scaling)  / width_scaling;
+    gdouble scale_height_without_bar = (view_height_without_bar -
+            height_non_scaling) / height_scaling;
+    gdouble scale_full_height_without_bar = (view_height_without_bar -
+            full_height_non_scaling) / full_height_scaling;
+    gdouble scale_width_without_bar = (view_width_without_bar -
+            width_non_scaling)  / width_scaling;
+    gdouble scale_height_with_bar = (view_height_with_bar -
+            height_non_scaling) / height_scaling;
+    gdouble scale_width_with_bar = (view_width_with_bar - width_non_scaling) /
+        width_scaling;
     gdouble scale_both = MIN(scale_width_without_bar, scale_height_without_bar);
-    gdouble scale_both_full = MIN(scale_width_without_bar, scale_full_height_without_bar);
+    gdouble scale_both_full = MIN(scale_width_without_bar,
+            scale_full_height_without_bar);
 
     // When the preview window size is shrunk, in FIT_WIDTH and FIT_HEIGHT there
     // is a point right after the scrollbar has disappeared, where the document
@@ -448,7 +475,8 @@ static void update_fit_scale(GuPreviewGui* pc) {
     // Check if we need a bar:
     if (scale_full_height_without_bar < scale_both) {
         // We need a vsbar
-        scale_both = MAX(scale_both_full, MIN(scale_width_with_bar, scale_height_without_bar));
+        scale_both = MAX(scale_both_full, MIN(scale_width_with_bar,
+                    scale_height_without_bar));
     } else {
         // We do not need a vsbar, everything is fine...
     }
@@ -467,7 +495,8 @@ static void update_fit_scale(GuPreviewGui* pc) {
         return;
     }
 
-    slog(L_DEBUG, "Document size wrong for fitting, changing scale from %f to %f.\n", pc->scale, scale);
+    slog(L_DEBUG, "Document size wrong for fitting, changing scale from %f "
+            "to %f.\n", pc->scale, scale);
 
     // We do not really know where to center the scroll that might appear, 
     // passing the center of the window causes the toolbar to not be darn 
@@ -529,7 +558,7 @@ static void update_page_input(GuPreviewGui* pc) {
         gchar* num = g_strdup_printf ("%d", pc->current_page+1);
         g_signal_handler_block(pc->page_input, pc->page_input_changed_handler);
         gtk_entry_set_text (GTK_ENTRY(pc->page_input), num);
-        g_signal_handler_unblock(pc->page_input, pc->page_input_changed_handler);
+        g_signal_handler_unblock(pc->page_input,pc->page_input_changed_handler);
         g_free (num);
     }
 
@@ -570,7 +599,7 @@ static void update_page_positions(GuPreviewGui* pc) {
         for (i=0; i<pc->n_pages; i++) {
             page_inner(pc, i).height = get_page_height(pc, i)*pc->scale;
             page_inner(pc, i).width = get_page_width(pc, i)*pc->scale;
-            page_inner(pc, i).y = MAX((fov.height - page_inner(pc, i).height)/2, 
+            page_inner(pc, i).y = MAX((fov.height - page_inner(pc, i).height)/2,
                                        get_document_margin(pc));
             page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2, 
                                        get_document_margin(pc));
@@ -617,13 +646,16 @@ static void update_current_page(GuPreviewGui* pc) {
     }
     //L_F_DEBUG;
 
-    gdouble offset_y = MAX(get_document_margin(pc), (gtk_adjustment_get_page_size(pc->vadj) - pc->height_scaled)/2 );
+    gdouble offset_y = MAX(get_document_margin(pc),
+            (gtk_adjustment_get_page_size(pc->vadj) - pc->height_scaled)/2 );
 
     // TODO: This can be simplified...
 
     // The page margins are just for safety...
-    gdouble view_start_y = gtk_adjustment_get_value(pc->vadj) - get_page_margin(pc);
-    gdouble view_end_y   = view_start_y + gtk_adjustment_get_page_size(pc->vadj) + 2*get_page_margin(pc);
+    gdouble view_start_y = gtk_adjustment_get_value(pc->vadj) -
+        get_page_margin(pc);
+    gdouble view_end_y   = view_start_y + gtk_adjustment_get_page_size(pc->vadj)
+        + 2*get_page_margin(pc);
 
     gint page;
     for (page=0; page < pc->n_pages; page++) {
@@ -666,7 +698,8 @@ static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
     }
     
     if (pc->cache_size != 0) {
-        slog(L_ERROR, "Cleared all page renderings, but cache not empty. Cache size is %iB.\n", pc->cache_size);
+        slog(L_ERROR, "Cleared all page renderings, but cache not empty. "
+                "Cache size is %iB.\n", pc->cache_size);
     }
     
 }
@@ -1768,7 +1801,8 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
     }
     
     if (n == 0) {
-        slog(L_DEBUG, "Could not delete any pages from cache. All pages are currently visible.\n");
+        slog(L_DEBUG, "Could not delete any pages from cache. All pages are "
+                "currently visible.\n");
     } else {
         slog(L_DEBUG, "Deleted %i pages from cache.\n", n);
     }
