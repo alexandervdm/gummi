@@ -60,7 +60,9 @@ extern GummiGui* gui;
  * tutorials written by Micah Carrick that can be found on:
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
-/* Widgets names to be set insensitive in ZERO TABS situations*/
+
+/* These widgets are (de-)sensitised using the gui_has_tabs_sensitive function
+ * for when we switch from 0 to 1 tabs and vice versa */
 const gchar* insens_widgets_str[] = {
     "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
@@ -71,7 +73,6 @@ const gchar* insens_widgets_str[] = {
     "menu_runmakeindex", "menu_runbibtex", "menu_docstat", "menu_spelling",
     "menu_snippets", "menu_edit", "menu_document", "menu_search"
 };
-
 
 
 GummiGui* gui_init (GtkBuilder* builder) {
@@ -339,7 +340,7 @@ void gui_open_file (const gchar* filename) {
         tabmanager_create_tab (A_LOAD, filename, NULL);
 
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
-        gui_set_sensitive (TRUE);
+        gui_set_hastabs_sensitive (TRUE);
 }
 
 void gui_save_file (GuTabContext* tab, gboolean saveas) {
@@ -388,7 +389,7 @@ cleanup:
     g_free (pdfname);
 }
 
-void gui_set_sensitive(gboolean enable) {
+void gui_set_hastabs_sensitive (gboolean enable) {
     gint i = 0;
     for (i = 0; i < gui->insens_widget_size; ++i)
         gtk_widget_set_sensitive (gui->insens_widgets[i], enable);
@@ -471,6 +472,9 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
     g_free(templ_name);
+    
+    if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
+        gui_set_hastabs_sensitive (TRUE);
 }
 
 G_MODULE_EXPORT

@@ -121,7 +121,7 @@ void gui_set_window_title (const gchar* filename, const gchar* text);
 
 void gui_open_file (const gchar* filename);
 void gui_save_file (GuTabContext* tab, gboolean saveas);
-void gui_set_sensitive(gboolean enable);
+void gui_set_hastabs_sensitive (gboolean enable);
 
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget* nbpage,
         int page, void* data);

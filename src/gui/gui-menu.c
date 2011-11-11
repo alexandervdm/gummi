@@ -65,7 +65,7 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
  G_MODULE_EXPORT
 void on_menu_new_activate (GtkWidget *widget, void* user) {
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
-        gui_set_sensitive (TRUE);
+        gui_set_hastabs_sensitive (TRUE);
     tabmanager_create_tab (A_NONE, NULL, NULL);
 }
 
@@ -152,7 +152,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
 
     if (!tabmanager_remove_tab (tab)) {
         motion_start_errormode (gummi->motion, ""); // TODO: empty screen
-        gui_set_sensitive (FALSE);
+        gui_set_hastabs_sensitive (FALSE);
     } else
         gui_set_filename_display (g_active_tab, TRUE, FALSE);
 }
