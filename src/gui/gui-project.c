@@ -151,18 +151,22 @@ void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
 }
 
 void on_projfile_add_clicked (GtkWidget* widget, void* user) {
+    gchar* selected = NULL;
     
-    gchar* selected_file = get_open_filename (TYPE_LATEX);
+    selected = get_open_filename (TYPE_LATEX);
     
-    if (project_add_document (gummi->project->projfile, selected_file)) {
-        int amount = projectgui_list_projfiles (gummi->project->projfile);
-        gtk_label_set_text (gui->projectgui->proj_nroffiles, 
-                            g_strdup_printf("%d", amount));
-        gui_open_file (selected_file);
+    if (selected) {
+        if (project_add_document (gummi->project->projfile, selected)) {
+            int amount = projectgui_list_projfiles (gummi->project->projfile);
+            gtk_label_set_text (gui->projectgui->proj_nroffiles, 
+                                g_strdup_printf("%d", amount));
+            gui_open_file (selected);
+        }
+        else {
+            statusbar_set_message ("Error adding document to the project..");
+        }
     }
-    else {
-        statusbar_set_message ("Error adding document to the active project..");
-    }
+    g_free (selected);
 }
 
 void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
