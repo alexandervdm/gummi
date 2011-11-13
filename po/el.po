@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 09:19+0100\n"
+"POT-Creation-Date: 2011-11-13 20:11+0100\n"
 "PO-Revision-Date: 2010-05-24 14:43+0200\n"
 "Last-Translator: Dimitris Leventeas <mydimle@gmail.com>\n"
 "Language-Team: EL <mydimle@gmail.com>>\n"
@@ -308,7 +308,7 @@ msgstr "Ταίριαξε ολόκληρη λέξη μόνο"
 msgid "Matrix"
 msgstr "Μητρώο"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:578
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
@@ -587,11 +587,11 @@ msgstr ""
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:576
 msgid "no bibliography file detected"
 msgstr "Δεν βρέθηκε αρχείο βιβλιογραφίας"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:577
 msgid "none"
 msgstr "κανένα"
 
@@ -925,7 +925,7 @@ msgstr ""
 msgid "%s: No such file or directory\n"
 msgstr ""
 
-#: ../src/gui/gui-preview.c:871
+#: ../src/gui/gui-preview.c:902
 #, c-format
 msgid "of %d"
 msgstr ""
@@ -986,132 +986,137 @@ msgstr ""
 msgid "Error loading recent file: %s"
 msgstr "Σφάλμα φορτώνοντας πρόσφατο αρχείο: "
 
-#: ../src/gui/gui-menu.c:344
+#: ../src/gui/gui-menu.c:342
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:347
+#: ../src/gui/gui-menu.c:345
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:377
+#: ../src/gui/gui-menu.c:375
 #, fuzzy
 msgid "Words in text"
 msgstr "Έντονο κείμενο"
 
-#: ../src/gui/gui-menu.c:378
+#: ../src/gui/gui-menu.c:376
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:379
+#: ../src/gui/gui-menu.c:377
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:380
+#: ../src/gui/gui-menu.c:378
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:381
+#: ../src/gui/gui-menu.c:379
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:382
+#: ../src/gui/gui-menu.c:380
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:383
+#: ../src/gui/gui-menu.c:381
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-main.c:330
+#: ../src/gui/gui-main.c:325
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:368 ../src/latex.c:262
+#: ../src/gui/gui-main.c:363 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:472
+#: ../src/gui/gui-main.c:467
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:526
 #, fuzzy
 msgid "Compiling bibliography file..."
 msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:528
 msgid "bibliography compiled without errors"
 msgstr "Η βιβλιογραφία μεταφράστηκε χωρίς λάθη"
 
-#: ../src/gui/gui-main.c:532
+#: ../src/gui/gui-main.c:530
 #, fuzzy
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Λάθος μεταφράζοντας το αρχείο βιβλιογραφίας ή δεν βρέθηκε κάποιο"
 
-#: ../src/gui/gui-main.c:535
+#: ../src/gui/gui-main.c:533
 msgid "error compiling bibliography file"
 msgstr "λάθος μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../src/gui/gui-main.c:569
+#: ../src/gui/gui-main.c:567
 #, c-format
 msgid "%s loaded"
 msgstr ""
 
-#: ../src/gui/gui-main.c:668
+#: ../src/gui/gui-main.c:669
 msgid "Do you want to save the changes you have made?"
 msgstr "Θέλετε να αποθηκεύσετε τις αλλαγές που κάνατε;"
 
-#: ../src/gui/gui-main.c:686
+#: ../src/gui/gui-main.c:687
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Δημιουργία νέου έγγράφου"
 
-#: ../src/gui/gui-main.c:689
+#: ../src/gui/gui-main.c:690
 msgid "Select an image to insert"
 msgstr ""
 
-#: ../src/gui/gui-main.c:690
+#: ../src/gui/gui-main.c:691
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Μεταφράζοντας το αρχείο βιβλιογραφίας"
 
-#: ../src/gui/gui-main.c:723
+#: ../src/gui/gui-main.c:724
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Δημιουργία νέου έγγράφου"
 
-#: ../src/gui/gui-main.c:724
+#: ../src/gui/gui-main.c:725
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Δημιουργία νέου έγγράφου"
 
-#: ../src/gui/gui-main.c:725
+#: ../src/gui/gui-main.c:726
 msgid "Export to PDF"
 msgstr ""
 
-#: ../src/gui/gui-main.c:772
+#: ../src/gui/gui-main.c:729
+#, fuzzy
+msgid "Create project"
+msgstr "Δημιουργία νέου έγγράφου"
+
+#: ../src/gui/gui-main.c:774
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Φόρτωσε ένα αρχείο"
 
-#: ../src/gui/gui-main.c:777
+#: ../src/gui/gui-main.c:779
 msgid "Text files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:790
+#: ../src/gui/gui-main.c:792
 #, fuzzy
 msgid "Image files"
 msgstr "Εικόνα"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:799
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:805
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Προτιμήσεις Gummi"

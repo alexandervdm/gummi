@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 09:19+0100\n"
+"POT-Creation-Date: 2011-11-13 20:11+0100\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -305,7 +305,7 @@ msgstr "只配對此單字"
 msgid "Matrix"
 msgstr "矩陣"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:578
 msgid "N/A"
 msgstr "無"
 
@@ -588,11 +588,11 @@ msgstr "標頭內總字數"
 msgid "math environments"
 msgstr ""
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:576
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:577
 msgid "none"
 msgstr "無"
 
@@ -916,7 +916,7 @@ msgstr "無法轉換文字為UTF-8格式!\n"
 msgid "%s: No such file or directory\n"
 msgstr "%s: 找不到此檔案或目錄\n"
 
-#: ../src/gui/gui-preview.c:871
+#: ../src/gui/gui-preview.c:902
 #, c-format
 msgid "of %d"
 msgstr "之 %d"
@@ -976,123 +976,128 @@ msgstr "輸入新的捷徑, 或按後退鍵清除"
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui/gui-menu.c:344
+#: ../src/gui/gui-menu.c:342
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:347
+#: ../src/gui/gui-menu.c:345
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:377
+#: ../src/gui/gui-menu.c:375
 msgid "Words in text"
 msgstr "純文字數"
 
-#: ../src/gui/gui-menu.c:378
+#: ../src/gui/gui-menu.c:376
 msgid "Words in headers"
 msgstr "標頭內總字數"
 
-#: ../src/gui/gui-menu.c:379
+#: ../src/gui/gui-menu.c:377
 msgid "Words in float captions"
 msgstr "浮動標題內總字數"
 
-#: ../src/gui/gui-menu.c:380
+#: ../src/gui/gui-menu.c:378
 msgid "Number of headers"
 msgstr "標頭總數"
 
-#: ../src/gui/gui-menu.c:381
+#: ../src/gui/gui-menu.c:379
 msgid "Number of floats"
 msgstr "浮動元件總數"
 
-#: ../src/gui/gui-menu.c:382
+#: ../src/gui/gui-menu.c:380
 msgid "Number of math inlines"
 msgstr "行內數學式總數"
 
-#: ../src/gui/gui-menu.c:383
+#: ../src/gui/gui-menu.c:381
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
-#: ../src/gui/gui-main.c:330
+#: ../src/gui/gui-main.c:325
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
 
-#: ../src/gui/gui-main.c:368 ../src/latex.c:262
+#: ../src/gui/gui-main.c:363 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:472
+#: ../src/gui/gui-main.c:467
 #, c-format
 msgid "Loading template ..."
 msgstr "載入模版中..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:526
 msgid "Compiling bibliography file..."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:528
 msgid "bibliography compiled without errors"
 msgstr "參考文獻已成功編譯"
 
-#: ../src/gui/gui-main.c:532
+#: ../src/gui/gui-main.c:530
 msgid "Error compiling bibliography file or none detected..."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui/gui-main.c:535
+#: ../src/gui/gui-main.c:533
 msgid "error compiling bibliography file"
 msgstr "編譯參考文獻過程發生錯誤"
 
-#: ../src/gui/gui-main.c:569
+#: ../src/gui/gui-main.c:567
 #, c-format
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui/gui-main.c:668
+#: ../src/gui/gui-main.c:669
 msgid "Do you want to save the changes you have made?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui/gui-main.c:686
+#: ../src/gui/gui-main.c:687
 msgid "Open LaTeX document"
 msgstr "開啟LaTeX文件"
 
-#: ../src/gui/gui-main.c:689
+#: ../src/gui/gui-main.c:690
 msgid "Select an image to insert"
 msgstr "選擇要插入的影像"
 
-#: ../src/gui/gui-main.c:690
+#: ../src/gui/gui-main.c:691
 msgid "Select bibliography file"
 msgstr "選擇參考文獻檔案"
 
-#: ../src/gui/gui-main.c:723
+#: ../src/gui/gui-main.c:724
 msgid "Save LaTeX document"
 msgstr "儲存LaTeX文件"
 
-#: ../src/gui/gui-main.c:724
+#: ../src/gui/gui-main.c:725
 msgid "Save as LaTeX document"
 msgstr "另存為LaTeX文件"
 
-#: ../src/gui/gui-main.c:725
+#: ../src/gui/gui-main.c:726
 msgid "Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../src/gui/gui-main.c:772
+#: ../src/gui/gui-main.c:729
+#, fuzzy
+msgid "Create project"
+msgstr "建立新文件"
+
+#: ../src/gui/gui-main.c:774
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
-#: ../src/gui/gui-main.c:777
+#: ../src/gui/gui-main.c:779
 msgid "Text files"
 msgstr "純文字文件"
 
-#: ../src/gui/gui-main.c:790
+#: ../src/gui/gui-main.c:792
 msgid "Image files"
 msgstr "影像檔"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:799
 msgid "Bibtex files"
 msgstr "參考文獻"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:805
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Gummi 偏好設定"

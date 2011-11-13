@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 09:19+0100\n"
+"POT-Creation-Date: 2011-11-13 20:11+0100\n"
 "PO-Revision-Date: 2011-11-08 13:19-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Portuguese\n"
@@ -311,7 +311,7 @@ msgstr "Equivaler apenas a palavra completa"
 msgid "Matrix"
 msgstr "Matriz"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:580
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:578
 msgid "N/A"
 msgstr "N/A"
 
@@ -590,11 +590,11 @@ msgstr "cabeçalho"
 msgid "math environments"
 msgstr "ambientes matemáticos"
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:578
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:576
 msgid "no bibliography file detected"
 msgstr "ficheiro de bibliografia não encontrado"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:579
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:577
 msgid "none"
 msgstr "nenhum"
 
@@ -914,7 +914,7 @@ msgstr "Não é possível converter o texto para UTF-8!\n"
 msgid "%s: No such file or directory\n"
 msgstr "%s: Ficheiro ou pasta não encontrado\n"
 
-#: ../src/gui/gui-preview.c:871
+#: ../src/gui/gui-preview.c:902
 #, c-format
 msgid "of %d"
 msgstr "de %d"
@@ -988,123 +988,128 @@ msgstr "Insira uma nova tecla de atalho, ou prima a tecla espaço para limpar"
 msgid "Error loading recent file: %s"
 msgstr "Ocorreu um erro ao ler o ficheiro: %s"
 
-#: ../src/gui/gui-menu.c:344
+#: ../src/gui/gui-menu.c:342
 msgid "Running Makeindex.."
 msgstr "A Executar Makeindex.."
 
-#: ../src/gui/gui-menu.c:347
+#: ../src/gui/gui-menu.c:345
 msgid "Error running Makeindex.."
 msgstr "Erro durante a execução do Makeindex.."
 
-#: ../src/gui/gui-menu.c:377
+#: ../src/gui/gui-menu.c:375
 msgid "Words in text"
 msgstr "Palavras no texto"
 
-#: ../src/gui/gui-menu.c:378
+#: ../src/gui/gui-menu.c:376
 msgid "Words in headers"
 msgstr "Palavras no cabeçalho"
 
-#: ../src/gui/gui-menu.c:379
+#: ../src/gui/gui-menu.c:377
 msgid "Words in float captions"
 msgstr "Palavras em legendas flutuantes"
 
-#: ../src/gui/gui-menu.c:380
+#: ../src/gui/gui-menu.c:378
 msgid "Number of headers"
 msgstr "Números de cabeçalhos"
 
-#: ../src/gui/gui-menu.c:381
+#: ../src/gui/gui-menu.c:379
 msgid "Number of floats"
 msgstr "Número de flutuantes"
 
-#: ../src/gui/gui-menu.c:382
+#: ../src/gui/gui-menu.c:380
 msgid "Number of math inlines"
 msgstr "Número de fórmulas em modo interno"
 
-#: ../src/gui/gui-menu.c:383
+#: ../src/gui/gui-menu.c:381
 msgid "Number of math displayed"
 msgstr "Número de fórmulas em modo externo"
 
-#: ../src/gui/gui-main.c:330
+#: ../src/gui/gui-main.c:325
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Arquivo de Swap já existente para %s, utilizar este?"
 
-#: ../src/gui/gui-main.c:368 ../src/latex.c:262
+#: ../src/gui/gui-main.c:363 ../src/latex.c:262
 msgid "The file already exists. Overwrite?"
 msgstr "O ficheiro já existe. Guardar novamente?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:472
+#: ../src/gui/gui-main.c:467
 #, c-format
 msgid "Loading template ..."
 msgstr "Iniciando o modelo ..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:526
 msgid "Compiling bibliography file..."
 msgstr "A compilar o ficheiro de bibliografia"
 
-#: ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:528
 msgid "bibliography compiled without errors"
 msgstr "bibliografia compilada sem erros"
 
-#: ../src/gui/gui-main.c:532
+#: ../src/gui/gui-main.c:530
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Erro ao compilar a bibliografia ou ficheiro não encontrado..."
 
-#: ../src/gui/gui-main.c:535
+#: ../src/gui/gui-main.c:533
 msgid "error compiling bibliography file"
 msgstr "erro ao compilar a bibliografia"
 
-#: ../src/gui/gui-main.c:569
+#: ../src/gui/gui-main.c:567
 #, c-format
 msgid "%s loaded"
 msgstr "%s iniciados"
 
-#: ../src/gui/gui-main.c:668
+#: ../src/gui/gui-main.c:669
 msgid "Do you want to save the changes you have made?"
 msgstr "Guardar as mudanças que foram feitas?"
 
-#: ../src/gui/gui-main.c:686
+#: ../src/gui/gui-main.c:687
 msgid "Open LaTeX document"
 msgstr "Abrir documento LaTeX"
 
-#: ../src/gui/gui-main.c:689
+#: ../src/gui/gui-main.c:690
 msgid "Select an image to insert"
 msgstr "Seleccione uma imagem para inserir"
 
-#: ../src/gui/gui-main.c:690
+#: ../src/gui/gui-main.c:691
 msgid "Select bibliography file"
 msgstr "Seleccione o arquivo de bibliografia"
 
-#: ../src/gui/gui-main.c:723
+#: ../src/gui/gui-main.c:724
 msgid "Save LaTeX document"
 msgstr "Guardar documento LaTeX"
 
-#: ../src/gui/gui-main.c:724
+#: ../src/gui/gui-main.c:725
 msgid "Save as LaTeX document"
 msgstr "Guardar como documento LaTeX"
 
-#: ../src/gui/gui-main.c:725
+#: ../src/gui/gui-main.c:726
 msgid "Export to PDF"
 msgstr "Exportar para PDF"
 
-#: ../src/gui/gui-main.c:772
+#: ../src/gui/gui-main.c:729
+#, fuzzy
+msgid "Create project"
+msgstr "Criar novo Projecto"
+
+#: ../src/gui/gui-main.c:774
 msgid "LaTeX files"
 msgstr "Iniciar um arquivo"
 
-#: ../src/gui/gui-main.c:777
+#: ../src/gui/gui-main.c:779
 msgid "Text files"
 msgstr "Ficheiros de texto"
 
-#: ../src/gui/gui-main.c:790
+#: ../src/gui/gui-main.c:792
 msgid "Image files"
 msgstr "Imagem"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:799
 msgid "Bibtex files"
 msgstr "Ficheiros Bibtex"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:805
 msgid "Gummi project files"
 msgstr "Ficheiros de projecto Gummi"
 
