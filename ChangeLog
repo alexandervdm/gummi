@@ -2,9 +2,7 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
-Gummi 0.6.0 (??, 2011):
-
-(listed up to svn 1090)
+Gummi 0.6.0 (November 14th, 2011):
 
 	Bugs fixed:
 	* Improved preview scaling performance
@@ -33,8 +31,6 @@ Gummi 0.6.0 (??, 2011):
 	* Minimal project support
 	* SyncTeX support
 	* New & updated translations
-
-
 
 Gummi 0.5.8 (March 17th, 2011):
 
