@@ -266,6 +266,7 @@ void on_biblio_file_activate (GtkWidget *widget, void * user) {
     if (filename) {
         gtk_entry_set_text (g_importgui->biblio_file, filename);
     }
+    g_free (filename);
 }
 
 G_MODULE_EXPORT
