@@ -148,10 +148,8 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
-    printf("removing %s\n", tab->editor->workfile);
-
     if (!tabmanager_remove_tab (tab)) {
-        motion_start_errormode (gummi->motion, ""); // TODO: empty screen
+        motion_start_errormode (gummi->motion, "");
         gui_set_hastabs_sensitive (FALSE);
     } else
         gui_set_filename_display (g_active_tab, TRUE, FALSE);
