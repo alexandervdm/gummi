@@ -180,9 +180,11 @@ void latex_analyse_errors (GuLatex* lc) {
 }
 
 gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
-    if (!lc->modified_since_compile) return TRUE;
+    static glong cerrors = 0;
     gchar* basename = ec->basename;
     gchar* filename = ec->filename;
+
+    if (!lc->modified_since_compile) return cerrors == 0;
 
     const gchar* typesetter = config_get_value ("typesetter");
     if (!external_exists (typesetter)) {
@@ -198,7 +200,7 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     
     /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command);
-    gboolean cerrors = (glong)cresult.first;
+    cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
     
     lc->compilelog = latex_analyse_log (coutput, filename, basename);
