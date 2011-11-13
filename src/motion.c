@@ -138,6 +138,9 @@ gpointer motion_compile_thread (gpointer data) {
         compile_status = latex_update_pdffile (latex, editor);
         g_mutex_unlock (mc->compile_mutex);
 
+        if (!mc->keep_running)
+            g_thread_exit (NULL);
+
         previewgui_update_statuslight(compile_status? "gtk-yes": "gtk-no");
 
         /* Make sure the editor still exists after compile */
