@@ -162,3 +162,18 @@ void tabmanager_update_tab (const gchar* filename) {
     slog (L_INFO, "Environment updated for %s\n", g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);    
 }
+
+gboolean tabmanager_check_exists (const gchar* filename) {
+    GList *editors;
+    GuEditor* ec;
+    gint ectotal, i;
+    
+    editors = gummi_get_all_editors ();
+    ectotal = g_list_length (editors);
+    
+    for (i=0; i<ectotal; i++) {
+        ec = g_list_nth_data (editors, i);
+        if (utils_strequal (ec->filename, filename)) return TRUE;
+    }
+    return FALSE;
+}
