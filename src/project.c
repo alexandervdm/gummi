@@ -137,6 +137,9 @@ gboolean project_add_document (const gchar* project, const gchar* fname) {
         return FALSE;
     }
     
+    // don't add files that are already in the project:
+    if (utils_subinstr (fname, oldcontent, TRUE) return FALSE;
+    
     newcontent = g_strconcat (oldcontent, "\nfile=", fname, NULL);
     
     if (g_file_test (project, G_FILE_TEST_EXISTS)) {
