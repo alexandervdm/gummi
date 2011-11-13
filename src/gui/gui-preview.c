@@ -154,9 +154,9 @@ static void update_page_positions(GuPreviewGui* pc);
 static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
                                             const LayeredRectangle *src2,
                                             LayeredRectangle *dest);
-static gboolean layered_rectangle_union(const LayeredRectangle *src1,
-                                        const LayeredRectangle *src2,
-                                        LayeredRectangle *dest);
+//static gboolean layered_rectangle_union(const LayeredRectangle *src1,
+//                                        const LayeredRectangle *src2,
+//                                        LayeredRectangle *dest);
 #define page_inner(pc,i) (((pc)->pages + (i))->inner)
 #define page_outer(pc,i) (((pc)->pages + (i))->outer)
 
@@ -1707,6 +1707,7 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
  *  If dest is not NULL, it will be the union of both rectangles, if however the
  *  src rectangles are on different layers, dest's layer will be undefined.
  */
+/*
 static gboolean layered_rectangle_union(const LayeredRectangle *src1,
                                         const LayeredRectangle *src2,
                                         LayeredRectangle *dest) {
@@ -1739,7 +1740,7 @@ static gboolean layered_rectangle_union(const LayeredRectangle *src1,
         return FALSE;
     }
     return TRUE;
-}
+}*/
 
 gboolean run_garbage_collector(GuPreviewGui* pc) {
     
