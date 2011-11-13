@@ -95,7 +95,8 @@ gpointer motion_compile_thread (gpointer data) {
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
     GtkWidget* focus = NULL;
-    gboolean precompile_ok;
+    gboolean precompile_ok = FALSE;
+    gboolean compile_status = FALSE;
     gchar *editortext;
 
     latex = gummi_get_latex ();
@@ -134,8 +135,10 @@ gpointer motion_compile_thread (gpointer data) {
             continue;
         }
         
-        latex_update_pdffile (latex, editor);
+        compile_status = latex_update_pdffile (latex, editor);
         g_mutex_unlock (mc->compile_mutex);
+
+        previewgui_update_statuslight(compile_status? "gtk-yes": "gtk-no");
 
         /* Make sure the editor still exists after compile */
         if (editor == gummi_get_active_editor()) {

@@ -963,9 +963,8 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
     //previewgui_goto_page (pc, 0);
 }
 
-void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
-    //L_F_DEBUG;
-
+void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
+        gchar* tex_file) {
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
      * compiling. Also prevent PDF from changing (compiling) when previewing */
     if (!g_mutex_trylock (gummi->motion->compile_mutex)) return;

@@ -179,7 +179,7 @@ void latex_analyse_errors (GuLatex* lc) {
     g_regex_unref (match_str);
 }
 
-void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
+gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     if (!lc->modified_since_compile) return;
     gchar* basename = ec->basename;
     gchar* filename = ec->filename;
@@ -205,15 +205,13 @@ void latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     lc->modified_since_compile = FALSE;
     
     /* find error line */
-    if (cerrors) {
-        if (g_utf8_strlen (lc->compilelog, -1) != 0) {
-            latex_analyse_errors (lc);
-        }
-        previewgui_update_statuslight ("gtk-no");
-    } else
-        previewgui_update_statuslight ("gtk-yes");
+    if (cerrors && (g_utf8_strlen (lc->compilelog, -1) != 0)) {
+        latex_analyse_errors (lc);
+    }
     
     g_free (command);
+
+    return cerrors;
 }
 
 void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
