@@ -4,7 +4,7 @@ Gummi CHANGELOG
 
 Gummi 0.6.0 (??, 2011):
 
-(listed up to svn 910)
+(listed up to svn 1090)
 
 	Bugs fixed:
 	* Improved preview scaling performance
@@ -14,7 +14,10 @@ Gummi 0.6.0 (??, 2011):
 	* Search results colour depends on color theme
 	* Preview scroll position restored after error
 	* Replaced all win32 incompatible code
+	* Configuration I/O transaction fixes
+	* Modifier keys no longer trigger auto-compile
 	* Correct encoded text is written on file save
+	* Fixed a rare GUI hang when program is closed
 	* Several GUI and icon related problems
 	* Several memory leaks
 
@@ -25,8 +28,11 @@ Gummi 0.6.0 (??, 2011):
 	* Continuous PDF preview
 	* Filter function for bibliographies
 	* Improved document statistics
+	* Infoscreen panel with document status
 	* More configurable options
-
+	* Minimal project support
+	* SyncTeX support
+	* New & updated translations
 
 
 
