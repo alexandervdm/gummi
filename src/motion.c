@@ -141,11 +141,11 @@ gpointer motion_compile_thread (gpointer data) {
         if (!mc->keep_running)
             g_thread_exit (NULL);
 
+        gdk_threads_enter ();
         previewgui_update_statuslight(compile_status? "gtk-yes": "gtk-no");
 
         /* Make sure the editor still exists after compile */
         if (editor == gummi_get_active_editor()) {
-            gdk_threads_enter ();
             editor_apply_errortags (editor, latex->errorlines);
             gui_buildlog_set_text (latex->compilelog);
 
@@ -161,8 +161,8 @@ gpointer motion_compile_thread (gpointer data) {
                 }
                 if (mc->errormode) motion_stop_errormode (mc);
             }
-            gdk_threads_leave ();
         }
+        gdk_threads_leave ();
     }
 }
 
