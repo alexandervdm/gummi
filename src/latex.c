@@ -180,7 +180,7 @@ void latex_analyse_errors (GuLatex* lc) {
 }
 
 gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
-    if (!lc->modified_since_compile) return;
+    if (!lc->modified_since_compile) return TRUE;
     gchar* basename = ec->basename;
     gchar* filename = ec->filename;
 
@@ -211,7 +211,7 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     
     g_free (command);
 
-    return cerrors;
+    return cerrors == 0;
 }
 
 void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
