@@ -79,7 +79,6 @@ gboolean latex_method_active (gchar* method) {
 }
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
-    GtkTextIter current, start, end;
     gchar *text;
     
     text = editor_grab_buffer (ec);
