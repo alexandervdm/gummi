@@ -82,15 +82,7 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     GtkTextIter current, start, end;
     gchar *text;
     
-    /* save selection */
-    editor_get_current_iter (ec, &current);
-    gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (ec->buffer), &start,
-            &end);
     text = editor_grab_buffer (ec);
-
-    /* restore selection */
-    gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (ec->buffer), &current);
-    gtk_text_buffer_select_range (GTK_TEXT_BUFFER (ec->buffer), &end, &start);
     
     /* write buffer content to the workfile */
     utils_set_file_contents (ec->workfile, text, -1);

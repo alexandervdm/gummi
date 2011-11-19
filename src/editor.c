@@ -341,10 +341,8 @@ void editor_fill_buffer (GuEditor* ec, const gchar* text) {
 
 gchar* editor_grab_buffer (GuEditor* ec) {
     GtkTextIter start, end;
-    gtk_widget_set_sensitive (GTK_WIDGET (ec->view), FALSE);
     gtk_text_buffer_get_bounds (ec_buffer, &start, &end);
     gchar* pstr = gtk_text_iter_get_text (&start, &end);
-    gtk_widget_set_sensitive (GTK_WIDGET (ec->view), TRUE);
     return pstr;
 }
 
