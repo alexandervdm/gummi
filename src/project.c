@@ -146,6 +146,10 @@ gboolean project_add_document (const gchar* project, const gchar* fname) {
         utils_set_file_contents (project, newcontent, -1);
         return TRUE;
     }
+
+    g_free(oldcontent);
+    g_free(newcontent);
+
     return FALSE;
 }
 
@@ -168,6 +172,10 @@ gboolean project_remove_document (const gchar* project, const gchar* fname) {
         utils_set_file_contents (project, newcontent, -1);
         return TRUE;
     }
+
+    g_free(oldcontent);
+    g_free(newcontent);
+
     return FALSE;
 }
 
@@ -176,7 +184,7 @@ GList* project_list_files (const gchar* content) {
     GList* filelist = NULL;
     gint i;
     
-    for (i=0;i<g_strv_length(splcontent);i++) {
+    for (i = 0; i < g_strv_length(splcontent); i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
         if (utils_strequal ("file", line[0])) {
             filelist = g_list_append (filelist, line[1]);
@@ -221,8 +229,8 @@ gchar* project_get_value (const gchar* content, const gchar* item) {
     gchar** splcontent = g_strsplit(content, "\n", 0);
     gchar* result = g_strdup ("");
     gint i;
-    
-    for (i=0;i<g_strv_length(splcontent)-1;i++) {
+
+    for (i = 0; i < g_strv_length(splcontent) -1; i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
         if (utils_strequal (item, line[0])) {
             return line[1];

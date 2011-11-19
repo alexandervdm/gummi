@@ -287,17 +287,19 @@ gboolean utils_strequal (const gchar* str1, const gchar* str2) {
     return FALSE;
 }
 
-gboolean utils_subinstr (gchar* substr, gchar* target, gboolean case_sens) {
+gboolean utils_subinstr (const gchar* substr, const gchar* target,
+        gboolean case_insens) {
     if (target != NULL && substr != NULL) {
-        if (case_sens == TRUE) {
-            if (strstr(g_utf8_strup(target, -1), g_utf8_strup(substr, -1)) != NULL) {
-                return TRUE;
-            }
+        if (case_insens) {
+            gchar* ntarget = g_utf8_strup(target, -1);
+            gchar* nsubstr = g_utf8_strup(substr, -1);
+            gboolean result = g_strstr_len(ntarget, -1, nsubstr) != NULL;
+            g_free(ntarget);
+            g_free(nsubstr);
+            return result;
         }
         else {
-            if (strstr(target, substr) != NULL) {
-                return TRUE;
-            }
+            return g_strstr_len(target, -1, substr) != NULL;
         }
     }
     return FALSE;
