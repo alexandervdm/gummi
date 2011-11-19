@@ -309,9 +309,19 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
 
 void gui_open_file (const gchar* filename) {
     gint ret = 0;
-    gchar* basename = g_path_get_basename (filename);
-    gchar* dirname = g_path_get_dirname (filename);
-    gchar* prev_workfile = g_strdup_printf ("%s%c.%s.swp", dirname,
+    gchar* basename = NULL;
+    gchar* dirname = NULL;
+    gchar* prev_workfile =  NULL;
+
+    if (!g_file_test(filename, G_FILE_TEST_EXISTS)) {
+        slog(L_G_ERROR, "Failed to open file '%s': No such file or "
+                "directory\n", filename);
+        return;
+    }
+
+    basename = g_path_get_basename (filename);
+    dirname = g_path_get_dirname (filename);
+    prev_workfile = g_strdup_printf ("%s%c.%s.swp", dirname,
             G_DIR_SEPARATOR, basename);
 
     /* destroy previous file info context, be careful not to place this
