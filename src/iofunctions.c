@@ -99,8 +99,8 @@ void iofunctions_load_file (GuIOFunc* io, const gchar* filename) {
 
 void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     GError* err = NULL;
-    gchar* text;
-    gchar* decoded;
+    gchar* text = NULL;
+    gchar* decoded = NULL;
     gboolean result;
     GuEditor* ec = NULL;
 
@@ -111,7 +111,7 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
         g_error_free (err);
         iofunctions_load_default_text (FALSE);
-        goto cleanup;
+        return;
     }
     if (NULL == (decoded = iofunctions_decode_text (text)))
         goto cleanup;

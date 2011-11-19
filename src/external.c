@@ -142,5 +142,3 @@ static gchar* version_latexmk (const gchar* output) {
     gchar** version = g_strsplit (output, " ", BUFSIZ);
     return version[7];
 }
-
-    

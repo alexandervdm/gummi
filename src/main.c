@@ -137,8 +137,14 @@ int main (int argc, char *argv[]) {
 
     if (argc != 2)
         tabmanager_create_tab (A_DEFAULT, NULL, NULL);
-    else
+    else {
+        if (!g_file_test(argv[1], G_FILE_TEST_EXISTS)) {
+            slog(L_ERROR, "Failed to open file '%s': No such file or "
+                    "directory\n", argv[1]);
+            exit(1);
+        }
         tabmanager_create_tab (A_LOAD, argv[1], NULL);
+    }
         
     if (config_get_value ("autosaving")) iofunctions_start_autosave ();
 
