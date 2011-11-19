@@ -72,7 +72,7 @@ GuLatex* latex_init (void) {
 
 
 gboolean latex_method_active (gchar* method) {
-    if (utils_strequal (config_get_value ("compile_steps"), method)) {
+    if (g_str_equal (config_get_value ("compile_steps"), method)) {
         return TRUE;
     }
     return FALSE;
@@ -245,7 +245,7 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
     GError* err = NULL;
     gint ret = 0;
 
-    if (0 != strcmp (path + strlen (path) -4, ".pdf"))
+    if (!g_str_equal (path + strlen (path) -4, ".pdf"))
         savepath = g_strdup_printf ("%s.pdf", path);
     else
         savepath = g_strdup (path);

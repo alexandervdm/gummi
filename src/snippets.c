@@ -401,7 +401,7 @@ void snippets_accel_disconnect (GuSnippets* sc, const gchar* key) {
     current = sc->closure_data;
     while (current) {
         closure_data = TUPLE2 (current->data);
-        if (strcmp (closure_data->first, key) == 0)
+        if (g_str_equal (closure_data->first, key))
             break;
         current = g_list_next (current);
     }
@@ -560,7 +560,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &start, einfo->left_mark);
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &end, einfo->right_mark);
 
-        if (strcmp (value->text, "$SELECTED_TEXT") == 0) {
+        if (g_str_equal (value->text, "$SELECTED_TEXT")) {
             GtkTextIter ms, me;
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, info->sel_text, -1);
@@ -568,11 +568,11 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
             me = ms;
             gtk_text_iter_forward_chars (&me, strlen (info->sel_text));
             gtk_text_buffer_delete (ec_buffer, &ms, &me);
-        } else if (strcmp (value->text, "$FILENAME") == 0) {
+        } else if (g_str_equal (value->text, "$FILENAME")) {
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start,
                     ec->filename? ec->filename: "", -1);
-        } else if (strcmp (value->text, "$BASENAME") == 0) {
+        } else if (g_str_equal (value->text, "$BASENAME")) {
             gchar* basename = g_path_get_basename(ec->filename?ec->filename:"");
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, basename, -1);

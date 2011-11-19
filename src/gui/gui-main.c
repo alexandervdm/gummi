@@ -353,7 +353,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     if (saveas || !(filename = tab->editor->filename)) {
         if ((filename = get_save_filename (TYPE_LATEX))) {
             new = TRUE;
-            if (strcmp (filename + strlen (filename) -4, ".tex")) {
+            if (!g_str_equal (filename + strlen (filename) -4, ".tex")) {
                 prev = filename;
                 filename = g_strdup_printf ("%s.tex", filename);
                 g_free (prev);
@@ -815,7 +815,7 @@ void add_to_recent_list (const gchar* filename) {
     gint i = 0;
     /* check if it already exists */
     for (i = 0; i < 5; ++i)
-        if (0 == strcmp (filename, gui->recent_list[i]))
+        if (g_str_equal (filename, gui->recent_list[i]))
             return;
 
     /* add to recent list */
@@ -835,7 +835,7 @@ void display_recent_files (GummiGui* gui) {
         gtk_widget_hide (GTK_WIDGET (gui->recent[i]));
 
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
-        if (0 != strcmp (gui->recent_list[i], "__NULL__")) {
+        if (!g_str_equal (gui->recent_list[i], "__NULL__")) {
             basename = g_path_get_basename (gui->recent_list[i]);
             tstr = g_strdup_printf ("%d. %s", count + 1, basename);
             gtk_menu_item_set_label (gui->recent[i], tstr);

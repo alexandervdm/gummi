@@ -47,7 +47,7 @@ void latexmk_init (void) {
 }
 
 gboolean latexmk_active (void) {
-    if (utils_strequal (config_get_value("typesetter"), C_LATEXMK)) {
+    if (g_str_equal (config_get_value("typesetter"), C_LATEXMK)) {
         return TRUE;
     }
     return FALSE;
@@ -62,7 +62,7 @@ gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basenam
     gchar* base;
 
     /* reroute output files to our temp directory */
-    if (!utils_strequal (C_TMPDIR, g_path_get_dirname (workfile))) {
+    if (!g_str_equal (C_TMPDIR, g_path_get_dirname (workfile))) {
         base = g_path_get_basename (basename);
         outdir = g_strdup_printf ("-jobname=\"%s/%s\"", C_TMPDIR, base);
     }
@@ -80,7 +80,7 @@ gchar* latexmk_get_flags (const gchar *method) {
     gchar* lmkflags;
 
     if (config_get_value("synctex")) {
-        if (utils_strequal (method, "texpdf")) {
+        if (g_str_equal (method, "texpdf")) {
             lmkflags = g_strdup_printf("-e \"\\$pdflatex = 'pdflatex -synctex=1'\" -silent");
         }
         else {
@@ -88,7 +88,7 @@ gchar* latexmk_get_flags (const gchar *method) {
         }
     }
     else {
-        if (utils_strequal (method, "texpdf")) {
+        if (g_str_equal (method, "texpdf")) {
             lmkflags = g_strdup_printf("-e \"\\$pdflatex = 'pdflatex -synctex=0'\" -silent");
         }
         else {
@@ -96,10 +96,10 @@ gchar* latexmk_get_flags (const gchar *method) {
         }
     }
     
-    if (utils_strequal (method, "texpdf")) {
+    if (g_str_equal (method, "texpdf")) {
         lmkwithoutput = g_strconcat (lmkflags, " -pdf", NULL);
     }
-    else if (utils_strequal (method, "texdvipdf")) {
+    else if (g_str_equal (method, "texdvipdf")) {
         lmkwithoutput = g_strconcat (lmkflags, " -pdfdvi", NULL);
     }
     else {
