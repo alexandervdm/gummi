@@ -59,6 +59,9 @@ if test "$spellcheck" = yes; then
     GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
 fi
 
+# Add explicit linking flags
+GUI_LIBS="$GUI_LIBS -lm -lz"
+
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h locale.h netdb.h stdlib.h string.h sys/socket.h sys/time.h unistd.h fcntl.h])
 

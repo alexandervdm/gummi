@@ -5300,6 +5300,9 @@ fi
     GUI_LIBS="$GUI_LIBS $gtkspell_LIBS"
 fi
 
+# Add explicit linking flags
+GUI_LIBS="$GUI_LIBS -lm -lz"
+
 # Checks for header files.
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
