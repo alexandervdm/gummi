@@ -42,7 +42,7 @@ static gdouble get_texlive_version (void);
 
 
 gboolean external_exists (const gchar* program) {
-    const gchar *fullpath = g_find_program_in_path (program);
+    gchar *fullpath = g_find_program_in_path (program);
     gboolean result = g_file_test (fullpath, G_FILE_TEST_EXISTS);
     g_free(fullpath);
     return result;
