@@ -93,15 +93,15 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {
     gtk_widget_set_visible (GTK_WIDGET(is->image), TRUE);
-    if (g_str_equal (msg, "compile_error")) {
+    if (utils_strequal (msg, "compile_error")) {
         gtk_label_set_text (is->header, get_infoheader(1));
         gtk_label_set_text (is->details, get_infodetails(1));
     }
-    else if (g_str_equal (msg, "document_error")) {
+    else if (utils_strequal (msg, "document_error")) {
         gtk_label_set_text (is->header, get_infoheader(2));
         gtk_label_set_text (is->details, get_infodetails(2));
     }
-    else if (g_str_equal (msg, "program_error")) {
+    else if (utils_strequal (msg, "program_error")) {
         gtk_label_set_text (is->header, get_infoheader(3));
         gtk_label_set_text (is->details, get_infodetails(3));
     }

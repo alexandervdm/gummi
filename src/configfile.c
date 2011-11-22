@@ -145,7 +145,7 @@ void config_init (const gchar* filename) {
         slog (L_INFO, "found old configuration file, replacing it with new "
                 "one ...\n");
         config_set_default ();
-    } else if (!g_str_equal (PACKAGE_VERSION, config_version)) {
+    } else if (0 != strcmp (PACKAGE_VERSION, config_version)) {
         slog (L_INFO, "updating version tag in configuration file...\n");
         config_set_value ("config_version", PACKAGE_VERSION);
     } else {
@@ -174,7 +174,7 @@ const gchar* config_get_value (const gchar* term) {
     slist* index = slist_find (config_head, term, FALSE, TRUE);
 
     ret = index->second;
-    if (ret && g_str_equal (ret, "False"))
+    if (ret && 0 == strcmp (ret, "False"))
         return NULL;
     return ret;
 }

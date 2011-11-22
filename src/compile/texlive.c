@@ -72,14 +72,14 @@ gboolean texlive_active (void) {
 }
 
 gboolean pdflatex_active (void) {
-    if (g_str_equal (config_get_value("typesetter"), "pdflatex")) {
+    if (utils_strequal (config_get_value("typesetter"), "pdflatex")) {
         return TRUE;
     }
     return FALSE;
 }
 
 gboolean xelatex_active (void) {
-    if (g_str_equal (config_get_value("typesetter"), "xelatex")) {
+    if (utils_strequal (config_get_value("typesetter"), "xelatex")) {
         return TRUE;
     }
     return FALSE;
@@ -109,14 +109,14 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     gchar *dviname = g_strdup_printf("%s.dvi", g_path_get_basename (basename));
     gchar *psname = g_strdup_printf("%s.ps", g_path_get_basename (basename));
     
-    if (g_str_equal (method, "texpdf")) {
+    if (utils_strequal (method, "texpdf")) {
 
         texcmd = g_strdup_printf("%s %s %s \"%s\"", typesetter, 
                                                 flags,
                                                 outdir, 
                                                 workfile);
     }
-    else if (g_str_equal (method, "texdvipdf")) {
+    else if (utils_strequal (method, "texdvipdf")) {
         texcmd = g_strdup_printf("latex %s %s \"%s\" %s %s dvipdf -q \"%s\"",
                                                 flags, 
                                                 outdir, 

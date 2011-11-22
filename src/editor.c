@@ -411,7 +411,7 @@ void editor_set_selection_textstyle (GuEditor* ec, const gchar* type) {
 
     /* select style */
     for (i = 0; i < style_size; ++i)
-        if (g_str_equal (style[i][0], type)) {
+        if (0 == strcmp (style[i][0], type)) {
             selected = i;
             break;
         }
