@@ -150,6 +150,7 @@ void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), FALSE);
 }
 
+G_MODULE_EXPORT
 void on_projfile_add_clicked (GtkWidget* widget, void* user) {
     gchar* selected = NULL;
     
@@ -169,6 +170,7 @@ void on_projfile_add_clicked (GtkWidget* widget, void* user) {
     g_free (selected);
 }
 
+G_MODULE_EXPORT
 void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
     GtkTreeIter iter;
     gchar* value;
