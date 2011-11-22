@@ -151,7 +151,12 @@ gchar* texlive_get_flags (const gchar* method) {
                                       "-halt-on-error");
                                           
     if (!latex_use_shellescaping()) {
-        gchar* tmp = g_strconcat(flags, " --no-shell-escape", NULL);
+        gchar* tmp = g_strconcat(flags, " -no-shell-escape", NULL);
+        g_free(flags);
+        flags = tmp;
+    }
+    else {
+        gchar* tmp = g_strconcat(flags, " -shell-escape", NULL);
         g_free(flags);
         flags = tmp;
     }
