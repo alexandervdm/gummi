@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 20:11+0100\n"
+"POT-Creation-Date: 2011-11-23 11:48+0100\n"
 "PO-Revision-Date: 2011-11-07 22:16+0100\n"
 "Last-Translator: Marc Vinyals <marcvinyals@velodius.com>\n"
 "Language-Team: Català <marcvinyals@velodius.com>\n"
@@ -309,7 +309,7 @@ msgstr "Només coincideix la paraula sencera"
 msgid "Matrix"
 msgstr "Matriu"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:578
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:588
 msgid "N/A"
 msgstr "N/D"
 
@@ -589,11 +589,11 @@ msgstr "capçaleres"
 msgid "math environments"
 msgstr "entorns matemàtics"
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:576
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:586
 msgid "no bibliography file detected"
 msgstr "no s'ha detectat cap fitxer de bibliografia"
 
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:577
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:587
 msgid "none"
 msgstr "cap"
 
@@ -1021,105 +1021,105 @@ msgstr "Nombre de fórmules en línia"
 msgid "Number of math displayed"
 msgstr "Nombre de fórmules a part"
 
-#: ../src/gui/gui-main.c:325
+#: ../src/gui/gui-main.c:335
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Existeix un fitxer de recuperació per a %s, voleu obrir-lo?"
 
-#: ../src/gui/gui-main.c:363 ../src/latex.c:262
+#: ../src/gui/gui-main.c:373 ../src/latex.c:253
 msgid "The file already exists. Overwrite?"
 msgstr "El fitxer ja existeix. El voleu sobreescriure?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:467
+#: ../src/gui/gui-main.c:477
 #, c-format
 msgid "Loading template ..."
 msgstr "Carregant la plantilla..."
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:536
 msgid "Compiling bibliography file..."
 msgstr "S'està compilant la bibliografia..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:538
 msgid "bibliography compiled without errors"
 msgstr "s'ha compilat la bibliografia sense errors"
 
-#: ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:540
 msgid "Error compiling bibliography file or none detected..."
 msgstr ""
 "S'ha produït un error mentre es compilava la bibliografia o no s'ha detectat"
 
-#: ../src/gui/gui-main.c:533
+#: ../src/gui/gui-main.c:543
 msgid "error compiling bibliography file"
 msgstr "s'ha produït un error mentre es compilava la bibliografia"
 
-#: ../src/gui/gui-main.c:567
+#: ../src/gui/gui-main.c:577
 #, c-format
 msgid "%s loaded"
 msgstr "s'ha carregat %s"
 
-#: ../src/gui/gui-main.c:669
+#: ../src/gui/gui-main.c:679
 msgid "Do you want to save the changes you have made?"
 msgstr "Voleu desar els canvis?"
 
-#: ../src/gui/gui-main.c:687
+#: ../src/gui/gui-main.c:697
 msgid "Open LaTeX document"
 msgstr "Obre un document LaTeX"
 
-#: ../src/gui/gui-main.c:690
+#: ../src/gui/gui-main.c:700
 msgid "Select an image to insert"
 msgstr "Seleccioneu una imatge per inserir"
 
-#: ../src/gui/gui-main.c:691
+#: ../src/gui/gui-main.c:701
 msgid "Select bibliography file"
 msgstr "Escull el fitxer de bibliografia"
 
-#: ../src/gui/gui-main.c:724
+#: ../src/gui/gui-main.c:734
 msgid "Save LaTeX document"
 msgstr "Desa "
 
-#: ../src/gui/gui-main.c:725
+#: ../src/gui/gui-main.c:735
 msgid "Save as LaTeX document"
 msgstr "Desa com a document LaTeX"
 
-#: ../src/gui/gui-main.c:726
+#: ../src/gui/gui-main.c:736
 msgid "Export to PDF"
 msgstr "Exporta a PDF"
 
-#: ../src/gui/gui-main.c:729
+#: ../src/gui/gui-main.c:739
 #, fuzzy
 msgid "Create project"
 msgstr "Crea un projecte nou"
 
-#: ../src/gui/gui-main.c:774
+#: ../src/gui/gui-main.c:784
 msgid "LaTeX files"
 msgstr "Fitxers LaTeX"
 
-#: ../src/gui/gui-main.c:779
+#: ../src/gui/gui-main.c:789
 msgid "Text files"
 msgstr "Fitxers de text"
 
-#: ../src/gui/gui-main.c:792
+#: ../src/gui/gui-main.c:802
 msgid "Image files"
 msgstr "Fitxers d'imatge"
 
-#: ../src/gui/gui-main.c:799
+#: ../src/gui/gui-main.c:809
 msgid "Bibtex files"
 msgstr "Fitxers Bibtex"
 
-#: ../src/gui/gui-main.c:805
+#: ../src/gui/gui-main.c:815
 msgid "Gummi project files"
 msgstr "Fitxers de projecte"
 
-#: ../src/editor.c:563
+#: ../src/editor.c:561
 msgid "Top reached, search from bottom?"
 msgstr "S'ha arribat al començament, voleu tornar al final?"
 
-#: ../src/editor.c:570
+#: ../src/editor.c:568
 msgid "Bottom reached, search from top?"
 msgstr "S'ha arribat al final, voleu tornar al començament?"
 
-#: ../src/latex.c:270
+#: ../src/latex.c:261
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"

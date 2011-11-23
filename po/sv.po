@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-13 20:11+0100\n"
+"POT-Creation-Date: 2011-11-23 11:48+0100\n"
 "PO-Revision-Date: 2011-11-07 20:48+0100\n"
 "Last-Translator: Kess Vargavind <vargavind@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -307,7 +307,7 @@ msgstr "Sök endast hela ord"
 msgid "Matrix"
 msgstr "Matris"
 
-#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:578
+#: ../data/ui/gummi.glade.h:81 ../src/gui/gui-main.c:588
 msgid "N/A"
 msgstr "Inga tillgängliga"
 
@@ -587,13 +587,13 @@ msgstr "rubriker"
 msgid "math environments"
 msgstr "matematikomgivningar"
 
-#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:576
+#: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:586
 msgid "no bibliography file detected"
 msgstr "Ingen bibliografifil funnen"
 
 # Behöver delas upp i källkoden:
 #   * sv: inga, ingen, inget
-#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:577
+#: ../data/ui/gummi.glade.h:151 ../src/gui/gui-main.c:587
 msgid "none"
 msgstr "Inget"
 
@@ -1023,104 +1023,104 @@ msgstr "Ekvationer i texten"
 msgid "Number of math displayed"
 msgstr "Ekvationer"
 
-#: ../src/gui/gui-main.c:325
+#: ../src/gui/gui-main.c:335
 #, c-format
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Tidigare arbetskopia finns av %s, vill du återgå till den?"
 
-#: ../src/gui/gui-main.c:363 ../src/latex.c:262
+#: ../src/gui/gui-main.c:373 ../src/latex.c:253
 msgid "The file already exists. Overwrite?"
 msgstr "Filen finns redan. Skriva över?"
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:467
+#: ../src/gui/gui-main.c:477
 #, c-format
 msgid "Loading template ..."
 msgstr "Öppnar mall..."
 
-#: ../src/gui/gui-main.c:526
+#: ../src/gui/gui-main.c:536
 msgid "Compiling bibliography file..."
 msgstr "Skapar bibliografifil..."
 
-#: ../src/gui/gui-main.c:528
+#: ../src/gui/gui-main.c:538
 msgid "bibliography compiled without errors"
 msgstr "Bibliografin skapad utan fel"
 
-#: ../src/gui/gui-main.c:530
+#: ../src/gui/gui-main.c:540
 msgid "Error compiling bibliography file or none detected..."
 msgstr "Kunde ej finna eller kompilera bibliografifilen"
 
-#: ../src/gui/gui-main.c:533
+#: ../src/gui/gui-main.c:543
 msgid "error compiling bibliography file"
 msgstr "Kunde inte skapa bibliografin"
 
-#: ../src/gui/gui-main.c:567
+#: ../src/gui/gui-main.c:577
 #, c-format
 msgid "%s loaded"
 msgstr "%s laddad"
 
-#: ../src/gui/gui-main.c:669
+#: ../src/gui/gui-main.c:679
 msgid "Do you want to save the changes you have made?"
 msgstr "Vill du spara de ändringar du gjort?"
 
-#: ../src/gui/gui-main.c:687
+#: ../src/gui/gui-main.c:697
 msgid "Open LaTeX document"
 msgstr "Öppna LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:690
+#: ../src/gui/gui-main.c:700
 msgid "Select an image to insert"
 msgstr "Välj en bild att infoga"
 
-#: ../src/gui/gui-main.c:691
+#: ../src/gui/gui-main.c:701
 msgid "Select bibliography file"
 msgstr "Välj bibliografifil"
 
-#: ../src/gui/gui-main.c:724
+#: ../src/gui/gui-main.c:734
 msgid "Save LaTeX document"
 msgstr "Spara LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:725
+#: ../src/gui/gui-main.c:735
 msgid "Save as LaTeX document"
 msgstr "Spara som LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:726
+#: ../src/gui/gui-main.c:736
 msgid "Export to PDF"
 msgstr "Exportera som PDF"
 
-#: ../src/gui/gui-main.c:729
+#: ../src/gui/gui-main.c:739
 #, fuzzy
 msgid "Create project"
 msgstr "Skapa nytt projekt"
 
-#: ../src/gui/gui-main.c:774
+#: ../src/gui/gui-main.c:784
 msgid "LaTeX files"
 msgstr "LaTeX-filer"
 
-#: ../src/gui/gui-main.c:779
+#: ../src/gui/gui-main.c:789
 msgid "Text files"
 msgstr "Textfiler"
 
-#: ../src/gui/gui-main.c:792
+#: ../src/gui/gui-main.c:802
 msgid "Image files"
 msgstr "Bildfiler"
 
-#: ../src/gui/gui-main.c:799
+#: ../src/gui/gui-main.c:809
 msgid "Bibtex files"
 msgstr "BibTeX-filer"
 
-#: ../src/gui/gui-main.c:805
+#: ../src/gui/gui-main.c:815
 msgid "Gummi project files"
 msgstr "Gummi-projektfiler"
 
-#: ../src/editor.c:563
+#: ../src/editor.c:561
 msgid "Top reached, search from bottom?"
 msgstr "Början av dokumentet nådd, fortsätta från slutet?"
 
-#: ../src/editor.c:570
+#: ../src/editor.c:568
 msgid "Bottom reached, search from top?"
 msgstr "Slutet av dokumentet nått, fortsätta från början?"
 
-#: ../src/latex.c:270
+#: ../src/latex.c:261
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"
