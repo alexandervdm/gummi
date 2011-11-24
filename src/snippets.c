@@ -235,11 +235,10 @@ void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key) {
     snippet = snippets_get_value (sc, key);
     g_return_if_fail (snippet != NULL);
 
-    editor_get_current_iter (ec, &start);
     new_info = snippets_parse (snippet);
-    new_info->start_offset = gtk_text_iter_get_offset (&start);
 
     gtk_text_buffer_get_selection_bounds (ec_buffer, &start, &end);
+    new_info->start_offset = gtk_text_iter_get_offset (&start);
     new_info->sel_text = gtk_text_iter_get_text (&start, &end);
     GSList* marks = gtk_text_iter_get_marks (&start);
     new_info->sel_start = *GTK_TEXT_MARK (marks->data);
