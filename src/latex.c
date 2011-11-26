@@ -231,11 +231,15 @@ gboolean latex_precompile_check (gchar* editortext) {
      * http://pangea.stanford.edu/computing/unix/formatting/parts.php
      * TOD: Improve and add document scan tags and make compatible with
      * upcoming master/slave document system */
+     
+    // TODO: see issue #269
     
     gboolean class = utils_subinstr("\\documentclass", editortext, FALSE);
     gboolean style = utils_subinstr("\\documentstyle", editortext, FALSE);
-    
-    return (class || style);
+    gboolean include = utils_subinstr("\\include", editortext, FALSE);
+    gboolean input = utils_subinstr("\\input", editortext, FALSE);
+
+    return (class || style || include || input);
 }
 
 void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
