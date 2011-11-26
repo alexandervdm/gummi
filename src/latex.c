@@ -244,7 +244,7 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
     GError* err = NULL;
     gint ret = 0;
 
-    if (0 != strcmp (path + strlen (path) -4, ".pdf"))
+    if (0 != g_strcmp0 (path + strlen (path) -4, ".pdf"))
         savepath = g_strdup_printf ("%s.pdf", path);
     else
         savepath = g_strdup (path);

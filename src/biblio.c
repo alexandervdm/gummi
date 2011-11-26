@@ -73,7 +73,7 @@ gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec) {
     if (g_regex_match (bib_regex, content, 0, &match_info)) {
         result = g_match_info_fetch_all (match_info);
         if (result[1]) {
-            if (strcmp (result[1] +strlen (result[1]) -4, ".bib") != 0)
+            if (g_strcmp0 (result[1] +strlen (result[1]) -4, ".bib") != 0)
                 bibfn = g_strconcat (result[1], ".bib", NULL);
             else
                 bibfn = g_strdup (result[1]);

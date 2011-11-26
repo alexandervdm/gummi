@@ -268,7 +268,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         config_set_value("cache_size", "150");
     }
 
-    if (strcmp (config_get_value ("pagelayout"), "single_page") == 0) {
+    if (g_strcmp0 (config_get_value ("pagelayout"), "single_page") == 0) {
         gtk_check_menu_item_set_active(
                 GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_SINGLE_PAGE;
@@ -936,13 +936,13 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *pdffile) {
 
     // Restore scale and fit mode
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
-    if (strcmp (config_get_value ("zoommode"), "pagewidth") == 0) {
+    if (g_strcmp0 (config_get_value ("zoommode"), "pagewidth") == 0) {
         set_fit_mode(pc, FIT_WIDTH);
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_WIDTH);
-    } else if (strcmp (config_get_value ("zoommode"), "pageheight") == 0) {
+    } else if (g_strcmp0 (config_get_value ("zoommode"), "pageheight") == 0) {
         set_fit_mode(pc, FIT_HEIGHT);
         //gtk_combo_box_set_active(pc->combo_sizes, new_index);
-    } else if (strcmp (config_get_value ("zoommode"), "bestfit") == 0) {
+    } else if (g_strcmp0 (config_get_value ("zoommode"), "bestfit") == 0) {
         set_fit_mode(pc, FIT_BOTH);
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_BOTH);
     } else {
@@ -1302,8 +1302,8 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
             to_y = to_y - (adjpage_height - target_height)/2;
             to_x = to_x - (adjpage_width - target_width)/2;
             
-            if (0 == strcmp (config_get_value ("animated_scroll"), "always") || 
-                0 == strcmp (config_get_value ("animated_scroll"), "autosync")) {
+            if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "always") || 
+                0 == g_strcmp0 (config_get_value ("animated_scroll"), "autosync")) {
                 previewgui_scroll_to_xy(pc, to_x, to_y);
             } else {
                 previewgui_goto_xy(pc, to_x, to_y);
@@ -1501,7 +1501,7 @@ void previewgui_cleanup_fds (GuPreviewGui* pc) {
 }
 
 void previewgui_start_preview (GuPreviewGui* pc) {
-    if (0 == strcmp (config_get_value ("compile_scheme"), "on_idle")) {
+    if (0 == g_strcmp0 (config_get_value ("compile_scheme"), "on_idle")) {
         pc->preview_on_idle = TRUE;
     } else {
         pc->update_timer = g_timeout_add_seconds (
@@ -1526,7 +1526,7 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
     newpage = MAX(newpage, 0);
     newpage = MIN(newpage, gui->previewgui->n_pages);
     
-    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+    if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "always")) {
         previewgui_scroll_to_page (gui->previewgui, newpage);
     } else {
         previewgui_goto_page (gui->previewgui, newpage);
@@ -1539,7 +1539,7 @@ void on_next_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+    if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "always")) {
         previewgui_scroll_to_page (pc, pc->next_page);
     } else {
         previewgui_goto_page (pc, pc->next_page);
@@ -1551,7 +1551,7 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    if (0 == strcmp (config_get_value ("animated_scroll"), "always")) {
+    if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "always")) {
         previewgui_scroll_to_page (pc, pc->prev_page);
     } else {
         previewgui_goto_page (pc, pc->prev_page);

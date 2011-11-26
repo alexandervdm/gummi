@@ -65,7 +65,7 @@ gboolean project_create_new (const gchar* filename) {
                                            "root=%s\n", 
                                             version, csetter, csteps, rootfile);
     
-    if (strcmp (filename + strlen (filename) -6, ".gummi")) {
+    if (g_strcmp0 (filename + strlen (filename) -6, ".gummi")) {
         filename = g_strdup_printf ("%s.gummi", filename);
     }
 

@@ -280,7 +280,7 @@ gboolean utils_glist_is_member (GList* list, gchar* item) {
 }
 
 gboolean utils_strequal (const gchar* str1, const gchar* str2) {
-    /* TODO: replace "strcmp" calls */
+    /* TODO: replace "g_strcmp0" calls */
     if (g_strcmp0 (str1, str2) == 0) {
         return TRUE;
     }
@@ -315,7 +315,7 @@ slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create) 
             if (0 == strncmp (current->first, term, strlen (term)))
                 return current;
         } else {
-            if (0 == strcmp (current->first, term))
+            if (0 == g_strcmp0 (current->first, term))
                 return current;
         }
         prev = current;
