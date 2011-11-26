@@ -701,11 +701,13 @@ void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
     }
 }
 
+G_MODULE_EXPORT
 void toggle_shellescape (GtkToggleButton* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("shellescape", newval? "True": "False");
 }
 
+G_MODULE_EXPORT
 void on_synctex_toggled (GtkToggleButton* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     config_set_value ("synctex", newval? "True": "False");
