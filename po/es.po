@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi ES Language\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-23 11:48+0100\n"
+"POT-Creation-Date: 2011-11-29 15:13+0800\n"
 "PO-Revision-Date: 2011-11-20 22:39-0300\n"
 "Last-Translator: Carlos Salas C. <csalasc@gmail.com>\n"
 "Language-Team: Carlos Salas Contreras <csalasc@gmail.com>\n"
@@ -863,28 +863,46 @@ msgid "Edit:"
 msgstr "_Editar"
 
 #: ../data/ui/snippets.glade.h:4
+msgid "Insert macro"
+msgstr ""
+
+#: ../data/ui/snippets.glade.h:5
 msgid "Reset all snippets"
 msgstr "_Restablecer predeterminados"
 
-#: ../data/ui/snippets.glade.h:5
+#: ../data/ui/snippets.glade.h:6
 msgid "Shortcut key:"
 msgstr "Tecla de acceso directo:"
 
-#: ../data/ui/snippets.glade.h:6
+#: ../data/ui/snippets.glade.h:7
 msgid "Snippets Manager"
 msgstr "Administrador de Snippets"
 
-#: ../data/ui/snippets.glade.h:7
+#: ../data/ui/snippets.glade.h:8
 msgid "Snippets:"
 msgstr "Snippets:"
 
-#: ../data/ui/snippets.glade.h:8
+#: ../data/ui/snippets.glade.h:9
 msgid "Tab trigger:"
 msgstr "Disparador de tabulación"
 
-#: ../data/ui/snippets.glade.h:9
+#: ../data/ui/snippets.glade.h:10
 msgid "_Reset"
 msgstr "_Restablecer"
+
+#: ../data/ui/snippets.glade.h:11
+msgid "basename"
+msgstr ""
+
+#: ../data/ui/snippets.glade.h:12
+#, fuzzy
+msgid "filename"
+msgstr "Nombre de Archivo:"
+
+#: ../data/ui/snippets.glade.h:13
+#, fuzzy
+msgid "selected text"
+msgstr "Texto centrado"
 
 #: ../src/iofunctions.c:130
 #, c-format
@@ -963,18 +981,18 @@ msgstr ""
 "alternativo desde el menú Preferencias. La vista previa \n"
 "no se reanudará hasta que reinicie Gummi.\n"
 
-#: ../src/gui/gui-snippets.c:303
+#: ../src/gui/gui-snippets.c:329
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
 "Se ha detectado disparador de tabulación duplicado! Por favor seleccione "
 "otro.\n"
 
-#: ../src/gui/gui-snippets.c:317
+#: ../src/gui/gui-snippets.c:343
 msgid "Type a new shortcut"
 msgstr "Crear documento nuevo"
 
-#: ../src/gui/gui-snippets.c:320
+#: ../src/gui/gui-snippets.c:346
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Escriba nuevo acceso directo, o presione retroceso para borrar"
 
@@ -1024,7 +1042,7 @@ msgstr "Número de math mostrados"
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Existe archivo de intercambio para %s, ¿quiere recuperarlo desde ahí?"
 
-#: ../src/gui/gui-main.c:373 ../src/latex.c:253
+#: ../src/gui/gui-main.c:373 ../src/latex.c:257
 msgid "The file already exists. Overwrite?"
 msgstr "El archivo ya existe, ¿Sobrescribir?"
 
@@ -1107,15 +1125,15 @@ msgstr "Archivo BibTeX"
 msgid "Gummi project files"
 msgstr "Archivos de proyectos Gummi"
 
-#: ../src/editor.c:561
+#: ../src/editor.c:559
 msgid "Top reached, search from bottom?"
 msgstr "Parte superior alcanzada, ¿Buscar desde abajo?"
 
-#: ../src/editor.c:568
+#: ../src/editor.c:566
 msgid "Bottom reached, search from top?"
 msgstr "Parte inferior alcanzada, ¿Buscar desde arriba?"
 
-#: ../src/latex.c:261
+#: ../src/latex.c:265
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"

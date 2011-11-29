@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-23 11:48+0100\n"
+"POT-Creation-Date: 2011-11-29 15:13+0800\n"
 "PO-Revision-Date: 2011-11-08 13:19-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Portuguese\n"
@@ -868,28 +868,46 @@ msgid "Edit:"
 msgstr "Editar:"
 
 #: ../data/ui/snippets.glade.h:4
+msgid "Insert macro"
+msgstr ""
+
+#: ../data/ui/snippets.glade.h:5
 msgid "Reset all snippets"
 msgstr "Restaurar todos os pedaços"
 
-#: ../data/ui/snippets.glade.h:5
+#: ../data/ui/snippets.glade.h:6
 msgid "Shortcut key:"
 msgstr "Teclas de atalho"
 
-#: ../data/ui/snippets.glade.h:6
+#: ../data/ui/snippets.glade.h:7
 msgid "Snippets Manager"
 msgstr "Gestor de pedaços"
 
-#: ../data/ui/snippets.glade.h:7
+#: ../data/ui/snippets.glade.h:8
 msgid "Snippets:"
 msgstr "Pedaços"
 
-#: ../data/ui/snippets.glade.h:8
+#: ../data/ui/snippets.glade.h:9
 msgid "Tab trigger:"
 msgstr "Despoletador de separador"
 
-#: ../data/ui/snippets.glade.h:9
+#: ../data/ui/snippets.glade.h:10
 msgid "_Reset"
 msgstr "_Restaurar"
+
+#: ../data/ui/snippets.glade.h:11
+msgid "basename"
+msgstr ""
+
+#: ../data/ui/snippets.glade.h:12
+#, fuzzy
+msgid "filename"
+msgstr "Nome do ficheiro"
+
+#: ../data/ui/snippets.glade.h:13
+#, fuzzy
+msgid "selected text"
+msgstr "Centralizado"
 
 #: ../src/iofunctions.c:130
 #, c-format
@@ -969,17 +987,17 @@ msgstr ""
 "O visualizador não reiniciará até que o Gummi\n"
 "seja reiniciado.\n"
 
-#: ../src/gui/gui-snippets.c:303
+#: ../src/gui/gui-snippets.c:329
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
 "Detectado despoletador de separador duplicado! Por favor, escolha outro.\n"
 
-#: ../src/gui/gui-snippets.c:317
+#: ../src/gui/gui-snippets.c:343
 msgid "Type a new shortcut"
 msgstr "Insira uma nova tecla de atalho"
 
-#: ../src/gui/gui-snippets.c:320
+#: ../src/gui/gui-snippets.c:346
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Insira uma nova tecla de atalho, ou prima a tecla espaço para limpar"
 
@@ -1029,7 +1047,7 @@ msgstr "Número de fórmulas em modo externo"
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "Arquivo de Swap já existente para %s, utilizar este?"
 
-#: ../src/gui/gui-main.c:373 ../src/latex.c:253
+#: ../src/gui/gui-main.c:373 ../src/latex.c:257
 msgid "The file already exists. Overwrite?"
 msgstr "O ficheiro já existe. Guardar novamente?"
 
@@ -1113,15 +1131,15 @@ msgstr "Ficheiros Bibtex"
 msgid "Gummi project files"
 msgstr "Ficheiros de projecto Gummi"
 
-#: ../src/editor.c:561
+#: ../src/editor.c:559
 msgid "Top reached, search from bottom?"
 msgstr "Início alcançado, procurar do final?"
 
-#: ../src/editor.c:568
+#: ../src/editor.c:566
 msgid "Bottom reached, search from top?"
 msgstr "Final alcançado, buscar do início?"
 
-#: ../src/latex.c:261
+#: ../src/latex.c:265
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"

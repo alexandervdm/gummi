@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-23 11:48+0100\n"
+"POT-Creation-Date: 2011-11-29 15:13+0800\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -16,14 +16,12 @@ msgid "   "
 msgstr "   "
 
 #: ../data/ui/gummi.glade.h:2
-#, fuzzy
 msgid "       "
-msgstr "        "
+msgstr "       "
 
 #: ../data/ui/gummi.glade.h:3
-#, fuzzy
 msgid "         "
-msgstr "        "
+msgstr "         "
 
 #: ../data/ui/gummi.glade.h:4
 msgid "0"
@@ -87,7 +85,6 @@ msgid "Align right"
 msgstr "向右對齊"
 
 #: ../data/ui/gummi.glade.h:26
-#, fuzzy
 msgid "Author"
 msgstr "作者"
 
@@ -125,7 +122,7 @@ msgstr "方括弧"
 
 #: ../data/ui/gummi.glade.h:35
 msgid "Build Log"
-msgstr ""
+msgstr "編譯訊息"
 
 #: ../data/ui/gummi.glade.h:36
 msgid "Caption:"
@@ -140,9 +137,8 @@ msgid "Check _Updates"
 msgstr "檢查更新(_U)"
 
 #: ../data/ui/gummi.glade.h:39
-#, fuzzy
 msgid "Close Project"
-msgstr "建立新文件"
+msgstr "關閉專案"
 
 #: ../data/ui/gummi.glade.h:40
 msgid "Columns:"
@@ -170,16 +166,15 @@ msgstr "編譯目前的參考文獻"
 
 #: ../data/ui/gummi.glade.h:47
 msgid "Continuous, One Column"
-msgstr ""
+msgstr "單頁連續"
 
 #: ../data/ui/gummi.glade.h:48
 msgid "Create a new document"
 msgstr "建立新文件"
 
 #: ../data/ui/gummi.glade.h:49
-#, fuzzy
 msgid "Create new Project"
-msgstr "建立新文件"
+msgstr "建立新專案"
 
 #: ../data/ui/gummi.glade.h:50
 msgid "Create new document from template.."
@@ -200,23 +195,20 @@ msgid ""
 msgstr "偵測在文件中出現的參考文獻"
 
 #: ../data/ui/gummi.glade.h:55
-#, fuzzy
 msgid "Document"
-msgstr "文件(_D)"
+msgstr "文件"
 
 #: ../data/ui/gummi.glade.h:56
 msgid "Document _Statistics"
 msgstr "文件資訊(_S)"
 
 #: ../data/ui/gummi.glade.h:57
-#, fuzzy
 msgid "Document name"
-msgstr "文件(_D)"
+msgstr "文件名"
 
 #: ../data/ui/gummi.glade.h:58
-#, fuzzy
 msgid "Document statistics"
-msgstr "文件資訊"
+msgstr "文件統計"
 
 #: ../data/ui/gummi.glade.h:59
 msgid "Double line"
@@ -236,12 +228,10 @@ msgid ""
 "active document"
 msgstr ""
 "目前文件的錯誤輸出\n"
-" "
 
 #: ../data/ui/gummi.glade.h:64
-#, fuzzy
 msgid "File path"
-msgstr "存檔"
+msgstr "檔案路徑"
 
 #: ../data/ui/gummi.glade.h:65
 msgid "File:"
@@ -326,14 +316,12 @@ msgid "No borders"
 msgstr "無邊框"
 
 #: ../data/ui/gummi.glade.h:86
-#, fuzzy
 msgid "Nr of files:"
-msgstr "浮動元件總數"
+msgstr "檔案數量:"
 
 #: ../data/ui/gummi.glade.h:87
-#, fuzzy
 msgid "Number of:"
-msgstr "浮動元件總數"
+msgstr "數量:"
 
 #: ../data/ui/gummi.glade.h:88
 msgid "Open"
@@ -341,7 +329,7 @@ msgstr "開啟"
 
 #: ../data/ui/gummi.glade.h:89
 msgid "Open Project"
-msgstr ""
+msgstr "開啟專案"
 
 #: ../data/ui/gummi.glade.h:90
 msgid "Open the selected template"
@@ -349,11 +337,11 @@ msgstr "打開選擇的模版"
 
 #: ../data/ui/gummi.glade.h:91
 msgid "PDF Preview could not initialise."
-msgstr ""
+msgstr "無法啟動PDF預覽"
 
 #: ../data/ui/gummi.glade.h:92
 msgid "Page Layout in Preview"
-msgstr ""
+msgstr "預覽格式"
 
 #: ../data/ui/gummi.glade.h:93
 msgid "Parentheses"
@@ -373,12 +361,11 @@ msgstr "前一個"
 
 #: ../data/ui/gummi.glade.h:97
 msgid "Project"
-msgstr ""
+msgstr "專案"
 
 #: ../data/ui/gummi.glade.h:98
-#, fuzzy
 msgid "Project name:"
-msgstr "文件(_D)"
+msgstr "專案名稱:"
 
 #: ../data/ui/gummi.glade.h:99
 msgid "References:"
@@ -389,6 +376,7 @@ msgid ""
 "Remove the selected\n"
 "file from the project."
 msgstr ""
+"從專案中移除選取的文件.\n"
 
 #: ../data/ui/gummi.glade.h:102
 msgid "Replace _All"
@@ -400,7 +388,7 @@ msgstr "取代為:"
 
 #: ../data/ui/gummi.glade.h:104
 msgid "Root path:"
-msgstr ""
+msgstr "專案根目錄:"
 
 #: ../data/ui/gummi.glade.h:105
 msgid "Rows:"
@@ -408,11 +396,11 @@ msgstr "列:"
 
 #: ../data/ui/gummi.glade.h:106
 msgid "Run _BibTeX"
-msgstr ""
+msgstr "編譯參考文獻"
 
 #: ../data/ui/gummi.glade.h:107
 msgid "Run _Makeindex"
-msgstr ""
+msgstr "編譯索引"
 
 #: ../data/ui/gummi.glade.h:108
 msgid "Save"
@@ -424,7 +412,7 @@ msgstr "另存新檔...(_A)"
 
 #: ../data/ui/gummi.glade.h:110
 msgid "Save early.. save often!"
-msgstr ""
+msgstr "多存檔有益身體建康!"
 
 #: ../data/ui/gummi.glade.h:111
 msgid "Save the current file"
@@ -447,15 +435,15 @@ msgid ""
 "Select a file to add it \n"
 "to the active project. "
 msgstr ""
+"請選擇要加入專案的文件."
 
 #: ../data/ui/gummi.glade.h:117
 msgid "Set Compilation Options"
-msgstr ""
+msgstr "設定編譯選項"
 
 #: ../data/ui/gummi.glade.h:118
-#, fuzzy
 msgid "Single Page"
-msgstr "單線"
+msgstr "單頁"
 
 #: ../data/ui/gummi.glade.h:119
 msgid "Single line"
@@ -463,27 +451,25 @@ msgstr "單線"
 
 #: ../data/ui/gummi.glade.h:120
 msgid "Style:"
-msgstr ""
+msgstr "樣式:"
 
 #: ../data/ui/gummi.glade.h:121
 msgid "Sync Preview with Editor"
-msgstr ""
+msgstr "同步預覽與編輯器"
 
 #: ../data/ui/gummi.glade.h:122
 msgid "Table"
 msgstr "表格"
 
 #: ../data/ui/gummi.glade.h:123
-#, fuzzy
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
 msgstr ""
 "這項功能需要\n"
-"texcount才能執行\n"
+"當前文件存檔後才能執行\n"
 
 #: ../data/ui/gummi.glade.h:125
-#, fuzzy
 msgid "Title"
 msgstr "標題"
 
@@ -500,15 +486,15 @@ msgid ""
 "Use SyncTeX to scroll preview to the part of the document that was last "
 "edited."
 msgstr ""
+"捲動預覽到最近編輯的地方."
 
 #: ../data/ui/gummi.glade.h:129
-#, fuzzy
 msgid "Words in:"
-msgstr "純文字數"
+msgstr "字數:"
 
 #: ../data/ui/gummi.glade.h:130
 msgid "Year"
-msgstr ""
+msgstr "年份"
 
 #: ../data/ui/gummi.glade.h:131
 msgid "_Document"
@@ -540,11 +526,11 @@ msgstr "開啟...(_O)"
 
 #: ../data/ui/gummi.glade.h:138
 msgid "_Project"
-msgstr ""
+msgstr "專案(_P)"
 
 #: ../data/ui/gummi.glade.h:139
 msgid "_Replace"
-msgstr "取代"
+msgstr "取代(_R)"
 
 #: ../data/ui/gummi.glade.h:140
 msgid "_Right Pane"
@@ -571,22 +557,20 @@ msgid "filter:"
 msgstr "篩選:"
 
 #: ../data/ui/gummi.glade.h:146
-#, fuzzy
 msgid "float captions"
 msgstr "浮動標題內總字數"
 
 #: ../data/ui/gummi.glade.h:147
 msgid "floats"
-msgstr ""
+msgstr "浮動物件"
 
 #: ../data/ui/gummi.glade.h:148
-#, fuzzy
 msgid "headers"
 msgstr "標頭內總字數"
 
 #: ../data/ui/gummi.glade.h:149
 msgid "math environments"
-msgstr ""
+msgstr "數學環境"
 
 #: ../data/ui/gummi.glade.h:150 ../src/gui/gui-main.c:586
 msgid "no bibliography file detected"
@@ -605,9 +589,8 @@ msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
 #: ../data/ui/gummi.glade.h:154
-#, fuzzy
 msgid "text"
-msgstr "粗體"
+msgstr "文字"
 
 #: ../data/ui/gummi.glade.h:155
 msgid "toolbutton1"
@@ -635,7 +618,7 @@ msgstr "toolbutton7"
 
 #: ../data/ui/prefs.glade.h:2
 msgid "Always"
-msgstr ""
+msgstr "永遠"
 
 #: ../data/ui/prefs.glade.h:3
 msgid "Automatic Indentation"
@@ -647,20 +630,19 @@ msgstr "存檔時自動匯出 PDF"
 
 #: ../data/ui/prefs.glade.h:5
 msgid "Cache size"
-msgstr ""
+msgstr "快取大小"
 
 #: ../data/ui/prefs.glade.h:6
 msgid "Color Scheme"
 msgstr "色彩配置"
 
 #: ../data/ui/prefs.glade.h:7
-#, fuzzy
 msgid "Compilation"
-msgstr "確認"
+msgstr "編譯"
 
 #: ../data/ui/prefs.glade.h:8
 msgid "Compilation steps"
-msgstr ""
+msgstr "編譯步驟"
 
 #: ../data/ui/prefs.glade.h:9
 msgid "Configure snippets"
@@ -687,9 +669,8 @@ msgid "Editor font"
 msgstr "編輯器字體"
 
 #: ../data/ui/prefs.glade.h:15
-#, fuzzy
 msgid "Enable SyncTeX"
-msgstr "啟用文字片段"
+msgstr "啟用SyncTeX"
 
 #: ../data/ui/prefs.glade.h:16
 msgid "Enable text wrapping"
@@ -721,7 +702,7 @@ msgstr "插入空格來替代Tab字符(_S)"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Latexmk"
-msgstr ""
+msgstr "Latexmk"
 
 #: ../data/ui/prefs.glade.h:24
 msgid "Line numbers"
@@ -729,7 +710,7 @@ msgstr "行號"
 
 #: ../data/ui/prefs.glade.h:25
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../data/ui/prefs.glade.h:26
 msgid "Miscellaneous"
@@ -737,7 +718,7 @@ msgstr "雜項"
 
 #: ../data/ui/prefs.glade.h:27
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 #: ../data/ui/prefs.glade.h:28
 msgid "None"
@@ -745,7 +726,7 @@ msgstr "無"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Only when syncing preview with editor"
-msgstr ""
+msgstr "只有當預覽與編輯器同步時"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "PDF Compiling"
@@ -756,13 +737,12 @@ msgid "PDF Exporting"
 msgstr "PDF 匯出"
 
 #: ../data/ui/prefs.glade.h:32
-#, fuzzy
 msgid "Preview"
 msgstr "預覽"
 
 #: ../data/ui/prefs.glade.h:33
 msgid "Rubber"
-msgstr ""
+msgstr "Rubber"
 
 #: ../data/ui/prefs.glade.h:34
 msgid "Snippets"
@@ -782,23 +762,23 @@ msgstr "Tab 字符寬度:"
 
 #: ../data/ui/prefs.glade.h:38
 msgid "TeX → DVI → PDF"
-msgstr ""
+msgstr "TeX → DVI → PDF"
 
 #: ../data/ui/prefs.glade.h:39
 msgid "TeX → DVI → PS → PDF"
-msgstr ""
+msgstr "TeX → DVI → PS → PDF"
 
 #: ../data/ui/prefs.glade.h:40
 msgid "TeX → PDF"
-msgstr ""
+msgstr "TeX → PDF"
 
 #: ../data/ui/prefs.glade.h:41
 msgid "TeXLive with PdfTeX"
-msgstr ""
+msgstr "TexLive: PdfTex"
 
 #: ../data/ui/prefs.glade.h:42
 msgid "TeXLive with XeTeX"
-msgstr ""
+msgstr "TexLive: XeTex"
 
 #: ../data/ui/prefs.glade.h:43
 msgid "Text wrapping"
@@ -806,24 +786,23 @@ msgstr "文字換行"
 
 #: ../data/ui/prefs.glade.h:44
 msgid "This program was not found on your system."
-msgstr ""
+msgstr "無法在您的系統中找到這個程式"
 
 #: ../data/ui/prefs.glade.h:45
 msgid "Typesetter command"
 msgstr "排版指令:"
 
 #: ../data/ui/prefs.glade.h:46
-#, fuzzy
 msgid "Typesetter options"
-msgstr "排版指令:"
+msgstr "排版指令選項"
 
 #: ../data/ui/prefs.glade.h:47
 msgid "Use animated scroll"
-msgstr ""
+msgstr "捲動時使用動畫"
 
 #: ../data/ui/prefs.glade.h:48
 msgid "Use shell-escape"
-msgstr ""
+msgstr "使用shell-escape"
 
 #: ../data/ui/prefs.glade.h:49
 msgid "View"
@@ -870,28 +849,44 @@ msgid "Edit:"
 msgstr "編輯: "
 
 #: ../data/ui/snippets.glade.h:4
+msgid "Insert macro"
+msgstr "插入巨集"
+
+#: ../data/ui/snippets.glade.h:5
 msgid "Reset all snippets"
 msgstr "重設為預設"
 
-#: ../data/ui/snippets.glade.h:5
+#: ../data/ui/snippets.glade.h:6
 msgid "Shortcut key:"
 msgstr "捷徑鍵:"
 
-#: ../data/ui/snippets.glade.h:6
+#: ../data/ui/snippets.glade.h:7
 msgid "Snippets Manager"
 msgstr "文字片段管理"
 
-#: ../data/ui/snippets.glade.h:7
+#: ../data/ui/snippets.glade.h:8
 msgid "Snippets:"
 msgstr "文字片段:"
 
-#: ../data/ui/snippets.glade.h:8
+#: ../data/ui/snippets.glade.h:9
 msgid "Tab trigger:"
 msgstr "Tab 觸發:"
 
-#: ../data/ui/snippets.glade.h:9
+#: ../data/ui/snippets.glade.h:10
 msgid "_Reset"
 msgstr "重設(_R)"
+
+#: ../data/ui/snippets.glade.h:11
+msgid "basename"
+msgstr "檔案名稱"
+
+#: ../data/ui/snippets.glade.h:12
+msgid "filename"
+msgstr "檔名"
+
+#: ../data/ui/snippets.glade.h:13
+msgid "selected text"
+msgstr "已選取文字"
 
 #: ../src/iofunctions.c:130
 #, c-format
@@ -923,15 +918,15 @@ msgstr "之 %d"
 
 #: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
-msgstr ""
+msgstr "無法啟動PDF預覽"
 
 #: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
-msgstr ""
+msgstr "文件似乎是空白或無效的LaTeX文件"
 
 #: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
-msgstr ""
+msgstr "無法找到編譯程式"
 
 #: ../src/gui/gui-infoscreen.c:128
 msgid ""
@@ -940,6 +935,8 @@ msgid ""
 "are resolved. Additional information is available on\n"
 "the Build log tab.\n"
 msgstr ""
+"目前的文件中包含錯誤，PDF預覽將在錯誤修正後自動恢復.\n"
+"請參考編譯訊息分頁中的資訊修正錯誤."
 
 #: ../src/gui/gui-infoscreen.c:133
 msgid ""
@@ -948,6 +945,8 @@ msgid ""
 "load the default text or use the Project menu to add\n"
 "it to an active project.\n"
 msgstr ""
+"目前的文件是無效的LaTeX文件. 你可以繼續編輯或是從\n"
+"專案選單中加入LaTeX文件."
 
 #: ../src/gui/gui-infoscreen.c:138
 msgid ""
@@ -957,17 +956,19 @@ msgid ""
 "live preview function will not resume until Gummi\n"
 "is restarted.\n"
 msgstr ""
+"您選擇的編譯程式無法被找到. 請重新安裝編譯程式或是\n"
+"選擇其他的編譯程式. PDF預覽將在Gummi重啟後恢復."
 
-#: ../src/gui/gui-snippets.c:303
+#: ../src/gui/gui-snippets.c:329
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr "Tab觸發字串重覆! 請選擇另一個字串.\n"
 
-#: ../src/gui/gui-snippets.c:317
+#: ../src/gui/gui-snippets.c:343
 msgid "Type a new shortcut"
 msgstr "輸入新的捷徑"
 
-#: ../src/gui/gui-snippets.c:320
+#: ../src/gui/gui-snippets.c:346
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "輸入新的捷徑, 或按後退鍵清除"
 
@@ -978,11 +979,11 @@ msgstr "載入最近使用文件時發生錯誤: %s"
 
 #: ../src/gui/gui-menu.c:342
 msgid "Running Makeindex.."
-msgstr ""
+msgstr "執行Makeindex中.."
 
 #: ../src/gui/gui-menu.c:345
 msgid "Error running Makeindex.."
-msgstr ""
+msgstr "執行Makeindex的過程中發生錯誤.."
 
 #: ../src/gui/gui-menu.c:375
 msgid "Words in text"
@@ -1017,7 +1018,7 @@ msgstr "顯示的數學式總數"
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
 
-#: ../src/gui/gui-main.c:373 ../src/latex.c:253
+#: ../src/gui/gui-main.c:373 ../src/latex.c:257
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
@@ -1077,9 +1078,8 @@ msgid "Export to PDF"
 msgstr "匯出為PDF"
 
 #: ../src/gui/gui-main.c:739
-#, fuzzy
 msgid "Create project"
-msgstr "建立新文件"
+msgstr "建立新專案"
 
 #: ../src/gui/gui-main.c:784
 msgid "LaTeX files"
@@ -1098,23 +1098,23 @@ msgid "Bibtex files"
 msgstr "參考文獻"
 
 #: ../src/gui/gui-main.c:815
-#, fuzzy
 msgid "Gummi project files"
-msgstr "Gummi 偏好設定"
+msgstr "Gummi 專案檔"
 
-#: ../src/editor.c:561
+#: ../src/editor.c:559
 msgid "Top reached, search from bottom?"
 msgstr "已搜尋到文首, 從文末開始尋找?"
 
-#: ../src/editor.c:568
+#: ../src/editor.c:566
 msgid "Bottom reached, search from top?"
 msgstr "已搜尋到文末, 從文首開始尋找?"
 
-#: ../src/latex.c:261
+#: ../src/latex.c:265
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"
 msgstr ""
+"文件包含錯誤, 無法匯出為PDF.\n"
 
 #: ../src/update.c:114
 #, c-format
