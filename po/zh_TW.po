@@ -227,7 +227,8 @@ msgid ""
 "Error status for\n"
 "active document"
 msgstr ""
-"目前文件的錯誤輸出\n"
+"目前文件\n"
+"的錯誤輸出"
 
 #: ../data/ui/gummi.glade.h:64
 msgid "File path"
@@ -376,7 +377,8 @@ msgid ""
 "Remove the selected\n"
 "file from the project."
 msgstr ""
-"從專案中移除選取的文件.\n"
+"從專案中移除\n"
+"選取的文件."
 
 #: ../data/ui/gummi.glade.h:102
 msgid "Replace _All"
@@ -467,7 +469,7 @@ msgid ""
 "active document to be saved. "
 msgstr ""
 "這項功能需要\n"
-"當前文件存檔後才能執行\n"
+"當前文件存檔後才能執行."
 
 #: ../data/ui/gummi.glade.h:125
 msgid "Title"
@@ -936,7 +938,7 @@ msgid ""
 "the Build log tab.\n"
 msgstr ""
 "目前的文件中包含錯誤，PDF預覽將在錯誤修正後自動恢復.\n"
-"請參考編譯訊息分頁中的資訊修正錯誤."
+"請參考編譯訊息分頁中的資訊修正錯誤.\n"
 
 #: ../src/gui/gui-infoscreen.c:133
 msgid ""
@@ -946,7 +948,7 @@ msgid ""
 "it to an active project.\n"
 msgstr ""
 "目前的文件是無效的LaTeX文件. 你可以繼續編輯或是從\n"
-"專案選單中加入LaTeX文件."
+"專案選單中加入LaTeX文件.\n"
 
 #: ../src/gui/gui-infoscreen.c:138
 msgid ""
@@ -957,7 +959,7 @@ msgid ""
 "is restarted.\n"
 msgstr ""
 "您選擇的編譯程式無法被找到. 請重新安裝編譯程式或是\n"
-"選擇其他的編譯程式. PDF預覽將在Gummi重啟後恢復."
+"選擇其他的編譯程式. PDF預覽將在Gummi重啟後恢復.\n"
 
 #: ../src/gui/gui-snippets.c:329
 msgid ""
