@@ -453,25 +453,29 @@ gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec) 
 
     /* Snippet just activated */
     if (!info->current) {
-        /* Skip $0 and jump to next placeholder */
-        if (info->einfo_unique
-            && GU_SNIPPET_EXPAND_INFO (info->einfo_unique->data)->group_number
-            == 0)
-            info->current = g_list_next (info->einfo_unique);
-        else
+        /* Skip $0, $-1 and jump to next placeholder */
+        if (info->einfo_unique) {
             info->current = info->einfo_unique;
+            while (info->current &&
+                GU_SNIPPET_EXPAND_INFO (info->current->data)->group_number <= 0)
+                info->current = g_list_next (info->current);
+        }
     } else
         info->current = g_list_next (info->current);
 
     /* No placeholder left */
     if (!info->current) {
         info->current = g_list_first (info->einfo_sorted);
-        if (!info->current
-            || GU_SNIPPET_EXPAND_INFO (info->current->data)->group_number != 0)
+        while (info->current &&
+               GU_SNIPPET_EXPAND_INFO (info->current->data)->group_number != 0)
+            info->current = g_list_next(info->current);
+
+        if (!info->current)
             return FALSE;
-        /* This is the last one($0) set to false to deactivate snippet */
-        success = FALSE;
+        else /* This is the last one($0) set to false to deactivate snippet */
+            success = FALSE;
     }
+
     einfo = GU_SNIPPET_EXPAND_INFO (info->current->data);
     gtk_text_buffer_get_iter_at_mark (ec_buffer, &start, einfo->left_mark);
     gtk_text_buffer_get_iter_at_mark (ec_buffer, &end, einfo->right_mark);
@@ -487,7 +491,8 @@ gboolean snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec)
     info->current = g_list_previous (info->current);
 
     /* Return false to deactivate snippet */
-    if (!info->current)
+    if (!info->current ||
+        GU_SNIPPET_EXPAND_INFO(info->current->data)->group_number < 0)
         return FALSE;
 
     einfo = GU_SNIPPET_EXPAND_INFO (info->current->data);
