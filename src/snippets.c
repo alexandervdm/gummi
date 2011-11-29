@@ -337,11 +337,16 @@ GuSnippetInfo* snippets_parse (char* snippet) {
     gchar** result = NULL;
     GRegex* regex = NULL;
     GMatchInfo* match_info = NULL;
-    const gchar* holders[] = { "\\$([0-9]+)", "\\${([0-9]*):?([^}]*)}" };
+    const gchar* holders[] = { "\\$([0-9]+)", "\\${([0-9]*):?([^}]*)}",
+                               "\\$(FILENAME)", "\\${(FILENAME)}",
+                               "\\$(BASENAME)", "\\${(BASENAME)}",
+                               "\\$(SELECTED_TEXT)", "\\${(SELECTED_TEXT)}"
+                               /* Anyway to combine these? */
+                            };
 
     GuSnippetInfo* info = snippet_info_new (snippet);
 
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < sizeof(holders) / sizeof(holders[0]); ++i) {
         if (! (regex = g_regex_new (holders[i], G_REGEX_DOTALL, 0, &err))) {
             slog (L_ERROR, "g_regex_new (): %s\n", err->message);
             g_error_free (err);
@@ -351,8 +356,13 @@ GuSnippetInfo* snippets_parse (char* snippet) {
         while (g_match_info_matches (match_info)) {
             result = g_match_info_fetch_all (match_info);
             g_match_info_fetch_pos (match_info, 0, &start, &end);
-            snippet_info_append_holder (info, atoi (result[1]), start,
-                    end -start, result[2]);
+            if (i < 2) {
+                snippet_info_append_holder (info, atoi (result[1]), start,
+                        end -start, result[2]);
+            } else {
+                snippet_info_append_holder (info, -1, start, end -start,
+                        result[1]);
+            }
             slog (L_DEBUG, "Placeholder: (%s, %s, %s)\n", result[0], result[1],
                     result[2]);
             g_match_info_next (match_info, NULL);
@@ -364,6 +374,7 @@ GuSnippetInfo* snippets_parse (char* snippet) {
     info->einfo = g_list_sort (info->einfo, snippet_info_pos_cmp);
     info->einfo_sorted = g_list_copy (info->einfo);
     info->einfo_sorted = g_list_sort (info->einfo_sorted, snippet_info_num_cmp);
+
     return info;
 }
 
@@ -559,7 +570,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &start, einfo->left_mark);
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &end, einfo->right_mark);
 
-        if (g_strcmp0 (value->text, "$SELECTED_TEXT") == 0) {
+        if (g_strcmp0 (value->text, "SELECTED_TEXT") == 0) {
             GtkTextIter ms, me;
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, info->sel_text, -1);
@@ -567,11 +578,11 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
             me = ms;
             gtk_text_iter_forward_chars (&me, strlen (info->sel_text));
             gtk_text_buffer_delete (ec_buffer, &ms, &me);
-        } else if (g_strcmp0 (value->text, "$FILENAME") == 0) {
+        } else if (g_strcmp0 (value->text, "FILENAME") == 0) {
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start,
                     ec->filename? ec->filename: "", -1);
-        } else if (g_strcmp0 (value->text, "$BASENAME") == 0) {
+        } else if (g_strcmp0 (value->text, "BASENAME") == 0) {
             gchar* basename = g_path_get_basename(ec->filename?ec->filename:"");
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, basename, -1);
@@ -586,7 +597,10 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
 }
 
 void snippet_info_sync_group (GuSnippetInfo* info, GuEditor* ec) {
-    if (!info->current) return;
+    if (!info->current ||
+        GU_SNIPPET_EXPAND_INFO(info->current->data)->group_number == -1)
+        return;
+
     GuSnippetExpandInfo* active = GU_SNIPPET_EXPAND_INFO (info->current->data);
     GList* current = g_list_first (info->einfo);
     gchar* text = NULL;
