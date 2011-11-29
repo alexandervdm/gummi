@@ -363,8 +363,7 @@ void editor_insert_package (GuEditor* ec, const gchar* package) {
                 NULL)) {
         gtk_source_buffer_begin_not_undoable_action (ec->buffer);
         gtk_text_buffer_begin_user_action (ec_buffer);
-        gtk_text_buffer_insert (ec_buffer, &mstart,
-                pkgstr, strlen (pkgstr));
+        gtk_text_buffer_insert (ec_buffer, &mstart, pkgstr, -1);
         gtk_text_buffer_end_user_action (ec_buffer);
         gtk_source_buffer_end_not_undoable_action (ec->buffer);
         gtk_text_buffer_set_modified (ec_buffer, TRUE);
@@ -384,8 +383,7 @@ void editor_insert_bib (GuEditor* ec, const gchar* package) {
                 &sstart, &send, NULL)) {
         gtk_source_buffer_begin_not_undoable_action (ec->buffer);
         gtk_text_buffer_begin_user_action (ec_buffer);
-        gtk_text_buffer_insert (ec_buffer, &mstart,
-                pkgstr, strlen (pkgstr));
+        gtk_text_buffer_insert (ec_buffer, &mstart, pkgstr, -1);
         gtk_text_buffer_end_user_action (ec_buffer);
         gtk_source_buffer_end_not_undoable_action (ec->buffer);
         gtk_text_buffer_set_modified (ec_buffer, TRUE);
@@ -448,7 +446,7 @@ void editor_set_selection_textstyle (GuEditor* ec, const gchar* type) {
 
     gtk_text_buffer_begin_user_action (ec_buffer);
     gtk_text_buffer_delete (ec_buffer, &start, &end);
-    gtk_text_buffer_insert (ec_buffer, &start, outtext, strlen (outtext));
+    gtk_text_buffer_insert (ec_buffer, &start, outtext, -1);
     end = start;
     gtk_text_iter_backward_chars (&start, strlen (outtext));
     gtk_text_buffer_select_range (ec_buffer, &start, &end);
@@ -603,7 +601,7 @@ void editor_start_replace_next (GuEditor* ec, const gchar* term,
             && gtk_text_iter_ends_word (&mend)))) {
         gtk_text_buffer_begin_user_action (ec_buffer);
         gtk_text_buffer_delete (ec_buffer, &mstart, &mend);
-        gtk_text_buffer_insert (ec_buffer, &mstart, rterm, strlen (rterm));
+        gtk_text_buffer_insert (ec_buffer, &mstart, rterm, -1);
         gtk_text_buffer_end_user_action (ec_buffer);
         editor_search_next (ec, FALSE);
     }
@@ -628,8 +626,7 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
                 && gtk_text_iter_ends_word (&mend)))) {
             gtk_text_buffer_begin_user_action (ec_buffer);
             gtk_text_buffer_delete (ec_buffer, &mstart, &mend);
-            gtk_text_buffer_insert (ec_buffer, &mstart, rterm,
-                    strlen (rterm));
+            gtk_text_buffer_insert (ec_buffer, &mstart, rterm, -1);
             gtk_text_buffer_end_user_action (ec_buffer);
             start =  mstart;
         } else break;

@@ -544,6 +544,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
     GtkTextIter start, end;
     GHashTable* map = NULL;
     GList* current = NULL;
+    gchar* text = NULL;
     gint key = 0;
 
     map = g_hash_table_new (NULL, NULL);
@@ -570,7 +571,9 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &start, einfo->left_mark);
         gtk_text_buffer_get_iter_at_mark (ec_buffer, &end, einfo->right_mark);
 
-        if (g_strcmp0 (value->text, "SELECTED_TEXT") == 0) {
+        /* Expand macros */
+        text = GU_SNIPPET_EXPAND_INFO(current->data)->text;
+        if (g_strcmp0 (text, "SELECTED_TEXT") == 0) {
             GtkTextIter ms, me;
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, info->sel_text, -1);
@@ -578,19 +581,21 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
             me = ms;
             gtk_text_iter_forward_chars (&me, strlen (info->sel_text));
             gtk_text_buffer_delete (ec_buffer, &ms, &me);
-        } else if (g_strcmp0 (value->text, "FILENAME") == 0) {
+        } else if (g_strcmp0 (text, "FILENAME") == 0) {
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start,
                     ec->filename? ec->filename: "", -1);
-        } else if (g_strcmp0 (value->text, "BASENAME") == 0) {
+        } else if (g_strcmp0 (text, "BASENAME") == 0) {
             gchar* basename = g_path_get_basename(ec->filename?ec->filename:"");
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, basename, -1);
             g_free (basename);
         } else {
+            /* Expand text of same group with with text of group leader */
             gtk_text_buffer_delete (ec_buffer, &start, &end);
             gtk_text_buffer_insert (ec_buffer, &start, value->text, -1);
         }
+
         current = g_list_next (current);
     }
     g_hash_table_destroy (map);

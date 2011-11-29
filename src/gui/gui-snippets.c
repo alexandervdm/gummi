@@ -48,6 +48,8 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 
+static void snippetsgui_insert_at_current(GuSnippetsGui* sc, gchar* text);
+
 GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
     GuSnippetsGui* s = g_new0 (GuSnippetsGui, 1);
     GtkSourceLanguageManager* manager = NULL;
@@ -115,6 +117,14 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
 
 void snippetsgui_main (GuSnippetsGui* s) {
     gtk_widget_show_all (GTK_WIDGET (s->snippetswindow));
+}
+
+static void snippetsgui_insert_at_current(GuSnippetsGui* sc, gchar* text) {
+    GtkTextIter start;
+    GtkTextBuffer* buffer = GTK_TEXT_BUFFER(sc->buffer);
+    GtkTextMark* mark = gtk_text_buffer_get_insert (buffer);
+    gtk_text_buffer_get_iter_at_mark (buffer, &start, mark);
+    gtk_text_buffer_insert (buffer, &start, text, -1);
 }
 
 void snippetsgui_load_snippets (GuSnippetsGui* s) {
@@ -210,6 +220,22 @@ void on_snippetsgui_reset_clicked (GtkWidget* widget, void* user) {
     snippets_set_default (gummi->snippets);
     snippetsgui_load_snippets (gui->snippetsgui);
     snippetsgui_move_cursor_to_row (gui->snippetsgui, 0);
+}
+
+G_MODULE_EXPORT
+void on_snippetsgui_selected_text_clicked (GtkWidget* widget, void* user) {
+    snippetsgui_insert_at_current(gui->snippetsgui, "$SELECTED_TEXT");
+}
+
+G_MODULE_EXPORT
+void on_snippetsgui_filename_clicked (GtkWidget* widget, void* user) {
+    snippetsgui_insert_at_current(gui->snippetsgui, "$FILENAME");
+    
+}
+
+G_MODULE_EXPORT
+void on_snippetsgui_basename_clicked (GtkWidget* widget, void* user) {
+    snippetsgui_insert_at_current(gui->snippetsgui, "$BASENAME");
 }
 
 G_MODULE_EXPORT

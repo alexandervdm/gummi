@@ -67,6 +67,10 @@ gboolean on_accelerator_entry_key_press_event (GtkWidget* widget,
         GdkEventKey* event, void* user);
 void on_snippetsgui_close_clicked (GtkWidget* widget, void* user);
 void on_snippetsgui_reset_clicked (GtkWidget* widget, void* user);
+void on_snippetsgui_selected_text_clicked (GtkWidget* widget, void* user);
+void on_snippetsgui_filename_clicked (GtkWidget* widget, void* user);
+void on_snippetsgui_basename_clicked (GtkWidget* widget, void* user);
+
 void on_snippets_tree_view_cursor_changed (GtkTreeView* view, void* user);
 void on_snippet_renderer_edited (GtkCellRendererText* renderer, gchar *path,
         gchar* name, void* user);
