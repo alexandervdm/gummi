@@ -2084,8 +2084,16 @@ gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
 
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
 
+    LayeredRectangle fov = get_fov(pc);
+    gdouble x_rel = (gdouble) (fov.x + fov.width/2) / pc->width_scaled;
+    gdouble y_rel = (gdouble) (fov.y + fov.height/2) / pc->height_scaled;
+
     update_fit_scale(pc);
     update_page_positions(pc);
+    
+    fov = get_fov(pc);
+    previewgui_goto_xy (pc, x_rel*pc->width_scaled - fov.width/2, 
+                            y_rel*pc->height_scaled - fov.height/2);
 
     return FALSE;
 }
