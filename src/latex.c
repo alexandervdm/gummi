@@ -236,10 +236,9 @@ gboolean latex_precompile_check (gchar* editortext) {
     
     gboolean class = utils_subinstr("\\documentclass", editortext, FALSE);
     gboolean style = utils_subinstr("\\documentstyle", editortext, FALSE);
-    gboolean include = utils_subinstr("\\include", editortext, FALSE);
     gboolean input = utils_subinstr("\\input", editortext, FALSE);
 
-    return (class || style || include || input);
+    return (class || style || input);
 }
 
 void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
