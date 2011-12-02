@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-29 15:13+0800\n"
+"POT-Creation-Date: 2011-12-02 10:41+0100\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -436,8 +436,7 @@ msgstr "尋找:"
 msgid ""
 "Select a file to add it \n"
 "to the active project. "
-msgstr ""
-"請選擇要加入專案的文件."
+msgstr "請選擇要加入專案的文件."
 
 #: ../data/ui/gummi.glade.h:117
 msgid "Set Compilation Options"
@@ -487,8 +486,7 @@ msgstr "底線"
 msgid ""
 "Use SyncTeX to scroll preview to the part of the document that was last "
 "edited."
-msgstr ""
-"捲動預覽到最近編輯的地方."
+msgstr "捲動預覽到最近編輯的地方."
 
 #: ../data/ui/gummi.glade.h:129
 msgid "Words in:"
@@ -1020,7 +1018,7 @@ msgstr "顯示的數學式總數"
 msgid "Swap file exits for %s, do you want to recover from it?"
 msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
 
-#: ../src/gui/gui-main.c:373 ../src/latex.c:257
+#: ../src/gui/gui-main.c:373 ../src/latex.c:256
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
@@ -1111,12 +1109,11 @@ msgstr "已搜尋到文首, 從文末開始尋找?"
 msgid "Bottom reached, search from top?"
 msgstr "已搜尋到文末, 從文首開始尋找?"
 
-#: ../src/latex.c:265
+#: ../src/latex.c:264
 msgid ""
 "Unable to export PDF..\n"
 "Document contains errors.\n"
-msgstr ""
-"文件包含錯誤, 無法匯出為PDF.\n"
+msgstr "文件包含錯誤, 無法匯出為PDF.\n"
 
 #: ../src/update.c:114
 #, c-format
