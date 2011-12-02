@@ -2,6 +2,19 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.1 (December 2th, 2011):
+
+	Bugs fixed:
+	* Selecting text no longer freezes during updates
+	* Shell escape option is now set/unset correctly
+	* Fixed crash when trying to open non-existing file from cli
+	* Popup windows no longer block gui in fullscreen mode
+	* Documents containing input commands can pass precompile check
+	* Opening snippet menu no longer blocks gui
+	* Several fixes to snippet insertion mechanism
+	* Minor tweaks to the build scripts for convenience
+	* Fixed some minor memory leaks
+
 Gummi 0.6.0 (November 14th, 2011):
 
 	Bugs fixed:
