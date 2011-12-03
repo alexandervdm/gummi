@@ -149,19 +149,24 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 
 #ifdef USE_GTKSPELL
     /* list available languages */
-    gchar* ptr = 0;
 
     Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts");
+    int i;
 
-    ptr = strtok ((gchar*)pret.second, " \n");
-    while (ptr) {
+    gchar** output = g_strsplit((gchar*)pret.second, "\n", BUFSIZ);
+    gchar** elems = NULL;
+    
+    for(i = 0; output[i] != NULL; i++) {
         GtkTreeIter iter;
-        if (ptr[0] != '(') {
+        elems = g_strsplit (output[i], " ", BUFSIZ);
+        if (elems[0] != NULL) {
             gtk_list_store_append (p->list_languages, &iter);
-            gtk_list_store_set (p->list_languages, &iter, 0, ptr, -1);
+            gtk_list_store_set (p->list_languages, &iter, 0, elems[0], -1);
         }
-        ptr = strtok (NULL, " \n");
     }
+    g_strfreev(output);
+    g_strfreev(elems);
+
     gtk_combo_box_set_active (p->combo_languages, 0);
     g_free ((gchar*)pret.second);
 #else
