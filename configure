@@ -619,6 +619,8 @@ gtksourceview_LIBS
 gtksourceview_CFLAGS
 GTK_LIBS
 GTK_CFLAGS
+gthread_LIBS
+gthread_CFLAGS
 GLIB_MKENUMS
 GOBJECT_QUERY
 GLIB_GENMARSHAL
@@ -756,6 +758,8 @@ CPPFLAGS
 PKG_CONFIG
 PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
+gthread_CFLAGS
+gthread_LIBS
 gtksourceview_CFLAGS
 gtksourceview_LIBS
 poppler_CFLAGS
@@ -1399,6 +1403,10 @@ Some influential environment variables:
               directories to add to pkg-config's search path
   PKG_CONFIG_LIBDIR
               path overriding pkg-config's built-in search path
+  gthread_CFLAGS
+              C compiler flags for gthread, overriding pkg-config
+  gthread_LIBS
+              linker flags for gthread, overriding pkg-config
   gtksourceview_CFLAGS
               C compiler flags for gtksourceview, overriding pkg-config
   gtksourceview_LIBS
@@ -4812,6 +4820,80 @@ rm -f core conftest.err conftest.$ac_objext \
 
   rm -f conf.glibtest
 
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gthread" >&5
+$as_echo_n "checking for gthread... " >&6; }
+
+if test -n "$gthread_CFLAGS"; then
+    pkg_cv_gthread_CFLAGS="$gthread_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gthread-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gthread-2.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_gthread_CFLAGS=`$PKG_CONFIG --cflags "gthread-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$gthread_LIBS"; then
+    pkg_cv_gthread_LIBS="$gthread_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gthread-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gthread-2.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_gthread_LIBS=`$PKG_CONFIG --libs "gthread-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        gthread_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gthread-2.0" 2>&1`
+        else
+	        gthread_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gthread-2.0" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$gthread_PKG_ERRORS" >&5
+
+	as_fn_error $? "You need ghread-2.0 to build $PACKAGE" "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	as_fn_error $? "You need ghread-2.0 to build $PACKAGE" "$LINENO" 5
+else
+	gthread_CFLAGS=$pkg_cv_gthread_CFLAGS
+	gthread_LIBS=$pkg_cv_gthread_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+GUI_CFLAGS="$GUI_CFLAGS $gthread_CFLAGS"
+GUI_LIBS="$GUI_LIBS $gthread_LIBS"
 
 # Check whether --enable-gtktest was given.
 if test "${enable_gtktest+set}" = set; then :

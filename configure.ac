@@ -37,6 +37,11 @@ AM_PATH_GLIB_2_0([2.20.0], [
 	 GUI_LIBS="$GUI_LIBS $GLIB_LIBS"
 	], [AC_MSG_ERROR([You need Glib >= 2.20.0 to build $PACKAGE])]) 
 
+PKG_CHECK_MODULES(gthread, [gthread-2.0],,
+	[AC_MSG_ERROR([You need ghread-2.0 to build $PACKAGE])]) 
+GUI_CFLAGS="$GUI_CFLAGS $gthread_CFLAGS"
+GUI_LIBS="$GUI_LIBS $gthread_LIBS"
+
 AM_PATH_GTK_2_0([2.20.0], [
 	 GUI_CFLAGS="$GUI_CFLAGS $GTK_CFLAGS"
 	 GUI_LIBS="$GUI_LIBS $GTK_LIBS"
