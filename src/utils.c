@@ -46,6 +46,7 @@
 #   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
 
+#include "constants.h"
 #include "environment.h"
 #include "utils.h"
 
@@ -258,11 +259,10 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
 }
 
 gchar* utils_get_tmp_tmp_dir (void) {
-/* brb, gonna go punch a wall */
-    gchar *tmp_tmp = "C:\\gummitmp";
+	/* brb, gonna go punch a wall */
+    gchar *tmp_tmp = g_build_path (C_DIRSEP, g_get_home_dir(), "tmp", NULL);
     g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
-    /* TODO: find out why Windows's env variables are still
-             using goddamn 8.3 DOS format style and fix it. */
+
     return tmp_tmp;
 }  
 
