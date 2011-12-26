@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi ES Language\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-02 10:41+0100\n"
-"PO-Revision-Date: 2011-11-20 22:39-0300\n"
+"POT-Creation-Date: 2011-12-26 08:13+0100\n"
+"PO-Revision-Date: 2011-12-17 17:06-0300\n"
 "Last-Translator: Carlos Salas C. <csalasc@gmail.com>\n"
 "Language-Team: Carlos Salas Contreras <csalasc@gmail.com>\n"
 "Language: \n"
@@ -120,7 +120,7 @@ msgstr "Llaves"
 
 #: ../data/ui/gummi.glade.h:33
 msgid "Bracket:"
-msgstr "Corchete:"
+msgstr "Símbolo Cierre:"
 
 #: ../data/ui/gummi.glade.h:34
 msgid "Brackets"
@@ -228,7 +228,7 @@ msgstr "S_nippets"
 
 #: ../data/ui/gummi.glade.h:61
 msgid "Enable S_pell checking"
-msgstr "Lenguaje de revisión ortográfica:"
+msgstr "Habilitar revisión ortográfica:"
 
 #: ../data/ui/gummi.glade.h:62
 msgid ""
@@ -540,7 +540,7 @@ msgstr "_Abrir..."
 
 #: ../data/ui/gummi.glade.h:138
 msgid "_Project"
-msgstr "_Poryecto"
+msgstr "_Proyecto"
 
 #: ../data/ui/gummi.glade.h:139
 msgid "_Replace"
@@ -808,7 +808,7 @@ msgstr "Comando de compilación"
 
 #: ../data/ui/prefs.glade.h:46
 msgid "Typesetter options"
-msgstr "Comando de compilación"
+msgstr "Opciones de compilación"
 
 #: ../data/ui/prefs.glade.h:47
 msgid "Use animated scroll"
@@ -963,10 +963,10 @@ msgid ""
 "load the default text or use the Project menu to add\n"
 "it to an active project.\n"
 msgstr ""
-"El actual documento aparece como\n"
-"archivo LaTeX inválido. Puede seguir trabajando en el,\n"
-"cargando el texto por defecto o usando el menú Proyecto\n"
-"para agregarlo al proyecto actual.\n"
+"El actual documento aparece como archivo LaTeX inválido.\n"
+"Puede seguir trabajando en el, cargando el texto por\n"
+"defecto o usando el menú Proyecto para agregarlo al\n"
+"proyecto actual.\n"
 
 #: ../src/gui/gui-infoscreen.c:138
 msgid ""
