@@ -32,6 +32,7 @@
 #include <sys/stat.h> 
 
 #include "biblio.h"
+#include "constants.h"
 #include "utils.h"
 #include "latex.h"
 #include "environment.h"
@@ -102,8 +103,9 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
     if (g_find_program_in_path ("bibtex")) {
         gboolean success = FALSE;
         char* command = g_strdup_printf ("cd \"%s\";"
-                                         "env openout_any=a bibtex \"%s\"",
+                                         "%s bibtex \"%s\"",
                                          dirname,
+                                         C_TEXSEC,
                                          auxname);
                                          
         g_free (auxname);
