@@ -102,9 +102,10 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
 
     if (g_find_program_in_path ("bibtex")) {
         gboolean success = FALSE;
-        char* command = g_strdup_printf ("cd \"%s\";"
+        char* command = g_strdup_printf ("cd \"%s\"%s"
                                          "%s bibtex \"%s\"",
                                          dirname,
+                                         C_CMDSEP,
                                          C_TEXSEC,
                                          auxname);
                                          
