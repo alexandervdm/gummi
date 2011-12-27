@@ -55,14 +55,46 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
     m->menu_projclose = GTK_MENU_ITEM(
                         gtk_builder_get_object (builder, "menu_projclose"));
     
+    #ifdef WIN32
+    /* please do not enable for nix, it has no place on a free OS ;)*/
+    GtkWidget* donate = 
+		gtk_menu_item_new_with_label ("Support this Project");
+    GtkWidget* helpmenu = 
+		GTK_WIDGET (gtk_builder_get_object (builder, "menu11"));
+    gtk_menu_prepend (GTK_MENU (helpmenu), donate);
+    gtk_signal_connect_object (GTK_OBJECT (donate), "activate",
+                               GTK_SIGNAL_FUNC (on_menu_donate_activate),
+                               NULL);
+    #endif
+    
     return m;
 }
+
+#ifdef WIN32
+G_MODULE_EXPORT
+void on_menu_donate_activate (GtkWidget* widget, void* user) {
+	//TODO: enhance
+	GtkWidget* dialog;
+    dialog = gtk_message_dialog_new (NULL, 
+        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+        GTK_MESSAGE_INFO,
+        GTK_BUTTONS_OK,
+        "Gummi is released as free open-source software under the MIT "
+        "license. Development is carried out and continued as a spare "
+        "time activity. \nIf you are interested in supporting this "
+        "project with a donation, please visit our official website. "
+        "Thank you!");
+    gtk_window_set_title (GTK_WINDOW (dialog), "Support this project");
+    gtk_dialog_run (GTK_DIALOG (dialog));      
+    gtk_widget_destroy (dialog);
+}
+#endif
 
 /*******************************************************************************
  * FILE MENU                                                                   *
  ******************************************************************************/
 
- G_MODULE_EXPORT
+G_MODULE_EXPORT
 void on_menu_new_activate (GtkWidget *widget, void* user) {
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_hastabs_sensitive (TRUE);

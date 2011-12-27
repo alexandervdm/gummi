@@ -47,6 +47,10 @@ struct _GuMenuGui {
 GuMenuGui* menugui_init (GtkBuilder* builder);
 void on_menu_close_activate (GtkWidget *widget, void* user);
 
+#ifdef WIN32
+	void on_menu_donate_activate (GtkWidget *widget, void* user);
+#endif
+
 #endif /* __GUMMI_GUI_MENU_H__ */
 
 
