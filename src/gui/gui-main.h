@@ -95,6 +95,12 @@ struct _GummiGui {
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;
     
+    #ifdef WIN32
+		GtkWidget* w32label;
+		GtkWidget* w32button;
+		GtkWidget* w32window;
+    #endif
+    
     guint statusid;
     gchar* recent_list[5];
 };

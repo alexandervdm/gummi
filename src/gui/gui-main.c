@@ -230,18 +230,55 @@ GummiGui* gui_init (GtkBuilder* builder) {
     return g;
 }
 
+
+G_MODULE_EXPORT
+gboolean on_w32button_clicked (GtkWidget* widget, void* user) {
+	#ifdef WIN32
+		gtk_widget_hide (gui->w32window);
+	#endif
+	return TRUE;
+}
+
+#ifdef WIN32
+gboolean w32popup_wait_event (void *builder) {
+
+	const gchar* count = gtk_label_get_text (GTK_LABEL (gui->w32label));
+	gint number = atoi (count) - 1;
+	
+	if (number == 0) {
+
+		gtk_label_set_text (GTK_LABEL (gui->w32label), "");	
+		gtk_widget_set_sensitive (gui->w32button, TRUE);
+		return FALSE;
+	}
+	gtk_label_set_text (GTK_LABEL (gui->w32label), 
+						g_strdup_printf("%d", number));
+	return TRUE;
+}
+#endif
+
 void gui_main (GtkBuilder* builder) {
     gtk_builder_connect_signals (builder, NULL);
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
-
-    //GtkWidget *tmp = GTK_WIDGET (gtk_builder_get_object (builder, "svnpopup"));
-    //gtk_widget_show (tmp);
+	#ifdef WIN32
+    gui->w32window = 
+			GTK_WIDGET (gtk_builder_get_object (builder, "w32popup"));
+	gui->w32button = 
+			GTK_WIDGET (gtk_builder_get_object (builder, "w32button"));
+	gui->w32label = 
+			GTK_WIDGET (gtk_builder_get_object (builder, "w32label"));
+    gtk_widget_show (gui->w32window);
+    
+    g_timeout_add_seconds (1, w32popup_wait_event, NULL);
+    #endif
 
     gdk_threads_enter();
     gtk_main ();
     gdk_threads_leave();
 }
+
+
 
 G_MODULE_EXPORT
 void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
