@@ -130,7 +130,7 @@ void config_init (const gchar* filename) {
         }
         if (!g_file_test (filename, G_FILE_TEST_EXISTS) &&
             utils_set_file_contents (filename, text, -1)) {
-            slog (L_WARNING, "Old welcome text succesfully backed up..\n");
+            slog (L_WARNING, "Old welcome text successfully backed up..\n");
         }
         else {
             slog (L_WARNING, "Could not backup old welcome text..\n");
