@@ -111,12 +111,16 @@ static gdouble get_texlive_version (void) {
 
     /* Keep in mind that Ubuntu/Debian like themselves a lot:
      * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
-     * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2009/Debian) */
+     * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2009/Debian)
+     * pdfTeX 3.1415926-2.3-1.40.12 (Web2C 2011) */
      
-    gchar** splitted = g_strsplit(output, " ", BUFSIZ);
-    gchar* segment = g_strdup (splitted[4]);
+    gchar** splitted = g_strsplit (output, " ", BUFSIZ);
+    guint size = g_strv_length (splitted);
+    
+    gchar* segment = g_strdup (splitted[size-1]);
     gchar* resultstr = "";
     
+    // make sure to only allow numeric characters in the result:
     int n;
     for (n=0;n<g_utf8_strlen(segment, -1);n++) {    
         if (g_ascii_isdigit (segment[n])) {
