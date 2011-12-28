@@ -65,7 +65,7 @@ if test "$spellcheck" = yes; then
 fi
 
 # Add explicit linking flags
-GUI_LIBS="$GUI_LIBS -lm -lz"
+GUI_LIBS="$GUI_LIBS -lm -lz -pthread -lgthread-2.0 -lrt -lglib-2.0"
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h locale.h netdb.h stdlib.h string.h sys/socket.h sys/time.h unistd.h fcntl.h])
