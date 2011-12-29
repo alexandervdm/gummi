@@ -245,8 +245,14 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_object_unref(holder);
 
     // The scale to correct for the users DPI
-    gdouble poppler_scale = gdk_screen_get_resolution(
-            gdk_screen_get_default()) / 72.0;
+    gdouble screen_dpi = gdk_screen_get_resolution (
+						 gdk_screen_get_default());
+            
+	/* the gdk screen functions do not work properly on win32, so we 
+	 * should probably return a default value (or find an alternative)*/
+    if (screen_dpi == -1) screen_dpi = 96.0;
+	gdouble poppler_scale = screen_dpi / 72.0;
+
     int i;
     for (i=0; i<N_ZOOM_SIZES; i++) {
         list_sizes[i] *= poppler_scale;
