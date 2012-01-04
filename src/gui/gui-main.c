@@ -837,11 +837,20 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
 
         case TYPE_IMAGE: 
             /* Only \insertgraphics uses this section now. Make sure 
-             * the patterns & mimes are okay before assigning it
-			for other functions */
-            gtk_file_filter_set_name (filter, _("Image files"));
-            gtk_file_filter_add_mime_type (filter, "image/*");
-            gtk_file_filter_add_pattern (filter, "*.pdf");
+             * the patterns & mimes are correct before assigning it
+			 * for other functions */
+            gtk_file_filter_set_name (filter, _("Supported Image files"));
+            
+            /* Pdflatex supports different formats than pure latex */
+            if (latex_method_active ("texpdf")) {
+				gtk_file_filter_add_pattern (filter, "*.jpg");
+				gtk_file_filter_add_pattern (filter, "*.jpeg");
+				gtk_file_filter_add_pattern (filter, "*.png");
+				gtk_file_filter_add_pattern (filter, "*.pdf");
+			}
+			else {
+				gtk_file_filter_add_pattern (filter, "*.eps");
+			}
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
