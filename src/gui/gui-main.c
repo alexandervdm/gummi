@@ -835,9 +835,13 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_set_filter (dialog, filter);
             break;
 
-        case TYPE_IMAGE:
+        case TYPE_IMAGE: 
+            /* Only \insertgraphics uses this section now. Make sure 
+             * the patterns & mimes are okay before assigning it
+			for other functions */
             gtk_file_filter_set_name (filter, _("Image files"));
             gtk_file_filter_add_mime_type (filter, "image/*");
+            gtk_file_filter_add_pattern (filter, "*.pdf");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
