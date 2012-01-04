@@ -848,9 +848,7 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
 				gtk_file_filter_add_pattern (filter, "*.png");
 				gtk_file_filter_add_pattern (filter, "*.pdf");
 			}
-			else {
-				gtk_file_filter_add_pattern (filter, "*.eps");
-			}
+			gtk_file_filter_add_pattern (filter, "*.eps");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
