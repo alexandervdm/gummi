@@ -272,17 +272,9 @@ gboolean utils_glist_is_member (GList* list, gchar* item) {
     int i;
     
     for (i=0;i<nrofitems;i++) {
-        if (utils_strequal (item, g_list_nth_data (list,i))) {
+        if (STR_EQU (item, g_list_nth_data (list,i))) {
             return TRUE;
         }
-    }
-    return FALSE;
-}
-
-gboolean utils_strequal (const gchar* str1, const gchar* str2) {
-    /* TODO: replace "g_strcmp0" calls */
-    if (g_strcmp0 (str1, str2) == 0) {
-        return TRUE;
     }
     return FALSE;
 }
@@ -321,7 +313,7 @@ slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create) 
             if (0 == strncmp (current->first, term, strlen (term)))
                 return current;
         } else {
-            if (0 == g_strcmp0 (current->first, term))
+            if (STR_EQU (current->first, term))
                 return current;
         }
         prev = current;

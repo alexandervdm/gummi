@@ -95,10 +95,10 @@ gchar* external_version (const gchar* program) {
        pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
        pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2011)
     */
-    if (utils_strequal (program, C_RUBBER)) {
+    if (STR_EQU (program, C_RUBBER)) {
         result = version_rubber (result);
     }
-    else if (utils_strequal (program, C_LATEXMK)) {
+    else if (STR_EQU (program, C_LATEXMK)) {
         result = version_latexmk (lines[1]);
     }
     

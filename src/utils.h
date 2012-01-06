@@ -41,6 +41,7 @@
 #endif
 
 #define TO_BOOL(X) ((X)? TRUE: FALSE)
+#define STR_EQU(X, Y) (g_strcmp0((X), (Y)) == 0)
 
 #define L_IS_TYPE(level, type) ((level & type) == type)
 #define L_IS_GUI(level) (level & 0xf0)
@@ -158,7 +159,6 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
  */
 gboolean utils_subinstr (const gchar* substr, const gchar* target,
         gboolean case_sens);
-gboolean utils_strequal (const gchar* str1, const gchar* str2);
 
 gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
 

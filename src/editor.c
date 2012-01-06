@@ -409,7 +409,7 @@ void editor_set_selection_textstyle (GuEditor* ec, const gchar* type) {
 
     /* select style */
     for (i = 0; i < style_size; ++i)
-        if (0 == g_strcmp0 (style[i][0], type)) {
+        if (STR_EQU (style[i][0], type)) {
             selected = i;
             break;
         }

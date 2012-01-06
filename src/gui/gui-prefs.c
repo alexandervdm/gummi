@@ -346,12 +346,12 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
     gtk_spin_button_set_value (prefs->compile_timer,
                                atoi (config_get_value ("compile_timer")));
     /* compile scheme */
-    if (0 == g_strcmp0 (config_get_value ("compile_scheme"), "real_time"))
+    if (STR_EQU (config_get_value ("compile_scheme"), "real_time"))
         gtk_combo_box_set_active (prefs->compile_scheme, 1);
                                
-    if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "always")) {
+    if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 0);
-    } else if (0 == g_strcmp0 (config_get_value ("animated_scroll"), "never")) {
+    } else if (STR_EQU (config_get_value ("animated_scroll"), "never")) {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 2);
     } else {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 1);
@@ -375,7 +375,7 @@ static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
     while (valid) {
         const gchar* str_value;
         gtk_tree_model_get (combo_lang, &iter, 0, &str_value, -1);
-        if (0 == g_strcmp0 (lang, str_value)) {
+        if (STR_EQU (lang, str_value)) {
             gtk_combo_box_set_active (prefs->combo_languages, count);
             break;
         }
@@ -397,7 +397,7 @@ void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
     GtkTreePath* treepath;
 
     while (schemes_iter) {
-        if (!g_strcmp0 (gtk_source_style_scheme_get_id (schemes_iter->data),
+        if (STR_EQU (gtk_source_style_scheme_get_id (schemes_iter->data),
                      scheme)) {
             gchar* path = g_strdup_printf ("%d", column);
             treepath = gtk_tree_path_new_from_string (path);

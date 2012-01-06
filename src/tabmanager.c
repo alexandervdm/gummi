@@ -173,7 +173,7 @@ gboolean tabmanager_check_exists (const gchar* filename) {
     
     for (i=0; i<ectotal; i++) {
         ec = g_list_nth_data (editors, i);
-        if (utils_strequal (ec->filename, filename)) return TRUE;
+        if (STR_EQU (ec->filename, filename)) return TRUE;
     }
     return FALSE;
 }

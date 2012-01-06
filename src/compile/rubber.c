@@ -47,7 +47,7 @@ void rubber_init (void) {
 }
 
 gboolean rubber_active (void) {
-    if (utils_strequal (config_get_value("typesetter"), C_RUBBER)) {
+    if (STR_EQU (config_get_value("typesetter"), C_RUBBER)) {
         return TRUE;
     }
     return FALSE;
@@ -70,7 +70,7 @@ gchar* rubber_get_command (const gchar* method, gchar* workfile) {
 
 gchar* rubber_get_flags (const gchar *method) {
     gchar *rubflags;
-    if (utils_strequal (method, "texpdf")) {
+    if (STR_EQU (method, "texpdf")) {
         rubflags = g_strdup_printf("-d -q");
     }
     else {

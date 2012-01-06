@@ -65,7 +65,7 @@ gboolean project_create_new (const gchar* filename) {
                                            "root=%s\n", 
                                             version, csetter, csteps, rootfile);
     
-    if (g_strcmp0 (filename + strlen (filename) -6, ".gummi")) {
+    if (!STR_EQU (filename + strlen (filename) -6, ".gummi")) {
         filename = g_strdup_printf ("%s.gummi", filename);
     }
 
@@ -186,11 +186,11 @@ GList* project_list_files (const gchar* content) {
     
     for (i = 0; i < g_strv_length(splcontent); i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
-        if (utils_strequal ("file", line[0])) {
+        if (STR_EQU ("file", line[0])) {
             filelist = g_list_append (filelist, line[1]);
             gummi->project->nroffiles += 1;
         }
-        if (utils_strequal ("root", line[0])) {
+        if (STR_EQU ("root", line[0])) {
             filelist = g_list_prepend (filelist, line[1]);
             gummi->project->rootfile = g_strdup (line[1]);
         }
@@ -232,7 +232,7 @@ gchar* project_get_value (const gchar* content, const gchar* item) {
 
     for (i = 0; i < g_strv_length(splcontent) -1; i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
-        if (utils_strequal (item, line[0])) {
+        if (STR_EQU (item, line[0])) {
             return line[1];
         }
     }

@@ -85,7 +85,7 @@ gboolean motion_do_compile (gpointer user) {
     g_mutex_unlock (mc->signal_mutex);
 
 ret:
-    return (0 == g_strcmp0 (config_get_value ("compile_scheme"), "real_time"));
+    return (STR_EQU (config_get_value ("compile_scheme"), "real_time"));
 }
 
 gpointer motion_compile_thread (gpointer data) {
