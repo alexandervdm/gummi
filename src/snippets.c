@@ -356,6 +356,15 @@ GuSnippetInfo* snippets_parse (char* snippet) {
         while (g_match_info_matches (match_info)) {
             result = g_match_info_fetch_all (match_info);
             g_match_info_fetch_pos (match_info, 0, &start, &end);
+
+            /* Convert start, end to UTF8 offset */
+            char* s_start = g_substr(snippet, 0, start);
+            char* s_end = g_substr(snippet, 0, end);
+            start = g_utf8_strlen(s_start, -1);
+            end = g_utf8_strlen(s_end, -1);
+            g_free(s_start);
+            g_free(s_end);
+
             if (i < 2) {
                 snippet_info_append_holder (info, atoi (result[1]), start,
                         end -start, result[2]);

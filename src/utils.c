@@ -304,7 +304,13 @@ gboolean utils_subinstr (const gchar* substr, const gchar* target,
     }
     return FALSE;
 }
-    
+
+gchar* g_substr(gchar* src, gint start, gint end) {
+    gint len = end - start + 1;
+    char* dst = g_malloc(len * sizeof(gchar));
+    memset(dst, 0, len);
+    return strncpy(dst, &src[start], end - start);
+}
 
 slist* slist_find (slist* head, const gchar* term, gboolean n, gboolean create) {
     slist* current = head;

@@ -165,6 +165,8 @@ gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
 
 gboolean utils_glist_is_member (GList *list, gchar* item);
 
+gchar* g_substr(gchar* src, gint start, gint end);
+
 /**
  * slist_find:
  * @head: the list head
