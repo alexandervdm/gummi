@@ -35,8 +35,8 @@
 #define C_DEFAULTTEXT g_build_filename (DATADIR, "misc", "default.tex", NULL)
 
 #define C_LATEX "latex"
-#define C_PDFLATEX "pdftex"
-#define C_XELATEX "xetex"
+#define C_PDFLATEX "pdflatex"
+#define C_XELATEX "xelatex"
 #define C_RUBBER "rubber"
 #define C_LATEXMK "latexmk"
 
