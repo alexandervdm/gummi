@@ -150,10 +150,12 @@ int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
         (G_REGEX_CASELESS | G_REGEX_DOTALL), 0, NULL);
       
     subregex_ident = g_regex_new ("@.+{([^,]+),", 0, 0, NULL);
-    subregex_title = g_regex_new ("[^book]title[\\s]*=[\\s]*(.*)", 0, 0, NULL);
-    subregex_author = g_regex_new ("author[\\s]*=[\\s]*(.*)", 0, 0, NULL);
-    subregex_year = g_regex_new ("year[\\s]*=[\\s]*[{|\"]?([1|2][0-9]{3})", 0,
-            0, NULL);
+    subregex_title = g_regex_new 
+		("[^book]title[\\s]*=[\\s]*(.*)", G_REGEX_CASELESS, 0, NULL);
+    subregex_author = g_regex_new 
+		("author[\\s]*=[\\s]*(.*)", G_REGEX_CASELESS, 0, NULL);
+    subregex_year = g_regex_new 
+		("year[\\s]*=[\\s]*[{|\"]?([1|2][0-9]{3})", G_REGEX_CASELESS, 0, NULL);
     regex_formatting = g_regex_new ("[{|}|\"|,|\\$]", 0, 0, NULL);
     
     
