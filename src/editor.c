@@ -185,6 +185,13 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
 
     ec->fdname = g_build_filename (C_TMPDIR, "gummi_XXXXXX", NULL);
     ec->workfd = g_mkstemp (ec->fdname);
+    
+    // This is required for Windows 7, but not for Linux. It may also
+    // be the proper way for *nix, but I don't want to change this
+    // crucial piece of code at this stage of development -alexander
+    #ifdef WIN32
+		close(ec->workfd);
+	#end
 
     if (filename) {
         gchar* base = g_path_get_basename (filename);
