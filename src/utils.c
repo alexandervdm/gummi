@@ -260,7 +260,8 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
 
 gchar* utils_get_tmp_tmp_dir (void) {
 	/* brb, gonna go punch a wall */
-    gchar *tmp_tmp = g_build_path (C_DIRSEP, g_get_home_dir(), "tmp", NULL);
+    gchar *tmp_tmp = g_build_path 
+						(C_DIRSEP, g_get_home_dir(), "gtmp", NULL);
     g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
 
     return tmp_tmp;

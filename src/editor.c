@@ -191,7 +191,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
     // crucial piece of code at this stage of development -alexander
     #ifdef WIN32
 		close(ec->workfd);
-	#end
+	#endif
 
     if (filename) {
         gchar* base = g_path_get_basename (filename);
