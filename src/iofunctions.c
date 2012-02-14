@@ -173,6 +173,21 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
     g_object_unref (savecontext);
 }
 
+gchar* iofunctions_get_swapfile (const gchar* filename) {
+    gchar* basename = NULL;
+    gchar* dirname = NULL;
+    gchar* swapfile = NULL;
+    
+    basename = g_path_get_basename (filename);
+    dirname = g_path_get_dirname (filename);
+    swapfile = g_strdup_printf ("%s%c.%s.swp", dirname,
+            G_DIR_SEPARATOR, basename);
+            
+    g_free (dirname);
+    g_free (basename);
+    return swapfile;
+}
+
 void iofunctions_start_autosave (void) {
     sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, NULL);

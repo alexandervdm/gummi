@@ -344,27 +344,9 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
 }
 
 
-void gui_open_file (const gchar* filename) {
-    gint ret = 0;
-    gchar* basename = NULL;
-    gchar* dirname = NULL;
-    gchar* prev_workfile =  NULL;
-
-    if (!g_file_test(filename, G_FILE_TEST_EXISTS)) {
-        slog(L_G_ERROR, "Failed to open file '%s': No such file or "
-                "directory\n", filename);
-        return;
-    }
-
-    basename = g_path_get_basename (filename);
-    dirname = g_path_get_dirname (filename);
-    prev_workfile = g_strdup_printf ("%s%c.%s.swp", dirname,
-            G_DIR_SEPARATOR, basename);
-
-    /* destroy previous file info context, be careful not to place this
-     * line before the previewgui_stop_preview, else if the user is using
-     * the real_time compile scheme, the compile scheme functions can
-     * access fileinfo */
+gboolean gui_recover_from_swapfile (const gchar* filename) {
+	gchar* prev_workfile = iofunctions_get_swapfile (filename);
+	gint ret = 0;
 
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
@@ -372,22 +354,34 @@ void gui_open_file (const gchar* filename) {
         gchar* message = g_strdup_printf (_("Swap file exits for %s, do you "
                 "want to recover from it?"), filename);
 
+		gdk_threads_enter();
         ret = utils_yes_no_dialog (message);
-        if (GTK_RESPONSE_YES == ret)
+        gdk_threads_leave();
+
+        if (GTK_RESPONSE_YES == ret) {
             tabmanager_create_tab (A_LOAD_OPT, filename, prev_workfile);
+            return TRUE;
+		}
         g_free (message);
     }
+    return FALSE;
+}
 
-    g_free (dirname);
-    g_free (basename);
-    g_free (prev_workfile);
+void gui_open_file (const gchar* filename) {
+    if (!g_file_test(filename, G_FILE_TEST_EXISTS)) {
+        slog(L_G_ERROR, "Failed to open file '%s': No such file or "
+                "directory\n", filename);
+        return;
+    }
 
+	// TODO: this whole procedure needs cleanup in 0.7.0
+	if (!gui_recover_from_swapfile (filename)) {
+		tabmanager_create_tab (A_LOAD, filename, NULL);
+	}
 
-    if (GTK_RESPONSE_YES != ret)
-        tabmanager_create_tab (A_LOAD, filename, NULL);
-
-    if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
+    if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane))) {
         gui_set_hastabs_sensitive (TRUE);
+	}
 }
 
 void gui_save_file (GuTabContext* tab, gboolean saveas) {
