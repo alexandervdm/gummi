@@ -351,8 +351,8 @@ gboolean gui_recover_from_swapfile (const gchar* filename) {
     /* Check if swap file exists and try to recover from it */
     if (utils_path_exists (prev_workfile)) {
         slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
-        gchar* message = g_strdup_printf (_("Swap file exits for %s, do you "
-                "want to recover from it?"), filename);
+        gchar* message = g_strdup_printf (_("Swap file exists for %s, "
+				"do you want to recover from it?"), filename);
 
 		gdk_threads_enter();
         ret = utils_yes_no_dialog (message);
