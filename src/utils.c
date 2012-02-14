@@ -178,18 +178,9 @@ gboolean utils_path_exists (const gchar* path) {
 
 gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
                                   gssize length) {
-    /* g_file_set_contents does not work properly on Windows systems.
-     * I'm not convinced this current implementation for win32 is 
-     * correct or even solves the problem, so fix/modify away..! */
-    #ifdef WIN32
-        FILE *fp;
-        gint len;
-        len = strlen(text);
-        
-        fp = g_fopen(filename, "w");
-        fwrite(text, sizeof(gchar), len, fp);
-        fclose(fp);
-    #else
+    /* g_file_set_contents may not work correctly on Windows. See the
+     * API documentation of this function for details. Should Gummi
+     * be affected, we might have to implement an alternative */
         GError* error = NULL;
         if (!g_file_set_contents(filename, text, length, &error)) {
             slog (L_ERROR, "%s\n", error->message);
