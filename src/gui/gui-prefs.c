@@ -272,6 +272,7 @@ static void set_tab_defaulttext_settings (GuPrefsGui* prefs) {
         return;
     }
     gtk_text_buffer_set_text (prefs->default_buffer, text, -1);
+    gtk_text_buffer_set_modified (prefs->default_buffer, FALSE);
     g_free (text);
 }
 
