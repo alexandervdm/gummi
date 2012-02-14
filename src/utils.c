@@ -188,7 +188,6 @@ gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
             return FALSE;
         }
         return TRUE;
-    #endif
 }
 
 gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err)
