@@ -188,6 +188,15 @@ gchar* iofunctions_get_swapfile (const gchar* filename) {
     return swapfile;
 }
 
+gboolean iofunctions_has_swapfile (const gchar* filename) {
+    gchar* swapfile = iofunctions_get_swapfile (filename);
+    // todo: check what do if null
+    if (utils_path_exists (swapfile)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 void iofunctions_start_autosave (void) {
     sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
             iofunctions_autosave_cb, NULL);

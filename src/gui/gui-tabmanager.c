@@ -61,19 +61,49 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     tabmanagergui_create_label (tp, labeltext);
     g_signal_connect (tp->button, "clicked", 
                       G_CALLBACK (on_menu_close_activate), tc);
+    tabmanagergui_create_infobar (tp, "test");
 
     gtk_container_add (GTK_CONTAINER (tp->scrollw), 
                        GTK_WIDGET (editor->view));
                        
     tp->editorbox = gtk_vbox_new (FALSE, 0);
-    gtk_box_pack_start (GTK_BOX (tp->editorbox), tp->scrollw, TRUE, TRUE, 0);
 
+    gtk_box_pack_start (GTK_BOX (tp->editorbox), tp->infobar, FALSE, FALSE, 0);
+    gtk_box_pack_end (GTK_BOX (tp->editorbox), tp->scrollw, TRUE, TRUE, 0);
     
     pos = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), 
                                     tp->editorbox, GTK_WIDGET (tp->labelbox));
 
     gtk_widget_show_all (tp->editorbox);
     return pos;
+}
+
+void tabmanagergui_create_infobar (GuTabPage* tp, gchar* text) {
+    GtkWidget* infobar = NULL;
+    GtkWidget* message = NULL;
+    GtkWidget* area = NULL;
+    
+    infobar = gtk_info_bar_new ();
+    gtk_widget_set_no_show_all (infobar, TRUE);
+    message = gtk_label_new (text);
+    gtk_widget_show (message);
+    area = gtk_info_bar_get_content_area (GTK_INFO_BAR (infobar));
+    gtk_container_add (GTK_CONTAINER (area), message);
+    
+    gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
+                            GTK_STOCK_YES, GTK_RESPONSE_YES);
+    gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
+                            GTK_STOCK_NO, GTK_RESPONSE_NO);                   
+    g_signal_connect (infobar, "response",
+                  G_CALLBACK (gtk_widget_hide), NULL);
+
+    gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
+                                  GTK_MESSAGE_WARNING);
+                                  
+    //gtk_label_set_text (GTK_LABEL (message), text);
+    gtk_widget_show (infobar);
+    
+    tp->infobar = infobar;
 }
 
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
@@ -125,7 +155,7 @@ gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec) {
     gtk_widget_show (GTK_WIDGET(newec->view));
 
     int pos = gtk_notebook_page_num (g_tabnotebook, 
-                            gummi->tabmanager->active_tab->page->scrollw);
+                            gummi->tabmanager->active_tab->page->editorbox);
     return pos;
 }
 

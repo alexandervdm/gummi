@@ -344,11 +344,14 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
 }
 
 
-gboolean gui_recover_from_swapfile (const gchar* filename) {
+void gui_recover_from_swapfile (const gchar* filename) {
 	gchar* prev_workfile = iofunctions_get_swapfile (filename);
 	gint ret = 0;
+    
+    //tabmanagergui_create_infobar (g_active_tab, "");
+    
 
-    /* Check if swap file exists and try to recover from it */
+    /*
     if (utils_path_exists (prev_workfile)) {
         slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
         gchar* message = g_strdup_printf (_("Swap file exists for %s, "
@@ -365,6 +368,7 @@ gboolean gui_recover_from_swapfile (const gchar* filename) {
         g_free (message);
     }
     return FALSE;
+    */
 }
 
 void gui_open_file (const gchar* filename) {
@@ -373,11 +377,13 @@ void gui_open_file (const gchar* filename) {
                 "directory\n", filename);
         return;
     }
-
 	// TODO: this whole procedure needs cleanup in 0.7.0
-	if (!gui_recover_from_swapfile (filename)) {
-		tabmanager_create_tab (A_LOAD, filename, NULL);
-	}
+    if (iofunctions_has_swapfile (filename)) {
+        gui_recover_from_swapfile (filename);
+    }
+    else {
+        tabmanager_create_tab (A_LOAD, filename, NULL);
+    }
 
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane))) {
         gui_set_hastabs_sensitive (TRUE);
