@@ -53,8 +53,8 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     tc->page = tp;
     int pos;
     
-    tp->scroll = gtk_scrolled_window_new (NULL, NULL);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tp->scroll),
+    tp->scrollw = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tp->scrollw),
                                     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
                                     
     gchar* labeltext = tabmanager_get_tabname (tc);
@@ -62,12 +62,17 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     g_signal_connect (tp->button, "clicked", 
                       G_CALLBACK (on_menu_close_activate), tc);
 
-    gtk_container_add (GTK_CONTAINER (tp->scroll), GTK_WIDGET (editor->view));
-    pos = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), tp->scroll,
-                                    GTK_WIDGET (tp->labelbox));
+    gtk_container_add (GTK_CONTAINER (tp->scrollw), 
+                       GTK_WIDGET (editor->view));
+                       
+    tp->editorbox = gtk_vbox_new (FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (tp->editorbox), tp->scrollw, TRUE, TRUE, 0);
 
-    gtk_widget_show (tp->scroll);
-    gtk_widget_show (GTK_WIDGET(editor->view));
+    
+    pos = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook), 
+                                    tp->editorbox, GTK_WIDGET (tp->labelbox));
+
+    gtk_widget_show_all (tp->editorbox);
     return pos;
 }
 
@@ -113,14 +118,14 @@ gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec) {
     gummi->tabmanager->active_tab->editor = newec;
     editor_destroy (g_active_editor);
     
-    gtk_container_remove (GTK_CONTAINER (tc->page->scroll),
+    gtk_container_remove (GTK_CONTAINER (tc->page->scrollw),
                           GTK_WIDGET (gummi->tabmanager->active_editor->view));
-    gtk_container_add (GTK_CONTAINER (tc->page->scroll),
+    gtk_container_add (GTK_CONTAINER (tc->page->scrollw),
                        GTK_WIDGET (newec->view));
     gtk_widget_show (GTK_WIDGET(newec->view));
 
     int pos = gtk_notebook_page_num (g_tabnotebook, 
-                            gummi->tabmanager->active_tab->page->scroll);
+                            gummi->tabmanager->active_tab->page->scrollw);
     return pos;
 }
 

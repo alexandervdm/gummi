@@ -41,7 +41,8 @@
 typedef struct _GuTabPage GuTabPage;
 
 struct _GuTabPage {
-    GtkWidget* scroll;
+    GtkWidget* scrollw;
+    GtkWidget* editorbox;
     GtkWidget* labelbox;
     GtkLabel* label;
     gint position;
