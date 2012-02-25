@@ -45,7 +45,8 @@ struct _GuTabPage {
     GtkWidget* editorbox;
     
     GtkWidget* infobar;
-    GtkWidget* barmsg;
+    GtkWidget* barlabel;
+    gint infosignal;
     
     GtkWidget* labelbox;
     GtkLabel* label;
@@ -76,6 +77,7 @@ struct _GuTabmanagerGui {
 GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder);
 int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor);
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext);
+void tabmanagergui_create_infobar (GuTabPage* tp);
 
 gchar* tabmanagergui_get_labeltext (GuTabPage* tp);
 gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec);
@@ -84,6 +86,7 @@ gint tabmanagergui_get_current_page (void);
 gint tabmanagergui_get_n_pages (void);
 void tabmanagergui_update_label (GuTabPage* tp, const gchar* text);
 void tablabel_set_bold_text (GuTabPage* tp);
+
 
 
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */

@@ -344,31 +344,42 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
 }
 
 
-void gui_recover_from_swapfile (const gchar* filename) {
-	gchar* prev_workfile = iofunctions_get_swapfile (filename);
-	gint ret = 0;
+
+void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename) {
+    gchar* prev_workfile = iofunctions_get_swapfile (filename);
     
-    //tabmanagergui_create_infobar (g_active_tab, "");
-    
-
-    /*
-    if (utils_path_exists (prev_workfile)) {
-        slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
-        gchar* message = g_strdup_printf (_("Swap file exists for %s, "
-				"do you want to recover from it?"), filename);
-
-		gdk_threads_enter();
-        ret = utils_yes_no_dialog (message);
-        gdk_threads_leave();
-
-        if (GTK_RESPONSE_YES == ret) {
-            tabmanager_create_tab (A_LOAD_OPT, filename, prev_workfile);
-            return TRUE;
-		}
-        g_free (message);
+    if (res == GTK_RESPONSE_YES) {
+        tabmanager_create_tab (A_LOAD_OPT, filename, prev_workfile);
     }
-    return FALSE;
-    */
+    else { // NO
+        tabmanager_create_tab (A_LOAD, filename, NULL);
+    }
+    gui_recovery_mode_disable (bar);
+}
+
+void gui_recovery_mode_enable (const gchar* filename) {
+    gchar* prev_workfile = iofunctions_get_swapfile (filename);
+    slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
+    gchar* msg = g_strdup_printf (_("Swap file exists for %s, "
+				"do you want to recover from it?"), filename);
+    gtk_label_set_text (GTK_LABEL (g_active_tab->page->barlabel), msg);
+    g_free (msg);
+    
+    gchar* data = g_strconcat (filename, NULL);
+    g_active_tab->page->infosignal = 
+        g_signal_connect (g_active_tab->page->infobar, "response",
+        G_CALLBACK (on_recovery_infobar_response), (gpointer)data);
+        
+    gtk_widget_set_sensitive (GTK_WIDGET (g_active_editor->view), FALSE);
+    gtk_widget_show (g_active_tab->page->infobar);
+}
+
+void gui_recovery_mode_disable (GtkInfoBar *infobar) {
+    gint id = g_active_tab->page->infosignal;
+    g_signal_handler_disconnect (infobar, id);
+
+    gtk_widget_hide (GTK_WIDGET(infobar));
+    gtk_widget_set_sensitive (GTK_WIDGET (g_active_editor->view), TRUE);
 }
 
 void gui_open_file (const gchar* filename) {
@@ -379,7 +390,7 @@ void gui_open_file (const gchar* filename) {
     }
 	// TODO: this whole procedure needs cleanup in 0.7.0
     if (iofunctions_has_swapfile (filename)) {
-        gui_recover_from_swapfile (filename);
+        gui_recovery_mode_enable (filename);
     }
     else {
         tabmanager_create_tab (A_LOAD, filename, NULL);

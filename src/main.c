@@ -143,9 +143,7 @@ int main (int argc, char *argv[]) {
                     "directory\n", argv[1]);
             exit(1);
         }
-        if (iofunctions_has_swapfile (argv[1])) {
-            gui_recover_from_swapfile (argv[1]);
-        }
+        tabmanager_create_tab (A_LOAD, argv[1], NULL);
     }
         
     if (config_get_value ("autosaving")) iofunctions_start_autosave ();

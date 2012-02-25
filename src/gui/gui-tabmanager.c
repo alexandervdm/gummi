@@ -61,7 +61,7 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     tabmanagergui_create_label (tp, labeltext);
     g_signal_connect (tp->button, "clicked", 
                       G_CALLBACK (on_menu_close_activate), tc);
-    tabmanagergui_create_infobar (tp, "test");
+    tabmanagergui_create_infobar (tp);
 
     gtk_container_add (GTK_CONTAINER (tp->scrollw), 
                        GTK_WIDGET (editor->view));
@@ -78,14 +78,19 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     return pos;
 }
 
-void tabmanagergui_create_infobar (GuTabPage* tp, gchar* text) {
+void tabmanagergui_create_infobar (GuTabPage* tp) {
+    // we will probably want to make a separate file for infobar 
+    // procedures that we can attach to hboxes in both the editor 
+    // and the preview window, TODO for 0.7.0 -Alex
     GtkWidget* infobar = NULL;
     GtkWidget* message = NULL;
     GtkWidget* area = NULL;
     
     infobar = gtk_info_bar_new ();
     gtk_widget_set_no_show_all (infobar, TRUE);
-    message = gtk_label_new (text);
+    message = gtk_label_new ("");
+    gtk_label_set_line_wrap (GTK_LABEL(message), TRUE);
+    
     gtk_widget_show (message);
     area = gtk_info_bar_get_content_area (GTK_INFO_BAR (infobar));
     gtk_container_add (GTK_CONTAINER (area), message);
@@ -93,16 +98,12 @@ void tabmanagergui_create_infobar (GuTabPage* tp, gchar* text) {
     gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
                             GTK_STOCK_YES, GTK_RESPONSE_YES);
     gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
-                            GTK_STOCK_NO, GTK_RESPONSE_NO);                   
-    g_signal_connect (infobar, "response",
-                  G_CALLBACK (gtk_widget_hide), NULL);
-
+                            GTK_STOCK_NO, GTK_RESPONSE_NO);
+                  
     gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
                                   GTK_MESSAGE_WARNING);
                                   
-    //gtk_label_set_text (GTK_LABEL (message), text);
-    gtk_widget_show (infobar);
-    
+    tp->barlabel = message;
     tp->infobar = infobar;
 }
 
