@@ -1261,61 +1261,53 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
     gdouble node_height = node->height * pc->scale;
     gdouble node_width = node->width * pc->scale;
 
-    gdouble target_x = gtk_adjustment_get_value(pc->hadj);
-    gdouble target_width = adjpage_width;
-    gdouble target_y = gtk_adjustment_get_value(pc->vadj) + adjpage_height/3;
-    gdouble target_height = adjpage_height/3;
-    
-    gdouble diff_top = node_y - target_y;
-    gdouble diff_left = node_x - target_x;
-    gdouble diff_bottom = target_y + target_height - (node_y+node_height);
-    gdouble diff_right = target_x + target_width - (node_x+node_width);
+    gdouble view_x = gtk_adjustment_get_value(pc->hadj);
+    gdouble view_width = adjpage_width;
+    gdouble view_y = gtk_adjustment_get_value(pc->vadj);
+    gdouble view_height = adjpage_height;
     
     slog(L_DEBUG, "node: (%f, %f), w=%f, h=%f\n", node_x, node_y, node_width,
             node_height);
-    slog(L_DEBUG, "target: (%f, %f), w=%f, h=%f\n", target_x, target_y,
-            target_width, target_height);
-    
-    slog(L_DEBUG, "diff: top=%f, left=%f, bottom=%f, right=%f\n", diff_top,
-            diff_left, diff_bottom, diff_right);
-        
-    gdouble to_y = gtk_adjustment_get_value(pc->vadj);
-    gdouble to_x = gtk_adjustment_get_value(pc->hadj);
-    
-    if (floor(diff_top) < 0) {
-        to_y = node_y + node_height - target_height;
-    } else if (floor(diff_bottom) < 0) {
+    slog(L_DEBUG, "view: (%f, %f), w=%f, h=%f\n", view_x, view_y,
+        view_width, view_height);
+
+    gdouble to_y;
+    gdouble to_x;
+    // Positioning algorithm:
+    // The x and y coordinates are treated separately.  For each,
+    //  - If the node is already within the view, do not change the view.
+    //  - Else, if the node can fit in the view, center it.
+    //  - Else, align the view to the top/left of the view.
+    // The functions used to change the view do bounds checking, so we
+    // don't do that here.
+
+    if (node_y > view_y && node_y + node_height < view_y + view_height) {
+        to_y = view_y;
+    } else if (node_height < view_height) {
+        to_y = node_y + (node_height - view_height)/2;
+    } else {
         to_y = node_y;
     }
-    
-    if (floor(diff_left) < 0 && floor(diff_right) > 0) {
-        to_x += MIN(ABS(diff_left), ABS(diff_right));
-    } else if (floor(diff_left) > 0 && floor(diff_right) < 0) {
-        to_x -= MIN(ABS(diff_left), ABS(diff_right));
+        
+    if (node_x > view_x && node_x + node_width < view_x + view_width) {
+        to_x = view_x;
+    } else if (node_width < view_width) {
+        to_x = node_x + (node_width - view_width)/2;
+    } else {
+        to_x = node_x;
     }
     
     if (!is_continuous(pc) && pc->current_page != node->page) {
     
         previewgui_goto_page (pc, node->page);
-        
-        to_y = to_y - (adjpage_height - target_height)/2;
-        to_x = to_x - (adjpage_width - target_width)/2;
-        
         previewgui_goto_xy(pc, to_x, to_y);
     
     } else {
-        if (to_y != gtk_adjustment_get_value(pc->vadj) || 
-            to_x != gtk_adjustment_get_value(pc->hadj)) {
-            
-            to_y = to_y - (adjpage_height - target_height)/2;
-            to_x = to_x - (adjpage_width - target_width)/2;
-            
-            if (STR_EQU (config_get_value ("animated_scroll"), "always") ||
-                STR_EQU (config_get_value ("animated_scroll"), "autosync")) {
-                previewgui_scroll_to_xy(pc, to_x, to_y);
-            } else {
-                previewgui_goto_xy(pc, to_x, to_y);
-            }
+        if (STR_EQU (config_get_value ("animated_scroll"), "always") ||
+            STR_EQU (config_get_value ("animated_scroll"), "autosync")) {
+            previewgui_scroll_to_xy(pc, to_x, to_y);
+        } else {
+            previewgui_goto_xy(pc, to_x, to_y);
         }
     }
 
