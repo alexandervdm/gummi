@@ -87,8 +87,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     g->mainwindow =
         GTK_WINDOW (gtk_builder_get_object (builder, "mainwindow"));
-    g->toolbar =
-        GTK_HBOX (gtk_builder_get_object (builder, "toolbar"));
+    g->toolbar = 
+        GTK_WIDGET (gtk_builder_get_object (builder, "maintoolbar"));
     g->statusbar =
         GTK_STATUSBAR (gtk_builder_get_object (builder, "statusbar"));
     g->rightpane =
@@ -182,11 +182,11 @@ GummiGui* gui_init (GtkBuilder* builder) {
     }
     if (config_get_value ("toolbar")) {
         gtk_check_menu_item_set_active (g->menu_toolbar, TRUE);
-        gtk_widget_show (GTK_WIDGET (g->toolbar));
+        gtk_widget_show (g->toolbar);
     } else {
         config_set_value ("toolbar", "False");
         gtk_check_menu_item_set_active (g->menu_toolbar, FALSE);
-        gtk_widget_hide (GTK_WIDGET (g->toolbar));
+        gtk_widget_hide (g->toolbar);
     }
 
     if (config_get_value ("statusbar")) {

@@ -305,10 +305,10 @@ void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
 G_MODULE_EXPORT
 void on_menu_toolbar_toggled (GtkWidget *widget, void * user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
-        gtk_widget_show (GTK_WIDGET (gui->toolbar));
+        gtk_widget_show (gui->toolbar);
         config_set_value ("toolbar", "True");
     } else {
-        gtk_widget_hide (GTK_WIDGET (gui->toolbar));
+        gtk_widget_hide (gui->toolbar);
         config_set_value ("toolbar", "False");
     }
 }
