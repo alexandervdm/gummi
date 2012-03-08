@@ -55,7 +55,7 @@ gboolean updatecheck (GtkWindow* parent) {
     struct timeval timeout;
     gchar data[BUFSIZ] = { 0 };
     const gchar* avail_version;
-    const gchar* request = "GET /redmine/projects/gummi/repository/raw/"
+    const gchar* request = "GET /projects/gummi/repository/raw/"
         "trunk/dev/latest HTTP/1.1\r\n"
         "User-Agent: Gummi\r\n"
         "Host: dev.midnightcoding.org\r\n"
