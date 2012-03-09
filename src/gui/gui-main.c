@@ -349,29 +349,30 @@ void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename)
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
     
     if (res == GTK_RESPONSE_YES) {
-        tabmanager_create_tab (A_LOAD_OPT, filename, prev_workfile);
+        tabmanager_set_content (A_LOAD_OPT, filename, prev_workfile);
     }
     else { // NO
-        tabmanager_create_tab (A_LOAD, filename, NULL);
+        tabmanager_set_content (A_LOAD, filename, NULL);
     }
     gui_recovery_mode_disable (bar);
 }
 
-void gui_recovery_mode_enable (const gchar* filename) {
+void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
+
     slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
     gchar* msg = g_strdup_printf (_("Swap file exists for %s, "
 				"do you want to recover from it?"), filename);
-    gtk_label_set_text (GTK_LABEL (g_active_tab->page->barlabel), msg);
+    gtk_label_set_text (GTK_LABEL (tab->page->barlabel), msg);
     g_free (msg);
     
     gchar* data = g_strconcat (filename, NULL);
-    g_active_tab->page->infosignal = 
+    tab->page->infosignal = 
         g_signal_connect (g_active_tab->page->infobar, "response",
         G_CALLBACK (on_recovery_infobar_response), (gpointer)data);
         
-    gtk_widget_set_sensitive (GTK_WIDGET (g_active_editor->view), FALSE);
-    gtk_widget_show (g_active_tab->page->infobar);
+    gtk_widget_set_sensitive (GTK_WIDGET (tab->editor->view), FALSE);
+    gtk_widget_show (tab->page->infobar);
 }
 
 void gui_recovery_mode_disable (GtkInfoBar *infobar) {
@@ -388,14 +389,8 @@ void gui_open_file (const gchar* filename) {
                 "directory\n", filename);
         return;
     }
-	// TODO: this whole procedure needs cleanup in 0.7.0
-    if (iofunctions_has_swapfile (filename)) {
-        gui_recovery_mode_enable (filename);
-    }
-    else {
-        tabmanager_create_tab (A_LOAD, filename, NULL);
-    }
 
+    tabmanager_create_tab (A_LOAD, filename, NULL);
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane))) {
         gui_set_hastabs_sensitive (TRUE);
 	}

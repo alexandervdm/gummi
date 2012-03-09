@@ -189,8 +189,9 @@ gchar* iofunctions_get_swapfile (const gchar* filename) {
 }
 
 gboolean iofunctions_has_swapfile (const gchar* filename) {
+    if (filename == NULL) return FALSE;
+    
     gchar* swapfile = iofunctions_get_swapfile (filename);
-    // todo: check what do if null
     if (utils_path_exists (swapfile)) {
         return TRUE;
     }

@@ -155,7 +155,7 @@ void on_biblio_filter_changed (GtkWidget* widget, void* user);
 gboolean on_bibprogressbar_update (void* user);
 
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename);
-void gui_recovery_mode_enable (const gchar* filename);
+void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename);
 void gui_recovery_mode_disable (GtkInfoBar *infobar);
 
 /* misc functions */

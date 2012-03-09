@@ -118,7 +118,8 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
 
     if (current_tab_replaceable (act)) {
         pos = tabmanagergui_replace_page (g_active_tab, editor);
-    } else {
+    } 
+    else {
         GuTabContext* tc = g_new0(GuTabContext, 1);
         tc->editor = editor;
         g_tabs = g_list_append(g_tabs, tc);
@@ -128,6 +129,23 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     
     tabmanager_set_active_tab (pos);
 
+    if (iofunctions_has_swapfile (filename)) {
+        gui_recovery_mode_enable (g_active_tab, filename);
+        // signal handles tabmanager_set_content in this case..
+    }
+    else {
+        tabmanager_set_content (act, filename, opt);
+    }
+
+    gui_set_filename_display (g_active_tab, TRUE, TRUE);
+    add_to_recent_list (filename);
+
+    previewgui_reset (gui->previewgui);
+}
+
+void tabmanager_set_content (OpenAct act, const gchar* filename, gchar* opt) {
+    // Loads the appropriate content in the editor. Seperated from
+    // tab creation function to allow calling it from recovery mode
     switch (act) {
         case A_NONE:
             break;
@@ -143,11 +161,6 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
         default:
             slog(L_FATAL, "can't happen bug\n");
     }
-
-    gui_set_filename_display (g_active_tab, TRUE, TRUE);
-    add_to_recent_list (filename);
-
-    previewgui_reset (gui->previewgui);
 }
 
 void tabmanager_update_tab (const gchar* filename) {

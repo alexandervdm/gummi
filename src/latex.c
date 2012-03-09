@@ -83,9 +83,12 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     
     text = editor_grab_buffer (ec);
     
-    /* write buffer content to the workfile */
-    utils_set_file_contents (ec->workfile, text, -1);
-    
+    // bit of a dirty hack, but only write the buffer content when
+    // there is not a recovery in progress, otherwise the workfile
+    // will be overwritten with empty text
+    if (!STR_EQU (text, "")) {
+        utils_set_file_contents (ec->workfile, text, -1);
+    }
     return text;
 }
 
