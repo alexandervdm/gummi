@@ -40,6 +40,9 @@
 #include "utils.h"
 
 
+//TODO: this should really be a gui class in 0.7.0
+
+
 GuTemplate* template_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
     GuTemplate* t = g_new0 (GuTemplate, 1);
@@ -52,11 +55,11 @@ GuTemplate* template_init (GtkBuilder* builder) {
     t->template_label = 
         GTK_LABEL (gtk_builder_get_object (builder, "template_label"));
     t->template_add =
-        GTK_BUTTON (gtk_builder_get_object (builder, "template_add"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "template_add"));
     t->template_remove =
-        GTK_BUTTON (gtk_builder_get_object (builder, "template_remove"));
+        GTK_WIDGET (gtk_builder_get_object (builder, "template_remove"));
     t->template_open =
-        GTK_BUTTON (gtk_builder_get_object (builder, "template_open")); 
+        GTK_WIDGET (gtk_builder_get_object (builder, "template_open")); 
     t->template_render = GTK_CELL_RENDERER_TEXT (
             gtk_builder_get_object (builder, "template_renderer"));
     t->template_col = GTK_TREE_VIEW_COLUMN (
@@ -91,6 +94,13 @@ void template_setup (GuTemplate* t) {
         g_free (filepath);
     }
     g_free (dirpath);
+    
+    // disable the add button when there are no tabs opened (#388)
+    if (!tabmanager_has_tabs()) {
+        gtk_widget_set_sensitive (t->template_add, FALSE);
+    }
+    
+    
 }
 
 gchar* template_get_selected_path (GuTemplate* t) {
@@ -120,9 +130,9 @@ void template_add_new_entry (GuTemplate* t) {
     gtk_list_store_append (t->list_templates, &iter);
     
     g_object_set (t->template_render, "editable", TRUE, NULL);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_add), FALSE);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_remove), FALSE);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_open), FALSE);
+    gtk_widget_set_sensitive (t->template_add, FALSE);
+    gtk_widget_set_sensitive (t->template_remove, FALSE);
+    gtk_widget_set_sensitive (t->template_open, FALSE);
     
     col = gtk_tree_view_get_column (t->templateview, 0);
     model = gtk_tree_view_get_model (t->templateview);
@@ -163,9 +173,9 @@ void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
         g_file_set_contents (filepath, text, strlen (text), NULL);
     }
     g_object_set (t->template_render, "editable", FALSE, NULL);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_add), TRUE);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_remove), TRUE);
-    gtk_widget_set_sensitive (GTK_WIDGET (t->template_open), TRUE);
+    gtk_widget_set_sensitive (t->template_add, TRUE);
+    gtk_widget_set_sensitive (t->template_remove, TRUE);
+    gtk_widget_set_sensitive (t->template_open, TRUE);
 }
 
 void template_data_free(templdata* data) {

@@ -67,6 +67,7 @@ gboolean tabmanager_remove_tab (GuTabContext* tab);
 
 void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt);
 void tabmanager_update_tab (const gchar* filename);
+gboolean tabmanager_has_tabs ();
 gboolean tabmanager_check_exists (const gchar* filename);
 
 void tabmanager_set_content (OpenAct act, const gchar* filename, gchar* opt);

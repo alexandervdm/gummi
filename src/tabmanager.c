@@ -176,6 +176,16 @@ void tabmanager_update_tab (const gchar* filename) {
     previewgui_reset (gui->previewgui);    
 }
 
+gboolean tabmanager_has_tabs () {
+    if (g_list_length (g_tabs) == 0) {
+        if (g_active_editor != NULL) {
+            slog (L_ERROR, "Something went terribly wrong in has_tabs\n");
+        }
+        return FALSE;
+    }
+    return TRUE;
+}
+
 gboolean tabmanager_check_exists (const gchar* filename) {
     GList *editors;
     GuEditor* ec;

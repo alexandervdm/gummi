@@ -45,9 +45,9 @@ typedef struct _Template {
     GtkCellRendererText* template_render;
     GtkTreeViewColumn* template_col;
     GtkLabel* template_label;
-    GtkButton* template_add;
-    GtkButton* template_remove;
-    GtkButton* template_open;
+    GtkWidget* template_add;
+    GtkWidget* template_remove;
+    GtkWidget* template_open;
 } GuTemplate;
 
 
