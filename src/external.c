@@ -56,7 +56,7 @@ gboolean external_hasflag (const gchar* program, const gchar* flag) {
 
 static gchar* get_version_output (const gchar* command, int linenr) {
     const gchar* getversion = g_strdup_printf("%s --version", command); 
-    Tuple2 cmdgetv = utils_popen_r (getversion);
+    Tuple2 cmdgetv = utils_popen_r (getversion, NULL);
     gchar* output = (gchar*)cmdgetv.second;
     gchar* result = g_strdup ("Unknown");
     
@@ -81,7 +81,7 @@ gdouble external_version2 (ExternalProg program) {
 
 gchar* external_version (const gchar* program) {
     const gchar* getversion = g_strdup_printf("%s --version", program); 
-    Tuple2 cmdgetv = utils_popen_r (getversion);
+    Tuple2 cmdgetv = utils_popen_r (getversion, NULL);
     gchar* output = (gchar*)cmdgetv.second;
 
     gchar* result = g_strdup ("Unknown, please report a bug");

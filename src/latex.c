@@ -92,16 +92,10 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     return text;
 }
 
-
-
-
 gchar* latex_set_compile_cmd (GuEditor* ec) {
     
     const gchar* method = config_get_value ("compile_steps");
-    const gchar* curdir = g_path_get_dirname (ec->workfile);
-    const gchar* precommand = g_strdup_printf ("cd \"%s\"%s%s", 
-                                                curdir, C_CMDSEP, C_TEXSEC);
-                                                
+    gchar* combined = NULL;
     gchar* texcmd = NULL;
     
     if (rubber_active()) {
@@ -114,11 +108,8 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
         texcmd = texlive_get_command (method, ec->workfile, ec->basename);
     }
 
-    gchar* combined = g_strdup_printf ("%s %s", 
-                                        precommand, 
-                                        texcmd);
-                                        
-    //printf("%s\n", combined);
+    combined = g_strdup_printf("%s %s", C_TEXSEC, texcmd);
+    g_free(texcmd);
 
     return combined;
 }
@@ -187,13 +178,14 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     }
 
     /* create compile command */
+    gchar* curdir = g_path_get_dirname (ec->workfile);
     gchar *command = latex_set_compile_cmd (ec);
 
     g_free (lc->compilelog);
     memset (lc->errorlines, 0, BUFSIZ);
     
     /* run pdf compilation */
-    Tuple2 cresult = utils_popen_r (command);
+    Tuple2 cresult = utils_popen_r (command, curdir);
     cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
     
@@ -212,19 +204,16 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
 void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
     gchar* dirname = g_path_get_dirname (ec->workfile);
-    gchar* command = g_strdup_printf ("cd \"%s\"%s"
-                                     "%s %s "
-                                     "--draftmode "
-                                     "-interaction=nonstopmode "
-                                     "--output-directory=\"%s\" \"%s\"",
-                                     dirname,
-                                     C_CMDSEP,
-                                     C_TEXSEC,
-                                     config_get_value ("typesetter"),
-                                     C_TMPDIR,
-                                     ec->workfile);
+    gchar* command = g_strdup_printf ("%s %s "
+                                      "--draftmode "
+                                      "-interaction=nonstopmode "
+                                      "--output-directory=\"%s\" \"%s\"",
+                                      C_TEXSEC,
+                                      config_get_value ("typesetter"),
+                                      C_TMPDIR,
+                                      ec->workfile);
     g_free (dirname);
-    Tuple2 res = utils_popen_r (command);
+    Tuple2 res = utils_popen_r (command, dirname);
     g_free (res.second);
     g_free (command);
 }
@@ -276,14 +265,11 @@ gboolean latex_run_makeindex (GuEditor* ec) {
     
     if (g_find_program_in_path ("makeindex")) {
         
-        const gchar* precmd = g_strdup_printf ("cd \"%s\"%s%s", 
-                                                C_TMPDIR, C_CMDSEP, C_TEXSEC);
-                                                    
         gchar* command = g_strdup_printf ("%s makeindex \"%s.idx\"",
-                                         precmd, 
-                                         g_path_get_basename(ec->basename));
+                                          C_TEXSEC,
+                                          g_path_get_basename(ec->basename));
                                          
-        Tuple2 res = utils_popen_r (command);
+        Tuple2 res = utils_popen_r (command, C_TMPDIR);
         retcode = (glong)res.first;
         g_free (command);
     }

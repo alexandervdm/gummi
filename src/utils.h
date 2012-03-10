@@ -138,7 +138,7 @@ gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err);
  *
  * Platform independent interface for calling popen ().
  */
-Tuple2 utils_popen_r (const gchar* cmd);
+Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir);
 
 /**
  * utils_path_to_relative:

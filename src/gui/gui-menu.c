@@ -431,7 +431,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void * user) {
         }
 
         cmd = g_strdup_printf ("texcount '%s'", tmpfile);
-        Tuple2 result = utils_popen_r (cmd);
+        Tuple2 result = utils_popen_r (cmd, NULL);
 
         for (i = 0; i < TEXCOUNT_OUTPUT_LINES; ++i)
             if (! (regexs[i] = g_regex_new (terms_regex[i], 0, 0, &err))) {

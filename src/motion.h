@@ -42,6 +42,7 @@ struct _GuMotion {
     GMutex* compile_mutex;
     GThread* compile_thread;
     GCond* compile_cv;
+    pid_t* typesetter_pid;
     
     gboolean keep_running;
     gboolean errormode;

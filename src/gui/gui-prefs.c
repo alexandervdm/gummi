@@ -150,7 +150,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 #ifdef USE_GTKSPELL
     /* list available languages */
 
-    Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts");
+    Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts", NULL);
 
     if (pret.second != NULL) {
         gchar** output = g_strsplit((gchar*)pret.second, "\n", BUFSIZ);

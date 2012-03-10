@@ -38,10 +38,8 @@
 #include <gtk/gtk.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
-#ifdef HAVE_SYS_WAIT_H
-#   include <sys/wait.h>
-#endif
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
@@ -70,6 +68,8 @@
 static gint slog_debug = 0;
 static GtkWindow* parent = 0;
 GThread* main_thread = 0;
+extern pid_t typesetter_pid;
+
 
 void slog_init (gint debug) {
     slog_debug = debug;
@@ -210,18 +210,32 @@ gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err)
     return TRUE;
 }
 
-Tuple2 utils_popen_r (const gchar* cmd) {
-    FILE* fp = popen (cmd, "r");
+Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     gchar buf[BUFSIZ];
+    int pout = 0;
     gchar* ret = NULL;
     gchar* rot = NULL;
-    glong status = 0, len = 0;
+    glong len = 0;
+    gint status = 0;
+    int n_args = 0;
+    gchar** args = NULL;
+    GError* error = NULL;
 
     g_assert (cmd != NULL);
 
-    if (!fp) slog (L_FATAL, "popen () error\n");
+    /* XXX: Set typesetter_pid, ugly... */
+    if (!g_shell_parse_argv(cmd, &n_args, &args, &error)) {
+        slog(L_G_FATAL, "%s", error->message);
+        /* Not reached */
+    }
 
-    while ( (len = fread (buf, 1, BUFSIZ, fp))) {
+    if (!g_spawn_async_with_pipes (chdir, args, NULL,  G_SPAWN_SEARCH_PATH,
+                NULL, NULL, &typesetter_pid, NULL, &pout, NULL, &error)) {
+        slog(L_G_FATAL, "%s", error->message);
+        /* Not reached */
+    }
+
+    while ((len = read (pout, buf, BUFSIZ)) > 0) {
         buf[len - (len == BUFSIZ)] = 0;
         rot = g_strdup (ret);
         g_free (ret);
@@ -230,13 +244,11 @@ Tuple2 utils_popen_r (const gchar* cmd) {
         else
             ret = g_strdup (buf);
         g_free (rot);
-    } /* win32 uses a different range of return codes */
-    #ifdef WIN32
-        status = (pclose (fp));
-    #else
-        status = WEXITSTATUS (pclose (fp));
-    #endif
-    return (Tuple2){NULL, (gpointer)status, (gpointer)ret};
+    }
+
+    waitpid(typesetter_pid, &status, 0);
+
+    return (Tuple2){NULL, (gpointer)(glong)status, (gpointer)ret};
 }
 
 gchar* utils_path_to_relative (const gchar* root, const gchar* target) {

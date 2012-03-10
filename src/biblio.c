@@ -102,17 +102,13 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
 
     if (g_find_program_in_path ("bibtex")) {
         gboolean success = FALSE;
-        char* command = g_strdup_printf ("cd \"%s\"%s"
-                                         "%s bibtex \"%s\"",
-                                         dirname,
-                                         C_CMDSEP,
-                                         C_TEXSEC,
-                                         auxname);
+        char* command = g_strdup_printf ("%s bibtex \"%s\"",
+                                         C_TEXSEC, auxname);
                                          
         g_free (auxname);
         latex_update_workfile (lc, ec);
         latex_update_auxfile (lc, ec);
-        Tuple2 res = utils_popen_r (command);
+        Tuple2 res = utils_popen_r (command, dirname);
         gtk_widget_set_tooltip_text (GTK_WIDGET (bc->progressbar),
                 (gchar*)res.second);
         g_free (command);

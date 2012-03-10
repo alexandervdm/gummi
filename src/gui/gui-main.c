@@ -292,6 +292,8 @@ void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
 G_MODULE_EXPORT
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int pagenr, void *data) {
+    /* Kill typesetter command */
+    motion_kill_typesetter(gummi->motion);
 
     /* set the active tab/editor pointers */
     tabmanager_set_active_tab (pagenr);

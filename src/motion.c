@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -47,6 +48,9 @@
 extern GummiGui* gui;
 extern Gummi* gummi;
 
+/* Typesetter pid */
+pid_t typesetter_pid = 0;
+
 GuMotion* motion_init (void) {
     GuMotion* m = g_new0 (GuMotion, 1);
 
@@ -55,6 +59,7 @@ GuMotion* motion_init (void) {
     m->compile_mutex = g_mutex_new ();
     m->compile_cv = g_cond_new ();
     m->keep_running = TRUE;
+    m->typesetter_pid = &typesetter_pid;
 
     return m;
 }
@@ -74,6 +79,17 @@ void motion_stop_compile_thread (GuMotion* m) {
     m->keep_running = FALSE;
     motion_do_compile(m);
     g_thread_join(m->compile_thread);
+}
+
+void motion_kill_typesetter (GuMotion* m) {
+    if (*m->typesetter_pid) {
+        slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
+        kill(*m->typesetter_pid, 15);
+        waitpid(*m->typesetter_pid, NULL, 0);
+        *m->typesetter_pid = 0;
+        /* XXX: Ugly hack: delay compile signal */
+        motion_start_timer (m);
+    }
 }
 
 gboolean motion_do_compile (gpointer user) {
@@ -136,6 +152,7 @@ gpointer motion_compile_thread (gpointer data) {
         }
         
         compile_status = latex_update_pdffile (latex, editor);
+        *mc->typesetter_pid = 0;
         g_mutex_unlock (mc->compile_mutex);
 
         if (!mc->keep_running)
