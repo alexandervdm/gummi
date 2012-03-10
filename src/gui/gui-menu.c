@@ -34,6 +34,7 @@
 #include "environment.h"
 #include "external.h"
 #include "gui-main.h"
+#include "motion.h"
 #include "project.h"
 #include "update.h"
 
@@ -180,11 +181,15 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
     
+    /* Kill typesetter command */
+    motion_kill_typesetter(gummi->motion);
+
     if (!tabmanager_remove_tab (tab)) {
         motion_start_errormode (gummi->motion, "");
         gui_set_hastabs_sensitive (FALSE);
-    } else
+    } else {
         gui_set_filename_display (g_active_tab, TRUE, FALSE);
+    }
 }
 
 G_MODULE_EXPORT
