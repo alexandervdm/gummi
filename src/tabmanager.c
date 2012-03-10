@@ -172,7 +172,8 @@ void tabmanager_update_tab (const gchar* filename) {
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
     
     editor_fileinfo_update (g_active_tab->editor, filename);
-    slog (L_INFO, "Environment updated for %s\n", g_active_tab->editor->filename);
+    slog (L_INFO, "Environment updated for %s\n",
+            g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);    
 }
 

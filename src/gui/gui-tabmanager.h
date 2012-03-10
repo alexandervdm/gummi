@@ -88,5 +88,4 @@ void tabmanagergui_update_label (GuTabPage* tp, const gchar* text);
 void tablabel_set_bold_text (GuTabPage* tp);
 
 
-
 #endif /* __GUMMI_GUI_TABMANAGER_H__ */

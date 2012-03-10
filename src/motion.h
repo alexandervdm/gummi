@@ -57,15 +57,11 @@ gboolean motion_idle_cb (gpointer user);
 void motion_start_timer (GuMotion* mc);
 void motion_stop_timer (GuMotion* mc);
 
-
-
 void motion_start_errormode (GuMotion *mc, const gchar *msg);
 void motion_stop_errormode (GuMotion *mc);
 
-
 gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user);
 gboolean on_key_release_cb (GtkWidget* widget, GdkEventKey* event, void* user);
-
 
 
 #endif /* __GUMMI_MOTION_H__ */

@@ -170,7 +170,7 @@ void motion_force_compile (GuMotion *mc) {
     /* sort-of signal to force a compile run after certain actions that
      * don't trigger the regular editor content change signals */
     gummi->latex->modified_since_compile = TRUE;
-    motion_start_timer (gummi->motion);
+    motion_do_compile (mc);
 }
 
 void motion_start_errormode (GuMotion *mc, const gchar *msg) {

@@ -379,12 +379,6 @@ void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
     motion_force_compile (gummi->motion);
 }
 
-
-
-
-
-
-
 G_MODULE_EXPORT
 void on_menu_runbibtex_activate (GtkWidget *widget, void * user) {
     on_button_biblio_compile_clicked (widget, user);
