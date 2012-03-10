@@ -32,6 +32,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 #include <glib.h>
 #include <gtk/gtk.h>

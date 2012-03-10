@@ -57,6 +57,7 @@ gpointer motion_compile_thread (gpointer data);
 gboolean motion_idle_cb (gpointer user);
 void motion_start_timer (GuMotion* mc);
 void motion_stop_timer (GuMotion* mc);
+void motion_kill_typesetter (GuMotion* m);
 
 void motion_start_errormode (GuMotion *mc, const gchar *msg);
 void motion_stop_errormode (GuMotion *mc);
