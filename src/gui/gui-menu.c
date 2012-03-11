@@ -30,6 +30,7 @@
 #include "gui-menu.h"
 
 #include "configfile.h"
+#include "constants.h"
 #include "editor.h"
 #include "environment.h"
 #include "external.h"
@@ -103,7 +104,7 @@ void on_menu_new_activate (GtkWidget *widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_template_activate (GtkWidget *widget, void * user) {
+void on_menu_template_activate (GtkWidget *widget, void *user) {
     gtk_list_store_clear (gummi->templ->list_templates);
     template_setup (gummi->templ);
     gtk_widget_show_all (GTK_WIDGET (gummi->templ->templatewindow));
@@ -132,7 +133,7 @@ void on_menu_saveas_activate (GtkWidget *widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_export_activate (GtkWidget *widget, void * user) {
+void on_menu_export_activate (GtkWidget *widget, void *user) {
     gchar* filename = NULL;
 
     filename = get_save_filename (TYPE_PDF);
@@ -142,7 +143,7 @@ void on_menu_export_activate (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_recent_activate (GtkWidget *widget, void * user) {
+void on_menu_recent_activate (GtkWidget *widget, void *user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
     gint index = name[0] - '0' -1;
@@ -276,19 +277,19 @@ void on_menu_paste_activate (GtkWidget *widget, void* user) {
 
 
 G_MODULE_EXPORT
-void on_menu_delete_activate (GtkWidget *widget, void * user) {
+void on_menu_delete_activate (GtkWidget *widget, void *user) {
     gtk_text_buffer_delete_selection (g_e_buffer, FALSE, TRUE);
 }
 
 G_MODULE_EXPORT
-void on_menu_selectall_activate (GtkWidget *widget, void * user) {
+void on_menu_selectall_activate (GtkWidget *widget, void *user) {
     GtkTextIter start, end;
     gtk_text_buffer_get_bounds (g_e_buffer, &start, &end);
     gtk_text_buffer_select_range (g_e_buffer, &start, &end);
 }
 
 G_MODULE_EXPORT
-void on_menu_preferences_activate (GtkWidget *widget, void * user) {
+void on_menu_preferences_activate (GtkWidget *widget, void *user) {
     prefsgui_main (gui->prefsgui, 0);
 }
 
@@ -297,7 +298,7 @@ void on_menu_preferences_activate (GtkWidget *widget, void * user) {
  ******************************************************************************/
 
 G_MODULE_EXPORT
-void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
+void on_menu_statusbar_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->statusbar));
         config_set_value ("statusbar", "True");
@@ -308,7 +309,7 @@ void on_menu_statusbar_toggled (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_toolbar_toggled (GtkWidget *widget, void * user) {
+void on_menu_toolbar_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (gui->toolbar);
         config_set_value ("toolbar", "True");
@@ -319,7 +320,7 @@ void on_menu_toolbar_toggled (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_rightpane_toggled (GtkWidget *widget, void * user) {
+void on_menu_rightpane_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->rightpane));
         config_set_value ("rightpane", "True");
@@ -332,7 +333,7 @@ void on_menu_rightpane_toggled (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_fullscreen_toggled (GtkWidget *widget, void * user) {
+void on_menu_fullscreen_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget)))
         gtk_window_fullscreen (gui->mainwindow);
     else
@@ -349,12 +350,12 @@ void on_menu_find_activate (GtkWidget *widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_findnext_activate (GtkWidget *widget, void * user) {
+void on_menu_findnext_activate (GtkWidget *widget, void *user) {
     editor_jumpto_search_result (g_active_editor, 1);
 }
 
 G_MODULE_EXPORT
-void on_menu_findprev_activate (GtkWidget *widget, void * user) {
+void on_menu_findprev_activate (GtkWidget *widget, void *user) {
     editor_jumpto_search_result (g_active_editor, -1);
 }
 
@@ -374,7 +375,7 @@ void on_menu_compileopts_activate (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
+void on_menu_runmakeindex_activate (GtkWidget *widget, void *user) {
     if (latex_run_makeindex (g_active_editor)) {
         statusbar_set_message (_("Running Makeindex.."));
     }
@@ -385,12 +386,12 @@ void on_menu_runmakeindex_activate (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_runbibtex_activate (GtkWidget *widget, void * user) {
+void on_menu_runbibtex_activate (GtkWidget *widget, void *user) {
     on_button_biblio_compile_clicked (widget, user);
 }
 
 G_MODULE_EXPORT
-void on_menu_docstat_activate (GtkWidget *widget, void * user) {
+void on_menu_docstat_activate (GtkWidget *widget, void *user) {
     gint i = 0;
     gchar* output = 0;
     gchar* cmd = 0;
@@ -495,7 +496,7 @@ cleanup:
 }
 
 G_MODULE_EXPORT
-void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
+void on_menu_spelling_toggled (GtkWidget *widget, void *user) {
 #ifdef USE_GTKSPELL
     GList *editors;
     GuEditor* ec;
@@ -523,7 +524,7 @@ void on_menu_spelling_toggled (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_snippets_toggled (GtkWidget *widget, void * user) {
+void on_menu_snippets_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         slog(L_INFO, "snippets activated\n");
         config_set_value ("snippets", "True");
@@ -626,7 +627,19 @@ void on_menu_projclose_activate (GtkWidget *widget, void *user) {
  ******************************************************************************/
 
 G_MODULE_EXPORT
-void on_menu_update_activate (GtkWidget *widget, void * user) {
+void on_menu_guide_activate (GtkWidget *widget, void *user) {
+    GError *error = NULL;
+
+    gtk_show_uri (gdk_screen_get_default(), 
+                  C_GUMMIGUIDE, GDK_CURRENT_TIME, &error);
+    
+    if (error) {
+        slog (L_ERROR, "Can't open user guide: %s\n", error->message);
+    }
+}
+
+G_MODULE_EXPORT
+void on_menu_update_activate (GtkWidget *widget, void *user) {
     #ifdef WIN32
         slog (L_G_INFO, "To be implemented for win32..\n");
     #else
@@ -637,7 +650,7 @@ void on_menu_update_activate (GtkWidget *widget, void * user) {
 }
 
 G_MODULE_EXPORT
-void on_menu_about_activate (GtkWidget *widget, void * user) {
+void on_menu_about_activate (GtkWidget *widget, void *user) {
     GError* err = NULL;
     gchar* icon_file = g_build_filename (DATADIR, "icons", "gummi.png", NULL);
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size (icon_file, 80, 80, &err);
