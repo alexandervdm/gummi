@@ -32,7 +32,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
-#include <sys/wait.h>
+
+#ifndef WIN32
+    #include <sys/types.h>
+    #include <sys/wait.h>
+#endif
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -86,7 +90,10 @@ void motion_kill_typesetter (GuMotion* m) {
     if (*m->typesetter_pid) {
         slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
         kill(*m->typesetter_pid, 15);
-        waitpid(*m->typesetter_pid, NULL, 0);
+        #ifndef WIN32
+            // TODO: command is not available on win32 systems:
+            waitpid(*m->typesetter_pid, NULL, 0);
+        #endif
         *m->typesetter_pid = 0;
         /* XXX: Ugly hack: delay compile signal */
         motion_start_timer (m);

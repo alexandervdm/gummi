@@ -37,8 +37,11 @@
 #include <glib/gprintf.h>
 #include <gtk/gtk.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+
+#ifndef WIN32
+    #include <sys/types.h>
+    #include <sys/wait.h>
+#endif
 
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
@@ -246,7 +249,10 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         g_free (rot);
     }
 
-    waitpid(typesetter_pid, &status, 0);
+    #ifndef WIN32
+        // TODO: command is not available on win32 systems:
+        waitpid(typesetter_pid, &status, 0);
+    #endif
 
     return (Tuple2){NULL, (gpointer)(glong)status, (gpointer)ret};
 }
