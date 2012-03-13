@@ -27,6 +27,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef __GUMMI_COMPILE_TEXLIVE_H__
+#define __GUMMI_COMPILE_TEXLIVE_H__
 
 #include <glib.h>
 
@@ -42,3 +44,4 @@ gboolean xelatex_detected (void);
 gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basename);
 gchar* texlive_get_flags (const gchar *method);
 
+#endif /* __GUMMI_COMPILE_TEXLIVE_H__ */

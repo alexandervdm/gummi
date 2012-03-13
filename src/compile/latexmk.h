@@ -27,6 +27,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef __GUMMI_COMPILE_LATEXMK_H__
+#define __GUMMI_COMPILE_LATEXMK_H__
+
 #include <glib.h>
 
 void latexmk_init (void);
@@ -35,3 +38,5 @@ gboolean latexmk_detected (void);
 
 gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basename);
 gchar* latexmk_get_flags (const gchar *method);
+
+#endif /* __GUMMI_COMPILE_LATEXMK_H__ */

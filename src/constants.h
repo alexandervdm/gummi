@@ -29,6 +29,9 @@
 
 #include "utils.h"
 
+#ifndef __GUMMI_CONSTANTS_H__
+#define __GUMMI_CONSTANTS_H__
+
 /* File constants */
 #define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)
 #define C_DEFAULTTEXT g_build_filename (DATADIR, "misc", "default.tex", NULL)
@@ -61,5 +64,4 @@
     #define C_TEXSEC "env openout_any=a"
 #endif
 
-
-
+#endif /* __GUMMI_CONSTANTS_H__ */

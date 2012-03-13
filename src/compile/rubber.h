@@ -27,10 +27,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef __GUMMI_COMPILE_RUBBER_H__
+#define __GUMMI_COMPILE_RUBBER_H__
+
 #include <glib.h>
-
-
-
 
 void rubber_init (void);
 gboolean rubber_active (void);
@@ -39,5 +39,4 @@ gboolean rubber_detected (void);
 gchar* rubber_get_command (const gchar* method, gchar* workfile);
 gchar* rubber_get_flags (const gchar *method);
 
-
-
+#endif /* __GUMMI_COMPILE_RUBBER_H */

@@ -78,9 +78,3 @@ gchar* rubber_get_flags (const gchar *method) {
     }
     return rubflags;
 }
-
-
-
-
-
-
