@@ -97,10 +97,10 @@ void motion_kill_typesetter (GuMotion* m) {
         command = g_strdup_printf("pkill -15 -P %d", *m->typesetter_pid);
         system(command);
         g_free(command);
-#endif
 
         /* Make sure typesetter command is terminated */
         kill(*m->typesetter_pid, 15);
+#endif
 
         slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
         *m->typesetter_pid = 0;
