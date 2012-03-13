@@ -88,13 +88,19 @@ void motion_stop_compile_thread (GuMotion* m) {
 
 void motion_kill_typesetter (GuMotion* m) {
     if (*m->typesetter_pid) {
-        slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
+        gchar* command = NULL;
+        /* Kill children spawned by typesetter command/script, don't know
+         * how to do this programatically yet, so use pkill for now */
+        command = g_strdup_printf("pkill -9 -P %d", *m->typesetter_pid);
+        system(command);
+        g_free(command);
+
+        /* Make sure typesetter command is terminated */
         kill(*m->typesetter_pid, 15);
-        #ifndef WIN32
-            // TODO: command is not available on win32 systems:
-            waitpid(*m->typesetter_pid, NULL, 0);
-        #endif
+
+        slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
         *m->typesetter_pid = 0;
+
         /* XXX: Ugly hack: delay compile signal */
         motion_start_timer (m);
     }
