@@ -36,6 +36,7 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <glib/gstdio.h>
 
 #include "configfile.h"
 #include "constants.h"
@@ -216,6 +217,27 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
     Tuple2 res = utils_popen_r (command, dirname);
     g_free (res.second);
     g_free (command);
+}
+
+int latex_remove_auxfile (GuEditor* ec) {
+    gchar* auxfile = NULL;
+    int res = -1;
+    // TODO: merge this into function with several other instances.
+    // for instance the lines in analyse_log
+    if (ec->filename == NULL) {
+        auxfile = g_strconcat (ec->basename, ".aux", NULL);
+    }
+    else {
+        auxfile = g_strconcat (C_TMPDIR, C_DIRSEP, 
+                  g_path_get_basename(ec->basename), ".aux", NULL);
+        }
+    
+    // TODO: extend for other build files
+    if (g_file_test (auxfile, G_FILE_TEST_EXISTS)) {
+        res = g_remove (auxfile);
+    }
+    g_free (auxfile);
+    return res;
 }
 
 gboolean latex_precompile_check (gchar* editortext) {

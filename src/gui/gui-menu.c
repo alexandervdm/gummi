@@ -375,6 +375,18 @@ void on_menu_compileopts_activate (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
+void on_menu_cleanup_activate (GtkWidget *widget, void *user) {
+    int result = latex_remove_auxfile (g_active_editor);
+
+    if (result == 0) {
+        statusbar_set_message (_("Succesfully removed build files.."));
+    }
+    else {
+        statusbar_set_message (_("Error removing build files.."));
+    }
+}
+
+G_MODULE_EXPORT
 void on_menu_runmakeindex_activate (GtkWidget *widget, void *user) {
     if (latex_run_makeindex (g_active_editor)) {
         statusbar_set_message (_("Running Makeindex.."));

@@ -61,6 +61,7 @@ gboolean latex_typesetter_detected (GuLatex* lc, gchar* typesetter);
 gboolean latex_typesetter_active (gchar* typesetter);
 gboolean latex_method_active (gchar* method);
 gboolean latex_run_makeindex (GuEditor* ec);
+int latex_remove_auxfile (GuEditor* ec);
 
 gboolean latex_can_synctex (void);
 gboolean latex_use_synctex (void);

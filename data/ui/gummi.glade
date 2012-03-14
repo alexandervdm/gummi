@@ -530,6 +530,12 @@
     <property name="stock">gtk-preferences</property>
     <property name="icon-size">1</property>
   </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-clear</property>
+    <property name="icon-size">1</property>
+  </object>
   <object class="GtkImage" id="image21">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -1916,6 +1922,18 @@ and update preview.</property>
                       <object class="GtkSeparatorMenuItem" id="menuitem3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_cleanup">
+                        <property name="label" translatable="yes">_Cleanup Build Files</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="image">image2</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="on_menu_cleanup_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
