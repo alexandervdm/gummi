@@ -2,7 +2,7 @@
  * @file    environment.h
  * @brief   
  *
- * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
  * 
  * Permission is hereby granted, free of charge, to any person
@@ -40,12 +40,12 @@
 #endif
 
 #define PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
-#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2011\n\n"\
+#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2012\n\n"\
                         "Alexander van der Mey\n"\
                         "Wei-Ning Huang\n"\
                         "Dion Timmermann"
 #define PACKAGE_LICENSE \
-"Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
+"Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
 "All Rights reserved.\n" \
 "\n" \
 "Permission is hereby granted, free of charge, to any person\n" \

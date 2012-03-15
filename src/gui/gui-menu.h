@@ -2,7 +2,7 @@
  * @file   gui-menu.h
  * @brief
  *
- * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person
