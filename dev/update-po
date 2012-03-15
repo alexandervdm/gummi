@@ -3,4 +3,7 @@
 absolute_dir=$(cd "$( dirname "$0" )" && pwd)
 
 cd $absolute_dir/../po
-for i in `ls *.po`; do intltool-update ${i%.po}; done
+for i in `ls *.po`; do 
+    echo -e "\nprocessing $i";
+    intltool-update ${i%.po}; 
+done
