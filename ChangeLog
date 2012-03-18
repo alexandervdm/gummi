@@ -2,6 +2,23 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.2 (March 18th, 2012):
+
+	Bugs fixed:
+	* Recovery mode is also triggered when gummi is run with file argv
+	* Incomplete compilation processes are killed on tab switch
+	* Fix template addition crash when zero tabs are opened
+	* PDF files can now be used by the image importer
+	* Fixed building/compilation scripts for explicit linking
+	* Default text only written to disk when changes are made
+	* SyncTeX auto-scrolling is now disabled by default
+	* Converted snippet offsets to utf8
+	* Bibliography items with all capital letters can be parsed
+	* Various minor spelling/phrasing errors
+	* Build files can now be removed from the menu
+	* Lots of Windows specific issues
+	* Addition of user guide link
+
 Gummi 0.6.1 (December 2th, 2011):
 
 	Bugs fixed:
