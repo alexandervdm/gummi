@@ -29,6 +29,9 @@ case $2 in
 		;;
 	oneiric)
 		poppler_glib_ver=6
+        ;;
+    precise)
+        poppler_glib_ver=8
 		;;
 esac
 
