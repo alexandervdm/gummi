@@ -88,6 +88,7 @@ AC_CONFIG_FILES([Makefile
 		 data/icons/Makefile
 		 data/snippets/Makefile
 		 data/misc/Makefile
+		 lib/Makefile
 		 po/Makefile.in
 		 data/misc/$PACKAGE.desktop
 		 ])

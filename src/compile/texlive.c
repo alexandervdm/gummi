@@ -115,28 +115,14 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
                                                 flags,
                                                 outdir, 
                                                 workfile);
-    }
-    else if (STR_EQU (method, "texdvipdf")) {
-        texcmd = g_strdup_printf("latex %s %s \"%s\" %s %s dvipdf -q \"%s\"",
-                                                flags, 
-                                                outdir, 
-                                                workfile,
-                                                C_CMDSEP,
-                                                C_CD_TMPDIR,
-                                                dviname);
-    }
-    else {
-        texcmd = g_strdup_printf("latex %s %s \"%s\" %s"
-                                 "%s dvips -q \"%s\" %s"
-                                 "ps2pdf \"%s\"",
-                                                flags, 
-                                                outdir, 
-                                                workfile,
-                                                C_CMDSEP,
-                                                C_CD_TMPDIR,
-                                                dviname,
-                                                C_CMDSEP,
-                                                psname);
+    } else if (STR_EQU (method, "texdvipdf")) {
+        texcmd = g_strdup_printf(LIBDIR "/latex_dvi_pdf.sh "
+                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
+                flags, outdir, workfile, C_TMPDIR, dviname);
+    } else {
+        texcmd = g_strdup_printf(LIBDIR "/latex_dvi_ps_pdf.sh "
+                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
+                flags, outdir, workfile, C_TMPDIR, dviname, psname);
     }
     
     g_free(dviname);
