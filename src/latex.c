@@ -213,8 +213,8 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
                                       config_get_value ("typesetter"),
                                       C_TMPDIR,
                                       ec->workfile);
-    g_free (dirname);
     Tuple2 res = utils_popen_r (command, dirname);
+    g_free (dirname);
     g_free (res.second);
     g_free (command);
 }
