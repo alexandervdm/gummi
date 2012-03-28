@@ -700,6 +700,8 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Russian: Kruvalig\n"
         "Swedish: Kess Vargavind\n"
         "Spanish: Carlos Salas Contreras\n";
+        
+    const gchar* documenters[] = {"Guy Edwards", NULL};
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());
     gtk_window_set_transient_for (GTK_WINDOW (dialog), gui->mainwindow);
@@ -713,6 +715,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     gtk_about_dialog_set_logo (dialog, icon);
     gtk_about_dialog_set_comments (dialog, PACKAGE_COMMENTS);
     gtk_about_dialog_set_translator_credits (dialog, translators);
+    gtk_about_dialog_set_documenters (dialog, documenters);
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (GTK_WIDGET (dialog));
 }
