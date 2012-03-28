@@ -27,6 +27,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifndef __GUMMI_EXTERNAL_H__
+#define __GUMMI_EXTERNAL_H__
+
 #include <glib.h>
 
 typedef struct {
@@ -48,6 +51,7 @@ typedef enum _ExternalProg {
 gboolean external_exists (const gchar* program);
 gboolean external_hasflag (const gchar* program, const gchar* flag);
 
-
 gchar* external_version (const gchar* program);
 gdouble external_version2 (ExternalProg program);
+
+#endif /* __GUMMI_EXTERNAL_H__ */
