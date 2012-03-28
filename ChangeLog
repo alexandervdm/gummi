@@ -2,6 +2,17 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.3 (March 28th, 2012):
+	
+	Bugs fixed:
+	* Fix bibtex regression since 0.6.2
+	* Fix for compiling through dvi/ps
+	* Correctly disable template open button when none exist
+	* Gummi toolbar can be hidden again
+	* Fix LaTeX error screen and error line output
+	* Menu item compatibility with Ubuntu's Unity fixed
+	* Added Chinese (simplified) translation
+
 Gummi 0.6.2 (March 18th, 2012):
 
 	Bugs fixed:
