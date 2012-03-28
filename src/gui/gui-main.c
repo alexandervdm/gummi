@@ -563,6 +563,14 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     g_free (filepath);
 }
 
+G_MODULE_EXPORT 
+void on_template_cursor_changed (GtkTreeView *tree, gpointer data) {
+    if (!gtk_tree_view_get_selection (tree) == NULL) {
+        gtk_widget_set_sensitive (gummi->templ->template_open, TRUE);
+    }
+}
+    
+
 G_MODULE_EXPORT
 void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
     gint id = gtk_tree_view_column_get_sort_column_id

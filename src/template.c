@@ -100,6 +100,8 @@ void template_setup (GuTemplate* t) {
         gtk_widget_set_sensitive (t->template_add, FALSE);
     }
     
+    gtk_widget_set_sensitive (t->template_open, FALSE);
+    
     
 }
 
@@ -159,6 +161,7 @@ void template_remove_entry (GuTemplate* t) {
         gtk_list_store_remove (t->list_templates, &iter);
         g_remove (filepath);
     }
+    gtk_widget_set_sensitive (t->template_open, FALSE);
 }
 
 void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {

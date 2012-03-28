@@ -3355,9 +3355,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
@@ -3661,6 +3661,7 @@ more information.
                         <property name="model">list_templates</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
+                        <signal name="cursor-changed" handler="on_template_cursor_changed" swapped="no"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="template_column">
                             <property name="title">templates</property>
@@ -3763,6 +3764,7 @@ current active document.</property>
                 <property name="label">gtk-open</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Open the selected template</property>
