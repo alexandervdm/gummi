@@ -232,7 +232,8 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         /* Not reached */
     }
 
-    if (!g_spawn_async_with_pipes (chdir, args, NULL,  G_SPAWN_SEARCH_PATH,
+    if (!g_spawn_async_with_pipes (chdir, args, NULL,
+                G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                 NULL, NULL, &typesetter_pid, NULL, &pout, NULL, &error)) {
         slog(L_G_FATAL, "%s", error->message);
         /* Not reached */
