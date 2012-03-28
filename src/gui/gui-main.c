@@ -71,7 +71,8 @@ const gchar* insens_widgets_str[] = {
     "menu_delete", "menu_selectall", "menu_preferences", "menu_find",
     "menu_prev", "menu_next", "menu_pdfcompile", "menu_compileopts",
     "menu_runmakeindex", "menu_runbibtex", "menu_docstat", "menu_spelling",
-    "menu_snippets", "menu_edit", "menu_document", "menu_search"
+    "menu_snippets", "menu_edit", "menu_document", "menu_search",
+    "menu_cleanup"
 };
 
 
