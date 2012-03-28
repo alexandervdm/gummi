@@ -565,7 +565,7 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
 
 G_MODULE_EXPORT 
 void on_template_cursor_changed (GtkTreeView *tree, gpointer data) {
-    if (!gtk_tree_view_get_selection (tree) == NULL) {
+    if (!gtk_tree_view_get_selection (tree) == 0) {
         gtk_widget_set_sensitive (gummi->templ->template_open, TRUE);
     }
 }
