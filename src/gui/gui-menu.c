@@ -685,6 +685,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Arabic: Hamad Mohammad\n"
         "Brazilian-Portugese: Fernando Cruz & Alexandre Guimarães\n"
         "Catalan: Marc Vinyals\n"
+        "Chinese (Simplified): Mathlab pass\n"
         "Chinese (Traditional): Wei-Ning Huang\n"
         "Czech: Přemysl Janouch\n"
         "Danish: Jack Olsen\n"
