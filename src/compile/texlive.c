@@ -116,11 +116,11 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
                                                 outdir, 
                                                 workfile);
     } else if (STR_EQU (method, "texdvipdf")) {
-        texcmd = g_strdup_printf(LIBDIR "/latex_dvi_pdf.sh "
+        texcmd = g_strdup_printf(LIBDIR "/latex_dvi.sh pdf "
                 "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
                 flags, outdir, workfile, C_TMPDIR, dviname);
     } else {
-        texcmd = g_strdup_printf(LIBDIR "/latex_dvi_ps_pdf.sh "
+        texcmd = g_strdup_printf(LIBDIR "/latex_dvi.sh ps "
                 "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
                 flags, outdir, workfile, C_TMPDIR, dviname, psname);
     }
