@@ -159,7 +159,6 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
     if (filename != NULL) {
         if (! (result = g_file_set_contents (filename, encoded, -1, &err))) {
             slog (L_ERROR, "g_file_set_contents (): %s\n", err->message);
-            g_error_free (err);
         }
     }
         
