@@ -233,6 +233,8 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         /* Not reached */
     }
 
+    // Don't forget to copy the g-spawn-helper*.exe files into the
+    // same directory as libglib-2.0.dll for WIN32
     if (!g_spawn_async_with_pipes (chdir, args, NULL,
                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                 NULL, NULL, &proc_pid, NULL, &pout, NULL, &error)) {

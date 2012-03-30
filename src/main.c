@@ -78,7 +78,7 @@ int main (int argc, char *argv[]) {
     /* initialize GTK */
     g_thread_init (NULL);
     gdk_threads_init ();
-    gtk_init (&argc, &argv);\
+    gtk_init (&argc, &argv);
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (DATADIR, "ui", "gummi.glade", NULL);
