@@ -87,6 +87,7 @@ int main (int argc, char *argv[]) {
     /* Initialize logging */
     slog_init (debug);
     slog (L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
+    slog (L_DEBUG, "Datadir: %s\n", DATADIR);
 
     /* Initialize configuration */
     gchar* configname = g_build_filename (g_get_user_config_dir (), "gummi",
