@@ -73,21 +73,25 @@ int main (int argc, char *argv[]) {
     GOptionContext* context = g_option_context_new ("files");
     g_option_context_add_main_entries (context, entries, PACKAGE);
     g_option_context_parse (context, &argc, &argv, &error);
+    if (error) g_error("%s\n", error->message);
 
     /* initialize GTK */
     g_thread_init (NULL);
     gdk_threads_init ();
-    gtk_init (&argc, &argv);
+    gtk_init (&argc, &argv);\
+    GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (DATADIR, "ui", "gummi.glade", NULL);
-    gtk_builder_add_from_file (builder, ui, NULL);
+    gtk_builder_add_from_file (builder, ui, &ui_error);
+    if (ui_error) {
+        g_error ("%s\n", ui_error->message);
+    }
     gtk_builder_set_translation_domain (builder, PACKAGE);
     g_free (ui);
 
     /* Initialize logging */
     slog_init (debug);
     slog (L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
-    slog (L_DEBUG, "Datadir: %s\n", DATADIR);
 
     /* Initialize configuration */
     gchar* configname = g_build_filename (g_get_user_config_dir (), "gummi",
