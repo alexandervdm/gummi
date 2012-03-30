@@ -223,10 +223,11 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     int n_args = 0;
     gchar** args = NULL;
     GError* error = NULL;
+    GPid proc_pid;
 
     g_assert (cmd != NULL);
 
-    /* XXX: Set typesetter_pid, ugly... */
+    /* XXX: Set process pid, ugly... */
     if (!g_shell_parse_argv(cmd, &n_args, &args, &error)) {
         slog(L_G_FATAL, "%s", error->message);
         /* Not reached */
@@ -234,7 +235,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
 
     if (!g_spawn_async_with_pipes (chdir, args, NULL,
                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                NULL, NULL, &typesetter_pid, NULL, &pout, NULL, &error)) {
+                NULL, NULL, &proc_pid, NULL, &pout, NULL, &error)) {
         slog(L_G_FATAL, "%s", error->message);
         /* Not reached */
     }
@@ -252,7 +253,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
 
     #ifndef WIN32
         // TODO: command is not available on win32 systems:
-        waitpid(typesetter_pid, &status, 0);
+        waitpid(proc_pid, &status, 0);
     #endif
 
     return (Tuple2){NULL, (gpointer)(glong)status, (gpointer)ret};
