@@ -117,7 +117,8 @@ static gdouble get_texlive_version (void) {
      * Also, TeXLive utilities from versions before 2008 do not 
      * mention the year in the --version tag. */
      
-    if (!utils_subinstr ("TeX Live", output, FALSE)) {
+    if ((!utils_subinstr ("TeX Live", output, FALSE)) &&
+        (!utils_subinstr ("Web2C", output, FALSE))) {
         return version;
     }
     
