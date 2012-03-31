@@ -58,9 +58,13 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
                         gtk_builder_get_object (builder, "menu_projclose"));
     
     #ifdef WIN32
-    /* please do not enable for nix, it has no place on a free OS ;)*/
+    // Please do NOT enable for nix, it has no place on a free OS ;)
     GtkWidget* donate = 
-		gtk_menu_item_new_with_label ("Support this Project");
+		gtk_image_menu_item_new_with_label ("Support this Project");
+    gtk_image_menu_item_set_image 
+        (GTK_IMAGE_MENU_ITEM(donate), 
+         GTK_WIDGET(gtk_image_new_from_stock(
+         GTK_STOCK_DIALOG_QUESTION, GTK_ICON_SIZE_MENU)));
     GtkWidget* helpmenu = 
 		GTK_WIDGET (gtk_builder_get_object (builder, "menu11"));
     gtk_menu_prepend (GTK_MENU (helpmenu), donate);
@@ -103,7 +107,7 @@ G_MODULE_EXPORT
 void on_menu_donate_activate (GtkWidget* widget, void* user) {
 	//TODO: enhance
 	GtkWidget* dialog;
-    dialog = gtk_message_dialog_new (NULL, 
+    dialog = gtk_message_dialog_new (gui->mainwindow, 
         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
         GTK_MESSAGE_INFO,
         GTK_BUTTONS_OK,
