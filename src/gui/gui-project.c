@@ -98,24 +98,26 @@ int projectgui_list_projfiles (gchar* active_proj) {
         path = g_path_get_dirname (tmp);
         gtk_list_store_append (store, &iter);
         
-        if (i == 0) pic = projectgui_get_status_pixbuf (ROOT);
-        if (!g_file_test (tmp, G_FILE_TEST_EXISTS))
-                    pic = projectgui_get_status_pixbuf (ERROR);
+        // 0=ROOT, 1=ERROR
+        if (i == 0) pic = projectgui_get_status_pixbuf (0);
+        if (!g_file_test (tmp, G_FILE_TEST_EXISTS)) {
+                    pic = projectgui_get_status_pixbuf (1);
+                }
 
         gtk_list_store_set (store, &iter, 0, pic, 1, name, 2, path, 3, tmp, -1);
     }
     return amount;
 }
 
-GdkPixbuf* projectgui_get_status_pixbuf (ProjFileStatus status) {
+GdkPixbuf* projectgui_get_status_pixbuf (int status) {
     GtkWidget* iv = GTK_WIDGET (gtk_invisible_new());
 
     switch (status) {
-        case ROOT:
+        case 0:
             return gtk_widget_render_icon (iv, GTK_STOCK_HOME,
                                                GTK_ICON_SIZE_MENU,
                                                NULL);
-        case ERROR:
+        case 1:
             return gtk_widget_render_icon (iv, GTK_STOCK_STOP,
                                                GTK_ICON_SIZE_MENU,
                                                NULL);
