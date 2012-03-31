@@ -69,6 +69,32 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
                                NULL);
     #endif
     
+    /* TODO: There has to be a better way than this.. (bug 246)
+    GtkSettings *settings = gtk_settings_get_default();
+    gchar *iconsizes;
+    g_object_get(settings, "gtk-icon-sizes", &iconsizes, NULL);
+    if (iconsizes != NULL) {
+        printf("%s\n", iconsizes);
+    }*/ 
+
+    #ifdef WIN32
+        // The 2 non-stock menu items have their pixel size values set 
+        // to the default 16x16 in GLADE. The normal icon-size value is 
+        // normally set by the GTK theme in gtkrc. For themes using
+        // non-default icon sizes or Windows, this 16x16 value will be
+        // wrong. This code sets it to match the gtkrc file that we 
+        // supply with the Windows builds:
+        GtkWidget* export = gtk_image_menu_item_get_image (
+        GTK_IMAGE_MENU_ITEM (gtk_builder_get_object (builder, "menu_export")));
+        GtkWidget* update = gtk_image_menu_item_get_image (
+        GTK_IMAGE_MENU_ITEM (gtk_builder_get_object (builder, "menu_update")));
+        gtk_image_set_pixel_size (GTK_IMAGE(export), 13);
+        gtk_image_set_pixel_size (GTK_IMAGE(update), 13);
+    #endif
+ 
+
+    
+    
     return m;
 }
 
