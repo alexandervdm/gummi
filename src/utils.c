@@ -38,7 +38,9 @@
 #include <gtk/gtk.h>
 #include <unistd.h>
 
-#ifndef WIN32
+#ifdef WIN32
+    #include <windows.h>
+#else
     #include <sys/types.h>
     #include <sys/wait.h>
 #endif
@@ -253,8 +255,9 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         g_free (rot);
     }
 
-    #ifndef WIN32
-        // TODO: command is not available on win32 systems:
+    #ifdef WIN32 // TODO: check this
+        status = WaitForSingleObject(proc_pid, 0);
+    #else
         waitpid(proc_pid, &status, 0);
     #endif
 
