@@ -130,6 +130,8 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_runbibtex"));
     g->menu_runmakeindex =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_runmakeindex"));
+    g->bibcompile =
+        GTK_WIDGET (gtk_builder_get_object (builder, "bibcompile"));
 
     g->insens_widget_size = sizeof(insens_widgets_str) / sizeof(gchar*);
     g->insens_widgets = g_new0(GtkWidget*, g->insens_widget_size);
@@ -583,20 +585,22 @@ void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
+    
+    gtk_widget_set_sensitive (widget, FALSE);
     g_timeout_add (10, on_bibprogressbar_update, NULL);
 
     if (biblio_compile_bibliography (gummi->biblio, g_active_editor,
                 gummi->latex)) {
         statusbar_set_message (_("Compiling bibliography file..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _("bibliography compiled without errors"));
+                _("Bibliography compiled without errors"));
+        motion_force_compile (gummi->motion);
     } else {
-        statusbar_set_message (_("Error compiling bibliography file or none "
-                    "detected..."));
+        statusbar_set_message 
+        (_("Error compiling bibliography file or none detected..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _("error compiling bibliography file"));
+                _("Error compiling bibliography file"));
     }
-    motion_force_compile (gummi->motion);
 }
 
 G_MODULE_EXPORT
@@ -722,7 +726,11 @@ gboolean on_bibprogressbar_update (void* user) {
     gtk_adjustment_set_value
         (gummi->biblio->progressmon, gummi->biblio->progressval);
     gummi->biblio->progressval += 1.0;
-    return ! (gummi->biblio->progressval > 60);
+    if (gummi->biblio->progressval > 60) {
+        gtk_widget_set_sensitive (gui->bibcompile, TRUE);
+        return FALSE;
+    }
+    return TRUE;
 }
 
 gint check_for_save (GuEditor* editor) {

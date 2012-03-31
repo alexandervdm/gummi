@@ -91,6 +91,7 @@ struct _GummiGui {
     GtkWidget** insens_widgets;
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
+    GtkWidget *bibcompile;
     
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;
