@@ -256,7 +256,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     }
 
     #ifdef WIN32 // TODO: check this
-        status = WaitForSingleObject(proc_pid, 0);
+        status = WaitForSingleObject(proc_pid, INFINITE);
     #else
         waitpid(proc_pid, &status, 0);
     #endif
