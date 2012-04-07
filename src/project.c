@@ -199,7 +199,7 @@ GList* project_list_files (const gchar* content) {
 }
     
 gboolean project_load_files (const gchar* projfile, const gchar* content) {
-    
+    gboolean status = FALSE;
     gint rootpos, i;
     gchar* filename;
 
@@ -215,14 +215,15 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
                 // TODO: no direct calling this:
                 g_active_editor->projfile = g_strdup (projfile);
             }
+            status = TRUE;
         }
         if (i == 0) {
             rootpos = tabmanagergui_get_current_page ();
         }
     }
-    projectgui_set_rootfile (rootpos);
+    if (status == TRUE) projectgui_set_rootfile (rootpos);
     
-    return TRUE;
+    return status;
 }
 
 gchar* project_get_value (const gchar* content, const gchar* item) {
