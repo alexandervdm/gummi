@@ -65,6 +65,7 @@ void searchgui_main (GuSearchGui* gc) {
     gtk_entry_set_text (gc->replaceentry, gc->prev_replace? gc->prev_replace:"");
     gtk_widget_grab_focus (GTK_WIDGET (gc->searchentry));
     gtk_widget_show_all (GTK_WIDGET (gc->searchwindow));
+    slog_set_gui_parent (GTK_WINDOW (gc->searchwindow));
 }
 
 G_MODULE_EXPORT
@@ -101,6 +102,7 @@ gboolean on_button_searchwindow_close_clicked (GtkWidget* widget, void* user) {
     gui->searchgui->prev_replace = g_strdup (gtk_entry_get_text (
                 gui->searchgui->replaceentry));
     gtk_widget_hide (GTK_WIDGET (gui->searchgui->searchwindow));
+    slog_set_gui_parent (GTK_WINDOW (gui->mainwindow));
     return TRUE;
 }
 
