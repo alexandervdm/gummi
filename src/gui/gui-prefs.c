@@ -758,8 +758,7 @@ void on_combo_animated_scroll_changed (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
-{
+void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user) {
     gchar* id = NULL;
     gchar* name = NULL;
     GList* tab = gummi->tabmanager->tabs;

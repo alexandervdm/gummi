@@ -329,8 +329,7 @@ inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc) {
 }
 
 G_MODULE_EXPORT
-void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data)
-{
+void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data) {
     //L_F_DEBUG;
 
     if (!gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM(radioitem))) {
@@ -794,8 +793,7 @@ static void update_page_sizes(GuPreviewGui* pc) {
     update_fit_scale(pc);
 }
 
-void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout)
-{
+void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout) {
     //L_F_DEBUG;
 
     if (pageLayout == POPPLER_PAGE_LAYOUT_UNSET) {
@@ -1576,8 +1574,7 @@ void on_combo_sizes_changed (GtkWidget* widget, void* user) {
 
 }
 
-static void paint_page(cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y)
-{
+static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y) {
     if (page < 0 || page >= pc->n_pages) {
         return;
     }

@@ -324,8 +324,7 @@ void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     }
 }
 
-void gui_set_filename_display (GuTabContext* tc, gboolean title, gboolean label)
-{
+void gui_set_filename_display (GuTabContext* tc, gboolean title, gboolean label) {
     gchar* filetext = tabmanager_get_tabname (tc);
     
     if (label) tabmanagergui_update_label (tc->page, filetext);

@@ -320,8 +320,7 @@ gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
     return FALSE;
 }
 
-gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* e)
-{
+gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* e) {
     if (e->keyval != GDK_KEY_Tab && !sc->info)
         return FALSE;
 
@@ -493,8 +492,7 @@ gboolean snippet_info_goto_next_placeholder (GuSnippetInfo* info, GuEditor* ec) 
     return success;
 }
 
-gboolean snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec)
-{
+gboolean snippet_info_goto_prev_placeholder (GuSnippetInfo* info, GuEditor* ec) {
     GuSnippetExpandInfo* einfo = NULL;
     GtkTextIter start, end;
     info->current = g_list_previous (info->current);

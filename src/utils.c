@@ -195,8 +195,7 @@ gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
         return TRUE;
 }
 
-gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err)
-{
+gboolean utils_copy_file (const gchar* source, const gchar* dest, GError** err) {
     gchar* contents;
     gsize length;
 

@@ -117,8 +117,7 @@ void on_button_searchwindow_find_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
-void on_button_searchwindow_replace_next_clicked (GtkWidget* widget, void* user)
-{
+void on_button_searchwindow_replace_next_clicked (GtkWidget* widget, void* user) {
     editor_start_replace_next (g_active_editor,
             gtk_entry_get_text (gui->searchgui->searchentry),
             gtk_entry_get_text (gui->searchgui->replaceentry),

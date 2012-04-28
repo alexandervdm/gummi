@@ -721,8 +721,7 @@ static inline gdouble gdkcolor_luminance(GdkColor c) {
  *  be white or black, which has more contrast.
  */
 void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme, 
-                      gchar* styleName, gchar* defaultBG)
-{
+                      gchar* styleName, gchar* defaultBG) {
     GtkSourceStyle *style = NULL;
     
     gchar *bg = NULL;
