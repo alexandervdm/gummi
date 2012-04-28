@@ -2802,6 +2802,7 @@ active document to be saved. </property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="xpad">10</property>
+                                    <property name="ellipsize">start</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -2814,6 +2815,7 @@ active document to be saved. </property>
                                     <property name="can_focus">False</property>
                                     <property name="xalign">0</property>
                                     <property name="xpad">10</property>
+                                    <property name="ellipsize">start</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -3365,9 +3367,9 @@ bibliography database</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
                 <property name="secondary_icon_sensitive">True</property>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>

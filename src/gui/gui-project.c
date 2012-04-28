@@ -134,6 +134,12 @@ void projectgui_enable (GuProject* pr, GuProjectGui* prgui) {
     gtk_label_set_text (prgui->proj_path, projrootpath);
     gtk_label_set_text (prgui->proj_nroffiles, 
                         g_strdup_printf("%d", pr->nroffiles));
+    
+    // for visible information when window is shrinked, see #439 -A
+    gtk_widget_set_tooltip_text 
+                        (GTK_WIDGET (prgui->proj_name), projbasename);
+    gtk_widget_set_tooltip_text 
+                        (GTK_WIDGET (prgui->proj_path), projrootpath);
                         
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_addbutton), TRUE);
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), TRUE);
@@ -147,6 +153,11 @@ void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
     gtk_label_set_text (prgui->proj_name, "");
     gtk_label_set_text (prgui->proj_path, "");
     gtk_label_set_text (prgui->proj_nroffiles, "");
+
+    gtk_widget_set_tooltip_text 
+                        (GTK_WIDGET (prgui->proj_name), "");
+    gtk_widget_set_tooltip_text 
+                        (GTK_WIDGET (prgui->proj_path), "");
     
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_addbutton), FALSE);
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), FALSE);
