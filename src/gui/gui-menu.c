@@ -703,7 +703,9 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Wei-Ning Huang\n"
         "<aitjcize@gmail.com>",
         "Dion Timmermann",
-        "<dion.timmermann@tu-harburg.de>\n", 
+        "<dion.timmermann@tu-harburg.de>", 
+        "Robert Schroll",
+        "<rschroll@gmail.com>\n",
         "Former contributors:",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };

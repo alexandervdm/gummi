@@ -43,7 +43,8 @@
 #define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2012\n\n"\
                         "Alexander van der Mey\n"\
                         "Wei-Ning Huang\n"\
-                        "Dion Timmermann"
+                        "Dion Timmermann\n"\
+                        "Robert Schroll"
 #define PACKAGE_LICENSE \
 "Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
 "All Rights reserved.\n" \
