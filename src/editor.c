@@ -121,11 +121,17 @@ GuEditor* editor_new (GuMotion* mc) {
 
 void editor_destroy (GuEditor* ec) {
     gint i = 0;
-
-    for (i = 0; i < 2; ++i)
-        g_signal_handler_disconnect (ec->view, ec->sigid[i]);
-    for (i = 2; i < 5; ++i)
-        g_signal_handler_disconnect (ec->buffer, ec->sigid[i]);
+    
+    for (i = 0; i < 2; ++i) {
+        if (g_signal_handler_is_connected (ec->view, ec->sigid[i])) {
+            g_signal_handler_disconnect (ec->view, ec->sigid[i]);
+        }
+    }
+    for (i = 2; i < 5; ++i) {
+        if (g_signal_handler_is_connected (ec->buffer, ec->sigid[i])) {
+            g_signal_handler_disconnect (ec->buffer, ec->sigid[i]);
+        }
+    }
 
     editor_fileinfo_cleanup (ec);
     g_free(ec);

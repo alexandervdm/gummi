@@ -147,10 +147,10 @@ gchar* tabmanagergui_get_labeltext (GuTabPage* tp) {
 gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec) {
     
     gummi->tabmanager->active_tab->editor = newec;
-    editor_destroy (g_active_editor);
     
     gtk_container_remove (GTK_CONTAINER (tc->page->scrollw),
-                          GTK_WIDGET (gummi->tabmanager->active_editor->view));
+                          GTK_WIDGET (g_active_editor->view));
+    editor_destroy (g_active_editor);
     gtk_container_add (GTK_CONTAINER (tc->page->scrollw),
                        GTK_WIDGET (newec->view));
     gtk_widget_show (GTK_WIDGET(newec->view));
