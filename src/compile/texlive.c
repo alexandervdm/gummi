@@ -109,6 +109,12 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     gchar *dviname = g_strdup_printf("%s.dvi", g_path_get_basename (basename));
     gchar *psname = g_strdup_printf("%s.ps", g_path_get_basename (basename));
     
+    #ifdef WIN32
+    gchar *script = g_build_filename (LIBDIR, "latex_dvi.cmd", NULL);
+    #else
+    gchar *script = g_build_filename (LIBDIR, "latex_dvi.sh", NULL);
+    #endif
+    
     if (STR_EQU (method, "texpdf")) {
 
         texcmd = g_strdup_printf("%s %s %s \"%s\"", typesetter, 
@@ -116,18 +122,19 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
                                                 outdir, 
                                                 workfile);
     } else if (STR_EQU (method, "texdvipdf")) {
-        texcmd = g_strdup_printf(LIBDIR "/latex_dvi.sh pdf "
-                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
+        texcmd = g_strdup_printf("%s pdf "
+                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\"", script, 
                 flags, outdir, workfile, C_TMPDIR, dviname);
     } else {
-        texcmd = g_strdup_printf(LIBDIR "/latex_dvi.sh ps "
-                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"",
+        texcmd = g_strdup_printf("%s ps "
+                "\"%s\" \"%s\" \"%s\" \"%s\" \"%s\" \"%s\"", script, 
                 flags, outdir, workfile, C_TMPDIR, dviname, psname);
     }
     
+    g_free(script);
     g_free(dviname);
     g_free(psname);
-    
+
     return texcmd;
 }
 
