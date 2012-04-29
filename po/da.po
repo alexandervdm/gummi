@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 19:09+0100\n"
+"POT-Creation-Date: 2012-04-29 17:26+0200\n"
 "PO-Revision-Date: 2010-05-23 23:05+0100\n"
 "Last-Translator: Jack Olsen jackolsendk@gmail.com\n"
 "Language-Team: Jack Olsen jackolsendk@gmail.com\n"
@@ -339,7 +339,7 @@ msgstr ""
 msgid "Create new Project"
 msgstr "Opret et nyt dokument"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:575
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
 #, fuzzy
 msgid ""
 "This function requires the current\n"
@@ -405,7 +405,7 @@ msgstr "værktøjsknap3"
 
 #: ../data/ui/gummi.glade.h:103
 #, fuzzy
-msgid "         "
+msgid "  "
 msgstr "        "
 
 #: ../data/ui/gummi.glade.h:104
@@ -491,7 +491,7 @@ msgstr ""
 msgid "Filename:"
 msgstr "Filnavn:"
 
-#: ../data/ui/gummi.glade.h:125 ../src/gui/gui-main.c:632
+#: ../data/ui/gummi.glade.h:125 ../src/gui/gui-main.c:644
 msgid "none"
 msgstr "ingen"
 
@@ -499,7 +499,7 @@ msgstr "ingen"
 msgid "References:"
 msgstr "Referencer:"
 
-#: ../data/ui/gummi.glade.h:127 ../src/gui/gui-main.c:633
+#: ../data/ui/gummi.glade.h:127 ../src/gui/gui-main.c:645
 msgid "N/A"
 msgstr "N/A"
 
@@ -524,7 +524,7 @@ msgid ""
 "bibliography database"
 msgstr "Kompilerer bibliografi-filen"
 
-#: ../data/ui/gummi.glade.h:134 ../src/gui/gui-main.c:631
+#: ../data/ui/gummi.glade.h:134 ../src/gui/gui-main.c:643
 msgid "no bibliography file detected"
 msgstr "ingen bibliografi-fil fundet"
 
@@ -894,30 +894,9 @@ msgstr ""
 msgid "Reset all snippets"
 msgstr "_Nulstil til standardinstilling"
 
-#: ../src/iofunctions.c:130
-#, fuzzy, c-format
-msgid "Saving %s..."
-msgstr "Gem _som..."
-
-#: ../src/iofunctions.c:167
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-
-#: ../src/iofunctions.c:240
-msgid "Can not convert text to UTF-8!\n"
-msgstr ""
-
-#: ../src/gui/gui-import.c:189
+#: ../src/gui/gui-import.c:229
 #, c-format
 msgid "%s: No such file or directory\n"
-msgstr ""
-
-#: ../src/gui/gui-preview.c:908
-#, c-format
-msgid "of %d"
 msgstr ""
 
 #: ../src/gui/gui-infoscreen.c:117
@@ -957,6 +936,169 @@ msgid ""
 "is restarted.\n"
 msgstr ""
 
+#: ../src/gui/gui-main.c:368
+#, c-format
+msgid "Swap file exists for %s, do you want to recover from it?"
+msgstr ""
+
+#: ../src/gui/gui-main.c:420 ../src/latex.c:270
+msgid "The file already exists. Overwrite?"
+msgstr ""
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:524
+#, c-format
+msgid "Loading template ..."
+msgstr ""
+
+#: ../src/gui/gui-main.c:593
+#, fuzzy
+msgid "Compiling bibliography file..."
+msgstr "Kompilerer bibliografi-filen"
+
+#: ../src/gui/gui-main.c:595
+#, fuzzy
+msgid "Bibliography compiled without errors"
+msgstr "bibliografien kompilerede uden fejl"
+
+#: ../src/gui/gui-main.c:599
+#, fuzzy
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
+
+#: ../src/gui/gui-main.c:601
+#, fuzzy
+msgid "Error compiling bibliography file"
+msgstr "fejl ved kompilering af bibliografi-filen"
+
+#: ../src/gui/gui-main.c:634
+#, c-format
+msgid "%s loaded"
+msgstr ""
+
+#: ../src/gui/gui-main.c:740
+msgid "Do you want to save the changes you have made?"
+msgstr "Ønsker du at gemme dine ændringer?"
+
+#: ../src/gui/gui-main.c:758
+#, fuzzy
+msgid "Open LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:761
+msgid "Select an image to insert"
+msgstr ""
+
+#: ../src/gui/gui-main.c:762
+#, fuzzy
+msgid "Select bibliography file"
+msgstr "Kompilerer bibliografi-filen"
+
+#: ../src/gui/gui-main.c:795
+#, fuzzy
+msgid "Save LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:796
+#, fuzzy
+msgid "Save as LaTeX document"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:797
+msgid "Export to PDF"
+msgstr ""
+
+#: ../src/gui/gui-main.c:800
+#, fuzzy
+msgid "Create project"
+msgstr "Opret et nyt dokument"
+
+#: ../src/gui/gui-main.c:845
+#, fuzzy
+msgid "LaTeX files"
+msgstr "Åben en fil"
+
+#: ../src/gui/gui-main.c:850
+msgid "Text files"
+msgstr ""
+
+#. Only \insertgraphics uses this section now. Make sure
+#. * the patterns & mimes are correct before assigning it
+#. * for other functions
+#: ../src/gui/gui-main.c:866
+#, fuzzy
+msgid "Supported Image files"
+msgstr "Billede"
+
+#: ../src/gui/gui-main.c:881
+msgid "Bibtex files"
+msgstr ""
+
+#: ../src/gui/gui-main.c:887
+#, fuzzy
+msgid "Gummi project files"
+msgstr "Gummi Indstillinger"
+
+#: ../src/gui/gui-menu.c:184
+#, fuzzy, c-format
+msgid "Error loading recent file: %s"
+msgstr "Fejl ved indlæsning af nyere fil: "
+
+#: ../src/gui/gui-menu.c:412
+msgid "Succesfully removed build files.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:415
+msgid "Error removing build files.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:422
+msgid "Running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:425
+msgid "Error running Makeindex.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:449
+#, fuzzy
+msgid "Words in text"
+msgstr "Fremhævet tekst"
+
+#: ../src/gui/gui-menu.c:450
+msgid "Words in headers"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:451
+msgid "Words in float captions"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:452
+msgid "Number of headers"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:453
+msgid "Number of floats"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:454
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:455
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:590
+#, fuzzy
+msgid "This function requires an active document"
+msgstr "Denne funktion kræver en aktiv\n"
+
+#: ../src/gui/gui-preview.c:906
+#, c-format
+msgid "of %d"
+msgstr ""
+
 #: ../src/gui/gui-snippets.c:329
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
@@ -971,174 +1113,41 @@ msgstr "Opret et nyt dokument"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:154
-#, fuzzy, c-format
-msgid "Error loading recent file: %s"
-msgstr "Fejl ved indlæsning af nyere fil: "
-
-#: ../src/gui/gui-menu.c:382
-msgid "Succesfully removed build files.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:385
-msgid "Error removing build files.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:392
-msgid "Running Makeindex.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:395
-msgid "Error running Makeindex.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:419
-#, fuzzy
-msgid "Words in text"
-msgstr "Fremhævet tekst"
-
-#: ../src/gui/gui-menu.c:420
-msgid "Words in headers"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:421
-msgid "Words in float captions"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:422
-msgid "Number of headers"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:423
-msgid "Number of floats"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:424
-msgid "Number of math inlines"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:425
-msgid "Number of math displayed"
-msgstr ""
-
-#: ../src/gui/gui-menu.c:560
-#, fuzzy
-msgid "This function requires an active document"
-msgstr "Denne funktion kræver en aktiv\n"
-
-#: ../src/gui/gui-main.c:366
-#, c-format
-msgid "Swap file exists for %s, do you want to recover from it?"
-msgstr ""
-
-#: ../src/gui/gui-main.c:418 ../src/latex.c:270
-msgid "The file already exists. Overwrite?"
-msgstr ""
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c:522
-#, c-format
-msgid "Loading template ..."
-msgstr ""
-
-#: ../src/gui/gui-main.c:581
-#, fuzzy
-msgid "Compiling bibliography file..."
-msgstr "Kompilerer bibliografi-filen"
-
-#: ../src/gui/gui-main.c:583
-msgid "bibliography compiled without errors"
-msgstr "bibliografien kompilerede uden fejl"
-
-#: ../src/gui/gui-main.c:585
-#, fuzzy
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Fejl ved kompilering af bibliografi-filen eller ingen fundet..."
-
-#: ../src/gui/gui-main.c:588
-msgid "error compiling bibliography file"
-msgstr "fejl ved kompilering af bibliografi-filen"
-
-#: ../src/gui/gui-main.c:622
-#, c-format
-msgid "%s loaded"
-msgstr ""
-
-#: ../src/gui/gui-main.c:724
-msgid "Do you want to save the changes you have made?"
-msgstr "Ønsker du at gemme dine ændringer?"
-
-#: ../src/gui/gui-main.c:742
-#, fuzzy
-msgid "Open LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c:745
-msgid "Select an image to insert"
-msgstr ""
-
-#: ../src/gui/gui-main.c:746
-#, fuzzy
-msgid "Select bibliography file"
-msgstr "Kompilerer bibliografi-filen"
-
-#: ../src/gui/gui-main.c:779
-#, fuzzy
-msgid "Save LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c:780
-#, fuzzy
-msgid "Save as LaTeX document"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c:781
-msgid "Export to PDF"
-msgstr ""
-
-#: ../src/gui/gui-main.c:784
-#, fuzzy
-msgid "Create project"
-msgstr "Opret et nyt dokument"
-
-#: ../src/gui/gui-main.c:829
-#, fuzzy
-msgid "LaTeX files"
-msgstr "Åben en fil"
-
-#: ../src/gui/gui-main.c:834
-msgid "Text files"
-msgstr ""
-
-#. Only \insertgraphics uses this section now. Make sure
-#. * the patterns & mimes are correct before assigning it
-#. * for other functions
-#: ../src/gui/gui-main.c:850
-#, fuzzy
-msgid "Supported Image files"
-msgstr "Billede"
-
-#: ../src/gui/gui-main.c:865
-msgid "Bibtex files"
-msgstr ""
-
-#: ../src/gui/gui-main.c:871
-#, fuzzy
-msgid "Gummi project files"
-msgstr "Gummi Indstillinger"
-
-#: ../src/editor.c:566
+#: ../src/editor.c:573
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:573
+#: ../src/editor.c:580
 msgid "Bottom reached, search from top?"
 msgstr ""
 
-#: ../src/latex.c:278
+#: ../src/iofunctions.c:130
+#, fuzzy, c-format
+msgid "Saving %s..."
+msgstr "Gem _som..."
+
+#: ../src/iofunctions.c:166
+#, c-format
 msgid ""
-"Unable to export PDF..\n"
-"Document contains errors.\n"
+"%s\n"
+"Please try again later."
+msgstr ""
+
+#: ../src/iofunctions.c:239
+msgid "Can not convert text to UTF-8!\n"
+msgstr ""
+
+#: ../src/latex.c:277
+#, c-format
+msgid ""
+"Unable to export PDF file.\n"
+"\n"
+"%s"
+msgstr ""
+
+#: ../src/tabmanager.c:73
+#, c-format
+msgid "Unsaved Document %d"
 msgstr ""
 
 #: ../src/update.c:114
@@ -1158,7 +1167,7 @@ msgstr ""
 msgid "Update Check"
 msgstr "Opdateringskontrol"
 
-#: ../src/utils.c:120
+#: ../src/utils.c:122
 #, c-format
 msgid ""
 "%s has encountered a serious error and will require a restart. Your working "
@@ -1166,15 +1175,14 @@ msgid ""
 "http://dev.midnightcoding.org"
 msgstr ""
 
-#: ../src/utils.c:166
+#: ../src/utils.c:168
 #, fuzzy
 msgid "Confirmation"
 msgstr "Billedtekst:"
 
-#: ../src/tabmanager.c:73
-#, c-format
-msgid "Unsaved Document %d"
-msgstr ""
+#, fuzzy
+#~ msgid "         "
+#~ msgstr "        "
 
 #~ msgid "Bold text"
 #~ msgstr "Fremhævet tekst"
@@ -1203,10 +1211,6 @@ msgstr ""
 
 #~ msgid "Underline text"
 #~ msgstr "Understreget tekst"
-
-#, fuzzy
-#~ msgid "  "
-#~ msgstr "        "
 
 #, fuzzy
 #~ msgid "Include document"

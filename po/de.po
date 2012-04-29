@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 19:09+0100\n"
+"POT-Creation-Date: 2012-04-29 17:26+0200\n"
 "PO-Revision-Date: 2011-11-07 21:59+0100\n"
 "Last-Translator: Max Bruckner <max.w8chtel@googlemail.com>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -346,7 +346,7 @@ msgstr "Projekt"
 msgid "Create new Project"
 msgstr "Neues Projekt"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:575
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -412,8 +412,8 @@ msgid "toolbutton3"
 msgstr "werkzeugknopf3"
 
 #: ../data/ui/gummi.glade.h:103
-msgid "         "
-msgstr "         "
+msgid "  "
+msgstr "  "
 
 #: ../data/ui/gummi.glade.h:104
 msgid "Image"
@@ -500,7 +500,7 @@ msgstr "Projekt"
 msgid "Filename:"
 msgstr "Dateiname:"
 
-#: ../data/ui/gummi.glade.h:125 ../src/gui/gui-main.c:632
+#: ../data/ui/gummi.glade.h:125 ../src/gui/gui-main.c:644
 msgid "none"
 msgstr "Keine"
 
@@ -509,7 +509,7 @@ msgstr "Keine"
 msgid "References:"
 msgstr "Referenzen:"
 
-#: ../data/ui/gummi.glade.h:127 ../src/gui/gui-main.c:633
+#: ../data/ui/gummi.glade.h:127 ../src/gui/gui-main.c:645
 msgid "N/A"
 msgstr "N/V"
 
@@ -538,7 +538,7 @@ msgstr ""
 "Kompiliere aktive \n"
 "Bibliografie-Datenbank"
 
-#: ../data/ui/gummi.glade.h:134 ../src/gui/gui-main.c:631
+#: ../data/ui/gummi.glade.h:134 ../src/gui/gui-main.c:643
 msgid "no bibliography file detected"
 msgstr "Keine Bibliografiedatei gefunden"
 
@@ -897,33 +897,10 @@ msgstr "Zu_rücksetzen"
 msgid "Reset all snippets"
 msgstr "Alle Schnipsel zurücksetzen"
 
-#: ../src/iofunctions.c:130
-#, c-format
-msgid "Saving %s..."
-msgstr "Speichern %s..."
-
-#: ../src/iofunctions.c:167
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-"%s\n"
-"Bitte versuchen Sie es später erneut."
-
-#: ../src/iofunctions.c:240
-msgid "Can not convert text to UTF-8!\n"
-msgstr "Text kann nicht nach UTF-8 konvertiert werden!\n"
-
-#: ../src/gui/gui-import.c:189
+#: ../src/gui/gui-import.c:229
 #, c-format
 msgid "%s: No such file or directory\n"
 msgstr "%s: Datei oder Verzeichnis nicht gefunden\n"
-
-#: ../src/gui/gui-preview.c:908
-#, c-format
-msgid "of %d"
-msgstr "von %d"
 
 #: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
@@ -975,6 +952,165 @@ msgstr ""
 "Die Live-Vorschau funktioniert erst wieder nach einem Neustart\n"
 "von Gummi.\n"
 
+#: ../src/gui/gui-main.c:368
+#, c-format
+msgid "Swap file exists for %s, do you want to recover from it?"
+msgstr ""
+
+#: ../src/gui/gui-main.c:420 ../src/latex.c:270
+msgid "The file already exists. Overwrite?"
+msgstr "Die Datei existiert bereits. Überschreiben?"
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:524
+#, c-format
+msgid "Loading template ..."
+msgstr "Lade Vorgabe ..."
+
+#: ../src/gui/gui-main.c:593
+msgid "Compiling bibliography file..."
+msgstr "Kompiliere Bibliografiedatei.."
+
+#: ../src/gui/gui-main.c:595
+#, fuzzy
+msgid "Bibliography compiled without errors"
+msgstr "Bibliografie ohne Fehler kompiliert"
+
+#: ../src/gui/gui-main.c:599
+msgid "Error compiling bibliography file or none detected..."
+msgstr "Fehler beim Kompilieren der Bibliografiedatei oder keine gefunden..."
+
+#: ../src/gui/gui-main.c:601
+#, fuzzy
+msgid "Error compiling bibliography file"
+msgstr "Fehler beim Kompilieren der Bibliografiedatei"
+
+#: ../src/gui/gui-main.c:634
+#, c-format
+msgid "%s loaded"
+msgstr "%s geladen"
+
+#: ../src/gui/gui-main.c:740
+msgid "Do you want to save the changes you have made?"
+msgstr "Sollen die durchgeführten Änderungen gespeichert werden?"
+
+#: ../src/gui/gui-main.c:758
+msgid "Open LaTeX document"
+msgstr "LaTeX-Dokument öffnen"
+
+#: ../src/gui/gui-main.c:761
+msgid "Select an image to insert"
+msgstr "Bild auswählen zum Einfügen"
+
+#: ../src/gui/gui-main.c:762
+msgid "Select bibliography file"
+msgstr "Bibliografiedatei auswählen"
+
+#: ../src/gui/gui-main.c:795
+msgid "Save LaTeX document"
+msgstr "LaTeX Dokument speichern"
+
+#: ../src/gui/gui-main.c:796
+msgid "Save as LaTeX document"
+msgstr "Als LaTeX Dokument speichern"
+
+#: ../src/gui/gui-main.c:797
+msgid "Export to PDF"
+msgstr "Als PDF exportieren"
+
+#: ../src/gui/gui-main.c:800
+#, fuzzy
+msgid "Create project"
+msgstr "Neues Projekt"
+
+#: ../src/gui/gui-main.c:845
+msgid "LaTeX files"
+msgstr "LaTeX-Dateien"
+
+#: ../src/gui/gui-main.c:850
+msgid "Text files"
+msgstr "Text-Dateien"
+
+#. Only \insertgraphics uses this section now. Make sure
+#. * the patterns & mimes are correct before assigning it
+#. * for other functions
+#: ../src/gui/gui-main.c:866
+#, fuzzy
+msgid "Supported Image files"
+msgstr "Bilddateien"
+
+#: ../src/gui/gui-main.c:881
+msgid "Bibtex files"
+msgstr "Bibtex-Dateien"
+
+#: ../src/gui/gui-main.c:887
+msgid "Gummi project files"
+msgstr "Gummi Projektdateien"
+
+#: ../src/gui/gui-menu.c:184
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "Fehler beim Laden der aktuellen Datei: %s"
+
+#: ../src/gui/gui-menu.c:412
+msgid "Succesfully removed build files.."
+msgstr ""
+
+#: ../src/gui/gui-menu.c:415
+#, fuzzy
+msgid "Error removing build files.."
+msgstr "Fehler beim ausführen von Makeindex.."
+
+#: ../src/gui/gui-menu.c:422
+msgid "Running Makeindex.."
+msgstr "Starte Makeindex.."
+
+#: ../src/gui/gui-menu.c:425
+msgid "Error running Makeindex.."
+msgstr "Fehler beim ausführen von Makeindex.."
+
+#: ../src/gui/gui-menu.c:449
+msgid "Words in text"
+msgstr "Wörter im Text"
+
+#: ../src/gui/gui-menu.c:450
+msgid "Words in headers"
+msgstr "Wörter in Kopfzeilen"
+
+#: ../src/gui/gui-menu.c:451
+msgid "Words in float captions"
+msgstr "Wörter in Beschriftungen von Gleitumgebungen"
+
+#: ../src/gui/gui-menu.c:452
+msgid "Number of headers"
+msgstr "Anzahl Kopfzeilen"
+
+#: ../src/gui/gui-menu.c:453
+msgid "Number of floats"
+msgstr "Anzahl Gleitobjekte"
+
+#: ../src/gui/gui-menu.c:454
+#, fuzzy
+msgid "Number of math inlines"
+msgstr "Anzahl von Mathe \"inlines\""
+
+#: ../src/gui/gui-menu.c:455
+#, fuzzy
+msgid "Number of math displayed"
+msgstr "Anzahl von Mathe \"displayed\""
+
+#: ../src/gui/gui-menu.c:590
+#, fuzzy
+msgid "This function requires an active document"
+msgstr ""
+"Um diese Funktion nutzen zu können muss\n"
+"das aktive Dokument gespeichert werden. "
+
+#: ../src/gui/gui-preview.c:906
+#, c-format
+msgid "of %d"
+msgstr "von %d"
+
 #: ../src/gui/gui-snippets.c:329
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
@@ -990,173 +1126,46 @@ msgstr "Neue Tastenkombination drücken"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Neue Tastenkombination drücken, oder mit der Rücktaste löschen"
 
-#: ../src/gui/gui-menu.c:154
-#, c-format
-msgid "Error loading recent file: %s"
-msgstr "Fehler beim Laden der aktuellen Datei: %s"
-
-#: ../src/gui/gui-menu.c:382
-msgid "Succesfully removed build files.."
-msgstr ""
-
-#: ../src/gui/gui-menu.c:385
-#, fuzzy
-msgid "Error removing build files.."
-msgstr "Fehler beim ausführen von Makeindex.."
-
-#: ../src/gui/gui-menu.c:392
-msgid "Running Makeindex.."
-msgstr "Starte Makeindex.."
-
-#: ../src/gui/gui-menu.c:395
-msgid "Error running Makeindex.."
-msgstr "Fehler beim ausführen von Makeindex.."
-
-#: ../src/gui/gui-menu.c:419
-msgid "Words in text"
-msgstr "Wörter im Text"
-
-#: ../src/gui/gui-menu.c:420
-msgid "Words in headers"
-msgstr "Wörter in Kopfzeilen"
-
-#: ../src/gui/gui-menu.c:421
-msgid "Words in float captions"
-msgstr "Wörter in Beschriftungen von Gleitumgebungen"
-
-#: ../src/gui/gui-menu.c:422
-msgid "Number of headers"
-msgstr "Anzahl Kopfzeilen"
-
-#: ../src/gui/gui-menu.c:423
-msgid "Number of floats"
-msgstr "Anzahl Gleitobjekte"
-
-#: ../src/gui/gui-menu.c:424
-#, fuzzy
-msgid "Number of math inlines"
-msgstr "Anzahl von Mathe \"inlines\""
-
-#: ../src/gui/gui-menu.c:425
-#, fuzzy
-msgid "Number of math displayed"
-msgstr "Anzahl von Mathe \"displayed\""
-
-#: ../src/gui/gui-menu.c:560
-#, fuzzy
-msgid "This function requires an active document"
-msgstr ""
-"Um diese Funktion nutzen zu können muss\n"
-"das aktive Dokument gespeichert werden. "
-
-#: ../src/gui/gui-main.c:366
-#, c-format
-msgid "Swap file exists for %s, do you want to recover from it?"
-msgstr ""
-
-#: ../src/gui/gui-main.c:418 ../src/latex.c:270
-msgid "The file already exists. Overwrite?"
-msgstr "Die Datei existiert bereits. Überschreiben?"
-
-#. add Loading message to status bar
-#: ../src/gui/gui-main.c:522
-#, c-format
-msgid "Loading template ..."
-msgstr "Lade Vorgabe ..."
-
-#: ../src/gui/gui-main.c:581
-msgid "Compiling bibliography file..."
-msgstr "Kompiliere Bibliografiedatei.."
-
-#: ../src/gui/gui-main.c:583
-msgid "bibliography compiled without errors"
-msgstr "Bibliografie ohne Fehler kompiliert"
-
-#: ../src/gui/gui-main.c:585
-msgid "Error compiling bibliography file or none detected..."
-msgstr "Fehler beim Kompilieren der Bibliografiedatei oder keine gefunden..."
-
-#: ../src/gui/gui-main.c:588
-msgid "error compiling bibliography file"
-msgstr "Fehler beim Kompilieren der Bibliografiedatei"
-
-#: ../src/gui/gui-main.c:622
-#, c-format
-msgid "%s loaded"
-msgstr "%s geladen"
-
-#: ../src/gui/gui-main.c:724
-msgid "Do you want to save the changes you have made?"
-msgstr "Sollen die durchgeführten Änderungen gespeichert werden?"
-
-#: ../src/gui/gui-main.c:742
-msgid "Open LaTeX document"
-msgstr "LaTeX-Dokument öffnen"
-
-#: ../src/gui/gui-main.c:745
-msgid "Select an image to insert"
-msgstr "Bild auswählen zum Einfügen"
-
-#: ../src/gui/gui-main.c:746
-msgid "Select bibliography file"
-msgstr "Bibliografiedatei auswählen"
-
-#: ../src/gui/gui-main.c:779
-msgid "Save LaTeX document"
-msgstr "LaTeX Dokument speichern"
-
-#: ../src/gui/gui-main.c:780
-msgid "Save as LaTeX document"
-msgstr "Als LaTeX Dokument speichern"
-
-#: ../src/gui/gui-main.c:781
-msgid "Export to PDF"
-msgstr "Als PDF exportieren"
-
-#: ../src/gui/gui-main.c:784
-#, fuzzy
-msgid "Create project"
-msgstr "Neues Projekt"
-
-#: ../src/gui/gui-main.c:829
-msgid "LaTeX files"
-msgstr "LaTeX-Dateien"
-
-#: ../src/gui/gui-main.c:834
-msgid "Text files"
-msgstr "Text-Dateien"
-
-#. Only \insertgraphics uses this section now. Make sure
-#. * the patterns & mimes are correct before assigning it
-#. * for other functions
-#: ../src/gui/gui-main.c:850
-#, fuzzy
-msgid "Supported Image files"
-msgstr "Bilddateien"
-
-#: ../src/gui/gui-main.c:865
-msgid "Bibtex files"
-msgstr "Bibtex-Dateien"
-
-#: ../src/gui/gui-main.c:871
-msgid "Gummi project files"
-msgstr "Gummi Projektdateien"
-
-#: ../src/editor.c:566
+#: ../src/editor.c:573
 msgid "Top reached, search from bottom?"
 msgstr "Oben angekommen, Suche von unten beginnen?"
 
-#: ../src/editor.c:573
+#: ../src/editor.c:580
 msgid "Bottom reached, search from top?"
 msgstr "Unten angekommen, Suche von oben beginnen?"
 
-#: ../src/latex.c:278
+#: ../src/iofunctions.c:130
+#, c-format
+msgid "Saving %s..."
+msgstr "Speichern %s..."
+
+#: ../src/iofunctions.c:166
+#, c-format
 msgid ""
-"Unable to export PDF..\n"
-"Document contains errors.\n"
+"%s\n"
+"Please try again later."
+msgstr ""
+"%s\n"
+"Bitte versuchen Sie es später erneut."
+
+#: ../src/iofunctions.c:239
+msgid "Can not convert text to UTF-8!\n"
+msgstr "Text kann nicht nach UTF-8 konvertiert werden!\n"
+
+#: ../src/latex.c:277
+#, fuzzy, c-format
+msgid ""
+"Unable to export PDF file.\n"
+"\n"
+"%s"
 msgstr ""
 "Kann nicht als PDF exportiert werden..\n"
 "Dokument enthält Fehler.\n"
+
+#: ../src/tabmanager.c:73
+#, c-format
+msgid "Unsaved Document %d"
+msgstr "Ungespeichertes Dokument %d"
 
 #: ../src/update.c:114
 #, c-format
@@ -1177,7 +1186,7 @@ msgstr ""
 msgid "Update Check"
 msgstr "Aktualisierungsüberprüfung"
 
-#: ../src/utils.c:120
+#: ../src/utils.c:122
 #, c-format
 msgid ""
 "%s has encountered a serious error and will require a restart. Your working "
@@ -1188,14 +1197,12 @@ msgstr ""
 "Arbeitsdaten werden gespeichert, wenn das Dokument neu eingelesen wird. "
 "Fehlerberichte bitte an: http://dev.midnightcoding.org"
 
-#: ../src/utils.c:166
+#: ../src/utils.c:168
 msgid "Confirmation"
 msgstr "Betätigung"
 
-#: ../src/tabmanager.c:73
-#, c-format
-msgid "Unsaved Document %d"
-msgstr "Ungespeichertes Dokument %d"
+#~ msgid "         "
+#~ msgstr "         "
 
 #~ msgid "Bold text"
 #~ msgstr "Fett"
@@ -1227,9 +1234,6 @@ msgstr "Ungespeichertes Dokument %d"
 
 #~ msgid "Underline text"
 #~ msgstr "unterstrichen"
-
-#~ msgid "  "
-#~ msgstr "  "
 
 #~ msgid "Hello svn user!"
 #~ msgstr "Hallo SVN Benutzer!"
