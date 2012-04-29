@@ -45,17 +45,10 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuImportGui* i = g_new0 (GuImportGui, 1);
-    i->box_image =
-        GTK_HBOX (gtk_builder_get_object (builder, "box_image"));
-    i->box_table =
-        GTK_HBOX (gtk_builder_get_object (builder, "box_table"));
-    i->box_matrix =
-        GTK_HBOX (gtk_builder_get_object (builder, "box_matrix"));
-    i->box_biblio =
-        GTK_HBOX (gtk_builder_get_object (builder, "box_biblio"));
-
-    i->import_tabs =
-        GTK_NOTEBOOK (gtk_builder_get_object (builder, "import_tabs"));
+    
+    i->import_panel =
+        GTK_HBOX (gtk_builder_get_object (builder, "import_panel"));
+        
     i->image_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_image"));
     i->table_pane =
@@ -102,6 +95,7 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     return i;
 }
 
+/*
 G_MODULE_EXPORT
 void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
         guint page_num, void* user) {
@@ -109,7 +103,7 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
     list = gtk_container_get_children (
             GTK_CONTAINER (g_importgui->box_image));
             
-    /* TODO: is this really necessary? */
+
     while (list) {
         gtk_container_remove (GTK_CONTAINER (g_importgui->box_image),
                 GTK_WIDGET (list->data));
@@ -155,6 +149,52 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
             break;
     }
 }
+*/
+
+void importgui_remove_all_panels () {
+    GList* list = NULL;
+    
+    list = gtk_container_get_children (
+            GTK_CONTAINER (g_importgui->import_panel));
+    while (list) {
+        gtk_container_remove (GTK_CONTAINER (g_importgui->import_panel),
+                GTK_WIDGET (list->data));
+        list = list->next;
+    }
+}
+
+G_MODULE_EXPORT
+void on_imp_panel_image_clicked (GtkWidget* widget, void* user) {
+    importgui_remove_all_panels ();
+    gtk_container_add (GTK_CONTAINER (g_importgui->import_panel),
+                    GTK_WIDGET (g_importgui->image_pane));
+}
+
+G_MODULE_EXPORT
+void on_imp_panel_table_clicked (GtkWidget* widget, void* user) {
+    importgui_remove_all_panels ();
+    gtk_container_add (GTK_CONTAINER (g_importgui->import_panel),
+                    GTK_WIDGET (g_importgui->table_pane));
+}
+
+G_MODULE_EXPORT
+void on_imp_panel_matrix_clicked (GtkWidget* widget, void* user) {
+    importgui_remove_all_panels ();
+    gtk_container_add (GTK_CONTAINER (g_importgui->import_panel),
+                    GTK_WIDGET (g_importgui->matrix_pane));
+}
+
+G_MODULE_EXPORT
+void on_imp_panel_biblio_clicked (GtkWidget* widget, void* user) {
+    importgui_remove_all_panels ();
+    gtk_container_add (GTK_CONTAINER (g_importgui->import_panel),
+                    GTK_WIDGET (g_importgui->biblio_pane));
+}
+
+G_MODULE_EXPORT
+void on_imp_minimize_clicked (GtkWidget* widget, void* user) {
+    importgui_remove_all_panels ();
+}
 
 G_MODULE_EXPORT
 void on_import_table_apply_clicked (GtkWidget* widget, void* user) {
@@ -170,7 +210,7 @@ void on_import_table_apply_clicked (GtkWidget* widget, void* user) {
     gtk_text_buffer_insert (g_e_buffer, &current, text, strlen (text));
     gtk_text_buffer_end_user_action (g_e_buffer);
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
-    gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
+    importgui_remove_all_panels ();
 }
 
 G_MODULE_EXPORT
@@ -201,8 +241,7 @@ void on_import_image_apply_clicked (GtkWidget* widget, void* user) {
             importer_imagegui_set_sensitive ("", FALSE);
         }
     }
-    gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
-
+    importgui_remove_all_panels ();
     g_free (relative_path);
     g_free (root_path);
 }
@@ -221,7 +260,7 @@ void on_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     gtk_text_buffer_insert (g_e_buffer, &current, text, strlen (text));
     gtk_text_buffer_end_user_action (g_e_buffer);
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
-    gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
+    importgui_remove_all_panels ();
 }
 
 G_MODULE_EXPORT
@@ -244,7 +283,7 @@ void on_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
         g_free (basename);
         gtk_entry_set_text (g_importgui->biblio_file, "");
     }
-    gtk_notebook_set_current_page (g_importgui->import_tabs, 0);
+    importgui_remove_all_panels ();
 }
 
 G_MODULE_EXPORT

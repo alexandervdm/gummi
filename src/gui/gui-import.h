@@ -39,12 +39,8 @@
 typedef struct _GuImportGui GuImportGui;
 
 struct _GuImportGui {
-    GtkHBox* box_image;
-    GtkHBox* box_table;
-    GtkHBox* box_matrix;
-    GtkHBox* box_biblio;
+    GtkHBox* import_panel;
 
-    GtkNotebook* import_tabs;
     GtkViewport* image_pane;
     GtkViewport* table_pane;
     GtkViewport* matrix_pane;
