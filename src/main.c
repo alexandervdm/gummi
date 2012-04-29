@@ -82,6 +82,13 @@ int main (int argc, char *argv[]) {
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (DATADIR, "ui", "gummi.glade", NULL);
+    
+    // exit program when gummi.glade can not be located:
+    if (!g_file_test (ui, G_FILE_TEST_EXISTS)) {
+        printf("Could not locate Glade interface file at:\n%s\n", ui);
+        return 0;
+    }
+    
     gtk_builder_add_from_file (builder, ui, &ui_error);
     if (ui_error) {
         g_error ("%s\n", ui_error->message);
