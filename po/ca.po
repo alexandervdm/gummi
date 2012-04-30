@@ -532,7 +532,7 @@ msgstr "no s'ha detectat cap fitxer de bibliografia"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Títol"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"

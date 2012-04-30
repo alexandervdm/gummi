@@ -379,11 +379,11 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:95
 msgid "Open"
-msgstr ""
+msgstr "افتح"
 
 #: ../data/ui/gummi.glade.h:96
 msgid "Save"
-msgstr ""
+msgstr "احفظ"
 
 #: ../data/ui/gummi.glade.h:97
 msgid "toolbutton5"
@@ -416,11 +416,11 @@ msgstr "   "
 
 #: ../data/ui/gummi.glade.h:104
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 #: ../data/ui/gummi.glade.h:105
 msgid "Table"
-msgstr ""
+msgstr "جدول"
 
 #: ../data/ui/gummi.glade.h:106
 msgid "Matrix"
@@ -535,7 +535,7 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
@@ -551,7 +551,7 @@ msgstr ":"
 
 #: ../data/ui/gummi.glade.h:139
 msgid "Find"
-msgstr ""
+msgstr "ابحث"
 
 #: ../data/ui/gummi.glade.h:140
 msgid "Search for:"
@@ -666,7 +666,7 @@ msgstr "  "
 
 #: ../data/ui/prefs.glade.h:16
 msgid "View"
-msgstr ""
+msgstr "اعرض"
 
 #: ../data/ui/prefs.glade.h:17
 msgid "Tab stops"
@@ -690,7 +690,7 @@ msgstr "  "
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "قصاصات"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -710,7 +710,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:27
 msgid "Editor"
-msgstr ""
+msgstr "المحرر"
 
 #: ../data/ui/prefs.glade.h:28
 msgid "Editor font"
@@ -864,7 +864,7 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Activation"
-msgstr ""
+msgstr "تنشيط"
 
 #: ../data/ui/snippets.glade.h:9
 msgid "    "

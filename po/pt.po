@@ -533,7 +533,7 @@ msgstr "ficheiro de bibliografia não encontrado"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"

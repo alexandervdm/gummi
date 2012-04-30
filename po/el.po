@@ -531,7 +531,7 @@ msgstr "Δεν βρέθηκε αρχείο βιβλιογραφίας"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Τίτλος"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
@@ -684,7 +684,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:20
 msgid "Automatic Indentation"
-msgstr ""
+msgstr "Αυτόματη εσοχή"
 
 #: ../data/ui/prefs.glade.h:21
 msgid "_Enable automatic indentation"
@@ -692,7 +692,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "Snippets"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -722,7 +722,7 @@ msgstr "Γραμματοσειρά Επεξεργαστή:"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Color Scheme"
-msgstr ""
+msgstr "Χρωματικό σχήμα"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Font & Colors"
@@ -840,7 +840,7 @@ msgstr "_Επαναφορά προεπιλογών"
 
 #: ../data/ui/snippets.glade.h:1
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Διαχειριστής Snippets"
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Snippets:"
@@ -871,7 +871,7 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Activation"
-msgstr ""
+msgstr "Ενεργοποίηση"
 
 #: ../data/ui/snippets.glade.h:9
 #, fuzzy

@@ -540,7 +540,7 @@ msgstr "nenalezen žádný soubor s bibliografií"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Nadpis"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"

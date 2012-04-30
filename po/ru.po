@@ -533,7 +533,7 @@ msgstr "Файл библиографии отсутствует"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Заголовок"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:20
 msgid "Automatic Indentation"
-msgstr ""
+msgstr "Автоматический отступ"
 
 #: ../data/ui/prefs.glade.h:21
 msgid "_Enable automatic indentation"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "Фрагменты текста"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -724,7 +724,7 @@ msgstr "Редактор шрифта:"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Color Scheme"
-msgstr ""
+msgstr "Цветовая схема"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Font & Colors"
@@ -842,7 +842,7 @@ msgstr "_Сбросить по умолчанию"
 
 #: ../data/ui/snippets.glade.h:1
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Обозреватель фрагментов"
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Snippets:"
@@ -873,7 +873,7 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Activation"
-msgstr ""
+msgstr "Активация"
 
 #: ../data/ui/snippets.glade.h:9
 #, fuzzy

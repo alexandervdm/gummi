@@ -538,7 +538,7 @@ msgstr "nessuna bibliografia trovata"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
@@ -700,7 +700,7 @@ msgstr "Abilita l'indentazione (_a)utomatica"
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "Snippet"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -730,7 +730,7 @@ msgstr "Caratteri dell'editor:"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schema colore"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Font & Colors"
@@ -848,7 +848,7 @@ msgstr "(_R)ipristina predefiniti"
 
 #: ../data/ui/snippets.glade.h:1
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Gestore snippet"
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Snippets:"
@@ -879,7 +879,7 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Activation"
-msgstr ""
+msgstr "Attivazione"
 
 #: ../data/ui/snippets.glade.h:9
 #, fuzzy

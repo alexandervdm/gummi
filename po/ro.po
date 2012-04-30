@@ -538,7 +538,7 @@ msgstr "nu a fost detectat niciun fisier de bibliografie"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Titlu"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
@@ -690,7 +690,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:20
 msgid "Automatic Indentation"
-msgstr ""
+msgstr "Indentare automată"
 
 #: ../data/ui/prefs.glade.h:21
 msgid "_Enable automatic indentation"
@@ -698,7 +698,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "Fragmente de text"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -728,7 +728,7 @@ msgstr "Font Editor:"
 
 #: ../data/ui/prefs.glade.h:29
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schemă de culori"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Font & Colors"
@@ -846,7 +846,7 @@ msgstr "_Reseteaza setarile standard"
 
 #: ../data/ui/snippets.glade.h:1
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Administrator fragmente de text"
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Snippets:"
@@ -877,7 +877,7 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Activation"
-msgstr ""
+msgstr "Activare"
 
 #: ../data/ui/snippets.glade.h:9
 #, fuzzy

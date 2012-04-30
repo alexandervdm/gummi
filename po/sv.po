@@ -536,7 +536,7 @@ msgstr "Ingen bibliografifil funnen"
 
 #: ../data/ui/gummi.glade.h:135
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"

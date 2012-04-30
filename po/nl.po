@@ -701,7 +701,7 @@ msgstr ""
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
-msgstr ""
+msgstr "Knipsels"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
@@ -850,7 +850,7 @@ msgstr "Herstel standaarden"
 
 #: ../data/ui/snippets.glade.h:1
 msgid "Snippets Manager"
-msgstr ""
+msgstr "Knipselbeheer"
 
 #: ../data/ui/snippets.glade.h:2
 msgid "Snippets:"
@@ -1118,7 +1118,7 @@ msgstr ""
 
 #: ../src/gui/gui-snippets.c:343
 msgid "Type a new shortcut"
-msgstr ""
+msgstr "Typ een nieuwe sneltoets"
 
 #: ../src/gui/gui-snippets.c:346
 msgid "Type a new shortcut, or press Backspace to clear"
