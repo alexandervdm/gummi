@@ -733,11 +733,28 @@ gboolean on_bibprogressbar_update (void* user) {
 }
 
 gint check_for_save (GuEditor* editor) {
+    GtkWidget* dialog;
     gint ret = 0;
-
-    if (editor && editor_buffer_changed (editor))
-        ret = utils_yes_no_dialog (
-                _("Do you want to save the changes you have made?"));
+    
+    if (editor && editor_buffer_changed (editor)){
+        dialog = gtk_message_dialog_new (gui->mainwindow,
+                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                     GTK_MESSAGE_QUESTION,
+                     GTK_BUTTONS_NONE,
+                     _("Do you want to save the changes to %s?"),
+                     editor->filename != NULL ? g_path_get_basename (editor->filename) : _("this document"));
+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                GTK_STOCK_DISCARD, GTK_RESPONSE_NO,
+                                GTK_STOCK_SAVE, GTK_RESPONSE_YES,
+                                NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+        
+        gtk_window_set_title (GTK_WINDOW (dialog), _("Unsaved Changes"));
+        ret = gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_widget_destroy (dialog);
+    }
+    
     return ret;
 }
 
