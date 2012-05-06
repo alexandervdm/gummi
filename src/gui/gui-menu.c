@@ -230,9 +230,6 @@ gboolean on_menu_quit_activate (void) {
     int i = 0;
     gint length = g_list_length (gummi->tabmanager->tabs);
 
-    /* Stop compile thread */
-    if (length > 0) motion_stop_compile_thread (gummi->motion);
-
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
         tabmanager_set_active_tab (i);
@@ -243,6 +240,9 @@ gboolean on_menu_quit_activate (void) {
         else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
             return TRUE;
     }
+
+    /* Stop compile thread */
+    if (length > 0) motion_stop_compile_thread (gummi->motion);
 
     gtk_window_get_size (gui->mainwindow, &width, &height);
     gtk_window_get_position (gui->mainwindow, &wx, &wy);
