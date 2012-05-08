@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-29 17:26+0200\n"
+"POT-Creation-Date: 2012-05-08 19:14+0200\n"
 "PO-Revision-Date: 2011-11-07 21:59+0100\n"
 "Last-Translator: Max Bruckner <max.w8chtel@googlemail.com>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -848,54 +848,64 @@ msgid "Snippets Manager"
 msgstr "Schnipsel Manager"
 
 #: ../data/ui/snippets.glade.h:2
+msgid "_Reset"
+msgstr "Zu_rücksetzen"
+
+#: ../data/ui/snippets.glade.h:3
+msgid "Reset all snippets"
+msgstr "Alle Schnipsel zurücksetzen"
+
+#: ../data/ui/snippets.glade.h:4
 msgid "Snippets:"
 msgstr "Schnipsel:"
 
-#: ../data/ui/snippets.glade.h:3
+#: ../data/ui/snippets.glade.h:5
+#, fuzzy
+msgid "Create a new snippet"
+msgstr "Erstelle neues Dokument"
+
+#: ../data/ui/snippets.glade.h:6
+#, fuzzy
+msgid "Remove selected snippet"
+msgstr "Alle Schnipsel zurücksetzen"
+
+#: ../data/ui/snippets.glade.h:7
 msgid "Edit:"
 msgstr "Bearbeiten:"
 
-#: ../data/ui/snippets.glade.h:4
+#: ../data/ui/snippets.glade.h:8
 msgid "Insert macro"
 msgstr ""
 
-#: ../data/ui/snippets.glade.h:5
+#: ../data/ui/snippets.glade.h:9
 #, fuzzy
 msgid "selected text"
 msgstr "zentrieren"
 
-#: ../data/ui/snippets.glade.h:6
+#: ../data/ui/snippets.glade.h:10
 #, fuzzy
 msgid "filename"
 msgstr "Dateiname:"
 
-#: ../data/ui/snippets.glade.h:7
+#: ../data/ui/snippets.glade.h:11
 msgid "basename"
 msgstr ""
 
-#: ../data/ui/snippets.glade.h:8
+#: ../data/ui/snippets.glade.h:12
 msgid "Activation"
 msgstr "Aktivierung"
 
-#: ../data/ui/snippets.glade.h:9
+#: ../data/ui/snippets.glade.h:13
 msgid "    "
 msgstr "    "
 
-#: ../data/ui/snippets.glade.h:10
+#: ../data/ui/snippets.glade.h:14
 msgid "Tab trigger:"
 msgstr "Tab Auslöser:"
 
-#: ../data/ui/snippets.glade.h:11
+#: ../data/ui/snippets.glade.h:15
 msgid "Shortcut key:"
 msgstr "Tastenkombination:"
-
-#: ../data/ui/snippets.glade.h:12
-msgid "_Reset"
-msgstr "Zu_rücksetzen"
-
-#: ../data/ui/snippets.glade.h:13
-msgid "Reset all snippets"
-msgstr "Alle Schnipsel zurücksetzen"
 
 #: ../src/gui/gui-import.c:229
 #, c-format
@@ -990,60 +1000,70 @@ msgstr "Fehler beim Kompilieren der Bibliografiedatei"
 msgid "%s loaded"
 msgstr "%s geladen"
 
-#: ../src/gui/gui-main.c:740
-msgid "Do you want to save the changes you have made?"
+#: ../src/gui/gui-main.c:744
+#, fuzzy, c-format
+msgid "Do you want to save the changes to %s?"
 msgstr "Sollen die durchgeführten Änderungen gespeichert werden?"
 
-#: ../src/gui/gui-main.c:758
+#: ../src/gui/gui-main.c:745
+#, fuzzy
+msgid "this document"
+msgstr "LaTeX Dokument öffnen"
+
+#: ../src/gui/gui-main.c:753
+msgid "Unsaved Changes"
+msgstr ""
+
+#: ../src/gui/gui-main.c:775
 msgid "Open LaTeX document"
 msgstr "LaTeX-Dokument öffnen"
 
-#: ../src/gui/gui-main.c:761
+#: ../src/gui/gui-main.c:778
 msgid "Select an image to insert"
 msgstr "Bild auswählen zum Einfügen"
 
-#: ../src/gui/gui-main.c:762
+#: ../src/gui/gui-main.c:779
 msgid "Select bibliography file"
 msgstr "Bibliografiedatei auswählen"
 
-#: ../src/gui/gui-main.c:795
+#: ../src/gui/gui-main.c:812
 msgid "Save LaTeX document"
 msgstr "LaTeX Dokument speichern"
 
-#: ../src/gui/gui-main.c:796
+#: ../src/gui/gui-main.c:813
 msgid "Save as LaTeX document"
 msgstr "Als LaTeX Dokument speichern"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:814
 msgid "Export to PDF"
 msgstr "Als PDF exportieren"
 
-#: ../src/gui/gui-main.c:800
+#: ../src/gui/gui-main.c:817
 #, fuzzy
 msgid "Create project"
 msgstr "Neues Projekt"
 
-#: ../src/gui/gui-main.c:845
+#: ../src/gui/gui-main.c:862
 msgid "LaTeX files"
 msgstr "LaTeX-Dateien"
 
-#: ../src/gui/gui-main.c:850
+#: ../src/gui/gui-main.c:867
 msgid "Text files"
 msgstr "Text-Dateien"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:866
+#: ../src/gui/gui-main.c:883
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Bilddateien"
 
-#: ../src/gui/gui-main.c:881
+#: ../src/gui/gui-main.c:898
 msgid "Bibtex files"
 msgstr "Bibtex-Dateien"
 
-#: ../src/gui/gui-main.c:887
+#: ../src/gui/gui-main.c:904
 msgid "Gummi project files"
 msgstr "Gummi Projektdateien"
 
@@ -1210,9 +1230,6 @@ msgstr "Betätigung"
 #~ msgid "Center text"
 #~ msgstr "zentrieren"
 
-#~ msgid "Create a new document"
-#~ msgstr "Erstelle neues Dokument"
-
 #~ msgid ""
 #~ "Error status for\n"
 #~ "active document"
@@ -1240,10 +1257,6 @@ msgstr "Betätigung"
 
 #~ msgid "Include document"
 #~ msgstr "Dokument einbinden"
-
-#, fuzzy
-#~ msgid "Input document"
-#~ msgstr "LaTeX Dokument öffnen"
 
 #~ msgid "New document"
 #~ msgstr "Neues Dokument erstellen"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-29 17:26+0200\n"
+"POT-Creation-Date: 2012-05-08 19:14+0200\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -815,52 +815,62 @@ msgid "Snippets Manager"
 msgstr "文字片段管理"
 
 #: ../data/ui/snippets.glade.h:2
-msgid "Snippets:"
-msgstr "文字片段:"
-
-#: ../data/ui/snippets.glade.h:3
-msgid "Edit:"
-msgstr "編輯: "
-
-#: ../data/ui/snippets.glade.h:4
-msgid "Insert macro"
-msgstr "插入巨集"
-
-#: ../data/ui/snippets.glade.h:5
-msgid "selected text"
-msgstr "已選取文字"
-
-#: ../data/ui/snippets.glade.h:6
-msgid "filename"
-msgstr "檔名"
-
-#: ../data/ui/snippets.glade.h:7
-msgid "basename"
-msgstr "檔案名稱"
-
-#: ../data/ui/snippets.glade.h:8
-msgid "Activation"
-msgstr "觸發"
-
-#: ../data/ui/snippets.glade.h:9
-msgid "    "
-msgstr "    "
-
-#: ../data/ui/snippets.glade.h:10
-msgid "Tab trigger:"
-msgstr "Tab 觸發:"
-
-#: ../data/ui/snippets.glade.h:11
-msgid "Shortcut key:"
-msgstr "捷徑鍵:"
-
-#: ../data/ui/snippets.glade.h:12
 msgid "_Reset"
 msgstr "重設(_R)"
 
-#: ../data/ui/snippets.glade.h:13
+#: ../data/ui/snippets.glade.h:3
 msgid "Reset all snippets"
 msgstr "重設為預設"
+
+#: ../data/ui/snippets.glade.h:4
+msgid "Snippets:"
+msgstr "文字片段:"
+
+#: ../data/ui/snippets.glade.h:5
+#, fuzzy
+msgid "Create a new snippet"
+msgstr "建立新文件"
+
+#: ../data/ui/snippets.glade.h:6
+#, fuzzy
+msgid "Remove selected snippet"
+msgstr "重設為預設"
+
+#: ../data/ui/snippets.glade.h:7
+msgid "Edit:"
+msgstr "編輯: "
+
+#: ../data/ui/snippets.glade.h:8
+msgid "Insert macro"
+msgstr "插入巨集"
+
+#: ../data/ui/snippets.glade.h:9
+msgid "selected text"
+msgstr "已選取文字"
+
+#: ../data/ui/snippets.glade.h:10
+msgid "filename"
+msgstr "檔名"
+
+#: ../data/ui/snippets.glade.h:11
+msgid "basename"
+msgstr "檔案名稱"
+
+#: ../data/ui/snippets.glade.h:12
+msgid "Activation"
+msgstr "觸發"
+
+#: ../data/ui/snippets.glade.h:13
+msgid "    "
+msgstr "    "
+
+#: ../data/ui/snippets.glade.h:14
+msgid "Tab trigger:"
+msgstr "Tab 觸發:"
+
+#: ../data/ui/snippets.glade.h:15
+msgid "Shortcut key:"
+msgstr "捷徑鍵:"
 
 #: ../src/gui/gui-import.c:229
 #, c-format
@@ -948,59 +958,69 @@ msgstr "編譯參考文獻過程發生錯誤"
 msgid "%s loaded"
 msgstr "已載入%s"
 
-#: ../src/gui/gui-main.c:740
-msgid "Do you want to save the changes you have made?"
+#: ../src/gui/gui-main.c:744
+#, fuzzy, c-format
+msgid "Do you want to save the changes to %s?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui/gui-main.c:758
+#: ../src/gui/gui-main.c:745
+#, fuzzy
+msgid "this document"
+msgstr "輸入文件"
+
+#: ../src/gui/gui-main.c:753
+msgid "Unsaved Changes"
+msgstr ""
+
+#: ../src/gui/gui-main.c:775
 msgid "Open LaTeX document"
 msgstr "開啟LaTeX文件"
 
-#: ../src/gui/gui-main.c:761
+#: ../src/gui/gui-main.c:778
 msgid "Select an image to insert"
 msgstr "選擇要插入的影像"
 
-#: ../src/gui/gui-main.c:762
+#: ../src/gui/gui-main.c:779
 msgid "Select bibliography file"
 msgstr "選擇參考文獻檔案"
 
-#: ../src/gui/gui-main.c:795
+#: ../src/gui/gui-main.c:812
 msgid "Save LaTeX document"
 msgstr "儲存LaTeX文件"
 
-#: ../src/gui/gui-main.c:796
+#: ../src/gui/gui-main.c:813
 msgid "Save as LaTeX document"
 msgstr "另存為LaTeX文件"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:814
 msgid "Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../src/gui/gui-main.c:800
+#: ../src/gui/gui-main.c:817
 msgid "Create project"
 msgstr "建立新專案"
 
-#: ../src/gui/gui-main.c:845
+#: ../src/gui/gui-main.c:862
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
-#: ../src/gui/gui-main.c:850
+#: ../src/gui/gui-main.c:867
 msgid "Text files"
 msgstr "純文字文件"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:866
+#: ../src/gui/gui-main.c:883
 #, fuzzy
 msgid "Supported Image files"
 msgstr "影像檔"
 
-#: ../src/gui/gui-main.c:881
+#: ../src/gui/gui-main.c:898
 msgid "Bibtex files"
 msgstr "參考文獻"
 
-#: ../src/gui/gui-main.c:887
+#: ../src/gui/gui-main.c:904
 msgid "Gummi project files"
 msgstr "Gummi 專案檔"
 
@@ -1160,9 +1180,6 @@ msgstr "確認"
 #~ msgid "Center text"
 #~ msgstr "置中"
 
-#~ msgid "Create a new document"
-#~ msgstr "建立新文件"
-
 #~ msgid ""
 #~ "Error status for\n"
 #~ "active document"
@@ -1190,9 +1207,6 @@ msgstr "確認"
 
 #~ msgid "Include document"
 #~ msgstr "引入文件"
-
-#~ msgid "Input document"
-#~ msgstr "輸入文件"
 
 #~ msgid "New document"
 #~ msgstr "建立新文件"

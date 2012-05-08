@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-29 17:26+0200\n"
+"POT-Creation-Date: 2012-05-08 19:14+0200\n"
 "PO-Revision-Date: 2011-11-07 20:48+0100\n"
 "Last-Translator: Kess Vargavind <vargavind@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -835,55 +835,65 @@ msgid "Snippets Manager"
 msgstr "Hantera kodstycken"
 
 #: ../data/ui/snippets.glade.h:2
+msgid "_Reset"
+msgstr "_Återställ"
+
+#: ../data/ui/snippets.glade.h:3
+msgid "Reset all snippets"
+msgstr "Återställ kodstycken"
+
+#: ../data/ui/snippets.glade.h:4
 msgid "Snippets:"
 msgstr "Kodstycken:"
 
-#: ../data/ui/snippets.glade.h:3
+#: ../data/ui/snippets.glade.h:5
+#, fuzzy
+msgid "Create a new snippet"
+msgstr "Skapa nytt dokument"
+
+#: ../data/ui/snippets.glade.h:6
+#, fuzzy
+msgid "Remove selected snippet"
+msgstr "Återställ kodstycken"
+
+#: ../data/ui/snippets.glade.h:7
 msgid "Edit:"
 msgstr "Redigera:"
 
-#: ../data/ui/snippets.glade.h:4
+#: ../data/ui/snippets.glade.h:8
 msgid "Insert macro"
 msgstr ""
 
-#: ../data/ui/snippets.glade.h:5
+#: ../data/ui/snippets.glade.h:9
 #, fuzzy
 msgid "selected text"
 msgstr "Centrerad"
 
-#: ../data/ui/snippets.glade.h:6
+#: ../data/ui/snippets.glade.h:10
 #, fuzzy
 msgid "filename"
 msgstr "Filnamn:"
 
-#: ../data/ui/snippets.glade.h:7
+#: ../data/ui/snippets.glade.h:11
 msgid "basename"
 msgstr ""
 
-#: ../data/ui/snippets.glade.h:8
+#: ../data/ui/snippets.glade.h:12
 msgid "Activation"
 msgstr "Aktivering"
 
-#: ../data/ui/snippets.glade.h:9
+#: ../data/ui/snippets.glade.h:13
 msgid "    "
 msgstr "    "
 
 # Tabb utlöser automatisk textkomplettering av fördefinierade kodstycken
-#: ../data/ui/snippets.glade.h:10
+#: ../data/ui/snippets.glade.h:14
 msgid "Tab trigger:"
 msgstr "Tabbutlösare:"
 
-#: ../data/ui/snippets.glade.h:11
+#: ../data/ui/snippets.glade.h:15
 msgid "Shortcut key:"
 msgstr "Kortkommando:"
-
-#: ../data/ui/snippets.glade.h:12
-msgid "_Reset"
-msgstr "_Återställ"
-
-#: ../data/ui/snippets.glade.h:13
-msgid "Reset all snippets"
-msgstr "Återställ kodstycken"
 
 #: ../src/gui/gui-import.c:229
 #, c-format
@@ -978,60 +988,70 @@ msgstr "Kunde inte skapa bibliografin"
 msgid "%s loaded"
 msgstr "%s laddad"
 
-#: ../src/gui/gui-main.c:740
-msgid "Do you want to save the changes you have made?"
+#: ../src/gui/gui-main.c:744
+#, fuzzy, c-format
+msgid "Do you want to save the changes to %s?"
 msgstr "Vill du spara de ändringar du gjort?"
 
-#: ../src/gui/gui-main.c:758
+#: ../src/gui/gui-main.c:745
+#, fuzzy
+msgid "this document"
+msgstr "Dokument"
+
+#: ../src/gui/gui-main.c:753
+msgid "Unsaved Changes"
+msgstr ""
+
+#: ../src/gui/gui-main.c:775
 msgid "Open LaTeX document"
 msgstr "Öppna LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:761
+#: ../src/gui/gui-main.c:778
 msgid "Select an image to insert"
 msgstr "Välj en bild att infoga"
 
-#: ../src/gui/gui-main.c:762
+#: ../src/gui/gui-main.c:779
 msgid "Select bibliography file"
 msgstr "Välj bibliografifil"
 
-#: ../src/gui/gui-main.c:795
+#: ../src/gui/gui-main.c:812
 msgid "Save LaTeX document"
 msgstr "Spara LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:796
+#: ../src/gui/gui-main.c:813
 msgid "Save as LaTeX document"
 msgstr "Spara som LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:797
+#: ../src/gui/gui-main.c:814
 msgid "Export to PDF"
 msgstr "Exportera som PDF"
 
-#: ../src/gui/gui-main.c:800
+#: ../src/gui/gui-main.c:817
 #, fuzzy
 msgid "Create project"
 msgstr "Skapa nytt projekt"
 
-#: ../src/gui/gui-main.c:845
+#: ../src/gui/gui-main.c:862
 msgid "LaTeX files"
 msgstr "LaTeX-filer"
 
-#: ../src/gui/gui-main.c:850
+#: ../src/gui/gui-main.c:867
 msgid "Text files"
 msgstr "Textfiler"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:866
+#: ../src/gui/gui-main.c:883
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Bildfiler"
 
-#: ../src/gui/gui-main.c:881
+#: ../src/gui/gui-main.c:898
 msgid "Bibtex files"
 msgstr "BibTeX-filer"
 
-#: ../src/gui/gui-main.c:887
+#: ../src/gui/gui-main.c:904
 msgid "Gummi project files"
 msgstr "Gummi-projektfiler"
 
@@ -1193,9 +1213,6 @@ msgstr "Bekräftelse"
 
 #~ msgid "Center text"
 #~ msgstr "Centrerad"
-
-#~ msgid "Create a new document"
-#~ msgstr "Skapa nytt dokument"
 
 #~ msgid ""
 #~ "Error status for\n"
