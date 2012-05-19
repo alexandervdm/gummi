@@ -161,7 +161,7 @@ struct _GuPreviewGui {
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder);
 void previewgui_update_statuslight (const gchar* type);
-void previewgui_set_pdffile (GuPreviewGui* prev, const gchar *pdffile);
+void previewgui_set_pdffile (GuPreviewGui* prev, const gchar *uri);
 void previewgui_refresh (GuPreviewGui* prev, GtkTextIter *sync_to, gchar* tex_file);
 void previewgui_set_pagedata (GuPreviewGui* prev);
 void previewgui_goto_page (GuPreviewGui* prev, int page_number);
