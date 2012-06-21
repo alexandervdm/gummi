@@ -972,16 +972,13 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
     /* This line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) goto unlock;
 
-    previewgui_cleanup_fds (pc);
-
     // If no document had been loaded successfully before, force call of set_pdffile
     if (pc->doc == NULL) {
-		// We create a copy of uri here as this will be overwritten by set_pdffile
-        gchar* uri = g_strdup(uri);
         previewgui_set_pdffile (pc, pc->uri);
-        g_free(uri);
         goto unlock;
     }
+
+    previewgui_cleanup_fds (pc);
 
     pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
 
