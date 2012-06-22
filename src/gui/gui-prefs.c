@@ -150,27 +150,28 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 #ifdef USE_GTKSPELL
     /* list available languages */
 
-    Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts", NULL);
-
-    if (pret.second != NULL) {
-        gchar** output = g_strsplit((gchar*)pret.second, "\n", BUFSIZ);
-        gchar** elems = NULL;
-        int i;
-
-        for(i = 0; output[i] != NULL; i++) {
-            GtkTreeIter iter;
-            elems = g_strsplit (output[i], " ", BUFSIZ);
-            if (elems[0] != NULL) {
-                gtk_list_store_append (p->list_languages, &iter);
-                gtk_list_store_set (p->list_languages, &iter, 0, elems[0], -1);
+    if (g_file_test ("enchant-lsmod", G_FILE_TEST_EXISTS)) {
+        Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts", NULL);
+    
+        if (pret.second != NULL) {
+            gchar** output = g_strsplit((gchar*)pret.second, "\n", BUFSIZ);
+            gchar** elems = NULL;
+            int i;
+    
+            for(i = 0; output[i] != NULL; i++) {
+                GtkTreeIter iter;
+                elems = g_strsplit (output[i], " ", BUFSIZ);
+                if (elems[0] != NULL) {
+                    gtk_list_store_append (p->list_languages, &iter);
+                    gtk_list_store_set (p->list_languages, &iter, 0, elems[0], -1);
+                }
             }
+        g_strfreev(output);
+        g_strfreev(elems);
         }
-    g_strfreev(output);
-    g_strfreev(elems);
+        gtk_combo_box_set_active (p->combo_languages, 0);
+        g_free ((gchar*)pret.second);
     }
-
-    gtk_combo_box_set_active (p->combo_languages, 0);
-    g_free ((gchar*)pret.second);
 #else
     /* desensitise gtkspell related GUI elements if not used */
     GtkWidget* box = GTK_WIDGET (
