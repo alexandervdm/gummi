@@ -109,9 +109,10 @@ static gdouble get_texlive_version (void) {
     gdouble version = 0;
     gchar* output = get_version_output (C_LATEX, 0);
     
-    /* Keep in mind that Ubuntu/Debian like themselves a lot:
+    /* Keep in mind that some distros like themselves a lot:
      * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
      * pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2009/Debian)
+     * pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2012/dev/Arch Linux)
      * pdfTeX 3.1415926-2.3-1.40.12 (Web2C 2011)
      * 
      * Also, TeXLive utilities from versions before 2008 do not 
@@ -122,10 +123,11 @@ static gdouble get_texlive_version (void) {
         return version;
     }
     
-    gchar** splitted = g_strsplit (output, " ", BUFSIZ);
+    gchar** splitted = g_strsplit (output, "(", BUFSIZ);
     guint size = g_strv_length (splitted);
     
     gchar* segment = g_strdup (splitted[size-1]);
+    segment = g_strjoinv("", g_strsplit(segment, "Web2C", -1));
     gchar* resultstr = "";
     
     // make sure to only allow numeric characters in the result:
