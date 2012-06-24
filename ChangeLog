@@ -2,6 +2,20 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.4 (June 24th, 2012):
+
+	Bugs fixed:
+	* Replaced faulty importer implementation with a toolbar variant
+	* Fixed an issue where the previewer would not display correctly
+	* dvi script uses exit status to signal compilation status
+	* Improved the reported messages for some errors. 
+	* Better TeXLive version detection
+	* Fixed a reference problem that could lead to a crash
+	* Search window is correctly centered in GNOME 3
+	* Tab markup not enabled when project loading fails
+	* Minor UI tweaks to the project & bibliography panels
+	* Minor UI tweaks to the snippet configuration interface
+
 Gummi 0.6.3 (March 28th, 2012):
 	
 	Bugs fixed:
