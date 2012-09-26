@@ -725,6 +725,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "French: Yvan Duron & Olivier Brousse\n"
         "German: Thomas Niederprüm\n"
         "Greek: Dimitris Leventeas\n"
+        "Hungarian: Balázs Meskó\n"
         "Italian: Salvatore Vassallo\n"
         "Polish: Hubert Kowalski\n"
         "Portugese: Alexandre Guimarães\n"
