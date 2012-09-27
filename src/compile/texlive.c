@@ -110,9 +110,9 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     gchar *psname = g_strdup_printf("%s.ps", g_path_get_basename (basename));
     
     #ifdef WIN32
-    gchar *script = g_build_filename (LIBDIR, "latex_dvi.cmd", NULL);
+    gchar *script = g_build_filename (GUMMI_LIBS, "latex_dvi.cmd", NULL);
     #else
-    gchar *script = g_build_filename (LIBDIR, "latex_dvi.sh", NULL);
+    gchar *script = g_build_filename (GUMMI_LIBS, "latex_dvi.sh", NULL);
     #endif
     
     if (STR_EQU (method, "texpdf")) {

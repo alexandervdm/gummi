@@ -150,7 +150,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->infoscreengui = infoscreengui_init (builder);
     g->projectgui = projectgui_init (builder);
 
-    gchar* icon_file = g_build_filename (DATADIR, "icons", "icon.png", NULL);
+    gchar* icon_file = g_build_filename (GUMMI_DATA, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);
     g_free (icon_file);
     gtk_window_resize (g->mainwindow,

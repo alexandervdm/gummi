@@ -65,7 +65,7 @@ void on_window_destroy (GtkObject *object, gpointer user_data) {
 
 int main (int argc, char *argv[]) {
     /* set up i18n */
-    bindtextdomain (PACKAGE, LOCALEDIR);
+    bindtextdomain (PACKAGE, GUMMI_LOCALES);
     setlocale (LC_ALL, "");
     textdomain (PACKAGE);
 
@@ -81,7 +81,7 @@ int main (int argc, char *argv[]) {
     gtk_init (&argc, &argv);
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
-    gchar* ui = g_build_filename (DATADIR, "ui", "gummi.glade", NULL);
+    gchar* ui = g_build_filename (GUMMI_DATA, "ui", "gummi.glade", NULL);
     
     // exit program when gummi.glade can not be located:
     if (!g_file_test (ui, G_FILE_TEST_EXISTS)) {

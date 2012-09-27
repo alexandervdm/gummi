@@ -60,7 +60,7 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
     gint len = 0, i = 0;
 
     GtkBuilder* builder = gtk_builder_new ();
-    gchar* ui = g_build_filename (DATADIR, "ui", "snippets.glade", NULL);
+    gchar* ui = g_build_filename (GUMMI_DATA, "ui", "snippets.glade", NULL);
     gtk_builder_add_from_file (builder, ui, NULL);
     gtk_builder_set_translation_domain (builder, PACKAGE);
     g_free (ui);
@@ -86,7 +86,7 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
 
     /* Initialize GtkSourceView */
     manager = gtk_source_language_manager_new ();
-    lang_dir = g_build_filename (DATADIR, "snippets", NULL);
+    lang_dir = g_build_filename (GUMMI_DATA, "snippets", NULL);
     langs = g_strdupv ((gchar**)gtk_source_language_manager_get_search_path (
                        manager));
     len = g_strv_length (langs);

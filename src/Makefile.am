@@ -1,9 +1,9 @@
 bin_PROGRAMS = gummi
 AM_CFLAGS = $(GUI_CFLAGS) \
 	    -export-dynamic -Wall -O2 \
-	    -DLIBDIR=\"$(libdir)/$(PACKAGE)\" \
-	    -DDATADIR=\"$(datadir)/$(PACKAGE)\" \
-	    -DLOCALEDIR=\"$(datadir)/locale\"
+	    -DGUMMI_LIBS=\"$(libdir)/$(PACKAGE)\" \
+	    -DGUMMI_DATA=\"$(datadir)/$(PACKAGE)\" \
+	    -DGUMMI_LOCALES=\"$(datadir)/locale\"
 
 gummi_LDADD = $(GUI_LIBS) \
 	      $(LIBINTL)

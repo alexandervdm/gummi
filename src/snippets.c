@@ -60,7 +60,7 @@ GuSnippets* snippets_init (const gchar* filename) {
 
 void snippets_set_default (GuSnippets* sc) {
     GError* err = NULL;
-    gchar* snip = g_build_filename (DATADIR, "snippets", "snippets.cfg", NULL);
+    gchar* snip = g_build_filename (GUMMI_DATA, "snippets", "snippets.cfg", NULL);
     GList* current = sc->closure_data;
 
     /* Remove all accelerator */

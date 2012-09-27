@@ -694,7 +694,7 @@ void on_menu_update_activate (GtkWidget *widget, void *user) {
 G_MODULE_EXPORT
 void on_menu_about_activate (GtkWidget *widget, void *user) {
     GError* err = NULL;
-    gchar* icon_file = g_build_filename (DATADIR, "icons", "gummi.png", NULL);
+    gchar* icon_file = g_build_filename (GUMMI_DATA, "icons", "gummi.png", NULL);
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size (icon_file, 80, 80, &err);
     g_free (icon_file);
 

@@ -65,7 +65,7 @@ static void set_tab_miscellaneous_settings (GuPrefsGui* prefs);
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GuPrefsGui* p = g_new0 (GuPrefsGui, 1);
     GtkBuilder* builder = gtk_builder_new ();
-    gchar* ui = g_build_filename (DATADIR, "ui", "prefs.glade", NULL);
+    gchar* ui = g_build_filename (GUMMI_DATA, "ui", "prefs.glade", NULL);
     gtk_builder_add_from_file (builder, ui, NULL);
     gtk_builder_set_translation_domain (builder, PACKAGE);
     g_free (ui);

@@ -34,7 +34,7 @@
 
 /* File constants */
 #define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)
-#define C_DEFAULTTEXT g_build_filename (DATADIR, "misc", "default.tex", NULL)
+#define C_DEFAULTTEXT g_build_filename (GUMMI_DATA, "misc", "default.tex", NULL)
 
 /* URL constants */
 #define C_GUMMIGUIDE "http://dev.midnightcoding.org/projects/gummi/wiki/UserGuide"
