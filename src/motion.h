@@ -54,7 +54,7 @@ void motion_start_compile_thread (GuMotion* m);
 void motion_stop_compile_thread (GuMotion* m);
 void motion_pause_compile_thread (GuMotion* m);
 void motion_resume_compile_thread (GuMotion* m);
-void motion_do_compile (gpointer user);
+gboolean motion_do_compile (gpointer user);
 void motion_force_compile (GuMotion *mc);
 gpointer motion_compile_thread (gpointer data);
 gboolean motion_idle_cb (gpointer user);

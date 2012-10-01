@@ -136,13 +136,16 @@ void motion_kill_typesetter (GuMotion* m) {
     }
 }
 
-void motion_do_compile (gpointer user) {
+gboolean motion_do_compile (gpointer user) {
     L_F_DEBUG;
     GuMotion* mc = GU_MOTION (user);
 
-    if (!g_mutex_trylock (mc->signal_mutex)) return;
+    if (!g_mutex_trylock (mc->signal_mutex)) goto ret;
     g_cond_signal (mc->compile_cv);
     g_mutex_unlock (mc->signal_mutex);
+
+ret:
+    return (STR_EQU (config_get_value ("compile_scheme"), "real_time"));
 }
 
 gpointer motion_compile_thread (gpointer data) {
