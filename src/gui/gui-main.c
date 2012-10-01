@@ -295,6 +295,7 @@ void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
 G_MODULE_EXPORT
 void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
                                  int pagenr, void *data) {
+    slog (L_DEBUG, "Switched to environment at page %d\n", pagenr);
     /* Kill typesetter command */
     motion_kill_typesetter(gummi->motion);
 
@@ -308,7 +309,6 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
     gui_buildlog_set_text ("");
     
     previewgui_reset (gui->previewgui);
-    slog (L_DEBUG, "Switched to environment at page %d\n", pagenr);
 }
 
 G_MODULE_EXPORT

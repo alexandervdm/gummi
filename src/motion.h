@@ -45,13 +45,16 @@ struct _GuMotion {
     pid_t* typesetter_pid;
     
     gboolean keep_running;
+    gboolean pause;
     gboolean errormode;
 };
 
 GuMotion* motion_init (void);
 void motion_start_compile_thread (GuMotion* m);
 void motion_stop_compile_thread (GuMotion* m);
-gboolean motion_do_compile (gpointer user);
+void motion_pause_compile_thread (GuMotion* m);
+void motion_resume_compile_thread (GuMotion* m);
+void motion_do_compile (gpointer user);
 void motion_force_compile (GuMotion *mc);
 gpointer motion_compile_thread (gpointer data);
 gboolean motion_idle_cb (gpointer user);

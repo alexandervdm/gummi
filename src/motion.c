@@ -73,6 +73,7 @@ GuMotion* motion_init (void) {
     m->compile_mutex = g_mutex_new ();
     m->compile_cv = g_cond_new ();
     m->keep_running = TRUE;
+    m->keep_running = FALSE;
     m->typesetter_pid = &typesetter_pid;
 
     return m;
@@ -90,9 +91,25 @@ void motion_start_compile_thread (GuMotion* m) {
 }
 
 void motion_stop_compile_thread (GuMotion* m) {
+    L_F_DEBUG;
+
     m->keep_running = FALSE;
     motion_do_compile(m);
     g_thread_join(m->compile_thread);
+}
+
+void motion_pause_compile_thread (GuMotion* m) {
+    L_F_DEBUG;
+
+    m->pause = TRUE;
+    motion_do_compile(m);
+}
+
+void motion_resume_compile_thread (GuMotion* m) {
+    L_F_DEBUG;
+
+    m->pause = FALSE;
+    motion_do_compile(m);
 }
 
 void motion_kill_typesetter (GuMotion* m) {
@@ -119,16 +136,13 @@ void motion_kill_typesetter (GuMotion* m) {
     }
 }
 
-gboolean motion_do_compile (gpointer user) {
+void motion_do_compile (gpointer user) {
     L_F_DEBUG;
     GuMotion* mc = GU_MOTION (user);
 
-    if (!g_mutex_trylock (mc->signal_mutex)) goto ret;
+    if (!g_mutex_trylock (mc->signal_mutex)) return;
     g_cond_signal (mc->compile_cv);
     g_mutex_unlock (mc->signal_mutex);
-
-ret:
-    return (STR_EQU (config_get_value ("compile_scheme"), "real_time"));
 }
 
 gpointer motion_compile_thread (gpointer data) {
@@ -160,6 +174,11 @@ gpointer motion_compile_thread (gpointer data) {
             g_thread_exit (NULL);
         }
 
+        if (mc->pause) {
+            g_mutex_unlock (mc->compile_mutex);
+            continue;
+        }
+
         gdk_threads_enter ();
         focus = gtk_window_get_focus (gui->mainwindow);
         editortext = latex_update_workfile (latex, editor);
@@ -168,15 +187,14 @@ gpointer motion_compile_thread (gpointer data) {
         g_free (editortext);
 
         gtk_widget_grab_focus (focus);
-        gdk_threads_leave();
 
         if (!precompile_ok) {
-            g_mutex_unlock (mc->compile_mutex);
-            gdk_threads_enter();
             motion_start_errormode (mc, "document_error");
             gdk_threads_leave();
+            g_mutex_unlock (mc->compile_mutex);
             continue;
         }
+        gdk_threads_leave();
         
         compile_status = latex_update_pdffile (latex, editor);
         *mc->typesetter_pid = 0;
