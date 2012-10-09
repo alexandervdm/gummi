@@ -52,10 +52,13 @@
 extern Gummi* gummi;
 extern GummiGui* gui;
 static int debug = 0;
+static int showversion = 0;
 
 static GOptionEntry entries[] = {
-    { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE, &debug, 
-        (gchar*)"show debug info", NULL},
+    { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE, 
+        &debug, (gchar*)"show debug info", NULL},
+    { (const gchar*)"version", (gchar)'v', 0, G_OPTION_ARG_NONE, 
+        &showversion, (gchar*)"show version and exit", NULL},
     { NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL }
 };
 
@@ -74,6 +77,11 @@ int main (int argc, char *argv[]) {
     g_option_context_add_main_entries (context, entries, PACKAGE);
     g_option_context_parse (context, &argc, &argv, &error);
     if (error) g_error("%s\n", error->message);
+    
+    if (showversion) {
+        printf("Gummi %s\n", PACKAGE_VERSION);
+        return 0;
+    }
 
     /* initialize GTK */
     g_thread_init (NULL);
