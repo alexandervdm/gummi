@@ -758,7 +758,7 @@ msgstr "TeXLive mit XeTeX"
 
 #: ../data/ui/prefs.glade.h:36
 msgid "Rubber"
-msgstr "Radiergummi"
+msgstr "Rubber"
 
 #: ../data/ui/prefs.glade.h:37
 msgid "Latexmk"

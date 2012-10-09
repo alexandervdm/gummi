@@ -734,7 +734,7 @@ msgstr "Comando tipógrafo"
 
 #: ../data/ui/prefs.glade.h:33
 msgid "TeXLive with PdfTeX"
-msgstr "TexLive com PdfTex"
+msgstr "TeXLive com PdfTex"
 
 #: ../data/ui/prefs.glade.h:34
 msgid "This program was not found on your system."
@@ -742,11 +742,11 @@ msgstr "O programa não foi encontrado."
 
 #: ../data/ui/prefs.glade.h:35
 msgid "TeXLive with XeTeX"
-msgstr "TexLive com XeTex"
+msgstr "TeXLive com XeTeX"
 
 #: ../data/ui/prefs.glade.h:36
 msgid "Rubber"
-msgstr "Apagador"
+msgstr "Rubber"
 
 #: ../data/ui/prefs.glade.h:37
 msgid "Latexmk"
