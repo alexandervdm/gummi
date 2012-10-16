@@ -150,9 +150,11 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 #ifdef USE_GTKSPELL
     /* list available languages */
 
-    if (g_file_test ("enchant-lsmod", G_FILE_TEST_EXISTS)) {
-        Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts", NULL);
     
+    if (g_file_test (
+        g_find_program_in_path("enchant-lsmod"), G_FILE_TEST_EXISTS)) {
+            
+        Tuple2 pret = utils_popen_r ("enchant-lsmod -list-dicts", NULL);
         if (pret.second != NULL) {
             gchar** output = g_strsplit((gchar*)pret.second, "\n", BUFSIZ);
             gchar** elems = NULL;
