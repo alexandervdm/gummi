@@ -234,8 +234,6 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         /* Not reached */
     }
 
-    // Don't forget to copy the g-spawn-helper*.exe files into the
-    // same directory as libglib-2.0.dll for WIN32
     if (!g_spawn_async_with_pipes (chdir, args, NULL,
                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                 NULL, NULL, &proc_pid, NULL, &pout, NULL, &error)) {
@@ -243,6 +241,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
         /* Not reached */
     }
 
+    // TODO: replace with GIOChannel implementation:
     while ((len = read (pout, buf, BUFSIZ)) > 0) {
         buf[len - (len == BUFSIZ)] = 0;
         rot = g_strdup (ret);
@@ -259,6 +258,11 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     #else
         waitpid(proc_pid, &status, 0);
     #endif
+    
+    // See bug 446:
+    if (!g_utf8_validate (ret, -1, NULL)) {
+        ret = g_convert (ret, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL);
+    }
 
     return (Tuple2){NULL, (gpointer)(glong)status, (gpointer)ret};
 }
