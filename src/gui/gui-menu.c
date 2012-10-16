@@ -241,7 +241,6 @@ gboolean on_menu_quit_activate (void) {
         else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
             return TRUE;
     }
-    motion_resume_compile_thread (gummi->motion);
 
     /* Stop compile thread */
     if (length > 0) motion_stop_compile_thread (gummi->motion);
