@@ -224,7 +224,6 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     int n_args = 0;
     gchar** args = NULL;
     GError* error = NULL;
-    GPid proc_pid;
 
     g_assert (cmd != NULL);
 
@@ -236,7 +235,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
 
     if (!g_spawn_async_with_pipes (chdir, args, NULL,
                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                NULL, NULL, &proc_pid, NULL, &pout, NULL, &error)) {
+                NULL, NULL, &typesetter_pid, NULL, &pout, NULL, &error)) {
         slog(L_G_FATAL, "%s", error->message);
         /* Not reached */
     }
@@ -257,9 +256,9 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     close(pout);
 
     #ifdef WIN32 // TODO: check this
-        status = WaitForSingleObject(proc_pid, INFINITE);
+        status = WaitForSingleObject(typesetter_pid, INFINITE);
     #else
-        waitpid(proc_pid, &status, 0);
+        waitpid(typesetter_pid, &status, 0);
     #endif
     
     // See bug 446:
