@@ -252,6 +252,9 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
             ret = g_strdup (buf);
         g_free (rot);
     }
+    
+    // close the file descriptor:
+    close(pout);
 
     #ifdef WIN32 // TODO: check this
         status = WaitForSingleObject(proc_pid, INFINITE);
