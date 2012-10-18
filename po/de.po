@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: 2011-11-07 21:59+0100\n"
 "Last-Translator: Max Bruckner <max.w8chtel@googlemail.com>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -346,7 +346,7 @@ msgstr "Projekt"
 msgid "Create new Project"
 msgstr "Neues Projekt"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -1072,61 +1072,61 @@ msgstr "Gummi Projektdateien"
 msgid "Error loading recent file: %s"
 msgstr "Fehler beim Laden der aktuellen Datei: %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "Fehler beim ausführen von Makeindex.."
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr "Starte Makeindex.."
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr "Fehler beim ausführen von Makeindex.."
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 msgid "Words in text"
 msgstr "Wörter im Text"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr "Wörter in Kopfzeilen"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr "Wörter in Beschriftungen von Gleitumgebungen"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr "Anzahl Kopfzeilen"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr "Anzahl Gleitobjekte"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 #, fuzzy
 msgid "Number of math inlines"
 msgstr "Anzahl von Mathe \"inlines\""
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 #, fuzzy
 msgid "Number of math displayed"
 msgstr "Anzahl von Mathe \"displayed\""
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "Um diese Funktion nutzen zu können muss\n"
 "das aktive Dokument gespeichert werden. "
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr "von %d"

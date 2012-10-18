@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: 2011-10-11 14:35-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -338,7 +338,7 @@ msgstr "_Projeto"
 msgid "Create new Project"
 msgstr "Criar novo Projeto"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -1057,57 +1057,57 @@ msgstr "Preferências do Gummi"
 msgid "Error loading recent file: %s"
 msgstr "Erro lendo o arquivo: %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "Erro na execução do Makeindex"
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr "Executando Makeindex"
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr "Erro na execução do Makeindex"
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 msgid "Words in text"
 msgstr "Palavras no texto"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr "Palavras no cabeçalho"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr "Palavras em legendas flutuantes"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr "Números de cabeçalhos"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr "Número de flutuantes"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 msgid "Number of math inlines"
 msgstr "Número de fórmulas em modo interno"
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 msgid "Number of math displayed"
 msgstr "Número de fórmulas em modo externo"
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 #, fuzzy
 msgid "This function requires an active document"
 msgstr "Esta função requer o arquivoatual para ser salva."
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr "de %d"

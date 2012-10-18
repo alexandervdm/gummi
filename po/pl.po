@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: 2010-11-11 01:08+0100\n"
 "Last-Translator: Hubert Kowalski <johnnybit@gmail.com>\n"
 "Language-Team: Polish Translation <johnnybit@gmail.com>\n"
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Create new Project"
 msgstr "Tworzy nowy dokument"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 #, fuzzy
 msgid ""
 "This function requires the current\n"
@@ -1075,58 +1075,58 @@ msgstr "Preferencje Gummi"
 msgid "Error loading recent file: %s"
 msgstr "Błąd przy otwieraniu niedawno otwartego pliku %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 msgid "Error removing build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 msgid "Words in text"
 msgstr "Słów w tekście"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr "Słów w nagłówkach"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr "Słów w podpisach"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr "Liczba nagłówków"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr "Liczba pływających elementów"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 msgid "Number of math inlines"
 msgstr "Liczba wzorów w liniach"
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 msgid "Number of math displayed"
 msgstr "Liczba wzorów odgraniczonych"
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "Ta funkcja wymaga\n"
 "programu texcount.\n"
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr ""

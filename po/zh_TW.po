@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -329,7 +329,7 @@ msgstr "專案(_P)"
 msgid "Create new Project"
 msgstr "建立新專案"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -1029,59 +1029,59 @@ msgstr "Gummi 專案檔"
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "執行Makeindex的過程中發生錯誤.."
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr "執行Makeindex中.."
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr "執行Makeindex的過程中發生錯誤.."
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 msgid "Words in text"
 msgstr "純文字數"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr "標頭內總字數"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr "浮動標題內總字數"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr "標頭總數"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr "浮動元件總數"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 msgid "Number of math inlines"
 msgstr "行內數學式總數"
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "這項功能需要\n"
 "當前文件存檔後才能執行."
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr "之 %d"

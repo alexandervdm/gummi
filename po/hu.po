@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: 2012-08-13 13:39+0200\n"
 "Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: magyar <>\n"
@@ -339,7 +339,7 @@ msgstr "_Projekt"
 msgid "Create new Project"
 msgstr "Új projekt létrehozása"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -1047,55 +1047,55 @@ msgstr "Gummi projektfájlok"
 msgid "Error loading recent file: %s"
 msgstr "Fájl betöltési hiba: %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr "Fordítási fájlok sikeresen törölve…"
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 msgid "Error removing build files.."
 msgstr "Hiba történt a fordítási fájlok törlése közben…"
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr "Makeindex futtatása…"
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr "Hiba a Makeindex futtatásakor…"
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 msgid "Words in text"
 msgstr "Szavak a szövegben"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr "Szavak a fejlécekben"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr "Szavak az úszó objektumokban"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr "Fejlécek száma"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr "Úszó objektumok száma"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 msgid "Number of math inlines"
 msgstr "Sorközi matematikai mód darabszáma"
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 msgid "Number of math displayed"
 msgstr "Kiemelt matematikai mód darabszáma"
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 msgid "This function requires an active document"
 msgstr "A funkcióhoz szükséges egy aktív dokumentum"
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr "/ %d"

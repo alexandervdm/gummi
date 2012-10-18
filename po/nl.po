@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-08 19:14+0200\n"
+"POT-Creation-Date: 2012-10-18 14:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Mey <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Woorden in:"
 
 #: ../data/ui/gummi.glade.h:4
 msgid "       "
-msgstr ""
+msgstr "       "
 
 #: ../data/ui/gummi.glade.h:5
 #, fuzzy
@@ -37,7 +37,7 @@ msgstr "tekst"
 
 #: ../data/ui/gummi.glade.h:6
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../data/ui/gummi.glade.h:7
 msgid "headers"
@@ -69,7 +69,7 @@ msgstr "Bestand:"
 
 #: ../data/ui/gummi.glade.h:14
 msgid "Style:"
-msgstr ""
+msgstr "Stijl:"
 
 #: ../data/ui/gummi.glade.h:15
 msgid "Caption:"
@@ -342,7 +342,7 @@ msgstr ""
 msgid "Create new Project"
 msgstr "Creer nieuw document"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:605
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
 #, fuzzy
 msgid ""
 "This function requires the current\n"
@@ -999,16 +999,16 @@ msgstr ""
 #: ../src/gui/gui-main.c:744
 #, c-format
 msgid "Do you want to save the changes to %s?"
-msgstr ""
+msgstr "Wil je de wijzigingen opslaan naar %s?"
 
 #: ../src/gui/gui-main.c:745
 #, fuzzy
 msgid "this document"
-msgstr "Creer nieuw document"
+msgstr "dit document"
 
 #: ../src/gui/gui-main.c:753
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Onopgeslagen Wijzigingen"
 
 #: ../src/gui/gui-main.c:775
 #, fuzzy
@@ -1072,61 +1072,61 @@ msgstr "Gummi project bestanden"
 #: ../src/gui/gui-menu.c:184
 #, c-format
 msgid "Error loading recent file: %s"
-msgstr ""
+msgstr "Fout bij laden van recent bestand: %s"
 
-#: ../src/gui/gui-menu.c:412
+#: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:415
+#: ../src/gui/gui-menu.c:416
 msgid "Error removing build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:422
+#: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:449
+#: ../src/gui/gui-menu.c:450
 #, fuzzy
 msgid "Words in text"
 msgstr "Woorden in tekst"
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:451
 msgid "Words in headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:452
 msgid "Words in float captions"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:455
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:456
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:590
+#: ../src/gui/gui-menu.c:591
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "Deze functie vereist dat het \n"
 "actieve document opgeslagen is."
 
-#: ../src/gui/gui-preview.c:906
+#: ../src/gui/gui-preview.c:904
 #, c-format
 msgid "of %d"
 msgstr ""
