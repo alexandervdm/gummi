@@ -2,6 +2,18 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.5 (October 18th, 2012):
+
+	Bugs fixed:
+	* Fixed empty build logs when special characters were included
+	* Fixed a rare deadlock situation on program exit
+	* Fixed regression in spell-checking language listing
+	* Fixed regression in killing inresponsive compilation processes
+	* Correctly close file descriptors for child processes
+	* Implemented --version CLI argument
+	* Several translation updates
+	* Added Hungarian translation
+
 Gummi 0.6.4 (June 24th, 2012):
 
 	Bugs fixed:
