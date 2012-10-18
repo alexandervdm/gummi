@@ -262,8 +262,11 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     #endif
     
     // See bug 446:
-    if (!g_utf8_validate (ret, -1, NULL)) {
-        ret = g_convert (ret, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL);
+    if (ret) {
+        if (!g_utf8_validate (ret, -1, NULL)) {
+            ret = g_convert_with_fallback (ret, -1, "UTF-8", 
+                    "ISO-8859-1", NULL, NULL, NULL, NULL);
+        }
     }
 
     return (Tuple2){NULL, (gpointer)(glong)status, (gpointer)ret};
