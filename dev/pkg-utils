@@ -30,9 +30,12 @@ case $2 in
 	oneiric)
 		poppler_glib_ver=6
         ;;
-    precise)
-        poppler_glib_ver=8
-		;;
+	precise)
+        	poppler_glib_ver=8
+	;;
+	quantal)
+		poppler_glib_ver=8
+	;;
 esac
 
 if [ -e configure.ac ]; then
@@ -43,6 +46,7 @@ fi
 
 if [ "$1" == "clean" ]; then
   rm -rf $PKG_DIR/$package*
+  echo "cleaned ~/Public.."
   exit 0
 fi
 
