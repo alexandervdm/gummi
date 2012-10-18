@@ -27,6 +27,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -36,6 +37,10 @@
 #ifndef WIN32
     #include <sys/types.h>
     #include <sys/wait.h>
+#endif
+
+#ifdef WIN32
+    #include <windows.h>
 #endif
 
 #include <glib.h>
@@ -125,8 +130,20 @@ void motion_kill_typesetter (GuMotion* m) {
         g_free(command);
 
         /* Make sure typesetter command is terminated */
-        kill(*m->typesetter_pid, 15);
+        if (kill(*m->typesetter_pid, 15)) {
+            slog(L_ERROR, "Could not kill process: %s\n", 
+                                    g_strerror(errno));
+        }
+#else
+        if (!TerminateProcess(*m->typesetter_pid, 0)) {
+            gchar *msg = g_win32_error_message(GetLastError());
+            slog (L_ERROR, "Could not kill process: %s\n", 
+                                    msg ? msg : "(null)");
+            g_free(msg);
+        }
+
 #endif
+
 
         slog(L_DEBUG, "Typeseter[pid=%d]: Killed\n", *m->typesetter_pid);
         *m->typesetter_pid = 0;
