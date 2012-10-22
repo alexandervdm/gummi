@@ -731,7 +731,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Polish: Hubert Kowalski\n"
         "Portugese: Alexandre Guimarães\n"
         "Romanian: Alexandru-Eugen Ichim\n"
-        "Russian: Kruvalig\n"
+        "Russian: Kruvalig & Max Musatov\n"
         "Swedish: Kess Vargavind\n"
         "Spanish: Carlos Salas Contreras\n";
         

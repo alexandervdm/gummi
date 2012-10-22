@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Gummi 0.6.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-18 14:23+0200\n"
-"PO-Revision-Date: 2010-05-23 16:18+0400\n"
-"Last-Translator: kruvalig <kruvalig@gmail.com>\n"
-"Language-Team: fedora-trans-ru\n"
+"PO-Revision-Date: 2012-10-22 20:42+0300\n"
+"Last-Translator: Musatov M. <m1kc@yandex.ru>\n"
+"Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,56 +16,57 @@ msgstr ""
 
 #: ../data/ui/gummi.glade.h:1
 msgid "Document statistics"
-msgstr ""
+msgstr "Статистика документа"
 
 #: ../data/ui/gummi.glade.h:2
-#, fuzzy
 msgid "Document name"
-msgstr "Скомпилировать"
+msgstr "Имя документа"
 
 #: ../data/ui/gummi.glade.h:3
 #, fuzzy
 msgid "Words in:"
-msgstr "Жирный текст"
+msgstr "Слова в:"
 
 #: ../data/ui/gummi.glade.h:4
-#, fuzzy
 msgid "       "
-msgstr "        "
+msgstr "       "
 
 #: ../data/ui/gummi.glade.h:5
-#, fuzzy
 msgid "text"
-msgstr "Жирный текст"
+msgstr "текст"
 
 #: ../data/ui/gummi.glade.h:6
 msgid "0"
 msgstr "0"
 
 #: ../data/ui/gummi.glade.h:7
+#, fuzzy
 msgid "headers"
-msgstr ""
+msgstr "заголовки"
 
 #: ../data/ui/gummi.glade.h:8
 #, fuzzy
 msgid "float captions"
-msgstr "Шаблон настроек:"
+msgstr "плавающие заголовки"
 
 #: ../data/ui/gummi.glade.h:9
+#, fuzzy
 msgid "Number of:"
-msgstr ""
+msgstr "Количество:"
 
 #: ../data/ui/gummi.glade.h:10
+#, fuzzy
 msgid "floats"
-msgstr ""
+msgstr "плавающие"
 
 #: ../data/ui/gummi.glade.h:11
+#, fuzzy
 msgid "math environments"
-msgstr ""
+msgstr "окружения math"
 
 #: ../data/ui/gummi.glade.h:12
 msgid "PDF Preview could not initialise."
-msgstr ""
+msgstr "Не удалось инициализировать предпросмотр PDF."
 
 #: ../data/ui/gummi.glade.h:13
 msgid "File:"
@@ -73,7 +74,7 @@ msgstr "Файл:"
 
 #: ../data/ui/gummi.glade.h:14
 msgid "Style:"
-msgstr ""
+msgstr "Стиль:"
 
 #: ../data/ui/gummi.glade.h:15
 msgid "Caption:"
@@ -215,15 +216,17 @@ msgstr "Документ из _шаблона"
 #: ../data/ui/gummi.glade.h:56
 #, fuzzy
 msgid "_Open..."
-msgstr "Открыть"
+msgstr "Открыть..."
 
 #: ../data/ui/gummi.glade.h:57
+#, fuzzy
 msgid "Save _As..."
-msgstr ""
+msgstr "Сохранить как..."
 
 #: ../data/ui/gummi.glade.h:58
+#, fuzzy
 msgid "_Export to PDF"
-msgstr ""
+msgstr "Экспортировать в PDF"
 
 #: ../data/ui/gummi.glade.h:59
 msgid "shouldnotseeme"
@@ -246,31 +249,35 @@ msgid "_Toolbar"
 msgstr "_Инструменты"
 
 #: ../data/ui/gummi.glade.h:64
+#, fuzzy
 msgid "_Right Pane"
-msgstr ""
+msgstr "Правая панель"
 
 #: ../data/ui/gummi.glade.h:65
+#, fuzzy
 msgid ""
 "Use SyncTeX to scroll preview to the part of the document that was last "
 "edited."
 msgstr ""
+"Использовать SyncTeX для прокрутки окна предпросмотра к той части документа, "
+"которая редактировалась последней."
 
 #: ../data/ui/gummi.glade.h:66
 msgid "Sync Preview with Editor"
-msgstr ""
+msgstr "Синхронизировать предпросмотр с редактором"
 
 #: ../data/ui/gummi.glade.h:67
 msgid "Page Layout in Preview"
-msgstr ""
+msgstr "Расположение страниц в предпросмотре"
 
 #: ../data/ui/gummi.glade.h:68
-#, fuzzy
 msgid "Single Page"
-msgstr "Однострочный"
+msgstr "Одна страница"
 
 #: ../data/ui/gummi.glade.h:69
+#, fuzzy
 msgid "Continuous, One Column"
-msgstr ""
+msgstr "Непрерывно, в один столбец"
 
 #: ../data/ui/gummi.glade.h:70
 msgid "_Fullscreen"
@@ -291,18 +298,20 @@ msgstr "_Обратный поиск"
 #: ../data/ui/gummi.glade.h:74
 #, fuzzy
 msgid "_Document"
-msgstr "Скомпилировать"
+msgstr "Документ"
 
 #: ../data/ui/gummi.glade.h:75
 #, fuzzy
 msgid "Compile _Document"
-msgstr "Скомпилировать"
+msgstr "Скомпилировать документ"
 
 #: ../data/ui/gummi.glade.h:76
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
 msgstr ""
+"Скомпилировать документ LaTeX\n"
+"и обновить предпросмотр."
 
 #: ../data/ui/gummi.glade.h:78
 #, fuzzy
@@ -310,20 +319,24 @@ msgid "Set Compilation Options"
 msgstr "Шаблон настроек:"
 
 #: ../data/ui/gummi.glade.h:79
+#, fuzzy
 msgid "_Cleanup Build Files"
-msgstr ""
+msgstr "Очистить файлы сборки"
 
 #: ../data/ui/gummi.glade.h:80
+#, fuzzy
 msgid "Run _Makeindex"
-msgstr ""
+msgstr "Запустить Makeindex"
 
 #: ../data/ui/gummi.glade.h:81
+#, fuzzy
 msgid "Run _BibTeX"
-msgstr ""
+msgstr "Запустить BibTeX"
 
 #: ../data/ui/gummi.glade.h:82
+#, fuzzy
 msgid "Document _Statistics"
-msgstr ""
+msgstr "Статистика документа"
 
 #: ../data/ui/gummi.glade.h:83
 #, fuzzy
@@ -331,12 +344,14 @@ msgid "Enable S_pell Checking"
 msgstr "Проверка орфографии для зыка:"
 
 #: ../data/ui/gummi.glade.h:84
+#, fuzzy
 msgid "Enable S_nippets"
-msgstr ""
+msgstr "Разрешить сниппеты"
 
 #: ../data/ui/gummi.glade.h:85
+#, fuzzy
 msgid "_Project"
-msgstr ""
+msgstr "Проект"
 
 #: ../data/ui/gummi.glade.h:86
 #, fuzzy
@@ -348,10 +363,12 @@ msgid ""
 "This function requires the current\n"
 "active document to be saved. "
 msgstr ""
+"Эта функция требует, чтобы активный\n"
+"документ был сохранён. "
 
 #: ../data/ui/gummi.glade.h:89
 msgid "Open Project"
-msgstr ""
+msgstr "Открыть проект"
 
 #: ../data/ui/gummi.glade.h:90
 #, fuzzy
@@ -363,16 +380,18 @@ msgid "_Help"
 msgstr "_Справка"
 
 #: ../data/ui/gummi.glade.h:92
+#, fuzzy
 msgid "User _Guide"
-msgstr ""
+msgstr "Руководство пользователя"
 
 #: ../data/ui/gummi.glade.h:93
 msgid "Check _Updates"
 msgstr "Проверить _обновления"
 
 #: ../data/ui/gummi.glade.h:94
+#, fuzzy
 msgid "New"
-msgstr ""
+msgstr "Новый"
 
 #: ../data/ui/gummi.glade.h:95
 msgid "Open"
@@ -445,15 +464,16 @@ msgstr "Область предпросмотра"
 
 #: ../data/ui/gummi.glade.h:112
 msgid "Build Log"
-msgstr ""
+msgstr "Журнал сборки"
 
 #: ../data/ui/gummi.glade.h:113
 msgid "Nr of files:"
-msgstr ""
+msgstr "Кол-во файлов:"
 
 #: ../data/ui/gummi.glade.h:114
+#, fuzzy
 msgid "Root path:"
-msgstr ""
+msgstr "Корневой путь:"
 
 #: ../data/ui/gummi.glade.h:115
 #, fuzzy
@@ -462,7 +482,7 @@ msgstr "Скомпилировать"
 
 #: ../data/ui/gummi.glade.h:116 ../data/ui/prefs.glade.h:9
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: ../data/ui/gummi.glade.h:117
 #, fuzzy
@@ -479,16 +499,20 @@ msgid ""
 "Select a file to add it \n"
 "to the active project. "
 msgstr ""
+"Выбрать файл и добавить его \n"
+"в активный проект. "
 
 #: ../data/ui/gummi.glade.h:121
 msgid ""
 "Remove the selected\n"
 "file from the project."
 msgstr ""
+"Удалить выбранный\n"
+"файл из проекта."
 
 #: ../data/ui/gummi.glade.h:123
 msgid "Project"
-msgstr ""
+msgstr "Проект"
 
 #: ../data/ui/gummi.glade.h:124
 msgid "Filename:"
@@ -507,14 +531,17 @@ msgid "N/A"
 msgstr "N/A"
 
 #: ../data/ui/gummi.glade.h:128
+#, fuzzy
 msgid "Detect"
-msgstr ""
+msgstr "Определить автоматически"
 
 #: ../data/ui/gummi.glade.h:129
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr ""
+"Определить, упоминается ли файл bibtex\n"
+"в текущем документе"
 
 #: ../data/ui/gummi.glade.h:131
 msgid "Compile"
@@ -537,11 +564,11 @@ msgstr "Заголовок"
 
 #: ../data/ui/gummi.glade.h:136
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: ../data/ui/gummi.glade.h:137
 msgid "Year"
-msgstr ""
+msgstr "Год"
 
 #: ../data/ui/gummi.glade.h:138
 msgid "filter:"
@@ -557,7 +584,7 @@ msgstr "Искать в:"
 
 #: ../data/ui/gummi.glade.h:141
 msgid "Replace with:"
-msgstr ""
+msgstr "Заменить на:"
 
 #: ../data/ui/gummi.glade.h:142
 msgid "Match entire word only"
@@ -572,16 +599,18 @@ msgid "Match case"
 msgstr "Учитывать регистр"
 
 #: ../data/ui/gummi.glade.h:145
+#, fuzzy
 msgid "_Replace"
-msgstr ""
+msgstr "Заменить"
 
 #: ../data/ui/gummi.glade.h:146
+#, fuzzy
 msgid "Replace _All"
-msgstr ""
+msgstr "Заменить все"
 
 #: ../data/ui/gummi.glade.h:147
 msgid "Save early.. save often!"
-msgstr ""
+msgstr "Сохраняйтесь чаще!"
 
 #: ../data/ui/gummi.glade.h:148
 #, fuzzy
@@ -593,19 +622,20 @@ msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr ""
+"Создать шаблон из \n"
+"текущего документа."
 
 #: ../data/ui/gummi.glade.h:151
 msgid "Deletes the selected template"
-msgstr ""
+msgstr "Удаляет выбранный шаблон"
 
 #: ../data/ui/gummi.glade.h:152
 msgid "Open the selected template"
-msgstr ""
+msgstr "Открыть выбранный шаблон"
 
 #: ../data/ui/gummi.glade.h:153
-#, fuzzy
 msgid "10"
-msgstr "0"
+msgstr "10"
 
 #: ../data/ui/prefs.glade.h:1
 #, fuzzy
@@ -623,15 +653,15 @@ msgstr "None"
 
 #: ../data/ui/prefs.glade.h:4
 msgid "Always"
-msgstr ""
+msgstr "Всегда"
 
 #: ../data/ui/prefs.glade.h:5
 msgid "Only when syncing preview with editor"
-msgstr ""
+msgstr "Только во время синхронизации предпросмотра с редактором"
 
 #: ../data/ui/prefs.glade.h:6
 msgid "Never"
-msgstr ""
+msgstr "Никогда"
 
 #: ../data/ui/prefs.glade.h:7
 msgid "Gummi Preferences"
@@ -673,24 +703,27 @@ msgid "View"
 msgstr "Вид"
 
 #: ../data/ui/prefs.glade.h:17
+#, fuzzy
 msgid "Tab stops"
-msgstr ""
+msgstr "Абзацы"
 
 #: ../data/ui/prefs.glade.h:18
 msgid "Tab width:"
-msgstr ""
+msgstr "Ширина табуляции:"
 
 #: ../data/ui/prefs.glade.h:19
+#, fuzzy
 msgid "Insert _spaces instead of tabs"
-msgstr ""
+msgstr "Вставлять пробелы вместо знаков табуляции"
 
 #: ../data/ui/prefs.glade.h:20
 msgid "Automatic Indentation"
 msgstr "Автоматический отступ"
 
 #: ../data/ui/prefs.glade.h:21
+#, fuzzy
 msgid "_Enable automatic indentation"
-msgstr ""
+msgstr "Разрешить автоматическую расстановку отступов"
 
 #: ../data/ui/prefs.glade.h:22
 msgid "Snippets"
@@ -698,7 +731,7 @@ msgstr "Фрагменты текста"
 
 #: ../data/ui/prefs.glade.h:23
 msgid "Configure snippets"
-msgstr ""
+msgstr "Настроить сниппеты"
 
 #: ../data/ui/prefs.glade.h:24
 #, fuzzy
@@ -728,7 +761,7 @@ msgstr "Цветовая схема"
 
 #: ../data/ui/prefs.glade.h:30
 msgid "Font & Colors"
-msgstr ""
+msgstr "Шрифты и цвета"
 
 #: ../data/ui/prefs.glade.h:31
 msgid "Default Text"
@@ -741,15 +774,15 @@ msgstr "Верстка команд:"
 
 #: ../data/ui/prefs.glade.h:33
 msgid "TeXLive with PdfTeX"
-msgstr ""
+msgstr "TeXLive с PdfTeX"
 
 #: ../data/ui/prefs.glade.h:34
 msgid "This program was not found on your system."
-msgstr ""
+msgstr "Данная программа не была найдена в вашей системе."
 
 #: ../data/ui/prefs.glade.h:35
 msgid "TeXLive with XeTeX"
-msgstr ""
+msgstr "TeXLive с XeTeX"
 
 #: ../data/ui/prefs.glade.h:36
 msgid "Rubber"
@@ -765,28 +798,30 @@ msgid "Typesetter options"
 msgstr "Верстка команд:"
 
 #: ../data/ui/prefs.glade.h:39
+#, fuzzy
 msgid "Use shell-escape"
-msgstr ""
+msgstr "Использовать экранирование"
 
 #: ../data/ui/prefs.glade.h:40
 msgid "Enable SyncTeX"
-msgstr ""
+msgstr "Разрешить использование SyncTeX"
 
 #: ../data/ui/prefs.glade.h:41
+#, fuzzy
 msgid "Compilation steps"
-msgstr ""
+msgstr "Шаги компиляции"
 
 #: ../data/ui/prefs.glade.h:42
 msgid "TeX → PDF"
-msgstr ""
+msgstr "TeX → PDF"
 
 #: ../data/ui/prefs.glade.h:43
 msgid "TeX → DVI → PDF"
-msgstr ""
+msgstr "TeX → DVI → PDF"
 
 #: ../data/ui/prefs.glade.h:44
 msgid "TeX → DVI → PS → PDF"
-msgstr ""
+msgstr "TeX → DVI → PS → PDF"
 
 #: ../data/ui/prefs.glade.h:45
 #, fuzzy
@@ -803,15 +838,15 @@ msgstr "секунд"
 
 #: ../data/ui/prefs.glade.h:48
 msgid "Use animated scroll"
-msgstr ""
+msgstr "Использовать анимированную прокрутку"
 
 #: ../data/ui/prefs.glade.h:49
 msgid "Cache size"
-msgstr ""
+msgstr "Размер кэша"
 
 #: ../data/ui/prefs.glade.h:50
 msgid "MB"
-msgstr ""
+msgstr "Мб"
 
 #: ../data/ui/prefs.glade.h:51
 #, fuzzy
@@ -830,11 +865,11 @@ msgstr "Компиляция PDF"
 
 #: ../data/ui/prefs.glade.h:54
 msgid "Automatically export PDF on document save"
-msgstr ""
+msgstr "Автоматически экспортировать в PDF при сохранении"
 
 #: ../data/ui/prefs.glade.h:55
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Разное"
 
 #: ../data/ui/prefs.glade.h:56
 msgid "_Reset defaults"
@@ -845,8 +880,9 @@ msgid "Snippets Manager"
 msgstr "Обозреватель фрагментов"
 
 #: ../data/ui/snippets.glade.h:2
+#, fuzzy
 msgid "_Reset"
-msgstr ""
+msgstr "Сброс"
 
 #: ../data/ui/snippets.glade.h:3
 #, fuzzy
@@ -855,7 +891,7 @@ msgstr "_Сбросить по умолчанию"
 
 #: ../data/ui/snippets.glade.h:4
 msgid "Snippets:"
-msgstr ""
+msgstr "Сниппеты:"
 
 #: ../data/ui/snippets.glade.h:5
 #, fuzzy
@@ -874,7 +910,7 @@ msgstr "_Изменить"
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Insert macro"
-msgstr ""
+msgstr "Вставить макрос"
 
 #: ../data/ui/snippets.glade.h:9
 #, fuzzy
@@ -887,8 +923,9 @@ msgid "filename"
 msgstr "Имя файла:"
 
 #: ../data/ui/snippets.glade.h:11
+#, fuzzy
 msgid "basename"
-msgstr ""
+msgstr "базовое имя"
 
 #: ../data/ui/snippets.glade.h:12
 msgid "Activation"
@@ -905,24 +942,24 @@ msgstr ""
 
 #: ../data/ui/snippets.glade.h:15
 msgid "Shortcut key:"
-msgstr ""
+msgstr "Горячая клавиша:"
 
 #: ../src/gui/gui-import.c:229
 #, c-format
 msgid "%s: No such file or directory\n"
-msgstr ""
+msgstr "%s: Нет такого файла или каталога\n"
 
 #: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
-msgstr ""
+msgstr "Не удалось инициализировать предпросмотр PDF."
 
 #: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
-msgstr ""
+msgstr "Документ пуст или повреждён."
 
 #: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
-msgstr ""
+msgstr "Отсутствует программа для компиляции."
 
 #: ../src/gui/gui-infoscreen.c:128
 msgid ""
@@ -931,6 +968,10 @@ msgid ""
 "are resolved. Additional information is available on\n"
 "the Build log tab.\n"
 msgstr ""
+"В активном документе есть ошибки. Функция синхронного предпросмотра\n"
+"продолжит работу автоматически, когда эти ошибки\n"
+"будет исправлены. Дополнительная информация доступна на вкладке\n"
+"\"Журнал сборки\".\n"
 
 #: ../src/gui/gui-infoscreen.c:133
 msgid ""
@@ -962,7 +1003,7 @@ msgstr ""
 #: ../src/gui/gui-main.c:524
 #, c-format
 msgid "Loading template ..."
-msgstr ""
+msgstr "Загрузка шаблона..."
 
 #: ../src/gui/gui-main.c:593
 #, fuzzy
@@ -985,14 +1026,14 @@ msgid "Error compiling bibliography file"
 msgstr "_Скомпилировать библиографию"
 
 #: ../src/gui/gui-main.c:634
-#, c-format
+#, fuzzy, c-format
 msgid "%s loaded"
-msgstr ""
+msgstr "%s загружен"
 
 #: ../src/gui/gui-main.c:744
 #, c-format
 msgid "Do you want to save the changes to %s?"
-msgstr ""
+msgstr "Вы хотите сохранить изменения в %s?"
 
 #: ../src/gui/gui-main.c:745
 #, fuzzy
@@ -1001,7 +1042,7 @@ msgstr "Создать новый документ"
 
 #: ../src/gui/gui-main.c:753
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Несохранённые изменения"
 
 #: ../src/gui/gui-main.c:775
 #, fuzzy
@@ -1010,7 +1051,7 @@ msgstr "Создать новый документ"
 
 #: ../src/gui/gui-main.c:778
 msgid "Select an image to insert"
-msgstr ""
+msgstr "Выберите изображение для вставки"
 
 #: ../src/gui/gui-main.c:779
 #, fuzzy
@@ -1029,7 +1070,7 @@ msgstr "Создать новый документ"
 
 #: ../src/gui/gui-main.c:814
 msgid "Export to PDF"
-msgstr ""
+msgstr "Экспортировать в PDF"
 
 #: ../src/gui/gui-main.c:817
 #, fuzzy
@@ -1043,7 +1084,7 @@ msgstr "Открыть файл"
 
 #: ../src/gui/gui-main.c:867
 msgid "Text files"
-msgstr ""
+msgstr "Текстовые файлы"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
@@ -1055,7 +1096,7 @@ msgstr "Изображение"
 
 #: ../src/gui/gui-main.c:898
 msgid "Bibtex files"
-msgstr ""
+msgstr "Файлы Bibtex"
 
 #: ../src/gui/gui-main.c:904
 #, fuzzy
@@ -1069,19 +1110,19 @@ msgstr ""
 
 #: ../src/gui/gui-menu.c:413
 msgid "Succesfully removed build files.."
-msgstr ""
+msgstr "Файлы сборки успешно удалены."
 
 #: ../src/gui/gui-menu.c:416
 msgid "Error removing build files.."
-msgstr ""
+msgstr "Ошибка при удалении файлов сборки."
 
 #: ../src/gui/gui-menu.c:423
 msgid "Running Makeindex.."
-msgstr ""
+msgstr "Запуск Makeindex..."
 
 #: ../src/gui/gui-menu.c:426
 msgid "Error running Makeindex.."
-msgstr ""
+msgstr "Ошибка при запуске Makeindex."
 
 #: ../src/gui/gui-menu.c:450
 #, fuzzy
@@ -1089,16 +1130,18 @@ msgid "Words in text"
 msgstr "Жирный текст"
 
 #: ../src/gui/gui-menu.c:451
+#, fuzzy
 msgid "Words in headers"
-msgstr ""
+msgstr "Слова в заголовках"
 
 #: ../src/gui/gui-menu.c:452
+#, fuzzy
 msgid "Words in float captions"
-msgstr ""
+msgstr "Слова в плавающих заголовках"
 
 #: ../src/gui/gui-menu.c:453
 msgid "Number of headers"
-msgstr ""
+msgstr "Число заголовков"
 
 #: ../src/gui/gui-menu.c:454
 msgid "Number of floats"
@@ -1117,9 +1160,9 @@ msgid "This function requires an active document"
 msgstr ""
 
 #: ../src/gui/gui-preview.c:904
-#, c-format
+#, fuzzy, c-format
 msgid "of %d"
-msgstr ""
+msgstr "из %d"
 
 #: ../src/gui/gui-snippets.c:329
 msgid ""
