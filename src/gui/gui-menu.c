@@ -733,7 +733,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Romanian: Alexandru-Eugen Ichim\n"
         "Russian: Kruvalig & Max Musatov\n"
         "Swedish: Kess Vargavind\n"
-        "Spanish: Carlos Salas Contreras\n";
+        "Spanish: Carlos Salas Contreras & Francisco Javier Serrador\n";
         
     const gchar* documenters[] = {"Guy Edwards", NULL};
 
