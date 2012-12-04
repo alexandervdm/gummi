@@ -210,7 +210,7 @@ void iofunctions_stop_autosave (void) {
         return;
     }
     else {
-        slog (L_ERROR, "Error occured stopping autosaving..");
+        slog (L_ERROR, "Error occured stopping autosaving..\n");
     }
 }
 
@@ -227,7 +227,7 @@ char* iofunctions_decode_text (gchar* text) {
 
     if (! (result = g_locale_to_utf8 (text, -1, &read, &written, &err))) {
         g_error_free (err);
-        slog (L_ERROR, "failed to convert text from default locale, trying "
+        slog (L_ERROR, "Failed to convert text from default locale, trying "
                 "ISO-8859-1\n");
         gsize in_size = strlen (text), out_size = in_size * 2;
         gchar* out = (gchar*)g_malloc (out_size);
