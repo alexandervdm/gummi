@@ -56,6 +56,8 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
                         gtk_builder_get_object (builder, "menu_projopen"));
     m->menu_projclose = GTK_MENU_ITEM(
                         gtk_builder_get_object (builder, "menu_projclose"));
+    m->menu_cut = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_cut"));
+    m->menu_copy = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_copy"));
     
     #ifdef WIN32
     // Please do NOT enable for nix, it has no place on a free OS ;)
@@ -271,6 +273,22 @@ gboolean on_menu_quit_activate (void) {
 /*******************************************************************************
  * EDIT MENU                                                                   *
  ******************************************************************************/
+
+G_MODULE_EXPORT
+void on_menu_edit_activate (GtkWidget *widget, void *user) {
+    if (g_active_editor == NULL)
+        return;
+
+    if (gtk_text_buffer_get_has_selection 
+	(GTK_TEXT_BUFFER(g_active_editor->buffer))) {
+        gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_cut), TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_copy), TRUE);
+        return;
+    }
+
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_cut), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_copy), FALSE);
+}
 
 G_MODULE_EXPORT
 void on_menu_undo_activate (GtkWidget *widget, void* user) {
@@ -753,11 +771,3 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (GTK_WIDGET (dialog));
 }
-
-
-
-
-
-
-
-
