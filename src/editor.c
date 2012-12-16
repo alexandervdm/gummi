@@ -367,9 +367,17 @@ gboolean editor_buffer_changed (GuEditor* ec) {
     return FALSE;
 }
 
-void editor_insert_package (GuEditor* ec, const gchar* package) {
+void editor_insert_package (GuEditor* ec, const gchar* package, const gchar* options) {
     GtkTextIter start, mstart, mend, sstart, send;
-    gchar* pkgstr = g_strdup_printf ("\\usepackage{%s}\n", package);
+    
+    gchar* pkgstr = NULL;
+    if (options == NULL) {
+        pkgstr = g_strdup_printf ("\\usepackage{%s}\n", package);
+    }
+    else {
+        pkgstr = g_strdup_printf ("\\usepackage[%s]{%s}\n", options, package);
+    }
+
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
     gtk_text_iter_forward_search (&start, (gchar*)"\\begin{document}", 0,
             &mstart, &mend, NULL);

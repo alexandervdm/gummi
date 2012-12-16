@@ -232,7 +232,7 @@ void on_import_image_apply_clicked (GtkWidget* widget, void* user) {
                 root_path = g_path_get_dirname (g_active_editor->filename);
             relative_path = utils_path_to_relative (root_path, imagefile);
             text =importer_generate_image(relative_path, caption, label, scale);
-            editor_insert_package (g_active_editor, "graphicx");
+            editor_insert_package (g_active_editor, "graphicx", NULL);
             editor_get_current_iter (g_active_editor, &current);
             gtk_text_buffer_begin_user_action (g_e_buffer);
             gtk_text_buffer_insert (g_e_buffer, &current,text,strlen (text));
@@ -254,7 +254,7 @@ void on_import_matrix_apply_clicked (GtkWidget* widget, void* user) {
     gint rows = gtk_adjustment_get_value (g_importgui->matrix_rows);
     gint cols = gtk_adjustment_get_value (g_importgui->matrix_cols);
     const gchar* text = importer_generate_matrix (bracket, rows, cols);
-    editor_insert_package (g_active_editor, "amsmath");
+    editor_insert_package (g_active_editor, "amsmath", NULL);
     editor_get_current_iter (g_active_editor, &current);
     gtk_text_buffer_begin_user_action (g_e_buffer);
     gtk_text_buffer_insert (g_e_buffer, &current, text, strlen (text));

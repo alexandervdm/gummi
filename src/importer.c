@@ -37,6 +37,8 @@
 #include "environment.h"
 #include "utils.h"
 
+extern Gummi* gummi;
+
 const gchar align_type[][4] = { "l", "c", "r" };
 const gchar bracket_type[][16] = { "matrix", "pmatrix", "bmatrix",
                                   "Bmatrix", "vmatrix", "Vmatrix" };
@@ -121,6 +123,14 @@ const gchar* importer_generate_image (const gchar* path, const gchar* caption,
 
     /* clear previous data */
     result[0] = 0;
+    
+    // Filepath notation corrections for Windows systems:
+    #ifdef WIN32
+    path = g_strjoinv("/", g_strsplit(path, "\\", -1));
+    if (utils_subinstr (" ", path, FALSE)) {
+        editor_insert_package (g_active_editor, "grffile", "space");
+    }
+    #endif
 
     snprintf (scale_str, 16, "%.2f", scale);
 

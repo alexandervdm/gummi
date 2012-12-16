@@ -91,7 +91,7 @@ void editor_fill_buffer (GuEditor* ec, const gchar* text);
 
 /* editor_grab_buffer will return a newly allocated string */
 gchar* editor_grab_buffer (GuEditor* ec);
-void editor_insert_package (GuEditor* ec, const gchar* package);
+void editor_insert_package (GuEditor* ec, const gchar* package, const gchar* options);
 void editor_insert_bib (GuEditor* ec, const gchar* package);
 void editor_set_selection_textstyle (GuEditor* ec, const gchar* type);
 void editor_apply_errortags (GuEditor* ec, gint* lines);
