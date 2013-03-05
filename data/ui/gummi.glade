@@ -2636,7 +2636,6 @@ active document to be saved. </property>
                                 <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkComboBox" id="combo_sizes">
-                                    <property name="width_request">125</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="model">list_sizes</property>
