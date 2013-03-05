@@ -37,7 +37,6 @@
 #include "gui-main.h"
 #include "motion.h"
 #include "project.h"
-#include "update.h"
 
 extern Gummi* gummi;
 extern GummiGui* gui;
@@ -697,17 +696,6 @@ void on_menu_guide_activate (GtkWidget *widget, void *user) {
     if (error) {
         slog (L_ERROR, "Can't open user guide: %s\n", error->message);
     }
-}
-
-G_MODULE_EXPORT
-void on_menu_update_activate (GtkWidget *widget, void *user) {
-    #ifdef WIN32
-        slog (L_G_INFO, "To be implemented for win32..\n");
-    #else
-        gboolean ret = updatecheck (gui->mainwindow);
-        if (!ret)
-            slog (L_G_ERROR, "Update check failed!\n");
-    #endif
 }
 
 G_MODULE_EXPORT

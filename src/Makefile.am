@@ -36,7 +36,6 @@ gummi_SOURCES = biblio.c  biblio.h \
 		signals.c signals.h \
 		snippets.c snippets.h \
 		template.c template.h \
-		update.c update.h \
 		utils.c utils.h \
 		tabmanager.c tabmanager.h \
 		constants.h porting.h \
