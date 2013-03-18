@@ -59,7 +59,5 @@ src/tabmanager.c
 src/tabmanager.h
 src/template.c
 src/template.h
-src/update.c
-src/update.h
 src/utils.c
 src/utils.h
