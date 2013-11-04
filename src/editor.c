@@ -201,13 +201,22 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
 	#endif
 
     if (filename) {
-        gchar* base = g_path_get_basename (filename);
-        gchar* dir = g_path_get_dirname (filename);
-        ec->filename = g_strdup (filename);
+        gchar* fname = NULL;
+        if (!g_path_is_absolute (fname)) {
+            fname = g_strdup_printf ("%s%c%s", g_get_current_dir(),
+                                     G_DIR_SEPARATOR, filename);
+        } else {
+            fname = g_strdup (filename);
+        }
+
+        gchar* base = g_path_get_basename (fname);
+        gchar* dir = g_path_get_dirname (fname);
+        ec->filename = g_strdup (fname);
         ec->basename = g_strdup_printf ("%s%c.%s", dir, G_DIR_SEPARATOR, base);
         ec->workfile = g_strdup_printf ("%s.swp", ec->basename);
         ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", C_TMPDIR,
                                        G_DIR_SEPARATOR, base);
+        g_free (fname);
         g_free (base);
         g_free (dir);
     } else {
