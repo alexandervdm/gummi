@@ -1,6 +1,6 @@
 /**
  * @file    gui-preview.c
- * @brief 
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
@@ -120,10 +120,10 @@ static void block_handlers_current_page(GuPreviewGui* pc);
 static void unblock_handlers_current_page(GuPreviewGui* pc);
 static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
 
-static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
+static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event,
                                          gpointer   user_data);
-                                         
-                                         
+
+
 static gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user);
 
 /* Functions for layout and painting */
@@ -164,7 +164,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
     p->previewgui_viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
-    p->previewgui_toolbar = 
+    p->previewgui_toolbar =
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_toolbar"));
     p->statuslight =
         GTK_WIDGET (gtk_builder_get_object (builder, "tool_statuslight"));
@@ -244,8 +244,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     // The scale to correct for the users DPI
     gdouble screen_dpi = gdk_screen_get_resolution (
 						 gdk_screen_get_default());
-            
-	/* the gdk screen functions do not work properly on win32, so we 
+
+	/* the gdk screen functions do not work properly on win32, so we
 	 * should probably return a default value (or find an alternative)*/
     if (screen_dpi == -1) screen_dpi = 96.0;
 	gdouble poppler_scale = screen_dpi / 72.0;
@@ -256,17 +256,17 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     }
 
     p->fit_mode = FIT_NONE;
-    
+
     /* TODO: temporary measure because the config system does not look up
              default value if the setting is undefined */
     if (STR_EQU (config_get_value("zoommode"), "")) {
         config_set_value("zoommode", "pagewidth");
     }
-    
+
     if (STR_EQU (config_get_value("animated_scroll"), "")) {
         config_set_value("animated_scroll", "always");
     }
-    
+
     if (STR_EQU (config_get_value("cache_size"), "")) {
         config_set_value("cache_size", "150");
     }
@@ -280,7 +280,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
                     p->page_layout_one_column), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
     }
-    
+
     p->sync_nodes = NULL;
 
     slog (L_INFO, "using libpoppler %s\n", poppler_get_version ());
@@ -432,11 +432,11 @@ static void update_fit_scale(GuPreviewGui* pc) {
             pc->previewgui_viewport->view_window);
 #else
         gint view_width_without_bar, view_height_without_bar;
-        gdk_drawable_get_size (pc->previewgui_viewport->view_window, 
-                                &view_width_without_bar, 
+        gdk_drawable_get_size (pc->previewgui_viewport->view_window,
+                                &view_width_without_bar,
                                 &view_height_without_bar);
 #endif
-    
+
 
     if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(
                     GTK_SCROLLED_WINDOW(pc->scrollw)))) {
@@ -498,10 +498,10 @@ static void update_fit_scale(GuPreviewGui* pc) {
     slog(L_DEBUG, "Document size wrong for fitting, changing scale from %f "
             "to %f.\n", pc->scale, scale);
 
-    // We do not really know where to center the scroll that might appear, 
-    // passing the center of the window causes the toolbar to not be darn 
+    // We do not really know where to center the scroll that might appear,
+    // passing the center of the window causes the toolbar to not be darn
     // (don't ask me why).
-    // Passing NAN as position to center the scrolling on, causes no 
+    // Passing NAN as position to center the scrolling on, causes no
     // scrolling to happen (this is checked in previewgui_goto_xy)
     // So this is basically a bugfix - but I could not see any unwanted side
     // effects up till now...
@@ -547,7 +547,7 @@ static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
     //L_F_DEBUG;
 
     pc->current_page = page;
-    
+
     update_page_input(pc);
 
 }
@@ -574,21 +574,21 @@ static void update_page_positions(GuPreviewGui* pc) {
 
     if (is_continuous(pc)) {
         gint y = get_document_margin(pc);
-        
+
         for (i=0; i<pc->n_pages; i++) {
             page_inner(pc, i).y = y;
             page_inner(pc, i).width = get_page_width(pc, i)*pc->scale;
-            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2, 
+            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2,
                                        get_document_margin(pc));
             page_inner(pc, i).height = get_page_height(pc, i)*pc->scale;
             page_inner(pc, i).layer = 0;
-            
+
             y += page_inner(pc, i).height + get_page_margin(pc);
         }
-        
+
         y -= get_page_margin(pc);
         y += get_document_margin(pc);
-        
+
         if (y < fov.height) {
             gint diff = (fov.height - y) / 2;
             for (i=0; i<pc->n_pages; i++) {
@@ -596,19 +596,19 @@ static void update_page_positions(GuPreviewGui* pc) {
             }
         }
     } else {
-        
+
         for (i=0; i<pc->n_pages; i++) {
             page_inner(pc, i).height = get_page_height(pc, i)*pc->scale;
             page_inner(pc, i).width = get_page_width(pc, i)*pc->scale;
             page_inner(pc, i).y = MAX((fov.height - page_inner(pc, i).height)/2,
                                        get_document_margin(pc));
-            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2, 
+            page_inner(pc, i).x = MAX((fov.width - page_inner(pc, i).width)/2,
                                        get_document_margin(pc));
             page_inner(pc, i).layer = i;
         }
-        
+
     }
-    
+
     for (i=0; i<pc->n_pages; i++) {
         page_outer(pc, i).x = page_inner(pc, i).x - 1;
         page_outer(pc, i).y = page_inner(pc, i).y - 1;
@@ -618,7 +618,7 @@ static void update_page_positions(GuPreviewGui* pc) {
     }
 }
 
-static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event, 
+static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event,
                                          gpointer   user_data) {
     update_page_input(user_data);
     return FALSE;
@@ -697,12 +697,12 @@ static void previewgui_invalidate_renderings(GuPreviewGui* pc) {
     for (i = 0; i < pc->n_pages; i++) {
         remove_page_rendering(pc, i);
     }
-    
+
     if (pc->cache_size != 0) {
         slog(L_ERROR, "Cleared all page renderings, but cache not empty. "
                 "Cache size is %iB.\n", pc->cache_size);
     }
-    
+
 }
 
 static gboolean remove_page_rendering(GuPreviewGui* pc, gint page) {
@@ -713,9 +713,9 @@ static gboolean remove_page_rendering(GuPreviewGui* pc, gint page) {
 
     cairo_surface_destroy((pc->pages + page)->rendering);
     (pc->pages + page)->rendering = NULL;
-    pc->cache_size -= page_inner(pc, page).width * 
-            page_inner(pc, page).height * BYTES_PER_PIXEL; 
-            
+    pc->cache_size -= page_inner(pc, page).width *
+            page_inner(pc, page).height * BYTES_PER_PIXEL;
+
     return TRUE;
 }
 
@@ -840,8 +840,8 @@ static void update_scaled_size(GuPreviewGui* pc) {
     } else {
         pc->height_scaled = get_page_height(pc, pc->current_page) * pc->scale;
     }
-    
-    
+
+
 
     pc->width_scaled = pc->width_pages*pc->scale;
 }
@@ -859,7 +859,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     gdouble old_y = (gtk_adjustment_get_value(pc->vadj) + y) /
             (pc->height_scaled + 2*get_document_margin(pc));
 
-    // We have to do this before changing the scale, as otherwise the cache 
+    // We have to do this before changing the scale, as otherwise the cache
     // size would be calcualted wrong!
     previewgui_invalidate_renderings(pc);
 
@@ -931,9 +931,9 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     pc->restore_x = -1;
     pc->restore_y = -1;
 
-    load_document(pc, FALSE);   
+    load_document(pc, FALSE);
 
-    // This is mainly for debugging - to make sure the boxes in the preview disappear.    
+    // This is mainly for debugging - to make sure the boxes in the preview disappear.
     synctex_clear_sync_nodes(pc);
 
     // Restore scale and fit mode
@@ -958,7 +958,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
 
     gtk_widget_queue_draw (pc->drawarea);
-    
+
     previewgui_goto_page (pc, 0);
 }
 
@@ -988,36 +988,36 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
     load_document(pc, TRUE);
     update_page_positions(pc);
 
-    if (config_get_value ("synctex") && config_get_value ("autosync") && 
+    if (config_get_value ("synctex") && config_get_value ("autosync") &&
             synctex_run_parser(pc, sync_to, tex_file)) {
-        
-        
+
+
         SyncNode *node;
         if ((node = synctex_one_node_found(pc)) == NULL) {
-            // See if the nodes are so close they all fit in the window 
+            // See if the nodes are so close they all fit in the window
             // in that case we just merge them
             synctex_merge_nodes(pc);
         }
-        
+
 #if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
         if ((node = synctex_one_node_found(pc)) == NULL) {
             // Search for words in the pdf
             synctex_filter_results(pc, sync_to);
         }
-        // Here we could try merging again - but only with nodes which 
+        // Here we could try merging again - but only with nodes which
         // contained the searched text
 #endif
-        
+
         // If we have only one node left/selected, scroll ot it.
         if ((node = synctex_one_node_found(pc)) != NULL) {
            synctex_scroll_to_node(pc, node);
         }
-        
+
     } else {
-        
-        // This is mainly for debugging - to make sure the boxes in the preview disappear.  
+
+        // This is mainly for debugging - to make sure the boxes in the preview disappear.
         synctex_clear_sync_nodes(pc);
-        
+
         if (pc->current_page >= pc->n_pages) {
             previewgui_goto_page (pc, pc->n_pages-1);
         }
@@ -1051,26 +1051,26 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
          * SyncTeX can return several nodes. It seems best to use the last one, as
          * this one rarely is below (usually slighly above) the edited line.
          */
-         
+
         while ((node = synctex_next_result(sync_scanner))) {
-        
+
             SyncNode *sn = g_new0(SyncNode, 1);
-        
+
             sn->page = synctex_node_page(node) - 1; // syncTeX counts from 1, but poppler from 0
             sn->x = synctex_node_box_visible_h(node);
             sn->y = synctex_node_box_visible_v(node);
             sn->width = synctex_node_box_visible_width(node);
             sn->height = synctex_node_box_visible_height(node);
             sn->y -= sn->height;    // We want y to be the upper value
-            
+
             pc->sync_nodes = g_slist_append(pc->sync_nodes, sn);
-            
+
         }
     }
 
     synctex_scanner_free(sync_scanner);
-    
-    return TRUE;    
+
+    return TRUE;
 }
 
 #if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
@@ -1084,51 +1084,51 @@ static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to) {
     GtkTextIter wordStart = *sync_to;
     int i;
     for (i=0; i<5; i++) {
-    
+
         gtk_text_iter_backward_word_start(&wordStart);
-        
+
         GtkTextIter wordEnd = wordStart;
         gtk_text_iter_forward_word_end(&wordEnd);
-        
+
 
         if (gtk_text_iter_compare(&wordStart, &wordEnd) >= 0) {
             break;
         }
-            
+
         gchar *word = g_strconcat("\\b", gtk_text_iter_get_text(&wordStart, &wordEnd), "\\b", NULL);
-        
+
         //gchar *pattern g_strconcat
-        
+
         slog(L_DEBUG, "Searching for word \"%s\"\n", word);
 
         GSList *nl = pc->sync_nodes;
-        
+
         while (nl != NULL) {
-        
+
             SyncNode *sn =  nl->data;
-            
+
             PopplerRectangle selection;
             selection.x1 = sn->x;               // lower left corner
             selection.y1 = sn->y + sn->height;  // lower left corner
             selection.x2 = sn->x + sn->width;   // upper right corner
             selection.y2 = sn->y;               // upper right corner
-            
+
             PopplerPage* ppage = poppler_document_get_page(pc->doc, sn->page);
-            gchar *node_text = poppler_page_get_selected_text(ppage, 
+            gchar *node_text = poppler_page_get_selected_text(ppage,
                         POPPLER_SELECTION_WORD, &selection);
-            
+
             //slog(L_DEBUG, "Node contains text\"%s\"\n", node_text);
-            
+
             if (g_regex_match_simple(word, node_text, 0, 0)) {
                 sn->score += 1;
             }
-            
+
             g_free(node_text);
             g_object_unref(ppage);
-        
+
             nl = nl->next;
         }
-        
+
         g_free(word);
     }
 }
@@ -1136,22 +1136,22 @@ static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to) {
 
 
 static SyncNode* synctex_one_node_found(GuPreviewGui* pc) {
-    
+
     if (g_slist_length(pc->sync_nodes) == 1) {
         SyncNode *node = g_slist_nth_data(pc->sync_nodes, 0);
         node->score = -1;
         return node;
     }
-    
+
     // See if we have found a single match
     GSList *nl = pc->sync_nodes;
-    
+
     gint score_max_id = -1;
     gint score_other = 0;
     gint n = 0;
     while (nl != NULL) {
         SyncNode *sn =  nl->data;
-    
+
         if (sn->score > score_other) {
             score_other = sn->score;
             score_max_id = n;
@@ -1160,17 +1160,17 @@ static SyncNode* synctex_one_node_found(GuPreviewGui* pc) {
             // the first one..
             score_max_id = -1;
         }
-    
+
         nl = nl->next;
         n++;
     }
-    
+
     if (score_max_id >= 0) {
         SyncNode *node = g_slist_nth_data(pc->sync_nodes, score_max_id);
         node->score = -1;
         return node;
     }
-    
+
     return NULL;
 }
 
@@ -1180,47 +1180,47 @@ static void synctex_merge_nodes(GuPreviewGui* pc) {
     gint y1 = INT_MAX;   // upper left corner
     gint x2 = -1;   // lower right corner
     gint y2 = -1;   // lower right corner
-    
+
     gint page = -1;
-    
+
     GSList *nl = pc->sync_nodes;
-    
+
     while (nl != NULL) {
-    
+
         SyncNode *sn =  nl->data;
-        
-        
+
+
         slog(L_DEBUG, "Nodes (%i, %i), w=%i, h=%i, P=%i\n", sn->x, sn->y, sn->width, sn->height, sn->page);
-        
+
         if (page == -1) {
             page = sn->page;
         } else if (page != sn->page) {
             return; // The Nodes are on different pages. We don't hande this for now...
         }
-        
+
         x1 = MIN(x1, sn->x);
         y1 = MIN(y1, sn->y);
         x2 = MAX(x2, sn->x + sn->width);
         y2 = MAX(y2, sn->y + sn->height);
-    
+
         nl = nl->next;
     }
-    
+
     if ((y2-y1)*pc->scale < gtk_adjustment_get_page_size(pc->vadj)/3) {
         SyncNode *sn = g_new0(SyncNode, 1);
         sn->y = y1;
         sn->x = x1;
-        
+
         sn->width = x2 - x1;
         sn->height = y2 - y1;
         sn->page = page;
-        
+
         slog(L_DEBUG, "Merged nodes to (%i, %i), w=%i, h=%i, p=%i\n", sn->x, sn->y, sn->width, sn->height, sn->page);
-        
+
         synctex_clear_sync_nodes(pc);
         pc->sync_nodes = g_slist_append(pc->sync_nodes, sn);
     }
-    
+
 }
 
 static void synctex_clear_sync_nodes(GuPreviewGui* pc) {
@@ -1229,10 +1229,10 @@ static void synctex_clear_sync_nodes(GuPreviewGui* pc) {
         SyncNode *node = el->data;
         g_free(node);
         node = NULL;
-        
+
         el = el->next;
     }
-    
+
     g_slist_free (pc->sync_nodes);
     pc->sync_nodes = NULL;
 }
@@ -1245,7 +1245,7 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
     gdouble node_x = MAX(get_document_margin(pc),
                           (adjpage_width - pc->width_scaled) / 2);
     gdouble node_y;
-    
+
     if (is_continuous(pc)) {
         node_y = MAX(get_document_margin(pc),
                                (adjpage_height - pc->height_scaled) / 2);
@@ -1258,7 +1258,7 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
         gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
         node_y = MAX(get_document_margin(pc), (adjpage_height-height)/2);
     }
-    
+
     node_y += node->y * pc->scale;
     node_x += node->x * pc->scale;
     gdouble node_height = node->height * pc->scale;
@@ -1268,7 +1268,7 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
     gdouble view_width = adjpage_width;
     gdouble view_y = gtk_adjustment_get_value(pc->vadj);
     gdouble view_height = adjpage_height;
-    
+
     slog(L_DEBUG, "node: (%f, %f), w=%f, h=%f\n", node_x, node_y, node_width,
             node_height);
     slog(L_DEBUG, "view: (%f, %f), w=%f, h=%f\n", view_x, view_y,
@@ -1291,7 +1291,7 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
     } else {
         to_y = node_y;
     }
-        
+
     if (node_x > view_x && node_x + node_width < view_x + view_width) {
         to_x = view_x;
     } else if (node_width < view_width) {
@@ -1299,12 +1299,12 @@ static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
     } else {
         to_x = node_x;
     }
-    
+
     if (!is_continuous(pc) && pc->current_page != node->page) {
-    
+
         previewgui_goto_page (pc, node->page);
         previewgui_goto_xy(pc, to_x, to_y);
-    
+
     } else {
         if (STR_EQU (config_get_value ("animated_scroll"), "always") ||
             STR_EQU (config_get_value ("animated_scroll"), "autosync")) {
@@ -1380,11 +1380,11 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
     }
     //L_F_DEBUG;
 
-    x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) - 
+    x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) -
                     gtk_adjustment_get_page_size(pc->hadj));
-    y = CLAMP(y, 0, gtk_adjustment_get_upper(pc->vadj) - 
+    y = CLAMP(y, 0, gtk_adjustment_get_upper(pc->vadj) -
                     gtk_adjustment_get_page_size(pc->vadj));
-        
+
     // Minimize the number of calls to on_adjustment_changed
     block_handlers_current_page(pc);
     gtk_adjustment_set_value(pc->hadj, x);
@@ -1466,10 +1466,10 @@ static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
         PopplerPage* ppage = poppler_document_get_page(pc->doc, page);
         p->rendering = do_render(ppage, pc->scale, p->width, p->height);
         g_object_unref(ppage);
-        pc->cache_size += page_inner(pc, page).width * 
+        pc->cache_size += page_inner(pc, page).width *
                 page_inner(pc, page).height * BYTES_PER_PIXEL;
-    
-        // Trigger the garbage collector to be run - it will exit if nothing is TBD.    
+
+        // Trigger the garbage collector to be run - it will exit if nothing is TBD.
         g_idle_add( (GSourceFunc) run_garbage_collector, pc);
     }
 
@@ -1528,7 +1528,7 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
     newpage -= 1;
     newpage = MAX(newpage, 0);
     newpage = MIN(newpage, gui->previewgui->n_pages);
-    
+
     if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
         previewgui_scroll_to_page (gui->previewgui, newpage);
     } else {
@@ -1613,15 +1613,15 @@ static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y
 
     GSList *nl = pc->sync_nodes;
     while (nl != NULL && in_debug_mode()) {
-    
+
         SyncNode *sn =  nl->data;
-    
+
         if (sn->page == page) {
             gint mark_x = sn->x * pc->scale;
             gint mark_y = sn->y * pc->scale;
             gint mark_width = sn->width * pc->scale;
             gint mark_height = sn->height * pc->scale;
-        
+
             cairo_set_line_width (cr, 1);
             if (sn->score < 0) {
                 cairo_set_source_rgb (cr, 1, 0, 0); // Mark selected node red
@@ -1633,16 +1633,16 @@ static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y
             cairo_rectangle (cr, x+mark_x-1, y+mark_y-1, mark_width+2, mark_height+2);
             cairo_stroke (cr);
         }
-        
+
         nl = nl->next;
     }
-    
+
     cairo_surface_destroy(rendering);
 }
 
 static inline LayeredRectangle get_fov(GuPreviewGui* pc) {
     //L_F_DEBUG;
-    
+
     LayeredRectangle fov;
     fov.x = gtk_adjustment_get_value(pc->hadj);
     fov.y = gtk_adjustment_get_value(pc->vadj);
@@ -1653,13 +1653,13 @@ static inline LayeredRectangle get_fov(GuPreviewGui* pc) {
     } else {
         fov.layer = pc->current_page;
     }
-    
+
     return fov;
 }
 
 /**
  *  Tests for the intersection of both rectangles src1 and src2.
- *  If dest is set and there is a intersection, it will be the intersecting, 
+ *  If dest is set and there is a intersection, it will be the intersecting,
  *  rectangle. If dest is set but src1 and src2 do not intersect, dest's width
  *  and height will be set to 0. All other values will be undefined. Dest may be
  *  the same as src1 or src2.
@@ -1677,14 +1677,14 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
         }
         return FALSE;
     }
-                                  
+
     if (src1->layer == src2->layer) {
-   
+
         gint dest_x = MAX (src1->x, src2->x);
         gint dest_y = MAX (src1->y, src2->y);
         gint dest_x2 = MIN (src1->x + src1->width, src2->x + src2->width);
         gint dest_y2 = MIN (src1->y + src1->height, src2->y + src2->height);
-        
+
         if (dest_x2 > dest_x && dest_y2 > dest_y) {
             if (dest) {
                 dest->x = dest_x;
@@ -1696,7 +1696,7 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
             return TRUE;
         }
     }
-    
+
     if (dest) {
         dest->width = 0;
         dest->height = 0;
@@ -1723,14 +1723,14 @@ static gboolean layered_rectangle_union(const LayeredRectangle *src1,
         }
         return FALSE;
     }
-    
+
     if (dest) {
-    
+
         gint dest_x = MIN (src1->x, src2->x);
         gint dest_y = MIN (src1->y, src2->y);
         gint dest_x2 = MAX (src1->x + src1->width, src2->x + src2->width);
         gint dest_y2 = MAX (src1->y + src1->height, src2->y + src2->height);
-    
+
         dest->x = dest_x;
         dest->y = dest_y;
         dest->width = dest_x2 - dest_x;
@@ -1739,7 +1739,7 @@ static gboolean layered_rectangle_union(const LayeredRectangle *src1,
             dest->layer = src1->layer;
         }
     }
-    
+
     if (src1->layer != src2->layer) {
         return FALSE;
     }
@@ -1747,18 +1747,18 @@ static gboolean layered_rectangle_union(const LayeredRectangle *src1,
 }*/
 
 gboolean run_garbage_collector(GuPreviewGui* pc) {
-    
+
     gint max_cache_size = atoi (config_get_value ("cache_size")) * 1024 * 1024;
-    
+
     if (pc->cache_size < max_cache_size) {
         return FALSE;
     }
-    
+
     LayeredRectangle fov = get_fov(pc);
-    
+
     gint first = -1;
     gint last = -1;
-    
+
     gint i;
     for (i=0; i < pc->n_pages; i++) {
         if (layered_rectangle_intersect(&fov, &(page_inner(pc, i)), NULL)) {
@@ -1768,12 +1768,12 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
             last = i;
         }
     }
-    
+
     if (first == -1) {
         slog(L_ERROR, "No pages are shown. Clearing whole cache.\n");
         previewgui_invalidate_renderings(pc);
     }
-    
+
     gint n=0;
     gint dist = MAX(first, pc->n_pages - 1 - last);
     for (; dist > 0; dist--) {
@@ -1788,7 +1788,7 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
         if (pc->cache_size < max_cache_size / 2) {
             break;
         }
-        
+
         gint down = last + dist;
         if (down < pc->n_pages && down >= 0) {
             if (!layered_rectangle_intersect(&fov, &(page_inner(pc, down)), NULL)) {
@@ -1801,14 +1801,14 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
             break;
         }
     }
-    
+
     if (n == 0) {
         slog(L_DEBUG, "Could not delete any pages from cache. All pages are "
                 "currently visible.\n");
     } else {
         slog(L_DEBUG, "Deleted %i pages from cache.\n", n);
     }
-        
+
     return FALSE;   // We only want this to run once - so always return false!
 }
 
@@ -1999,7 +1999,7 @@ static void draw2page(GuPreviewGui* pc, gint dx, gint dy, gint *pp, gint *px, gi
 
     *px -= MAX(get_document_margin(pc),
                           (adjpage_width - pc->width_scaled) / 2);
-    
+
     if (is_continuous(pc)) {
         *py -= MAX(get_document_margin(pc),
                                (adjpage_height - pc->height_scaled) / 2);
@@ -2017,7 +2017,7 @@ static void draw2page(GuPreviewGui* pc, gint dx, gint dy, gint *pp, gint *px, gi
         *py -= MAX(get_document_margin(pc), (adjpage_height-height)/2);
         *pp += pc->current_page;
     }
-    
+
     //TODO Check if we still are inside a page...
 }
 
@@ -2032,36 +2032,36 @@ gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
     gint x;
     gint y;
     draw2page(pc, e->x, e->y, &page, &x, &y);
-    
+
     if (e->state & GDK_CONTROL_MASK) {
-    
-        
+
+
         slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
-    
+
         synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
-        
+
         if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
             synctex_node_t node;
             /*
              * SyncTeX can return several nodes. It seems best to use the last one, as
              * this one rarely is below (usually slighly above) the edited line.
              */
-             
+
             if ((node = synctex_next_result(sync_scanner))) {
-            
+
                 const gchar *file = synctex_scanner_get_name(sync_scanner, synctex_node_tag(node));
                 gint line = synctex_node_line(node);
-            
+
                 slog(L_DEBUG, "File \"%s\", Line %i\n", file, line);
-                
+
                 // FIXME: Go to the editor containing the file "file"!
                 editor_scroll_to_line(gummi_get_active_editor(), line-1);
-                
+
             }
         }
 
         synctex_scanner_free(sync_scanner);
-    
+
     }
 
     pc->prev_x = e->x;
@@ -2096,9 +2096,9 @@ gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
 
     update_fit_scale(pc);
     update_page_positions(pc);
-    
+
     fov = get_fov(pc);
-    previewgui_goto_xy (pc, x_rel*pc->width_scaled - fov.width/2, 
+    previewgui_goto_xy (pc, x_rel*pc->width_scaled - fov.width/2,
                             y_rel*pc->height_scaled - fov.height/2);
 
     return FALSE;

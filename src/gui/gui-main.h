@@ -1,10 +1,10 @@
 /**
  * @file   gui-main.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -47,9 +47,9 @@
 #define RECENT_FILES_NUM 5
 #define TEXCOUNT_OUTPUT_LINES 7
 
-/* These macros should be only used in GUI related classes 
+/* These macros should be only used in GUI related classes
  * which acted as syntax sugar */
-/* These macros should be only used in GUI related classes 
+/* These macros should be only used in GUI related classes
  * which acted as syntax sugar */
 #define g_e_buffer GTK_TEXT_BUFFER (g_active_editor->buffer)
 #define g_e_view GTK_TEXT_VIEW (g_active_editor->view)
@@ -59,7 +59,7 @@
 
 
 #define GUMMI_GUI(x) ((GummiGui*)x)
-typedef struct _GummiGui GummiGui; 
+typedef struct _GummiGui GummiGui;
 
 struct _GummiGui {
     GuMenuGui* menugui;
@@ -92,16 +92,16 @@ struct _GummiGui {
     GtkBuilder *builder;
     GtkWidget *docstatswindow;
     GtkWidget *bibcompile;
-    
+
     GtkMenuItem* menu_runbibtex;
     GtkMenuItem* menu_runmakeindex;
-    
+
     #ifdef WIN32
 		GtkWidget* w32label;
 		GtkWidget* w32button;
 		GtkWidget* w32window;
     #endif
-    
+
     guint statusid;
     gchar* recent_list[5];
 };
@@ -121,7 +121,7 @@ void gui_main (GtkBuilder* builder);
 gboolean gui_quit (void);
 
 
-void gui_set_filename_display (GuTabContext* tc, 
+void gui_set_filename_display (GuTabContext* tc,
                                         gboolean title, gboolean label);
 void gui_set_window_title (const gchar* filename, const gchar* text);
 

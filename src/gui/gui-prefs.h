@@ -62,7 +62,7 @@ struct _GuPrefsGui {
     GtkComboBox* compile_scheme;
     GtkSpinButton* compile_timer;
     GtkSpinButton* spin_cache_size;
-    
+
     GtkToggleButton* typ_pdflatex;
     GtkToggleButton* typ_xelatex;
     GtkToggleButton* typ_rubber;
@@ -70,10 +70,10 @@ struct _GuPrefsGui {
 
     GtkToggleButton* method_texpdf;
     GtkToggleButton* method_texdvipdf;
-    GtkToggleButton* method_texdvipspdf;    
+    GtkToggleButton* method_texdvipspdf;
 
     GtkComboBox* combo_animated_scroll;
-    
+
     GtkVBox* view_box;
     GtkHBox* editor_box;
     GtkHBox* compile_box;

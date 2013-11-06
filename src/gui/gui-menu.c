@@ -48,7 +48,7 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuMenuGui* m = g_new0 (GuMenuGui, 1);
-    
+
     m->menu_projcreate = GTK_MENU_ITEM(
                         gtk_builder_get_object (builder, "menu_projcreate"));
     m->menu_projopen = GTK_MENU_ITEM(
@@ -57,37 +57,37 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
                         gtk_builder_get_object (builder, "menu_projclose"));
     m->menu_cut = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_cut"));
     m->menu_copy = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_copy"));
-    
+
     #ifdef WIN32
     // Please do NOT enable for nix, it has no place on a free OS ;)
-    GtkWidget* donate = 
+    GtkWidget* donate =
 		gtk_image_menu_item_new_with_label ("Support this Project");
-    gtk_image_menu_item_set_image 
-        (GTK_IMAGE_MENU_ITEM(donate), 
+    gtk_image_menu_item_set_image
+        (GTK_IMAGE_MENU_ITEM(donate),
          GTK_WIDGET(gtk_image_new_from_stock(
          GTK_STOCK_DIALOG_QUESTION, GTK_ICON_SIZE_MENU)));
-    GtkWidget* helpmenu = 
+    GtkWidget* helpmenu =
 		GTK_WIDGET (gtk_builder_get_object (builder, "menu11"));
     gtk_menu_prepend (GTK_MENU (helpmenu), donate);
     gtk_signal_connect_object (GTK_OBJECT (donate), "activate",
                                GTK_SIGNAL_FUNC (on_menu_donate_activate),
                                NULL);
     #endif
-    
+
     /* TODO: There has to be a better way than this.. (bug 246)
     GtkSettings *settings = gtk_settings_get_default();
     gchar *iconsizes;
     g_object_get(settings, "gtk-icon-sizes", &iconsizes, NULL);
     if (iconsizes != NULL) {
         printf("%s\n", iconsizes);
-    }*/ 
+    }*/
 
     #ifdef WIN32
-        // The 2 non-stock menu items have their pixel size values set 
-        // to the default 16x16 in GLADE. The normal icon-size value is 
+        // The 2 non-stock menu items have their pixel size values set
+        // to the default 16x16 in GLADE. The normal icon-size value is
         // normally set by the GTK theme in gtkrc. For themes using
         // non-default icon sizes or Windows, this 16x16 value will be
-        // wrong. This code sets it to match the gtkrc file that we 
+        // wrong. This code sets it to match the gtkrc file that we
         // supply with the Windows builds:
         GtkWidget* export = gtk_image_menu_item_get_image (
         GTK_IMAGE_MENU_ITEM (gtk_builder_get_object (builder, "menu_export")));
@@ -96,10 +96,10 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
         gtk_image_set_pixel_size (GTK_IMAGE(export), 13);
         gtk_image_set_pixel_size (GTK_IMAGE(update), 13);
     #endif
- 
 
-    
-    
+
+
+
     return m;
 }
 
@@ -108,7 +108,7 @@ G_MODULE_EXPORT
 void on_menu_donate_activate (GtkWidget* widget, void* user) {
 	//TODO: enhance
 	GtkWidget* dialog;
-    dialog = gtk_message_dialog_new (gui->mainwindow, 
+    dialog = gtk_message_dialog_new (gui->mainwindow,
         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
         GTK_MESSAGE_INFO,
         GTK_BUTTONS_OK,
@@ -118,7 +118,7 @@ void on_menu_donate_activate (GtkWidget* widget, void* user) {
         "project with a donation, please visit our official website. "
         "Thank you!");
     gtk_window_set_title (GTK_WINDOW (dialog), "Support this project");
-    gtk_dialog_run (GTK_DIALOG (dialog));      
+    gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
 }
 #endif
@@ -203,16 +203,16 @@ void on_menu_recent_activate (GtkWidget *widget, void *user) {
 G_MODULE_EXPORT
 void on_menu_close_activate (GtkWidget *widget, void* user) {
     GuTabContext* tab = NULL;
-    
+
     tab = (user)? GU_TAB_CONTEXT (user): g_active_tab;
-    
+
     gint ret = check_for_save (tab->editor);
-    
+
     if (GTK_RESPONSE_YES == ret)
         gui_save_file (tab, FALSE);
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
-    
+
     /* Kill typesetter command */
     motion_kill_typesetter(gummi->motion);
 
@@ -278,7 +278,7 @@ void on_menu_edit_activate (GtkWidget *widget, void *user) {
     if (g_active_editor == NULL)
         return;
 
-    if (gtk_text_buffer_get_has_selection 
+    if (gtk_text_buffer_get_has_selection
 	(GTK_TEXT_BUFFER(g_active_editor->buffer))) {
         gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_cut), TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_copy), TRUE);
@@ -460,8 +460,8 @@ void on_menu_docstat_activate (GtkWidget *widget, void *user) {
     GMatchInfo* match_info;
     GRegex* regexs[TEXCOUNT_OUTPUT_LINES];
     gchar* res[TEXCOUNT_OUTPUT_LINES] = { 0 };
-    
-    
+
+
     /* TODO: can we deprecate this? */
     const gchar* terms[] = {
         _("Words in text"),
@@ -472,7 +472,7 @@ void on_menu_docstat_activate (GtkWidget *widget, void *user) {
         _("Number of math inlines"),
         _("Number of math displayed")
     };
-    
+
     const gchar* terms_regex[] = {
         "Words in text: ([0-9]*)",
         "Words in headers: ([0-9]*)",
@@ -529,19 +529,19 @@ void on_menu_docstat_activate (GtkWidget *widget, void *user) {
         return;
     }
 
-    gchararray items[6] = {"stats_words", "stats_head", "stats_float", 
+    gchararray items[6] = {"stats_words", "stats_head", "stats_float",
                            "stats_nrhead", "stats_nrfloat", "stats_nrmath"};
     int j = 0;
     GtkLabel *tmp;
-        
+
     for (j = 0; j < 6; j++) {
         gchar *value = items[j];
         tmp = GTK_LABEL(gtk_builder_get_object (gui->builder, value));
         gtk_label_set_text (tmp, res[j]);
     }
-    
 
-    gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (gui->builder, 
+
+    gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (gui->builder,
                     "stats_filename")), tabmanagergui_get_labeltext (g_active_tab->page));
     gtk_widget_show (gui->docstatswindow);
     return;
@@ -561,25 +561,25 @@ void on_menu_spelling_toggled (GtkWidget *widget, void *user) {
     GList *editors;
     GuEditor* ec;
     int ectotal, i;
-    
-    gboolean activate = gtk_check_menu_item_get_active 
+
+    gboolean activate = gtk_check_menu_item_get_active
                         (GTK_CHECK_MENU_ITEM (widget));
-    
+
     editors = gummi_get_all_editors ();
     ectotal = g_list_length (editors);
-    
+
     for (i=0; i<ectotal; i++) {
         ec = g_list_nth_data (editors, i);
         if (activate) {
             editor_activate_spellchecking (ec, TRUE);
         }
-        else { 
+        else {
             editor_activate_spellchecking (ec, FALSE);
         }
     }
     if (activate) config_set_value ("spelling", "True");
     else { config_set_value ("spelling", "False"); }
-            
+
 #endif
 }
 
@@ -601,24 +601,24 @@ void on_menu_snippets_toggled (GtkWidget *widget, void *user) {
 G_MODULE_EXPORT
 void on_menu_project_activate (GtkWidget *widget, void *user) {
     // TODO: perhaps use buffer to run pre compile check */
-    
+
     if (g_active_editor == NULL) {
-		gtk_widget_set_tooltip_text (GTK_WIDGET 
+		gtk_widget_set_tooltip_text (GTK_WIDGET
 					 (gui->menugui->menu_projcreate),
 					_("This function requires an active document"));
 		return;
 	}
-    
+
     if (!gummi_project_active()) {
         gtk_widget_set_sensitive (GTK_WIDGET
                                  (gui->menugui->menu_projopen), TRUE);
         // TODO we should probably have functions for calls like this:
         if (g_active_editor->filename != NULL) {
             gtk_widget_set_sensitive (GTK_WIDGET
-                                 (gui->menugui->menu_projcreate), TRUE);                    
+                                 (gui->menugui->menu_projcreate), TRUE);
         }
         else {
-			gtk_widget_set_tooltip_text (GTK_WIDGET 
+			gtk_widget_set_tooltip_text (GTK_WIDGET
 					 (gui->menugui->menu_projcreate),
 					_("This function requires the current\n"
 					  "active document to be saved. "));
@@ -645,7 +645,7 @@ void on_menu_projcreate_activate (GtkWidget *widget, void *user) {
 
     gchar* filename = get_save_filename (TYPE_PROJECT);
     if (!filename) return;
-    
+
     if (project_create_new (filename)) {
         projectgui_enable (gummi->project, gui->projectgui);
         projectgui_list_projfiles (gummi->project->projfile);
@@ -654,7 +654,7 @@ void on_menu_projcreate_activate (GtkWidget *widget, void *user) {
 
 G_MODULE_EXPORT
 void on_menu_projopen_activate (GtkWidget *widget, void *user) {
-    
+
     gchar* filename = get_open_filename (TYPE_PROJECT);
     if (!filename) return;
 
@@ -672,14 +672,14 @@ void on_menu_projopen_activate (GtkWidget *widget, void *user) {
 
 G_MODULE_EXPORT
 void on_menu_projclose_activate (GtkWidget *widget, void *user) {
-    
+
     if (!gummi->project->projfile) return;
-    
+
     if (project_close ()) {
         projectgui_disable (gummi->project, gui->projectgui);
     }
-    
-    
+
+
 }
 
 /*******************************************************************************
@@ -690,9 +690,9 @@ G_MODULE_EXPORT
 void on_menu_guide_activate (GtkWidget *widget, void *user) {
     GError *error = NULL;
 
-    gtk_show_uri (gdk_screen_get_default(), 
+    gtk_show_uri (gdk_screen_get_default(),
                   C_GUMMIGUIDE, GDK_CURRENT_TIME, &error);
-    
+
     if (error) {
         slog (L_ERROR, "Can't open user guide: %s\n", error->message);
     }
@@ -710,7 +710,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Wei-Ning Huang\n"
         "<aitjcize@gmail.com>",
         "Dion Timmermann",
-        "<dion.timmermann@tu-harburg.de>", 
+        "<dion.timmermann@tu-harburg.de>",
         "Robert Schroll",
         "<rschroll@gmail.com>\n",
         "Former contributors:",
@@ -740,7 +740,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Russian: Kruvalig & Max Musatov\n"
         "Swedish: Kess Vargavind\n"
         "Spanish: Carlos Salas Contreras & Francisco Javier Serrador\n";
-        
+
     const gchar* documenters[] = {"Guy Edwards", NULL};
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());

@@ -1,10 +1,10 @@
 /**
  * @file    editor.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -73,7 +73,7 @@ struct _GuEditor {
     gboolean wholeword;
     gboolean matchcase;
     gint sigid[5];
-    
+
     GtkTextIter last_edit;
     gboolean sync_to_last_edit;
 };
@@ -112,7 +112,7 @@ void editor_scroll_to_line (GuEditor* ec, gint line);
 void editor_undo_change (GuEditor* ec);
 void editor_redo_change (GuEditor* ec);
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);
-void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme, 
+void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
                       gchar* styleName, gchar* defaultBG);
 gint schemes_compare (gconstpointer a, gconstpointer b);
 GList* editor_list_style_scheme_sorted (void);

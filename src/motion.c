@@ -1,10 +1,10 @@
 /**
  * @file   motion.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -131,13 +131,13 @@ void motion_kill_typesetter (GuMotion* m) {
 
         /* Make sure typesetter command is terminated */
         if (kill(*m->typesetter_pid, 15)) {
-            slog(L_ERROR, "Could not kill process: %s\n", 
+            slog(L_ERROR, "Could not kill process: %s\n",
                                     g_strerror(errno));
         }
 #else
         if (!TerminateProcess(*m->typesetter_pid, 0)) {
             gchar *msg = g_win32_error_message(GetLastError());
-            slog (L_ERROR, "Could not kill process: %s\n", 
+            slog (L_ERROR, "Could not kill process: %s\n",
                                     msg ? msg : "(null)");
             g_free(msg);
         }
@@ -178,7 +178,7 @@ gpointer motion_compile_thread (gpointer data) {
 
     latex = gummi_get_latex ();
     pc = gui->previewgui;
-    
+
     while (TRUE) {
         if (!g_mutex_trylock (mc->compile_mutex)) continue;
         slog (L_DEBUG, "Compile thread sleeping...\n");
@@ -202,7 +202,7 @@ gpointer motion_compile_thread (gpointer data) {
         gdk_threads_enter ();
         focus = gtk_window_get_focus (gui->mainwindow);
         editortext = latex_update_workfile (latex, editor);
-        
+
         precompile_ok = latex_precompile_check (editortext);
         g_free (editortext);
 
@@ -215,7 +215,7 @@ gpointer motion_compile_thread (gpointer data) {
             continue;
         }
         gdk_threads_leave();
-        
+
         compile_status = latex_update_pdffile (latex, editor);
         *mc->typesetter_pid = 0;
         g_mutex_unlock (mc->compile_mutex);
@@ -235,7 +235,7 @@ gpointer motion_compile_thread (gpointer data) {
                 motion_start_errormode  (mc, "compile_error");
             } else {
                 if (!pc->uri) {
-                    
+
                     char* uri = g_strconcat (urifrmt, editor->pdffile, NULL);
                     previewgui_set_pdffile (pc, uri);
                     g_free(uri);
@@ -259,24 +259,24 @@ void motion_force_compile (GuMotion *mc) {
 }
 
 void motion_start_errormode (GuMotion *mc, const gchar *msg) {
-    
+
     if (mc->errormode) {
         infoscreengui_set_message (gui->infoscreengui, msg);
     return;
     }
 
     previewgui_save_position (gui->previewgui);
-    
+
     infoscreengui_enable (gui->infoscreengui, msg);
     mc->errormode = TRUE;
 }
 
 void motion_stop_errormode (GuMotion *mc) {
-    
+
     if (!mc->errormode) return;
 
     previewgui_restore_position (gui->previewgui);
-    
+
     infoscreengui_disable (gui->infoscreengui);
     mc->errormode = FALSE;
 }
@@ -304,7 +304,7 @@ gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     if (!event->is_modifier) {
         motion_stop_timer (GU_MOTION (user));
     }
-    if (config_get_value("snippets") && 
+    if (config_get_value("snippets") &&
         snippets_key_press_cb (gummi_get_snippets (),
                                gummi_get_active_editor (), event))
         return TRUE;
@@ -315,7 +315,7 @@ gboolean on_key_release_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     if (!event->is_modifier) {
         motion_start_timer (GU_MOTION (user));
     }
-    if (config_get_value("snippets") && 
+    if (config_get_value("snippets") &&
         snippets_key_release_cb (gummi_get_snippets (),
                                  gummi_get_active_editor (), event))
         return TRUE;

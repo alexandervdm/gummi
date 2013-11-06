@@ -45,17 +45,17 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuImportGui* i = g_new0 (GuImportGui, 1);
-    
+
     i->import_panel =
         GTK_HBOX (gtk_builder_get_object (builder, "import_panel"));
-        
+
     i->image_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_image"));
     i->table_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_table"));
     i->matrix_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_matrix"));
-    i->biblio_pane = 
+    i->biblio_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_biblio"));
 
     i->image_file =
@@ -84,9 +84,9 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
         GTK_ADJUSTMENT (gtk_builder_get_object (builder, "matrix_cols"));
     i->matrix_combobracket =
         GTK_COMBO_BOX (gtk_builder_get_object (builder,"matrix_combobracket"));
-        
-    i->biblio_file = 
-         GTK_ENTRY (gtk_builder_get_object (builder, "biblio_file"));   
+
+    i->biblio_file =
+         GTK_ENTRY (gtk_builder_get_object (builder, "biblio_file"));
 
     gtk_adjustment_set_value (i->table_cols, 3);
     gtk_adjustment_set_value (i->table_rows, 3);
@@ -102,7 +102,7 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
     GList* list = NULL;
     list = gtk_container_get_children (
             GTK_CONTAINER (g_importgui->box_image));
-            
+
 
     while (list) {
         gtk_container_remove (GTK_CONTAINER (g_importgui->box_image),
@@ -153,7 +153,7 @@ void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
 
 void importgui_remove_all_panels () {
     GList* list = NULL;
-    
+
     list = gtk_container_get_children (
             GTK_CONTAINER (g_importgui->import_panel));
     while (list) {
@@ -268,7 +268,7 @@ void on_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
     gchar* basename = NULL;
     gchar* root_path = NULL;
     gchar* relative_path = NULL;
-    
+
     const gchar* filename = gtk_entry_get_text (g_importgui->biblio_file);
 
     if ((filename) && (strlen(filename) != 0)) {
@@ -289,7 +289,7 @@ void on_import_biblio_apply_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_image_file_activate (void) {
     gchar* filename = NULL;
-    
+
     filename = get_open_filename (TYPE_IMAGE);
     if (filename) {
         importer_imagegui_set_sensitive (filename, TRUE);
@@ -300,7 +300,7 @@ void on_image_file_activate (void) {
 G_MODULE_EXPORT
 void on_biblio_file_activate (GtkWidget *widget, void * user) {
     gchar* filename = NULL;
-    
+
     filename = get_open_filename (TYPE_BIBLIO);
     if (filename) {
         gtk_entry_set_text (g_importgui->biblio_file, filename);

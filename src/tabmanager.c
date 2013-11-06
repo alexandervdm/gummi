@@ -1,10 +1,10 @@
 /**
  * @file   tabmanager.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -37,7 +37,7 @@ static gboolean current_tab_replaceable (OpenAct act);
 
 GuTabmanager* tabmanager_init (void) {
     GuTabmanager* tm = g_new0 (GuTabmanager, 1);
-    
+
     tm->tabs = NULL;
     tm->active_editor = NULL;
     tm->active_tab = NULL;
@@ -57,7 +57,7 @@ void tabmanager_foreach_editor (GFunc func, gpointer user_data) {
 static gboolean current_tab_replaceable (OpenAct act) {
     if ((act == A_LOAD || act == A_LOAD_OPT))
         if (g_active_editor && !g_active_editor->filename)
-            if (!editor_buffer_changed (g_active_editor)) 
+            if (!editor_buffer_changed (g_active_editor))
                 return TRUE;
     return FALSE;
 }
@@ -70,12 +70,12 @@ gchar* tabmanager_get_tabname (GuTabContext* tc) {
     if (tc->editor->filename) {
         filetext = g_path_get_basename (tc->editor->filename);
     } else {
-        filetext = g_strdup_printf (_("Unsaved Document %d"), 
+        filetext = g_strdup_printf (_("Unsaved Document %d"),
                                        tc->page->unsavednr);
     }
-    
+
     modified = editor_buffer_changed (tc->editor);
-    
+
     labeltext = g_strdup_printf ("%s%s", (modified? "*": ""), filetext);
     g_free (filetext);
     return labeltext;
@@ -89,13 +89,13 @@ gboolean tabmanager_remove_tab (GuTabContext* tab) {
 
     g_tabs = g_list_remove (g_tabs, tab);
     tabmanager_set_active_tab (total - 2);
-    
+
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (g_tabnotebook, position);
     g_free (tab);
     return (total != 1);
 }
-    
+
 /*--------------------------------------------------------------------------*/
 
 
@@ -105,7 +105,7 @@ void tabmanager_set_active_tab (int position) {
         g_active_editor = NULL;
     } else {
         g_active_tab = GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position));
-        g_active_editor = 
+        g_active_editor =
             GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position))->editor;
     }
 }
@@ -113,12 +113,12 @@ void tabmanager_set_active_tab (int position) {
 
 void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     gint pos = 0;
-    
+
     GuEditor* editor = gummi_new_environment (filename);
 
     if (current_tab_replaceable (act)) {
         pos = tabmanagergui_replace_page (g_active_tab, editor);
-    } 
+    }
     else {
         GuTabContext* tc = g_new0(GuTabContext, 1);
         tc->editor = editor;
@@ -126,7 +126,7 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
         pos = tabmanagergui_create_page (tc, tc->editor);
         tabmanagergui_set_current_page (pos);
     }
-    
+
     tabmanager_set_active_tab (pos);
 
     if (iofunctions_has_swapfile (filename)) {
@@ -167,14 +167,14 @@ void tabmanager_update_tab (const gchar* filename) {
     /* this function is called when the document is saved. no new editor
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
-     
+
     add_to_recent_list (filename);
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
-    
+
     editor_fileinfo_update (g_active_tab->editor, filename);
     slog (L_INFO, "Environment updated for %s\n",
             g_active_tab->editor->filename);
-    previewgui_reset (gui->previewgui);    
+    previewgui_reset (gui->previewgui);
 }
 
 gboolean tabmanager_has_tabs () {
@@ -191,10 +191,10 @@ gboolean tabmanager_check_exists (const gchar* filename) {
     GList *editors;
     GuEditor* ec;
     gint ectotal, i;
-    
+
     editors = gummi_get_all_editors ();
     ectotal = g_list_length (editors);
-    
+
     for (i=0; i<ectotal; i++) {
         ec = g_list_nth_data (editors, i);
         if (STR_EQU (ec->filename, filename)) return TRUE;

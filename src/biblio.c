@@ -28,8 +28,8 @@
  */
 
 #include <gtk/gtk.h>
-#include <string.h> 
-#include <sys/stat.h> 
+#include <string.h>
+#include <sys/stat.h>
 
 #include "biblio.h"
 #include "constants.h"
@@ -47,11 +47,11 @@ GuBiblio* biblio_init (GtkBuilder* builder) {
         GTK_PROGRESS_BAR (gtk_builder_get_object (builder, "bibprogressbar"));
     b->progressmon =
         GTK_ADJUSTMENT (gtk_builder_get_object (builder, "bibprogressmon"));
-    b->list_biblios = 
+    b->list_biblios =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_biblios"));
-    b->filenm_label = 
+    b->filenm_label =
         GTK_LABEL (gtk_builder_get_object (builder, "bibfilenm"));
-    b->refnr_label = 
+    b->refnr_label =
         GTK_LABEL (gtk_builder_get_object (builder, "bibrefnr"));
     b->list_filter =
         GTK_ENTRY (gtk_builder_get_object (builder, "biblio_filter"));
@@ -68,7 +68,7 @@ gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec) {
     GMatchInfo *match_info;
     GRegex* bib_regex = NULL;
     gboolean state = FALSE;
-    
+
     content = editor_grab_buffer (ec);
     bib_regex = g_regex_new ("\\\\bibliography{\\s*([^{}\\s]*)\\s*}", 0,0,NULL);
     if (g_regex_match (bib_regex, content, 0, &match_info)) {
@@ -104,7 +104,7 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
         gboolean success = FALSE;
         char* command = g_strdup_printf ("%s bibtex \"%s\"",
                                          C_TEXSEC, auxname);
-                                         
+
         g_free (auxname);
         latex_update_workfile (lc, ec);
         latex_update_auxfile (lc, ec);
@@ -125,7 +125,7 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
 
 int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
     int entry_total = 0;
-    
+
     GtkTreeIter iter;
     GRegex* regex_entry;
     GRegex* subregex_ident;
@@ -137,28 +137,28 @@ int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
     gchar* author_out = NULL;
     gchar* title_out = NULL;
 
-    GMatchInfo *match_entry; 
-    
+    GMatchInfo *match_entry;
+
     regex_entry = g_regex_new (
         "(@article|@book|@booklet|@conference|@inbook|@incollection|"
         "@inproceedings|@manual|@mastersthesis|@misc|@phdthesis|"
-        "@proceedings|@techreport|@unpublished)([^@]*)", 
+        "@proceedings|@techreport|@unpublished)([^@]*)",
         (G_REGEX_CASELESS | G_REGEX_DOTALL), 0, NULL);
-      
+
     subregex_ident = g_regex_new ("@.+{([^,]+),", 0, 0, NULL);
-    subregex_title = g_regex_new 
+    subregex_title = g_regex_new
 		("[^book]title[\\s]*=[\\s]*(.*)", G_REGEX_CASELESS, 0, NULL);
-    subregex_author = g_regex_new 
+    subregex_author = g_regex_new
 		("author[\\s]*=[\\s]*(.*)", G_REGEX_CASELESS, 0, NULL);
-    subregex_year = g_regex_new 
+    subregex_year = g_regex_new
 		("year[\\s]*=[\\s]*[{|\"]?([1|2][0-9]{3})", G_REGEX_CASELESS, 0, NULL);
     regex_formatting = g_regex_new ("[{|}|\"|,|\\$]", 0, 0, NULL);
-    
-    
+
+
     g_regex_match (regex_entry, bib_content, 0, &match_entry);
-    
+
     while (g_match_info_matches (match_entry)) {
-        
+
         gchar *entry = g_match_info_fetch (match_entry, 0);
 
         gchar **ident_res = g_regex_split (subregex_ident, entry, 0);
@@ -175,7 +175,7 @@ int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
             title_out = g_regex_replace (regex_formatting, title_res[1],
                                          -1, 0, "", 0, 0);
         else title_out = NULL;
-        
+
         gtk_list_store_append (bc->list_biblios, &iter);
         gtk_list_store_set (bc->list_biblios, &iter, 0, ident_res[1],
                                                     1, title_out,
@@ -199,6 +199,6 @@ int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {
     g_regex_unref (subregex_author);
     g_regex_unref (subregex_year);
     g_regex_unref (regex_formatting);
-    
+
     return entry_total;
 }

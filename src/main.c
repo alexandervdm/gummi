@@ -55,9 +55,9 @@ static int debug = 0;
 static int showversion = 0;
 
 static GOptionEntry entries[] = {
-    { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE, 
+    { (const gchar*)"debug", (gchar)'d', 0, G_OPTION_ARG_NONE,
         &debug, (gchar*)"show debug info", NULL},
-    { (const gchar*)"version", (gchar)'v', 0, G_OPTION_ARG_NONE, 
+    { (const gchar*)"version", (gchar)'v', 0, G_OPTION_ARG_NONE,
         &showversion, (gchar*)"show version and exit", NULL},
     { NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL }
 };
@@ -77,7 +77,7 @@ int main (int argc, char *argv[]) {
     g_option_context_add_main_entries (context, entries, PACKAGE);
     g_option_context_parse (context, &argc, &argv, &error);
     if (error) g_error("%s\n", error->message);
-    
+
     if (showversion) {
         printf("Gummi %s\n", PACKAGE_VERSION);
         return 0;
@@ -90,13 +90,13 @@ int main (int argc, char *argv[]) {
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (GUMMI_DATA, "ui", "gummi.glade", NULL);
-    
+
     // exit program when gummi.glade can not be located:
     if (!g_file_test (ui, G_FILE_TEST_EXISTS)) {
         printf("Could not locate Glade interface file at:\n%s\n", ui);
         return 0;
     }
-    
+
     gtk_builder_add_from_file (builder, ui, &ui_error);
     if (ui_error) {
         g_error ("%s\n", ui_error->message);
@@ -125,7 +125,7 @@ int main (int argc, char *argv[]) {
     // why do we not load this from environment, like gui-main does? -A
     GuMotion* motion = motion_init ();
     GuIOFunc* io = iofunctions_init();
-    GuLatex* latex = latex_init (); 
+    GuLatex* latex = latex_init ();
     GuBiblio* biblio = biblio_init (builder);
     GuTemplate* templ = template_init (builder);
     GuTabmanager* tabm = tabmanager_init ();
@@ -138,7 +138,7 @@ int main (int argc, char *argv[]) {
 
     /* Initialize GUI */
     gui = gui_init (builder);
-    
+
     slog_set_gui_parent (gui->mainwindow);
     slog (L_DEBUG, "GummiGui created!\n");
 
@@ -165,7 +165,7 @@ int main (int argc, char *argv[]) {
         }
         tabmanager_create_tab (A_LOAD, argv[1], NULL);
     }
-        
+
     if (config_get_value ("autosaving")) iofunctions_start_autosave ();
 
     gui_main (builder);

@@ -1,10 +1,10 @@
 /**
  * @file    environment.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -109,8 +109,8 @@ struct _Gummi {
     GuProject* project;
 };
 
-Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib, 
-                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm, 
+Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
+                   GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm,
                    GuProject* proj);
 GuEditor* gummi_new_environment (const gchar* filename);
 
@@ -119,9 +119,9 @@ GuEditor* gummi_new_environment (const gchar* filename);
  * non-GUI classes.
  * Please only use this functions if not avoidable.
  */
- 
-gboolean gummi_project_active (void); 
- 
+
+gboolean gummi_project_active (void);
+
 GummiGui* gummi_get_gui (void);
 GuEditor* gummi_get_active_editor (void);
 GuIOFunc* gummi_get_io (void);

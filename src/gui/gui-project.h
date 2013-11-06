@@ -43,14 +43,14 @@ typedef struct _GuProjectGui GuProjectGui;
 struct _GuProjectGui {
     GtkListStore* list_projfiles;
     GtkTreeView* proj_treeview;
-    
+
     GtkButton* proj_addbutton;
     GtkButton* proj_rembutton;
-    
+
     GtkLabel* proj_name;
     GtkLabel* proj_path;
     GtkLabel* proj_nroffiles;
-    
+
 };
 
 GuProjectGui* projectgui_init (GtkBuilder* builder);

@@ -1,10 +1,10 @@
 /**
  * @file   latexmk.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -37,10 +37,10 @@
 gboolean lmk_detected = FALSE;
 
 void latexmk_init (void) {
-    
+
     if (external_exists (C_LATEXMK)) {
         // TODO: check if supported version
-        slog (L_INFO, "Typesetter detected: Latexmk %s\n", 
+        slog (L_INFO, "Typesetter detected: Latexmk %s\n",
                        external_version (C_LATEXMK));
         lmk_detected = TRUE;
     }
@@ -66,10 +66,10 @@ gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basenam
         base = g_path_get_basename (basename);
         outdir = g_strdup_printf ("-jobname=\"%s/%s\"", C_TMPDIR, base);
     }
-    
+
     const gchar* flags = latexmk_get_flags (method);
     gchar* lmkcmd;
-    
+
     lmkcmd = g_strdup_printf("latexmk %s %s \"%s\"", flags, outdir, workfile);
     return lmkcmd;
 }
@@ -95,7 +95,7 @@ gchar* latexmk_get_flags (const gchar *method) {
             lmkflags = g_strdup_printf("-e \"\\$latex = 'latex -synctex=0'\" -silent");
         }
     }
-    
+
     if (STR_EQU (method, "texpdf")) {
         lmkwithoutput = g_strconcat (lmkflags, " -pdf", NULL);
     }
@@ -105,7 +105,7 @@ gchar* latexmk_get_flags (const gchar *method) {
     else {
         lmkwithoutput = g_strconcat (lmkflags, " -pdfps", NULL);
     }
-    
+
     g_free (lmkflags);
     return lmkwithoutput;
 }

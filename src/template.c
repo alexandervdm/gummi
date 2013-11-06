@@ -1,10 +1,10 @@
 /**
  * @file   template.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -48,18 +48,18 @@ GuTemplate* template_init (GtkBuilder* builder) {
     GuTemplate* t = g_new0 (GuTemplate, 1);
     t->templatewindow =
         GTK_WINDOW (gtk_builder_get_object (builder, "templatewindow"));
-    t->templateview = 
+    t->templateview =
         GTK_TREE_VIEW (gtk_builder_get_object (builder, "template_treeview"));
     t->list_templates =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_templates"));
-    t->template_label = 
+    t->template_label =
         GTK_LABEL (gtk_builder_get_object (builder, "template_label"));
     t->template_add =
         GTK_WIDGET (gtk_builder_get_object (builder, "template_add"));
     t->template_remove =
         GTK_WIDGET (gtk_builder_get_object (builder, "template_remove"));
     t->template_open =
-        GTK_WIDGET (gtk_builder_get_object (builder, "template_open")); 
+        GTK_WIDGET (gtk_builder_get_object (builder, "template_open"));
     t->template_render = GTK_CELL_RENDERER_TEXT (
             gtk_builder_get_object (builder, "template_renderer"));
     t->template_col = GTK_TREE_VIEW_COLUMN (
@@ -76,9 +76,9 @@ void template_setup (GuTemplate* t) {
 
     gchar *dirpath = g_build_filename (g_get_user_config_dir (), "gummi",
                                       "templates" , NULL);
-    
-    GDir* dir = g_dir_open (dirpath, 0, &error);    
-    if (error) { 
+
+    GDir* dir = g_dir_open (dirpath, 0, &error);
+    if (error) {
         /* print error if directory does not exist */
         slog (L_INFO, "unable to read template directory, creating new..\n");
         g_mkdir_with_parents (dirpath, DIR_PERMS);
@@ -94,15 +94,15 @@ void template_setup (GuTemplate* t) {
         g_free (filepath);
     }
     g_free (dirpath);
-    
+
     // disable the add button when there are no tabs opened (#388)
     if (!tabmanager_has_tabs()) {
         gtk_widget_set_sensitive (t->template_add, FALSE);
     }
-    
+
     gtk_widget_set_sensitive (t->template_open, FALSE);
-    
-    
+
+
 }
 
 gchar* template_get_selected_path (GuTemplate* t) {
@@ -110,10 +110,10 @@ gchar* template_get_selected_path (GuTemplate* t) {
     GtkTreeIter iter;
     GtkTreeSelection *selection;
     gchar *filepath = NULL;
-    
+
     model = gtk_tree_view_get_model (t->templateview);
     selection = gtk_tree_view_get_selection (t->templateview);
-    
+
     if (gtk_tree_selection_get_selected (selection, &model, &iter))
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
 
@@ -127,15 +127,15 @@ void template_add_new_entry (GuTemplate* t) {
     GtkTreePath* path = NULL;
     GtkTreeViewColumn* col = NULL;
     GList* cells = NULL;
-    
+
     gtk_label_set_text (t->template_label, "");
     gtk_list_store_append (t->list_templates, &iter);
-    
+
     g_object_set (t->template_render, "editable", TRUE, NULL);
     gtk_widget_set_sensitive (t->template_add, FALSE);
     gtk_widget_set_sensitive (t->template_remove, FALSE);
     gtk_widget_set_sensitive (t->template_open, FALSE);
-    
+
     col = gtk_tree_view_get_column (t->templateview, 0);
     model = gtk_tree_view_get_model (t->templateview);
     path = gtk_tree_model_get_path (model, &iter);
@@ -155,7 +155,7 @@ void template_remove_entry (GuTemplate* t) {
 
     model = gtk_tree_view_get_model (t->templateview);
     selection = gtk_tree_view_get_selection (t->templateview);
-    
+
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
         gtk_list_store_remove (t->list_templates, &iter);
@@ -167,7 +167,7 @@ void template_remove_entry (GuTemplate* t) {
 void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
     const char* filepath = g_build_filename (g_get_user_config_dir (),
             "gummi", "templates", filename, NULL);
-                           
+
     if (g_file_test (filepath, G_FILE_TEST_EXISTS)) {
         gtk_label_set_text (t->template_label, "filename already exists");
         template_remove_entry (t);

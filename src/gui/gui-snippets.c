@@ -71,11 +71,11 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
         GTK_TREE_VIEW (gtk_builder_get_object (builder, "snippets_tree_view"));
     s->snippet_scroll =
         GTK_SCROLLED_WINDOW(gtk_builder_get_object (builder, "snippet_scroll"));
-    s->tab_trigger_entry = 
+    s->tab_trigger_entry =
         GTK_ENTRY (gtk_builder_get_object (builder, "tab_trigger_entry"));
-    s->accelerator_entry = 
+    s->accelerator_entry =
         GTK_ENTRY (gtk_builder_get_object (builder, "accelerator_entry"));
-    s->list_snippets = 
+    s->list_snippets =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_snippets"));
     s->snippet_renderer = GTK_CELL_RENDERER_TEXT
         (gtk_builder_get_object (builder, "snippet_renderer"));
@@ -230,7 +230,7 @@ void on_snippetsgui_selected_text_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_snippetsgui_filename_clicked (GtkWidget* widget, void* user) {
     snippetsgui_insert_at_current(gui->snippetsgui, "$FILENAME");
-    
+
 }
 
 G_MODULE_EXPORT
@@ -248,7 +248,7 @@ void on_button_new_snippet_clicked (GtkWidget* widget, void* user) {
 
     gtk_list_store_append (s->list_snippets, &iter);
     g_object_set (s->snippet_renderer, "editable", TRUE, NULL);
-    
+
     col = gtk_tree_view_get_column (s->snippets_tree_view, 0);
     model = gtk_tree_view_get_model (s->snippets_tree_view);
     path = gtk_tree_model_get_path (model, &iter);
@@ -283,7 +283,7 @@ void on_button_remove_snippet_clicked (GtkWidget* widget, void* user) {
         gtk_tree_model_get (model, &iter, 0, &name, 1, &key, 2, &accel, -1);
         path = gtk_tree_model_get_path (model, &iter);
         path_str = gtk_tree_path_to_string (path);
-        
+
         /* Because this function is also called by on_snippet_renderer_edited
          * where the snippet to be remove isn't inserted into slist, we only
          * remove if the snippets is already in the slist */
@@ -430,7 +430,7 @@ void on_snippet_renderer_edited (GtkCellRendererText* renderer, gchar *path,
     GtkTreeIter iter;
     GtkTreeModel* model = NULL;
     GtkTreeSelection* selection = NULL;
-    
+
     g_object_set (renderer, "editable", FALSE, NULL);
     model = gtk_tree_view_get_model (s->snippets_tree_view);
     selection = gtk_tree_view_get_selection (s->snippets_tree_view);

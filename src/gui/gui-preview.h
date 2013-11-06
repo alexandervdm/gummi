@@ -1,10 +1,10 @@
 /**
  * @file   gui-preview.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -31,7 +31,7 @@
 #define __GUMMI_GUI_PREVIEW_H__
 
 #include <gtk/gtk.h>
-#include <poppler.h> 
+#include <poppler.h>
 
 #define PAGE_MARGIN 14
 #define DOCUMENT_MARGIN (PAGE_MARGIN/2)
@@ -47,14 +47,14 @@
 #define BYTES_PER_PIXEL 4
 
 /**
- *  These "Layered" Rectangles are just like normal GdkRectangles, except the 
+ *  These "Layered" Rectangles are just like normal GdkRectangles, except the
  *  have a layer assigned. 2 Rectangles can only intersect or be unioned if they
  *  are on the same layer.
- * 
- *  In the future these structs should be used to describe the position of a 
- *  page. In continuous mode all pages are on the same layer (0). In Paged mode, 
- *  they are on different layers. The field of view (fov) rectangle, that 
- *  describes the portion of the preview that is currently visible is on the 
+ *
+ *  In the future these structs should be used to describe the position of a
+ *  page. In continuous mode all pages are on the same layer (0). In Paged mode,
+ *  they are on different layers. The field of view (fov) rectangle, that
+ *  describes the portion of the preview that is currently visible is on the
  *  layer/page that should currently be displayed (0 in continuous mode).
  */
 typedef struct _LayeredRectangle LayeredRectangle;
@@ -67,9 +67,9 @@ struct _LayeredRectangle {
 };
 
 enum GuPreviewFitMode {
-    FIT_NONE = 0, 
-    FIT_WIDTH, 
-    FIT_HEIGHT, 
+    FIT_NONE = 0,
+    FIT_WIDTH,
+    FIT_HEIGHT,
     FIT_BOTH
 };
 
@@ -78,13 +78,13 @@ typedef struct _GuPreviewPage GuPreviewPage;
 
 struct _GuPreviewPage {
     cairo_surface_t* rendering;
-    
+
     double height;
     double width;
-    
+
     LayeredRectangle inner; // Position of the page itself
     LayeredRectangle outer; // Position of the page + border & shadow
-    
+
 };
 
 #define GU_PREVIEW_GUI(x) ((GuPreviewGui*)x)
@@ -141,7 +141,7 @@ struct _GuPreviewGui {
     GuPreviewPage *pages;
     enum GuPreviewFitMode fit_mode;
     gint cache_size;
-    
+
     gint document_width_scaling;
     gint document_height_scaling;
     gint document_width_non_scaling;

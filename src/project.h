@@ -1,10 +1,10 @@
 /**
  * @file   project.h
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -35,7 +35,7 @@
 typedef struct _Project {
     gchar* projfile;
     gchar* rootfile;
-    
+
     int nroffiles;
 
 } GuProject;
@@ -50,8 +50,8 @@ gboolean project_open_existing (const gchar* filename);
 gboolean project_file_integrity (const gchar* content);
 gboolean project_load_files (const gchar* projfile, const gchar* content);
 GList* project_list_files (const gchar* content);
-gchar* project_get_value (const gchar* content, const gchar* item);   
-  
+gchar* project_get_value (const gchar* content, const gchar* item);
+
 gboolean project_add_document (const gchar* project, const gchar* fname);
 gboolean project_remove_document (const gchar* project, const gchar* fname);
 

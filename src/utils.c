@@ -1,10 +1,10 @@
 /**
  * @file    utils.c
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -127,7 +127,7 @@ void slog (gint level, const gchar *fmt, ...) {
         else
             out = g_strdup (message);
 
-        dialog = gtk_message_dialog_new (parent, 
+        dialog = gtk_message_dialog_new (parent,
                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                 L_IS_TYPE (level,L_G_INFO)? GTK_MESSAGE_INFO: GTK_MESSAGE_ERROR,
                 GTK_BUTTONS_OK,
@@ -146,8 +146,8 @@ void slog (gint level, const gchar *fmt, ...) {
     }
 
     if (!L_IS_TYPE (level, L_INFO) &&
-        !L_IS_TYPE (level, L_DEBUG) && 
-        !L_IS_TYPE (level, L_ERROR) && 
+        !L_IS_TYPE (level, L_DEBUG) &&
+        !L_IS_TYPE (level, L_ERROR) &&
         !L_IS_TYPE (level, L_G_INFO) &&
         !L_IS_TYPE (level, L_G_ERROR))
         exit (1);
@@ -159,14 +159,14 @@ gint utils_yes_no_dialog (const gchar* message) {
 
     g_return_val_if_fail (message != NULL, 0);
 
-    dialog = gtk_message_dialog_new (parent, 
+    dialog = gtk_message_dialog_new (parent,
                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                  GTK_MESSAGE_QUESTION,
                  GTK_BUTTONS_YES_NO,
                  "%s", message);
 
     gtk_window_set_title (GTK_WINDOW (dialog), _("Confirmation"));
-    ret = gtk_dialog_run (GTK_DIALOG (dialog));      
+    ret = gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
 
     return ret;
@@ -251,7 +251,7 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
             ret = g_strdup (buf);
         g_free (rot);
     }
-    
+
     // close the file descriptor:
     close(pout);
 
@@ -260,11 +260,11 @@ Tuple2 utils_popen_r (const gchar* cmd, const gchar* chdir) {
     #else
         waitpid(typesetter_pid, &status, 0);
     #endif
-    
+
     // See bug 446:
     if (ret) {
         if (!g_utf8_validate (ret, -1, NULL)) {
-            ret = g_convert_with_fallback (ret, -1, "UTF-8", 
+            ret = g_convert_with_fallback (ret, -1, "UTF-8",
                     "ISO-8859-1", NULL, NULL, NULL, NULL);
         }
     }
@@ -283,18 +283,18 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target) {
 
 gchar* utils_get_tmp_tmp_dir (void) {
 	/* brb, gonna go punch a wall */
-    gchar *tmp_tmp = g_build_path 
+    gchar *tmp_tmp = g_build_path
 						(C_DIRSEP, g_get_home_dir(), "gtmp", NULL);
     g_mkdir_with_parents (tmp_tmp, DIR_PERMS);
 
     return tmp_tmp;
-}  
+}
 
 
 gboolean utils_glist_is_member (GList* list, gchar* item) {
     int nrofitems = g_list_length (list);
     int i;
-    
+
     for (i=0;i<nrofitems;i++) {
         if (STR_EQU (item, g_list_nth_data (list,i))) {
             return TRUE;

@@ -1,10 +1,10 @@
 /**
  * @file    editor.c
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -54,7 +54,7 @@ static void on_inserted_text(GtkTextBuffer *textbuffer,GtkTextIter *location,
                              gchar *text,gint len, gpointer user_data);
 static void on_delete_range(GtkTextBuffer *textbuffer,GtkTextIter *start,
                              GtkTextIter *end, gpointer user_data);
-                             
+
 const gchar style[][3][20] = {
     { "tool_bold", "\\textbf{", "}" },
     { "tool_italic", "\\emph{", "}" },
@@ -76,7 +76,7 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->workfile = NULL;
     ec->bibfile = NULL;
     ec->projfile = NULL;
-    
+
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new ();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,
             "latex");
@@ -88,7 +88,7 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->editortags = gtk_text_buffer_get_tag_table (ec_buffer);
     ec->replace_activated = FALSE;
     ec->term = NULL;
-    
+
     gtk_source_view_set_tab_width (ec->view,
             atoi (config_get_value ("tabwidth")));
     gtk_source_view_set_insert_spaces_instead_of_tabs (ec->view,
@@ -112,9 +112,9 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->sigid[2] = g_signal_connect (ec->buffer, "changed",
                 G_CALLBACK (check_preview_timer), NULL);
 
-    ec->sigid[3] = g_signal_connect_after(ec->buffer, "insert-text", 
+    ec->sigid[3] = g_signal_connect_after(ec->buffer, "insert-text",
                 G_CALLBACK(on_inserted_text), ec);
-    ec->sigid[4] = g_signal_connect_after(ec->buffer, "delete-range", 
+    ec->sigid[4] = g_signal_connect_after(ec->buffer, "delete-range",
                 G_CALLBACK(on_delete_range), ec);
 
     return ec;
@@ -122,7 +122,7 @@ GuEditor* editor_new (GuMotion* mc) {
 
 void editor_destroy (GuEditor* ec) {
     gint i = 0;
-    
+
     for (i = 0; i < 2; ++i) {
         if (g_signal_handler_is_connected (ec->view, ec->sigid[i])) {
             g_signal_handler_disconnect (ec->view, ec->sigid[i]);
@@ -145,7 +145,7 @@ static void on_inserted_text(GtkTextBuffer *textbuffer,GtkTextIter *location,
         return;
     }
     GuEditor* e = GU_EDITOR(user_data);
-    
+
     e->last_edit = *location;
     e->sync_to_last_edit = TRUE;
 }
@@ -157,7 +157,7 @@ static void on_delete_range(GtkTextBuffer *textbuffer,GtkTextIter *start,
         return;
     }
     GuEditor* e = GU_EDITOR(user_data);
-    
+
     e->last_edit = *start;
     e->sync_to_last_edit = TRUE;
 }
@@ -192,7 +192,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
 
     ec->fdname = g_build_filename (C_TMPDIR, "gummi_XXXXXX", NULL);
     ec->workfd = g_mkstemp (ec->fdname);
-    
+
     // This is required for Windows 7, but not for Linux. It may also
     // be the proper way for *nix, but I don't want to change this
     // crucial piece of code at this stage of development -alexander
@@ -242,7 +242,7 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     gchar* auxfile = NULL;
     gchar* logfile = NULL;
     gchar* syncfile = NULL;
-    
+
     if (ec->filename) {
         gchar* dirname = g_path_get_dirname (ec->filename);
         gchar* basename = g_path_get_basename (ec->filename);
@@ -264,7 +264,7 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
         g_free (dirname);
     }
 
-    // TODO: make a loop or maybe make register of created files? proc? 
+    // TODO: make a loop or maybe make register of created files? proc?
 
     close (ec->workfd);
     ec->workfd = -1;
@@ -378,7 +378,7 @@ gboolean editor_buffer_changed (GuEditor* ec) {
 
 void editor_insert_package (GuEditor* ec, const gchar* package, const gchar* options) {
     GtkTextIter start, mstart, mend, sstart, send;
-    
+
     gchar* pkgstr = NULL;
     if (options == NULL) {
         pkgstr = g_strdup_printf ("\\usepackage{%s}\n", package);
@@ -707,7 +707,7 @@ void editor_redo_change (GuEditor* ec) {
 }
 
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
-    
+
     GtkSourceStyleScheme* scheme =
         gtk_source_style_scheme_manager_get_scheme (ec->stylemanager, id);
     slog (L_INFO, "setting styles scheme to %s\n", id);
@@ -718,7 +718,7 @@ void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
                 "classic");
     }
     gtk_source_buffer_set_style_scheme (ec->buffer, scheme);
-    
+
     set_style_fg_bg(G_OBJECT (ec->searchtag), scheme, "search-match", "yellow");
     set_style_fg_bg(G_OBJECT (ec->errortag), scheme,"def:error",  "red");
 }
@@ -730,17 +730,17 @@ static inline gdouble gdkcolor_luminance(GdkColor c) {
 
 
 /**
- *  Sets a object's fore- and background color to that of scheme's style 
- *  "styleName". If no background color is defined in the style, defaultBG is 
+ *  Sets a object's fore- and background color to that of scheme's style
+ *  "styleName". If no background color is defined in the style, defaultBG is
  *  used. defaultBG can be any valid parameter to gdk_color_parse().
  *  If only a foreground color was defined and it has not enough contrast to the
  *  default background, it will be overwritten. The foreground color will either
  *  be white or black, which has more contrast.
  */
-void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme, 
+void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
                       gchar* styleName, gchar* defaultBG) {
     GtkSourceStyle *style = NULL;
-    
+
     gchar *bg = NULL;
     gchar *fg = NULL;
     gboolean foreground_set;
@@ -752,18 +752,18 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
     if (scheme == NULL) {
         goto set_style_fg_bg_return_defaults;
     }
-    
+
     style = gtk_source_style_scheme_get_style (scheme, styleName);
-    
+
     if (style == NULL) {
         goto set_style_fg_bg_return_defaults;
     }
-    
+
     // Get properties of style
-    g_object_get (style, 
-                  "foreground-set", &foreground_set, 
+    g_object_get (style,
+                  "foreground-set", &foreground_set,
                   "foreground", &fg,
-                  "background-set", &background_set, 
+                  "background-set", &background_set,
                   "background", &bg,
                   NULL);
 
@@ -775,11 +775,11 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
     if (background_set) {
         if (bg == NULL || !gdk_color_parse (bg, &background))
             background_set = FALSE;
-    }    
+    }
 
     g_free(fg);
     g_free(bg);
-    
+
     if (background_set && foreground_set) {
         // We trust the style to set both to good values
         // Do nothing
@@ -800,7 +800,7 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
             }
         }
     } else if (background_set && !foreground_set) {
-        // Choose a fg = white or black, which has more contrast   
+        // Choose a fg = white or black, which has more contrast
         if (gdkcolor_luminance(background) > 0.5) {
             gdk_color_parse("black", &foreground);
         } else {
@@ -810,11 +810,11 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
         // none set, set defaults
         goto set_style_fg_bg_return_defaults;
     }
-    
-    g_object_set (obj, "foreground-gdk", &foreground, 
+
+    g_object_set (obj, "foreground-gdk", &foreground,
                         "background-gdk", &background, NULL);
     return;
-                        
+
 set_style_fg_bg_return_defaults:
 
     // No valid style, set defaults
@@ -824,10 +824,10 @@ set_style_fg_bg_return_defaults:
     } else {
         gdk_color_parse("white", &foreground);
     }
-    
-    g_object_set (obj, "foreground-gdk", &foreground, 
+
+    g_object_set (obj, "foreground-gdk", &foreground,
                         "background-gdk", &background, NULL);
-                        
+
 }
 
 /* The following functions are taken from gedit and partially modified */

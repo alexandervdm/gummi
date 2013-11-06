@@ -66,8 +66,8 @@ extern GummiGui* gui;
 const gchar* insens_widgets_str[] = {
     "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
-    "menu_exportpdf", "import_tabs", "menu_close", "menu_export", 
-    "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste", 
+    "menu_exportpdf", "import_tabs", "menu_close", "menu_export",
+    "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste",
     "menu_delete", "menu_selectall", "menu_preferences", "menu_find",
     "menu_prev", "menu_next", "menu_pdfcompile", "menu_compileopts",
     "menu_runmakeindex", "menu_runbibtex", "menu_docstat", "menu_spelling",
@@ -83,12 +83,12 @@ GummiGui* gui_init (GtkBuilder* builder) {
     gint i = 0, wx = 0, wy = 0, width = 0, height = 0;
 
     GummiGui* g = g_new0 (GummiGui, 1);
-    
+
     g->builder = builder;
 
     g->mainwindow =
         GTK_WINDOW (gtk_builder_get_object (builder, "mainwindow"));
-    g->toolbar = 
+    g->toolbar =
         GTK_WIDGET (gtk_builder_get_object (builder, "maintoolbar"));
     g->statusbar =
         GTK_STATUSBAR (gtk_builder_get_object (builder, "statusbar"));
@@ -125,7 +125,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
-        
+
     g->menu_runbibtex =
         GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_runbibtex"));
     g->menu_runmakeindex =
@@ -209,16 +209,16 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
         gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
-    
-    g->menu_autosync = 
+
+    g->menu_autosync =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_autosync"));
-    
+
     if (latex_can_synctex() && config_get_value ("synctex")) {
         gtk_widget_set_sensitive (GTK_WIDGET (g->menu_autosync), TRUE);
         gboolean async = latex_use_synctex();
         gtk_check_menu_item_set_active (g->menu_autosync, (async? TRUE: FALSE));
     }
-        
+
     if (!config_get_value ("compile_status"))
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
 
@@ -247,14 +247,14 @@ gboolean w32popup_wait_event (void *builder) {
 
 	const gchar* count = gtk_label_get_text (GTK_LABEL (gui->w32label));
 	gint number = atoi (count) - 1;
-	
+
 	if (number == 0) {
 
-		gtk_label_set_text (GTK_LABEL (gui->w32label), "");	
+		gtk_label_set_text (GTK_LABEL (gui->w32label), "");
 		gtk_widget_set_sensitive (gui->w32button, TRUE);
 		return FALSE;
 	}
-	gtk_label_set_text (GTK_LABEL (gui->w32label), 
+	gtk_label_set_text (GTK_LABEL (gui->w32label),
 						g_strdup_printf("%d", number));
 	return TRUE;
 }
@@ -265,14 +265,14 @@ void gui_main (GtkBuilder* builder) {
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
 	#ifdef WIN32
-    gui->w32window = 
+    gui->w32window =
 			GTK_WIDGET (gtk_builder_get_object (builder, "w32popup"));
-	gui->w32button = 
+	gui->w32button =
 			GTK_WIDGET (gtk_builder_get_object (builder, "w32button"));
-	gui->w32label = 
+	gui->w32label =
 			GTK_WIDGET (gtk_builder_get_object (builder, "w32label"));
     gtk_widget_show (gui->w32window);
-    
+
     g_timeout_add_seconds (1, w32popup_wait_event, NULL);
     #endif
 
@@ -304,10 +304,10 @@ void on_tab_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
 
     /* update the title of the mainwindow */
     gui_set_filename_display (g_active_tab, TRUE, FALSE);
-    
+
     /* clear the build log output window */
     gui_buildlog_set_text ("");
-    
+
     previewgui_reset (gui->previewgui);
 }
 
@@ -326,7 +326,7 @@ void on_right_notebook_switch_page(GtkNotebook *notebook, GtkWidget *nbpage,
 
 void gui_set_filename_display (GuTabContext* tc, gboolean title, gboolean label) {
     gchar* filetext = tabmanager_get_tabname (tc);
-    
+
     if (label) tabmanagergui_update_label (tc->page, filetext);
     if (title) gui_set_window_title (tc->editor->filename, filetext);
 }
@@ -351,7 +351,7 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
 
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
-    
+
     if (res == GTK_RESPONSE_YES) {
         tabmanager_set_content (A_LOAD_OPT, filename, prev_workfile);
     }
@@ -369,12 +369,12 @@ void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename) {
 				"do you want to recover from it?"), filename);
     gtk_label_set_text (GTK_LABEL (tab->page->barlabel), msg);
     g_free (msg);
-    
+
     gchar* data = g_strconcat (filename, NULL);
-    tab->page->infosignal = 
+    tab->page->infosignal =
         g_signal_connect (g_active_tab->page->infobar, "response",
         G_CALLBACK (on_recovery_infobar_response), (gpointer)data);
-        
+
     gtk_widget_set_sensitive (GTK_WIDGET (tab->editor->view), FALSE);
     gtk_widget_show (tab->page->infobar);
 }
@@ -422,14 +422,14 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
             }
         } else goto cleanup;
     }
-    
+
     gchar *text;
     GtkWidget* focus = NULL;
 
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
     text = editor_grab_buffer (tab->editor);
     gtk_widget_grab_focus (focus);
-    
+
     iofunctions_save_file (gummi->io, filename, text);
 
     if (config_get_value ("autoexport")) {
@@ -529,7 +529,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
     g_free(templ_name);
-    
+
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_hastabs_sensitive (TRUE);
 }
@@ -565,13 +565,13 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     g_free (filepath);
 }
 
-G_MODULE_EXPORT 
+G_MODULE_EXPORT
 void on_template_cursor_changed (GtkTreeView *tree, gpointer data) {
     if (!gtk_tree_view_get_selection (tree) == 0) {
         gtk_widget_set_sensitive (gummi->templ->template_open, TRUE);
     }
 }
-    
+
 
 G_MODULE_EXPORT
 void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
@@ -584,7 +584,7 @@ void on_bibcolumn_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
-    
+
     gtk_widget_set_sensitive (widget, FALSE);
     g_timeout_add (10, on_bibprogressbar_update, NULL);
 
@@ -595,7 +595,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
                 _("Bibliography compiled without errors"));
         motion_force_compile (gummi->motion);
     } else {
-        statusbar_set_message 
+        statusbar_set_message
         (_("Error compiling bibliography file or none detected..."));
         gtk_progress_bar_set_text (gummi->biblio->progressbar,
                 _("Error compiling bibliography file"));
@@ -704,11 +704,11 @@ void typesetter_setup (void) {
     gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_runmakeindex), status);
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_shellescape),
                               status);
-                              
+
     gboolean texormk = (texlive_active() || latexmk_active());
-    
-    
-    
+
+
+
     if (config_get_value("synctex") && texormk) {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, TRUE);
     }
@@ -716,8 +716,8 @@ void typesetter_setup (void) {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, FALSE);
     }
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), texormk);
-    
-    
+
+
     slog (L_INFO, "Typesetter %s configured.\n",config_get_value("typesetter"));
 }
 
@@ -735,7 +735,7 @@ gboolean on_bibprogressbar_update (void* user) {
 gint check_for_save (GuEditor* editor) {
     GtkWidget* dialog;
     gint ret = 0;
-    
+
     if (editor && editor_buffer_changed (editor)){
         dialog = gtk_message_dialog_new (gui->mainwindow,
                      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -749,12 +749,12 @@ gint check_for_save (GuEditor* editor) {
                                 GTK_STOCK_SAVE, GTK_RESPONSE_YES,
                                 NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
-        
+
         gtk_window_set_title (GTK_WINDOW (dialog), _("Unsaved Changes"));
         ret = gtk_dialog_run (GTK_DIALOG (dialog));
         gtk_widget_destroy (dialog);
     }
-    
+
     return ret;
 }
 
@@ -876,12 +876,12 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_set_filter (dialog, filter);
             break;
 
-        case TYPE_IMAGE: 
-            /* Only \insertgraphics uses this section now. Make sure 
+        case TYPE_IMAGE:
+            /* Only \insertgraphics uses this section now. Make sure
              * the patterns & mimes are correct before assigning it
 			 * for other functions */
             gtk_file_filter_set_name (filter, _("Supported Image files"));
-            
+
             /* Pdflatex supports different formats than pure latex */
             if (latex_method_active ("texpdf")) {
 				gtk_file_filter_add_pattern (filter, "*.jpg");
@@ -905,7 +905,7 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_filter_add_pattern (filter, "*.gummi");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
-            break;   
+            break;
     }
 }
 
@@ -959,7 +959,7 @@ void gui_buildlog_set_text (const gchar *message) {
         GtkTextIter iter;
         gtk_text_buffer_set_text (gui->errorbuff, message, -1);
         gtk_text_buffer_get_end_iter (gui->errorbuff, &iter);
-		// The following lines are commented out, as they seem to cause 
+		// The following lines are commented out, as they seem to cause
 		// Bug #252.
         //GtkTextMark *mark = gtk_text_buffer_create_mark(gui->errorbuff, NULL, &iter, FALSE);
         //gtk_text_view_scroll_to_mark (gui->errorview, mark, 0.25, FALSE, 0, 0);
@@ -984,10 +984,10 @@ gboolean statusbar_del_message (void* user) {
  */
 void check_preview_timer (void) {
     g_return_if_fail (g_active_tab != NULL);
-    
+
     gtk_text_buffer_set_modified (g_e_buffer, TRUE);
     gummi->latex->modified_since_compile = TRUE;
-    
+
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
 
     motion_start_timer (gummi->motion);

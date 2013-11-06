@@ -1,10 +1,10 @@
 /**
  * @file   latex.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -44,9 +44,9 @@ struct _GuLatex {
     gint errorlines[BUFSIZ];
     gchar* compilelog;
     gboolean modified_since_compile;
-    
+
     int tex_version;
-    
+
 };
 
 GuLatex* latex_init (void);

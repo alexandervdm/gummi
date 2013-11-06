@@ -1,10 +1,10 @@
 /**
  * @file   importer.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -48,8 +48,8 @@ const gchar* importer_generate_table (gint rows, gint cols, gint borders,
     gint i = 0, j = 0;
     static gchar result[BUFSIZ * 2] = { 0 };
     gchar table[BUFSIZ * 2] = { 0 },
-          begin_tabular[BUFSIZ] = "\\begin{tabular}{", 
-          end_tabular[] = "\n\\end{tabular}\n", 
+          begin_tabular[BUFSIZ] = "\\begin{tabular}{",
+          end_tabular[] = "\n\\end{tabular}\n",
           line[] = "\n\\hline",
           tmp[BUFSIZ / 8];
 
@@ -123,7 +123,7 @@ const gchar* importer_generate_image (const gchar* path, const gchar* caption,
 
     /* clear previous data */
     result[0] = 0;
-    
+
     // Filepath notation corrections for Windows systems:
     #ifdef WIN32
     path = g_strjoinv("/", g_strsplit(path, "\\", -1));

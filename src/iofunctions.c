@@ -1,10 +1,10 @@
 /**
  * @file    iofunctions.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -77,9 +77,9 @@ void iofunctions_load_default_text (gboolean loopedonce) {
         utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, &copyerr);
         if (!loopedonce) return iofunctions_load_default_text (TRUE);
     }
-    
+
     if (text) editor_fill_buffer (ec, text);
-    
+
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (ec->buffer), FALSE);
     g_free (text);
 }
@@ -105,7 +105,7 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     GuEditor* ec = NULL;
 
     ec = gummi_get_active_editor();
-    
+
     /* get the file contents */
     if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
@@ -121,29 +121,29 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
 
 cleanup:
     g_free (decoded);
-    g_free (text); 
+    g_free (text);
 }
 
 void iofunctions_save_file (GuIOFunc* io, gchar* filename, gchar *text) {
     gchar* status = NULL;
 
     status = g_strdup_printf (_("Saving %s..."), filename);
-    statusbar_set_message (status);    
+    statusbar_set_message (status);
     g_free (status);
-    
+
     GObject *savecontext = g_object_new(G_TYPE_OBJECT, NULL);
-    
+
     g_object_set_data (savecontext, "filename", filename);
     g_object_set_data (savecontext, "text", text);
-    
+
     g_signal_emit_by_name (io->sig_hook, "document-write", savecontext);
-    
-    gtk_text_buffer_set_modified 
+
+    gtk_text_buffer_set_modified
                 (GTK_TEXT_BUFFER(gummi_get_active_editor()->buffer), FALSE);
 }
 
 void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
-    
+
     gboolean result = FALSE;
     gchar* filename = NULL;
     gchar* encoded = NULL;
@@ -154,21 +154,21 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
     text = g_object_get_data (savecontext, "text");
 
     encoded = iofunctions_encode_text (text);
-    
+
     /* set the contents of the file to the text from the buffer */
     if (filename != NULL) {
         if (! (result = g_file_set_contents (filename, encoded, -1, &err))) {
             slog (L_ERROR, "g_file_set_contents (): %s\n", err->message);
         }
     }
-        
+
     if (result == FALSE) {
         slog (L_G_ERROR, _("%s\nPlease try again later."), err->message);
         g_error_free (err);
     }
 
     g_free (encoded);
-    g_free (text); 
+    g_free (text);
     g_object_unref (savecontext);
 }
 
@@ -176,12 +176,12 @@ gchar* iofunctions_get_swapfile (const gchar* filename) {
     gchar* basename = NULL;
     gchar* dirname = NULL;
     gchar* swapfile = NULL;
-    
+
     basename = g_path_get_basename (filename);
     dirname = g_path_get_dirname (filename);
     swapfile = g_strdup_printf ("%s%c.%s.swp", dirname,
             G_DIR_SEPARATOR, basename);
-            
+
     g_free (dirname);
     g_free (basename);
     return swapfile;
@@ -189,7 +189,7 @@ gchar* iofunctions_get_swapfile (const gchar* filename) {
 
 gboolean iofunctions_has_swapfile (const gchar* filename) {
     if (filename == NULL) return FALSE;
-    
+
     gchar* swapfile = iofunctions_get_swapfile (filename);
     if (utils_path_exists (swapfile)) {
         return TRUE;
@@ -268,14 +268,14 @@ gboolean iofunctions_autosave_cb (void *user) {
 
     GList *tabs = gummi_get_all_tabs();
     tabtotal = g_list_length(tabs);
-    
+
     /* skip the autosave procedure when there are no tabs open */
-    if (tabtotal == 0) return TRUE; 
+    if (tabtotal == 0) return TRUE;
 
     for (i=0; i < tabtotal; i++) {
         tab = g_list_nth_data (tabs, i);
         ec = tab->editor;
-        
+
         if ((ec->filename) && editor_buffer_changed (ec)) {
             focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
             text = editor_grab_buffer (ec);

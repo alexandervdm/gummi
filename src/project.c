@@ -1,10 +1,10 @@
 /**
  * @file   project.h
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -26,7 +26,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
- 
+
 #include "project.h"
 
 #include <string.h>
@@ -62,9 +62,9 @@ gboolean project_create_new (const gchar* filename) {
     const gchar* content = g_strdup_printf("version=%s\n"
                                            "typesetter=%s\n"
                                            "steps=%s\n"
-                                           "root=%s\n", 
+                                           "root=%s\n",
                                             version, csetter, csteps, rootfile);
-    
+
     if (!STR_EQU (filename + strlen (filename) -6, ".gummi")) {
         filename = g_strdup_printf ("%s.gummi", filename);
     }
@@ -72,9 +72,9 @@ gboolean project_create_new (const gchar* filename) {
     statusbar_set_message (g_strdup_printf("Creating project file: %s",
                 filename));
     utils_set_file_contents (filename, content, -1);
-    
+
     gummi->project->projfile = g_strdup (filename);
-    
+
     return TRUE;
 }
 
@@ -86,10 +86,10 @@ gboolean project_open_existing (const gchar* filename) {
         slog (L_ERROR, "%s\n", err->message);
         return FALSE;
     }
-    
+
     if (!project_file_integrity (content)) return FALSE;
     if (!project_load_files (filename, content)) return FALSE;
-    
+
     gummi->project->projfile = g_strdup (filename);
 
     return TRUE;
@@ -99,7 +99,7 @@ gboolean project_close (void) {
     GList *tabs = NULL;
     int i = 0;
     tabs = g_list_copy(gummi_get_all_tabs());
-    
+
     // XXX: needs refactor
     /* Disable compile thread to prevent it from compiling nonexisting editor */
     motion_stop_compile_thread(gummi->motion);
@@ -131,17 +131,17 @@ gboolean project_add_document (const gchar* project, const gchar* fname) {
     gchar* oldcontent;
     gchar* newcontent;
     GError* err;
-    
+
     if (!g_file_get_contents (project, &oldcontent, NULL, &err)) {
         slog (L_ERROR, "%s\n", err->message);
         return FALSE;
     }
-    
+
     // don't add files that are already in the project:
     if (utils_subinstr ((gchar*)fname, oldcontent, TRUE)) return FALSE;
-    
+
     newcontent = g_strconcat (oldcontent, "\nfile=", fname, NULL);
-    
+
     if (g_file_test (project, G_FILE_TEST_EXISTS)) {
         utils_set_file_contents (project, newcontent, -1);
         return TRUE;
@@ -157,17 +157,17 @@ gboolean project_remove_document (const gchar* project, const gchar* fname) {
     gchar* oldcontent;
     gchar* newcontent;
     GError* err;
-    
+
     if (!g_file_get_contents (project, &oldcontent, NULL, &err)) {
         slog (L_ERROR, "%s\n", err->message);
         return FALSE;
     }
-    
+
     gchar* delimiter = g_strdup_printf ("file=%s", fname);
-    
+
     gchar** splitcontent = g_strsplit (oldcontent, delimiter, 2);
     newcontent = g_strconcat (splitcontent[0], splitcontent[1], NULL);
-    
+
     if (g_file_test (project, G_FILE_TEST_EXISTS)) {
         utils_set_file_contents (project, newcontent, -1);
         return TRUE;
@@ -183,7 +183,7 @@ GList* project_list_files (const gchar* content) {
     gchar** splcontent = g_strsplit(content, "\n", 0);
     GList* filelist = NULL;
     gint i;
-    
+
     for (i = 0; i < g_strv_length(splcontent); i++) {
         gchar** line = g_strsplit(splcontent[i], "=", 0);
         if (STR_EQU ("file", line[0])) {
@@ -197,7 +197,7 @@ GList* project_list_files (const gchar* content) {
     }
     return filelist;
 }
-    
+
 gboolean project_load_files (const gchar* projfile, const gchar* content) {
     gboolean status = FALSE;
     gint rootpos, i;
@@ -209,7 +209,7 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
     for (i=0; i<length;i++) {
         filename = g_list_nth_data (filelist, i);
         if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
-            
+
             if (!tabmanager_check_exists (filename)) {
                 gui_open_file (filename);
                 // TODO: no direct calling this:
@@ -222,7 +222,7 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
         }
     }
     if (status == TRUE) projectgui_set_rootfile (rootpos);
-    
+
     return status;
 }
 

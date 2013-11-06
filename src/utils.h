@@ -1,10 +1,10 @@
 /**
  * @file    utils.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -152,7 +152,7 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
 
 /**
  * utils_subinstr:
- * 
+ *
  * Returns: A gboolean that states whether or the string in the first
  * argument is a substring of the second argument. When the case_sens arg
  * is passed as TRUE, case sensitivity of the two strings is ignored.

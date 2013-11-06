@@ -1,10 +1,10 @@
 /**
  * @file   motion.h
- * @brief   
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -43,7 +43,7 @@ struct _GuMotion {
     GThread* compile_thread;
     GCond* compile_cv;
     pid_t* typesetter_pid;
-    
+
     gboolean keep_running;
     gboolean pause;
     gboolean errormode;

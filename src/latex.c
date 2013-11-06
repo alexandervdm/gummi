@@ -1,10 +1,10 @@
 /**
  * @file   latex.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -56,17 +56,17 @@ GuLatex* latex_init (void) {
     GuLatex* l = g_new0 (GuLatex, 1);
     l->compilelog = NULL;
     l->modified_since_compile = FALSE;
-    
+
     l->tex_version = texlive_init ();
     rubber_init ();
     latexmk_init ();
-    
+
     /* TODO: Temp hard set of compilation options for migrating configs */
     if (strlen(config_get_value("typesetter")) == 0)
         config_set_value("typesetter", "pdflatex");
     if (strlen(config_get_value("compile_steps")) == 0)
         config_set_value("compile_steps", "texpdf");
-    
+
     return l;
 }
 
@@ -81,9 +81,9 @@ gboolean latex_method_active (gchar* method) {
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
     gchar *text;
-    
+
     text = editor_grab_buffer (ec);
-    
+
     // bit of a dirty hack, but only write the buffer content when
     // there is not a recovery in progress, otherwise the workfile
     // will be overwritten with empty text
@@ -94,11 +94,11 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 }
 
 gchar* latex_set_compile_cmd (GuEditor* ec) {
-    
+
     const gchar* method = config_get_value ("compile_steps");
     gchar* combined = NULL;
     gchar* texcmd = NULL;
-    
+
     if (rubber_active()) {
         texcmd = rubber_get_command (method, ec->workfile);
     }
@@ -124,7 +124,7 @@ gchar* latex_analyse_log (gchar* log, gchar* filename, gchar* basename) {
             logpath = g_strconcat (basename, ".log", NULL);
         }
         else {
-            logpath = g_strconcat (C_TMPDIR, C_DIRSEP, 
+            logpath = g_strconcat (C_TMPDIR, C_DIRSEP,
                                    g_path_get_basename(basename), ".log", NULL);
         }
         g_file_get_contents (logpath, &log, NULL, NULL);
@@ -132,8 +132,8 @@ gchar* latex_analyse_log (gchar* log, gchar* filename, gchar* basename) {
     return log;
 }
 
-            
-    
+
+
 
 void latex_analyse_errors (GuLatex* lc) {
     gchar* result = NULL;
@@ -146,7 +146,7 @@ void latex_analyse_errors (GuLatex* lc) {
         g_error_free (err);
         return;
     }
-    
+
     if (lc->compilelog == NULL) printf("null\n");
 
     if (g_regex_match (match_str, lc->compilelog, 0, &match_info)) {
@@ -184,20 +184,20 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
     g_free (lc->compilelog);
     memset (lc->errorlines, 0, BUFSIZ);
-    
+
     /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command, curdir);
     cerrors = (glong)cresult.first;
     gchar* coutput = (gchar*)cresult.second;
-    
+
     lc->compilelog = latex_analyse_log (coutput, filename, basename);
     lc->modified_since_compile = FALSE;
-    
+
     /* find error line */
     if (cerrors && (g_utf8_strlen (lc->compilelog, -1) != 0)) {
         latex_analyse_errors (lc);
     }
-    
+
     g_free (command);
 
     return cerrors == 0;
@@ -228,10 +228,10 @@ int latex_remove_auxfile (GuEditor* ec) {
         auxfile = g_strconcat (ec->basename, ".aux", NULL);
     }
     else {
-        auxfile = g_strconcat (C_TMPDIR, C_DIRSEP, 
+        auxfile = g_strconcat (C_TMPDIR, C_DIRSEP,
                   g_path_get_basename(ec->basename), ".aux", NULL);
         }
-    
+
     // TODO: extend for other build files
     if (g_file_test (auxfile, G_FILE_TEST_EXISTS)) {
         res = g_remove (auxfile);
@@ -245,9 +245,9 @@ gboolean latex_precompile_check (gchar* editortext) {
      * http://pangea.stanford.edu/computing/unix/formatting/parts.php
      * TOD: Improve and add document scan tags and make compatible with
      * upcoming master/slave document system */
-     
+
     // TODO: see issue #269
-    
+
     gboolean class = utils_subinstr("\\documentclass", editortext, FALSE);
     gboolean style = utils_subinstr("\\documentstyle", editortext, FALSE);
     gboolean input = utils_subinstr("\\input", editortext, FALSE);
@@ -274,7 +274,7 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
         }
     }
     if (!utils_copy_file (ec->pdffile, savepath, &err)) {
-        slog (L_G_ERROR, _("Unable to export PDF file.\n\n%s"), 
+        slog (L_G_ERROR, _("Unable to export PDF file.\n\n%s"),
                             err->message);
         g_error_free (err);
     }
@@ -284,13 +284,13 @@ void latex_export_pdffile (GuLatex* lc, GuEditor* ec, const gchar* path,
 
 gboolean latex_run_makeindex (GuEditor* ec) {
     int retcode;
-    
+
     if (g_find_program_in_path ("makeindex")) {
-        
+
         gchar* command = g_strdup_printf ("%s makeindex \"%s.idx\"",
                                           C_TEXSEC,
                                           g_path_get_basename(ec->basename));
-                                         
+
         Tuple2 res = utils_popen_r (command, C_TMPDIR);
         retcode = (glong)res.first;
         g_free (command);

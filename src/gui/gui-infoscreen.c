@@ -45,14 +45,14 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuInfoscreenGui* is = g_new0 (GuInfoscreenGui, 1);
-    
+
     is->viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     is->errorpanel =
         GTK_WIDGET(gtk_builder_get_object (builder, "errorpanel"));
     is->drawarea =
         GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
-        
+
     is->header =
         GTK_LABEL (gtk_builder_get_object (builder, "error_header"));
     is->image =
@@ -64,17 +64,17 @@ GuInfoscreenGui* infoscreengui_init (GtkBuilder* builder) {
 
 void infoscreengui_enable (GuInfoscreenGui *is, const gchar *msg) {
     GList* list = NULL;
-    
+
     list = gtk_container_get_children (GTK_CONTAINER (is->viewport));
-    
+
     infoscreengui_set_message (is, msg);
-    
+
     while (list) {
         gtk_container_remove (GTK_CONTAINER (is->viewport),
                 GTK_WIDGET (list->data));
         list = list->next;
     }
-    
+
     gtk_container_add (GTK_CONTAINER (is->viewport),
                 GTK_WIDGET (is->errorpanel));
     gtk_widget_show_all (GTK_WIDGET (is->viewport));
@@ -82,7 +82,7 @@ void infoscreengui_enable (GuInfoscreenGui *is, const gchar *msg) {
 }
 
 void infoscreengui_disable (GuInfoscreenGui *is) {
-    
+
     g_object_ref (is->errorpanel);
     gtk_container_remove (GTK_CONTAINER (is->viewport),
             GTK_WIDGET (is->errorpanel));

@@ -45,22 +45,22 @@ GuProjectGui* projectgui_init (GtkBuilder* builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuProjectGui* p = g_new0 (GuProjectGui, 1);
-    
+
     p->proj_name = GTK_LABEL (gtk_builder_get_object (builder, "proj_name"));
     p->proj_path = GTK_LABEL (gtk_builder_get_object (builder, "proj_path"));
-    p->proj_nroffiles = 
+    p->proj_nroffiles =
             GTK_LABEL (gtk_builder_get_object (builder, "proj_nroffiles"));
-    
-    p->proj_addbutton = 
+
+    p->proj_addbutton =
             GTK_BUTTON (gtk_builder_get_object (builder, "proj_addbutton"));
-    p->proj_rembutton = 
+    p->proj_rembutton =
             GTK_BUTTON (gtk_builder_get_object (builder, "proj_rembutton"));
-    
+
     p->list_projfiles =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_projfiles"));
     p->proj_treeview =
         GTK_TREE_VIEW (gtk_builder_get_object (builder, "proj_treeview"));
-        
+
     return p;
 }
 
@@ -79,7 +79,7 @@ int projectgui_list_projfiles (gchar* active_proj) {
     gint amount, i;
     gchar* name;
     gchar* path;
-    
+
     GtkListStore* store = gui->projectgui->list_projfiles;
     gtk_list_store_clear (store);
 
@@ -87,17 +87,17 @@ int projectgui_list_projfiles (gchar* active_proj) {
         slog (L_ERROR, "%s\n", err->message);
         return -1;
     }
-    
+
     files = project_list_files (content);
     amount = g_list_length (files);
-    
+
     for (i=0; i < amount; i++) {
         GdkPixbuf* pic = NULL;
         gchar* tmp = g_list_nth_data (files, i);
         name = g_path_get_basename (tmp);
         path = g_path_get_dirname (tmp);
         gtk_list_store_append (store, &iter);
-        
+
         // 0=ROOT, 1=ERROR
         if (i == 0) pic = projectgui_get_status_pixbuf (0);
         if (!g_file_test (tmp, G_FILE_TEST_EXISTS)) {
@@ -129,36 +129,36 @@ GdkPixbuf* projectgui_get_status_pixbuf (int status) {
 void projectgui_enable (GuProject* pr, GuProjectGui* prgui) {
     const gchar* projbasename = g_path_get_basename (pr->projfile);
     const gchar* projrootpath = g_path_get_dirname (pr->rootfile);
-    
+
     gtk_label_set_text (prgui->proj_name, projbasename);
     gtk_label_set_text (prgui->proj_path, projrootpath);
-    gtk_label_set_text (prgui->proj_nroffiles, 
+    gtk_label_set_text (prgui->proj_nroffiles,
                         g_strdup_printf("%d", pr->nroffiles));
-    
+
     // for visible information when window is shrinked, see #439 -A
-    gtk_widget_set_tooltip_text 
+    gtk_widget_set_tooltip_text
                         (GTK_WIDGET (prgui->proj_name), projbasename);
-    gtk_widget_set_tooltip_text 
+    gtk_widget_set_tooltip_text
                         (GTK_WIDGET (prgui->proj_path), projrootpath);
-                        
+
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_addbutton), TRUE);
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), TRUE);
     tablabel_set_bold_text (g_active_tab->page);
 }
 
 void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
-    
+
     gtk_list_store_clear (gui->projectgui->list_projfiles);
-    
+
     gtk_label_set_text (prgui->proj_name, "");
     gtk_label_set_text (prgui->proj_path, "");
     gtk_label_set_text (prgui->proj_nroffiles, "");
 
-    gtk_widget_set_tooltip_text 
+    gtk_widget_set_tooltip_text
                         (GTK_WIDGET (prgui->proj_name), "");
-    gtk_widget_set_tooltip_text 
+    gtk_widget_set_tooltip_text
                         (GTK_WIDGET (prgui->proj_path), "");
-    
+
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_addbutton), FALSE);
     gtk_widget_set_sensitive (GTK_WIDGET (prgui->proj_rembutton), FALSE);
 }
@@ -166,13 +166,13 @@ void projectgui_disable (GuProject* pr, GuProjectGui* prgui) {
 G_MODULE_EXPORT
 void on_projfile_add_clicked (GtkWidget* widget, void* user) {
     gchar* selected = NULL;
-    
+
     selected = get_open_filename (TYPE_LATEX);
-    
+
     if (selected) {
         if (project_add_document (gummi->project->projfile, selected)) {
             int amount = projectgui_list_projfiles (gummi->project->projfile);
-            gtk_label_set_text (gui->projectgui->proj_nroffiles, 
+            gtk_label_set_text (gui->projectgui->proj_nroffiles,
                                 g_strdup_printf("%d", amount));
             gui_open_file (selected);
         }
@@ -187,17 +187,17 @@ G_MODULE_EXPORT
 void on_projfile_rem_clicked (GtkWidget* widget, void* user) {
     GtkTreeIter iter;
     gchar* value;
-    
+
     GtkTreeModel* model = GTK_TREE_MODEL (gui->projectgui->list_projfiles);
-    GtkTreeSelection* selection = gtk_tree_view_get_selection 
+    GtkTreeSelection* selection = gtk_tree_view_get_selection
                                          (gui->projectgui->proj_treeview);
-                                         
+
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 3, &value, -1);
-    
+
         if (project_remove_document (gummi->project->projfile, value)) {
             int amount = projectgui_list_projfiles (gummi->project->projfile);
-            gtk_label_set_text (gui->projectgui->proj_nroffiles, 
+            gtk_label_set_text (gui->projectgui->proj_nroffiles,
                                 g_strdup_printf("%d", amount));
         }
     }

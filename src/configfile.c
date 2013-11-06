@@ -4,7 +4,7 @@
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -114,8 +114,8 @@ void config_init (const gchar* filename) {
 
     config_load ();
     config_version = config_get_value ("config_version");
-    
-    
+
+
     /* Migration from earlier version to newer version (first run only) */
     if (utils_subinstr("0.5", (gchar*)config_version, FALSE)) {
         const gchar* text = config_get_value ("welcome");
@@ -123,7 +123,7 @@ void config_init (const gchar* filename) {
         gchar* filename = g_build_filename (g_get_user_config_dir (),
             "gummi", "templates", templname, NULL);
         gchar* filepath = g_path_get_dirname (filename);
-            
+
         if (!g_file_test (filepath, G_FILE_TEST_IS_DIR)) {
             slog (L_WARNING, "Template directory does not exist, creating..\n");
             g_mkdir_with_parents (filepath, DIR_PERMS);
@@ -165,7 +165,7 @@ void config_set_default (void) {
 
 /**
  *  Returns the String assigned to a config parameter.
- *  If the String is "False", NULL is returned, thus in the case of a boolean 
+ *  If the String is "False", NULL is returned, thus in the case of a boolean
  *  parameter it is possible to write
  *      if (config_get_value("parameter_name")) {...}
  */
@@ -215,7 +215,7 @@ void config_load (void) {
         config_set_default ();
         return config_load ();
     }
-    
+
     /* In the occurence of a crash, the config file can be left open and the
      * contents wiped. Gummi segfaults at the start when the file is empty */
     gchar* contents;
@@ -225,7 +225,7 @@ void config_load (void) {
         config_set_default ();
         return config_load ();
     }
-    
+
     current = config_head = prev = g_new0 (slist, 1);
 
     while (fgets (buf, BUFSIZ, fh)) {

@@ -1,10 +1,10 @@
 /**
  * @file   rubber.c
- * @brief  
+ * @brief
  *
  * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -37,10 +37,10 @@
 gboolean rub_detected = FALSE;
 
 void rubber_init (void) {
-    
+
     if (external_exists (C_RUBBER)) {
         // TODO: check if supported version
-        slog (L_INFO, "Typesetter detected: Rubber %s\n", 
+        slog (L_INFO, "Typesetter detected: Rubber %s\n",
                        external_version (C_RUBBER));
         rub_detected = TRUE;
     }
@@ -58,13 +58,13 @@ gboolean rubber_detected (void) {
 }
 
 gchar* rubber_get_command (const gchar* method, gchar* workfile) {
-    
+
     const gchar* outdir = g_strdup_printf ("--into=\"%s\"", C_TMPDIR);
     const gchar* flags = rubber_get_flags (method);
     gchar* rubcmd;
-    
+
     rubcmd = g_strdup_printf("rubber %s %s \"%s\"", flags, outdir, workfile);
-    
+
     return rubcmd;
 }
 

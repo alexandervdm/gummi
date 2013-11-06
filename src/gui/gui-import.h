@@ -60,7 +60,7 @@ struct _GuImportGui {
     GtkAdjustment* matrix_rows;
     GtkAdjustment* matrix_cols;
     GtkComboBox* matrix_combobracket;
-    
+
     GtkEntry* biblio_file;
 };
 

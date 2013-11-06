@@ -1,10 +1,10 @@
 /**
  * @file    environment.c
- * @brief    
+ * @brief
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -38,7 +38,7 @@ GummiGui* gui = 0;
 Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
                    GuTemplate* tpl, GuSnippets* snip, GuTabmanager* tabm,
                    GuProject* proj) {
-    
+
     Gummi* g = g_new0 (Gummi, 1);
     g->io = io;
     g->motion = mo;
@@ -48,7 +48,7 @@ Gummi* gummi_init (GuMotion* mo, GuIOFunc* io, GuLatex* latex, GuBiblio* bib,
     g->snippets = snip;
     g->tabmanager = tabm;
     g->project = proj;
-    
+
     return g;
 }
 
@@ -64,12 +64,12 @@ gchar* gummi_get_projectfile (void) {
 GuEditor* gummi_new_environment (const gchar* filename) {
     GuEditor* ec = editor_new (gummi->motion);
     editor_fileinfo_update (ec, filename);
-    
+
     slog (L_INFO, "\n");
     slog (L_INFO, "Environment created for:\n");
     slog (L_INFO, "TEX: %s\n", ec->filename);
     slog (L_INFO, "TMP: %s\n", ec->workfile);
-    slog (L_INFO, "PDF: %s\n", ec->pdffile); 
+    slog (L_INFO, "PDF: %s\n", ec->pdffile);
     return ec;
 }
 
@@ -89,10 +89,10 @@ GList* gummi_get_all_editors (void) {
     int tabtotal, i;
     GuEditor* ec;
     GList* editors = NULL;
-    
+
     GList *tabs = gummi_get_all_tabs();
     tabtotal = g_list_length(tabs);
-    
+
     for (i = 0; i < tabtotal; ++i) {
         ec = GU_TAB_CONTEXT (g_list_nth_data (tabs, i))->editor;
         editors = g_list_append (editors, ec);

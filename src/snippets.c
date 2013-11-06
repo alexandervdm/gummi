@@ -4,7 +4,7 @@
  *
  * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
  * All Rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -291,7 +291,7 @@ gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
             g_free (key);
         }
     }
-    
+
     if (sc->info) {
         if (ev->keyval == GDK_KEY_Tab) {
             if (!snippet_info_goto_next_placeholder (sc->info, ec))
