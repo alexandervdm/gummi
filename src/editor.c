@@ -202,7 +202,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
 
     if (filename) {
         gchar* fname = NULL;
-        if (!g_path_is_absolute (fname)) {
+        if (!g_path_is_absolute (filename)) {
             fname = g_strdup_printf ("%s%c%s", g_get_current_dir(),
                                      G_DIR_SEPARATOR, filename);
         } else {
