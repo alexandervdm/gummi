@@ -967,7 +967,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
     //L_F_DEBUG;
     /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
      * compiling. Also prevent PDF from changing (compiling) when previewing */
-    if (!g_mutex_trylock (gummi->motion->compile_mutex)) return;
+    if (!g_mutex_trylock (&gummi->motion->compile_mutex)) return;
 
     /* This line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_path_exists (pc->uri + usize)) goto unlock;
@@ -1027,7 +1027,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
     gtk_widget_queue_draw (pc->drawarea);
 
 unlock:
-    g_mutex_unlock (gummi->motion->compile_mutex);
+    g_mutex_unlock (&gummi->motion->compile_mutex);
 }
 
 static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {

@@ -38,10 +38,10 @@ typedef struct _GuMotion GuMotion;
 
 struct _GuMotion {
     gint key_press_timer;
-    GMutex* signal_mutex;
-    GMutex* compile_mutex;
+    GMutex signal_mutex;
+    GMutex compile_mutex;
     GThread* compile_thread;
-    GCond* compile_cv;
+    GCond compile_cv;
     pid_t* typesetter_pid;
 
     gboolean keep_running;

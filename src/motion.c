@@ -74,9 +74,9 @@ GuMotion* motion_init (void) {
     GuMotion* m = g_new0 (GuMotion, 1);
 
     m->key_press_timer = 0;
-    m->signal_mutex = g_mutex_new ();
-    m->compile_mutex = g_mutex_new ();
-    m->compile_cv = g_cond_new ();
+    g_mutex_init(&m->signal_mutex);
+    g_mutex_init(&m->compile_mutex);
+    g_cond_init(&m->compile_cv);
     m->keep_running = TRUE;
     m->keep_running = FALSE;
     m->typesetter_pid = &typesetter_pid;
@@ -85,14 +85,8 @@ GuMotion* motion_init (void) {
 }
 
 void motion_start_compile_thread (GuMotion* m) {
-    GError* err = NULL;
-
     m->keep_running = TRUE;
-    m->compile_thread = g_thread_create (motion_compile_thread, m, TRUE, &err);
-    if (!m->compile_thread) {
-        slog (L_G_FATAL, "Can not create new thread: %s\n", err->message);
-        g_error_free(err);
-    }
+    m->compile_thread = g_thread_new ("motion", motion_compile_thread, m);
 }
 
 void motion_stop_compile_thread (GuMotion* m) {
@@ -157,9 +151,9 @@ gboolean motion_do_compile (gpointer user) {
     L_F_DEBUG;
     GuMotion* mc = GU_MOTION (user);
 
-    if (!g_mutex_trylock (mc->signal_mutex)) goto ret;
-    g_cond_signal (mc->compile_cv);
-    g_mutex_unlock (mc->signal_mutex);
+    if (!g_mutex_trylock (&mc->signal_mutex)) goto ret;
+    g_cond_signal (&mc->compile_cv);
+    g_mutex_unlock (&mc->signal_mutex);
 
 ret:
     return (STR_EQU (config_get_value ("compile_scheme"), "real_time"));
@@ -180,22 +174,22 @@ gpointer motion_compile_thread (gpointer data) {
     pc = gui->previewgui;
 
     while (TRUE) {
-        if (!g_mutex_trylock (mc->compile_mutex)) continue;
+        if (!g_mutex_trylock (&mc->compile_mutex)) continue;
         slog (L_DEBUG, "Compile thread sleeping...\n");
-        g_cond_wait (mc->compile_cv, mc->compile_mutex);
+        g_cond_wait (&mc->compile_cv, &mc->compile_mutex);
         slog (L_DEBUG, "Compile thread awoke.\n");
 
         if (!(editor = gummi_get_active_editor ())) {
-            g_mutex_unlock (mc->compile_mutex);
+            g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
         if (!mc->keep_running) {
-            g_mutex_unlock (mc->compile_mutex);
+            g_mutex_unlock (&mc->compile_mutex);
             g_thread_exit (NULL);
         }
 
         if (mc->pause) {
-            g_mutex_unlock (mc->compile_mutex);
+            g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
 
@@ -211,14 +205,14 @@ gpointer motion_compile_thread (gpointer data) {
         if (!precompile_ok) {
             motion_start_errormode (mc, "document_error");
             gdk_threads_leave();
-            g_mutex_unlock (mc->compile_mutex);
+            g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
         gdk_threads_leave();
 
         compile_status = latex_update_pdffile (latex, editor);
         *mc->typesetter_pid = 0;
-        g_mutex_unlock (mc->compile_mutex);
+        g_mutex_unlock (&mc->compile_mutex);
 
         if (!mc->keep_running)
             g_thread_exit (NULL);
