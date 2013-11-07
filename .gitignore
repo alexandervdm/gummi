@@ -1,3 +1,24 @@
-.*.swp
-.vimrc.local
+*.swp
+Makefile
+Makefile.in
+configure
+aclocal.m4
+config.h.in
+config.h
+config.log
+config.status
+autom4te.cache
+libtool
+mkinstalldirs
+stamp-h1
+install-sh
+depcomp
+missing
+ltmain.sh
+.deps
+.libs
+
+# intermediate files
 *.o
+*.lo
+*.la

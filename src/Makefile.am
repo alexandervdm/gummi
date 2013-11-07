@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 bin_PROGRAMS = gummi
 AM_CFLAGS = $(GUI_CFLAGS) \
 	    -export-dynamic -Wall -O2 \
