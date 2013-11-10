@@ -138,7 +138,7 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     }
 
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
-    add_to_recent_list (filename);
+    add_to_recent_list (editor->filename);
 
     previewgui_reset (gui->previewgui);
 }
@@ -168,10 +168,13 @@ void tabmanager_update_tab (const gchar* filename) {
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
 
-    add_to_recent_list (filename);
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
 
     editor_fileinfo_update (g_active_tab->editor, filename);
+
+    // Add full filepath to recent list
+    add_to_recent_list (g_active_tab->editor->filename);
+
     slog (L_INFO, "Environment updated for %s\n",
             g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);
