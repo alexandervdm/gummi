@@ -265,7 +265,7 @@ gboolean on_menu_quit_activate (void) {
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n"
             "  |)__)    I welcome your feedback at:\n"
-            "  -\"-\"-    http://gummi.midnightcoding.org\n\n");
+            "  -\"-\"-    https://github.com/alexandervdm/gummi\n\n");
     return FALSE;
 }
 
@@ -705,15 +705,14 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size (icon_file, 80, 80, &err);
     g_free (icon_file);
 
-    const gchar* authors[] = { "Alexander van der Mey\n"
-        "<alexvandermey@gmail.com>",
+    const gchar* authors[] = { "Alexander van der Meij\n"
+        "<alexandervdm@gliese.me>",
         "Wei-Ning Huang\n"
         "<aitjcize@gmail.com>",
-        "Dion Timmermann",
-        "<dion.timmermann@tu-harburg.de>",
-        "Robert Schroll",
-        "<rschroll@gmail.com>\n",
+        "",
         "Former contributors:",
+        "Dion Timmermann",
+        "Robert Schroll",
         "Thomas van der Burgt",
         "Cameron Grout", NULL };
 
@@ -728,7 +727,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Chinese (Traditional): Wei-Ning Huang\n"
         "Czech: Přemysl Janouch\n"
         "Danish: Jack Olsen\n"
-        "Dutch: Alexander van der Mey\n"
+        "Dutch: Alexander van der Meij\n"
         "French: Yvan Duron & Olivier Brousse\n"
         "German: Thomas Niederprüm\n"
         "Greek: Dimitris Leventeas\n"

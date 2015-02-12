@@ -37,7 +37,7 @@
 #define C_DEFAULTTEXT g_build_filename (GUMMI_DATA, "misc", "default.tex", NULL)
 
 /* URL constants */
-#define C_GUMMIGUIDE "http://dev.midnightcoding.org/projects/gummi/wiki/UserGuide"
+#define C_GUMMIGUIDE "https://github.com/alexandervdm/gummi/wiki"
 
 
 #define C_LATEX "latex"

@@ -52,7 +52,7 @@ fi
 
 
 echo "(1) Wei-Ning Huang"
-echo "(2) Alexander van der Mey"
+echo "(2) Alexander van der Meij"
 echo "Who are you? (1/2)"
 
 read -e WHO
@@ -61,7 +61,7 @@ if [ "$WHO" = "1" ]; then
     export DEBFULLNAME="Wei-Ning Huang (AZ)"
     export DEBEMAIL="aitjcize@gmail.com"
 else
-    export DEBFULLNAME="Alexander van der Mey"
+    export DEBFULLNAME="Alexander van der Meij"
     export DEBEMAIL="alexvandermey@gmail.com"
 fi
 

@@ -36,12 +36,12 @@
 #   define PACKAGE "gummi"
 #   define PACKAGE_NAME "Gummi"
 #   define PACKAGE_VERSION "svn"
-#   define PACKAGE_URL "http://gummi.midnightcoding.org/"
+#   define PACKAGE_URL "https://github.com/alexandervdm/gummi"
 #endif
 
 #define PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
 #define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2012\n\n"\
-                        "Alexander van der Mey\n"\
+                        "Alexander van der Meij\n"\
                         "Wei-Ning Huang\n"\
                         "Dion Timmermann\n"\
                         "Robert Schroll"
