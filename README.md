@@ -1,6 +1,8 @@
 # Gummi; the simple LaTeX editor
 Welcome to the new official home for Gummi. It's good to be back. I've decided to make a short FAQ to answer some of the questions you may have had while the original website was offline. 
 
+![Alt text](/../screenshots/screenshots/gummi-065-main.png?raw=true "gummi 0.6.5 main")
+
 ##### Are you going to continue development?
 Yes, I will start working on a new bugfix release right away. No release date yet, but it shouldn't take long to fix some of the minor existing annoyances. 
 
