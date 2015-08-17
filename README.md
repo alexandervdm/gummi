@@ -6,7 +6,7 @@ Welcome to the new official home for Gummi. It's good to be back. I've decided t
 ##### Are you going to continue development?
 Yes, I will start working on a new bugfix release right away. No release date yet, but it shouldn't take long to fix some of the minor existing annoyances. 
 
-##### What about implementing (mayor) feature X?
+##### What about implementing feature X?
 Unfortunately other projects I am currently working on take priority for the time being. There are some architectural aspects about the Gummi codebase that make popular requests like improved project support difficult to implement properly without some mayor reform. I'd probably do a complete rewrite of Gummi in Python or Vala if I had unlimited time, but unfortunately our reality does not work that way ;) - That said, I'm hopeful that this move to Github will bring in new contributions. 
 
 ##### Is there ever going to be a non-beta release of the Windows version?
@@ -14,8 +14,9 @@ That depends if someone wants to pick up the work. I have no personal interest i
 
 ##### Where can I find the documentation that was available on the original website?
 
-The documentation, written by Guy Edwards, is still on my disk. I will get it converted to Github's wiki format as soon as I can. 
+The documentation, written by Guy Edwards, is now available as a Github wiki [here](https://github.com/alexandervdm/gummi/wiki). The menu link in your current version of Gummi may however still point to the wrong URL. 
 
 #### Contact
 
-If you wish to contact me, please use the email address listed on my Github profile. I can also usually be found idling on FreeNode IRC network as 'alexandervdm' and use the Tox ID AE2172DCD91AEEFB03956AACBDF9F434221E192B8FD52A81B3C64E1ABC5A4442F53AD728725F
+If you wish to contact me, please use the contact details on my Github profile. I can also usually be found idling on the FreeNode IRC network as 'alexandervdm'. 
+
