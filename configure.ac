@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.65)
-AC_INIT([Gummi], [svn800], [alexvandermey@gmail.com], [gummi], [https://github.com/alexandervdm/gummi])
-AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+AC_INIT([Gummi], [0.6.5], [alexvandermey@gmail.com], [gummi], [http://gummi.midnightcoding.org/])
+AM_INIT_AUTOMAKE([foreign -Wall -Werror subdir-objects])
 
 GETTEXT_PACKAGE=gummi
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [The gettext domain])
