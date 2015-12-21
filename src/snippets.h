@@ -96,6 +96,7 @@ void snippets_deactivate (GuSnippets* sc, GuEditor* ec);
 gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
 gboolean snippets_key_release_cb(GuSnippets* sc, GuEditor* ec, GdkEventKey* ev);
 GuSnippetInfo* snippets_parse (char* snippet);
+gchar* snippets_add_indent(char *snippet, gint indent);
 void snippets_accel_cb (GtkAccelGroup* accel_group, GObject* obj,
         guint keyval, GdkModifierType mods, Tuple2* udata);
 void snippets_accel_connect (GuSnippets* sc, guint keyval, GdkModifierType mod,

@@ -228,16 +228,37 @@ void snippets_set_accelerator (GuSnippets* sc, gchar* config) {
 void snippets_activate (GuSnippets* sc, GuEditor* ec, gchar* key) {
     gchar* snippet = NULL;
     GuSnippetInfo* new_info = NULL;
-    GtkTextIter start, end;
+    GtkTextIter start, end, ind_start;
+    gint indent;
 
     slog (L_DEBUG, "Snippet `%s' activated\n", key);
 
     snippet = snippets_get_value (sc, key);
     g_return_if_fail (snippet != NULL);
 
-    new_info = snippets_parse (snippet);
-
     gtk_text_buffer_get_selection_bounds (ec_buffer, &start, &end);
+
+    indent = 0;
+    ind_start = start;
+
+    while (!gtk_text_iter_starts_line(&ind_start) &&
+           gtk_text_iter_backward_char(&ind_start) &&
+           gtk_text_iter_get_char(&ind_start) == 9) { /* tab key character */
+        indent++;
+    }
+
+
+    if (indent > 0) {
+        slog(L_DEBUG, "Indentation level: %d, reformatting snippet.\n",
+             indent);
+
+        gchar* ind_snippet = snippets_add_indent(snippet, indent);
+        new_info = snippets_parse(ind_snippet);
+        g_free(ind_snippet);
+    } else {
+        new_info = snippets_parse(snippet);
+    }
+
     new_info->start_offset = gtk_text_iter_get_offset (&start);
     new_info->sel_text = gtk_text_iter_get_text (&start, &end);
     GSList* marks = gtk_text_iter_get_marks (&start);
@@ -384,6 +405,25 @@ GuSnippetInfo* snippets_parse (char* snippet) {
     info->einfo_sorted = g_list_sort (info->einfo_sorted, snippet_info_num_cmp);
 
     return info;
+}
+
+gchar* snippets_add_indent(char* snippet, gint indent) {
+    /* split by newline */
+    gchar **lines = g_strsplit(snippet, "\n", -1);
+
+    /* construct new delimiter */
+    gint len = indent + 1;
+    gchar delim[len + 1];
+    delim[0]='\n';
+    for (gint i = 1; i < len; i++) {
+        delim[i] = '\t';
+    }
+    delim[len] = '\0';
+
+    /* join lines with new delimeter */
+    gchar *result = g_strjoinv(delim, lines);
+    g_strfreev(lines);
+    return result;
 }
 
 void snippets_accel_cb (GtkAccelGroup* accel_group, GObject* obj,
