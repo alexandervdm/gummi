@@ -91,7 +91,6 @@ void slog_set_gui_parent (GtkWindow* p) {
 
 void slog (gint level, const gchar *fmt, ...) {
     gchar message[BUFSIZ];
-    gchar* out;
     va_list vap;
 
     if (L_IS_TYPE (level, L_DEBUG) && !slog_debug) return;
@@ -118,21 +117,11 @@ void slog (gint level, const gchar *fmt, ...) {
     if (L_IS_GUI (level)) {
         GtkWidget* dialog;
 
-        if (L_IS_TYPE (level, L_G_FATAL))
-            out = g_strdup_printf (_("%s has encountered a serious error and "
-                        "will require a restart. Your working data will be "
-                        "restored when you reload your document. Please "
-                        "report bugs at: https://github.com/alexandervdm/gummi"),
-                        PACKAGE_NAME);
-        else
-            out = g_strdup (message);
-
         dialog = gtk_message_dialog_new (parent,
                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                 L_IS_TYPE (level,L_G_INFO)? GTK_MESSAGE_INFO: GTK_MESSAGE_ERROR,
                 GTK_BUTTONS_OK,
                 "%s", message);
-        g_free (out);
 
         if (L_IS_TYPE (level, L_G_ERROR))
             gtk_window_set_title (GTK_WINDOW (dialog), "Error!");
