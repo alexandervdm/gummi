@@ -8,5 +8,6 @@ Icon=@PACKAGE@
 Terminal=false
 Type=Application
 Categories=Office;
+Keywords=latex;editor;
 StartupNotify=true
 MimeType=text/x-tex;
