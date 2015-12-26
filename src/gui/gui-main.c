@@ -776,7 +776,8 @@ gchar* get_open_filename (GuFilterType type) {
         "shouldn't happen",
         "shouldn't happen",
         _("Select an image to insert"),
-        _("Select bibliography file")
+        _("Select bibliography file"),
+        _("Select project file")
     };
 
     chooser = GTK_FILE_CHOOSER (gtk_file_chooser_dialog_new (
