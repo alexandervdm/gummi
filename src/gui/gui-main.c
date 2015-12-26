@@ -863,10 +863,6 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_filter_add_pattern (filter, "*.tex");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
-            filter = gtk_file_filter_new ();
-            gtk_file_filter_set_name (filter, _("Text files"));
-            gtk_file_filter_add_mime_type (filter, "text/plain");
-            gtk_file_chooser_add_filter (dialog, filter);
             break;
 
         case TYPE_PDF:
