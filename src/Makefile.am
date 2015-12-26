@@ -8,7 +8,7 @@ AM_CFLAGS = $(GUI_CFLAGS) \
 	    -DGUMMI_LOCALES=\"$(datadir)/locale\"
 
 gummi_LDADD = $(GUI_LIBS) \
-	      $(LIBINTL)
+	      $(LIBINTL) -lgthread-2.0
 
 gummi_SOURCES = biblio.c  biblio.h \
 		configfile.c configfile.h \
