@@ -37,7 +37,7 @@
 typedef struct _GuMotion GuMotion;
 
 struct _GuMotion {
-    gint key_press_timer;
+    guint key_press_timer;
     GMutex signal_mutex;
     GMutex compile_mutex;
     GThread* compile_thread;
