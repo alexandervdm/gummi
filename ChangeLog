@@ -2,6 +2,20 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.6.6 "We're still here" (January 27th, 2016):
+
+	Bugs fixed:
+	* Fix using predictable filenames in /tmp (CVE-2015-7758) 
+	* Fix source id warnings during motion runtime
+	* Fix open-project crash due to missing file chooser title
+    * Fix synctex for input files with relative paths
+	* Add descriptive keywords to our desktop entry file
+	* Improvements to the bibliography detection regex
+	* Only allow loading tex files through file->open
+    * Desensitize cut/copy tools when no text is selected
+	* Various improvements to build system
+	* Removed deprecated code
+
 Gummi 0.6.5 (October 18th, 2012):
 
 	Bugs fixed:
