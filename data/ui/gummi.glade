@@ -3552,9 +3552,8 @@ Gummi 0.6.0 release. It is NOT meant for production use.
 
 Your feedback on this release is highly appreciated. Should you 
 encounter any problems, please create a bug report on our 
-website or email us on alexvandermey@gmail.com. Running 
-"gummi" or "gummi-d"  from the command line will provide 
-more information. 
+website. Running "gummi" or "gummi-d"  from the command line 
+will provide more information. 
 </property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
@@ -3800,8 +3799,7 @@ current active document.</property>
 This release is meant as a public test version and is not guaranteed to be stable. It is NOT meant for production use. 
 
 Your feedback on this release is highly appreciated. Should you 
-encounter any problems, please create a bug report on our 
-bug tracker or email us on alexvandermey@gmail.com. 
+encounter any problems, please create an issue on our tracker. 
 
 Future updates and new builds will be announced on our website at https://github.com/alexandervdm/gummi</property>
     <child internal-child="vbox">

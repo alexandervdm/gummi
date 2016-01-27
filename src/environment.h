@@ -2,7 +2,7 @@
  * @file    environment.h
  * @brief
  *
- * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2009-2016 Gummi Developers
  * All Rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person
@@ -35,18 +35,18 @@
 #else
 #   define PACKAGE "gummi"
 #   define PACKAGE_NAME "Gummi"
-#   define PACKAGE_VERSION "svn"
-#   define PACKAGE_URL "https://github.com/alexandervdm/gummi"
+#   define PACKAGE_VERSION "git"
+#   define PACKAGE_URL "https://alexandervdm.github.io/gummi/"
 #endif
 
 #define PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
-#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2012\n\n"\
+#define PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2016\n\n"\
                         "Alexander van der Meij\n"\
                         "Wei-Ning Huang\n"\
                         "Dion Timmermann\n"\
                         "Robert Schroll"
 #define PACKAGE_LICENSE \
-"Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>\n" \
+"Copyright (C) 2009-2016 Gummi Developers\n" \
 "All Rights reserved.\n" \
 "\n" \
 "Permission is hereby granted, free of charge, to any person\n" \

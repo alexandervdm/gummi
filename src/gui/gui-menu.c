@@ -2,7 +2,7 @@
  * @file   gui-menu.c
  * @brief
  *
- * Copyright (C) 2009-2012 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2009-2016 Gummi Developers
  * All Rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person
@@ -706,15 +706,16 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     g_free (icon_file);
 
     const gchar* authors[] = { "Alexander van der Meij\n"
-        "<alexandervdm@gliese.me>",
+        "<gummi{pleasenospam}vandermeij.tech>",
         "Wei-Ning Huang\n"
-        "<aitjcize@gmail.com>",
+        "<aitjcize{pleasenospam}gmail.com>",
         "",
         "Former contributors:",
         "Dion Timmermann",
         "Robert Schroll",
         "Thomas van der Burgt",
-        "Cameron Grout", NULL };
+        "Cameron Grout"
+        "Arnaud Loonstra", NULL };
 
     const gchar* translators =
         "**  Visit our website for instructions on  **\n"

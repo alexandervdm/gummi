@@ -2,7 +2,7 @@
  * @file   latexmk.h
  * @brief
  *
- * Copyright (C) 2010-2011 Gummi-Dev Team <alexvandermey@gmail.com>
+ * Copyright (C) 2010-2011 Gummi Developers
  * All Rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person
