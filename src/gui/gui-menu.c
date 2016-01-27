@@ -714,7 +714,7 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Dion Timmermann",
         "Robert Schroll",
         "Thomas van der Burgt",
-        "Cameron Grout"
+        "Cameron Grout",
         "Arnaud Loonstra", NULL };
 
     const gchar* translators =
