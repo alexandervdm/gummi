@@ -173,19 +173,25 @@ static void on_delete_range(GtkTextBuffer *textbuffer,GtkTextIter *start,
  * Since pdflatex refuses to compile TeX files with '.' prefixed, we have to
  * set the environment variable 'openout_any=a'.
  *
- * For a newly created document, all files including the TeX file is stored
- * under the temp directory. For files that are already saved, only the
- * workfile is saved under DIRNAME (FILENAME). Other compilation-related files
- * are located in the temp directory.
+ * For a newly created document, all files including the TeX file are stored
+ * under the ~/.cache folder (freedesktop XDG standard). For files that are 
+ * already saved, only the workfile is saved under DIRNAME (FILENAME). 
+ * Other compilation-related files are located in the temp directory.
  *
  * P.S. pdflatex will automatically strip the suffix, so for a file named
  * FILE.tex under /absolute/path/:
  *
  * filename = /absolute/path/FILE.tex
  * workfile = /absolute/path/.FILE.tex.swp
- * pdffile = /tmp/.FILE.tex.pdf
+ * pdffile = ~/cache/gummi/.FILE.tex.pdf
  */
 void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
+
+    // directory should exist, but if not create ~/.cache/gummi:
+    if (!g_file_test (C_TMPDIR, G_FILE_TEST_IS_DIR)) {
+            slog (L_WARNING, ".cache directory does not exist, creating..\n");
+            g_mkdir_with_parents (C_TMPDIR, DIR_PERMS);
+    }
 
     if (ec->workfd != -1)
         editor_fileinfo_cleanup (ec);

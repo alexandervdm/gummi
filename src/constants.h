@@ -59,7 +59,7 @@
     #define C_CMDSEP "&&"
     #define C_TEXSEC ""
 #else
-    #define C_TMPDIR g_get_tmp_dir()
+    #define C_TMPDIR g_build_path(G_DIR_SEPARATOR_S, g_get_user_cache_dir(), "gummi", NULL)
     #define C_CMDSEP ";"
     #define C_TEXSEC "env openout_any=a"
 #endif
