@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-13 07:54+0100\n"
+"POT-Creation-Date: 2016-01-27 19:58+0100\n"
 "PO-Revision-Date: 2012-03-14 22:17+0800\n"
 "Last-Translator: mathlab <mathlab@sina.com>\n"
 "Language-Team: \n"
@@ -329,7 +329,7 @@ msgstr "项目(_P)"
 msgid "Create new Project"
 msgstr "建立新项目"
 
-#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:606
+#: ../data/ui/gummi.glade.h:87 ../src/gui/gui-menu.c:623
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -354,116 +354,112 @@ msgid "User _Guide"
 msgstr ""
 
 #: ../data/ui/gummi.glade.h:93
-msgid "Check _Updates"
-msgstr "检查更新(_U)"
-
-#: ../data/ui/gummi.glade.h:94
 msgid "New"
 msgstr "新建"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:94
 msgid "Open"
 msgstr "打开"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:95
 msgid "Save"
 msgstr "保存"
 
-#: ../data/ui/gummi.glade.h:97
+#: ../data/ui/gummi.glade.h:96
 msgid "toolbutton5"
 msgstr "toolbutton5"
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:97
 msgid "toolbutton6"
 msgstr "toolbutton6"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:98
 msgid "toolbutton7"
 msgstr "toolbutton7"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:99
 msgid "toolbutton1"
 msgstr "toolbutton1"
 
-#: ../data/ui/gummi.glade.h:101
+#: ../data/ui/gummi.glade.h:100
 msgid "toolbutton2"
 msgstr "toolbutton2"
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:101
 msgid "toolbutton3"
 msgstr "toolbutton3"
 
-#: ../data/ui/gummi.glade.h:103
+#: ../data/ui/gummi.glade.h:102
 msgid "  "
 msgstr "  "
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:103
 msgid "Image"
 msgstr "图像"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:104
 msgid "Table"
 msgstr "表格"
 
-#: ../data/ui/gummi.glade.h:106
+#: ../data/ui/gummi.glade.h:105
 msgid "Matrix"
 msgstr "矩阵"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:106
 msgid "Bibliography"
 msgstr "参考文献"
 
-#: ../data/ui/gummi.glade.h:108
+#: ../data/ui/gummi.glade.h:107
 msgid "Previous"
 msgstr "前一处"
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:108
 msgid "Next"
 msgstr "下一处"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:109
 msgid "of 0"
 msgstr "/ 0"
 
-#: ../data/ui/gummi.glade.h:111
+#: ../data/ui/gummi.glade.h:110
 msgid "Preview Pane"
 msgstr "预览面板"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:111
 msgid "Build Log"
 msgstr "编译信息"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:112
 msgid "Nr of files:"
 msgstr "文件数量:"
 
-#: ../data/ui/gummi.glade.h:114
+#: ../data/ui/gummi.glade.h:113
 msgid "Root path:"
 msgstr "文件根目录:"
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:114
 msgid "Project name:"
 msgstr "项目名称:"
 
-#: ../data/ui/gummi.glade.h:116 ../data/ui/prefs.glade.h:9
+#: ../data/ui/gummi.glade.h:115 ../data/ui/prefs.glade.h:9
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:116
 msgid "Document"
 msgstr "文档"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:117
 msgid "File path"
 msgstr "文件路径"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:118
 msgid ""
 "Select a file to add it \n"
 "to the active project. "
 msgstr "请选择要加入项目的文件."
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:120
 msgid ""
 "Remove the selected\n"
 "file from the project."
@@ -471,121 +467,121 @@ msgstr ""
 "从项目中移除\n"
 "选择的文件."
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:122
 msgid "Project"
 msgstr "项目"
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:123
 msgid "Filename:"
 msgstr "文件名:"
 
-#: ../data/ui/gummi.glade.h:125 ../src/gui/gui-main.c:644
+#: ../data/ui/gummi.glade.h:124 ../src/gui/gui-main.c:644
 msgid "none"
 msgstr "无"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:125
 msgid "References:"
 msgstr "参考:"
 
-#: ../data/ui/gummi.glade.h:127 ../src/gui/gui-main.c:645
+#: ../data/ui/gummi.glade.h:126 ../src/gui/gui-main.c:645
 msgid "N/A"
 msgstr "无"
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:127
 msgid "Detect"
 msgstr "检测"
 
-#: ../data/ui/gummi.glade.h:129
+#: ../data/ui/gummi.glade.h:128
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
 msgstr "检测在文档中出現的参考文献"
 
-#: ../data/ui/gummi.glade.h:131
+#: ../data/ui/gummi.glade.h:130
 msgid "Compile"
 msgstr "编译"
 
-#: ../data/ui/gummi.glade.h:132
+#: ../data/ui/gummi.glade.h:131
 msgid ""
 "Compile the active \n"
 "bibliography database"
 msgstr "编译当前的参考文献"
 
-#: ../data/ui/gummi.glade.h:134 ../src/gui/gui-main.c:643
+#: ../data/ui/gummi.glade.h:133 ../src/gui/gui-main.c:643
 msgid "no bibliography file detected"
 msgstr "无法找到参考文献"
 
-#: ../data/ui/gummi.glade.h:135
+#: ../data/ui/gummi.glade.h:134
 msgid "Title"
 msgstr "标题"
 
-#: ../data/ui/gummi.glade.h:136
+#: ../data/ui/gummi.glade.h:135
 msgid "Author"
 msgstr "作者"
 
-#: ../data/ui/gummi.glade.h:137
+#: ../data/ui/gummi.glade.h:136
 msgid "Year"
 msgstr "年份"
 
-#: ../data/ui/gummi.glade.h:138
+#: ../data/ui/gummi.glade.h:137
 msgid "filter:"
 msgstr "过滤:"
 
-#: ../data/ui/gummi.glade.h:139
+#: ../data/ui/gummi.glade.h:138
 msgid "Find"
 msgstr "查找"
 
-#: ../data/ui/gummi.glade.h:140
+#: ../data/ui/gummi.glade.h:139
 msgid "Search for:"
 msgstr "查找:"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:140
 msgid "Replace with:"
 msgstr "替换为:"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:141
 msgid "Match entire word only"
 msgstr "全字匹配"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:142
 msgid "Search backwards"
 msgstr "向后"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:143
 msgid "Match case"
 msgstr "区分大小写"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:144
 msgid "_Replace"
 msgstr "替换(_R)"
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:145
 msgid "Replace _All"
 msgstr "全部替换(_A)"
 
-#: ../data/ui/gummi.glade.h:147
+#: ../data/ui/gummi.glade.h:146
 msgid "Save early.. save often!"
 msgstr "早保存、勤保存，工作很舒畅!"
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:147
 msgid "Create new document from template.."
 msgstr "从模版建立新文档.."
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:148
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr "从当前编辑的文档产生模版."
 
-#: ../data/ui/gummi.glade.h:151
+#: ../data/ui/gummi.glade.h:150
 msgid "Deletes the selected template"
 msgstr "删除选择的模板"
 
-#: ../data/ui/gummi.glade.h:152
+#: ../data/ui/gummi.glade.h:151
 msgid "Open the selected template"
 msgstr "打开选择的模版"
 
-#: ../data/ui/gummi.glade.h:153
+#: ../data/ui/gummi.glade.h:152
 #, fuzzy
 msgid "10"
 msgstr "0"
@@ -984,97 +980,98 @@ msgstr "选择要插入的图像"
 msgid "Select bibliography file"
 msgstr "选择参考文献"
 
-#: ../src/gui/gui-main.c:812
+#: ../src/gui/gui-main.c:780
+#, fuzzy
+msgid "Select project file"
+msgstr "Gummi 项目文件"
+
+#: ../src/gui/gui-main.c:813
 msgid "Save LaTeX document"
 msgstr "保存 LaTeX 文件"
 
-#: ../src/gui/gui-main.c:813
+#: ../src/gui/gui-main.c:814
 msgid "Save as LaTeX document"
 msgstr "另存为 LaTeX 文件"
 
-#: ../src/gui/gui-main.c:814
+#: ../src/gui/gui-main.c:815
 msgid "Export to PDF"
 msgstr "输出为 PDF"
 
-#: ../src/gui/gui-main.c:817
+#: ../src/gui/gui-main.c:818
 msgid "Create project"
 msgstr "建立新项目"
 
-#: ../src/gui/gui-main.c:862
+#: ../src/gui/gui-main.c:863
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
-
-#: ../src/gui/gui-main.c:867
-msgid "Text files"
-msgstr "纯文字文件"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:883
+#: ../src/gui/gui-main.c:880
 #, fuzzy
 msgid "Supported Image files"
 msgstr "图像文件"
 
-#: ../src/gui/gui-main.c:898
+#: ../src/gui/gui-main.c:895
 msgid "Bibtex files"
 msgstr "Bibtex 文件"
 
-#: ../src/gui/gui-main.c:904
+#: ../src/gui/gui-main.c:901
 msgid "Gummi project files"
 msgstr "Gummi 项目文件"
 
-#: ../src/gui/gui-menu.c:184
+#: ../src/gui/gui-menu.c:185
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "载入最近使用的文件时产生错误: %s"
 
-#: ../src/gui/gui-menu.c:413
+#: ../src/gui/gui-menu.c:430
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:416
+#: ../src/gui/gui-menu.c:433
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "运行 Makeindex 的过程中发生错误.."
 
-#: ../src/gui/gui-menu.c:423
+#: ../src/gui/gui-menu.c:440
 msgid "Running Makeindex.."
 msgstr "运行 Makeindex 中.."
 
-#: ../src/gui/gui-menu.c:426
+#: ../src/gui/gui-menu.c:443
 msgid "Error running Makeindex.."
 msgstr "运行 Makeindex 的过程中发生错误.."
 
-#: ../src/gui/gui-menu.c:450
+#: ../src/gui/gui-menu.c:467
 msgid "Words in text"
 msgstr "纯文字数"
 
-#: ../src/gui/gui-menu.c:451
+#: ../src/gui/gui-menu.c:468
 msgid "Words in headers"
 msgstr "标题內总字数"
 
-#: ../src/gui/gui-menu.c:452
+#: ../src/gui/gui-menu.c:469
 msgid "Words in float captions"
 msgstr "浮动标题內总字数"
 
-#: ../src/gui/gui-menu.c:453
+#: ../src/gui/gui-menu.c:470
 msgid "Number of headers"
 msgstr "标题总数"
 
-#: ../src/gui/gui-menu.c:454
+#: ../src/gui/gui-menu.c:471
 msgid "Number of floats"
 msgstr "浮动体总数"
 
-#: ../src/gui/gui-menu.c:455
+#: ../src/gui/gui-menu.c:472
 msgid "Number of math inlines"
 msgstr "行內数学式总数"
 
-#: ../src/gui/gui-menu.c:456
+#: ../src/gui/gui-menu.c:473
 msgid "Number of math displayed"
 msgstr "独立数学式总数"
 
-#: ../src/gui/gui-menu.c:591
+#: ../src/gui/gui-menu.c:608
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
@@ -1099,11 +1096,11 @@ msgstr "按新的快捷键"
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "按新的快捷键, 或按退格键清除"
 
-#: ../src/editor.c:573
+#: ../src/editor.c:596
 msgid "Top reached, search from bottom?"
 msgstr "已查找到文首, 从文末开始查找?"
 
-#: ../src/editor.c:580
+#: ../src/editor.c:603
 msgid "Bottom reached, search from top?"
 msgstr "已查找到文末, 从文首开始查找?"
 
@@ -1138,38 +1135,39 @@ msgstr "文件包含错误, 无法输出为PDF.\n"
 msgid "Unsaved Document %d"
 msgstr "未保存文件 %d"
 
-#: ../src/update.c:114
-#, c-format
-msgid ""
-"Currently installed:\n"
-"%s\n"
-"\n"
-"Currently available:\n"
-"%s"
-msgstr ""
-"安裝版本:\n"
-"%s\n"
-"\n"
-"最新版本:\n"
-"%s"
-
-#: ../src/update.c:116
-msgid "Update Check"
-msgstr "检查更新"
-
-#: ../src/utils.c:122
-#, c-format
-msgid ""
-"%s has encountered a serious error and will require a restart. Your working "
-"data will be restored when you reload your document. Please report bugs at: "
-"http://dev.midnightcoding.org"
-msgstr ""
-"%s 遇到了一个严重的错误,必须重新启动. 您的文件将在重新打开时被复原. 请到 "
-"http://dev.midnightcoding.org 报告这个错误."
-
-#: ../src/utils.c:168
+#: ../src/utils.c:157
 msgid "Confirmation"
 msgstr "确认"
+
+#~ msgid "Check _Updates"
+#~ msgstr "检查更新(_U)"
+
+#~ msgid "Text files"
+#~ msgstr "纯文字文件"
+
+#~ msgid ""
+#~ "Currently installed:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Currently available:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "安裝版本:\n"
+#~ "%s\n"
+#~ "\n"
+#~ "最新版本:\n"
+#~ "%s"
+
+#~ msgid "Update Check"
+#~ msgstr "检查更新"
+
+#~ msgid ""
+#~ "%s has encountered a serious error and will require a restart. Your "
+#~ "working data will be restored when you reload your document. Please "
+#~ "report bugs at: http://dev.midnightcoding.org"
+#~ msgstr ""
+#~ "%s 遇到了一个严重的错误,必须重新启动. 您的文件将在重新打开时被复原. 请到 "
+#~ "http://dev.midnightcoding.org 报告这个错误."
 
 #~ msgid "         "
 #~ msgstr "         "
