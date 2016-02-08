@@ -16,6 +16,10 @@ That depends if someone wants to pick up the work. I have no personal interest i
 
 The documentation, written by Guy Edwards, is now available as a Github wiki [here](https://github.com/alexandervdm/gummi/wiki). The menu link in your current version of Gummi may however still point to the wrong URL. 
 
+##### This works for LaTeX or TeX?
+
+This version works for XeLaTeX and PdfTeX, thereby providing functionality for both languages!
+
 #### Contact
 
 If you wish to contact me, please use the contact details on my Github profile. I can also usually be found idling on the FreeNode IRC network as 'alexandervdm'. 
