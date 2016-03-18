@@ -174,7 +174,7 @@ void on_projfile_add_clicked (GtkWidget* widget, void* user) {
             int amount = projectgui_list_projfiles (gummi->project->projfile);
             gtk_label_set_text (gui->projectgui->proj_nroffiles,
                                 g_strdup_printf("%d", amount));
-            gui_open_file (selected);
+            gui_open_file (selected, NULL, NULL);
         }
         else {
             statusbar_set_message ("Error adding document to the project..");

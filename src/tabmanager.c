@@ -110,11 +110,17 @@ void tabmanager_set_active_tab (int position) {
     }
 }
 
-
-void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
+// rootEditor: pointer to instance of editor of the root file (in a project)
+// createdEditor: if non-NULL, a pointer to the newly created editor is saved to
+//                this variable
+void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt,
+                            GuEditor* rootEditor, GuEditor** createdEditor) {
     gint pos = 0;
 
-    GuEditor* editor = gummi_new_environment (filename);
+    GuEditor* editor = gummi_new_environment (filename, rootEditor);
+    if (createdEditor != NULL) {
+        *createdEditor = editor;
+    }
 
     if (current_tab_replaceable (act)) {
         pos = tabmanagergui_replace_page (g_active_tab, editor);

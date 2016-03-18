@@ -61,8 +61,8 @@ gchar* gummi_get_projectfile (void) {
     return gummi->project->projfile;
 }
 
-GuEditor* gummi_new_environment (const gchar* filename) {
-    GuEditor* ec = editor_new (gummi->motion);
+GuEditor* gummi_new_environment (const gchar* filename, GuEditor* rootEditor) {
+    GuEditor* ec = editor_new (gummi->motion, rootEditor);
     editor_fileinfo_update (ec, filename);
 
     slog (L_INFO, "\n");

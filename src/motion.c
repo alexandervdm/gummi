@@ -163,6 +163,7 @@ gpointer motion_compile_thread (gpointer data) {
     L_F_DEBUG;
     GuMotion* mc = GU_MOTION (data);
     GuEditor* editor = NULL;
+    GuEditor* editor_to_compile = NULL;
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
     GtkWidget* focus = NULL;
@@ -183,6 +184,8 @@ gpointer motion_compile_thread (gpointer data) {
             g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
+        editor_to_compile = editor;
+
         if (!mc->keep_running) {
             g_mutex_unlock (&mc->compile_mutex);
             g_thread_exit (NULL);
@@ -203,14 +206,25 @@ gpointer motion_compile_thread (gpointer data) {
         gtk_widget_grab_focus (focus);
 
         if (!precompile_ok) {
-            motion_start_errormode (mc, "document_error");
-            gdk_threads_leave();
-            g_mutex_unlock (&mc->compile_mutex);
-            continue;
+            // a reason for the document to not being compilable is that it's
+            // a non-root file of a project. so, we'll check this case
+            if (editor->projfile != NULL && editor->rootEditor != NULL) {
+                // dirty hack to force update of file (compilation will only be
+                // done when the root file has changed, however since we're
+                // editing a non-root file, this won't be the case)
+                latex->modified_since_compile = 1;
+                editor_to_compile = editor->rootEditor;
+            } else {
+                motion_start_errormode (mc, "document_error");
+                gdk_threads_leave();
+                g_mutex_unlock (&mc->compile_mutex);
+                continue;
+            }
+
         }
         gdk_threads_leave();
 
-        compile_status = latex_update_pdffile (latex, editor);
+        compile_status = latex_update_pdffile (latex, editor_to_compile);
         *mc->typesetter_pid = 0;
         g_mutex_unlock (&mc->compile_mutex);
 
@@ -230,7 +244,8 @@ gpointer motion_compile_thread (gpointer data) {
             } else {
                 if (!pc->uri) {
 
-                    char* uri = g_strconcat (urifrmt, editor->pdffile, NULL);
+                    char* uri = g_strconcat (urifrmt,
+                            editor_to_compile->pdffile, NULL);
                     previewgui_set_pdffile (pc, uri);
                     g_free(uri);
                 } else {
