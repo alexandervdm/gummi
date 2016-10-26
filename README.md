@@ -7,7 +7,7 @@ Welcome to the new official home for Gummi. It's good to be back. I've decided t
 Yes, I will start working on a new bugfix release right away. No release date yet, but it shouldn't take long to fix some of the minor existing annoyances. 
 
 ##### What about implementing feature X?
-Unfortunately other projects I am currently working on take priority for the time being. There are some architectural aspects about the Gummi codebase that make popular requests like improved project support difficult to implement properly without some mayor reform. I'd probably do a complete rewrite of Gummi in Python or Vala if I had unlimited time, but unfortunately our reality does not work that way ;) - That said, I'm hopeful that this move to Github will bring in new contributions. 
+Unfortunately other projects I am currently working on take priority for the time being. There are some architectural aspects about the Gummi codebase that make popular requests like improved project support difficult to implement properly without some major reform. I'd probably do a complete rewrite of Gummi in Python or Vala if I had unlimited time, but unfortunately our reality does not work that way ;) - That said, I'm hopeful that this move to Github will bring in new contributions. 
 
 ##### Is there ever going to be a non-beta release of the Windows version?
 That depends if someone wants to pick up the work. I have no personal interest in the Windows platform, and as noted before.. limited time to spend on Gummi development. If you're up for the task, let me know and I'll do my best to help you. 
