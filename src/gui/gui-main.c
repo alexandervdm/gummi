@@ -348,8 +348,6 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
     g_free (title);
 }
 
-
-
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
 
@@ -433,8 +431,18 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     stat(filename, &attr);
     lastmod = difftime(tab->editor->last_modtime, attr.st_mtime);
     if (lastmod != 0.0) {
-        ret = utils_yes_no_dialog( ("This file has been modified externally, do you want to continue? (any external changes will be lost)") );
-        if (GTK_RESPONSE_YES != ret) goto cleanup;
+        /* Ask the user whether he want to save or reload */
+        ret = utils_save_reload_dialog( ("The content of the file has been changed externally. Saving will remove any external modifications.") );
+        if (ret == GTK_RESPONSE_YES) {
+            tabmanager_set_content(A_LOAD, filename, NULL);
+            /* Resets modtime */
+            stat(filename, &attr);
+            tab->editor->last_modtime = attr.st_mtime;
+            goto cleanup;
+        } else if (ret != GTK_RESPONSE_NO) {
+            /* cancel means: do nothing */
+            goto cleanup;
+        }
     }
 
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
@@ -452,7 +460,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gui_set_filename_display (tab, TRUE, TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (tab->editor->view));
 
-    /* Resets the modtime we have */
+    /* Resets modtime */
     stat(filename, &attr);
     tab->editor->last_modtime = attr.st_mtime;
 

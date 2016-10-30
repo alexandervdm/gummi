@@ -117,6 +117,7 @@ gboolean in_debug_mode();
 void slog_set_gui_parent (GtkWindow* p);
 void slog (gint level, const gchar *fmt, ...);
 gint utils_yes_no_dialog (const gchar* message);
+gint utils_save_reload_dialog (const gchar* message);
 gboolean utils_path_exists (const gchar* path);
 gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
         gssize length);
