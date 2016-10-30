@@ -32,6 +32,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourceiter.h>
@@ -222,6 +223,11 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
         ec->workfile = g_strdup_printf ("%s.swp", ec->basename);
         ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", C_TMPDIR,
                                        G_DIR_SEPARATOR, base);
+        // Get last modified time
+        struct stat attr;
+        stat(fname, &attr);
+        ec->last_modtime = attr.st_mtime;
+
         g_free (fname);
         g_free (base);
         g_free (dir);

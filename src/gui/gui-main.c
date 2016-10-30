@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #ifndef WIN32
 #   include <unistd.h>
@@ -426,6 +427,16 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gchar *text;
     GtkWidget* focus = NULL;
 
+    /* Check whether the file has been changed by (some) external program */
+    double lastmod;
+    struct stat attr;
+    stat(filename, &attr);
+    lastmod = difftime(tab->editor->last_modtime, attr.st_mtime);
+    if (lastmod != 0.0) {
+        ret = utils_yes_no_dialog( ("This file has been modified externally, do you want to continue? (any external changes will be lost)") );
+        if (GTK_RESPONSE_YES != ret) goto cleanup;
+    }
+
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
     text = editor_grab_buffer (tab->editor);
     gtk_widget_grab_focus (focus);
@@ -440,6 +451,10 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     if (new) tabmanager_update_tab (filename);
     gui_set_filename_display (tab, TRUE, TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (tab->editor->view));
+
+    /* Resets the modtime we have */
+    stat(filename, &attr);
+    tab->editor->last_modtime = attr.st_mtime;
 
 cleanup:
     if (new) g_free (filename);
