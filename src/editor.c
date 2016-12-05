@@ -335,7 +335,7 @@ void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
     GError* err2 = NULL;
     GtkSpell* spell = 0;
     if (status) {
-        if (! (spell = gtkspell_new_attach (ec_view, "en", &err))) {
+        if (! (spell = gtkspell_new_attach (ec_view, lang, &err))) {
             slog (L_ERROR, "gtkspell_new_attach (): %s\n", err->message);
             g_error_free (err);
         }
