@@ -197,6 +197,8 @@ gpointer motion_compile_thread (gpointer data) {
         focus = gtk_window_get_focus (gui->mainwindow);
         editortext = latex_update_workfile (latex, editor);
 
+        previewgui_update_statuslight("gtk-refresh");
+
         precompile_ok = latex_precompile_check (editortext);
         g_free (editortext);
 
