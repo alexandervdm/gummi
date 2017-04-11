@@ -40,6 +40,8 @@
 #include "environment.h"
 #include "utils.h"
 
+extern Gummi* gummi;
+
 static gchar* config_filename = 0;
 static slist* config_head = 0;
 
@@ -170,6 +172,28 @@ void config_set_default (void) {
  *      if (config_get_value("parameter_name")) {...}
  */
 const gchar* config_get_value (const gchar* term) {
+// Tries and gets the typesetter from the first line of the document.
+	GuTabContext* tc;
+	GtkSourceBuffer* buffer;
+// Checks that nothing is NULL on the road towards the editor buffer
+	if (term && STR_EQU(term, "typesetter") &&
+			gummi && gummi->tabmanager && g_tabs &&
+			(tc = g_list_nth_data(g_tabs, tabmanagergui_get_current_page())) &&
+			tc->editor && (buffer = tc->editor->buffer)) {
+	// Gets head-of-file and end-of-first-line indices
+		gchar* ts_prefix = "%!TYPESETTER";
+		GtkTextIter start, end;
+		gtk_text_buffer_get_start_iter(buffer, &start);
+		gtk_text_buffer_get_iter_at_line(buffer, &end, 1);
+		gchar* first_line = gtk_text_buffer_get_text(GTK_TEXT_BUFFER(buffer), 
+				&start, &end, TRUE);
+	// Return typesetter value if prefix is matched
+		if (first_line &&
+				strncmp(ts_prefix, first_line, strlen(ts_prefix)) == 0 &&
+				(first_line = strtok(first_line, " \t\n\r")))
+			return strtok(NULL, " \t\n\r");
+	} // if
+	
     gchar* ret  = NULL;
     slist* index = slist_find (config_head, term, FALSE, TRUE);
 
