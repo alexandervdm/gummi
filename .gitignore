@@ -22,3 +22,10 @@ ltmain.sh
 *.o
 *.lo
 *.la
+
+*.gmo
+*.pot
+gummi
+.dirstamp
+stamp-it
+

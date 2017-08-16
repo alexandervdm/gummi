@@ -276,6 +276,9 @@ void gui_main (GtkBuilder* builder) {
     g_timeout_add_seconds (1, w32popup_wait_event, NULL);
     #endif
 
+    // Reopen files here
+    gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter3.tex");
+
     gdk_threads_enter();
     gtk_main ();
     gdk_threads_leave();

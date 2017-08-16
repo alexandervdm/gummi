@@ -1,5 +1,7 @@
 #! /bin/sh
-AM_VERSION=-1.14
+# USE 1.15 on ARCH LINUX
+AM_VERSION=-1.15
+#AM_VERSION=-1.14
 AC_VERSION=
 
 set -x
