@@ -278,6 +278,7 @@ void gui_main (GtkBuilder* builder) {
 
     // Reopen files here
     gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter3.tex");
+    gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter2.tex");
 
     gdk_threads_enter();
     gtk_main ();
