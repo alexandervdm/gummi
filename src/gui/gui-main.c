@@ -230,6 +230,28 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     display_recent_files (g);
 
+    //for (gint i = 0; i < 15; ++i) {
+    //    char filename[3];
+    //    filename[0] = 'f';
+    //    sprintf(filename, "%d", i);
+    //    g->open_files_list[i] = g_strdup (config_get_value (filename));
+    //}
+    g->open_files_list[0] = g_strdup (config_get_value ("f1"));
+    g->open_files_list[1] = g_strdup (config_get_value ("f2"));
+    g->open_files_list[2] = g_strdup (config_get_value ("f3"));
+    g->open_files_list[3] = g_strdup (config_get_value ("f4"));
+    g->open_files_list[4] = g_strdup (config_get_value ("f5"));
+    g->open_files_list[5] = g_strdup (config_get_value ("f6"));
+    g->open_files_list[6] = g_strdup (config_get_value ("f7"));
+    g->open_files_list[7] = g_strdup (config_get_value ("f8"));
+    g->open_files_list[8] = g_strdup (config_get_value ("f9"));
+    g->open_files_list[9] = g_strdup (config_get_value ("f10"));
+    g->open_files_list[10] = g_strdup (config_get_value ("f11"));
+    g->open_files_list[11] = g_strdup (config_get_value ("f12"));
+    g->open_files_list[12] = g_strdup (config_get_value ("f13"));
+    g->open_files_list[13] = g_strdup (config_get_value ("f14"));
+    g->open_files_list[14] = g_strdup (config_get_value ("f15"));
+
     return g;
 }
 
@@ -908,6 +930,34 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_set_filter (dialog, filter);
             break;
     }
+}
+
+void add_to_open_files_list(const gchar *filename) {
+    if (!filename) return;
+    
+    gint i = 0;
+    for (i = 0; i < 15; ++i)
+        if (STR_EQU (filename, gui->open_files_list[i]))
+            return;
+    
+    g_free(gui->open_files_list[OPEN_FILES_LIST -1]);
+    for (i = OPEN_FILES_LIST -2; i >= 0; --i)
+        gui->open_files_list[i + 1] = gui->open_files_list[i];
+    gui->open_files_list[0] = g_strup(filename);
+
+    for (int e = 1; e < 10; ++e) {
+        char name[2];
+        sprintf(name, "f%d", e);
+        config_set_value(name, gui->open_files_list[e]);
+    }
+
+    for (int e = 10; e < 15; ++e) {
+        char name[3];
+        sprintf(name, "f%d", e);
+        config_set_value(name, gui->open_files_list[e]);
+    }
+
+
 }
 
 void add_to_recent_list (const gchar* filename) {
