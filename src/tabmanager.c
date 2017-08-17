@@ -118,14 +118,6 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
 
     GuEditor* editor = gummi_new_environment (filename);
 
-    // MARK
-    // SETTING ACT TO A_DEFAULT CREATES A NEW TAB when starting up
-    // TESTS
-    // if A_LOAD is set the contents of a file are loaded
-    //if (filename)
-    //    act = A_LOAD;
-    // TESTS
-
     if (current_tab_replaceable (act)) {
         pos = tabmanagergui_replace_page (g_active_tab, editor);
     }

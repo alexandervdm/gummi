@@ -230,27 +230,13 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     display_recent_files (g);
 
-    //for (gint i = 0; i < 15; ++i) {
-    //    char filename[3];
-    //    filename[0] = 'f';
-    //    sprintf(filename, "%d", i);
-    //    g->open_files_list[i] = g_strdup (config_get_value (filename));
-    //}
-    g->open_files_list[0] = g_strdup (config_get_value ("f1"));
-    g->open_files_list[1] = g_strdup (config_get_value ("f2"));
-    g->open_files_list[2] = g_strdup (config_get_value ("f3"));
-    g->open_files_list[3] = g_strdup (config_get_value ("f4"));
-    g->open_files_list[4] = g_strdup (config_get_value ("f5"));
-    g->open_files_list[5] = g_strdup (config_get_value ("f6"));
-    g->open_files_list[6] = g_strdup (config_get_value ("f7"));
-    g->open_files_list[7] = g_strdup (config_get_value ("f8"));
-    g->open_files_list[8] = g_strdup (config_get_value ("f9"));
-    g->open_files_list[9] = g_strdup (config_get_value ("f10"));
-    g->open_files_list[10] = g_strdup (config_get_value ("f11"));
-    g->open_files_list[11] = g_strdup (config_get_value ("f12"));
-    g->open_files_list[12] = g_strdup (config_get_value ("f13"));
-    g->open_files_list[13] = g_strdup (config_get_value ("f14"));
-    g->open_files_list[14] = g_strdup (config_get_value ("f15"));
+    gchar *where;
+    for (gint i = 0; i < 15; ++i) {
+        where = g_strdup_printf("f%d", (i+1));
+        g->open_files_list[i] = g_strdup (config_get_value (where));
+    
+        g_free(where);
+    }
 
     return g;
 }
@@ -299,8 +285,6 @@ void gui_main (GtkBuilder* builder) {
     #endif
 
     // Reopen files here
-    //gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter3.tex");
-    //gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter2.tex");
     for (int i = 0; i < OPEN_FILES_LIST; i++) 
         if (!STR_EQU (gui->open_files_list[i], "__NULL__"))
             gui_open_file(gui->open_files_list[i]); 
