@@ -90,6 +90,8 @@ gboolean tabmanager_remove_tab (GuTabContext* tab) {
     g_tabs = g_list_remove (g_tabs, tab);
     tabmanager_set_active_tab (total - 2);
 
+    remove_from_open_files_list(tab->editor->filename);
+
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (g_tabnotebook, position);
     g_free (tab);
@@ -120,8 +122,8 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     // SETTING ACT TO A_DEFAULT CREATES A NEW TAB when starting up
     // TESTS
     // if A_LOAD is set the contents of a file are loaded
-    if (filename)
-        act = A_LOAD;
+    //if (filename)
+    //    act = A_LOAD;
     // TESTS
 
     if (current_tab_replaceable (act)) {
@@ -185,7 +187,8 @@ void tabmanager_update_tab (const gchar* filename) {
 
     // Add full filepath to recent list
     add_to_recent_list (g_active_tab->editor->filename);
-
+    add_to_open_files_list(g_active_tab->editor->filename);
+    
     slog (L_INFO, "Environment updated for %s\n",
             g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);
