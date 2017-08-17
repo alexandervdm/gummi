@@ -143,7 +143,6 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     add_to_recent_list (editor->filename);
 
     add_to_open_files_list(editor->filename);
-    // TEST
 
     previewgui_reset (gui->previewgui);
 }
