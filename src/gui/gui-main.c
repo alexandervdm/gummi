@@ -299,8 +299,12 @@ void gui_main (GtkBuilder* builder) {
     #endif
 
     // Reopen files here
-    gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter3.tex");
-    gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter2.tex");
+    //gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter3.tex");
+    //gui_open_file("/home/flo/Documents/1fh/bac/bachelor_arbeiten/bac1/chapter2.tex");
+    for (int i = 0; i < OPEN_FILES_LIST; i++) {
+        if (STR_EQU (gui->open_files_list[i], "__NULL__") == 0)
+            gui_open_file(gui->open_files_list[i]); 
+    }
 
     gdk_threads_enter();
     gtk_main ();
