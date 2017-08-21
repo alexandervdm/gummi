@@ -22,3 +22,15 @@ ltmain.sh
 *.o
 *.lo
 *.la
+
+# CUSTOM ALTERATIONS
+*.gmo
+*.pot
+*/*.pot
+gummi
+.dirstamp
+stamp-it
+*.desktop
+**/POTFILES
+**/compile
+

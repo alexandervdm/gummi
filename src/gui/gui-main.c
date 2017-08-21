@@ -230,6 +230,14 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     display_recent_files (g);
 
+    gchar *where;
+    for (gint i = 0; i < 15; ++i) {
+        where = g_strdup_printf("f%d", (i+1));
+        g->open_files_list[i] = g_strdup (config_get_value (where));
+    
+        g_free(where);
+    }
+
     return g;
 }
 
@@ -275,6 +283,12 @@ void gui_main (GtkBuilder* builder) {
 
     g_timeout_add_seconds (1, w32popup_wait_event, NULL);
     #endif
+
+    // Reopen files here
+    for (int i = 0; i < OPEN_FILES_LIST; i++) 
+        if (!STR_EQU (gui->open_files_list[i], "__NULL__"))
+            gui_open_file(gui->open_files_list[i]); 
+    
 
     gdk_threads_enter();
     gtk_main ();
@@ -903,6 +917,48 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
+    }
+}
+
+void add_to_open_files_list(const gchar *filename) {
+    if (!filename) return;
+    
+    gint i = 0;
+    for (i = 0; i < OPEN_FILES_LIST; ++i)
+        if (STR_EQU (filename, gui->open_files_list[i]))
+            return;
+    
+    g_free(gui->open_files_list[OPEN_FILES_LIST -1]);
+    for (i = OPEN_FILES_LIST -2; i >= 0; --i)
+        gui->open_files_list[i + 1] = gui->open_files_list[i];
+    gui->open_files_list[0] = g_strdup(filename);
+
+    for (int e = 0; e < 10; e++) {
+        char name[2];
+        sprintf(name, "f%d", e+1);
+        config_set_value(name, gui->open_files_list[e]);
+    }
+
+    for (int e = 10; e < 15; e++) {
+        char name[3];
+        sprintf(name, "f%d", e+1);
+        config_set_value(name, gui->open_files_list[e]);
+    }
+
+    config_save();
+}
+
+void remove_from_open_files_list(const gchar *filename) {
+    if (!filename) return;
+
+    gchar *where;
+    for (gint i = 0; i < OPEN_FILES_LIST; i++) {
+        if (STR_EQU (filename, gui->open_files_list[i])) {
+            where = g_strdup_printf("f%d", (i+1));
+            config_set_value(where, "__NULL__");
+            
+            g_free(where);
+        }
     }
 }
 

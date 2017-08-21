@@ -98,7 +98,24 @@ const gchar config_str[] =
 "recent2 = __NULL__\n"
 "recent3 = __NULL__\n"
 "recent4 = __NULL__\n"
-"recent5 = __NULL__\n";
+"recent5 = __NULL__\n"
+"\n"
+"[FilesOpen]\n"
+"f1 = __NULL__\n"
+"f2 = __NULL__\n"
+"f3 = __NULL__\n"
+"f4 = __NULL__\n"
+"f5 = __NULL__\n"
+"f6 = __NULL__\n"
+"f7 = __NULL__\n"
+"f8 = __NULL__\n"
+"f9 = __NULL__\n"
+"f10 = __NULL__\n"
+"f11 = __NULL__\n"
+"f12 = __NULL__\n"
+"f13 = __NULL__\n"
+"f14 = __NULL__\n"
+"f15 = __NULL__\n";
 
 void config_init (const gchar* filename) {
     const gchar* config_version = NULL;
