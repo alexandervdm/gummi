@@ -98,7 +98,17 @@ const gchar config_str[] =
 "recent2 = __NULL__\n"
 "recent3 = __NULL__\n"
 "recent4 = __NULL__\n"
-"recent5 = __NULL__\n";
+"recent5 = __NULL__\n"
+"recent6 = __NULL__\n"
+"recent7 = __NULL__\n"
+"recent8 = __NULL__\n"
+"recent9 = __NULL__\n"
+"recent10 = __NULL__\n"
+"recent11 = __NULL__\n"
+"recent12 = __NULL__\n"
+"recent13 = __NULL__\n"
+"recent14 = __NULL__\n"
+"recent15 = __NULL__\n";
 
 void config_init (const gchar* filename) {
     const gchar* config_version = NULL;
