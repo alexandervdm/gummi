@@ -122,7 +122,7 @@ void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
 
     tp->label = GTK_LABEL (gtk_label_new (labeltext));
 
-    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->label), TRUE, TRUE, RECENT_FILES_NUM);
+    gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->label), TRUE, TRUE, 5);
 
     tp->button = GTK_BUTTON (gtk_button_new());
     image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
