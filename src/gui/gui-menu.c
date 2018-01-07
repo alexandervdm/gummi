@@ -174,6 +174,48 @@ void on_menu_export_activate (GtkWidget *widget, void *user) {
 }
 
 G_MODULE_EXPORT
+void on_menu_duplicate_line_activate (GtkWidget *widget, void *user) {
+    GtkTextMark* insert_mark = gtk_text_buffer_get_insert (g_e_buffer);
+    
+    GtkTextIter insert_mark_position;
+    gtk_text_buffer_get_iter_at_mark (g_e_buffer, &insert_mark_position, insert_mark);
+
+    gint line_of_insert = gtk_text_iter_get_line (&insert_mark_position);
+    gint line_after_insert = line_of_insert + 1;
+    
+    GtkTextIter start_of_line;
+    gtk_text_buffer_get_iter_at_line (g_e_buffer, &start_of_line, line_of_insert);
+
+    GtkTextIter end_of_line;
+    gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
+
+    gchar* current_line_content = gtk_text_buffer_get_text (g_e_buffer, &start_of_line, &end_of_line, 1);
+    gint length_of_current_line_content = strlen (current_line_content);
+    gtk_text_buffer_insert (g_e_buffer, &end_of_line, current_line_content, length_of_current_line_content);
+    g_free (current_line_content);
+}
+
+G_MODULE_EXPORT
+void on_menu_delete_line_activate (GtkWidget *widget, void *user) {
+    GtkTextMark* insert_mark = gtk_text_buffer_get_insert (g_e_buffer);
+    
+    GtkTextIter insert_mark_position;
+    gtk_text_buffer_get_iter_at_mark (g_e_buffer, &insert_mark_position, insert_mark);
+
+    gint line_of_insert = gtk_text_iter_get_line (&insert_mark_position);
+    gint line_after_insert = line_of_insert + 1;
+    
+    GtkTextIter start_of_line;
+    gtk_text_buffer_get_iter_at_line (g_e_buffer, &start_of_line, line_of_insert);
+
+    GtkTextIter end_of_line;
+    gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
+
+    // cannot be undone in case of multiple calls/lines deleted
+    gtk_text_buffer_delete (g_e_buffer, &start_of_line, &end_of_line);
+}
+
+G_MODULE_EXPORT
 void on_menu_recent_activate (GtkWidget *widget, void *user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
