@@ -230,6 +230,13 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     display_recent_files (g);
 
+    gchar* where;
+    for (gint i = 0; i < OPEN_FILES_LIST_NUM; ++i) {
+        where = g_strdup_printf("f%d", (i+1));
+        g->open_files_list[i] = g_strdup (config_get_value (where));
+        g_free(where);
+    }
+
     return g;
 }
 
@@ -275,6 +282,44 @@ void gui_main (GtkBuilder* builder) {
 
     g_timeout_add_seconds (1, w32popup_wait_event, NULL);
     #endif
+
+
+    GList *tabs = NULL;
+    tabs = g_list_copy(gummi_get_all_tabs());
+
+    // reopen files here
+    for ( gint i = OPEN_FILES_LIST_NUM -1; i >= 0; i--) {
+        if (!STR_EQU (gui->open_files_list[i], "__NULL__")) {
+            if ( access (gui->open_files_list[i], F_OK) == -1) {
+                gui->open_files_list[i] = "__NULL__";
+                continue;
+            }
+              
+            gint skip_opening_file = 0;
+            for ( int inner = 0; inner  < g_list_length (tabs); inner++) {
+                GuTabContext* tab = GU_TAB_CONTEXT (g_list_nth_data (tabs, inner));
+
+                if ( tab->editor->filename == NULL )
+                    continue;
+
+                // check if file was alreay openend
+                gint found_file = strcasestr( tab->editor->filename, gui->open_files_list[i]) != NULL;
+               
+                if (found_file) {
+                    slog(L_DEBUG, "File already open: %s\n", tab->editor->filename);
+                    skip_opening_file = 1;
+                    break;
+                }
+            }
+            
+            if (!skip_opening_file) {
+                slog(L_DEBUG, "Opening file: %s\n", gui->open_files_list[i]);
+                gui_open_file(gui->open_files_list[i]);
+            }
+        }
+    } 
+    g_list_free(tabs);
+    write_open_files_list_to_config();    
 
     gdk_threads_enter();
     gtk_main ();
@@ -904,6 +949,44 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_chooser_set_filter (dialog, filter);
             break;
     }
+}
+
+void write_open_files_list_to_config( void )
+{
+    gchar* where;
+    for (gint i = 0; i < OPEN_FILES_LIST_NUM; i++) {
+        where = g_strdup_printf("f%d", (i+1));
+        config_set_value(where, gui->open_files_list[i]);
+        g_free(where);
+    }
+    
+    config_save();
+}
+
+void add_to_open_files_list(const gchar* filename) {
+    if (!filename) return;
+    
+    gint i = 0;
+    for (i = 0; i < OPEN_FILES_LIST_NUM; ++i)
+        if (STR_EQU (filename, gui->open_files_list[i]))
+            return;
+    
+    g_free(gui->open_files_list[OPEN_FILES_LIST_NUM -1]);
+    for (i = OPEN_FILES_LIST_NUM -2; i >= 0; --i)
+        gui->open_files_list[i + 1] = gui->open_files_list[i];
+    gui->open_files_list[0] = g_strdup(filename);
+
+    write_open_files_list_to_config();
+}
+
+void remove_from_open_files_list(const gchar* filename) {
+    if (!filename) return;
+
+    for (gint i = 0; i < OPEN_FILES_LIST_NUM; i++)
+        if (STR_EQU (filename, gui->open_files_list[i]))
+            gui->open_files_list[i] = "__NULL__";
+    
+    write_open_files_list_to_config();
 }
 
 void add_to_recent_list (const gchar* filename) {

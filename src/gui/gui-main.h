@@ -45,6 +45,7 @@
 #include "gui-project.h"
 
 #define RECENT_FILES_NUM 5
+#define OPEN_FILES_LIST_NUM 15
 #define TEXCOUNT_OUTPUT_LINES 7
 
 /* These macros should be only used in GUI related classes
@@ -103,7 +104,8 @@ struct _GummiGui {
     #endif
 
     guint statusid;
-    gchar* recent_list[5];
+    gchar* recent_list[RECENT_FILES_NUM];
+    gchar* open_files_list[OPEN_FILES_LIST_NUM];
 };
 
 typedef enum _GuFilterType {
@@ -165,6 +167,7 @@ gchar* get_save_filename (GuFilterType type);
 void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type);
 gint check_for_save (GuEditor* editor);
 
+void add_to_open_files_list (const gchar* filename);
 void add_to_recent_list (const gchar* filename);
 void display_recent_files (GummiGui* gui);
 
