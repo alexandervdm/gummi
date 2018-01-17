@@ -280,12 +280,10 @@ void on_menu_edit_activate (GtkWidget *widget, void *user) {
 
     if (gtk_text_buffer_get_has_selection
 	(GTK_TEXT_BUFFER(g_active_editor->buffer))) {
-        gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_cut), TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_copy), TRUE);
         return;
     }
 
-    gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_cut), FALSE);
     gtk_widget_set_sensitive (GTK_WIDGET (gui->menugui->menu_copy), FALSE);
 }
 
@@ -301,7 +299,34 @@ void on_menu_redo_activate (GtkWidget *widget, void* user) {
 
 G_MODULE_EXPORT
 void on_menu_cut_activate (GtkWidget *widget, void* user) {
-    GtkClipboard     *clipboard;
+    GtkTextMark* insert_mark = gtk_text_buffer_get_insert (g_e_buffer);
+    
+    GtkTextIter insert_mark_position;
+    gtk_text_buffer_get_iter_at_mark (g_e_buffer, &insert_mark_position, insert_mark);
+    
+    GtkTextMark* selection_bound_mark = gtk_text_buffer_get_selection_bound (g_e_buffer);
+
+    GtkTextIter selection_bound_position;
+    gtk_text_buffer_get_iter_at_mark (g_e_buffer, &selection_bound_position, selection_bound_mark);
+
+    gchar* cut_line_content = gtk_text_buffer_get_text (g_e_buffer, &insert_mark_position, &selection_bound_position, 1);
+    gint content_length = strlen (cut_line_content);
+    
+    // in case nothing is selected select the current line 
+    if (content_length <= 0) {
+        gint line_of_insert = gtk_text_iter_get_line (&insert_mark_position);
+        gint line_after_insert = line_of_insert + 1;
+        
+        GtkTextIter start_of_line;
+        gtk_text_buffer_get_iter_at_line (g_e_buffer, &start_of_line, line_of_insert);
+
+        GtkTextIter end_of_line;
+        gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
+        
+        gtk_text_buffer_select_range (g_e_buffer, &start_of_line, &end_of_line);
+    } 
+
+    GtkClipboard  *clipboard;
 
     clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
     gtk_text_buffer_cut_clipboard (g_e_buffer, clipboard, TRUE);
