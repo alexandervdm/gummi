@@ -1676,6 +1676,30 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="menu_comment_out">
+                        <property name="label" translatable="yes">Comment out</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">False</property>
+                        <accelerator key="7" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <signal name="activate" handler="on_menu_comment_out_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child> 
+                      <object class="GtkImageMenuItem" id="menu_uncomment">
+                        <property name="label" translatable="yes">Uncomment</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">False</property>
+                        <accelerator key="slash" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <signal name="activate" handler="on_menu_uncomment_activate" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="separator4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
