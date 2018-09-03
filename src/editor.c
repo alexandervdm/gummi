@@ -650,6 +650,7 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
         gboolean matchcase) {
     GtkTextIter start, mstart, mend;
     gboolean ret = FALSE;
+    gboolean action_started = FALSE;
 
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
 
@@ -661,12 +662,17 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
         if (ret && (!wholeword || (wholeword
                 && gtk_text_iter_starts_word (&mstart)
                 && gtk_text_iter_ends_word (&mend)))) {
-            gtk_text_buffer_begin_user_action (ec_buffer);
+            if (!action_started) {
+                gtk_text_buffer_begin_user_action (ec_buffer);
+                action_started = TRUE;
+            }
             gtk_text_buffer_delete (ec_buffer, &mstart, &mend);
             gtk_text_buffer_insert (ec_buffer, &mstart, rterm, -1);
-            gtk_text_buffer_end_user_action (ec_buffer);
             start =  mstart;
         } else break;
+    }
+    if (action_started) {
+        gtk_text_buffer_end_user_action (ec_buffer);
     }
 }
 
