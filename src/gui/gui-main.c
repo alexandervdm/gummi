@@ -387,14 +387,15 @@ void gui_recovery_mode_disable (GtkInfoBar *infobar) {
     gtk_widget_set_sensitive (GTK_WIDGET (g_active_editor->view), TRUE);
 }
 
-void gui_open_file (const gchar* filename) {
+// we're just passing root and created through to tabmanager_create_tab
+void gui_open_file (const gchar* filename, GuEditor* root, GuEditor** created) {
     if (!g_file_test(filename, G_FILE_TEST_EXISTS)) {
         slog(L_G_ERROR, "Failed to open file '%s': No such file or "
                 "directory\n", filename);
         return;
     }
 
-    tabmanager_create_tab (A_LOAD, filename, NULL);
+    tabmanager_create_tab (A_LOAD, filename, NULL, root, created);
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane))) {
         gui_set_hastabs_sensitive (TRUE);
 	}
@@ -525,7 +526,7 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user) {
         statusbar_set_message (status);
         g_free (status);
 
-        tabmanager_create_tab (A_LOAD_OPT, NULL, templ_name);
+        tabmanager_create_tab (A_LOAD_OPT, NULL, templ_name, NULL, NULL);
         gtk_widget_hide (GTK_WIDGET (gummi->templ->templatewindow));
     }
     g_free(templ_name);

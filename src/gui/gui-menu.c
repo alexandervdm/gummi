@@ -131,7 +131,7 @@ G_MODULE_EXPORT
 void on_menu_new_activate (GtkWidget *widget, void* user) {
     if (!gtk_widget_get_sensitive (GTK_WIDGET (gui->rightpane)))
         gui_set_hastabs_sensitive (TRUE);
-    tabmanager_create_tab (A_NONE, NULL, NULL);
+    tabmanager_create_tab (A_NONE, NULL, NULL, NULL, NULL);
 }
 
 G_MODULE_EXPORT
@@ -146,7 +146,7 @@ void on_menu_open_activate (GtkWidget *widget, void* user) {
     gchar *filename = NULL;
 
     if ( (filename = get_open_filename (TYPE_LATEX)))
-        gui_open_file (filename);
+        gui_open_file (filename, NULL, NULL);
     g_free (filename);
 
     if (g_active_editor)
@@ -180,7 +180,7 @@ void on_menu_recent_activate (GtkWidget *widget, void *user) {
     gint index = name[0] - '0' -1;
 
     if (utils_path_exists (gui->recent_list[index])) {
-        gui_open_file (gui->recent_list[index]);
+        gui_open_file (gui->recent_list[index], NULL, NULL);
     } else {
         tstr = g_strdup_printf (_("Error loading recent file: %s"),
                 gui->recent_list[index]);

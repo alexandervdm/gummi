@@ -59,6 +59,7 @@ struct _GuEditor {
     gchar* workfile;
     gchar* bibfile;
     gchar* projfile;
+    GuEditor* rootEditor;
 
     /* GUI related members */
     GtkSourceView* view;
@@ -78,7 +79,7 @@ struct _GuEditor {
     gboolean sync_to_last_edit;
 };
 
-GuEditor* editor_new (GuMotion* mc);
+GuEditor* editor_new (GuMotion* mc, GuEditor* rootEditor);
 void editor_fileinfo_update (GuEditor* ec, const gchar* filename);
 void editor_fileinfo_cleanup (GuEditor* ec);
 gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename);

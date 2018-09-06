@@ -64,7 +64,7 @@ const gchar style[][3][20] = {
     { "tool_right", "\\begin{flushright}", "\\end{flushright}"}
 };
 
-GuEditor* editor_new (GuMotion* mc) {
+GuEditor* editor_new (GuMotion* mc, GuEditor* rootEditor) {
     GuEditor* ec = g_new0 (GuEditor, 1);
 
     /* File related member initialization */
@@ -76,6 +76,11 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->workfile = NULL;
     ec->bibfile = NULL;
     ec->projfile = NULL;
+    /* NULL if the file is not part of project or if the file is the root
+     * document of a project. Otherwise, rootEditor points to the editor
+     * instance of the root file. This is required for providing the
+     * "preview-on-save"-feature for projects. */
+    ec->rootEditor = rootEditor;
 
     GtkSourceLanguageManager* manager = gtk_source_language_manager_new ();
     GtkSourceLanguage* lang = gtk_source_language_manager_get_language (manager,

@@ -202,6 +202,7 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
     gboolean status = FALSE;
     gint rootpos, i;
     gchar* filename;
+    GuEditor* rootEditor = NULL;
 
     GList* filelist = project_list_files (content);
     gint length = g_list_length (filelist);
@@ -211,7 +212,14 @@ gboolean project_load_files (const gchar* projfile, const gchar* content) {
         if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
 
             if (!tabmanager_check_exists (filename)) {
-                gui_open_file (filename);
+                if (i == 0) {
+                    /* The first file is always the root file */
+                    gui_open_file (filename, NULL, &rootEditor);
+                }
+                else {
+                    gui_open_file (filename, rootEditor, NULL);
+                }
+
                 // TODO: no direct calling this:
                 g_active_editor->projfile = g_strdup (projfile);
             }

@@ -126,7 +126,7 @@ void gui_set_filename_display (GuTabContext* tc,
 void gui_set_window_title (const gchar* filename, const gchar* text);
 
 
-void gui_open_file (const gchar* filename);
+void gui_open_file (const gchar* filename, GuEditor* root, GuEditor** created);
 void gui_save_file (GuTabContext* tab, gboolean saveas);
 void gui_set_hastabs_sensitive (gboolean enable);
 
