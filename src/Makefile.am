@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 bin_PROGRAMS = gummi
 AM_CFLAGS = $(GUI_CFLAGS) \
-	    -export-dynamic -Wall -O2 \
+	    -Wl,-export-dynamic -Wall -O2 \
 	    -DGUMMI_LIBS=\"$(libdir)/$(PACKAGE)\" \
 	    -DGUMMI_DATA=\"$(datadir)/$(PACKAGE)\" \
 	    -DGUMMI_LOCALES=\"$(datadir)/locale\"
