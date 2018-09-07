@@ -59,6 +59,7 @@ struct _GuEditor {
     gchar* workfile;
     gchar* bibfile;
     gchar* projfile;
+    time_t last_modtime;
 
     /* GUI related members */
     GtkSourceView* view;
