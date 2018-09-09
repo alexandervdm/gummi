@@ -921,12 +921,17 @@ static void load_document(GuPreviewGui* pc, gboolean update) {
 
 void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     //L_F_DEBUG;
+    GError *error = NULL;
+    
     previewgui_cleanup_fds (pc);
 
     pc->uri = g_strdup(uri);
+    pc->doc = poppler_document_new_from_file (pc->uri, NULL, &error);
 
-    pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
-    g_return_if_fail (pc->doc != NULL);
+    if (pc->doc == NULL) {
+        statusbar_set_message(error->message);
+        return;
+    }
 
     pc->restore_x = -1;
     pc->restore_y = -1;
