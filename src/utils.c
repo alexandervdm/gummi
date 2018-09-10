@@ -190,6 +190,15 @@ gboolean utils_path_exists (const gchar* path) {
     return result;
 }
 
+gboolean utils_uri_path_exists (const gchar* uri) {
+    gboolean result = FALSE;
+    
+    gchar *filepath = g_filename_from_uri(uri, NULL, NULL);
+    result = utils_path_exists(filepath);
+    g_free(filepath);
+    return(result);
+}
+
 gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
                                   gssize length) {
     /* g_file_set_contents may not work correctly on Windows. See the

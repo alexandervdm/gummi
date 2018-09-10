@@ -55,15 +55,6 @@
 #include "snippets.h"
 #include "utils.h"
 
-/* set up uri using appropriate formatting for OS
-   http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
-#ifdef WIN32
-    const gchar *urifrmt = "file:///";
-#else
-    const gchar *urifrmt = "file://";
-#endif
-
-
 extern GummiGui* gui;
 extern Gummi* gummi;
 
@@ -230,7 +221,8 @@ gpointer motion_compile_thread (gpointer data) {
             } else {
                 if (!pc->uri) {
 
-                    char* uri = g_strconcat (urifrmt, editor->pdffile, NULL);
+                    gchar* uri = g_filename_to_uri(editor->pdffile, NULL, NULL);
+                    
                     previewgui_set_pdffile (pc, uri);
                     g_free(uri);
                 } else {
