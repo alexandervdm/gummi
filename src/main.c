@@ -156,13 +156,12 @@ int main (int argc, char *argv[]) {
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
 
     if (argc > 1) {
-      for ( int i = 1; i < argc; i++) {
+      for (int i = 1; i < argc; i++) {
         if (!g_file_test(argv[i], G_FILE_TEST_EXISTS)) {
-              slog(L_ERROR, "Failed to open file '%s': No such file or "
-                      "directory\n", argv[i]);
+              slog(L_ERROR, "Failed to open file '%s': "
+                            "No such file or directory\n", argv[i]);
               exit(1);
           }
-
           tabmanager_create_tab (A_LOAD, argv[i], NULL);
       }
     }
