@@ -113,16 +113,14 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_rightpane"));
     g->statusid =
         gtk_statusbar_get_context_id (GTK_STATUSBAR (g->statusbar), "Gummi");
-    g->recent[0] =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent1"));
-    g->recent[1] =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent2"));
-    g->recent[2] =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent3"));
-    g->recent[3] =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent4"));
-    g->recent[4] =
-        GTK_MENU_ITEM (gtk_builder_get_object (builder, "menu_recent5"));
+
+    gchar* tstr = 0; 
+    for (gint i = 0; i < RECENT_FILES_NUM; ++i) {
+        tstr = g_strdup_printf ("menu_recent%d", i + 1);
+        g->recent[i] =
+            GTK_MENU_ITEM (gtk_builder_get_object (builder, tstr));
+        g_free (tstr);
+    }
 
     g->docstatswindow =
         GTK_WIDGET (gtk_builder_get_object (builder, "docstatswindow"));
@@ -223,11 +221,12 @@ GummiGui* gui_init (GtkBuilder* builder) {
     if (!config_get_value ("compile_status"))
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
 
-    g->recent_list[0] = g_strdup (config_get_value ("recent1"));
-    g->recent_list[1] = g_strdup (config_get_value ("recent2"));
-    g->recent_list[2] = g_strdup (config_get_value ("recent3"));
-    g->recent_list[3] = g_strdup (config_get_value ("recent4"));
-    g->recent_list[4] = g_strdup (config_get_value ("recent5"));
+    tstr = 0; 
+    for (gint i = 0; i < RECENT_FILES_NUM; ++i) {
+        tstr = g_strdup_printf ("recent%d", i + 1);
+        g->recent_list[i] = g_strdup (config_get_value (tstr));
+        g_free (tstr);
+    }
 
     display_recent_files (g);
 
@@ -933,7 +932,7 @@ void add_to_recent_list (const gchar* filename) {
     if (!filename) return;
     gint i = 0;
     /* check if it already exists */
-    for (i = 0; i < 5; ++i)
+    for (i = 0; i < RECENT_FILES_NUM; ++i)
         if (STR_EQU (filename, gui->recent_list[i]))
             return;
 
@@ -947,22 +946,19 @@ void add_to_recent_list (const gchar* filename) {
 
 void display_recent_files (GummiGui* gui) {
     gchar* tstr = 0;
-    gchar* basename = 0;
     gint i = 0, count = 0;
 
-    for (i = 0; i < 5; ++i)
+    for (i = 0; i < RECENT_FILES_NUM; ++i)
         gtk_widget_hide (GTK_WIDGET (gui->recent[i]));
 
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
         if (!STR_EQU (gui->recent_list[i], "__NULL__")) {
-            basename = g_path_get_basename (gui->recent_list[i]);
-            tstr = g_strdup_printf ("%d. %s", count + 1, basename);
+            tstr = g_strdup_printf ("%d. %s", count + 1, gui->recent_list[i]);
             gtk_menu_item_set_label (gui->recent[i], tstr);
             gtk_widget_set_tooltip_text (GTK_WIDGET (gui->recent[i]),
                                         gui->recent_list[i]);
             gtk_widget_show (GTK_WIDGET (gui->recent[i]));
             g_free (tstr);
-            g_free (basename);
             ++count;
         }
     }

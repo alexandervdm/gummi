@@ -177,7 +177,19 @@ G_MODULE_EXPORT
 void on_menu_recent_activate (GtkWidget *widget, void *user) {
     const gchar* name = gtk_menu_item_get_label (GTK_MENU_ITEM (widget));
     gchar* tstr;
-    gint index = name[0] - '0' -1;
+
+    // get index of relevant file
+    gint first_part_of_index  = name[0] - '0' - 1;
+    gint second_part_of_index = 0;
+    
+    // index value > 9; e.g.:
+    // name = "10. ...";
+    if ( g_ascii_isdigit(name[1]) ) {
+      first_part_of_index = 10;
+      second_part_of_index = name[1] - '0' - 1;
+    }
+    gint index = first_part_of_index + second_part_of_index;
+
 
     if (utils_path_exists (gui->recent_list[index])) {
         gui_open_file (gui->recent_list[index]);
