@@ -90,6 +90,8 @@ gboolean tabmanager_remove_tab (GuTabContext* tab) {
     g_tabs = g_list_remove (g_tabs, tab);
     tabmanager_set_active_tab (total - 2);
 
+    remove_from_open_files_list(tab->editor->filename);
+
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (g_tabnotebook, position);
     g_free (tab);
@@ -140,6 +142,8 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
     add_to_recent_list (editor->filename);
 
+    add_to_open_files_list(editor->filename);
+
     previewgui_reset (gui->previewgui);
 }
 
@@ -168,13 +172,16 @@ void tabmanager_update_tab (const gchar* filename) {
      * or tab object has to be initialised, but we'll need a fileinfo env
      * to match the new filename and its location and a gui update*/
 
+    remove_from_open_files_list(g_active_tab->editor->filename);
+
     gui_set_filename_display (g_active_tab, TRUE, TRUE);
 
     editor_fileinfo_update (g_active_tab->editor, filename);
 
     // Add full filepath to recent list
     add_to_recent_list (g_active_tab->editor->filename);
-
+    add_to_open_files_list(g_active_tab->editor->filename);
+    
     slog (L_INFO, "Environment updated for %s\n",
             g_active_tab->editor->filename);
     previewgui_reset (gui->previewgui);
