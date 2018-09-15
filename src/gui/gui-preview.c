@@ -921,12 +921,17 @@ static void load_document(GuPreviewGui* pc, gboolean update) {
 
 void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     //L_F_DEBUG;
+    GError *error = NULL;
+    
     previewgui_cleanup_fds (pc);
 
     pc->uri = g_strdup(uri);
+    pc->doc = poppler_document_new_from_file (pc->uri, NULL, &error);
 
-    pc->doc = poppler_document_new_from_file (pc->uri, NULL, NULL);
-    g_return_if_fail (pc->doc != NULL);
+    if (pc->doc == NULL) {
+        statusbar_set_message(error->message);
+        return;
+    }
 
     pc->restore_x = -1;
     pc->restore_y = -1;
@@ -970,7 +975,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
     if (!g_mutex_trylock (&gummi->motion->compile_mutex)) return;
 
     /* This line is very important, if no pdf exist, preview will fail */
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) goto unlock;
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) goto unlock;
 
     // If no document had been loaded successfully before, force call of set_pdffile
     if (pc->doc == NULL) {
@@ -1821,7 +1826,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
 
     //slog(L_INFO, "scale: %f", pc->scale);
 
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) {
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) {
 
         return FALSE;
     }
@@ -1899,7 +1904,7 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
 
     if (GDK_CONTROL_MASK & e->state) {
 
@@ -2025,7 +2030,7 @@ G_MODULE_EXPORT
 gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
 
     // Check where the user clicked
     gint page;
@@ -2073,7 +2078,7 @@ G_MODULE_EXPORT
 gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
 
     gdouble new_x = gtk_adjustment_get_value (pc->hadj) - (e->x - pc->prev_x);
     gdouble new_y = gtk_adjustment_get_value (pc->vadj) - (e->y - pc->prev_y);
@@ -2088,7 +2093,7 @@ gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-    if (!pc->uri || !utils_path_exists (pc->uri + usize)) return FALSE;
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
 
     LayeredRectangle fov = get_fov(pc);
     gdouble x_rel = (gdouble) (fov.x + fov.width/2) / pc->width_scaled;

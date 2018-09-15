@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #ifndef WIN32
 #   include <unistd.h>
@@ -347,8 +348,6 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
     g_free (title);
 }
 
-
-
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
 
@@ -426,6 +425,26 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gchar *text;
     GtkWidget* focus = NULL;
 
+    /* Check whether the file has been changed by (some) external program */
+    double lastmod;
+    struct stat attr;
+    stat(filename, &attr);
+    lastmod = difftime(tab->editor->last_modtime, attr.st_mtime);
+    if (lastmod != 0.0) {
+        /* Ask the user whether he want to save or reload */
+        ret = utils_save_reload_dialog( ("The content of the file has been changed externally. Saving will remove any external modifications.") );
+        if (ret == GTK_RESPONSE_YES) {
+            tabmanager_set_content(A_LOAD, filename, NULL);
+            /* Resets modtime */
+            stat(filename, &attr);
+            tab->editor->last_modtime = attr.st_mtime;
+            goto cleanup;
+        } else if (ret != GTK_RESPONSE_NO) {
+            /* cancel means: do nothing */
+            goto cleanup;
+        }
+    }
+
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
     text = editor_grab_buffer (tab->editor);
     gtk_widget_grab_focus (focus);
@@ -440,6 +459,10 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     if (new) tabmanager_update_tab (filename);
     gui_set_filename_display (tab, TRUE, TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (tab->editor->view));
+
+    /* Resets modtime */
+    stat(filename, &attr);
+    tab->editor->last_modtime = attr.st_mtime;
 
 cleanup:
     if (new) g_free (filename);
@@ -958,13 +981,14 @@ void display_recent_files (GummiGui* gui) {
 void gui_buildlog_set_text (const gchar *message) {
     if (message) {
         GtkTextIter iter;
+        GtkTextMark *mark;
+        
         gtk_text_buffer_set_text (gui->errorbuff, message, -1);
         gtk_text_buffer_get_end_iter (gui->errorbuff, &iter);
-		// The following lines are commented out, as they seem to cause
-		// Bug #252.
-        //GtkTextMark *mark = gtk_text_buffer_create_mark(gui->errorbuff, NULL, &iter, FALSE);
-        //gtk_text_view_scroll_to_mark (gui->errorview, mark, 0.25, FALSE, 0, 0);
-        //gtk_text_view_scroll_to_iter (gui->errorview, &iter, 0.25, FALSE, 0, 0);
+        
+        // scrolling to the end used to cause bug #252 but seems ok now:
+        mark = gtk_text_buffer_create_mark(gui->errorbuff, NULL, &iter, FALSE);
+        gtk_text_view_scroll_to_mark (gui->errorview, mark, 0.25, FALSE, 0, 0);
     }
 }
 

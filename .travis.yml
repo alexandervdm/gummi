@@ -1,0 +1,18 @@
+
+language: c
+   
+addons:
+  apt:
+    packages:
+      - intltool
+      - libglib2.0-dev
+      - libgtk2.0-dev
+      - libgtksourceview2.0-dev
+      - libpoppler-glib-dev
+      - libgtkspell-dev
+    update: true
+
+script:
+      - ./autogen.sh
+      - ./configure
+      - make

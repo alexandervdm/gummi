@@ -32,6 +32,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourceiter.h>
@@ -222,6 +223,11 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
         ec->workfile = g_strdup_printf ("%s.swp", ec->basename);
         ec->pdffile =  g_strdup_printf ("%s%c.%s.pdf", C_TMPDIR,
                                        G_DIR_SEPARATOR, base);
+        // Get last modified time
+        struct stat attr;
+        stat(fname, &attr);
+        ec->last_modtime = attr.st_mtime;
+
         g_free (fname);
         g_free (base);
         g_free (dir);
@@ -335,7 +341,7 @@ void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
     GError* err2 = NULL;
     GtkSpell* spell = 0;
     if (status) {
-        if (! (spell = gtkspell_new_attach (ec_view, "en", &err))) {
+        if (! (spell = gtkspell_new_attach (ec_view, lang, &err))) {
             slog (L_ERROR, "gtkspell_new_attach (): %s\n", err->message);
             g_error_free (err);
         }
@@ -549,16 +555,18 @@ void editor_apply_searchtag (GuEditor* ec) {
     gtk_text_tag_table_add (ec->editortags, ec->searchtag);
 
     while (TRUE) {
-        ret = gtk_source_iter_forward_search (&start, ec->term,
-                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
-                &mstart, &mend, NULL);
+		do {
+			ret = gtk_source_iter_forward_search (&start, ec->term,
+	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+	                &mstart, &mend, NULL);
+			start = mend;
+		} while (ec->wholeword && ret && (!gtk_text_iter_starts_word(&mstart) ||
+				!gtk_text_iter_ends_word(&mend)));
 
-        if (ret && (!ec->wholeword || (ec->wholeword
-                        && gtk_text_iter_starts_word (&mstart)
-                        && gtk_text_iter_ends_word (&mend)))) {
+        if (ret) {
             gtk_text_buffer_apply_tag (ec_buffer, ec->searchtag,
                     &mstart, &mend);
-            start =  mend;
+//            start =  mend;
         } else break;
     }
 }
@@ -568,21 +576,23 @@ void editor_search_next (GuEditor* ec, gboolean inverse) {
     gboolean ret = FALSE, response = FALSE;
 
     editor_get_current_iter (ec, &current);
+	
+	do {
+	    if (ec->backwards ^ inverse) {
+	        ret = gtk_source_iter_backward_search (&current, ec->term,
+	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+	                &mstart, &mend, NULL);
+	    } else {
+	        gtk_text_iter_forward_chars (&current, strlen (ec->term));
+	        ret = gtk_source_iter_forward_search (&current, ec->term,
+	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+	                &mstart, &mend, NULL);
+		}
+		current = mend;
+	} while (ec->wholeword && ret && (!gtk_text_iter_starts_word(&mstart) ||
+			!gtk_text_iter_ends_word(&mend)));
 
-    if (ec->backwards ^ inverse) {
-        ret = gtk_source_iter_backward_search (&current, ec->term,
-                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
-                &mstart, &mend, NULL);
-    } else {
-        gtk_text_iter_forward_chars (&current, strlen (ec->term));
-        ret = gtk_source_iter_forward_search (&current, ec->term,
-                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
-                &mstart, &mend, NULL);
-    }
-
-    if (ret && (!ec->wholeword || (ec->wholeword
-            && gtk_text_iter_starts_word (&mstart)
-            && gtk_text_iter_ends_word (&mend)))) {
+    if (ret) {
         gtk_text_buffer_select_range (ec_buffer, &mstart, &mend);
         editor_scroll_to_cursor (ec);
     }
@@ -650,6 +660,7 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
         gboolean matchcase) {
     GtkTextIter start, mstart, mend;
     gboolean ret = FALSE;
+    gboolean action_started = FALSE;
 
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
 
@@ -661,12 +672,17 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
         if (ret && (!wholeword || (wholeword
                 && gtk_text_iter_starts_word (&mstart)
                 && gtk_text_iter_ends_word (&mend)))) {
-            gtk_text_buffer_begin_user_action (ec_buffer);
+            if (!action_started) {
+                gtk_text_buffer_begin_user_action (ec_buffer);
+                action_started = TRUE;
+            }
             gtk_text_buffer_delete (ec_buffer, &mstart, &mend);
             gtk_text_buffer_insert (ec_buffer, &mstart, rterm, -1);
-            gtk_text_buffer_end_user_action (ec_buffer);
             start =  mstart;
         } else break;
+    }
+    if (action_started) {
+        gtk_text_buffer_end_user_action (ec_buffer);
     }
 }
 

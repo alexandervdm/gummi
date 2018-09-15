@@ -142,6 +142,26 @@ void slog (gint level, const gchar *fmt, ...) {
         exit (1);
 }
 
+gint utils_save_reload_dialog (const gchar* message) {
+    GtkWidget* dialog;
+    gint ret = 0;
+
+    g_return_val_if_fail (message != NULL, 0);
+
+    dialog = gtk_message_dialog_new (parent,
+                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                 GTK_MESSAGE_QUESTION,
+                 GTK_BUTTONS_NONE,
+                 "%s", message);
+    gtk_dialog_add_buttons(dialog, "Reload", GTK_RESPONSE_YES, "Save", GTK_RESPONSE_NO, NULL);
+
+    gtk_window_set_title (GTK_WINDOW (dialog), _("Confirmation"));
+    ret = gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+
+    return ret;
+}
+
 gint utils_yes_no_dialog (const gchar* message) {
     GtkWidget* dialog;
     gint ret = 0;
@@ -168,6 +188,15 @@ gboolean utils_path_exists (const gchar* path) {
     result = g_file_query_exists (file, NULL);
     g_object_unref (file);
     return result;
+}
+
+gboolean utils_uri_path_exists (const gchar* uri) {
+    gboolean result = FALSE;
+    
+    gchar *filepath = g_filename_from_uri(uri, NULL, NULL);
+    result = utils_path_exists(filepath);
+    g_free(filepath);
+    return(result);
 }
 
 gboolean utils_set_file_contents (const gchar *filename, const gchar *text,
