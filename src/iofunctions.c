@@ -91,7 +91,7 @@ void iofunctions_load_file (GuIOFunc* io, const gchar* filename) {
 
     /* add Loading message to status bar and ensure GUI is current */
     status = g_strdup_printf ("Loading %s...", filename);
-    statusbar_set_message (status);
+    statusbar_set_permanent_message (status);
     g_free (status);
 
     g_signal_emit_by_name (io->sig_hook, "document-load", filename);

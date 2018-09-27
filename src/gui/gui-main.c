@@ -330,6 +330,9 @@ void gui_set_filename_display (GuTabContext* tc, gboolean title, gboolean label)
 
     if (label) tabmanagergui_update_label (tc->page, filetext);
     if (title) gui_set_window_title (tc->editor->filename, filetext);
+
+    statusbar_del_message (NULL);
+    statusbar_set_permanent_message (tc->editor->filename);
 }
 
 void gui_set_window_title (const gchar* filename, const gchar* text) {
@@ -991,6 +994,10 @@ void gui_buildlog_set_text (const gchar *message) {
 void statusbar_set_message (const gchar *message) {
     gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
     g_timeout_add_seconds (4, statusbar_del_message, NULL);
+}
+
+void statusbar_set_permanent_message (const gchar *message) {
+    gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
 }
 
 gboolean statusbar_del_message (void* user) {

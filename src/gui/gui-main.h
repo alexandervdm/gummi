@@ -170,6 +170,7 @@ void display_recent_files (GummiGui* gui);
 
 void gui_buildlog_set_text (const gchar *message);
 void statusbar_set_message (const gchar* message);
+void statusbar_set_permanent_message (const gchar* message);
 gboolean statusbar_del_message (void* user);
 
 void typesetter_setup (void);
