@@ -348,7 +348,7 @@ void on_menu_comment_out_activate (GtkWidget *widget, void* user) {
             /*slog (L_INFO, "comment out current_line: %s\n", current_line);*/
             /*slog (L_INFO, "comment out entire_content: %s\n", entire_content);*/
             
-            ptr = g_stpcpy (ptr, "%");
+            ptr = g_stpcpy (ptr, "% ");
             ptr = g_stpcpy (ptr, current_line);
             ptr = g_stpcpy (ptr, "\n");
         }
@@ -381,7 +381,7 @@ void on_menu_uncomment_activate (GtkWidget *widget, void* user) {
             /*slog (L_INFO, "uncomment out current_line: %s\n", current_line);*/
             /*slog (L_INFO, "uncomment out entire_content: %s\n", entire_content);*/
 
-            gchar** split_line = g_strsplit (current_line, "%", 2);
+            gchar** split_line = g_strsplit (current_line, "% ", 2);
             gchar** split_line_ptr = split_line;
             gchar* split_string_part;
 
