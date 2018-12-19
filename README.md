@@ -6,7 +6,7 @@ The simple LaTeX editor
 [![License](https://img.shields.io/github/license/alexandervdm/gummi.svg?maxAge=360000)](https://github.com/alexandervdm/gummi/blob/master/COPYING)
 
 ### Installing
-Gummi is available in the official repositories for most mayor platforms. Please check your package manager for availability or refer to our wiki for more details. 
+Gummi is available in the official repositories for most major platforms. Please check your package manager for availability or refer to our wiki for more details. 
 
 ### Screenshot
 
