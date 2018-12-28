@@ -175,24 +175,33 @@ void on_menu_export_activate (GtkWidget *widget, void *user) {
 
 G_MODULE_EXPORT
 void on_menu_duplicate_line_activate (GtkWidget *widget, void *user) {
-    GtkTextMark* insert_mark = gtk_text_buffer_get_insert (g_e_buffer);
+    GtkTextIter start, end;
+    gboolean has_selection = gtk_text_buffer_get_selection_bounds (g_e_buffer, &start, &end); 
     
-    GtkTextIter insert_mark_position;
-    gtk_text_buffer_get_iter_at_mark (g_e_buffer, &insert_mark_position, insert_mark);
-
-    gint line_of_insert = gtk_text_iter_get_line (&insert_mark_position);
-    gint line_after_insert = line_of_insert + 1;
+    if (has_selection) {
+        gchar* entire_content = gtk_text_buffer_get_text (g_e_buffer, &start, &end, TRUE);
+        gtk_text_buffer_insert_at_cursor (g_e_buffer, entire_content, strlen (entire_content));
+        g_free (entire_content);
+    } else {
+        GtkTextMark* insert_mark = gtk_text_buffer_get_insert (g_e_buffer);
     
-    GtkTextIter start_of_line;
-    gtk_text_buffer_get_iter_at_line (g_e_buffer, &start_of_line, line_of_insert);
+        GtkTextIter insert_mark_position;
+        gtk_text_buffer_get_iter_at_mark (g_e_buffer, &insert_mark_position, insert_mark);
 
-    GtkTextIter end_of_line;
-    gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
+        gint line_of_insert = gtk_text_iter_get_line (&insert_mark_position);
+        gint line_after_insert = line_of_insert + 1;
+    
+        GtkTextIter start_of_line;
+        gtk_text_buffer_get_iter_at_line (g_e_buffer, &start_of_line, line_of_insert);
 
-    gchar* current_line_content = gtk_text_buffer_get_text (g_e_buffer, &start_of_line, &end_of_line, 1);
-    gint length_of_current_line_content = strlen (current_line_content);
-    gtk_text_buffer_insert (g_e_buffer, &end_of_line, current_line_content, length_of_current_line_content);
-    g_free (current_line_content);
+        GtkTextIter end_of_line;
+        gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
+
+        gchar* current_line_content = gtk_text_buffer_get_text (g_e_buffer, &start_of_line, &end_of_line, 1);
+        gint length_of_current_line_content = strlen (current_line_content);
+        gtk_text_buffer_insert (g_e_buffer, &end_of_line, current_line_content, length_of_current_line_content);
+        g_free (current_line_content);
+    }
 }
 
 G_MODULE_EXPORT
@@ -211,8 +220,14 @@ void on_menu_delete_line_activate (GtkWidget *widget, void *user) {
     GtkTextIter end_of_line;
     gtk_text_buffer_get_iter_at_line (g_e_buffer, &end_of_line, line_after_insert);
 
-    // cannot be undone in case of multiple calls/lines deleted
-    gtk_text_buffer_delete (g_e_buffer, &start_of_line, &end_of_line);
+    GtkTextIter start, end;
+    gboolean has_selection = gtk_text_buffer_get_selection_bounds (g_e_buffer, &start, &end);
+
+    if (has_selection)
+        gtk_text_buffer_delete_selection (g_e_buffer, FALSE, TRUE);
+    else
+        // cannot be undone in case of multiple calls/lines deleted
+        gtk_text_buffer_delete (g_e_buffer, &start_of_line, &end_of_line);
 }
 
 G_MODULE_EXPORT
