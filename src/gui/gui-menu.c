@@ -316,6 +316,9 @@ gchar* _get_allocated_string_for_comments (const gchar* content, gchar** split_c
     int num_of_tokens = 0;
     for (; split_content[num_of_tokens] != NULL; num_of_tokens++)
         ;
+   
+    // There are possibly 3 addtional characters per line " " + "%" + "\n" (not just 1).
+    num_of_tokens *= 3;
 
     return g_new0 (gchar, (strlen (content) + num_of_tokens));
 }
