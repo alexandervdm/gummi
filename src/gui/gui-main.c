@@ -885,6 +885,8 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
         case TYPE_LATEX_SAVEAS:
             gtk_file_filter_set_name (filter, _("LaTeX files"));
             gtk_file_filter_add_pattern (filter, "*.tex");
+            gtk_file_filter_add_pattern (filter, "*.bib");
+            gtk_file_filter_add_pattern (filter, "*.sty");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
             break;
