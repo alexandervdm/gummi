@@ -69,7 +69,7 @@ const gchar* insens_widgets_str[] = {
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
     "menu_exportpdf", "import_tabs", "menu_close", "menu_export",
     "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste",
-    "menu_delete", "menu_selectall", "menu_preferences", "menu_find",
+    "menu_delete", "menu_selectall", "menu_duplicate_line", "menu_delete_line", "menu_preferences", "menu_find",
     "menu_prev", "menu_next", "menu_pdfcompile", "menu_compileopts",
     "menu_runmakeindex", "menu_runbibtex", "menu_docstat", "menu_spelling",
     "menu_snippets", "menu_edit", "menu_document", "menu_search",
