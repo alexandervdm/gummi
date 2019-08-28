@@ -48,7 +48,7 @@
 #include "motion.h"
 #include "porting.h"
 
-#include "syncTeX/synctex_parser.h"
+#include "synctex_parser.h"
 
 /* set up uri using appropriate formatting for OS
    http://en.wikipedia.org/wiki/File_URI_scheme#Linux */

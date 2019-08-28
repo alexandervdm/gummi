@@ -57,6 +57,11 @@ PKG_CHECK_MODULES(poppler, [poppler-glib],,
 GUI_CFLAGS="$GUI_CFLAGS $poppler_CFLAGS"
 GUI_LIBS="$GUI_LIBS $poppler_LIBS"
 
+PKG_CHECK_MODULES(synctex, [synctex >= 1.16],,
+	[AC_MSG_ERROR([You need synctex to build $PACKAGE])])
+GUI_CFLAGS="$GUI_CFLAGS $synctex_CFLAGS"
+GUI_LIBS="$GUI_LIBS $synctex_LIBS"
+
 if test "$spellcheck" = yes; then
     PKG_CHECK_MODULES(gtkspell, [gtkspell-2.0],,
 	    [AC_MSG_ERROR([You need GtkSpell  to build $PACKAGE])]) 
