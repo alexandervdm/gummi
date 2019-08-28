@@ -298,7 +298,7 @@ msgstr "設定編譯選項"
 
 #: ../data/ui/gummi.glade.h:79
 msgid "_Cleanup Build Files"
-msgstr ""
+msgstr "清理編譯檔案(_C)"
 
 #: ../data/ui/gummi.glade.h:80
 msgid "Run _Makeindex"
@@ -351,7 +351,7 @@ msgstr "幫助(_H)"
 
 #: ../data/ui/gummi.glade.h:92
 msgid "User _Guide"
-msgstr ""
+msgstr "使用導覽(_G)"
 
 #: ../data/ui/gummi.glade.h:93
 msgid "New"
@@ -966,7 +966,7 @@ msgstr "輸入文件"
 
 #: ../src/gui/gui-main.c:753
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "未儲存變更"
 
 #: ../src/gui/gui-main.c:775
 msgid "Open LaTeX document"
@@ -1028,7 +1028,7 @@ msgstr "載入最近使用文件時發生錯誤: %s"
 
 #: ../src/gui/gui-menu.c:430
 msgid "Succesfully removed build files.."
-msgstr ""
+msgstr "成功移除編譯檔案"
 
 #: ../src/gui/gui-menu.c:433
 #, fuzzy
