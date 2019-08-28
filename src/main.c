@@ -84,7 +84,6 @@ int main (int argc, char *argv[]) {
     }
 
     /* initialize GTK */
-    g_thread_init (NULL);
     gdk_threads_init ();
     gtk_init (&argc, &argv);
     GError* ui_error = NULL;

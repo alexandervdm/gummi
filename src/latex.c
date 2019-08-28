@@ -183,7 +183,7 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     gchar *command = latex_set_compile_cmd (ec);
 
     g_free (lc->compilelog);
-    memset (lc->errorlines, 0, BUFSIZ);
+    memset (lc->errorlines, 0, BUFSIZ * sizeof(gint));
 
     /* run pdf compilation */
     Tuple2 cresult = utils_popen_r (command, curdir);
