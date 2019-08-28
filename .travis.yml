@@ -10,6 +10,7 @@ addons:
       - libgtksourceview2.0-dev
       - libpoppler-glib-dev
       - libgtkspell-dev
+      - libsynctex-dev
     update: true
 
 script:
