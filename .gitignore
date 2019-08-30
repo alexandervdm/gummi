@@ -1,3 +1,4 @@
+src/gummi
 *.swp
 Makefile
 Makefile.in
