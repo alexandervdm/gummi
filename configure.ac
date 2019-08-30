@@ -42,10 +42,10 @@ PKG_CHECK_MODULES(gthread, [gthread-2.0],,
 GUI_CFLAGS="$GUI_CFLAGS $gthread_CFLAGS"
 GUI_LIBS="$GUI_LIBS $gthread_LIBS"
 
-AM_PATH_GTK_2_0([2.20.0], [
+AM_PATH_GTK_2_0([2.24.0], [
 	 GUI_CFLAGS="$GUI_CFLAGS $GTK_CFLAGS"
 	 GUI_LIBS="$GUI_LIBS $GTK_LIBS"
-	], [AC_MSG_ERROR([You need Gtk+ >= 2.20.0 to build $PACKAGE])]) 
+	], [AC_MSG_ERROR([You need Gtk+ >= 2.24.0 to build $PACKAGE])])
 
 PKG_CHECK_MODULES(gtksourceview, [gtksourceview-2.0 >= 2.2.1],,
 	[AC_MSG_ERROR([You need gtksourceview-2 >= 2.2.1 to build $PACKAGE])]) 

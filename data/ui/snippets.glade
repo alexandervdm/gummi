@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkImage" id="image_reset">
     <property name="visible">True</property>
@@ -41,7 +41,6 @@
             <child>
               <object class="GtkButton" id="snippetsgui_reset">
                 <property name="label" translatable="yes">_Reset</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -61,7 +60,6 @@
             <child>
               <object class="GtkButton" id="snippetsgui_close">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -150,7 +148,6 @@
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkButton" id="button_new_snippet">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -172,7 +169,6 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button_remove_snippet">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -267,7 +263,6 @@
                         <child>
                           <object class="GtkButton" id="selected_text">
                             <property name="label" translatable="yes">selected text</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -282,7 +277,6 @@
                         <child>
                           <object class="GtkButton" id="filename">
                             <property name="label" translatable="yes">filename</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -297,7 +291,6 @@
                         <child>
                           <object class="GtkButton" id="basename">
                             <property name="label" translatable="yes">basename</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -421,8 +414,8 @@
                                 <property name="primary_icon_sensitive">True</property>
                                 <property name="secondary_icon_sensitive">True</property>
                                 <signal name="key-press-event" handler="on_accelerator_entry_key_press_event" swapped="no"/>
-                                <signal name="focus-in-event" handler="on_accelerator_entry_focus_in_event" swapped="no"/>
                                 <signal name="focus-out-event" handler="on_accelerator_entry_focus_out_event" swapped="no"/>
+                                <signal name="focus-in-event" handler="on_accelerator_entry_focus_in_event" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>

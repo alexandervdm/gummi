@@ -316,13 +316,19 @@ static void unblock_handlers_current_page(GuPreviewGui* pc) {
 }
 
 inline static gboolean is_vscrollbar_visible(GuPreviewGui* pc) {
-    return pc->scrollw->allocation.width !=
-        GTK_WIDGET(pc->previewgui_viewport)->allocation.width;
+    GtkAllocation alloc1, alloc2;
+    gtk_widget_get_allocation(pc->scrollw, &alloc1);
+    gtk_widget_get_allocation(GTK_WIDGET(pc->previewgui_viewport), &alloc2);
+
+    return alloc1.width != alloc2.width;
 }
 
 inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc) {
-    return pc->scrollw->allocation.height !=
-        GTK_WIDGET(pc->previewgui_viewport)->allocation.height;
+    GtkAllocation alloc1, alloc2;
+    gtk_widget_get_allocation(pc->scrollw, &alloc1);
+    gtk_widget_get_allocation(GTK_WIDGET(pc->previewgui_viewport), &alloc2);
+
+    return alloc1.height != alloc2.height;
 }
 
 G_MODULE_EXPORT
@@ -393,6 +399,10 @@ static void update_fit_scale(GuPreviewGui* pc) {
     }
     //L_F_DEBUG;
 
+    GdkWindow *viewport_window;
+    gint view_width_without_bar;
+    gint view_height_without_bar;
+
     gdouble width_scaling;
     gdouble height_scaling;
     gdouble width_non_scaling;
@@ -425,18 +435,9 @@ static void update_fit_scale(GuPreviewGui* pc) {
     gint hscrollbar_height = spacing + req.height;
 
 
-#if GTK_MINOR_VERSION >= 24 // gdk_window_get_width is gtk-2.24 or higher.
-    gint view_width_without_bar = gdk_window_get_width(
-            pc->previewgui_viewport->view_window);
-    gint view_height_without_bar = gdk_window_get_height(
-            pc->previewgui_viewport->view_window);
-#else
-        gint view_width_without_bar, view_height_without_bar;
-        gdk_drawable_get_size (pc->previewgui_viewport->view_window,
-                                &view_width_without_bar,
-                                &view_height_without_bar);
-#endif
-
+    viewport_window = gtk_viewport_get_view_window(pc->previewgui_viewport);
+    view_width_without_bar = gdk_window_get_width(viewport_window);
+    view_height_without_bar = gdk_window_get_height(viewport_window);
 
     if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(
                     GTK_SCROLLED_WINDOW(pc->scrollw)))) {

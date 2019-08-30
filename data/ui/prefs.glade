@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkAdjustment" id="adj_cache_size">
     <property name="lower">50</property>
@@ -32,17 +32,6 @@
       </row>
       <row>
         <col id="0" translatable="yes">compile every</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_languages">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">None</col>
       </row>
     </data>
   </object>
@@ -83,6 +72,12 @@
     <property name="value">1.0000000002235174</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="tabwidth_adj">
+    <property name="lower">1</property>
+    <property name="upper">24</property>
+    <property name="value">8</property>
+    <property name="step_increment">1</property>
   </object>
   <object class="GtkWindow" id="prefwindow">
     <property name="can_focus">False</property>
@@ -158,7 +153,6 @@
                             <child>
                               <object class="GtkCheckButton" id="textwrapping">
                                 <property name="label" translatable="yes">Enable text wrapping</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -198,7 +192,6 @@
                             <child>
                               <object class="GtkCheckButton" id="wordwrapping">
                                 <property name="label" translatable="yes">Do not split words over two lines</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -274,7 +267,6 @@
                         <child>
                           <object class="GtkCheckButton" id="line_numbers">
                             <property name="label" translatable="yes">Display line numbers</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -343,7 +335,6 @@
                         <child>
                           <object class="GtkCheckButton" id="highlighting">
                             <property name="label" translatable="yes">Highlight current line</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -496,7 +487,6 @@
                         <child>
                           <object class="GtkCheckButton" id="spaces_instof_tabs">
                             <property name="label" translatable="yes">Insert _spaces instead of tabs</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -566,7 +556,6 @@
                         <child>
                           <object class="GtkCheckButton" id="autoindentation">
                             <property name="label" translatable="yes">_Enable automatic indentation</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -635,7 +624,6 @@
                         <child>
                           <object class="GtkButton" id="configure_snippets">
                             <property name="label" translatable="yes">Configure snippets</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -708,7 +696,6 @@
                             <child>
                               <object class="GtkCheckButton" id="autosaving">
                                 <property name="label" translatable="yes">_Autosave files every</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -838,7 +825,6 @@
                         </child>
                         <child>
                           <object class="GtkFontButton" id="editor_font">
-                            <property name="use_action_appearance">False</property>
                             <property name="width_request">300</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -1074,7 +1060,6 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_pdflatex">
                                 <property name="label" translatable="yes">TeXLive with PdfTeX</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1118,7 +1103,6 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_xelatex">
                                 <property name="label" translatable="yes">TeXLive with XeTeX</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1163,7 +1147,6 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_rubber">
                                 <property name="label" translatable="yes">Rubber</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1208,7 +1191,6 @@
                             <child>
                               <object class="GtkRadioButton" id="typ_latexmk">
                                 <property name="label" translatable="yes">Latexmk</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1294,7 +1276,6 @@
                             <child>
                               <object class="GtkCheckButton" id="opt_shellescape">
                                 <property name="label" translatable="yes">Use shell-escape</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1336,7 +1317,6 @@
                             <child>
                               <object class="GtkCheckButton" id="opt_synctex">
                                 <property name="label" translatable="yes">Enable SyncTeX</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -1419,7 +1399,6 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texpdf">
                                 <property name="label" translatable="yes">TeX → PDF</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -1460,7 +1439,6 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texdvipdf">
                                 <property name="label" translatable="yes">TeX → DVI → PDF</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -1502,7 +1480,6 @@
                             <child>
                               <object class="GtkRadioButton" id="method_texdvipspdf">
                                 <property name="label" translatable="yes">TeX → DVI → PS → PDF</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -1593,7 +1570,6 @@
                             <property name="can_focus">False</property>
                             <child>
                               <object class="GtkCheckButton" id="compile_status">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -1918,21 +1894,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="combo_languages">
-                            <property name="width_request">300</property>
+                          <object class="GtkComboBoxText" id="combo_languages">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="model">list_languages</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
                             <signal name="changed" handler="on_combo_language_changed" swapped="no"/>
-                            <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext2"/>
-                              <attributes>
-                                <attribute name="text">0</attribute>
-                              </attributes>
-                            </child>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -1997,7 +1967,6 @@
                             <child>
                               <object class="GtkCheckButton" id="auto_export">
                                 <property name="label" translatable="yes">Automatically export PDF on document save</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2064,7 +2033,6 @@
             <child>
               <object class="GtkButton" id="prefs_reset">
                 <property name="label" translatable="yes">_Reset defaults</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -2081,7 +2049,6 @@
             <child>
               <object class="GtkButton" id="prefs_close">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -2104,11 +2071,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkAdjustment" id="tabwidth_adj">
-    <property name="lower">1</property>
-    <property name="upper">24</property>
-    <property name="value">8</property>
-    <property name="step_increment">1</property>
   </object>
 </interface>

@@ -95,62 +95,6 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     return i;
 }
 
-/*
-G_MODULE_EXPORT
-void on_import_tabs_switch_page (GtkNotebook* notebook, GtkNotebookPage* page,
-        guint page_num, void* user) {
-    GList* list = NULL;
-    list = gtk_container_get_children (
-            GTK_CONTAINER (g_importgui->box_image));
-
-
-    while (list) {
-        gtk_container_remove (GTK_CONTAINER (g_importgui->box_image),
-                GTK_WIDGET (list->data));
-        list = list->next;
-    }
-    list = gtk_container_get_children (
-            GTK_CONTAINER (g_importgui->box_table));
-    while (list) {
-        gtk_container_remove (GTK_CONTAINER (g_importgui->box_table),
-                GTK_WIDGET (list->data));
-        list = list->next;
-    }
-    list = gtk_container_get_children (
-            GTK_CONTAINER (g_importgui->box_matrix));
-    while (list) {
-        gtk_container_remove (GTK_CONTAINER (g_importgui->box_matrix),
-                GTK_WIDGET (list->data));
-        list = list->next;
-    }
-    list = gtk_container_get_children (
-            GTK_CONTAINER (g_importgui->box_biblio));
-    while (list) {
-        gtk_container_remove (GTK_CONTAINER (g_importgui->box_biblio),
-                GTK_WIDGET (list->data));
-        list = list->next;
-    }
-
-    switch (page_num) {
-        case 1:
-            gtk_container_add (GTK_CONTAINER (g_importgui->box_image),
-                    GTK_WIDGET (g_importgui->image_pane));
-            break;
-        case 2:
-            gtk_container_add (GTK_CONTAINER (g_importgui->box_table),
-                    GTK_WIDGET (g_importgui->table_pane));
-            break;
-        case 3:
-            gtk_container_add (GTK_CONTAINER (g_importgui->box_matrix),
-                    GTK_WIDGET (g_importgui->matrix_pane));
-        case 4:
-            gtk_container_add (GTK_CONTAINER (g_importgui->box_biblio),
-                    GTK_WIDGET (g_importgui->biblio_pane));
-            break;
-    }
-}
-*/
-
 void importgui_remove_all_panels () {
     GList* list = NULL;
 

@@ -52,8 +52,7 @@ struct _GuPrefsGui {
     GtkCheckButton* spaces_instof_tabs;
     GtkCheckButton* autoindentation;
     GtkSpinButton* autosave_timer;
-    GtkComboBox* combo_languages;
-    GtkListStore* list_languages;
+    GtkComboBoxText* combo_languages;
     GtkTreeView* styleschemes_treeview;
     GtkListStore* list_styleschemes;
     GtkTextView* default_text;
@@ -97,7 +96,7 @@ void on_autosave_value_changed (GtkWidget* widget, void* user);
 void on_compile_value_changed (GtkWidget* widget, void* user);
 void on_editor_font_set (GtkWidget* widget, void* user);
 void on_combo_typesetter_changed (GtkWidget* widget, void* user);
-void on_combo_language_changed (GtkWidget* widget, void* user);
+void on_combo_language_changed (GtkComboBoxText* widget, void* user);
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user);
 void on_combo_animated_scroll_changed (GtkWidget* widget, void* user);
 void on_cache_size_value_changed(GtkWidget* widget, void* user);
