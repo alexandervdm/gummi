@@ -72,10 +72,6 @@ struct _GuPrefsGui {
     GtkToggleButton* method_texdvipspdf;
 
     GtkComboBox* combo_animated_scroll;
-
-    GtkVBox* view_box;
-    GtkHBox* editor_box;
-    GtkHBox* compile_box;
 };
 
 GuPrefsGui* prefsgui_init (GtkWindow* mainwindow);

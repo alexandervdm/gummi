@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="2.24"/>
-  <!-- interface-naming-policy toplevel-contextual -->
+  <requires lib="gtk+" version="3.20"/>
   <object class="GtkImage" id="image_reset">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -28,13 +28,16 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <signal name="delete-event" handler="on_snippetsgui_close_clicked" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -47,8 +50,8 @@
                 <property name="tooltip_text" translatable="yes">Reset all snippets</property>
                 <property name="image">image_reset</property>
                 <property name="use_underline">True</property>
-                <accelerator key="r" signal="clicked" modifiers="GDK_MOD1_MASK"/>
                 <signal name="clicked" handler="on_snippetsgui_reset_clicked" swapped="no"/>
+                <accelerator key="r" signal="clicked" modifiers="GDK_MOD1_MASK"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -94,9 +97,9 @@
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
                     <property name="label" translatable="yes">Snippets:</property>
                     <property name="justify">right</property>
+                    <property name="xalign">0</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -108,8 +111,6 @@
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">automatic</property>
-                    <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
                       <object class="GtkTreeView" id="snippets_tree_view">
@@ -118,13 +119,16 @@
                         <property name="model">list_snippets</property>
                         <property name="headers_visible">False</property>
                         <signal name="cursor-changed" handler="on_snippets_tree_view_cursor_changed" swapped="no"/>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="snippet_column">
                             <property name="title">Snippets</property>
                             <child>
                               <object class="GtkCellRendererText" id="snippet_renderer">
-                                <signal name="editing-canceled" handler="on_snippet_renderer_editing_canceled" swapped="no"/>
                                 <signal name="edited" handler="on_snippet_renderer_edited" swapped="no"/>
+                                <signal name="editing-canceled" handler="on_snippet_renderer_editing_canceled" swapped="no"/>
                               </object>
                               <attributes>
                                 <attribute name="text">0</attribute>
@@ -214,10 +218,10 @@
                       <object class="GtkLabel" id="label2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Edit:</property>
                         <property name="use_underline">True</property>
                         <property name="justify">right</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -229,8 +233,6 @@
                       <object class="GtkScrolledWindow" id="snippet_scroll">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="hscrollbar_policy">automatic</property>
-                        <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">in</property>
                         <child>
                           <placeholder/>
@@ -326,10 +328,10 @@
                       <object class="GtkLabel" id="label3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Activation</property>
                         <property name="use_underline">True</property>
                         <property name="justify">right</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -365,8 +367,8 @@
                               <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Tab trigger:</property>
+                                <property name="xalign">0</property>
                               </object>
                               <packing>
                                 <property name="x_options">GTK_FILL</property>
@@ -377,8 +379,8 @@
                               <object class="GtkLabel" id="label6">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Shortcut key:</property>
+                                <property name="xalign">0</property>
                               </object>
                               <packing>
                                 <property name="top_attach">1</property>
@@ -394,8 +396,6 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
                                 <signal name="key-release-event" handler="on_tab_trigger_entry_key_release_event" swapped="no"/>
                               </object>
                               <packing>
@@ -411,11 +411,9 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                                <signal name="key-press-event" handler="on_accelerator_entry_key_press_event" swapped="no"/>
-                                <signal name="focus-out-event" handler="on_accelerator_entry_focus_out_event" swapped="no"/>
                                 <signal name="focus-in-event" handler="on_accelerator_entry_focus_in_event" swapped="no"/>
+                                <signal name="focus-out-event" handler="on_accelerator_entry_focus_out_event" swapped="no"/>
+                                <signal name="key-press-event" handler="on_accelerator_entry_key_press_event" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -461,8 +459,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">snippetsgui_close</action-widget>
       <action-widget response="0">snippetsgui_reset</action-widget>
+      <action-widget response="0">snippetsgui_close</action-widget>
     </action-widgets>
   </object>
 </interface>

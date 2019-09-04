@@ -39,7 +39,7 @@
 typedef struct _GuImportGui GuImportGui;
 
 struct _GuImportGui {
-    GtkHBox* import_panel;
+    GtkBox* import_panel;
 
     GtkViewport* image_pane;
     GtkViewport* table_pane;

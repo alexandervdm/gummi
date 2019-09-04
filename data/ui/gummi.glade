@@ -1475,7 +1475,7 @@ active document to be saved. </property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkHBox" id="import_panel">
+                      <object class="GtkBox" id="import_panel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>

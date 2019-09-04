@@ -47,7 +47,7 @@ GuImportGui* importgui_init (GtkBuilder* builder) {
     GuImportGui* i = g_new0 (GuImportGui, 1);
 
     i->import_panel =
-        GTK_HBOX (gtk_builder_get_object (builder, "import_panel"));
+        GTK_BOX (gtk_builder_get_object (builder, "import_panel"));
 
     i->image_pane =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "imp_pane_image"));

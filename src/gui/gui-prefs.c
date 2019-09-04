@@ -139,10 +139,6 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->spin_cache_size =
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "spin_cache_size"));
 
-    p->view_box = GTK_VBOX (gtk_builder_get_object (builder, "view_box"));
-    p->editor_box = GTK_HBOX (gtk_builder_get_object (builder, "editor_box"));
-    p->compile_box = GTK_HBOX (gtk_builder_get_object (builder, "compile_box"));
-
     gtk_window_set_transient_for (GTK_WINDOW (p->prefwindow), mainwindow);
 
 #ifdef USE_GTKSPELL
