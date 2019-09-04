@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="2.24"/>
-  <!-- interface-naming-policy project-wide -->
+  <requires lib="gtk+" version="3.20"/>
   <object class="GtkAdjustment" id="bibprogressmon">
     <property name="upper">60</property>
     <property name="step_increment">1</property>
@@ -10,6 +10,9 @@
   </object>
   <object class="GtkWindow" id="errorwindow">
     <property name="can_focus">False</property>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkVBox" id="errorpanel">
         <property name="visible">True</property>
@@ -20,8 +23,8 @@
           <object class="GtkLabel" id="error_header">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="yalign">1</property>
             <property name="label" translatable="yes">PDF Preview could not initialise.</property>
+            <property name="yalign">1</property>
             <attributes>
               <attribute name="weight" value="semibold"/>
             </attributes>
@@ -48,10 +51,10 @@
           <object class="GtkLabel" id="error_details">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="yalign">0</property>
             <property name="justify">center</property>
             <property name="wrap">True</property>
             <property name="wrap_mode">char</property>
+            <property name="yalign">0</property>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -72,89 +75,83 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-find</property>
   </object>
-  <object class="GtkImage" id="im_updatechk">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="pixel_size">16</property>
-    <property name="icon_name">system-software-update</property>
-  </object>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-info</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image10">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-refresh</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image19">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-preferences</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-clear</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image21">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-execute</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image22">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-new</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image23">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-open</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image27">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-close</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-execute</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-open</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image5">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-save-as</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image6">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-info</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image7">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-new</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image9">
     <property name="visible">True</property>
@@ -191,9 +188,9 @@
               <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">File:</property>
                 <property name="justify">fill</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="x_options">GTK_FILL</property>
@@ -204,9 +201,9 @@
                 <property name="width_request">80</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Caption:</property>
                 <property name="justify">fill</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">1</property>
@@ -218,8 +215,8 @@
               <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Label:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">2</property>
@@ -231,8 +228,8 @@
               <object class="GtkLabel" id="label5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Scale:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">3</property>
@@ -248,11 +245,8 @@
                 <property name="can_focus">True</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <property name="adjustment">image_scaler</property>
                 <property name="digits">2</property>
               </object>
@@ -269,12 +263,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">•</property>
-                <property name="invisible_char_set">True</property>
                 <property name="secondary_icon_stock">gtk-open</property>
                 <property name="primary_icon_activatable">False</property>
-                <property name="secondary_icon_activatable">True</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <signal name="icon-press" handler="on_image_file_activate" swapped="no"/>
               </object>
               <packing>
@@ -289,11 +279,8 @@
                 <property name="can_focus">True</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -309,11 +296,8 @@
                 <property name="can_focus">True</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -341,9 +325,9 @@
                 <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="on_import_image_apply_clicked" swapped="no"/>
               </object>
               <packing>
@@ -384,9 +368,9 @@
               <object class="GtkLabel" id="label22">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">File:</property>
                 <property name="justify">fill</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="x_options">GTK_FILL</property>
@@ -398,12 +382,8 @@
                 <property name="can_focus">True</property>
                 <property name="editable">False</property>
                 <property name="invisible_char">•</property>
-                <property name="invisible_char_set">True</property>
                 <property name="secondary_icon_stock">gtk-open</property>
                 <property name="primary_icon_activatable">False</property>
-                <property name="secondary_icon_activatable">True</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <signal name="icon-press" handler="on_biblio_file_activate" swapped="no"/>
               </object>
               <packing>
@@ -415,9 +395,9 @@
               <object class="GtkLabel" id="label24">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Style:</property>
                 <property name="justify">fill</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">1</property>
@@ -465,9 +445,9 @@
                 <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="on_import_biblio_apply_clicked" swapped="no"/>
               </object>
               <packing>
@@ -583,6 +563,9 @@
     <property name="title" translatable="yes">Gummi - LaTeX Editor</property>
     <signal name="delete-event" handler="on_menu_quit_activate" swapped="no"/>
     <child>
+      <placeholder/>
+    </child>
+    <child>
       <object class="GtkVBox" id="mainbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -607,8 +590,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="n" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_new_activate" swapped="no"/>
+                        <accelerator key="n" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -630,8 +613,8 @@
                         <property name="use_underline">True</property>
                         <property name="image">image4</property>
                         <property name="use_stock">False</property>
-                        <accelerator key="o" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_open_activate" swapped="no"/>
+                        <accelerator key="o" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -647,8 +630,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="s" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_save_activate" swapped="no"/>
+                        <accelerator key="s" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -659,8 +642,8 @@
                         <property name="use_underline">True</property>
                         <property name="image">image5</property>
                         <property name="use_stock">False</property>
-                        <accelerator key="s" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_saveas_activate" swapped="no"/>
+                        <accelerator key="s" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -671,8 +654,8 @@
                         <property name="use_underline">True</property>
                         <property name="image">image9</property>
                         <property name="use_stock">False</property>
-                        <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_export_activate" swapped="no"/>
+                        <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -734,8 +717,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_close_activate" swapped="no"/>
+                        <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -745,8 +728,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_quit_activate" swapped="no"/>
+                        <accelerator key="q" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                   </object>
@@ -771,8 +754,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="z" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_undo_activate" swapped="no"/>
+                        <accelerator key="z" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -782,8 +765,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="z" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_redo_activate" swapped="no"/>
+                        <accelerator key="z" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -800,8 +783,8 @@
                         <property name="border_width">1</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="x" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_cut_activate" swapped="no"/>
+                        <accelerator key="x" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -811,8 +794,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_copy_activate" swapped="no"/>
+                        <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -822,8 +805,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="v" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_paste_activate" swapped="no"/>
+                        <accelerator key="v" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -849,8 +832,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="a" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_selectall_activate" swapped="no"/>
+                        <accelerator key="a" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -907,8 +890,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Right Pane</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="F8" signal="activate"/>
                         <signal name="toggled" handler="on_menu_rightpane_toggled" swapped="no"/>
+                        <accelerator key="F8" signal="activate"/>
                       </object>
                     </child>
                     <child>
@@ -975,8 +958,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">_Fullscreen</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="F11" signal="activate"/>
                         <signal name="toggled" handler="on_menu_fullscreen_toggled" swapped="no"/>
+                        <accelerator key="F11" signal="activate"/>
                       </object>
                     </child>
                   </object>
@@ -1000,8 +983,8 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <accelerator key="f" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_find_activate" swapped="no"/>
+                        <accelerator key="f" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -1010,8 +993,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Find Ne_xt</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="g" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_findnext_activate" swapped="no"/>
+                        <accelerator key="g" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -1020,8 +1003,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Find Pre_vious</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="g" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                         <signal name="activate" handler="on_menu_findprev_activate" swapped="no"/>
+                        <accelerator key="g" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                   </object>
@@ -1048,8 +1031,8 @@ and update preview.</property>
                         <property name="use_underline">True</property>
                         <property name="image">image10</property>
                         <property name="use_stock">False</property>
-                        <accelerator key="F9" signal="activate"/>
                         <signal name="activate" handler="on_menu_pdfcompile_activate" swapped="no"/>
+                        <accelerator key="F9" signal="activate"/>
                       </object>
                     </child>
                     <child>
@@ -1604,8 +1587,6 @@ active document to be saved. </property>
                   <object class="GtkNotebook" id="right_notebook">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="tab_border">0</property>
-                    <property name="tab_hborder">5</property>
                     <signal name="switch-page" handler="on_right_notebook_switch_page" swapped="no"/>
                     <child>
                       <object class="GtkVBox" id="vbox7">
@@ -1616,9 +1597,6 @@ active document to be saved. </property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="border_width">4</property>
-                            <property name="hscrollbar_policy">automatic</property>
-                            <property name="vscrollbar_policy">automatic</property>
-                            <property name="window_placement_set">True</property>
                             <property name="shadow_type">etched-in</property>
                             <child>
                               <object class="GtkViewport" id="preview_vport">
@@ -1679,6 +1657,7 @@ active document to be saved. </property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
                               </packing>
                             </child>
                             <child>
@@ -1699,11 +1678,8 @@ active document to be saved. </property>
                                         <property name="width_chars">6</property>
                                         <property name="text" translatable="yes">0</property>
                                         <property name="xalign">0.5</property>
-                                        <property name="invisible_char_set">True</property>
                                         <property name="primary_icon_activatable">False</property>
                                         <property name="secondary_icon_activatable">False</property>
-                                        <property name="primary_icon_sensitive">True</property>
-                                        <property name="secondary_icon_sensitive">True</property>
                                       </object>
                                       <packing>
                                         <property name="expand">True</property>
@@ -1728,6 +1704,7 @@ active document to be saved. </property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
                               </packing>
                             </child>
                             <child>
@@ -1737,6 +1714,7 @@ active document to be saved. </property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
                               </packing>
                             </child>
                             <child>
@@ -1760,6 +1738,7 @@ active document to be saved. </property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
+                                <property name="homogeneous">False</property>
                               </packing>
                             </child>
                           </object>
@@ -1786,8 +1765,6 @@ active document to be saved. </property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="border_width">4</property>
-                        <property name="hscrollbar_policy">automatic</property>
-                        <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">etched-in</property>
                         <child>
                           <object class="GtkTextView" id="errorview">
@@ -1835,9 +1812,9 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="label14">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="xpad">10</property>
                                     <property name="label" translatable="yes">Nr of files:</property>
+                                    <property name="xalign">0</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -1849,9 +1826,9 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="label13">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="xpad">10</property>
                                     <property name="label" translatable="yes">Root path:</property>
+                                    <property name="xalign">0</property>
                                   </object>
                                   <packing>
                                     <property name="top_attach">1</property>
@@ -1863,8 +1840,8 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="label26">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Project name:</property>
+                                    <property name="xalign">0</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
                                     </attributes>
@@ -1877,9 +1854,9 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="proj_name">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="xpad">10</property>
                                     <property name="ellipsize">start</property>
+                                    <property name="xalign">0</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -1890,9 +1867,9 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="proj_path">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="xpad">10</property>
                                     <property name="ellipsize">start</property>
+                                    <property name="xalign">0</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -1905,8 +1882,8 @@ active document to be saved. </property>
                                   <object class="GtkLabel" id="proj_nroffiles">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="xalign">0</property>
                                     <property name="xpad">10</property>
+                                    <property name="xalign">0</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -1926,8 +1903,6 @@ active document to be saved. </property>
                               <object class="GtkScrolledWindow" id="scrolledwindow2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="hscrollbar_policy">automatic</property>
-                                <property name="vscrollbar_policy">automatic</property>
                                 <property name="shadow_type">in</property>
                                 <child>
                                   <object class="GtkTreeView" id="proj_treeview">
@@ -1936,6 +1911,9 @@ active document to be saved. </property>
                                     <property name="model">list_projfiles</property>
                                     <property name="headers_clickable">False</property>
                                     <property name="search_column">0</property>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection"/>
+                                    </child>
                                     <child>
                                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                                         <property name="title" translatable="yes">   </property>
@@ -1990,11 +1968,11 @@ active document to be saved. </property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
+                                    <property name="focus_on_click">False</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Select a file to add it 
 to the active project. </property>
                                     <property name="use_stock">True</property>
-                                    <property name="focus_on_click">False</property>
                                     <signal name="clicked" handler="on_projfile_add_clicked" swapped="no"/>
                                   </object>
                                   <packing>
@@ -2009,11 +1987,11 @@ to the active project. </property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
+                                    <property name="focus_on_click">False</property>
                                     <property name="receives_default">True</property>
                                     <property name="tooltip_text" translatable="yes">Remove the selected
 file from the project.</property>
                                     <property name="use_stock">True</property>
-                                    <property name="focus_on_click">False</property>
                                     <signal name="clicked" handler="on_projfile_rem_clicked" swapped="no"/>
                                   </object>
                                   <packing>
@@ -2193,7 +2171,6 @@ bibliography database</property>
                                     <property name="can_focus">True</property>
                                     <property name="pulse_step">0.02</property>
                                     <property name="text" translatable="yes">no bibliography file detected</property>
-                                    <property name="adjustment">bibprogressmon</property>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -2213,14 +2190,15 @@ bibliography database</property>
                               <object class="GtkScrolledWindow" id="bibscrolledwindow">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="hscrollbar_policy">automatic</property>
-                                <property name="vscrollbar_policy">automatic</property>
                                 <child>
                                   <object class="GtkTreeView" id="bibtreeview">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="model">list_biblios</property>
                                     <signal name="row-activated" handler="on_bibreference_clicked" swapped="no"/>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection"/>
+                                    </child>
                                     <child>
                                       <object class="GtkTreeViewColumn" id="bibtitle_column">
                                         <property name="resizable">True</property>
@@ -2308,8 +2286,6 @@ bibliography database</property>
                                     <property name="invisible_char">•</property>
                                     <property name="primary_icon_activatable">False</property>
                                     <property name="secondary_icon_activatable">False</property>
-                                    <property name="primary_icon_sensitive">True</property>
-                                    <property name="secondary_icon_sensitive">True</property>
                                     <signal name="changed" handler="on_biblio_filter_changed" swapped="no"/>
                                   </object>
                                   <packing>
@@ -2396,8 +2372,11 @@ bibliography database</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <property name="transient_for">mainwindow</property>
-    <signal name="destroy-event" handler="on_docstats_close_clicked" swapped="no"/>
     <signal name="delete-event" handler="on_docstats_close_clicked" swapped="no"/>
+    <signal name="destroy-event" handler="on_docstats_close_clicked" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkVBox" id="vbox9">
         <property name="visible">True</property>
@@ -2427,8 +2406,8 @@ bibliography database</property>
               <object class="GtkLabel" id="label20">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Words in:</property>
+                <property name="xalign">0</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
@@ -2463,8 +2442,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label18">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">text</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2476,9 +2455,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_words">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2513,8 +2492,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label203">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">headers</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2526,9 +2505,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_head">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2563,8 +2542,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label23">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">float captions</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2576,9 +2555,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_float">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2604,8 +2583,8 @@ bibliography database</property>
               <object class="GtkLabel" id="label36">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Number of:</property>
+                <property name="xalign">0</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
@@ -2640,8 +2619,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label28">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">headers</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2653,9 +2632,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_nrhead">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2690,8 +2669,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label31">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">floats</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2703,9 +2682,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_nrfloat">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2740,8 +2719,8 @@ bibliography database</property>
                       <object class="GtkLabel" id="label34">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">math environments</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2753,9 +2732,9 @@ bibliography database</property>
                       <object class="GtkLabel" id="stats_nrmath">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">1</property>
                         <property name="xpad">10</property>
                         <property name="label" translatable="yes">0</property>
+                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -2826,10 +2805,12 @@ bibliography database</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
     <property name="transient_for">mainwindow</property>
-    <accelerator key="Escape" signal="activate-default"/>
     <signal name="activate-default" handler="on_button_searchwindow_close_clicked" swapped="no"/>
-    <signal name="destroy-event" handler="on_button_searchwindow_close_clicked" swapped="no"/>
     <signal name="delete-event" handler="on_button_searchwindow_close_clicked" swapped="no"/>
+    <signal name="destroy-event" handler="on_button_searchwindow_close_clicked" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkVBox" id="vbox3">
         <property name="visible">True</property>
@@ -2861,12 +2842,10 @@ bibliography database</property>
                 <property name="primary_icon_stock">gtk-find</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
+                <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
                 <accelerator key="Return" signal="activate"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -2906,8 +2885,6 @@ bibliography database</property>
                 <property name="primary_icon_stock">gtk-find-and-replace</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -3055,130 +3032,7 @@ bibliography database</property>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkMessageDialog" id="svnpopup">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Save early.. save often!</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="transient_for">mainwindow</property>
-    <property name="message_type">warning</property>
-    <property name="text">Thank you for testing Gummi 0.5.999!
-
-This release is meant as a public beta version for the upcoming
-Gummi 0.6.0 release. It is NOT meant for production use. 
-
-Your feedback on this release is highly appreciated. Should you 
-encounter any problems, please create a bug report on our 
-website. Running "gummi" or "gummi-d"  from the command line 
-will provide more information. 
-</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="has_focus">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkMessageDialog" id="w32popup">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Save early.. save often!</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="deletable">False</property>
-    <property name="transient_for">mainwindow</property>
-    <property name="message_type">warning</property>
-    <property name="text">Welcome to the 0.6.2~beta1 release of Gummi for Windows.
-
-This release is meant as a public test version and is not guaranteed to be stable. It is NOT meant for production use. 
-
-Your feedback on this release is highly appreciated. Should you 
-encounter any problems, please create an issue on our tracker. 
-
-Future updates and new builds will be announced on our website at https://github.com/alexandervdm/gummi</property>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox4">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area4">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="is_focus">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkLabel" id="w32label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">10</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="w32button">
-                <property name="label">gtk-ok</property>
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_w32button_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="0">w32button</action-widget>
-    </action-widgets>
+    <accelerator key="Escape" signal="activate-default"/>
   </object>
   <object class="GtkListStore" id="list_tablealign">
     <columns>
@@ -3242,9 +3096,11 @@ Future updates and new builds will be announced on our website at https://github
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">mainwindow</property>
-    <accelerator key="Escape" signal="activate-default"/>
-    <signal name="destroy-event" handler="on_button_template_close_clicked" swapped="no"/>
     <signal name="delete-event" handler="on_button_template_close_clicked" swapped="no"/>
+    <signal name="destroy-event" handler="on_button_template_close_clicked" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkHBox" id="hbox8">
         <property name="visible">True</property>
@@ -3263,8 +3119,6 @@ Future updates and new builds will be announced on our website at https://github
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">automatic</property>
-                    <property name="vscrollbar_policy">automatic</property>
                     <child>
                       <object class="GtkTreeView" id="template_treeview">
                         <property name="width_request">200</property>
@@ -3274,6 +3128,9 @@ Future updates and new builds will be announced on our website at https://github
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
                         <signal name="cursor-changed" handler="on_template_cursor_changed" swapped="no"/>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="template_column">
                             <property name="title">templates</property>
@@ -3410,6 +3267,7 @@ current active document.</property>
         </child>
       </object>
     </child>
+    <accelerator key="Escape" signal="activate-default"/>
   </object>
   <object class="GtkAdjustment" id="matrix_cols">
     <property name="upper">100</property>
@@ -3443,8 +3301,8 @@ current active document.</property>
               <object class="GtkLabel" id="label8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Rows:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="y_options">GTK_EXPAND</property>
@@ -3454,8 +3312,8 @@ current active document.</property>
               <object class="GtkLabel" id="label9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Columns:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">1</property>
@@ -3470,11 +3328,8 @@ current active document.</property>
                 <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <property name="adjustment">matrix_rows</property>
               </object>
               <packing>
@@ -3491,11 +3346,8 @@ current active document.</property>
                 <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <property name="adjustment">matrix_cols</property>
               </object>
               <packing>
@@ -3560,9 +3412,9 @@ current active document.</property>
                 <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="on_import_matrix_apply_clicked" swapped="no"/>
               </object>
               <packing>
@@ -3618,8 +3470,8 @@ current active document.</property>
               <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Rows:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="y_options">GTK_EXPAND</property>
@@ -3629,8 +3481,8 @@ current active document.</property>
               <object class="GtkLabel" id="label7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Columns:</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="top_attach">1</property>
@@ -3645,11 +3497,8 @@ current active document.</property>
                 <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <property name="adjustment">table_rows</property>
               </object>
               <packing>
@@ -3666,11 +3515,8 @@ current active document.</property>
                 <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
-                <property name="invisible_char_set">True</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">True</property>
-                <property name="secondary_icon_sensitive">True</property>
                 <property name="adjustment">table_cols</property>
               </object>
               <packing>
@@ -3743,9 +3589,9 @@ current active document.</property>
                 <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="on_import_table_apply_clicked" swapped="no"/>
               </object>
               <packing>
