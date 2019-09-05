@@ -156,7 +156,6 @@ gpointer motion_compile_thread (gpointer data) {
     GuEditor* editor = NULL;
     GuLatex* latex = NULL;
     GuPreviewGui* pc = NULL;
-    GtkWidget* focus = NULL;
     gboolean precompile_ok = FALSE;
     gboolean compile_status = FALSE;
     gchar *editortext;
@@ -184,22 +183,15 @@ gpointer motion_compile_thread (gpointer data) {
             continue;
         }
 
-        gdk_threads_enter ();
-        focus = gtk_window_get_focus (gui->mainwindow);
         editortext = latex_update_workfile (latex, editor);
-
         precompile_ok = latex_precompile_check (editortext);
         g_free (editortext);
 
-        gtk_widget_grab_focus (focus);
-
         if (!precompile_ok) {
             previewgui_start_errormode (gui->previewgui, "document_error");
-            gdk_threads_leave();
             g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
-        gdk_threads_leave();
 
         compile_status = latex_update_pdffile (latex, editor);
         *mc->typesetter_pid = 0;
@@ -208,7 +200,6 @@ gpointer motion_compile_thread (gpointer data) {
         if (!mc->keep_running)
             g_thread_exit (NULL);
 
-        gdk_threads_enter ();
         previewgui_update_statuslight(compile_status? "gtk-yes": "gtk-no");
 
         /* Make sure the editor still exists after compile */
@@ -233,7 +224,6 @@ gpointer motion_compile_thread (gpointer data) {
                 if (gui->previewgui->errormode) previewgui_stop_errormode (gui->previewgui);
             }
         }
-        gdk_threads_leave ();
     }
 }
 
