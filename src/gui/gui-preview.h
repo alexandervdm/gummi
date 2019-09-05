@@ -107,7 +107,7 @@ struct _GuPreviewGui {
     gulong page_input_changed_handler;
     gulong combo_sizes_changed_handler;
     gulong on_resize_handler;
-    gulong on_expose_handler;
+    gulong on_draw_handler;
     gulong hvalue_changed_handler;
     gulong vvalue_changed_handler;
     gulong hchanged_handler;
@@ -179,7 +179,7 @@ void on_page_input_changed (GtkEntry* entry, void* user);
 void on_next_page_clicked (GtkWidget* widget, void* user);
 void on_prev_page_clicked (GtkWidget* widget, void* user);
 void on_combo_sizes_changed (GtkWidget* widget, void* user);
-gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user);
+gboolean on_draw (GtkWidget* w, cairo_t* cr, void* user);
 gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user);
 gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user);
 gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user);

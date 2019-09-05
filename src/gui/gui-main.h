@@ -75,7 +75,7 @@ struct _GummiGui {
     GtkWindow* mainwindow;
     GtkTextBuffer* errorbuff;
     GtkTextView* errorview;
-        GtkVBox* rightpane;
+    GtkBox* rightpane;
 
     GtkWidget* toolbar;
     GtkStatusbar* statusbar;

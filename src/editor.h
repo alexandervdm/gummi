@@ -39,9 +39,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksource.h>
 
 #define ec_buffer GTK_TEXT_BUFFER(ec->buffer)
 #define ec_view GTK_TEXT_VIEW(ec->view)

@@ -34,11 +34,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourceiter.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksource.h>
 #ifdef USE_GTKSPELL
 #   include <gtkspell/gtkspell.h>
 #endif
@@ -316,7 +312,7 @@ void editor_sourceview_config (GuEditor* ec) {
     const gchar* font = config_get_value ("font");
     slog (L_INFO, "setting font to %s\n", font);
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_modify_font (GTK_WIDGET (ec->view), font_desc);
+    gtk_widget_override_font (GTK_WIDGET (ec->view), font_desc);
     pango_font_description_free (font_desc);
 
     gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (ec->view),
@@ -338,22 +334,23 @@ void editor_sourceview_config (GuEditor* ec) {
 void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
     const gchar* lang = config_get_value ("spell_language");
     GError* err = NULL;
-    GError* err2 = NULL;
-    GtkSpell* spell = 0;
+    GtkSpellChecker* spell = 0;
     if (status) {
-        if (! (spell = gtkspell_new_attach (ec_view, lang, &err))) {
-            slog (L_ERROR, "gtkspell_new_attach (): %s\n", err->message);
+        spell = gtk_spell_checker_new();
+
+        if (! (gtk_spell_checker_set_language (spell, lang, &err))) {
+            slog (L_ERROR, "gtk_spell_checker_set_language (): %s\n", err->message);
             g_error_free (err);
         }
-        if (!gtkspell_set_language (spell, lang, &err2)) {
-            slog (L_ERROR, "gtkspell_set_language (): %s\n", err2->message);
-            g_error_free (err2);
+        if (! (gtk_spell_checker_attach (spell, ec_view))) {
+            slog (L_ERROR, "gtk_spell_checker_attach failed\n");
         }
     } else {
-        GtkSpell* spell = gtkspell_get_from_text_view (ec_view);
+        GtkSpellChecker* spell = gtk_spell_checker_get_from_text_view (ec_view);
         if (spell)
-            gtkspell_detach (spell);
+            gtk_spell_checker_detach (spell);
     }
+    // TODO g_object_unref (spell); ?
 }
 #endif
 
@@ -556,8 +553,8 @@ void editor_apply_searchtag (GuEditor* ec) {
 
     while (TRUE) {
 		do {
-			ret = gtk_source_iter_forward_search (&start, ec->term,
-	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+			ret = gtk_text_iter_forward_search (&start, ec->term,
+	                (ec->matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
 	                &mstart, &mend, NULL);
 			start = mend;
 		} while (ec->wholeword && ret && (!gtk_text_iter_starts_word(&mstart) ||
@@ -579,13 +576,13 @@ void editor_search_next (GuEditor* ec, gboolean inverse) {
 	
 	do {
 	    if (ec->backwards ^ inverse) {
-	        ret = gtk_source_iter_backward_search (&current, ec->term,
-	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+	        ret = gtk_text_iter_backward_search (&current, ec->term,
+	                (ec->matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
 	                &mstart, &mend, NULL);
 	    } else {
 	        gtk_text_iter_forward_chars (&current, strlen (ec->term));
-	        ret = gtk_source_iter_forward_search (&current, ec->term,
-	                (ec->matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+	        ret = gtk_text_iter_forward_search (&current, ec->term,
+	                (ec->matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
 	                &mstart, &mend, NULL);
 		}
 		current = mend;
@@ -635,12 +632,12 @@ void editor_start_replace_next (GuEditor* ec, const gchar* term,
     editor_get_current_iter (ec, &current);
 
     if (backwards)
-       ret = gtk_source_iter_backward_search (&current, term,
-                (matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+       ret = gtk_text_iter_backward_search (&current, term,
+                (matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
                 &mstart, &mend, NULL);
     else
-       ret = gtk_source_iter_forward_search (&current, term,
-                (matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+       ret = gtk_text_iter_forward_search (&current, term,
+                (matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
                 &mstart, &mend, NULL);
 
     if (ret && (!wholeword || (wholeword
@@ -665,8 +662,8 @@ void editor_start_replace_all (GuEditor* ec, const gchar* term,
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
 
     while (TRUE) {
-        ret = gtk_source_iter_forward_search (&start, term,
-                (matchcase? 0: GTK_SOURCE_SEARCH_CASE_INSENSITIVE),
+        ret = gtk_text_iter_forward_search (&start, term,
+                (matchcase? 0: GTK_TEXT_SEARCH_CASE_INSENSITIVE),
                 &mstart, &mend, NULL);
 
         if (ret && (!wholeword || (wholeword
@@ -745,16 +742,14 @@ void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
     set_style_fg_bg(G_OBJECT (ec->errortag), scheme,"def:error",  "red");
 }
 
-
-static inline gdouble gdkcolor_luminance(GdkColor c) {
-    return (0.2126 * c.red + 0.7152 * c.green + 0.0722 * c.blue) / G_MAXUINT16;
+static inline gdouble gdk_rgba_luminance (GdkRGBA c) {
+    return 0.2126 * c.red + 0.7152 * c.green + 0.0722 * c.blue;
 }
-
 
 /**
  *  Sets a object's fore- and background color to that of scheme's style
  *  "styleName". If no background color is defined in the style, defaultBG is
- *  used. defaultBG can be any valid parameter to gdk_color_parse().
+ *  used. defaultBG can be any valid parameter to gdk_rgba_parse().
  *  If only a foreground color was defined and it has not enough contrast to the
  *  default background, it will be overwritten. The foreground color will either
  *  be white or black, which has more contrast.
@@ -767,8 +762,8 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
     gchar *fg = NULL;
     gboolean foreground_set;
     gboolean background_set;
-    GdkColor foreground;
-    GdkColor background;
+    GdkRGBA foreground;
+    GdkRGBA background;
 
 
     if (scheme == NULL) {
@@ -790,12 +785,12 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
                   NULL);
 
     if (foreground_set) {
-        if (fg == NULL || !gdk_color_parse (fg, &foreground))
+        if (fg == NULL || !gdk_rgba_parse(&foreground, fg))
             foreground_set = FALSE;
     }
 
     if (background_set) {
-        if (bg == NULL || !gdk_color_parse (bg, &background))
+        if (bg == NULL || !gdk_rgba_parse(&background, bg))
             background_set = FALSE;
     }
 
@@ -807,44 +802,48 @@ void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
         // Do nothing
     } else if (!background_set && foreground_set) {
         // Set bg to default and check if fg has enough contrast
-        gdk_color_parse(defaultBG, &background);
-        gdouble diff = ABS(gdkcolor_luminance(foreground) -
-                gdkcolor_luminance(background));
+        gdk_rgba_parse(&background, defaultBG);
+
+        gdouble diff = ABS(gdk_rgba_luminance(foreground) -
+                           gdk_rgba_luminance(background));
+
         if (diff < 0.5) {
             slog(L_INFO, "Style \"%s\" defines a foreground, but no background "
                          "color. As the fourground color has not enough "
                          "contrast to Gummis default background color, the "
                          "foreground color has been adjusted.\n", styleName);
-            if (gdkcolor_luminance(background) > 0.5) {
-                gdk_color_parse("black", &foreground);
+            if (gdk_rgba_luminance(background) > 0.5) {
+                gdk_rgba_parse(&foreground, "black");
             } else {
-                gdk_color_parse("white", &foreground);
+                gdk_rgba_parse(&foreground, "white");
             }
         }
     } else if (background_set && !foreground_set) {
         // Choose a fg = white or black, which has more contrast
-        if (gdkcolor_luminance(background) > 0.5) {
-            gdk_color_parse("black", &foreground);
+        if (gdk_rgba_luminance(background) > 0.5) {
+            gdk_rgba_parse(&foreground, "black");
         } else {
-            gdk_color_parse("white", &foreground);
+            gdk_rgba_parse(&foreground, "white");
         }
     } else {
         // none set, set defaults
         goto set_style_fg_bg_return_defaults;
     }
 
-    g_object_set (obj, "foreground-gdk", &foreground,
-                        "background-gdk", &background, NULL);
+    g_object_set(obj, "foreground", gdk_rgba_to_string(&foreground),
+                      "background", gdk_rgba_to_string(&background), 
+                       NULL);
     return;
 
 set_style_fg_bg_return_defaults:
 
     // No valid style, set defaults
-    gdk_color_parse(defaultBG, &background);
-    if (gdkcolor_luminance(background) > 0.5) {
-        gdk_color_parse("black", &foreground);
+    gdk_rgba_parse(&background, defaultBG);
+
+    if (gdk_rgba_luminance(background) > 0.5) {
+        gdk_rgba_parse(&foreground, "black");
     } else {
-        gdk_color_parse("white", &foreground);
+        gdk_rgba_parse(&foreground, "white");
     }
 
     g_object_set (obj, "foreground-gdk", &foreground,

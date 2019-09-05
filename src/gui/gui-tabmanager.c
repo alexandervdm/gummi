@@ -40,9 +40,7 @@ GuTabmanagerGui* tabmanagergui_init (GtkBuilder* builder) {
 
     GuTabmanagerGui* tm = g_new0 (GuTabmanagerGui, 1);
 
-    tm->notebook =
-        GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
-    g_object_set (tm->notebook, "tab-border", 0, NULL);
+    tm->notebook = GTK_NOTEBOOK (gtk_builder_get_object (builder, "tab_notebook"));
 
     tm->unsavednr = 0;
     return tm;
@@ -66,7 +64,7 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     gtk_container_add (GTK_CONTAINER (tp->scrollw),
                        GTK_WIDGET (editor->view));
 
-    tp->editorbox = gtk_vbox_new (FALSE, 0);
+    tp->editorbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
     gtk_box_pack_start (GTK_BOX (tp->editorbox), tp->infobar, FALSE, FALSE, 0);
     gtk_box_pack_end (GTK_BOX (tp->editorbox), tp->scrollw, TRUE, TRUE, 0);
@@ -96,9 +94,9 @@ void tabmanagergui_create_infobar (GuTabPage* tp) {
     gtk_container_add (GTK_CONTAINER (area), message);
 
     gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
-                            GTK_STOCK_YES, GTK_RESPONSE_YES);
+                            _("_Yes"), GTK_RESPONSE_YES);
     gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
-                            GTK_STOCK_NO, GTK_RESPONSE_NO);
+                            _("_No"), GTK_RESPONSE_NO);
 
     gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
                                   GTK_MESSAGE_WARNING);
@@ -109,12 +107,11 @@ void tabmanagergui_create_infobar (GuTabPage* tp) {
 
 void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
     static unsigned count = 0;
-    GtkRcStyle* rcstyle = NULL;
     GtkWidget* image = NULL;
-    GtkHBox* hbox;
+    GtkBox* hbox;
 
     tp->labelbox = gtk_event_box_new ();
-    hbox = GTK_HBOX (gtk_hbox_new (FALSE, 0));
+    hbox = GTK_BOX(gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0));
     tp->unsavednr = ++count;
 
     gtk_event_box_set_visible_window (GTK_EVENT_BOX (tp->labelbox), FALSE);
@@ -125,16 +122,20 @@ void tabmanagergui_create_label (GuTabPage* tp, gchar* labeltext) {
     gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->label), TRUE, TRUE, 5);
 
     tp->button = GTK_BUTTON (gtk_button_new());
-    image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
+
+    image = gtk_image_new_from_icon_name("window-close", GTK_ICON_SIZE_MENU);
+
     gtk_button_set_image (tp->button, image);
     g_object_set (tp->button, "relief", GTK_RELIEF_NONE,
                          "focus-on-click", FALSE, NULL);
     gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (tp->button), FALSE,FALSE,0);
 
+    /* TODO get into css i guess lmao
     rcstyle = gtk_rc_style_new ();
     rcstyle->xthickness = rcstyle->ythickness = 0;
     gtk_widget_modify_style (GTK_WIDGET (tp->button), rcstyle);
     g_object_unref (rcstyle);
+    */
 
     gtk_widget_show_all (GTK_WIDGET (hbox));
 }

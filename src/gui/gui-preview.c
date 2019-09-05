@@ -212,10 +212,12 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
     p->on_resize_handler = g_signal_connect (p->scrollw, "size-allocate",
             G_CALLBACK (on_resize), p);
-    g_signal_connect (p->drawarea, "scroll-event", G_CALLBACK (on_scroll), p);
-    p->on_expose_handler = g_signal_connect (p->drawarea, "expose-event",
-            G_CALLBACK (on_expose), p);
 
+    p->on_draw_handler = g_signal_connect (p->drawarea, "draw",
+            G_CALLBACK (on_draw), p);
+
+    g_signal_connect (p->drawarea, "scroll-event",
+                      G_CALLBACK (on_scroll), p);
     g_signal_connect (p->drawarea, "button-press-event",
                       G_CALLBACK (on_button_pressed), p);
     g_signal_connect (p->drawarea, "motion-notify-event",
@@ -878,7 +880,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     // Without blocking the handler, after changing the first property, e.g.
     // vadj, a signal is emitted that causes a redraw but still contains the
     // the not-updated hadj & scale values.
-    g_signal_handler_block(pc->drawarea, pc->on_expose_handler);
+    g_signal_handler_block(pc->drawarea, pc->on_draw_handler);
 
     update_drawarea_size(pc);
 
@@ -888,7 +890,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
 
         previewgui_goto_xy(pc, new_x, new_y);
     }
-    g_signal_handler_unblock(pc->drawarea, pc->on_expose_handler);
+    g_signal_handler_unblock(pc->drawarea, pc->on_draw_handler);
 
     gtk_widget_queue_draw (pc->drawarea);
 
@@ -1819,16 +1821,10 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
 }
 
 G_MODULE_EXPORT
-gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
+gboolean on_draw (GtkWidget* w, cairo_t* cr, void* user) {
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
-//    slog(L_INFO, "paint document with scale %f, region (%i, %i), w=%i,
-//    h=%i\n", e->area.x, e->area.y, e->area.width, e->area.height);
-
-    //slog(L_INFO, "scale: %f", pc->scale);
-
     if (!pc->uri || !utils_uri_path_exists (pc->uri)) {
-
         return FALSE;
     }
 
@@ -1838,7 +1834,8 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
     gdouble offset_x = MAX(get_document_margin(pc),
                           (page_width - pc->width_scaled) / 2);
 
-    cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(w));
+    //TODO: to be removed?
+    //cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(w));
 
     if (is_continuous(pc)) {
 
@@ -1884,7 +1881,7 @@ gboolean on_expose (GtkWidget* w, GdkEventExpose* e, void* user) {
             page_offset_y(pc, pc->current_page, offset_y));
     }
 
-    cairo_destroy (cr);
+    //cairo_destroy (cr);
 
     return TRUE;
 }

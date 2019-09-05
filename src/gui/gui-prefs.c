@@ -176,6 +176,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GList* schemes_iter = schemes;
     gchar* desc = NULL;
     GtkTreeIter iter;
+
     while (schemes_iter) {
         desc = g_markup_printf_escaped ("<b>%s</b> - %s",
                 gtk_source_style_scheme_get_name (schemes_iter->data),
@@ -187,6 +188,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         schemes_iter = g_list_next (schemes_iter);
         g_free (desc);
     }
+
     g_list_free (schemes);
 
     gtk_builder_connect_signals (builder, NULL);
@@ -250,7 +252,7 @@ static void set_tab_fontcolor_settings (GuPrefsGui* prefs) {
     const gchar* font = config_get_value ("font");
 
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_modify_font (GTK_WIDGET (prefs->default_text), font_desc);
+    gtk_widget_override_font (GTK_WIDGET (prefs->default_text), font_desc);
     pango_font_description_free (font_desc);
 
     gtk_font_button_set_font_name (prefs->editor_font,

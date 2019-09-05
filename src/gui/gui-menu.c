@@ -690,8 +690,8 @@ G_MODULE_EXPORT
 void on_menu_guide_activate (GtkWidget *widget, void *user) {
     GError *error = NULL;
 
-    gtk_show_uri (gdk_screen_get_default(),
-                  C_GUMMIGUIDE, GDK_CURRENT_TIME, &error);
+    gtk_show_uri_on_window (gdk_screen_get_default(),
+                            C_GUMMIGUIDE, GDK_CURRENT_TIME, &error);
 
     if (error) {
         slog (L_ERROR, "Can't open user guide: %s\n", error->message);

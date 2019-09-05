@@ -1579,14 +1579,13 @@ active document to be saved. </property>
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="rightpanebox">
+              <object class="GtkBox" id="box_rightpane">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="no_show_all">True</property>
                 <child>
                   <object class="GtkNotebook" id="right_notebook">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <signal name="switch-page" handler="on_right_notebook_switch_page" swapped="no"/>
                     <child>
                       <object class="GtkVBox" id="vbox7">
@@ -2115,7 +2114,7 @@ file from the project.</property>
                                       <object class="GtkButton" id="bibdetect">
                                         <property name="label" translatable="yes">Detect</property>
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
+                                        <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="tooltip_text" translatable="yes">Detect mention of a bibtex
 file in the current document</property>
@@ -2132,7 +2131,7 @@ file in the current document</property>
                                       <object class="GtkButton" id="bibcompile">
                                         <property name="label" translatable="yes">Compile</property>
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
+                                        <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="tooltip_text" translatable="yes">Compile the active 
 bibliography database</property>
@@ -2168,7 +2167,7 @@ bibliography database</property>
                                   <object class="GtkProgressBar" id="bibprogressbar">
                                     <property name="height_request">20</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="pulse_step">0.02</property>
                                     <property name="text" translatable="yes">no bibliography file detected</property>
                                   </object>
@@ -2195,6 +2194,7 @@ bibliography database</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="model">list_biblios</property>
+                                    <property name="search_column">0</property>
                                     <signal name="row-activated" handler="on_bibreference_clicked" swapped="no"/>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>

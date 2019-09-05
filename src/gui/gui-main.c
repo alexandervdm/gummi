@@ -94,7 +94,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->statusbar =
         GTK_STATUSBAR (gtk_builder_get_object (builder, "statusbar"));
     g->rightpane =
-        GTK_VBOX (gtk_builder_get_object (builder, "rightpanebox"));
+        GTK_BOX (gtk_builder_get_object (builder, "box_rightpane"));
     g->previewoff = GTK_TOGGLE_TOOL_BUTTON (
             gtk_builder_get_object (builder, "tool_previewoff"));
     g->errorview =
@@ -167,7 +167,7 @@ GummiGui* gui_init (GtkBuilder* builder) {
 
     PangoFontDescription* font_desc =
         pango_font_description_from_string ("Monospace 8");
-    gtk_widget_modify_font (GTK_WIDGET (g->errorview), font_desc);
+    gtk_widget_override_font (GTK_WIDGET (g->errorview), font_desc);
     pango_font_description_free (font_desc);
     gtk_window_get_size (g->mainwindow, &width, &height);
 
@@ -277,9 +277,7 @@ void gui_main (GtkBuilder* builder) {
     g_timeout_add_seconds (1, w32popup_wait_event, NULL);
     #endif
 
-    gdk_threads_enter();
     gtk_main ();
-    gdk_threads_leave();
 }
 
 
@@ -767,9 +765,9 @@ gint check_for_save (GuEditor* editor) {
                      _("Do you want to save the changes to %s?"),
                      editor->filename != NULL ? g_path_get_basename (editor->filename) : _("this document"));
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                GTK_STOCK_DISCARD, GTK_RESPONSE_NO,
-                                GTK_STOCK_SAVE, GTK_RESPONSE_YES,
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                _("_Discard"), GTK_RESPONSE_NO,
+                                _("_Save"), GTK_RESPONSE_YES,
                                 NULL);
         gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
 
@@ -807,8 +805,8 @@ gchar* get_open_filename (GuFilterType type) {
                 chooser_title[type],
                 gui->mainwindow,
                 GTK_FILE_CHOOSER_ACTION_OPEN,
-                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                _("_Open"), GTK_RESPONSE_OK,
                 NULL));
 
     file_dialog_set_filter (chooser, type);
@@ -845,8 +843,8 @@ gchar* get_save_filename (GuFilterType type) {
                 chooser_title[type],
                 gui->mainwindow,
                 GTK_FILE_CHOOSER_ACTION_SAVE,
-                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                _("_Save"), GTK_RESPONSE_OK,
                 NULL));
 
     file_dialog_set_filter (chooser, type);

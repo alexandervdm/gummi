@@ -62,10 +62,6 @@ static GOptionEntry entries[] = {
     { NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL }
 };
 
-void on_window_destroy (GtkObject *object, gpointer user_data) {
-    gtk_main_quit ();
-}
-
 int main (int argc, char *argv[]) {
     /* set up i18n */
     bindtextdomain (PACKAGE, GUMMI_LOCALES);
@@ -84,7 +80,6 @@ int main (int argc, char *argv[]) {
     }
 
     /* initialize GTK */
-    gdk_threads_init ();
     gtk_init (&argc, &argv);
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
