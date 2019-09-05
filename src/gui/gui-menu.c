@@ -34,9 +34,11 @@
 #include "editor.h"
 #include "environment.h"
 #include "external.h"
-#include "gui-main.h"
-#include "motion.h"
 #include "project.h"
+
+#include "gui-main.h"
+#include "gui-preview.h"
+
 
 extern Gummi* gummi;
 extern GummiGui* gui;
@@ -217,7 +219,7 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     motion_kill_typesetter(gummi->motion);
 
     if (!tabmanager_remove_tab (tab)) {
-        motion_start_errormode (gummi->motion, "");
+        previewgui_start_errormode(gui->previewgui, "");
         gui_set_hastabs_sensitive (FALSE);
     } else {
         gui_set_filename_display (g_active_tab, TRUE, FALSE);

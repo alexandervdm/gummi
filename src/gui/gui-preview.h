@@ -119,6 +119,7 @@ struct _GuPreviewGui {
     gchar *uri;
     guint update_timer;
     gboolean preview_on_idle;
+    gboolean errormode;
 
     GtkAdjustment* hadj;
     GtkAdjustment* vadj;
@@ -188,6 +189,9 @@ gboolean on_scroll_child(GtkScrolledWindow *scrolledwindow, GtkScrollType type,
 void on_adj_changed(GtkAdjustment *adjustment, gpointer user);
 void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem,gpointer data);
 void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout);
+
+void previewgui_start_errormode (GuPreviewGui *pc, const gchar *msg);
+void previewgui_stop_errormode (GuPreviewGui *pc);
 
 gboolean run_garbage_collector(GuPreviewGui* pc);
 

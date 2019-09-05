@@ -186,7 +186,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->page_layout_one_column = GTK_RADIO_MENU_ITEM
         (gtk_builder_get_object (builder, "page_layout_one_column"));
     p->update_timer = 0;
+    
     p->preview_on_idle = FALSE;
+    p->errormode = FALSE;
+    
     p->hadj = gtk_scrolled_window_get_hadjustment
                     (GTK_SCROLLED_WINDOW (p->scrollw));
     p->vadj = gtk_scrolled_window_get_vadjustment
@@ -536,6 +539,29 @@ static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble y) {
     }
 
     return y;
+}
+
+void previewgui_start_errormode (GuPreviewGui *pc, const gchar *msg) {
+
+    if (pc->errormode) {
+        infoscreengui_set_message (gui->infoscreengui, msg);
+        return;
+    }
+
+    previewgui_save_position (pc);
+
+    infoscreengui_enable (gui->infoscreengui, msg);
+    pc->errormode = TRUE;
+}
+
+void previewgui_stop_errormode (GuPreviewGui *pc) {
+
+    if (!pc->errormode) return;
+
+    previewgui_restore_position (pc);
+
+    infoscreengui_disable (gui->infoscreengui);
+    pc->errormode = FALSE;
 }
 
 static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
@@ -1386,7 +1412,6 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
     if (isnan(x) || isnan(y)) {
         return;
     }
-    //L_F_DEBUG;
 
     x = CLAMP(x, 0, gtk_adjustment_get_upper(pc->hadj) -
                     gtk_adjustment_get_page_size(pc->hadj));

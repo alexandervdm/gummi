@@ -194,7 +194,7 @@ gpointer motion_compile_thread (gpointer data) {
         gtk_widget_grab_focus (focus);
 
         if (!precompile_ok) {
-            motion_start_errormode (mc, "document_error");
+            previewgui_start_errormode (gui->previewgui, "document_error");
             gdk_threads_leave();
             g_mutex_unlock (&mc->compile_mutex);
             continue;
@@ -217,7 +217,7 @@ gpointer motion_compile_thread (gpointer data) {
             gui_buildlog_set_text (latex->compilelog);
 
             if (latex->errorlines[0]) {
-                motion_start_errormode  (mc, "compile_error");
+                previewgui_start_errormode (gui->previewgui, "compile_error");
             } else {
                 if (!pc->uri) {
 
@@ -230,7 +230,7 @@ gpointer motion_compile_thread (gpointer data) {
                             editor->sync_to_last_edit ?
                             &(editor->last_edit) : NULL, editor->workfile);
                 }
-                if (mc->errormode) motion_stop_errormode (mc);
+                if (gui->previewgui->errormode) previewgui_stop_errormode (gui->previewgui);
             }
         }
         gdk_threads_leave ();
@@ -242,29 +242,6 @@ void motion_force_compile (GuMotion *mc) {
      * don't trigger the regular editor content change signals */
     gummi->latex->modified_since_compile = TRUE;
     motion_do_compile (mc);
-}
-
-void motion_start_errormode (GuMotion *mc, const gchar *msg) {
-
-    if (mc->errormode) {
-        infoscreengui_set_message (gui->infoscreengui, msg);
-    return;
-    }
-
-    previewgui_save_position (gui->previewgui);
-
-    infoscreengui_enable (gui->infoscreengui, msg);
-    mc->errormode = TRUE;
-}
-
-void motion_stop_errormode (GuMotion *mc) {
-
-    if (!mc->errormode) return;
-
-    previewgui_restore_position (gui->previewgui);
-
-    infoscreengui_disable (gui->infoscreengui);
-    mc->errormode = FALSE;
 }
 
 gboolean motion_idle_cb (gpointer user) {
