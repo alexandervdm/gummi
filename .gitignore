@@ -23,3 +23,6 @@ ltmain.sh
 *.o
 *.lo
 *.la
+
+# glade tmp files
+data/ui/*.glade~
