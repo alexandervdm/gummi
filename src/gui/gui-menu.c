@@ -307,22 +307,120 @@ void on_menu_cut_activate (GtkWidget *widget, void* user) {
     gtk_text_buffer_cut_clipboard (g_e_buffer, clipboard, TRUE);
 }
 
+
+/** ------------------------------------------------------------------------------------------------ */
+/** utility functions for commenting functionality
+ *
+ */
+gchar* _get_allocated_string_for_comments (const gchar* content, gchar** split_content) {
+    int num_of_tokens = 0;
+    for (; split_content[num_of_tokens] != NULL; num_of_tokens++)
+        ;
+   
+    // There are possibly 3 addtional characters per line " " + "%" + "\n" (not just 1).
+    num_of_tokens *= 3;
+
+    return g_new0 (gchar, (strlen (content) + num_of_tokens));
+}
+
+void _split_content_and_get_preallocated_string (GtkTextIter* start, GtkTextIter* end, 
+                                                 gchar** entire_content, gchar*** split_content)
+{
+    const gchar* content = gtk_text_buffer_get_text (g_e_buffer, start, end, -1);
+    *split_content = g_strsplit (content, "\n", -1);
+    *entire_content = _get_allocated_string_for_comments (content, *split_content);
+}
+
+/** ------------------------------------------------------------------------------------------------ */
+
+G_MODULE_EXPORT
+void on_menu_comment_out_activate (GtkWidget *widget, void* user) {
+    GtkTextIter start, end;
+    gboolean has_selection = gtk_text_buffer_get_selection_bounds (g_e_buffer, &start, &end); 
+    gchar* entire_content;
+    gchar** split_content;
+
+    if (has_selection) {
+        _split_content_and_get_preallocated_string (&start, &end, &entire_content, &split_content);
+        gchar* ptr = entire_content;
+        gchar **split_ptr = split_content;
+        gchar* current_line;
+        
+        while (current_line = (*(split_ptr++))) {
+            // for debugging            
+            /*slog (L_INFO, "comment out current_line: %s\n", current_line);*/
+            /*slog (L_INFO, "comment out entire_content: %s\n", entire_content);*/
+            
+            ptr = g_stpcpy (ptr, "% ");
+            ptr = g_stpcpy (ptr, current_line);
+            ptr = g_stpcpy (ptr, "\n");
+        }
+   
+        // remove additional new line 
+        ptr[strlen (ptr) - 1] = '\0';
+
+        gtk_text_buffer_delete (g_e_buffer, &start, &end);
+        gtk_text_buffer_insert_at_cursor (g_e_buffer, entire_content, strlen (entire_content));
+        g_free (entire_content);
+        g_strfreev (split_content);
+      }
+}
+
+G_MODULE_EXPORT
+void on_menu_uncomment_activate (GtkWidget *widget, void* user) {
+    GtkTextIter start, end;
+    gboolean has_selection = gtk_text_buffer_get_selection_bounds (g_e_buffer, &start, &end);
+    gchar* entire_content;
+    gchar** split_content;
+
+    if (has_selection) {
+        _split_content_and_get_preallocated_string (&start, &end, &entire_content, &split_content);
+        gchar* ptr = entire_content;
+        gchar** split_ptr = split_content;
+        gchar* current_line;
+        
+        while (current_line = (*(split_ptr++))) {
+            // for debugging            
+            /*slog (L_INFO, "uncomment out current_line: %s\n", current_line);*/
+            /*slog (L_INFO, "uncomment out entire_content: %s\n", entire_content);*/
+
+            gchar** split_line = g_strsplit (current_line, "% ", 2);
+            gchar** split_line_ptr = split_line;
+            gchar* split_string_part;
+
+            while (split_string_part = (*(split_line_ptr++))) {
+                ptr = g_stpcpy (ptr, split_string_part);
+            }
+            g_strfreev (split_line);
+
+            ptr = g_stpcpy (ptr, "\n");
+        }
+
+        // remove additional new line 
+        ptr[strlen (ptr) - 1] = '\0';
+        
+        gtk_text_buffer_delete (g_e_buffer, &start, &end);
+        gtk_text_buffer_insert_at_cursor (g_e_buffer, entire_content, strlen (entire_content));
+        g_free (entire_content);
+        g_strfreev (split_content);
+    }
+}
+
 G_MODULE_EXPORT
 void on_menu_copy_activate (GtkWidget *widget, void* user) {
-    GtkClipboard     *clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
     gtk_text_buffer_copy_clipboard (g_e_buffer, clipboard);
 }
+
 G_MODULE_EXPORT
 void on_menu_paste_activate (GtkWidget *widget, void* user) {
-    GtkClipboard     *clipboard;
+    GtkClipboard *clipboard;
 
     clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
     gtk_text_buffer_paste_clipboard (g_e_buffer, clipboard, NULL, TRUE);
 }
-
-
 
 G_MODULE_EXPORT
 void on_menu_delete_activate (GtkWidget *widget, void *user) {
