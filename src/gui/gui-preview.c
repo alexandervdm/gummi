@@ -166,8 +166,6 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     p->previewgui_toolbar =
         GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_toolbar"));
-    p->statuslight =
-        GTK_WIDGET (gtk_builder_get_object (builder, "tool_statuslight"));
     p->drawarea =
         GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
     p->scrollw =
@@ -388,11 +386,6 @@ static gboolean previewgui_animated_scroll_step(gpointer data) {
 
         return TRUE;
     }
-}
-
-void previewgui_update_statuslight (const gchar* type) {
-    gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON(gui->previewgui->statuslight),
-           type);
 }
 
 static void update_fit_scale(GuPreviewGui* pc) {

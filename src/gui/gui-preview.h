@@ -94,7 +94,6 @@ struct _GuPreviewGui {
     PopplerDocument* doc;
     GtkViewport* previewgui_viewport;
     GtkWidget* previewgui_toolbar;
-    GtkWidget* statuslight;
     GtkWidget* drawarea;
     GtkWidget* page_next;
     GtkWidget* page_prev;
@@ -161,7 +160,6 @@ struct _GuPreviewGui {
 };
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder);
-void previewgui_update_statuslight (const gchar* type);
 void previewgui_set_pdffile (GuPreviewGui* prev, const gchar *uri);
 void previewgui_refresh (GuPreviewGui* prev, GtkTextIter *sync_to, gchar* tex_file);
 void previewgui_set_pagedata (GuPreviewGui* prev);
