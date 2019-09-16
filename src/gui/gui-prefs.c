@@ -249,14 +249,8 @@ static void set_tab_editor_settings (GuPrefsGui* prefs) {
 }
 
 static void set_tab_fontcolor_settings (GuPrefsGui* prefs) {
-    const gchar* font = config_get_value ("font");
-
-    PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_override_font (GTK_WIDGET (prefs->default_text), font_desc);
-    pango_font_description_free (font_desc);
-
-    gtk_font_button_set_font_name (prefs->editor_font,
-                                        config_get_value ("font"));
+    gtk_font_chooser_set_font (GTK_FONT_CHOOSER (prefs->editor_font),
+                               config_get_value ("font"));
     prefsgui_apply_style_scheme(prefs);
 }
 
@@ -633,7 +627,7 @@ void on_cache_size_value_changed(GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_editor_font_set (GtkWidget* widget, void* user) {
-    const gchar* font = gtk_font_button_get_font_name(GTK_FONT_BUTTON (widget));
+    const gchar* font = gtk_font_chooser_get_font ( GTK_FONT_CHOOSER (widget));
     PangoFontDescription* font_desc = pango_font_description_from_string (font);
     GList* tab = gummi->tabmanager->tabs;
 
@@ -641,7 +635,7 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
     config_set_value ("font", font);
 
     while (tab) {
-        gtk_widget_modify_font (GTK_WIDGET
+        gtk_widget_override_font (GTK_WIDGET
                 (GU_TAB_CONTEXT (tab->data)->editor->view), font_desc);
         tab = g_list_next (tab);
     }
