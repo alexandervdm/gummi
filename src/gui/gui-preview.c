@@ -161,7 +161,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuPreviewGui* p = g_new0 (GuPreviewGui, 1);
-    GdkColor bg = {0, 0xed00, 0xec00, 0xeb00};
+
     p->previewgui_viewport =
         GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
     p->previewgui_toolbar =
@@ -194,8 +194,6 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
                     (GTK_SCROLLED_WINDOW (p->scrollw));
     p->vadj = gtk_scrolled_window_get_vadjustment
                     (GTK_SCROLLED_WINDOW (p->scrollw));
-
-    gtk_widget_modify_bg (p->drawarea, GTK_STATE_NORMAL, &bg);
 
     /* Install event handlers */
     gtk_widget_add_events (p->drawarea, GDK_SCROLL_MASK

@@ -68,6 +68,7 @@ struct _GuEditor {
     GtkTextTagTable* editortags;
     gboolean replace_activated;
     gchar* term;
+    GtkCssProvider* css;
     gboolean backwards;
     gboolean wholeword;
     gboolean matchcase;
@@ -110,6 +111,7 @@ void editor_scroll_to_cursor (GuEditor* ec);
 void editor_scroll_to_line (GuEditor* ec, gint line);
 void editor_undo_change (GuEditor* ec);
 void editor_redo_change (GuEditor* ec);
+void editor_set_font (GuEditor* ec, const gchar* font);
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id);
 void set_style_fg_bg (GObject* obj, GtkSourceStyleScheme* scheme,
                       gchar* styleName, gchar* defaultBG);

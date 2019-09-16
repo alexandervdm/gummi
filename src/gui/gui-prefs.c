@@ -628,18 +628,15 @@ void on_cache_size_value_changed(GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_editor_font_set (GtkWidget* widget, void* user) {
     const gchar* font = gtk_font_chooser_get_font ( GTK_FONT_CHOOSER (widget));
-    PangoFontDescription* font_desc = pango_font_description_from_string (font);
     GList* tab = gummi->tabmanager->tabs;
 
     slog (L_INFO, "setting font to %s\n", font);
     config_set_value ("font", font);
 
     while (tab) {
-        gtk_widget_override_font (GTK_WIDGET
-                (GU_TAB_CONTEXT (tab->data)->editor->view), font_desc);
+        editor_set_font (GU_TAB_CONTEXT (tab->data)->editor, font);
         tab = g_list_next (tab);
     }
-    pango_font_description_free (font_desc);
 }
 
 

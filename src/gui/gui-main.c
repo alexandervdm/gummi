@@ -165,10 +165,32 @@ GummiGui* gui_init (GtkBuilder* builder) {
     else
       gtk_window_set_position (g->mainwindow, GTK_WIN_POS_CENTER);
 
-    PangoFontDescription* font_desc =
-        pango_font_description_from_string ("Monospace 8");
-    gtk_widget_override_font (GTK_WIDGET (g->errorview), font_desc);
-    pango_font_description_free (font_desc);
+
+    // use new css styling for errorview pane:
+    gtk_widget_set_name (GTK_WIDGET (g->errorview), "errorview");
+
+    GtkCssProvider *provider = gtk_css_provider_new ();
+    GError* error = NULL;
+
+    const gchar* css_data =
+        "#errorview {\n"
+        "   font: 12px 'Monospace';\n"
+        "}\n";
+
+    gtk_css_provider_load_from_data (provider, css_data, -1, &error);
+    if (error == NULL) {
+        GtkStyleContext *context;
+        context = gtk_widget_get_style_context (GTK_WIDGET (g->errorview));
+
+        gtk_style_context_add_provider (context,
+                                        GTK_STYLE_PROVIDER (provider),
+                                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+    else {
+        slog (L_ERROR, "%s\n", error->message);
+    }
+    g_object_unref (provider);
+
     gtk_window_get_size (g->mainwindow, &width, &height);
 
     hpaned= GTK_WIDGET (gtk_builder_get_object (builder, "hpaned"));

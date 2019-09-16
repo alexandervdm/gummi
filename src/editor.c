@@ -86,6 +86,14 @@ GuEditor* editor_new (GuMotion* mc) {
     ec->replace_activated = FALSE;
     ec->term = NULL;
 
+    ec->css = gtk_css_provider_new();
+
+    /* Set source view style provider so we can use ec->css to set font later */
+    GtkStyleContext* context = gtk_widget_get_style_context (GTK_WIDGET(ec->view));
+    gtk_style_context_add_provider(context,
+                                   GTK_STYLE_PROVIDER(ec->css),
+                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
     gtk_source_view_set_tab_width (ec->view,
             atoi (config_get_value ("tabwidth")));
     gtk_source_view_set_insert_spaces_instead_of_tabs (ec->view,
@@ -309,11 +317,7 @@ void editor_sourceview_config (GuEditor* ec) {
     const gchar* style_scheme = config_get_value ("style_scheme");
     editor_set_style_scheme_by_id (ec, style_scheme);
 
-    const gchar* font = config_get_value ("font");
-    slog (L_INFO, "setting font to %s\n", font);
-    PangoFontDescription* font_desc = pango_font_description_from_string (font);
-    gtk_widget_override_font (GTK_WIDGET (ec->view), font_desc);
-    pango_font_description_free (font_desc);
+    editor_set_font (ec, config_get_value ("font"));
 
     gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (ec->view),
             TO_BOOL (config_get_value ("line_numbers")));
@@ -724,6 +728,18 @@ void editor_redo_change (GuEditor* ec) {
         gtk_text_buffer_set_modified (ec_buffer, TRUE);
     }
 }
+
+void editor_set_font (GuEditor* ec, const gchar* font) {
+    // surely there has to be a better solution to transform
+    // a string like 'Monospace 12' into css syntax right..?
+    gchar** font_elems = g_strsplit (font, " ", BUFSIZ);
+    gchar* style = g_strdup_printf ("* { font: %spx '%s'; }",
+                                    font_elems[1], font_elems[0]);
+
+    gtk_css_provider_load_from_data (ec->css, style, -1, NULL);
+    g_free (style);
+}
+
 
 void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
 
