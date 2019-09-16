@@ -393,7 +393,7 @@ static gboolean previewgui_animated_scroll_step(gpointer data) {
 }
 
 void previewgui_update_statuslight (const gchar* type) {
-    gtk_tool_button_set_stock_id (GTK_TOOL_BUTTON(gui->previewgui->statuslight),
+    gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON(gui->previewgui->statuslight),
            type);
 }
 
@@ -431,14 +431,11 @@ static void update_fit_scale(GuPreviewGui* pc) {
     gint spacing;
     GtkRequisition req;
     gtk_widget_style_get (pc->scrollw, "scrollbar_spacing", &spacing, NULL);
-    // Use gtk_widget_get_preferred_size with GTK+3.0
-    gtk_widget_size_request(gtk_scrolled_window_get_vscrollbar(
-                GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
-    gint vscrollbar_width = spacing + req.width;
-    gtk_widget_size_request(gtk_scrolled_window_get_hscrollbar(
-                GTK_SCROLLED_WINDOW(pc->scrollw)), &req);
-    gint hscrollbar_height = spacing + req.height;
+    gtk_widget_get_preferred_size (gtk_scrolled_window_get_hscrollbar(
+                GTK_SCROLLED_WINDOW(pc->scrollw)), &req, NULL);
 
+    gint vscrollbar_width = spacing + req.width;
+    gint hscrollbar_height = spacing + req.height;
 
     viewport_window = gtk_viewport_get_view_window(pc->previewgui_viewport);
     view_width_without_bar = gdk_window_get_width(viewport_window);
@@ -781,14 +778,13 @@ static void update_drawarea_size(GuPreviewGui *pc) {
 
     // Minimize the number of calls to on_adjustment_changed
     block_handlers_current_page(pc);
+
     gtk_adjustment_set_upper(pc->hadj,
         (width==1) ? gtk_adjustment_get_page_size(pc->hadj) : width);
     gtk_adjustment_set_upper(pc->vadj,
         (height==1) ? gtk_adjustment_get_page_size(pc->vadj) : height);
-    gtk_adjustment_changed(pc->hadj);
-    unblock_handlers_current_page(pc);
-    gtk_adjustment_changed(pc->vadj);
 
+    unblock_handlers_current_page(pc);
 }
 
 static void update_page_sizes(GuPreviewGui* pc) {
@@ -1420,12 +1416,11 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
     // Minimize the number of calls to on_adjustment_changed
     block_handlers_current_page(pc);
+
     gtk_adjustment_set_value(pc->hadj, x);
     gtk_adjustment_set_value(pc->vadj, y);
-    gtk_adjustment_value_changed(pc->hadj);
-    unblock_handlers_current_page(pc);
-    gtk_adjustment_value_changed(pc->vadj);
 
+    unblock_handlers_current_page(pc);
 }
 
 void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
