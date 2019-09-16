@@ -155,12 +155,10 @@ gpointer motion_compile_thread (gpointer data) {
     GuMotion* mc = GU_MOTION (data);
     GuEditor* editor = NULL;
     GuLatex* latex = NULL;
-    GuPreviewGui* pc = NULL;
     gboolean precompile_ok = FALSE;
     gchar *editortext;
 
     latex = gummi_get_latex ();
-    pc = gui->previewgui;
 
     while (TRUE) {
         if (!g_mutex_trylock (&mc->compile_mutex)) continue;
@@ -187,7 +185,7 @@ gpointer motion_compile_thread (gpointer data) {
         g_free (editortext);
 
         if (!precompile_ok) {
-            previewgui_start_errormode (gui->previewgui, "document_error");
+            gdk_threads_add_idle (on_document_error, "document_error");
             g_mutex_unlock (&mc->compile_mutex);
             continue;
         }
@@ -200,28 +198,8 @@ gpointer motion_compile_thread (gpointer data) {
         if (!mc->keep_running)
             g_thread_exit (NULL);
 
-        /* Make sure the editor still exists after compile */
-        if (editor == gummi_get_active_editor()) {
-            editor_apply_errortags (editor, latex->errorlines);
-            gui_buildlog_set_text (latex->compilelog);
-
-            if (latex->errorlines[0]) {
-                previewgui_start_errormode (gui->previewgui, "compile_error");
-            } else {
-                if (!pc->uri) {
-
-                    gchar* uri = g_filename_to_uri(editor->pdffile, NULL, NULL);
-                    
-                    previewgui_set_pdffile (pc, uri);
-                    g_free(uri);
-                } else {
-                    previewgui_refresh (gui->previewgui,
-                            editor->sync_to_last_edit ?
-                            &(editor->last_edit) : NULL, editor->workfile);
-                }
-                if (gui->previewgui->errormode) previewgui_stop_errormode (gui->previewgui);
-            }
-        }
+        gdk_threads_add_idle (on_document_compiled, editor);
+        continue;
     }
 }
 

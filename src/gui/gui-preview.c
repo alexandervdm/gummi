@@ -552,6 +552,41 @@ void previewgui_stop_errormode (GuPreviewGui *pc) {
     pc->errormode = FALSE;
 }
 
+gboolean on_document_compiled (gpointer data) {
+    GuPreviewGui* pc = gui->previewgui;
+    GuEditor* editor = GU_EDITOR(data);
+    GuLatex* latex = gummi_get_latex();
+
+    /* Make sure the editor still exists after compile */
+    if (editor == gummi_get_active_editor()) {
+        editor_apply_errortags (editor, latex->errorlines);
+        gui_buildlog_set_text (latex->compilelog);
+
+        if (latex->errorlines[0]) {
+            previewgui_start_errormode (pc, "compile_error");
+        } else {
+            if (!pc->uri) {
+
+                gchar* uri = g_filename_to_uri (editor->pdffile, NULL, NULL);
+
+                previewgui_set_pdffile (pc, uri);
+                g_free(uri);
+            } else {
+                previewgui_refresh (gui->previewgui,
+                        editor->sync_to_last_edit ?
+                        &(editor->last_edit) : NULL, editor->workfile);
+            }
+            if (pc->errormode) previewgui_stop_errormode (pc);
+        }
+    }
+    return FALSE;
+}
+
+gboolean on_document_error (gpointer data) {
+    previewgui_start_errormode (gui->previewgui, (const gchar*) data);
+    return FALSE;
+}
+
 static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
 
     page = MAX(0, page);

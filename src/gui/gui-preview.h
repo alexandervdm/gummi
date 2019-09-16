@@ -190,6 +190,8 @@ void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout);
 
 void previewgui_start_errormode (GuPreviewGui *pc, const gchar *msg);
 void previewgui_stop_errormode (GuPreviewGui *pc);
+gboolean on_document_compiled (gpointer data);
+gboolean on_document_error (gpointer data);
 
 gboolean run_garbage_collector(GuPreviewGui* pc);
 
