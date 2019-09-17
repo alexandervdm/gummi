@@ -1459,9 +1459,10 @@ active document to be saved. </property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="importers_box">
+                  <object class="GtkBox" id="box_importers">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkBox" id="import_panel">
                         <property name="visible">True</property>
@@ -2831,9 +2832,9 @@ bibliography database</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <signal name="activate" handler="on_button_searchwindow_find_clicked" swapped="no"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
+                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
                 <accelerator key="Return" signal="activate"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
-                <accelerator key="Escape" signal="activate" modifiers="GDK_SHIFT_MASK"/>
               </object>
               <packing>
                 <property name="expand">True</property>

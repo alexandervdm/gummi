@@ -66,8 +66,8 @@ extern GummiGui* gui;
  * function for when we switch from 0 to 1 tabs and vice versa */
 const gchar* insens_widgets_str[] = {
     "box_rightpane", "tool_save", "tool_bold", "tool_italic", "tool_unline",
-    "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
-    "menu_exportpdf", "import_tabs", "menu_close", "menu_export",
+    "tool_left", "tool_center", "tool_right", "box_importers",
+    "menu_save", "menu_saveas", "menu_close", "menu_export",
     "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste",
     "menu_delete", "menu_selectall", "menu_preferences", "menu_find",
     "menu_prev", "menu_next", "menu_pdfcompile", "menu_compileopts",
