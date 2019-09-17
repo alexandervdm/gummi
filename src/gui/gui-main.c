@@ -62,10 +62,10 @@ extern GummiGui* gui;
  * http://www.micahcarrick.com/gtk-glade-tutorial-part-3.html */
 
 
-/* These widgets are (de-)sensitised using the gui_has_tabs_sensitive function
- * for when we switch from 0 to 1 tabs and vice versa */
+/* These widgets are (de)sensitised using the gui_set_hastabs_sensitive 
+ * function for when we switch from 0 to 1 tabs and vice versa */
 const gchar* insens_widgets_str[] = {
-    "rightpanebox", "tool_save", "tool_bold", "tool_italic", "tool_unline",
+    "box_rightpane", "tool_save", "tool_bold", "tool_italic", "tool_unline",
     "tool_left", "tool_center", "tool_right", "menu_save", "menu_saveas",
     "menu_exportpdf", "import_tabs", "menu_close", "menu_export",
     "menu_undo", "menu_redo", "menu_cut", "menu_copy", "menu_paste",
@@ -491,8 +491,9 @@ cleanup:
 
 void gui_set_hastabs_sensitive (gboolean enable) {
     gint i = 0;
-    for (i = 0; i < gui->insens_widget_size; ++i)
+    for (i = 0; i < gui->insens_widget_size; ++i) {
         gtk_widget_set_sensitive (gui->insens_widgets[i], enable);
+    }
 }
 
 G_MODULE_EXPORT
