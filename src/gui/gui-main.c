@@ -785,20 +785,23 @@ gint check_for_save (GuEditor* editor) {
                      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                      GTK_MESSAGE_QUESTION,
                      GTK_BUTTONS_NONE,
-                     _("Do you want to save the changes to %s?"),
-                     editor->filename != NULL ? g_path_get_basename (editor->filename) : _("this document"));
+                     _("This document has unsaved changes"));
+
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                    _("Do you want to save the changes to %s before closing?"),
+                                     editor->filename != NULL ? g_path_get_basename (editor->filename) : _("this document"));
+
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                _("_Close without Saving"), GTK_RESPONSE_NO,
                                 _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                _("_Discard"), GTK_RESPONSE_NO,
-                                _("_Save"), GTK_RESPONSE_YES,
+                                _("_Save As"), GTK_RESPONSE_YES,
                                 NULL);
+
         gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
 
-        gtk_window_set_title (GTK_WINDOW (dialog), _("Unsaved Changes"));
         ret = gtk_dialog_run (GTK_DIALOG (dialog));
         gtk_widget_destroy (dialog);
     }
-
     return ret;
 }
 
