@@ -180,9 +180,11 @@ gpointer motion_compile_thread (gpointer data) {
             continue;
         }
 
+        gdk_threads_enter ();
         editortext = latex_update_workfile (latex, editor);
         precompile_ok = latex_precompile_check (editortext);
         g_free (editortext);
+        gdk_threads_leave ();
 
         if (!precompile_ok) {
             gdk_threads_add_idle (on_document_error, "document_error");
