@@ -445,19 +445,20 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gchar *text;
     GtkWidget* focus = NULL;
 
-    // check whether the file has been changed by (some) external program */
+    // check whether the file has been changed by (some) external program
     double lastmod;
     struct stat attr;
     stat(filename, &attr);
     lastmod = difftime (tab->editor->last_modtime, attr.st_mtime);
-    if (lastmod != 0.0) {
+
+    if (lastmod != 0.0 && tab->editor->last_modtime != 0.0 ) {
         // ask the user whether he want to save or reload
         ret = utils_save_reload_dialog (
                 _("The content of the file has been changed externally. "
                   "Saving will remove any external modifications."));
         if (ret == GTK_RESPONSE_YES) {
             tabmanager_set_content (A_LOAD, filename, NULL);
-            // Resets modtime
+            // resets modtime
             stat(filename, &attr);
             tab->editor->last_modtime = attr.st_mtime;
             goto cleanup;
