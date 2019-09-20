@@ -39,7 +39,6 @@ typedef struct _GuBiblio GuBiblio;
 
 struct _GuBiblio {
     GtkProgressBar* progressbar;
-    GtkAdjustment* progressmon;
     GtkListStore* list_biblios;
     GtkTreeView* biblio_treeview;
     GtkLabel* filenm_label;

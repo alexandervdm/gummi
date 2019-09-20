@@ -766,10 +766,12 @@ void typesetter_setup (void) {
 }
 
 gboolean on_bibprogressbar_update (void* user) {
-    gtk_adjustment_set_value
-        (gummi->biblio->progressmon, gummi->biblio->progressval);
-    gummi->biblio->progressval += 1.0;
-    if (gummi->biblio->progressval > 60) {
+    gummi->biblio->progressval += 0.01;
+
+    gtk_progress_bar_set_fraction(gummi->biblio->progressbar,
+                                  gummi->biblio->progressval);
+
+    if (gummi->biblio->progressval >= 1) {
         gtk_widget_set_sensitive (gui->bibcompile, TRUE);
         return FALSE;
     }

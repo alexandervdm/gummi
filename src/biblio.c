@@ -45,8 +45,8 @@ GuBiblio* biblio_init (GtkBuilder* builder) {
     GuBiblio* b = g_new0 (GuBiblio, 1);
     b->progressbar =
         GTK_PROGRESS_BAR (gtk_builder_get_object (builder, "bibprogressbar"));
-    b->progressmon =
-        GTK_ADJUSTMENT (gtk_builder_get_object (builder, "bibprogressmon"));
+    b->progressval = 0.0;
+
     b->list_biblios =
         GTK_LIST_STORE (gtk_builder_get_object (builder, "list_biblios"));
     b->filenm_label =
@@ -57,7 +57,7 @@ GuBiblio* biblio_init (GtkBuilder* builder) {
         GTK_ENTRY (gtk_builder_get_object (builder, "biblio_filter"));
     b->biblio_treeview =
         GTK_TREE_VIEW (gtk_builder_get_object (builder, "bibtreeview"));
-    b->progressval = 0.0;
+
     return b;
 }
 
