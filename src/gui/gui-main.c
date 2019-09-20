@@ -634,15 +634,17 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
 
     if (biblio_compile_bibliography (gummi->biblio, g_active_editor,
                 gummi->latex)) {
-        statusbar_set_message (_("Compiling bibliography file..."));
-        gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _("Bibliography compiled without errors"));
+        statusbar_set_message (_("Compiling bibliography file.."));
+        // NOTE gtk3s bar doesnt place text inside the widget anymore :/
+        //gtk_progress_bar_set_text (gummi->biblio->progressbar,
+        //        _("Bibliography compiled without errors"));
         motion_force_compile (gummi->motion);
     } else {
         statusbar_set_message
-        (_("Error compiling bibliography file or none detected..."));
-        gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _("Error compiling bibliography file"));
+        (_("Error compiling bibliography file or none detected.."));
+        // NOTE gtk3s bar doesnt place text inside the widget anymore :/
+        //gtk_progress_bar_set_text (gummi->biblio->progressbar,
+        //        _("Error compiling bibliography file"));
     }
 }
 
@@ -675,16 +677,18 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
         str = g_strdup_printf ("%d", number);
         gtk_label_set_text (gummi->biblio->refnr_label, str);
         g_free (str);
-        str = g_strdup_printf (_("%s loaded"), basename);
-        gtk_progress_bar_set_text (gummi->biblio->progressbar, str);
+        // NOTE gtk3s bar doesnt place text inside the widget anymore :/
+        //gtk_progress_bar_set_text (gummi->biblio->progressbar, str);
         g_free (basename);
-        g_free (str);
     }
     else {
         gtk_widget_set_sensitive
                     (GTK_WIDGET(gummi->biblio->list_filter), FALSE);
-        gtk_progress_bar_set_text (gummi->biblio->progressbar,
-                _("no bibliography file detected"));
+        statusbar_set_message
+        (_("No bibliography file detected in document.."));
+        // NOTE gtk3s bar doesnt place text inside the widget anymore :/
+        //gtk_progress_bar_set_text (gummi->biblio->progressbar,
+        //        _("no bibliography file detected"));
         gtk_label_set_text (gummi->biblio->filenm_label, _("none"));
         gtk_label_set_text (gummi->biblio->refnr_label, _("N/A"));
     }
