@@ -38,5 +38,5 @@ gummi_SOURCES = biblio.c  biblio.h \
 		template.c template.h \
 		utils.c utils.h \
 		tabmanager.c tabmanager.h \
-		constants.h porting.h \
+		constants.h \
 		main.c

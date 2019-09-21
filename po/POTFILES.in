@@ -48,7 +48,6 @@ src/latex.h
 src/main.c
 src/motion.c
 src/motion.h
-src/porting.h
 src/project.c
 src/project.h
 src/signals.c

@@ -38,7 +38,6 @@
 
 #include "environment.h"
 #include "gui/gui-main.h"
-#include "porting.h"
 #include "snippets.h"
 
 extern Gummi* gummi;

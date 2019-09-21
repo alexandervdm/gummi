@@ -44,9 +44,7 @@
 #include "constants.h"
 #include "gui/gui-main.h"
 #include "environment.h"
-
 #include "motion.h"
-#include "porting.h"
 
 #include "synctex_parser.h"
 

@@ -39,7 +39,6 @@
 
 #include "editor.h"
 #include "environment.h"
-#include "porting.h"
 #include "utils.h"
 
 GuSnippets* snippets_init (const gchar* filename) {
