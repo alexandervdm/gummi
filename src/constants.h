@@ -32,28 +32,60 @@
 #ifndef __GUMMI_CONSTANTS_H__
 #define __GUMMI_CONSTANTS_H__
 
-/* File constants */
+// Gummi defs:
+#define C_PACKAGE "gummi"
+#define C_PACKAGE_NAME "Gummi"
+#define C_PACKAGE_VERSION "git"
+#define C_PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
+#define C_PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2019\n\n"\
+                            "Alexander van der Meij\n"\
+                            "Wei-Ning Huang\n"\
+                            "and past contributors"
+#define C_PACKAGE_URL "https://alexandervdm.github.io/gummi/"
+#define C_PACKAGE_GUIDE "https://github.com/alexandervdm/gummi/wiki"
+
+// Project license:
+#define C_PACKAGE_LICENSE \
+"Copyright (C) 2009-2016 Gummi Developers\n" \
+"All Rights reserved.\n" \
+"\n" \
+"Permission is hereby granted, free of charge, to any person\n" \
+"obtaining a copy of this software and associated documentation\n" \
+"files (the \"Software\"), to deal in the Software without\n" \
+"restriction, including without limitation the rights to use,\n" \
+"copy, modify, merge, publish, distribute, sublicense, and/or sell\n" \
+"copies of the Software, and to permit persons to whom the\n" \
+"Software is furnished to do so, subject to the following\n" \
+"conditions:\n" \
+"\n" \
+"The above copyright notice and this permission notice shall be\n" \
+"included in all copies or substantial portions of the Software.\n" \
+"\n" \
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n" \
+"EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n" \
+"OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n" \
+"NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\n" \
+"HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\n" \
+"WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n" \
+"FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n" \
+"OTHER DEALINGS IN THE SOFTWARE.\n"
+
+// Default documents:
 #define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)
 #define C_DEFAULTTEXT g_build_filename (GUMMI_DATA, "misc", "default.tex", NULL)
 
-/* URL constants */
-#define C_GUMMIGUIDE "https://github.com/alexandervdm/gummi/wiki"
-
-
+// LaTeX definitions
 #define C_LATEX "latex"
 #define C_PDFLATEX "pdflatex"
 #define C_XELATEX "xelatex"
 #define C_RUBBER "rubber"
 #define C_LATEXMK "latexmk"
 
+// Path definitions:
 #define C_CD_TMPDIR g_strdup_printf ("cd \"%s\"%s%s",C_TMPDIR,C_CMDSEP,C_TEXSEC)
 #define C_DIRSEP G_DIR_SEPARATOR_S
 
-
-
-
-/* Platform dependant constants : */
-
+// Platform dependant path definitions:
 #ifdef WIN32
     #define C_TMPDIR utils_get_tmp_tmp_dir()
     #define C_CMDSEP "&&"

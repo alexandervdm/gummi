@@ -36,6 +36,7 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
+#include "constants.h"
 #include "environment.h"
 #include "gui/gui-main.h"
 #include "snippets.h"
@@ -57,7 +58,7 @@ GuSnippetsGui* snippetsgui_init (GtkWindow* mainwindow) {
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (GUMMI_DATA, "ui", "snippets.glade", NULL);
     gtk_builder_add_from_file (builder, ui, NULL);
-    gtk_builder_set_translation_domain (builder, PACKAGE);
+    gtk_builder_set_translation_domain (builder, C_PACKAGE);
     g_free (ui);
 
     s->snippetswindow =

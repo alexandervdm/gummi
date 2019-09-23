@@ -693,7 +693,7 @@ void on_menu_guide_activate (GtkWidget *widget, void *user) {
     GError *error = NULL;
 
     gtk_show_uri_on_window (GTK_WINDOW (gui->mainwindow),
-                            C_GUMMIGUIDE, GDK_CURRENT_TIME, &error);
+                            C_PACKAGE_GUIDE, GDK_CURRENT_TIME, &error);
 
     if (error) {
         slog (L_ERROR, "Can't open user guide: %s\n", error->message);
@@ -749,13 +749,13 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     gtk_window_set_transient_for (GTK_WINDOW (dialog), gui->mainwindow);
     gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
     gtk_about_dialog_set_authors (dialog, authors);
-    gtk_about_dialog_set_program_name (dialog, PACKAGE_NAME);
-    gtk_about_dialog_set_version (dialog, PACKAGE_VERSION);
-    gtk_about_dialog_set_website (dialog, PACKAGE_URL);
-    gtk_about_dialog_set_copyright (dialog, PACKAGE_COPYRIGHT);
-    gtk_about_dialog_set_license (dialog, PACKAGE_LICENSE);
+    gtk_about_dialog_set_program_name (dialog, C_PACKAGE_NAME);
+    gtk_about_dialog_set_version (dialog, C_PACKAGE_VERSION);
+    gtk_about_dialog_set_website (dialog, C_PACKAGE_URL);
+    gtk_about_dialog_set_copyright (dialog, C_PACKAGE_COPYRIGHT);
+    gtk_about_dialog_set_license (dialog, C_PACKAGE_LICENSE);
     gtk_about_dialog_set_logo (dialog, icon);
-    gtk_about_dialog_set_comments (dialog, PACKAGE_COMMENTS);
+    gtk_about_dialog_set_comments (dialog, C_PACKAGE_COMMENTS);
     gtk_about_dialog_set_translator_credits (dialog, translators);
     gtk_about_dialog_set_documenters (dialog, documenters);
     gtk_dialog_run (GTK_DIALOG (dialog));

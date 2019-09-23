@@ -31,10 +31,6 @@
 #ifndef __GUMMI_EDITOR_H__
 #define __GUMMI_EDITOR_H__
 
-#ifdef HAVE_CONFIG_H
-#   include "config.h"
-#endif
-
 #include "motion.h"
 
 #include <glib.h>

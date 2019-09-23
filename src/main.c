@@ -37,6 +37,7 @@
 
 #include "biblio.h"
 #include "configfile.h"
+#include "constants.h"
 #include "environment.h"
 #include "external.h"
 #include "gui/gui-main.h"
@@ -64,18 +65,18 @@ static GOptionEntry entries[] = {
 
 int main (int argc, char *argv[]) {
     /* set up i18n */
-    bindtextdomain (PACKAGE, GUMMI_LOCALES);
+    bindtextdomain (C_PACKAGE, GUMMI_LOCALES);
     setlocale (LC_ALL, "");
-    textdomain (PACKAGE);
+    textdomain (C_PACKAGE);
 
     GError* error = NULL;
     GOptionContext* context = g_option_context_new ("files");
-    g_option_context_add_main_entries (context, entries, PACKAGE);
+    g_option_context_add_main_entries (context, entries, C_PACKAGE);
     g_option_context_parse (context, &argc, &argv, &error);
     if (error) g_error("%s\n", error->message);
 
     if (showversion) {
-        printf("Gummi %s\n", PACKAGE_VERSION);
+        printf("Gummi %s\n", C_PACKAGE_VERSION);
         return 0;
     }
 
@@ -95,12 +96,12 @@ int main (int argc, char *argv[]) {
     if (ui_error) {
         g_error ("%s\n", ui_error->message);
     }
-    gtk_builder_set_translation_domain (builder, PACKAGE);
+    gtk_builder_set_translation_domain (builder, C_PACKAGE);
     g_free (ui);
 
     /* Initialize logging */
     slog_init (debug);
-    slog (L_INFO, PACKAGE_NAME" version: "PACKAGE_VERSION"\n");
+    slog (L_INFO, C_PACKAGE_NAME" version: "C_PACKAGE_VERSION"\n");
 
     /* Initialize configuration */
     gchar* configname = g_build_filename (g_get_user_config_dir (), "gummi",

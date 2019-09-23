@@ -67,7 +67,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (GUMMI_DATA, "ui", "prefs.glade", NULL);
     gtk_builder_add_from_file (builder, ui, NULL);
-    gtk_builder_set_translation_domain (builder, PACKAGE);
+    gtk_builder_set_translation_domain (builder, C_PACKAGE);
     g_free (ui);
 
     p->prefwindow =

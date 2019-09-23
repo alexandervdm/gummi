@@ -37,7 +37,7 @@
 #include <glib.h>
 #include <assert.h>
 
-#include "environment.h"
+#include "constants.h"
 #include "utils.h"
 
 static gchar* config_filename = 0;
@@ -47,7 +47,7 @@ static gboolean transaction = FALSE;
 
 const gchar config_str[] =
 "[Global]\n"
-"config_version = "PACKAGE_VERSION"\n"
+"config_version = "C_PACKAGE_VERSION"\n"
 "mainwindow_x = 0\n"
 "mainwindow_y = 0\n"
 "mainwindow_w = 792\n"
@@ -145,9 +145,9 @@ void config_init (const gchar* filename) {
         slog (L_INFO, "found old configuration file, replacing it with new "
                 "one ...\n");
         config_set_default ();
-    } else if (!STR_EQU (PACKAGE_VERSION, config_version)) {
+    } else if (!STR_EQU (C_PACKAGE_VERSION, config_version)) {
         slog (L_INFO, "updating version tag in configuration file...\n");
-        config_set_value ("config_version", PACKAGE_VERSION);
+        config_set_value ("config_version", C_PACKAGE_VERSION);
     } else {
         config_save ();
     }

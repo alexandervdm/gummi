@@ -43,6 +43,7 @@
 
 #include "biblio.h"
 #include "configfile.h"
+#include "constants.h"
 #include "editor.h"
 #include "environment.h"
 #include "importer.h"
@@ -359,10 +360,10 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
     if (filename != NULL) {
         dirname = g_strdup_printf("(%s)", g_path_get_dirname (filename));
         title = g_strdup_printf ("%s %s - %s", text, dirname,
-                                                 PACKAGE_NAME);
+                                                 C_PACKAGE_NAME);
     }
     else {
-        title = g_strdup_printf ("%s - %s", text, PACKAGE_NAME);
+        title = g_strdup_printf ("%s - %s", text, C_PACKAGE_NAME);
     }
     gtk_window_set_title (gui->mainwindow, title);
     g_free (title);
