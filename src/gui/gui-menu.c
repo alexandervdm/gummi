@@ -720,18 +720,15 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Arnaud Loonstra", NULL };
 
     const gchar* translators =
-        "**  Visit our website for instructions on  **\n"
-        "**  contributing or updating a translation **\n"
-        "\n"
         "Arabic: Hamad Mohammad\n"
-        "Brazilian-Portugese: Fernando Cruz & Alexandre Guimarães\n"
+        "Brazilian-Portugese: Fernando Cruz, Alexandre Guimarães\n"
         "Catalan: Marc Vinyals\n"
         "Chinese (Simplified): Mathlab pass\n"
         "Chinese (Traditional): Wei-Ning Huang\n"
         "Czech: Přemysl Janouch\n"
         "Danish: Jack Olsen\n"
         "Dutch: Alexander van der Meij\n"
-        "French: Yvan Duron & Olivier Brousse\n"
+        "French: Yvan Duron, Olivier Brousse\n"
         "German: Thomas Niederprüm\n"
         "Greek: Dimitris Leventeas\n"
         "Hungarian: Balázs Meskó\n"
@@ -739,9 +736,9 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
         "Polish: Hubert Kowalski\n"
         "Portugese: Alexandre Guimarães\n"
         "Romanian: Alexandru-Eugen Ichim\n"
-        "Russian: Kruvalig & Max Musatov\n"
+        "Russian: Kruvalig, Max Musatov\n"
         "Swedish: Kess Vargavind\n"
-        "Spanish: Carlos Salas Contreras & Francisco Javier Serrador\n";
+        "Spanish: Carlos Salas Contreras, Francisco Javier Serrador\n";
 
     const gchar* documenters[] = {"Guy Edwards", NULL};
 
