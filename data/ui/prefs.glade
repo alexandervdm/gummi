@@ -1777,16 +1777,12 @@
                               <object class="GtkSpinButton" id="spin_cache_size">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="xalign">0.5</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
                                 <property name="adjustment">adj_cache_size</property>
                                 <signal name="value-changed" handler="on_cache_size_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
