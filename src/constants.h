@@ -2,7 +2,7 @@
  * @file   constants.h
  * @brief  Constants used throughout the program
  *
- * Copyright (C) 2009-2016 Gummi Developers
+ * Copyright (C) 2009 Gummi Developers
  * All Rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person
@@ -46,7 +46,7 @@
 
 // Project license:
 #define C_PACKAGE_LICENSE \
-"Copyright (C) 2009-2016 Gummi Developers\n" \
+"Copyright (C) 2009 Gummi Developers\n" \
 "All Rights reserved.\n" \
 "\n" \
 "Permission is hereby granted, free of charge, to any person\n" \
