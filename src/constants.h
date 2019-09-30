@@ -37,7 +37,7 @@
 #define C_PACKAGE_NAME "Gummi"
 #define C_PACKAGE_VERSION "git"
 #define C_PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
-#define C_PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009-2019\n\n"\
+#define C_PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009\n\n"\
                             "Alexander van der Meij\n"\
                             "Wei-Ning Huang\n"\
                             "and past contributors"
@@ -69,6 +69,47 @@
 "WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n" \
 "FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\n" \
 "OTHER DEALINGS IN THE SOFTWARE.\n"
+
+// Credits:
+#define C_CREDITS_DEVELOPERS \
+"Alexander van der Meij", \
+"Wei-Ning Huang", \
+"", \
+"with contributions by:", \
+"Dion Timmermann", \
+"Robert Schroll", \
+"Thomas van der Burgt", \
+"Cameron Grout", \
+"Arnaud Loonstra", \
+"Florian Begusch", \
+"Daniel Hershcovich", \
+"bobi32", \
+"Benny Siegert", \
+"scarlehoff"
+
+#define C_CREDITS_DOCUMENTERS \
+"Guy Edwards"
+
+#define C_CREDITS_TRANSLATORS \
+"Arabic: Hamad Mohammad\n" \
+"Brazilian-Portugese: Fernando Cruz, Alexandre Guimarães\n" \
+"Catalan: Marc Vinyals\n" \
+"Chinese (Simplified): Mathlab pass\n" \
+"Chinese (Traditional): Wei-Ning Huang\n" \
+"Czech: Přemysl Janouch\n" \
+"Danish: Jack Olsen\n" \
+"Dutch: Alexander van der Meij\n" \
+"French: Yvan Duron, Olivier Brousse\n" \
+"German: Thomas Niederprüm\n" \
+"Greek: Dimitris Leventeas\n" \
+"Hungarian: Balázs Meskó\n" \
+"Italian: Salvatore Vassallo\n" \
+"Polish: Hubert Kowalski\n" \
+"Portugese: Alexandre Guimarães\n" \
+"Romanian: Alexandru-Eugen Ichim\n" \
+"Russian: Kruvalig, Max Musatov\n" \
+"Swedish: Kess Vargavind\n" \
+"Spanish: Carlos Salas Contreras, Francisco Javier Serrador\n"
 
 // Default documents:
 #define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)

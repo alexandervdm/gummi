@@ -707,45 +707,14 @@ void on_menu_about_activate (GtkWidget *widget, void *user) {
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size (icon_file, 80, 80, &err);
     g_free (icon_file);
 
-    const gchar* authors[] = { "Alexander van der Meij\n"
-        "<gummi{pleasenospam}vandermeij.tech>",
-        "Wei-Ning Huang\n"
-        "<aitjcize{pleasenospam}gmail.com>",
-        "",
-        "Former contributors:",
-        "Dion Timmermann",
-        "Robert Schroll",
-        "Thomas van der Burgt",
-        "Cameron Grout",
-        "Arnaud Loonstra", NULL };
-
-    const gchar* translators =
-        "Arabic: Hamad Mohammad\n"
-        "Brazilian-Portugese: Fernando Cruz, Alexandre Guimarães\n"
-        "Catalan: Marc Vinyals\n"
-        "Chinese (Simplified): Mathlab pass\n"
-        "Chinese (Traditional): Wei-Ning Huang\n"
-        "Czech: Přemysl Janouch\n"
-        "Danish: Jack Olsen\n"
-        "Dutch: Alexander van der Meij\n"
-        "French: Yvan Duron, Olivier Brousse\n"
-        "German: Thomas Niederprüm\n"
-        "Greek: Dimitris Leventeas\n"
-        "Hungarian: Balázs Meskó\n"
-        "Italian: Salvatore Vassallo\n"
-        "Polish: Hubert Kowalski\n"
-        "Portugese: Alexandre Guimarães\n"
-        "Romanian: Alexandru-Eugen Ichim\n"
-        "Russian: Kruvalig, Max Musatov\n"
-        "Swedish: Kess Vargavind\n"
-        "Spanish: Carlos Salas Contreras, Francisco Javier Serrador\n";
-
-    const gchar* documenters[] = {"Guy Edwards", NULL};
+    const gchar* developers[]  = {C_CREDITS_DEVELOPERS, NULL};
+    const gchar* documenters[] = {C_CREDITS_DOCUMENTERS, NULL};
+    const gchar* translators   = C_CREDITS_TRANSLATORS;
 
     GtkAboutDialog* dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());
     gtk_window_set_transient_for (GTK_WINDOW (dialog), gui->mainwindow);
     gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-    gtk_about_dialog_set_authors (dialog, authors);
+    gtk_about_dialog_set_authors (dialog, developers);
     gtk_about_dialog_set_program_name (dialog, C_PACKAGE_NAME);
     gtk_about_dialog_set_version (dialog, C_PACKAGE_VERSION);
     gtk_about_dialog_set_website (dialog, C_PACKAGE_URL);
