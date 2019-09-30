@@ -68,7 +68,7 @@ const gchar config_str[] =
 "statusbar = True\n"
 "rightpane = True\n"
 "spell_language = None\n"
-"font = Monospace 10\n"
+"font = Monospace 14\n"
 "\n"
 "[Preview]\n"
 "zoommode = pagewidth\n"
