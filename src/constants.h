@@ -41,7 +41,7 @@
                             "Alexander van der Meij\n"\
                             "Wei-Ning Huang\n"\
                             "and past contributors"
-#define C_PACKAGE_URL "https://alexandervdm.github.io/gummi/"
+#define C_PACKAGE_URL "https://gummi.app"
 #define C_PACKAGE_GUIDE "https://github.com/alexandervdm/gummi/wiki"
 
 // Project license:
