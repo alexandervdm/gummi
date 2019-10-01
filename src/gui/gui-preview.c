@@ -48,8 +48,16 @@
 
 #include "synctex_parser.h"
 
-/* set up uri using appropriate formatting for OS
-   http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
+// compatibility fixes for libsynctex (>=1.16 && <=2.00):
+#ifdef USE_SYNCTEX1
+  typedef synctex_scanner_t synctex_scanner_p;
+  typedef synctex_node_t synctex_node_p;
+  #define synctex_display_query(scanner, file, line, column, page) synctex_display_query(scanner, file, line, column)
+  #define synctex_scanner_next_result(scanner) synctex_next_result(scanner)
+#endif
+
+// set up uri using appropriate formatting for OS
+// http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
 #ifdef WIN32
     gint usize = 8;
 #else
@@ -1095,18 +1103,18 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
     gint column = gtk_text_iter_get_line_offset(sync_to);
     slog(L_DEBUG, "Syncing to %s, line %i, column %i\n", tex_file, line, column);
 
-    synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
+    synctex_scanner_p sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
 
     synctex_clear_sync_nodes(pc);
 
-    if(synctex_display_query(sync_scanner, tex_file, line, column)>0) {
-        synctex_node_t node;
+    if(synctex_display_query(sync_scanner, tex_file, line, column, -1)>0) {
+        synctex_node_p node;
         /*
          * SyncTeX can return several nodes. It seems best to use the last one, as
          * this one rarely is below (usually slighly above) the edited line.
          */
 
-        while ((node = synctex_next_result(sync_scanner))) {
+        while ((node = synctex_scanner_next_result(sync_scanner))) {
 
             SyncNode *sn = g_new0(SyncNode, 1);
 
@@ -2085,16 +2093,16 @@ gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
 
         slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
 
-        synctex_scanner_t sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
+        synctex_scanner_p sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
 
         if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
-            synctex_node_t node;
+            synctex_node_p node;
             /*
              * SyncTeX can return several nodes. It seems best to use the last one, as
              * this one rarely is below (usually slighly above) the edited line.
              */
 
-            if ((node = synctex_next_result(sync_scanner))) {
+            if ((node = synctex_scanner_next_result(sync_scanner))) {
 
                 const gchar *file = synctex_scanner_get_name(sync_scanner, synctex_node_tag(node));
                 gint line = synctex_node_line(node);
