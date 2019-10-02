@@ -48,6 +48,10 @@
 
 #include "synctex_parser.h"
 
+#ifdef HAVE_CONFIG_H
+#   include "config.h"
+#endif
+
 // compatibility fixes for libsynctex (>=1.16 && <=2.00):
 #ifdef USE_SYNCTEX1
   typedef synctex_scanner_t synctex_scanner_p;
