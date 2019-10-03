@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 17:05+0200\n"
+"POT-Creation-Date: 2019-10-03 20:00+0200\n"
 "PO-Revision-Date: 2011-11-07 20:48+0100\n"
 "Last-Translator: Kess Vargavind <vargavind@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,7 +259,7 @@ msgstr "_Projekt"
 msgid "Create new Project"
 msgstr "Skapa nytt projekt"
 
-#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:623
+#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:625
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -414,7 +414,10 @@ msgstr "Filnamn:"
 
 # Behöver delas upp i källkoden:
 #   * sv: inga, ingen, inget
-#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:667
+#. NOTE gtk3s bar doesnt place text inside the widget anymore :/
+#. gtk_progress_bar_set_text (gummi->biblio->progressbar,
+#. _("no bibliography file detected"));
+#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:696
 msgid "none"
 msgstr "Inget"
 
@@ -422,7 +425,7 @@ msgstr "Inget"
 msgid "References:"
 msgstr "Referenser:"
 
-#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:668
+#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:697
 msgid "N/A"
 msgstr "Inga tillgängliga"
 
@@ -450,7 +453,7 @@ msgstr ""
 "Kompilera den aktuella\n"
 "bibliografidatabasen"
 
-#: ../data/ui/gummi.glade.h:114 ../src/gui/gui-main.c:666
+#: ../data/ui/gummi.glade.h:114
 msgid "no bibliography file detected"
 msgstr "Ingen bibliografifil funnen"
 
@@ -543,65 +546,56 @@ msgid "Replace _All"
 msgstr "Ersätt _alla"
 
 #: ../data/ui/gummi.glade.h:137
-msgid "Save early.. save often!"
-msgstr "Spara tidigt, spara ofta!"
-
-#: ../data/ui/gummi.glade.h:138
-#, fuzzy
-msgid "10"
-msgstr "0"
-
-#: ../data/ui/gummi.glade.h:139
 msgid "Align left"
 msgstr "Vänsterjusterad"
 
-#: ../data/ui/gummi.glade.h:140
+#: ../data/ui/gummi.glade.h:138
 msgid "Align center"
 msgstr "Centrerad"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:139
 msgid "Align right"
 msgstr "Högerjusterad"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:140
 msgid "No borders"
 msgstr "Inga ramar"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:141
 msgid "Border outline"
 msgstr "Ram runt tabell"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:142
 msgid "Border all cells"
 msgstr "Ramar runt celler"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:143
 msgid "Create new document from template.."
 msgstr "Skapa nytt dokument från mall..."
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:144
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr "Skapa en mall från detta dokument"
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:146
 msgid "Deletes the selected template"
 msgstr "Ta bort vald mall"
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:147
 msgid "Open the selected template"
 msgstr "Öppna vald mall"
 
-#: ../data/ui/gummi.glade.h:150
+#: ../data/ui/gummi.glade.h:148
 msgid "Rows:"
 msgstr "Rader:"
 
-#: ../data/ui/gummi.glade.h:151
+#: ../data/ui/gummi.glade.h:149
 msgid "Columns:"
 msgstr "Kolumner:"
 
-#: ../data/ui/gummi.glade.h:152
+#: ../data/ui/gummi.glade.h:150
 msgid "Bracket:"
 msgstr "Parenteser:"
 
@@ -942,192 +936,222 @@ msgstr ""
 "granskningen kommer inte att återupptas förrän\n"
 "Gummi har startats om.\n"
 
-#: ../src/gui/gui-main.c:367
+#: ../src/gui/gui-main.c:388
 #, fuzzy, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
 msgstr "Tidigare arbetskopia finns av %s, vill du återgå till den?"
 
-#: ../src/gui/gui-main.c:419 ../src/latex.c:270
+#: ../src/gui/gui-main.c:440 ../src/latex.c:270
 msgid "The file already exists. Overwrite?"
 msgstr "Filen finns redan. Skriva över?"
 
+#: ../src/gui/gui-main.c:458
+msgid ""
+"The content of the file has been changed externally. Saving will remove any "
+"external modifications."
+msgstr ""
+
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:547
+#: ../src/gui/gui-main.c:572
 #, c-format
 msgid "Loading template ..."
 msgstr "Öppnar mall..."
 
-#: ../src/gui/gui-main.c:616
-msgid "Compiling bibliography file..."
+#: ../src/gui/gui-main.c:641
+#, fuzzy
+msgid "Compiling bibliography file.."
 msgstr "Skapar bibliografifil..."
 
-#: ../src/gui/gui-main.c:618
+#: ../src/gui/gui-main.c:648
 #, fuzzy
-msgid "Bibliography compiled without errors"
-msgstr "Bibliografin skapad utan fel"
-
-#: ../src/gui/gui-main.c:622
-msgid "Error compiling bibliography file or none detected..."
+msgid "Error compiling bibliography file or none detected.."
 msgstr "Kunde ej finna eller kompilera bibliografifilen"
 
-#: ../src/gui/gui-main.c:624
+#: ../src/gui/gui-main.c:692
 #, fuzzy
-msgid "Error compiling bibliography file"
-msgstr "Kunde inte skapa bibliografin"
+msgid "No bibliography file detected in document.."
+msgstr "Ingen bibliografifil funnen"
 
-#: ../src/gui/gui-main.c:657
-#, c-format
-msgid "%s loaded"
-msgstr "%s laddad"
+#: ../src/gui/gui-main.c:798
+msgid "This document has unsaved changes"
+msgstr ""
 
-#: ../src/gui/gui-main.c:767
+#: ../src/gui/gui-main.c:801
 #, fuzzy, c-format
-msgid "Do you want to save the changes to %s?"
+msgid "Do you want to save the changes to %s before closing?"
 msgstr "Vill du spara de ändringar du gjort?"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:802
 #, fuzzy
 msgid "this document"
 msgstr "Dokument"
 
-#: ../src/gui/gui-main.c:776
-msgid "Unsaved Changes"
+#: ../src/gui/gui-main.c:805
+msgid "_Close without Saving"
 msgstr ""
 
-#: ../src/gui/gui-main.c:798
+#: ../src/gui/gui-main.c:806 ../src/gui/gui-main.c:844
+#: ../src/gui/gui-main.c:882
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/gui/gui-main.c:807
+#, fuzzy
+msgid "_Save As"
+msgstr "Spara so_m..."
+
+#: ../src/gui/gui-main.c:832
 msgid "Open LaTeX document"
 msgstr "Öppna LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:801
+#: ../src/gui/gui-main.c:835
 msgid "Select an image to insert"
 msgstr "Välj en bild att infoga"
 
-#: ../src/gui/gui-main.c:802
+#: ../src/gui/gui-main.c:836
 msgid "Select bibliography file"
 msgstr "Välj bibliografifil"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:837
 #, fuzzy
 msgid "Select project file"
 msgstr "Gummi-projektfiler"
 
-#: ../src/gui/gui-main.c:836
+#: ../src/gui/gui-main.c:845
+#, fuzzy
+msgid "_Open"
+msgstr "Öppna"
+
+#: ../src/gui/gui-main.c:870
 msgid "Save LaTeX document"
 msgstr "Spara LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:837
+#: ../src/gui/gui-main.c:871
 msgid "Save as LaTeX document"
 msgstr "Spara som LaTeX-dokument"
 
-#: ../src/gui/gui-main.c:838
+#: ../src/gui/gui-main.c:872
 msgid "Export to PDF"
 msgstr "Exportera som PDF"
 
-#: ../src/gui/gui-main.c:841
+#: ../src/gui/gui-main.c:875
 #, fuzzy
 msgid "Create project"
 msgstr "Skapa nytt projekt"
 
-#: ../src/gui/gui-main.c:886
+#: ../src/gui/gui-main.c:883
+#, fuzzy
+msgid "_Save"
+msgstr "Spara"
+
+#: ../src/gui/gui-main.c:920
 msgid "LaTeX files"
 msgstr "LaTeX-filer"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:937
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Bildfiler"
 
-#: ../src/gui/gui-main.c:918
+#: ../src/gui/gui-main.c:952
 msgid "Bibtex files"
 msgstr "BibTeX-filer"
 
-#: ../src/gui/gui-main.c:924
+#: ../src/gui/gui-main.c:958
 msgid "Gummi project files"
 msgstr "Gummi-projektfiler"
 
-#: ../src/gui/gui-menu.c:185
+#: ../src/gui/gui-menu.c:187
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Kunde inte öppna filen %s"
 
-#: ../src/gui/gui-menu.c:430
+#: ../src/gui/gui-menu.c:432
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:433
+#: ../src/gui/gui-menu.c:435
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "Fel upptäcktes under körning av Makeindex..."
 
-#: ../src/gui/gui-menu.c:440
+#: ../src/gui/gui-menu.c:442
 msgid "Running Makeindex.."
 msgstr "Kör Makeindex..."
 
-#: ../src/gui/gui-menu.c:443
+#: ../src/gui/gui-menu.c:445
 msgid "Error running Makeindex.."
 msgstr "Fel upptäcktes under körning av Makeindex..."
 
-#: ../src/gui/gui-menu.c:467
+#: ../src/gui/gui-menu.c:469
 msgid "Words in text"
 msgstr "Ord i texten"
 
-#: ../src/gui/gui-menu.c:468
+#: ../src/gui/gui-menu.c:470
 msgid "Words in headers"
 msgstr "Ord i rubriker"
 
-#: ../src/gui/gui-menu.c:469
+#: ../src/gui/gui-menu.c:471
 msgid "Words in float captions"
 msgstr "Svävande rubriker"
 
-#: ../src/gui/gui-menu.c:470
+#: ../src/gui/gui-menu.c:472
 msgid "Number of headers"
 msgstr "Rubriker"
 
-#: ../src/gui/gui-menu.c:471
+#: ../src/gui/gui-menu.c:473
 msgid "Number of floats"
 msgstr "Svävande element"
 
-#: ../src/gui/gui-menu.c:472
+#: ../src/gui/gui-menu.c:474
 msgid "Number of math inlines"
 msgstr "Ekvationer i texten"
 
-#: ../src/gui/gui-menu.c:473
+#: ../src/gui/gui-menu.c:475
 msgid "Number of math displayed"
 msgstr "Ekvationer"
 
-#: ../src/gui/gui-menu.c:608
+#: ../src/gui/gui-menu.c:610
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "Du måste spara aktivt dokument\n"
 "innan du kan använda den här funktionen."
 
-#: ../src/gui/gui-preview.c:905
+#: ../src/gui/gui-preview.c:965
 #, c-format
 msgid "of %d"
 msgstr "av %d"
 
-#: ../src/gui/gui-snippets.c:329
+#: ../src/gui/gui-snippets.c:325
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr "Detta tangentbordskommando används redan, välj ett annat.\n"
 
-#: ../src/gui/gui-snippets.c:343
+#: ../src/gui/gui-snippets.c:339
 msgid "Type a new shortcut"
 msgstr "Ange nytt kortkommando"
 
-#: ../src/gui/gui-snippets.c:346
+#: ../src/gui/gui-snippets.c:342
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Ange ny tangentkombination eller tryck backsteg för att tömma"
 
-#: ../src/editor.c:606
+#: ../src/gui/gui-tabmanager.c:97
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gui/gui-tabmanager.c:99
+msgid "_No"
+msgstr ""
+
+#: ../src/editor.c:607
 msgid "Top reached, search from bottom?"
 msgstr "Början av dokumentet nådd, fortsätta från slutet?"
 
-#: ../src/editor.c:613
+#: ../src/editor.c:614
 msgid "Bottom reached, search from top?"
 msgstr "Slutet av dokumentet nått, fortsätta från början?"
 
@@ -1167,6 +1191,24 @@ msgstr "Osparat dokument %d"
 #: ../src/utils.c:158 ../src/utils.c:177
 msgid "Confirmation"
 msgstr "Bekräftelse"
+
+#~ msgid "Save early.. save often!"
+#~ msgstr "Spara tidigt, spara ofta!"
+
+#, fuzzy
+#~ msgid "10"
+#~ msgstr "0"
+
+#, fuzzy
+#~ msgid "Bibliography compiled without errors"
+#~ msgstr "Bibliografin skapad utan fel"
+
+#, fuzzy
+#~ msgid "Error compiling bibliography file"
+#~ msgstr "Kunde inte skapa bibliografin"
+
+#~ msgid "%s loaded"
+#~ msgstr "%s laddad"
 
 #~ msgid "None"
 #~ msgstr "Ingen"

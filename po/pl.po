@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 17:05+0200\n"
+"POT-Creation-Date: 2019-10-03 20:00+0200\n"
 "PO-Revision-Date: 2010-11-11 01:08+0100\n"
 "Last-Translator: Hubert Kowalski <johnnybit@gmail.com>\n"
 "Language-Team: Polish Translation <johnnybit@gmail.com>\n"
@@ -263,7 +263,7 @@ msgstr ""
 msgid "Create new Project"
 msgstr "Tworzy nowy dokument"
 
-#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:623
+#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:625
 #, fuzzy
 msgid ""
 "This function requires the current\n"
@@ -418,7 +418,10 @@ msgstr ""
 msgid "Filename:"
 msgstr "Nazwa pliku:"
 
-#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:667
+#. NOTE gtk3s bar doesnt place text inside the widget anymore :/
+#. gtk_progress_bar_set_text (gummi->biblio->progressbar,
+#. _("no bibliography file detected"));
+#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:696
 msgid "none"
 msgstr "brak"
 
@@ -426,7 +429,7 @@ msgstr "brak"
 msgid "References:"
 msgstr "Odwołania:"
 
-#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:668
+#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:697
 msgid "N/A"
 msgstr "N/D"
 
@@ -452,7 +455,7 @@ msgstr ""
 "Skompiluj aktywną \n"
 "bazę bibliografii"
 
-#: ../data/ui/gummi.glade.h:114 ../src/gui/gui-main.c:666
+#: ../data/ui/gummi.glade.h:114
 msgid "no bibliography file detected"
 msgstr "nie znaleziono pliku bibliografii"
 
@@ -553,43 +556,34 @@ msgid "Replace _All"
 msgstr "Zastąp _Wszystkie"
 
 #: ../data/ui/gummi.glade.h:137
-msgid "Save early.. save often!"
-msgstr ""
-
-#: ../data/ui/gummi.glade.h:138
-#, fuzzy
-msgid "10"
-msgstr "0"
-
-#: ../data/ui/gummi.glade.h:139
 msgid "Align left"
 msgstr "Wyrównaj do lewej"
 
-#: ../data/ui/gummi.glade.h:140
+#: ../data/ui/gummi.glade.h:138
 msgid "Align center"
 msgstr "Wyrównaj do środka"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:139
 msgid "Align right"
 msgstr "Wyrównaj do prawej"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:140
 msgid "No borders"
 msgstr "Bez obramowania"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:141
 msgid "Border outline"
 msgstr "Obramowanie"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:142
 msgid "Border all cells"
 msgstr "Obramowanie wszystkich komórek"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:143
 msgid "Create new document from template.."
 msgstr "Utwórz nowy dokument na bazie szablonu"
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:144
 msgid ""
 "Make a template from the \n"
 "current active document."
@@ -597,23 +591,23 @@ msgstr ""
 "Utwórz szablon na podstawie \n"
 " aktywnego dokumentu."
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:146
 msgid "Deletes the selected template"
 msgstr "Usuwa wybrany szablon"
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:147
 msgid "Open the selected template"
 msgstr "Otwórz wybrany szablon"
 
-#: ../data/ui/gummi.glade.h:150
+#: ../data/ui/gummi.glade.h:148
 msgid "Rows:"
 msgstr "Wiersze:"
 
-#: ../data/ui/gummi.glade.h:151
+#: ../data/ui/gummi.glade.h:149
 msgid "Columns:"
 msgstr "Kolumny:"
 
-#: ../data/ui/gummi.glade.h:152
+#: ../data/ui/gummi.glade.h:150
 msgid "Bracket:"
 msgstr "Klamra:"
 
@@ -955,93 +949,115 @@ msgid ""
 "is restarted.\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:367
+#: ../src/gui/gui-main.c:388
 #, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:419 ../src/latex.c:270
+#: ../src/gui/gui-main.c:440 ../src/latex.c:270
 msgid "The file already exists. Overwrite?"
 msgstr "Plik już istnieje. Nadpisać?"
 
+#: ../src/gui/gui-main.c:458
+msgid ""
+"The content of the file has been changed externally. Saving will remove any "
+"external modifications."
+msgstr ""
+
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:547
+#: ../src/gui/gui-main.c:572
 #, c-format
 msgid "Loading template ..."
 msgstr ""
 
-#: ../src/gui/gui-main.c:616
-msgid "Compiling bibliography file..."
+#: ../src/gui/gui-main.c:641
+#, fuzzy
+msgid "Compiling bibliography file.."
 msgstr "Kompilacja pliku bibliografii..."
 
-#: ../src/gui/gui-main.c:618
+#: ../src/gui/gui-main.c:648
 #, fuzzy
-msgid "Bibliography compiled without errors"
-msgstr "bibliografia skompilowana bez błędów"
-
-#: ../src/gui/gui-main.c:622
-msgid "Error compiling bibliography file or none detected..."
+msgid "Error compiling bibliography file or none detected.."
 msgstr "Błąd kompilacji pliku bibliografii lub plik nie znaleziony"
 
-#: ../src/gui/gui-main.c:624
+#: ../src/gui/gui-main.c:692
 #, fuzzy
-msgid "Error compiling bibliography file"
-msgstr "błąd przy kompilacji bibliografii"
+msgid "No bibliography file detected in document.."
+msgstr "nie znaleziono pliku bibliografii"
 
-#: ../src/gui/gui-main.c:657
-#, c-format
-msgid "%s loaded"
-msgstr "%s Wczytane"
+#: ../src/gui/gui-main.c:798
+msgid "This document has unsaved changes"
+msgstr ""
 
-#: ../src/gui/gui-main.c:767
+#: ../src/gui/gui-main.c:801
 #, fuzzy, c-format
-msgid "Do you want to save the changes to %s?"
+msgid "Do you want to save the changes to %s before closing?"
 msgstr "Chcesz zapisać zmiany w dokumencie?"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:802
 #, fuzzy
 msgid "this document"
 msgstr "Otwiera dokument LaTeX"
 
-#: ../src/gui/gui-main.c:776
-msgid "Unsaved Changes"
+#: ../src/gui/gui-main.c:805
+msgid "_Close without Saving"
 msgstr ""
 
-#: ../src/gui/gui-main.c:798
+#: ../src/gui/gui-main.c:806 ../src/gui/gui-main.c:844
+#: ../src/gui/gui-main.c:882
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/gui/gui-main.c:807
+#, fuzzy
+msgid "_Save As"
+msgstr "Z_apisz Jako..."
+
+#: ../src/gui/gui-main.c:832
 msgid "Open LaTeX document"
 msgstr "Otwiera dokument LaTeX"
 
-#: ../src/gui/gui-main.c:801
+#: ../src/gui/gui-main.c:835
 msgid "Select an image to insert"
 msgstr "Wybierz obrazek do wstawienia"
 
-#: ../src/gui/gui-main.c:802
+#: ../src/gui/gui-main.c:836
 msgid "Select bibliography file"
 msgstr "Wybierz plik bibliografii"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:837
 #, fuzzy
 msgid "Select project file"
 msgstr "Preferencje Gummi"
 
-#: ../src/gui/gui-main.c:836
+#: ../src/gui/gui-main.c:845
+#, fuzzy
+msgid "_Open"
+msgstr "Otwórz"
+
+#: ../src/gui/gui-main.c:870
 msgid "Save LaTeX document"
 msgstr "Zapisz dokument LaTeX"
 
-#: ../src/gui/gui-main.c:837
+#: ../src/gui/gui-main.c:871
 msgid "Save as LaTeX document"
 msgstr "Zapisz jako dokument LaTeX"
 
-#: ../src/gui/gui-main.c:838
+#: ../src/gui/gui-main.c:872
 msgid "Export to PDF"
 msgstr "Eksport do pliku PDF"
 
-#: ../src/gui/gui-main.c:841
+#: ../src/gui/gui-main.c:875
 #, fuzzy
 msgid "Create project"
 msgstr "Tworzy nowy dokument"
 
-#: ../src/gui/gui-main.c:886
+#: ../src/gui/gui-main.c:883
+#, fuzzy
+msgid "_Save"
+msgstr "Zapisz"
+
+#: ../src/gui/gui-main.c:920
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Wczytaj plik"
@@ -1049,100 +1065,108 @@ msgstr "Wczytaj plik"
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:937
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Obrazek"
 
-#: ../src/gui/gui-main.c:918
+#: ../src/gui/gui-main.c:952
 msgid "Bibtex files"
 msgstr ""
 
-#: ../src/gui/gui-main.c:924
+#: ../src/gui/gui-main.c:958
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Preferencje Gummi"
 
-#: ../src/gui/gui-menu.c:185
+#: ../src/gui/gui-menu.c:187
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Błąd przy otwieraniu niedawno otwartego pliku %s"
 
-#: ../src/gui/gui-menu.c:430
+#: ../src/gui/gui-menu.c:432
 msgid "Succesfully removed build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:433
+#: ../src/gui/gui-menu.c:435
 msgid "Error removing build files.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:440
+#: ../src/gui/gui-menu.c:442
 msgid "Running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:443
+#: ../src/gui/gui-menu.c:445
 msgid "Error running Makeindex.."
 msgstr ""
 
-#: ../src/gui/gui-menu.c:467
+#: ../src/gui/gui-menu.c:469
 msgid "Words in text"
 msgstr "Słów w tekście"
 
-#: ../src/gui/gui-menu.c:468
+#: ../src/gui/gui-menu.c:470
 msgid "Words in headers"
 msgstr "Słów w nagłówkach"
 
-#: ../src/gui/gui-menu.c:469
+#: ../src/gui/gui-menu.c:471
 msgid "Words in float captions"
 msgstr "Słów w podpisach"
 
-#: ../src/gui/gui-menu.c:470
+#: ../src/gui/gui-menu.c:472
 msgid "Number of headers"
 msgstr "Liczba nagłówków"
 
-#: ../src/gui/gui-menu.c:471
+#: ../src/gui/gui-menu.c:473
 msgid "Number of floats"
 msgstr "Liczba pływających elementów"
 
-#: ../src/gui/gui-menu.c:472
+#: ../src/gui/gui-menu.c:474
 msgid "Number of math inlines"
 msgstr "Liczba wzorów w liniach"
 
-#: ../src/gui/gui-menu.c:473
+#: ../src/gui/gui-menu.c:475
 msgid "Number of math displayed"
 msgstr "Liczba wzorów odgraniczonych"
 
-#: ../src/gui/gui-menu.c:608
+#: ../src/gui/gui-menu.c:610
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "Ta funkcja wymaga\n"
 "programu texcount.\n"
 
-#: ../src/gui/gui-preview.c:905
+#: ../src/gui/gui-preview.c:965
 #, c-format
 msgid "of %d"
 msgstr ""
 
-#: ../src/gui/gui-snippets.c:329
+#: ../src/gui/gui-snippets.c:325
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
 
-#: ../src/gui/gui-snippets.c:343
+#: ../src/gui/gui-snippets.c:339
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Tworzy nowy dokument"
 
-#: ../src/gui/gui-snippets.c:346
+#: ../src/gui/gui-snippets.c:342
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/editor.c:606
+#: ../src/gui/gui-tabmanager.c:97
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gui/gui-tabmanager.c:99
+msgid "_No"
+msgstr ""
+
+#: ../src/editor.c:607
 msgid "Top reached, search from bottom?"
 msgstr "Osiągnięto górną granicę, zacząć od dołu?”"
 
-#: ../src/editor.c:613
+#: ../src/editor.c:614
 msgid "Bottom reached, search from top?"
 msgstr "Osiągnięto dolną granicę, zacząć od góry?"
 
@@ -1180,6 +1204,21 @@ msgstr ""
 #: ../src/utils.c:158 ../src/utils.c:177
 msgid "Confirmation"
 msgstr "Potwierdzenie"
+
+#, fuzzy
+#~ msgid "10"
+#~ msgstr "0"
+
+#, fuzzy
+#~ msgid "Bibliography compiled without errors"
+#~ msgstr "bibliografia skompilowana bez błędów"
+
+#, fuzzy
+#~ msgid "Error compiling bibliography file"
+#~ msgstr "błąd przy kompilacji bibliografii"
+
+#~ msgid "%s loaded"
+#~ msgstr "%s Wczytane"
 
 #~ msgid "None"
 #~ msgstr "Brak"

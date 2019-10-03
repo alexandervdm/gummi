@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 17:05+0200\n"
+"POT-Creation-Date: 2019-10-03 20:00+0200\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -249,7 +249,7 @@ msgstr "專案(_P)"
 msgid "Create new Project"
 msgstr "建立新專案"
 
-#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:623
+#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:625
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -399,7 +399,10 @@ msgstr "專案"
 msgid "Filename:"
 msgstr "檔名:"
 
-#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:667
+#. NOTE gtk3s bar doesnt place text inside the widget anymore :/
+#. gtk_progress_bar_set_text (gummi->biblio->progressbar,
+#. _("no bibliography file detected"));
+#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:696
 msgid "none"
 msgstr "無"
 
@@ -407,7 +410,7 @@ msgstr "無"
 msgid "References:"
 msgstr "參考:"
 
-#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:668
+#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:697
 msgid "N/A"
 msgstr "無"
 
@@ -431,7 +434,7 @@ msgid ""
 "bibliography database"
 msgstr "編譯目前的參考文獻"
 
-#: ../data/ui/gummi.glade.h:114 ../src/gui/gui-main.c:666
+#: ../data/ui/gummi.glade.h:114
 msgid "no bibliography file detected"
 msgstr "無法找到參考文獻"
 
@@ -524,65 +527,56 @@ msgid "Replace _All"
 msgstr "全部取代(_A)"
 
 #: ../data/ui/gummi.glade.h:137
-msgid "Save early.. save often!"
-msgstr "多存檔有益身體建康!"
-
-#: ../data/ui/gummi.glade.h:138
-#, fuzzy
-msgid "10"
-msgstr "0"
-
-#: ../data/ui/gummi.glade.h:139
 msgid "Align left"
 msgstr "向左對齊"
 
-#: ../data/ui/gummi.glade.h:140
+#: ../data/ui/gummi.glade.h:138
 msgid "Align center"
 msgstr "置中"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:139
 msgid "Align right"
 msgstr "向右對齊"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:140
 msgid "No borders"
 msgstr "無邊框"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:141
 msgid "Border outline"
 msgstr "外層邊框"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:142
 msgid "Border all cells"
 msgstr "完整邊框"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:143
 msgid "Create new document from template.."
 msgstr "從模版建立新文件.."
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:144
 msgid ""
 "Make a template from the \n"
 "current active document."
 msgstr "從目前編輯的文件產生模版."
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:146
 msgid "Deletes the selected template"
 msgstr "刪除選擇的模版"
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:147
 msgid "Open the selected template"
 msgstr "打開選擇的模版"
 
-#: ../data/ui/gummi.glade.h:150
+#: ../data/ui/gummi.glade.h:148
 msgid "Rows:"
 msgstr "列:"
 
-#: ../data/ui/gummi.glade.h:151
+#: ../data/ui/gummi.glade.h:149
 msgid "Columns:"
 msgstr "行:"
 
-#: ../data/ui/gummi.glade.h:152
+#: ../data/ui/gummi.glade.h:150
 msgid "Bracket:"
 msgstr "括弧:"
 
@@ -912,191 +906,221 @@ msgstr ""
 "您選擇的編譯程式無法被找到. 請重新安裝編譯程式或是\n"
 "選擇其他的編譯程式. PDF預覽將在Gummi重啟後恢復.\n"
 
-#: ../src/gui/gui-main.c:367
+#: ../src/gui/gui-main.c:388
 #, fuzzy, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
 msgstr "找到%s的暫存檔, 你想要從暫存檔回復嗎?"
 
-#: ../src/gui/gui-main.c:419 ../src/latex.c:270
+#: ../src/gui/gui-main.c:440 ../src/latex.c:270
 msgid "The file already exists. Overwrite?"
 msgstr "檔案已存在, 覆蓋嗎?"
 
+#: ../src/gui/gui-main.c:458
+msgid ""
+"The content of the file has been changed externally. Saving will remove any "
+"external modifications."
+msgstr ""
+
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:547
+#: ../src/gui/gui-main.c:572
 #, c-format
 msgid "Loading template ..."
 msgstr "載入模版中..."
 
-#: ../src/gui/gui-main.c:616
-msgid "Compiling bibliography file..."
+#: ../src/gui/gui-main.c:641
+#, fuzzy
+msgid "Compiling bibliography file.."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui/gui-main.c:618
+#: ../src/gui/gui-main.c:648
 #, fuzzy
-msgid "Bibliography compiled without errors"
-msgstr "參考文獻已成功編譯"
-
-#: ../src/gui/gui-main.c:622
-msgid "Error compiling bibliography file or none detected..."
+msgid "Error compiling bibliography file or none detected.."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui/gui-main.c:624
+#: ../src/gui/gui-main.c:692
 #, fuzzy
-msgid "Error compiling bibliography file"
-msgstr "編譯參考文獻過程發生錯誤"
+msgid "No bibliography file detected in document.."
+msgstr "無法找到參考文獻"
 
-#: ../src/gui/gui-main.c:657
-#, c-format
-msgid "%s loaded"
-msgstr "已載入%s"
+#: ../src/gui/gui-main.c:798
+msgid "This document has unsaved changes"
+msgstr ""
 
-#: ../src/gui/gui-main.c:767
+#: ../src/gui/gui-main.c:801
 #, fuzzy, c-format
-msgid "Do you want to save the changes to %s?"
+msgid "Do you want to save the changes to %s before closing?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:802
 #, fuzzy
 msgid "this document"
 msgstr "輸入文件"
 
-#: ../src/gui/gui-main.c:776
-msgid "Unsaved Changes"
-msgstr "未儲存變更"
+#: ../src/gui/gui-main.c:805
+msgid "_Close without Saving"
+msgstr ""
 
-#: ../src/gui/gui-main.c:798
+#: ../src/gui/gui-main.c:806 ../src/gui/gui-main.c:844
+#: ../src/gui/gui-main.c:882
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/gui/gui-main.c:807
+#, fuzzy
+msgid "_Save As"
+msgstr "另存新檔...(_A)"
+
+#: ../src/gui/gui-main.c:832
 msgid "Open LaTeX document"
 msgstr "開啟LaTeX文件"
 
-#: ../src/gui/gui-main.c:801
+#: ../src/gui/gui-main.c:835
 msgid "Select an image to insert"
 msgstr "選擇要插入的影像"
 
-#: ../src/gui/gui-main.c:802
+#: ../src/gui/gui-main.c:836
 msgid "Select bibliography file"
 msgstr "選擇參考文獻檔案"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:837
 #, fuzzy
 msgid "Select project file"
 msgstr "Gummi 專案檔"
 
-#: ../src/gui/gui-main.c:836
+#: ../src/gui/gui-main.c:845
+#, fuzzy
+msgid "_Open"
+msgstr "開啟"
+
+#: ../src/gui/gui-main.c:870
 msgid "Save LaTeX document"
 msgstr "儲存LaTeX文件"
 
-#: ../src/gui/gui-main.c:837
+#: ../src/gui/gui-main.c:871
 msgid "Save as LaTeX document"
 msgstr "另存為LaTeX文件"
 
-#: ../src/gui/gui-main.c:838
+#: ../src/gui/gui-main.c:872
 msgid "Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../src/gui/gui-main.c:841
+#: ../src/gui/gui-main.c:875
 msgid "Create project"
 msgstr "建立新專案"
 
-#: ../src/gui/gui-main.c:886
+#: ../src/gui/gui-main.c:883
+#, fuzzy
+msgid "_Save"
+msgstr "儲存"
+
+#: ../src/gui/gui-main.c:920
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:937
 #, fuzzy
 msgid "Supported Image files"
 msgstr "影像檔"
 
-#: ../src/gui/gui-main.c:918
+#: ../src/gui/gui-main.c:952
 msgid "Bibtex files"
 msgstr "參考文獻"
 
-#: ../src/gui/gui-main.c:924
+#: ../src/gui/gui-main.c:958
 msgid "Gummi project files"
 msgstr "Gummi 專案檔"
 
-#: ../src/gui/gui-menu.c:185
+#: ../src/gui/gui-menu.c:187
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "載入最近使用文件時發生錯誤: %s"
 
-#: ../src/gui/gui-menu.c:430
+#: ../src/gui/gui-menu.c:432
 msgid "Succesfully removed build files.."
 msgstr "成功移除編譯檔案"
 
-#: ../src/gui/gui-menu.c:433
+#: ../src/gui/gui-menu.c:435
 #, fuzzy
 msgid "Error removing build files.."
 msgstr "執行Makeindex的過程中發生錯誤.."
 
-#: ../src/gui/gui-menu.c:440
+#: ../src/gui/gui-menu.c:442
 msgid "Running Makeindex.."
 msgstr "執行Makeindex中.."
 
-#: ../src/gui/gui-menu.c:443
+#: ../src/gui/gui-menu.c:445
 msgid "Error running Makeindex.."
 msgstr "執行Makeindex的過程中發生錯誤.."
 
-#: ../src/gui/gui-menu.c:467
+#: ../src/gui/gui-menu.c:469
 msgid "Words in text"
 msgstr "純文字數"
 
-#: ../src/gui/gui-menu.c:468
+#: ../src/gui/gui-menu.c:470
 msgid "Words in headers"
 msgstr "標頭內總字數"
 
-#: ../src/gui/gui-menu.c:469
+#: ../src/gui/gui-menu.c:471
 msgid "Words in float captions"
 msgstr "浮動標題內總字數"
 
-#: ../src/gui/gui-menu.c:470
+#: ../src/gui/gui-menu.c:472
 msgid "Number of headers"
 msgstr "標頭總數"
 
-#: ../src/gui/gui-menu.c:471
+#: ../src/gui/gui-menu.c:473
 msgid "Number of floats"
 msgstr "浮動元件總數"
 
-#: ../src/gui/gui-menu.c:472
+#: ../src/gui/gui-menu.c:474
 msgid "Number of math inlines"
 msgstr "行內數學式總數"
 
-#: ../src/gui/gui-menu.c:473
+#: ../src/gui/gui-menu.c:475
 msgid "Number of math displayed"
 msgstr "顯示的數學式總數"
 
-#: ../src/gui/gui-menu.c:608
+#: ../src/gui/gui-menu.c:610
 #, fuzzy
 msgid "This function requires an active document"
 msgstr ""
 "這項功能需要\n"
 "當前文件存檔後才能執行."
 
-#: ../src/gui/gui-preview.c:905
+#: ../src/gui/gui-preview.c:965
 #, c-format
 msgid "of %d"
 msgstr "之 %d"
 
-#: ../src/gui/gui-snippets.c:329
+#: ../src/gui/gui-snippets.c:325
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr "Tab觸發字串重覆! 請選擇另一個字串.\n"
 
-#: ../src/gui/gui-snippets.c:343
+#: ../src/gui/gui-snippets.c:339
 msgid "Type a new shortcut"
 msgstr "輸入新的捷徑"
 
-#: ../src/gui/gui-snippets.c:346
+#: ../src/gui/gui-snippets.c:342
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "輸入新的捷徑, 或按後退鍵清除"
 
-#: ../src/editor.c:606
+#: ../src/gui/gui-tabmanager.c:97
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gui/gui-tabmanager.c:99
+msgid "_No"
+msgstr ""
+
+#: ../src/editor.c:607
 msgid "Top reached, search from bottom?"
 msgstr "已搜尋到文首, 從文末開始尋找?"
 
-#: ../src/editor.c:613
+#: ../src/editor.c:614
 msgid "Bottom reached, search from top?"
 msgstr "已搜尋到文末, 從文首開始尋找?"
 
@@ -1134,6 +1158,27 @@ msgstr "未儲存文件 %d"
 #: ../src/utils.c:158 ../src/utils.c:177
 msgid "Confirmation"
 msgstr "確認"
+
+#~ msgid "Save early.. save often!"
+#~ msgstr "多存檔有益身體建康!"
+
+#, fuzzy
+#~ msgid "10"
+#~ msgstr "0"
+
+#, fuzzy
+#~ msgid "Bibliography compiled without errors"
+#~ msgstr "參考文獻已成功編譯"
+
+#, fuzzy
+#~ msgid "Error compiling bibliography file"
+#~ msgstr "編譯參考文獻過程發生錯誤"
+
+#~ msgid "%s loaded"
+#~ msgstr "已載入%s"
+
+#~ msgid "Unsaved Changes"
+#~ msgstr "未儲存變更"
 
 #~ msgid "None"
 #~ msgstr "無"

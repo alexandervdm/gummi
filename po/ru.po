@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 17:05+0200\n"
+"POT-Creation-Date: 2019-10-03 20:00+0200\n"
 "PO-Revision-Date: 2012-10-22 20:42+0300\n"
 "Last-Translator: Musatov M. <m1kc@yandex.ru>\n"
 "Language-Team: Russian\n"
@@ -272,7 +272,7 @@ msgstr "Проект"
 msgid "Create new Project"
 msgstr "Создать новый документ"
 
-#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:623
+#: ../data/ui/gummi.glade.h:67 ../src/gui/gui-menu.c:625
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -432,7 +432,10 @@ msgstr "Проект"
 msgid "Filename:"
 msgstr "Имя файла:"
 
-#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:667
+#. NOTE gtk3s bar doesnt place text inside the widget anymore :/
+#. gtk_progress_bar_set_text (gummi->biblio->progressbar,
+#. _("no bibliography file detected"));
+#: ../data/ui/gummi.glade.h:105 ../src/gui/gui-main.c:696
 msgid "none"
 msgstr "отсутствует"
 
@@ -440,7 +443,7 @@ msgstr "отсутствует"
 msgid "References:"
 msgstr "Ссылки:"
 
-#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:668
+#: ../data/ui/gummi.glade.h:107 ../src/gui/gui-main.c:697
 msgid "N/A"
 msgstr "N/A"
 
@@ -468,7 +471,7 @@ msgid ""
 "bibliography database"
 msgstr "_Скомпилировать библиографию"
 
-#: ../data/ui/gummi.glade.h:114 ../src/gui/gui-main.c:666
+#: ../data/ui/gummi.glade.h:114
 msgid "no bibliography file detected"
 msgstr "Файл библиографии отсутствует"
 
@@ -569,43 +572,35 @@ msgid "Replace _All"
 msgstr "Заменить все"
 
 #: ../data/ui/gummi.glade.h:137
-msgid "Save early.. save often!"
-msgstr "Сохраняйтесь чаще!"
-
-#: ../data/ui/gummi.glade.h:138
-msgid "10"
-msgstr "10"
-
-#: ../data/ui/gummi.glade.h:139
 msgid "Align left"
 msgstr "Выровнять по левому краю"
 
-#: ../data/ui/gummi.glade.h:140
+#: ../data/ui/gummi.glade.h:138
 msgid "Align center"
 msgstr "Выровнять по центру"
 
-#: ../data/ui/gummi.glade.h:141
+#: ../data/ui/gummi.glade.h:139
 msgid "Align right"
 msgstr "Выровнять по правому краю"
 
-#: ../data/ui/gummi.glade.h:142
+#: ../data/ui/gummi.glade.h:140
 msgid "No borders"
 msgstr "Без границ"
 
-#: ../data/ui/gummi.glade.h:143
+#: ../data/ui/gummi.glade.h:141
 msgid "Border outline"
 msgstr "Обрамление контура"
 
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:142
 msgid "Border all cells"
 msgstr "Обрамление всех ячеек"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:143
 #, fuzzy
 msgid "Create new document from template.."
 msgstr "Создать новый документ.."
 
-#: ../data/ui/gummi.glade.h:146
+#: ../data/ui/gummi.glade.h:144
 msgid ""
 "Make a template from the \n"
 "current active document."
@@ -613,23 +608,23 @@ msgstr ""
 "Создать шаблон из \n"
 "текущего документа."
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:146
 msgid "Deletes the selected template"
 msgstr "Удаляет выбранный шаблон"
 
-#: ../data/ui/gummi.glade.h:149
+#: ../data/ui/gummi.glade.h:147
 msgid "Open the selected template"
 msgstr "Открыть выбранный шаблон"
 
-#: ../data/ui/gummi.glade.h:150
+#: ../data/ui/gummi.glade.h:148
 msgid "Rows:"
 msgstr "Строки:"
 
-#: ../data/ui/gummi.glade.h:151
+#: ../data/ui/gummi.glade.h:149
 msgid "Columns:"
 msgstr "Колонки:"
 
-#: ../data/ui/gummi.glade.h:152
+#: ../data/ui/gummi.glade.h:150
 msgid "Bracket:"
 msgstr "Скобки:"
 
@@ -982,99 +977,119 @@ msgid ""
 "is restarted.\n"
 msgstr ""
 
-#: ../src/gui/gui-main.c:367
+#: ../src/gui/gui-main.c:388
 #, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
 msgstr ""
 
-#: ../src/gui/gui-main.c:419 ../src/latex.c:270
+#: ../src/gui/gui-main.c:440 ../src/latex.c:270
 msgid "The file already exists. Overwrite?"
 msgstr ""
 
+#: ../src/gui/gui-main.c:458
+msgid ""
+"The content of the file has been changed externally. Saving will remove any "
+"external modifications."
+msgstr ""
+
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:547
+#: ../src/gui/gui-main.c:572
 #, c-format
 msgid "Loading template ..."
 msgstr "Загрузка шаблона..."
 
-#: ../src/gui/gui-main.c:616
+#: ../src/gui/gui-main.c:641
 #, fuzzy
-msgid "Compiling bibliography file..."
+msgid "Compiling bibliography file.."
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:618
+#: ../src/gui/gui-main.c:648
 #, fuzzy
-msgid "Bibliography compiled without errors"
+msgid "Error compiling bibliography file or none detected.."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:622
+#: ../src/gui/gui-main.c:692
 #, fuzzy
-msgid "Error compiling bibliography file or none detected..."
+msgid "No bibliography file detected in document.."
 msgstr "Файл библиографии отсутствует"
 
-#: ../src/gui/gui-main.c:624
-#, fuzzy
-msgid "Error compiling bibliography file"
-msgstr "_Скомпилировать библиографию"
+#: ../src/gui/gui-main.c:798
+msgid "This document has unsaved changes"
+msgstr ""
 
-#: ../src/gui/gui-main.c:657
+#: ../src/gui/gui-main.c:801
 #, fuzzy, c-format
-msgid "%s loaded"
-msgstr "%s загружен"
-
-#: ../src/gui/gui-main.c:767
-#, c-format
-msgid "Do you want to save the changes to %s?"
+msgid "Do you want to save the changes to %s before closing?"
 msgstr "Вы хотите сохранить изменения в %s?"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:802
 #, fuzzy
 msgid "this document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:776
-msgid "Unsaved Changes"
-msgstr "Несохранённые изменения"
+#: ../src/gui/gui-main.c:805
+msgid "_Close without Saving"
+msgstr ""
 
-#: ../src/gui/gui-main.c:798
+#: ../src/gui/gui-main.c:806 ../src/gui/gui-main.c:844
+#: ../src/gui/gui-main.c:882
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/gui/gui-main.c:807
+#, fuzzy
+msgid "_Save As"
+msgstr "Сохранить как..."
+
+#: ../src/gui/gui-main.c:832
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:801
+#: ../src/gui/gui-main.c:835
 msgid "Select an image to insert"
 msgstr "Выберите изображение для вставки"
 
-#: ../src/gui/gui-main.c:802
+#: ../src/gui/gui-main.c:836
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "_Скомпилировать библиографию"
 
-#: ../src/gui/gui-main.c:803
+#: ../src/gui/gui-main.c:837
 #, fuzzy
 msgid "Select project file"
 msgstr "Настройки Gummi"
 
-#: ../src/gui/gui-main.c:836
+#: ../src/gui/gui-main.c:845
+#, fuzzy
+msgid "_Open"
+msgstr "Открыть"
+
+#: ../src/gui/gui-main.c:870
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:837
+#: ../src/gui/gui-main.c:871
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:838
+#: ../src/gui/gui-main.c:872
 msgid "Export to PDF"
 msgstr "Экспортировать в PDF"
 
-#: ../src/gui/gui-main.c:841
+#: ../src/gui/gui-main.c:875
 #, fuzzy
 msgid "Create project"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-main.c:886
+#: ../src/gui/gui-main.c:883
+#, fuzzy
+msgid "_Save"
+msgstr "Сохранить"
+
+#: ../src/gui/gui-main.c:920
 #, fuzzy
 msgid "LaTeX files"
 msgstr "Открыть файл"
@@ -1082,100 +1097,108 @@ msgstr "Открыть файл"
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:903
+#: ../src/gui/gui-main.c:937
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Изображение"
 
-#: ../src/gui/gui-main.c:918
+#: ../src/gui/gui-main.c:952
 msgid "Bibtex files"
 msgstr "Файлы Bibtex"
 
-#: ../src/gui/gui-main.c:924
+#: ../src/gui/gui-main.c:958
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Настройки Gummi"
 
-#: ../src/gui/gui-menu.c:185
+#: ../src/gui/gui-menu.c:187
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:430
+#: ../src/gui/gui-menu.c:432
 msgid "Succesfully removed build files.."
 msgstr "Файлы сборки успешно удалены."
 
-#: ../src/gui/gui-menu.c:433
+#: ../src/gui/gui-menu.c:435
 msgid "Error removing build files.."
 msgstr "Ошибка при удалении файлов сборки."
 
-#: ../src/gui/gui-menu.c:440
+#: ../src/gui/gui-menu.c:442
 msgid "Running Makeindex.."
 msgstr "Запуск Makeindex..."
 
-#: ../src/gui/gui-menu.c:443
+#: ../src/gui/gui-menu.c:445
 msgid "Error running Makeindex.."
 msgstr "Ошибка при запуске Makeindex."
 
-#: ../src/gui/gui-menu.c:467
+#: ../src/gui/gui-menu.c:469
 #, fuzzy
 msgid "Words in text"
 msgstr "Жирный текст"
 
-#: ../src/gui/gui-menu.c:468
+#: ../src/gui/gui-menu.c:470
 #, fuzzy
 msgid "Words in headers"
 msgstr "Слова в заголовках"
 
-#: ../src/gui/gui-menu.c:469
+#: ../src/gui/gui-menu.c:471
 #, fuzzy
 msgid "Words in float captions"
 msgstr "Слова в плавающих заголовках"
 
-#: ../src/gui/gui-menu.c:470
+#: ../src/gui/gui-menu.c:472
 msgid "Number of headers"
 msgstr "Число заголовков"
 
-#: ../src/gui/gui-menu.c:471
+#: ../src/gui/gui-menu.c:473
 msgid "Number of floats"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:472
+#: ../src/gui/gui-menu.c:474
 msgid "Number of math inlines"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:473
+#: ../src/gui/gui-menu.c:475
 msgid "Number of math displayed"
 msgstr ""
 
-#: ../src/gui/gui-menu.c:608
+#: ../src/gui/gui-menu.c:610
 msgid "This function requires an active document"
 msgstr ""
 
-#: ../src/gui/gui-preview.c:905
+#: ../src/gui/gui-preview.c:965
 #, fuzzy, c-format
 msgid "of %d"
 msgstr "из %d"
 
-#: ../src/gui/gui-snippets.c:329
+#: ../src/gui/gui-snippets.c:325
 msgid ""
 "Duplicate activation tab trigger dectected! Please choose another one.\n"
 msgstr ""
 
-#: ../src/gui/gui-snippets.c:343
+#: ../src/gui/gui-snippets.c:339
 #, fuzzy
 msgid "Type a new shortcut"
 msgstr "Создать новый документ"
 
-#: ../src/gui/gui-snippets.c:346
+#: ../src/gui/gui-snippets.c:342
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 
-#: ../src/editor.c:606
+#: ../src/gui/gui-tabmanager.c:97
+msgid "_Yes"
+msgstr ""
+
+#: ../src/gui/gui-tabmanager.c:99
+msgid "_No"
+msgstr ""
+
+#: ../src/editor.c:607
 msgid "Top reached, search from bottom?"
 msgstr ""
 
-#: ../src/editor.c:613
+#: ../src/editor.c:614
 msgid "Bottom reached, search from top?"
 msgstr ""
 
@@ -1212,6 +1235,27 @@ msgstr ""
 #, fuzzy
 msgid "Confirmation"
 msgstr "Заголовок:"
+
+#~ msgid "Save early.. save often!"
+#~ msgstr "Сохраняйтесь чаще!"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#, fuzzy
+#~ msgid "Bibliography compiled without errors"
+#~ msgstr "Файл библиографии отсутствует"
+
+#, fuzzy
+#~ msgid "Error compiling bibliography file"
+#~ msgstr "_Скомпилировать библиографию"
+
+#, fuzzy
+#~ msgid "%s loaded"
+#~ msgstr "%s загружен"
+
+#~ msgid "Unsaved Changes"
+#~ msgstr "Несохранённые изменения"
 
 #~ msgid "None"
 #~ msgstr "None"
