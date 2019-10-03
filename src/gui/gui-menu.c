@@ -233,7 +233,6 @@ gboolean on_menu_quit_activate (void) {
     int i = 0;
     gint length = g_list_length (gummi->tabmanager->tabs);
 
-    motion_pause_compile_thread (gummi->motion);
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
         tabmanager_set_active_tab (i);
@@ -245,12 +244,13 @@ gboolean on_menu_quit_activate (void) {
             return TRUE;
     }
 
-    /* Stop compile thread */
+    // stop compile thread
     if (length > 0) motion_stop_compile_thread (gummi->motion);
 
     gtk_window_get_size (gui->mainwindow, &width, &height);
     gtk_window_get_position (gui->mainwindow, &wx, &wy);
 
+    // save current window size/position to persistent config
     config_begin();
     config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
     config_set_value ("mainwindow_y", g_ascii_dtostr (buf, 16, (double)wy));
