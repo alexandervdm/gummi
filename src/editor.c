@@ -885,6 +885,13 @@ GList* editor_list_style_scheme_sorted (void) {
     GtkSourceStyleSchemeManager* manager =
         gtk_source_style_scheme_manager_get_default();
 
+    // add custom style path ~/.config/gummi/styles:
+    gchar* custom = g_build_path (G_DIR_SEPARATOR_S, C_GUMMI_CONFDIR, "styles", NULL);
+    if (g_file_test (custom, G_FILE_TEST_IS_DIR)) {
+        gtk_source_style_scheme_manager_append_search_path (manager, custom);
+    }
+    g_free (custom);
+
     scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
 
     while (*scheme_ids != NULL) {

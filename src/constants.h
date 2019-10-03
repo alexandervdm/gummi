@@ -111,8 +111,11 @@
 "Swedish: Kess Vargavind\n" \
 "Spanish: Carlos Salas Contreras, Francisco Javier Serrador\n"
 
+// Default paths:
+#define C_GUMMI_CONFDIR g_build_path (G_DIR_SEPARATOR_S, g_get_user_config_dir(), "gummi", NULL)
+
 // Default documents:
-#define C_WELCOMETEXT g_build_filename ( g_get_user_config_dir (), "gummi", "welcome.tex", NULL)
+#define C_WELCOMETEXT g_build_filename (C_GUMMI_CONFDIR, "welcome.tex", NULL)
 #define C_DEFAULTTEXT g_build_filename (GUMMI_DATA, "misc", "default.tex", NULL)
 
 // LaTeX definitions
