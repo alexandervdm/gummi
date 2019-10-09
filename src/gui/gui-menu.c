@@ -228,10 +228,8 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
 
 G_MODULE_EXPORT
 gboolean on_menu_quit_activate (void) {
-    gint wx = 0, wy = 0, width = 0, height = 0;
-    gchar buf[16];
-    int i = 0;
     gint length = g_list_length (gummi->tabmanager->tabs);
+    int i = 0;
 
     for(i = 0; i < length; i++){
         gtk_notebook_set_current_page(gui->tabmanagergui->notebook, i);
@@ -247,16 +245,26 @@ gboolean on_menu_quit_activate (void) {
     // stop compile thread
     if (length > 0) motion_stop_compile_thread (gummi->motion);
 
-    gtk_window_get_size (gui->mainwindow, &width, &height);
-    gtk_window_get_position (gui->mainwindow, &wx, &wy);
-
     // save current window size/position to persistent config
     config_begin();
-    config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
-    config_set_value ("mainwindow_y", g_ascii_dtostr (buf, 16, (double)wy));
-    config_set_value ("mainwindow_w", g_ascii_dtostr (buf, 16, (double)width));
-    config_set_value ("mainwindow_h", g_ascii_dtostr (buf, 16, (double)height));
+    if (gtk_window_is_maximized (gui->mainwindow)) {
+        config_set_value ("mainwindow_max", "True");
+    }
+    else { // unmaximized mainwindow:
+        gint wx = 0, wy = 0, width = 0, height = 0;
+        gchar buf[16];
+
+        gtk_window_get_size (gui->mainwindow, &width, &height);
+        gtk_window_get_position (gui->mainwindow, &wx, &wy);
+
+        config_set_value ("mainwindow_max", "False");
+        config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
+        config_set_value ("mainwindow_y", g_ascii_dtostr (buf, 16, (double)wy));
+        config_set_value ("mainwindow_w", g_ascii_dtostr (buf, 16, (double)width));
+        config_set_value ("mainwindow_h", g_ascii_dtostr (buf, 16, (double)height));
+    }
     config_commit();
+
 
     gtk_main_quit ();
 

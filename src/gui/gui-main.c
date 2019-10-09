@@ -155,17 +155,25 @@ GummiGui* gui_init (GtkBuilder* builder) {
     gchar* icon_file = g_build_filename (GUMMI_DATA, "icons", "icon.png", NULL);
     gtk_window_set_icon_from_file (g->mainwindow, icon_file, NULL);
     g_free (icon_file);
-    gtk_window_resize (g->mainwindow,
-                      atoi (config_get_value ("mainwindow_w")),
-                      atoi (config_get_value ("mainwindow_h")));
 
-    wx = atoi (config_get_value ("mainwindow_x"));
-    wy = atoi (config_get_value ("mainwindow_y"));
-    if (wx && wy)
-      gtk_window_move (g->mainwindow, wx, wy);
-    else
-      gtk_window_set_position (g->mainwindow, GTK_WIN_POS_CENTER);
+    // set main window size and positioning:
+    if (TO_BOOL (config_get_value ("mainwindow_max"))) {
+        gtk_window_maximize (g->mainwindow);
+    }
+    else {
+        gtk_window_resize (g->mainwindow,
+                          atoi (config_get_value ("mainwindow_w")),
+                          atoi (config_get_value ("mainwindow_h")));
 
+        wx = atoi (config_get_value ("mainwindow_x"));
+        wy = atoi (config_get_value ("mainwindow_y"));
+        if (wx && wy) {
+            gtk_window_move (g->mainwindow, wx, wy);
+        }
+        else {
+            gtk_window_set_position (g->mainwindow, GTK_WIN_POS_CENTER);
+        }
+    }
 
     // use new css styling for errorview pane:
     gtk_widget_set_name (GTK_WIDGET (g->errorview), "errorview");

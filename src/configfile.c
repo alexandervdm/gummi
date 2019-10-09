@@ -52,6 +52,7 @@ const gchar config_str[] =
 "mainwindow_y = 0\n"
 "mainwindow_w = 792\n"
 "mainwindow_h = 558\n"
+"mainwindow_max = False\n"
 "\n"
 "[Editor]\n"
 "line_numbers = True\n"
