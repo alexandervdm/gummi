@@ -115,8 +115,8 @@ const gchar* importer_generate_matrix (gint bracket, gint rows, gint cols) {
     return result;
 }
 
-const gchar* importer_generate_image (const gchar* path, const gchar* caption,
-        const gchar* label, gdouble scale) {
+const gchar* importer_generate_image (const gchar* filepath, const gchar* caption,
+                                      const gchar* label, gdouble scale) {
     static gchar result[BUFSIZ] = { 0 };
     gchar scale_str[16] = { 0 };
     gchar* loc = NULL;
@@ -126,8 +126,8 @@ const gchar* importer_generate_image (const gchar* path, const gchar* caption,
 
     // Filepath notation corrections for Windows systems:
     #ifdef WIN32
-    path = g_strjoinv("/", g_strsplit(path, "\\", -1));
-    if (utils_subinstr (" ", path, FALSE)) {
+    path = g_strjoinv("/", g_strsplit(filepath, "\\", -1));
+    if (utils_subinstr (" ", filepath, FALSE)) {
         editor_insert_package (g_active_editor, "grffile", "space");
     }
     #endif
@@ -140,6 +140,6 @@ const gchar* importer_generate_image (const gchar* path, const gchar* caption,
 
     snprintf (result, BUFSIZ, "\\begin{figure}[htp]\n\\centering\n"
         "\\includegraphics[scale=%s]{%s}\n\\caption{%s}\n\\label{%s}\n"
-        "\\end{figure}", scale_str, path, caption, label);
+        "\\end{figure}", scale_str, filepath, caption, label);
     return result;
 }

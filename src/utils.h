@@ -160,7 +160,7 @@ gchar* utils_path_to_relative (const gchar* root, const gchar* target);
  * is passed as TRUE, case sensitivity of the two strings is ignored.
  */
 gboolean utils_subinstr (const gchar* substr, const gchar* target,
-        gboolean case_sens);
+        gboolean case_insens);
 
 gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
 

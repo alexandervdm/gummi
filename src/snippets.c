@@ -319,8 +319,9 @@ gboolean snippets_key_press_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
     return FALSE;
 }
 
-gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* e) {
-    if (e->keyval != GDK_KEY_Tab && !sc->info)
+gboolean snippets_key_release_cb (GuSnippets* sc, GuEditor* ec, GdkEventKey* ev) {
+
+    if (ev->keyval != GDK_KEY_Tab && !sc->info)
         return FALSE;
 
     if (sc->info)

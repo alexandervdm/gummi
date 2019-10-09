@@ -59,10 +59,10 @@ gboolean latexmk_detected (void) {
 
 gchar* latexmk_get_command (const gchar* method, gchar* workfile, gchar* basename) {
     gchar* outdir = g_strdup("");
-    gchar* base;
 
-    /* reroute output files to our temp directory */
+    // reroute output files to our temp directory
     if (!STR_EQU (C_TMPDIR, g_path_get_dirname (workfile))) {
+        gchar* base;
         base = g_path_get_basename (basename);
         outdir = g_strdup_printf ("-jobname=\"%s/%s\"", C_TMPDIR, base);
     }

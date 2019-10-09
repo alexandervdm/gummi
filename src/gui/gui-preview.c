@@ -138,7 +138,7 @@ static gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user);
 
 /* Functions for layout and painting */
 static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x);
-static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble x);
+static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble y);
 static void paint_page(cairo_t *cr, GuPreviewGui* pc,
                        gint page, gint x, gint y);
 static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
@@ -523,7 +523,7 @@ inline static gboolean is_continuous(GuPreviewGui* pc) {
     }
 }
 
-static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x) {
+static gint page_offset_x (GuPreviewGui* pc, gint page, gdouble x) {
     if (page < 0 || page >= pc->n_pages) {
         return 0;
     }
@@ -531,7 +531,7 @@ static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x) {
     return x + (pc->width_scaled - get_page_width(pc, page)*pc->scale) / 2;
 }
 
-static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble y) {
+static gint page_offset_y (GuPreviewGui* pc, gint page, gdouble y) {
     if (page < 0 || page >= pc->n_pages) {
         return 0;
     }
