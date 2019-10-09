@@ -78,7 +78,7 @@ void infoscreengui_enable (GuInfoscreenGui *is, const gchar *msg) {
     gtk_container_add (GTK_CONTAINER (is->viewport),
                 GTK_WIDGET (is->errorpanel));
     gtk_widget_show_all (GTK_WIDGET (is->viewport));
-    gtk_widget_set_sensitive (gui->previewgui->previewgui_toolbar, FALSE);
+    gtk_widget_set_sensitive (gui->previewgui->toolbar, FALSE);
 }
 
 void infoscreengui_disable (GuInfoscreenGui *is) {
@@ -88,7 +88,7 @@ void infoscreengui_disable (GuInfoscreenGui *is) {
             GTK_WIDGET (is->errorpanel));
     gtk_container_add (GTK_CONTAINER (is->viewport),
             GTK_WIDGET (is->drawarea));
-    gtk_widget_set_sensitive (gui->previewgui->previewgui_toolbar, TRUE);
+    gtk_widget_set_sensitive (gui->previewgui->toolbar, TRUE);
 }
 
 void infoscreengui_set_message (GuInfoscreenGui *is, const gchar *msg) {

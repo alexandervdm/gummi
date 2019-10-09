@@ -92,14 +92,18 @@ typedef struct _GuPreviewGui GuPreviewGui;
 
 struct _GuPreviewGui {
     PopplerDocument* doc;
-    GtkViewport* previewgui_viewport;
-    GtkWidget* previewgui_toolbar;
+
+    GtkWidget* scrollw;
+    GtkViewport* viewport;
     GtkWidget* drawarea;
+    GtkWidget* toolbar;
+
+
     GtkWidget* page_next;
     GtkWidget* page_prev;
     GtkWidget* page_label;
     GtkWidget* page_input;
-    GtkWidget* scrollw;
+
     GtkWidget* errorpanel;
     GtkComboBox* combo_sizes;
 

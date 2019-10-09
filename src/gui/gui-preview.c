@@ -33,20 +33,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <gdk/gdk.h>
 #include <cairo.h>
-#include <poppler.h>
+#include <glib.h>
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
 #include <math.h>
+#include <poppler.h>
+#include <synctex_parser.h>
 
 #include "configfile.h"
 #include "constants.h"
-#include "gui/gui-main.h"
 #include "environment.h"
 #include "motion.h"
-
-#include "synctex_parser.h"
+#include "gui/gui-main.h"
 
 #ifdef HAVE_CONFIG_H
 #   include "config.h"
@@ -60,13 +59,8 @@
   #define synctex_scanner_next_result(scanner) synctex_next_result(scanner)
 #endif
 
-// set up uri using appropriate formatting for OS
-// http://en.wikipedia.org/wiki/File_URI_scheme#Linux */
-#ifdef WIN32
-    gint usize = 8;
-#else
-    gint usize = 7;
-#endif
+#define page_inner(pc,i) (((pc)->pages + (i))->inner)
+#define page_outer(pc,i) (((pc)->pages + (i))->outer)
 
 enum {
     ZOOM_FIT_BOTH = 0,
@@ -98,96 +92,86 @@ typedef struct {
     gint score;
 } SyncNode;
 
-static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
-                                 gdouble y);
+////////////////////////////////////////////////////////////////////////////////
 
+// Update functions, to update cached values and gui-parameters after changes
+static void update_scaled_size (GuPreviewGui* pc);
+static void update_fit_scale (GuPreviewGui* pc);
+static void update_current_page (GuPreviewGui* pc);
+static void update_drawarea_size (GuPreviewGui *pc);
+static void update_page_sizes (GuPreviewGui* pc);
+static void update_prev_next_page (GuPreviewGui* pc);
+static void update_page_input (GuPreviewGui* pc);
 
-/* Update functions, to update cached values and gui-parameters after changes */
-static void update_scaled_size(GuPreviewGui* pc);
-static void update_fit_scale(GuPreviewGui* pc);
-static void update_current_page(GuPreviewGui* pc);
-static void update_drawarea_size(GuPreviewGui *pc);
-static void update_page_sizes(GuPreviewGui* pc);
-static void update_prev_next_page(GuPreviewGui* pc);
-static void update_page_input(GuPreviewGui* pc);
+// Simplicity functions for page layout
+inline static gboolean is_continuous (GuPreviewGui* pc);
 
-/* Simplicity functions for page layout */
-inline static gboolean is_continuous(GuPreviewGui* pc);
+// Functions for infos about the GUI */
+inline static gboolean is_vscrollbar_visible (GuPreviewGui* pc);
+inline static gboolean is_hscrollbar_visible (GuPreviewGui* pc);
 
-/* Functions for infos about the GUI */
-inline static gboolean is_vscrollbar_visible(GuPreviewGui* pc);
-inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc);
+// Functions for simpler accessing of the array and struct data
+inline static gdouble get_page_height (GuPreviewGui* pc, int page);
+inline static gdouble get_page_width (GuPreviewGui* pc, int page);
 
-/* Functions for simpler accessing of the array and struct data */
-inline static gdouble get_page_height(GuPreviewGui* pc, int page);
-inline static gdouble get_page_width(GuPreviewGui* pc, int page);
+inline static gint get_document_margin (GuPreviewGui* pc);
+inline static gint get_page_margin (GuPreviewGui* pc);
 
-inline static gint get_document_margin(GuPreviewGui* pc);
-inline static gint get_page_margin(GuPreviewGui* pc);
+// Other functions
+static void block_handlers_current_page (GuPreviewGui* pc);
+static void unblock_handlers_current_page (GuPreviewGui* pc);
+static void set_fit_mode (GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
 
-/* Other functions */
-static void block_handlers_current_page(GuPreviewGui* pc);
-static void unblock_handlers_current_page(GuPreviewGui* pc);
-static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
+static gboolean on_page_input_lost_focus (GtkWidget *widget, GdkEvent *event,
+                                          gpointer user_data);
 
-static gboolean on_page_input_lost_focus(GtkWidget *widget, GdkEvent  *event,
-                                         gpointer   user_data);
+static gboolean on_button_pressed (GtkWidget* w, GdkEventButton* e, void* user);
 
+// Functions for layout and painting
+static gint page_offset_x (GuPreviewGui* pc, gint page, gdouble x);
+static gint page_offset_y (GuPreviewGui* pc, gint page, gdouble y);
+static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y);
+static cairo_surface_t* get_page_rendering (GuPreviewGui* pc, int page);
+static gboolean remove_page_rendering (GuPreviewGui* pc, gint page);
 
-static gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user);
-
-/* Functions for layout and painting */
-static gint page_offset_x(GuPreviewGui* pc, gint page, gdouble x);
-static gint page_offset_y(GuPreviewGui* pc, gint page, gdouble y);
-static void paint_page(cairo_t *cr, GuPreviewGui* pc,
-                       gint page, gint x, gint y);
-static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page);
-static gboolean remove_page_rendering(GuPreviewGui* pc, gint page);
-
-/* Functions for scronizing editor and preview via SyncTeX */
-static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to,
-                                   gchar* tex_file);
+// Functions for syncronizing editor and preview via SyncTeX
+static gboolean synctex_run_parser (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
 #if HAVE_POPPLER_PAGE_GET_SELECTED_TEXT
-static void synctex_filter_results(GuPreviewGui* pc, GtkTextIter *sync_to);
+static void synctex_filter_results (GuPreviewGui* pc, GtkTextIter *sync_to);
 #endif
-static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node);
-static SyncNode* synctex_one_node_found(GuPreviewGui* pc);
-static void synctex_merge_nodes(GuPreviewGui* pc);
-static void synctex_clear_sync_nodes(GuPreviewGui* pc);
+static void synctex_scroll_to_node (GuPreviewGui* pc, SyncNode* node);
+static SyncNode* synctex_one_node_found (GuPreviewGui* pc);
+static void synctex_merge_nodes (GuPreviewGui* pc);
+static void synctex_clear_sync_nodes (GuPreviewGui* pc);
 
-/* (Page) Layout functions */
-static inline LayeredRectangle get_fov(GuPreviewGui* pc);
-static void update_page_positions(GuPreviewGui* pc);
-static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
-                                            const LayeredRectangle *src2,
-                                            LayeredRectangle *dest);
-//static gboolean layered_rectangle_union(const LayeredRectangle *src1,
-//                                        const LayeredRectangle *src2,
-//                                        LayeredRectangle *dest);
-#define page_inner(pc,i) (((pc)->pages + (i))->inner)
-#define page_outer(pc,i) (((pc)->pages + (i))->outer)
+// Page Layout functions
+static inline LayeredRectangle get_fov (GuPreviewGui* pc);
+static void update_page_positions (GuPreviewGui* pc);
+static gboolean layered_rectangle_intersect (const LayeredRectangle *src1,
+                                             const LayeredRectangle *src2,
+                                             LayeredRectangle *dest);
+
+static void previewgui_set_scale (GuPreviewGui* pc, gdouble scale, gdouble x, gdouble y);
+
+////////////////////////////////////////////////////////////////////////////////
+
 
 GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     g_return_val_if_fail (GTK_IS_BUILDER (builder), NULL);
 
     GuPreviewGui* p = g_new0 (GuPreviewGui, 1);
 
-    p->previewgui_viewport =
-        GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
-    p->previewgui_toolbar =
-        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_toolbar"));
-    p->drawarea =
-        GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
-    p->scrollw =
-        GTK_WIDGET (gtk_builder_get_object (builder, "previewgui_scroll"));
+    p->scrollw = GTK_WIDGET (gtk_builder_get_object (builder, "preview_scrollw"));
+    p->viewport = GTK_VIEWPORT (gtk_builder_get_object (builder, "preview_vport"));
+    p->drawarea = GTK_WIDGET (gtk_builder_get_object (builder, "preview_draw"));
+    p->toolbar = GTK_WIDGET (gtk_builder_get_object (builder, "preview_toolbar"));
+
     p->combo_sizes =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_sizes"));
     p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
     p->page_input = GTK_WIDGET (gtk_builder_get_object (builder, "page_input"));
-    p->uri = NULL;
-    p->doc = NULL;
 
     p->page_layout_single_page = GTK_RADIO_MENU_ITEM
         (gtk_builder_get_object (builder, "page_layout_single_page"));
@@ -195,19 +179,20 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         (gtk_builder_get_object (builder, "page_layout_one_column"));
     p->update_timer = 0;
     
+    p->uri = NULL;
+    p->doc = NULL;
     p->preview_on_idle = FALSE;
     p->errormode = FALSE;
     
-    p->hadj = gtk_scrolled_window_get_hadjustment
-                    (GTK_SCROLLED_WINDOW (p->scrollw));
-    p->vadj = gtk_scrolled_window_get_vadjustment
-                    (GTK_SCROLLED_WINDOW (p->scrollw));
+    p->hadj = gtk_scrolled_window_get_hadjustment (GTK_SCROLLED_WINDOW (p->scrollw));
+    p->vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (p->scrollw));
 
-    /* Install event handlers */
+    // Event handlers:
     gtk_widget_add_events (p->drawarea, GDK_SCROLL_MASK
                                       | GDK_BUTTON_PRESS_MASK
                                       | GDK_BUTTON_MOTION_MASK);
 
+    // Signals:
     p->page_input_changed_handler = g_signal_connect (p->page_input,
             "changed", G_CALLBACK (on_page_input_changed), p);
     g_signal_connect (p->page_input,
@@ -242,8 +227,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
                       G_CALLBACK (on_adj_changed), p);
 
 
-    /* The error panel is now imported from Glade. The following
-     * functions re-parent the panel widgets for use in Gummi */
+    // The error panel is now imported from Glade. The following
+    // functions re-parent the panel widgets for use in Gummi
     GtkWidget *holder =
         GTK_WIDGET(gtk_builder_get_object (builder, "errorwindow"));
     p->errorpanel =
@@ -256,20 +241,18 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     gdouble screen_dpi = gdk_screen_get_resolution (
 						 gdk_screen_get_default());
 
-	/* the gdk screen functions do not work properly on win32, so we
-	 * should probably return a default value (or find an alternative)*/
     if (screen_dpi == -1) screen_dpi = 96.0;
 	gdouble poppler_scale = screen_dpi / 72.0;
 
     int i;
-    for (i=0; i<N_ZOOM_SIZES; i++) {
+    for (i=0; i < N_ZOOM_SIZES; i++) {
         list_sizes[i] *= poppler_scale;
     }
 
     p->fit_mode = FIT_NONE;
 
-    /* TODO: temporary measure because the config system does not look up
-             default value if the setting is undefined */
+    // TODO: temporary measure because the config system does
+    // not look up default value if the setting is undefined
     if (STR_EQU (config_get_value("zoommode"), "")) {
         config_set_value("zoommode", "pagewidth");
     }
@@ -292,13 +275,11 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
     }
 
-    p->sync_nodes = NULL;
-
-    slog (L_INFO, "using libpoppler %s\n", poppler_get_version ());
+    slog (L_INFO, "Using libpoppler %s\n", poppler_get_version ());
     return p;
 }
 
-inline static gint get_document_margin(GuPreviewGui* pc) {
+inline static gint get_document_margin (GuPreviewGui* pc) {
     if (pc->pageLayout == POPPLER_PAGE_LAYOUT_SINGLE_PAGE) {
         return 0;
     } else {
@@ -306,38 +287,36 @@ inline static gint get_document_margin(GuPreviewGui* pc) {
     }
 }
 
-inline static gint get_page_margin(GuPreviewGui* pc) {
+inline static gint get_page_margin (GuPreviewGui* pc) {
     return PAGE_MARGIN;
 }
 
-static void block_handlers_current_page(GuPreviewGui* pc) {
-
+static void block_handlers_current_page (GuPreviewGui* pc) {
     g_signal_handler_block(pc->hadj, pc->hvalue_changed_handler);
     g_signal_handler_block(pc->vadj, pc->vvalue_changed_handler);
     g_signal_handler_block(pc->hadj, pc->hchanged_handler);
     g_signal_handler_block(pc->vadj, pc->vchanged_handler);
 }
 
-static void unblock_handlers_current_page(GuPreviewGui* pc) {
-
+static void unblock_handlers_current_page (GuPreviewGui* pc) {
     g_signal_handler_unblock(pc->hadj, pc->hvalue_changed_handler);
     g_signal_handler_unblock(pc->vadj, pc->vvalue_changed_handler);
     g_signal_handler_unblock(pc->hadj, pc->hchanged_handler);
     g_signal_handler_unblock(pc->vadj, pc->vchanged_handler);
 }
 
-inline static gboolean is_vscrollbar_visible(GuPreviewGui* pc) {
+inline static gboolean is_vscrollbar_visible (GuPreviewGui* pc) {
     GtkAllocation alloc1, alloc2;
     gtk_widget_get_allocation(pc->scrollw, &alloc1);
-    gtk_widget_get_allocation(GTK_WIDGET(pc->previewgui_viewport), &alloc2);
+    gtk_widget_get_allocation(GTK_WIDGET(pc->viewport), &alloc2);
 
     return alloc1.width != alloc2.width;
 }
 
-inline static gboolean is_hscrollbar_visible(GuPreviewGui* pc) {
+inline static gboolean is_hscrollbar_visible (GuPreviewGui* pc) {
     GtkAllocation alloc1, alloc2;
     gtk_widget_get_allocation(pc->scrollw, &alloc1);
-    gtk_widget_get_allocation(GTK_WIDGET(pc->previewgui_viewport), &alloc2);
+    gtk_widget_get_allocation(GTK_WIDGET(pc->viewport), &alloc2);
 
     return alloc1.height != alloc2.height;
 }
@@ -438,11 +417,11 @@ static void update_fit_scale(GuPreviewGui* pc) {
     gint vscrollbar_width = spacing + req.width;
     gint hscrollbar_height = spacing + req.height;
 
-    viewport_window = gtk_viewport_get_view_window(pc->previewgui_viewport);
-    view_width_without_bar = gdk_window_get_width(viewport_window);
-    view_height_without_bar = gdk_window_get_height(viewport_window);
+    viewport_window = gtk_viewport_get_view_window (pc->viewport);
+    view_width_without_bar = gdk_window_get_width (viewport_window);
+    view_height_without_bar = gdk_window_get_height (viewport_window);
 
-    if (gtk_widget_get_visible(gtk_scrolled_window_get_vscrollbar(
+    if (gtk_widget_get_visible (gtk_scrolled_window_get_vscrollbar(
                     GTK_SCROLLED_WINDOW(pc->scrollw)))) {
         view_width_without_bar += vscrollbar_width;
     }
@@ -567,7 +546,7 @@ gboolean on_document_compiled (gpointer data) {
     GuEditor* editor = GU_EDITOR(data);
     GuLatex* latex = gummi_get_latex();
 
-    /* Make sure the editor still exists after compile */
+    // Make sure the editor still exists after compile
     if (editor == gummi_get_active_editor()) {
         editor_apply_errortags (editor, latex->errorlines);
         gui_buildlog_set_text (latex->compilelog);
@@ -597,7 +576,7 @@ gboolean on_document_error (gpointer data) {
     return FALSE;
 }
 
-static void previewgui_set_current_page(GuPreviewGui* pc, gint page) {
+static void previewgui_set_current_page (GuPreviewGui* pc, gint page) {
 
     page = MAX(0, page);
     page = MIN(page, pc->n_pages-1);
@@ -929,8 +908,8 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     update_scaled_size(pc);
     update_page_positions(pc);
 
-    // TODO: Blocking the expose event is porbably not the best way.
-    // It would be great if we could change all 3 porperties(hadj, vadj & scale)
+    // TODO: Blocking the expose event is probably not the best way.
+    // It would be great if we could change all 3 properties (hadj, vadj & scale)
     // at the same time.
     // Probably blocking the expose handler causes the gray background of the
     // window to be drawn - but at least we do not scroll to a different page
@@ -938,20 +917,19 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
     // Without blocking the handler, after changing the first property, e.g.
     // vadj, a signal is emitted that causes a redraw but still contains the
     // the not-updated hadj & scale values.
-    g_signal_handler_block(pc->drawarea, pc->on_draw_handler);
+    g_signal_handler_block (pc->drawarea, pc->on_draw_handler);
 
-    update_drawarea_size(pc);
+    update_drawarea_size (pc);
 
     if (x >= 0 && y>= 0) {
-        gdouble new_x = old_x*(pc->width_scaled + 2*get_document_margin(pc))-x;
-        gdouble new_y = old_y*(pc->height_scaled + 2*get_document_margin(pc))-y;
+        gdouble new_x = old_x * (pc->width_scaled + 2 * get_document_margin(pc)) -x;
+        gdouble new_y = old_y * (pc->height_scaled + 2 * get_document_margin(pc)) -y;
 
-        previewgui_goto_xy(pc, new_x, new_y);
+        previewgui_goto_xy (pc, new_x, new_y);
     }
-    g_signal_handler_unblock(pc->drawarea, pc->on_draw_handler);
+    g_signal_handler_unblock (pc->drawarea, pc->on_draw_handler);
 
     gtk_widget_queue_draw (pc->drawarea);
-
 }
 
 static void load_document(GuPreviewGui* pc, gboolean update) {
@@ -1028,14 +1006,13 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     previewgui_goto_page (pc, 0);
 }
 
-void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to,
-        gchar* tex_file) {
+void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
     //L_F_DEBUG;
-    /* We lock the mutex to prevent previewing imcomplete PDF file, i.e
-     * compiling. Also prevent PDF from changing (compiling) when previewing */
+    // We lock the mutex to prevent previewing imcomplete PDF file, i.e
+    // compiling. Also prevent PDF from changing (compiling) when previewing */
     if (!g_mutex_trylock (&gummi->motion->compile_mutex)) return;
 
-    /* This line is very important, if no pdf exist, preview will fail */
+    // This line is very important, if no pdf exist, preview will fail */
     if (!pc->uri || !utils_uri_path_exists (pc->uri)) goto unlock;
 
     // If no document had been loaded successfully before, force call of set_pdffile
@@ -1111,13 +1088,11 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
 
     synctex_clear_sync_nodes(pc);
 
-    if(synctex_display_query(sync_scanner, tex_file, line, column, -1)>0) {
+    if (synctex_display_query (sync_scanner, tex_file, line, column, -1) > 0) {
         synctex_node_p node;
-        /*
-         * SyncTeX can return several nodes. It seems best to use the last one, as
-         * this one rarely is below (usually slighly above) the edited line.
-         */
 
+        // SyncTeX can return several nodes. It seems best to use the last one
+        // as this one rarely is below (usually slighly above) the edited line
         while ((node = synctex_scanner_next_result(sync_scanner))) {
 
             SyncNode *sn = g_new0(SyncNode, 1);
@@ -1135,7 +1110,6 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
     }
 
     synctex_scanner_free(sync_scanner);
-
     return TRUE;
 }
 
@@ -1303,7 +1277,7 @@ static void synctex_clear_sync_nodes(GuPreviewGui* pc) {
     pc->sync_nodes = NULL;
 }
 
-static void synctex_scroll_to_node(GuPreviewGui* pc, SyncNode* node) {
+static void synctex_scroll_to_node (GuPreviewGui* pc, SyncNode* node) {
 
     gint adjpage_width = gtk_adjustment_get_page_size(pc->hadj);
     gint adjpage_height = gtk_adjustment_get_page_size(pc->vadj);
@@ -1495,15 +1469,15 @@ void previewgui_save_position (GuPreviewGui* pc) {
 
 void previewgui_restore_position (GuPreviewGui* pc) {
     //L_F_DEBUG;
-    /* restore scroll window position to value before error mode */
-    /* TODO: might want to merge this with synctex funcs in future */
 
+    // Restore scroll window position to value before error mode
+    // TODO: might want to merge this with synctex funcs in future
     previewgui_goto_xy(pc, pc->restore_x, pc->restore_y);
     unblock_handlers_current_page(pc);
 }
 
-static cairo_surface_t* do_render(PopplerPage* ppage, gdouble scale,
-                                  gint width, gint height) {
+static cairo_surface_t* do_render (PopplerPage* ppage, gdouble scale,
+                                   gint width, gint height) {
 
     cairo_surface_t* r = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
                                                 width*scale,
@@ -1522,7 +1496,7 @@ static cairo_surface_t* do_render(PopplerPage* ppage, gdouble scale,
     return r;
 }
 
-static cairo_surface_t* get_page_rendering(GuPreviewGui* pc, int page) {
+static cairo_surface_t* get_page_rendering (GuPreviewGui* pc, int page) {
 
     GuPreviewPage *p = pc->pages + page;
 
@@ -1554,9 +1528,6 @@ void previewgui_reset (GuPreviewGui* pc) {
         previewgui_start_preview (pc);
 }
 
-void previewgui_quit(GuPreviewGui* pc) {
-
-}
 
 void previewgui_cleanup_fds (GuPreviewGui* pc) {
     //L_F_DEBUG;
@@ -1730,9 +1701,9 @@ static inline LayeredRectangle get_fov(GuPreviewGui* pc) {
  *
  *  Set dest to NULL, if you are only interested in the boolean result.
  */
-static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
-                                            const LayeredRectangle *src2,
-                                            LayeredRectangle *dest) {
+static gboolean layered_rectangle_intersect (const LayeredRectangle *src1,
+                                             const LayeredRectangle *src2,
+                                             LayeredRectangle *dest) {
 
     if (src1 == NULL || src2 == NULL) {
         if (dest) {
@@ -1768,49 +1739,7 @@ static gboolean layered_rectangle_intersect(const LayeredRectangle *src1,
     return FALSE;
 }
 
-/**
- *  Calculates the union of the rectangles src1 and src2.
- *
- *  Returns TRUE if both src rectangles are defined and on the same layer.
- *  If dest is not NULL, it will be the union of both rectangles, if however the
- *  src rectangles are on different layers, dest's layer will be undefined.
- */
-/*
-static gboolean layered_rectangle_union(const LayeredRectangle *src1,
-                                        const LayeredRectangle *src2,
-                                        LayeredRectangle *dest) {
-
-    if (src1 == NULL || src2 == NULL) {
-        if (dest) {
-            dest->width = 0;
-            dest->height = 0;
-        }
-        return FALSE;
-    }
-
-    if (dest) {
-
-        gint dest_x = MIN (src1->x, src2->x);
-        gint dest_y = MIN (src1->y, src2->y);
-        gint dest_x2 = MAX (src1->x + src1->width, src2->x + src2->width);
-        gint dest_y2 = MAX (src1->y + src1->height, src2->y + src2->height);
-
-        dest->x = dest_x;
-        dest->y = dest_y;
-        dest->width = dest_x2 - dest_x;
-        dest->height = dest_y2 - dest_y;
-        if (src1->layer == src2->layer) {
-            dest->layer = src1->layer;
-        }
-    }
-
-    if (src1->layer != src2->layer) {
-        return FALSE;
-    }
-    return TRUE;
-}*/
-
-gboolean run_garbage_collector(GuPreviewGui* pc) {
+gboolean run_garbage_collector (GuPreviewGui* pc) {
 
     gint max_cache_size = atoi (config_get_value ("cache_size")) * 1024 * 1024;
 
@@ -1834,7 +1763,7 @@ gboolean run_garbage_collector(GuPreviewGui* pc) {
     }
 
     if (first == -1) {
-        slog(L_ERROR, "No pages are shown. Clearing whole cache.\n");
+        slog (L_ERROR, "No pages are shown. Clearing whole cache.\n");
         previewgui_invalidate_renderings(pc);
     }
 
@@ -1890,8 +1819,6 @@ gboolean on_draw (GtkWidget* w, cairo_t* cr, void* user) {
     gdouble offset_x = MAX(get_document_margin(pc),
                           (page_width - pc->width_scaled) / 2);
 
-    //TODO: to be removed?
-    //cairo_t *cr = gdk_cairo_create(gtk_widget_get_window(w));
 
     if (is_continuous(pc)) {
 
@@ -1937,13 +1864,11 @@ gboolean on_draw (GtkWidget* w, cairo_t* cr, void* user) {
             page_offset_y(pc, pc->current_page, offset_y));
     }
 
-    //cairo_destroy (cr);
-
     return TRUE;
 }
 
 G_MODULE_EXPORT
-void on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
+void on_adj_changed (GtkAdjustment *adjustment, gpointer user) {
     //L_F_DEBUG;
     GuPreviewGui* pc = GU_PREVIEW_GUI(user);
 
@@ -1951,6 +1876,122 @@ void on_adj_changed(GtkAdjustment *adjustment, gpointer user) {
     pc->ascroll_steps_left = 0;
 
     update_current_page(pc);
+}
+
+static void draw2page (GuPreviewGui* pc, gint dx, gint dy, gint *pp, gint *px, gint *py) {
+
+    *px = dx;
+    *py = dy;
+    *pp = 0;
+
+    gint adjpage_width = gtk_adjustment_get_page_size(pc->hadj);
+    gint adjpage_height = gtk_adjustment_get_page_size(pc->vadj);
+
+    *px -= MAX(get_document_margin(pc),
+                          (adjpage_width - pc->width_scaled) / 2);
+
+    if (is_continuous(pc)) {
+        *py -= MAX(get_document_margin(pc),
+                               (adjpage_height - pc->height_scaled) / 2);
+
+        int i;
+        for (i=0; i < pc->n_pages-1; i++) {
+            gint pheight = get_page_height(pc, i)*pc->scale + get_page_margin(pc);
+            if (*py > pheight) {
+                *py -= pheight;
+                *pp += 1;
+            }
+        }
+    } else {
+        gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
+        *py -= MAX(get_document_margin(pc), (adjpage_height-height)/2);
+        *pp += pc->current_page;
+    }
+
+    //TODO Check if we still are inside a page...
+}
+
+G_MODULE_EXPORT
+gboolean on_button_pressed (GtkWidget* w, GdkEventButton* e, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
+
+    // Check where the user clicked
+    gint page;
+    gint x;
+    gint y;
+    draw2page(pc, e->x, e->y, &page, &x, &y);
+
+    if (e->state & GDK_CONTROL_MASK) {
+
+
+        slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
+
+        synctex_scanner_p sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
+
+        if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
+            synctex_node_p node;
+            /*
+             * SyncTeX can return several nodes. It seems best to use the last one, as
+             * this one rarely is below (usually slighly above) the edited line.
+             */
+
+            if ((node = synctex_scanner_next_result(sync_scanner))) {
+
+                const gchar *file = synctex_scanner_get_name(sync_scanner, synctex_node_tag(node));
+                gint line = synctex_node_line(node);
+
+                slog(L_DEBUG, "File \"%s\", Line %i\n", file, line);
+
+                // FIXME: Go to the editor containing the file "file"!
+                editor_scroll_to_line(gummi_get_active_editor(), line-1);
+
+            }
+        }
+
+        synctex_scanner_free(sync_scanner);
+
+    }
+
+    pc->prev_x = e->x;
+    pc->prev_y = e->y;
+    return FALSE;
+}
+
+G_MODULE_EXPORT
+gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
+
+    gdouble new_x = gtk_adjustment_get_value (pc->hadj) - (e->x - pc->prev_x);
+    gdouble new_y = gtk_adjustment_get_value (pc->vadj) - (e->y - pc->prev_y);
+
+    previewgui_goto_xy(pc, new_x, new_y);
+
+    return TRUE;
+}
+
+G_MODULE_EXPORT
+gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
+    //L_F_DEBUG;
+    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
+
+    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
+
+    LayeredRectangle fov = get_fov(pc);
+    gdouble x_rel = (gdouble) (fov.x + fov.width/2) / pc->width_scaled;
+    gdouble y_rel = (gdouble) (fov.y + fov.height/2) / pc->height_scaled;
+
+    update_fit_scale(pc);
+    update_page_positions(pc);
+
+    fov = get_fov(pc);
+    previewgui_goto_xy (pc, x_rel*pc->width_scaled - fov.width/2,
+                            y_rel*pc->height_scaled - fov.height/2);
+
+    return FALSE;
 }
 
 G_MODULE_EXPORT
@@ -2044,121 +2085,5 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
             return TRUE;
         }
     }
-    return FALSE;
-}
-
-static void draw2page(GuPreviewGui* pc, gint dx, gint dy, gint *pp, gint *px, gint *py) {
-
-    *px = dx;
-    *py = dy;
-    *pp = 0;
-
-    gint adjpage_width = gtk_adjustment_get_page_size(pc->hadj);
-    gint adjpage_height = gtk_adjustment_get_page_size(pc->vadj);
-
-    *px -= MAX(get_document_margin(pc),
-                          (adjpage_width - pc->width_scaled) / 2);
-
-    if (is_continuous(pc)) {
-        *py -= MAX(get_document_margin(pc),
-                               (adjpage_height - pc->height_scaled) / 2);
-
-        int i;
-        for (i=0; i < pc->n_pages-1; i++) {
-            gint pheight = get_page_height(pc, i)*pc->scale + get_page_margin(pc);
-            if (*py > pheight) {
-                *py -= pheight;
-                *pp += 1;
-            }
-        }
-    } else {
-        gdouble height = get_page_height(pc, pc->current_page) * pc->scale;
-        *py -= MAX(get_document_margin(pc), (adjpage_height-height)/2);
-        *pp += pc->current_page;
-    }
-
-    //TODO Check if we still are inside a page...
-}
-
-G_MODULE_EXPORT
-gboolean on_button_pressed(GtkWidget* w, GdkEventButton* e, void* user) {
-    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
-
-    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
-
-    // Check where the user clicked
-    gint page;
-    gint x;
-    gint y;
-    draw2page(pc, e->x, e->y, &page, &x, &y);
-
-    if (e->state & GDK_CONTROL_MASK) {
-
-
-        slog(L_DEBUG, "Ctrl-click to %i, %i\n", x, y);
-
-        synctex_scanner_p sync_scanner = synctex_scanner_new_with_output_file(pc->uri, C_TMPDIR, 1);
-
-        if(synctex_edit_query(sync_scanner, page+1, x/pc->scale, y/pc->scale)>0) {
-            synctex_node_p node;
-            /*
-             * SyncTeX can return several nodes. It seems best to use the last one, as
-             * this one rarely is below (usually slighly above) the edited line.
-             */
-
-            if ((node = synctex_scanner_next_result(sync_scanner))) {
-
-                const gchar *file = synctex_scanner_get_name(sync_scanner, synctex_node_tag(node));
-                gint line = synctex_node_line(node);
-
-                slog(L_DEBUG, "File \"%s\", Line %i\n", file, line);
-
-                // FIXME: Go to the editor containing the file "file"!
-                editor_scroll_to_line(gummi_get_active_editor(), line-1);
-
-            }
-        }
-
-        synctex_scanner_free(sync_scanner);
-
-    }
-
-    pc->prev_x = e->x;
-    pc->prev_y = e->y;
-    return FALSE;
-}
-
-G_MODULE_EXPORT
-gboolean on_motion (GtkWidget* w, GdkEventMotion* e, void* user) {
-    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
-
-    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
-
-    gdouble new_x = gtk_adjustment_get_value (pc->hadj) - (e->x - pc->prev_x);
-    gdouble new_y = gtk_adjustment_get_value (pc->vadj) - (e->y - pc->prev_y);
-
-    previewgui_goto_xy(pc, new_x, new_y);
-
-    return TRUE;
-}
-
-G_MODULE_EXPORT
-gboolean on_resize (GtkWidget* w, GdkRectangle* r, void* user) {
-    //L_F_DEBUG;
-    GuPreviewGui* pc = GU_PREVIEW_GUI(user);
-
-    if (!pc->uri || !utils_uri_path_exists (pc->uri)) return FALSE;
-
-    LayeredRectangle fov = get_fov(pc);
-    gdouble x_rel = (gdouble) (fov.x + fov.width/2) / pc->width_scaled;
-    gdouble y_rel = (gdouble) (fov.y + fov.height/2) / pc->height_scaled;
-
-    update_fit_scale(pc);
-    update_page_positions(pc);
-
-    fov = get_fov(pc);
-    previewgui_goto_xy (pc, x_rel*pc->width_scaled - fov.width/2,
-                            y_rel*pc->height_scaled - fov.height/2);
-
     return FALSE;
 }
