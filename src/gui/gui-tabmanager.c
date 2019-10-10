@@ -54,6 +54,8 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     tp->scrollw = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(tp->scrollw),
                                     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (tp->scrollw),
+                                         GTK_SHADOW_OUT);
 
     gchar* labeltext = tabmanager_get_tabname (tc);
     tabmanagergui_create_label (tp, labeltext);
