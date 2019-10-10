@@ -243,6 +243,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
     if (screen_dpi == -1) screen_dpi = 96.0;
 	gdouble poppler_scale = screen_dpi / 72.0;
+    slog (L_DEBUG, "Preview detected screen DPI at %.1f\n", screen_dpi);
 
     int i;
     for (i=0; i < N_ZOOM_SIZES; i++) {
