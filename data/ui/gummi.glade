@@ -2955,19 +2955,20 @@ bibliography database</property>
           </packing>
         </child>
         <child>
-          <object class="GtkHButtonBox" id="hbuttonbox3">
+          <object class="GtkButtonBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">10</property>
-            <property name="layout_style">end</property>
+            <property name="layout_style">start</property>
             <child>
-              <object class="GtkButton" id="button1">
-                <property name="label">gtk-close</property>
+              <object class="GtkButton" id="button2">
+                <property name="label">gtk-find</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_close_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_find_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2976,13 +2977,14 @@ bibliography database</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button2">
-                <property name="label">gtk-find</property>
+              <object class="GtkButton" id="button3">
+                <property name="label" translatable="yes">_Replace</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_find_clicked" swapped="no"/>
+                <property name="use_underline">True</property>
+                <signal name="clicked" handler="on_button_searchwindow_replace_next_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2991,13 +2993,14 @@ bibliography database</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button3">
-                <property name="label" translatable="yes">_Replace</property>
+              <object class="GtkButton" id="button4">
+                <property name="label" translatable="yes">Replace _All</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_replace_next_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_button_searchwindow_replace_all_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3006,13 +3009,16 @@ bibliography database</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button4">
-                <property name="label" translatable="yes">Replace _All</property>
+              <object class="GtkButton" id="button1">
+                <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_button_searchwindow_replace_all_clicked" swapped="no"/>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_button_searchwindow_close_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3022,8 +3028,8 @@ bibliography database</property>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">3</property>
           </packing>
         </child>
