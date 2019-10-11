@@ -250,7 +250,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         list_sizes[i] *= poppler_scale;
     }
 
-    p->fit_mode = FIT_NONE;
+    p->fit_mode = FIT_NUMERIC;
 
     if (STR_EQU (config_get_value ("pagelayout"), "single_page")) {
         gtk_check_menu_item_set_active(
@@ -366,7 +366,7 @@ static gboolean previewgui_animated_scroll_step(gpointer data) {
 
 static void update_fit_scale(GuPreviewGui* pc) {
 
-    if (pc->fit_mode == FIT_NONE) {
+    if (pc->fit_mode == FIT_NUMERIC) {
         return;
     }
     //L_F_DEBUG;
@@ -418,7 +418,6 @@ static void update_fit_scale(GuPreviewGui* pc) {
         view_height_without_bar += hscrollbar_height;
     }
     gint view_width_with_bar = view_width_without_bar - vscrollbar_width;
-    gint view_height_with_bar = view_height_without_bar - hscrollbar_height;
 
     gdouble scale_height_without_bar = (view_height_without_bar -
             height_non_scaling) / height_scaling;
@@ -426,19 +425,17 @@ static void update_fit_scale(GuPreviewGui* pc) {
             full_height_non_scaling) / full_height_scaling;
     gdouble scale_width_without_bar = (view_width_without_bar -
             width_non_scaling)  / width_scaling;
-    gdouble scale_height_with_bar = (view_height_with_bar -
-            height_non_scaling) / height_scaling;
     gdouble scale_width_with_bar = (view_width_with_bar - width_non_scaling) /
         width_scaling;
     gdouble scale_both = MIN(scale_width_without_bar, scale_height_without_bar);
     gdouble scale_both_full = MIN(scale_width_without_bar,
             scale_full_height_without_bar);
 
-    // When the preview window size is shrunk, in FIT_WIDTH and FIT_HEIGHT there
-    // is a point right after the scrollbar has disappeared, where the document
-    // should must not be shrunk, because the height just fits. We catch this
+    // When the preview window size is shrunk, in FIT_WIDTH there is a point 
+    // right after the scrollbar has disappeared, where the document should
+    // must not be shrunk, because the height just fits. We catch this
     // case here.
-    gdouble scale_height = MAX(scale_height_with_bar, scale_both_full);
+
     gdouble scale_width = MAX(scale_width_with_bar, scale_both_full);
 
     // Now for the scale_both....
@@ -455,9 +452,8 @@ static void update_fit_scale(GuPreviewGui* pc) {
 
     if (pc->fit_mode == FIT_WIDTH) {
         scale = scale_width;
-    } else if (pc->fit_mode == FIT_HEIGHT) {
-        scale = scale_height;
-    } else if (pc->fit_mode == FIT_BOTH) {
+    }
+    else if (pc->fit_mode == FIT_BOTH) {
         scale = scale_both;
     }
 
@@ -756,15 +752,12 @@ static void update_drawarea_size(GuPreviewGui *pc) {
     // If the document should be fit, we set the requested size to 1 so
     // scrollbars will not appear.
     switch (pc->fit_mode) {
-        case FIT_NONE:
+        case FIT_NUMERIC:
             width = pc->width_scaled + 2*get_document_margin(pc);
             height = pc->height_scaled + 2*get_document_margin(pc);
             break;
         case FIT_WIDTH:
             height = pc->height_scaled + 2*get_document_margin(pc);
-            break;
-        case FIT_HEIGHT:
-            width = pc->width_scaled + 2*get_document_margin(pc);
             break;
         case FIT_BOTH:
             if (is_continuous(pc)) {
@@ -841,14 +834,11 @@ static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode) {
     pc->fit_mode = fit_mode;
 
     switch (fit_mode) {
-        case FIT_NONE:
+        case FIT_NUMERIC:
             config_set_value("zoommode", "nofit");
             break;
         case FIT_WIDTH:
             config_set_value("zoommode", "pagewidth");
-            break;
-        case FIT_HEIGHT:
-            config_set_value("zoommode", "pageheight");
             break;
         case FIT_BOTH:
             config_set_value("zoommode", "bestfit");
@@ -972,14 +962,11 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     if (STR_EQU (config_get_value ("zoommode"), "pagewidth")) {
         set_fit_mode(pc, FIT_WIDTH);
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_WIDTH);
-    } else if (STR_EQU (config_get_value ("zoommode"), "pageheight")) {
-        set_fit_mode(pc, FIT_HEIGHT);
-        //gtk_combo_box_set_active(pc->combo_sizes, new_index);
     } else if (STR_EQU (config_get_value ("zoommode"), "bestfit")) {
         set_fit_mode(pc, FIT_BOTH);
         gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_BOTH);
     } else {
-        set_fit_mode(pc, FIT_NONE);
+        set_fit_mode(pc, FIT_NUMERIC);
         previewgui_set_scale(pc, list_sizes[ZOOM_100],
                 NAN,    // We pass NAN as this causes no scrolling to happen
                 NAN);   // This is checked in previewgui_goto_xy()
@@ -1593,7 +1580,7 @@ void on_combo_sizes_changed (GtkWidget* widget, void* user) {
     } else if (index == 1) {
         set_fit_mode(gui->previewgui, FIT_WIDTH);
     } else {
-        set_fit_mode(gui->previewgui, FIT_NONE);
+        set_fit_mode(gui->previewgui, FIT_NUMERIC);
         previewgui_set_scale(gui->previewgui, list_sizes[index],
                 gtk_adjustment_get_page_size(gui->previewgui->hadj)/2,
                 gtk_adjustment_get_page_size(gui->previewgui->vadj)/2);
@@ -2021,7 +2008,7 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
                 e->x - gtk_adjustment_get_value(pc->hadj),
                 e->y - gtk_adjustment_get_value(pc->vadj));
 
-            set_fit_mode(pc, FIT_NONE);
+            set_fit_mode(pc, FIT_NUMERIC);
             g_signal_handler_block(pc->combo_sizes,
                                    pc->combo_sizes_changed_handler);
             gtk_combo_box_set_active(pc->combo_sizes, new_index);

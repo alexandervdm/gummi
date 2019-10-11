@@ -67,10 +67,9 @@ struct _LayeredRectangle {
 };
 
 enum GuPreviewFitMode {
-    FIT_NONE = 0,
-    FIT_WIDTH,
-    FIT_HEIGHT,
-    FIT_BOTH
+    FIT_NUMERIC = 0,    // 50,85,100 .. 400 %
+    FIT_WIDTH,          // Fit Page Width
+    FIT_BOTH            // Best Fit
 };
 
 #define GU_PREVIEW_PAGE(x) ((GuPreviewPage*)(x))
