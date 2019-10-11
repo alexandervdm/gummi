@@ -252,20 +252,6 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
 
     p->fit_mode = FIT_NONE;
 
-    // TODO: temporary measure because the config system does
-    // not look up default value if the setting is undefined
-    if (STR_EQU (config_get_value("zoommode"), "")) {
-        config_set_value("zoommode", "pagewidth");
-    }
-
-    if (STR_EQU (config_get_value("animated_scroll"), "")) {
-        config_set_value("animated_scroll", "always");
-    }
-
-    if (STR_EQU (config_get_value("cache_size"), "")) {
-        config_set_value("cache_size", "150");
-    }
-
     if (STR_EQU (config_get_value ("pagelayout"), "single_page")) {
         gtk_check_menu_item_set_active(
                 GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
