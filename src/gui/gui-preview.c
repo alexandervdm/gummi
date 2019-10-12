@@ -120,7 +120,7 @@ inline static gint get_page_margin (GuPreviewGui* pc);
 // Other functions
 static void block_handlers_current_page (GuPreviewGui* pc);
 static void unblock_handlers_current_page (GuPreviewGui* pc);
-static void set_fit_mode (GuPreviewGui* pc, enum GuPreviewFitMode fit_mode);
+static void set_fit_mode (GuPreviewGui* pc, enum GuPreviewFitModes fit_mode);
 
 static gboolean on_page_input_lost_focus (GtkWidget *widget, GdkEvent *event,
                                           gpointer user_data);
@@ -250,8 +250,6 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         list_sizes[i] *= poppler_scale;
     }
 
-    p->fit_mode = FIT_NUMERIC;
-
     if (STR_EQU (config_get_value ("pagelayout"), "single_page")) {
         gtk_check_menu_item_set_active(
                 GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
@@ -366,7 +364,7 @@ static gboolean previewgui_animated_scroll_step(gpointer data) {
 
 static void update_fit_scale(GuPreviewGui* pc) {
 
-    if (pc->fit_mode == FIT_NUMERIC) {
+    if (g_active_tab->fit_mode == FIT_NUMERIC) {
         return;
     }
     //L_F_DEBUG;
@@ -450,10 +448,10 @@ static void update_fit_scale(GuPreviewGui* pc) {
 
     gdouble scale = pc->scale;
 
-    if (pc->fit_mode == FIT_WIDTH) {
+    if (g_active_tab->fit_mode == FIT_WIDTH) {
         scale = scale_width;
     }
-    else if (pc->fit_mode == FIT_BOTH) {
+    else if (g_active_tab->fit_mode == FIT_BOTH) {
         scale = scale_both;
     }
 
@@ -751,7 +749,7 @@ static void update_drawarea_size(GuPreviewGui *pc) {
 
     // If the document should be fit, we set the requested size to 1 so
     // scrollbars will not appear.
-    switch (pc->fit_mode) {
+    switch (g_active_tab->fit_mode) {
         case FIT_NUMERIC:
             width = pc->width_scaled + 2*get_document_margin(pc);
             height = pc->height_scaled + 2*get_document_margin(pc);
@@ -824,29 +822,10 @@ void previewgui_set_page_layout(GuPreviewGui* pc, PopplerPageLayout pageLayout) 
     previewgui_goto_page(pc, pc->current_page);
 }
 
-static void set_fit_mode(GuPreviewGui* pc, enum GuPreviewFitMode fit_mode) {
-
-    if (pc->fit_mode == fit_mode) {
-        return;
-    }
+static void set_fit_mode (GuPreviewGui* pc, enum GuPreviewFitModes fit_mode) {
     //L_F_DEBUG;
-
-    pc->fit_mode = fit_mode;
-
-    switch (fit_mode) {
-        case FIT_NUMERIC:
-            config_set_value("zoommode", "nofit");
-            break;
-        case FIT_WIDTH:
-            config_set_value("zoommode", "pagewidth");
-            break;
-        case FIT_BOTH:
-            config_set_value("zoommode", "bestfit");
-            break;
-    }
-
-    update_fit_scale(pc);
-    update_page_positions(pc);
+    update_fit_scale (pc);
+    update_page_positions (pc);
 }
 
 static void update_scaled_size(GuPreviewGui* pc) {
@@ -959,20 +938,25 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
 
     // Restore scale and fit mode
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
-    if (STR_EQU (config_get_value ("zoommode"), "pagewidth")) {
-        set_fit_mode(pc, FIT_WIDTH);
-        gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_WIDTH);
-    } else if (STR_EQU (config_get_value ("zoommode"), "bestfit")) {
-        set_fit_mode(pc, FIT_BOTH);
-        gtk_combo_box_set_active(pc->combo_sizes, ZOOM_FIT_BOTH);
-    } else {
-        set_fit_mode(pc, FIT_NUMERIC);
-        previewgui_set_scale(pc, list_sizes[ZOOM_100],
-                NAN,    // We pass NAN as this causes no scrolling to happen
-                NAN);   // This is checked in previewgui_goto_xy()
-                        // This might also have caused Bug #252.
-        gtk_combo_box_set_active(pc->combo_sizes, ZOOM_100);
+
+    switch (g_active_tab->fit_mode) {
+        case FIT_BOTH:
+            set_fit_mode (pc, FIT_BOTH);
+            gtk_combo_box_set_active (pc->combo_sizes, ZOOM_FIT_BOTH);
+            break;
+        case FIT_WIDTH:
+            set_fit_mode (pc, FIT_WIDTH);
+            gtk_combo_box_set_active (pc->combo_sizes, ZOOM_FIT_WIDTH);
+            break;
+        case FIT_NUMERIC: // should compile on both gcc and clang
+            set_fit_mode (pc, FIT_NUMERIC);
+            previewgui_set_scale (pc, list_sizes[g_active_tab->zoom_mode], NAN, NAN);
+            // We pass NAN to avoid scrolling to happen. This is checked
+            // in previewgui_goto_xy() and might also have caused bug #252
+            gtk_combo_box_set_active (pc->combo_sizes, g_active_tab->zoom_mode);
+            break;
     }
+
     g_signal_handler_unblock(pc->combo_sizes, pc->combo_sizes_changed_handler);
 
     gtk_widget_queue_draw (pc->drawarea);
@@ -1573,19 +1557,28 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_combo_sizes_changed (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
-    gint index = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+    gint new_zoom_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 
-    if (index == 0) {
-        set_fit_mode(gui->previewgui, FIT_BOTH);
-    } else if (index == 1) {
-        set_fit_mode(gui->previewgui, FIT_WIDTH);
-    } else {
-        set_fit_mode(gui->previewgui, FIT_NUMERIC);
-        previewgui_set_scale(gui->previewgui, list_sizes[index],
-                gtk_adjustment_get_page_size(gui->previewgui->hadj)/2,
-                gtk_adjustment_get_page_size(gui->previewgui->vadj)/2);
-    }
-
+    switch (new_zoom_mode) {
+        case FIT_BOTH:
+            g_active_tab->fit_mode = FIT_BOTH;
+            g_active_tab->zoom_mode = ZOOM_FIT_BOTH;
+            set_fit_mode (gui->previewgui, FIT_BOTH);
+            break;
+        case FIT_WIDTH:
+            g_active_tab->fit_mode = FIT_WIDTH;
+            g_active_tab->zoom_mode = ZOOM_FIT_WIDTH;
+            set_fit_mode (gui->previewgui, FIT_WIDTH);
+            break;
+        case 2 ... 10:
+            g_active_tab->fit_mode = FIT_NUMERIC;
+            g_active_tab->zoom_mode = new_zoom_mode;
+            set_fit_mode (gui->previewgui, FIT_NUMERIC);
+            previewgui_set_scale (gui->previewgui, list_sizes[new_zoom_mode],
+                    gtk_adjustment_get_page_size (gui->previewgui->hadj) / 2,
+                    gtk_adjustment_get_page_size (gui->previewgui->vadj) / 2);
+            break;
+        }
 }
 
 static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y) {

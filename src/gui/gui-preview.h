@@ -66,11 +66,12 @@ struct _LayeredRectangle {
     gint layer;
 };
 
-enum GuPreviewFitMode {
-    FIT_NUMERIC = 0,    // 50,85,100 .. 400 %
+enum GuPreviewFitModes {
+    FIT_BOTH = 0,       // Best Fit
     FIT_WIDTH,          // Fit Page Width
-    FIT_BOTH            // Best Fit
+    FIT_NUMERIC         // 50,85,100 .. 400 %
 };
+
 
 #define GU_PREVIEW_PAGE(x) ((GuPreviewPage*)(x))
 typedef struct _GuPreviewPage GuPreviewPage;
@@ -142,7 +143,6 @@ struct _GuPreviewGui {
     gdouble scale;
     PopplerPageLayout pageLayout;
     GuPreviewPage *pages;
-    enum GuPreviewFitMode fit_mode;
     gint cache_size;
 
     gint document_width_scaling;

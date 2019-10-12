@@ -34,6 +34,7 @@
 #include <gtk/gtk.h>
 
 #include "editor.h"
+#include "gui-preview.h"
 
 #define g_tabnotebook gui->tabmanagergui->notebook
 
@@ -63,6 +64,9 @@ typedef struct _GuTabContext GuTabContext;
 struct _GuTabContext {
     GuEditor* editor;
     GuTabPage* page;
+
+    enum GuPreviewFitModes fit_mode;
+    gint zoom_mode;
 };
 
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)
