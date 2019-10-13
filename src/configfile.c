@@ -72,7 +72,7 @@ const gchar config_str[] =
 "font = Monospace 14\n"
 "\n"
 "[Preview]\n"
-"zoommode = pagewidth\n"
+"zoom_mode = Fit Page Width\n"
 "pagelayout = one_column\n"
 "autosync = False\n"
 "animated_scroll = always\n"

@@ -937,6 +937,32 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     synctex_clear_sync_nodes(pc);
 
     // Restore scale and fit mode
+    if (!g_active_tab->fit_mode) {
+        const gchar* conf_zoom = config_get_value ("zoom_mode");
+        gint new_fit, new_zoom;
+
+        // TODO: build a dict like structure combining zoom fit strs with
+        // id (combo) so we dont have to do this verbose stuff all over the place
+        if (STR_EQU (conf_zoom, "Best Fit")) new_fit = 0, new_zoom = 0;
+        else
+        if (STR_EQU (conf_zoom, "Fit Page Width")) new_fit = 1, new_zoom = 1;
+        else {
+            new_fit = 2;
+            if (STR_EQU (conf_zoom, "50%")) new_zoom = 2;
+            else if (STR_EQU (conf_zoom, "70%")) new_zoom = 3;
+            else if (STR_EQU (conf_zoom, "85%")) new_zoom = 4;
+            else if (STR_EQU (conf_zoom, "100%")) new_zoom = 5;
+            else if (STR_EQU (conf_zoom, "125%")) new_zoom = 6;
+            else if (STR_EQU (conf_zoom, "150%")) new_zoom = 7;
+            else if (STR_EQU (conf_zoom, "200%")) new_zoom = 8;
+            else if (STR_EQU (conf_zoom, "300%")) new_zoom = 9;
+            else if (STR_EQU (conf_zoom, "400%")) new_zoom = 10;
+            else slog (L_ERROR, "should not happen\n");
+        }
+        g_active_tab->fit_mode = new_fit;
+        g_active_tab->zoom_mode = new_zoom;
+    }
+
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
 
     switch (g_active_tab->fit_mode) {

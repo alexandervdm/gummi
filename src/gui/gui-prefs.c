@@ -134,6 +134,10 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
     p->opt_synctex =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "opt_synctex"));
 
+    p->combo_zoom_modes =
+        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_zoom_modes"));
+    p->list_zoom_modes =
+        GTK_LIST_STORE (gtk_builder_get_object (builder, "list_zoom_modes"));
     p->combo_animated_scroll =
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_animated_scroll"));
     p->spin_cache_size =
@@ -341,6 +345,29 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
     if (STR_EQU (config_get_value ("compile_scheme"), "real_time"))
         gtk_combo_box_set_active (prefs->compile_scheme, 1);
 
+    // default zoom mode:
+    GtkTreeModel* model = 0;
+    GtkTreeIter iter;
+    gboolean valid = FALSE;
+    gint count = 0;
+
+    const gchar *conf_str = config_get_value("zoom_mode");
+
+    model = gtk_combo_box_get_model (GTK_COMBO_BOX (prefs->combo_zoom_modes));
+    valid = gtk_tree_model_get_iter_first (model, &iter);
+
+    while (valid) {
+        const gchar* list_str;
+        gtk_tree_model_get (model, &iter, 0, &list_str, -1);
+        if (STR_EQU (list_str, conf_str)) {
+            gtk_combo_box_set_active (GTK_COMBO_BOX (prefs->combo_zoom_modes), count);
+            break;
+        }
+        ++count;
+        valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+    // animated scroll:
     if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 0);
     } else if (STR_EQU (config_get_value ("animated_scroll"), "never")) {
@@ -738,6 +765,15 @@ void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
     slog (L_INFO, "compile scheme set to %s\n", scheme[selected]);
     config_set_value ("compile_scheme", scheme[selected]);
     previewgui_reset (gui->previewgui);
+}
+
+G_MODULE_EXPORT
+void on_combo_zoom_modes_changed (GtkWidget* widget, void* user) {
+    gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+    // lazily duplicating this again for now (TODO fix in 0.8.1)
+    gchar scheme[][16] = {"Best Fit", "Fit Page Width", "50%", "70%", "85%",
+                          "100%", "125%", "150%", "200%", "300%", "400%"};
+    config_set_value ("zoom_mode", scheme[selected]);
 }
 
 G_MODULE_EXPORT

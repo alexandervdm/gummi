@@ -125,9 +125,6 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
         g_tabs = g_list_append(g_tabs, tc);
         pos = tabmanagergui_create_page (tc, tc->editor);
         tabmanagergui_set_current_page (pos);
-
-        tc->fit_mode = FIT_WIDTH;
-        tc->zoom_mode = FIT_WIDTH;
     }
 
     tabmanager_set_active_tab (pos);
