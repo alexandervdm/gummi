@@ -641,7 +641,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gummi->biblio->progressval = 0.0;
 
     gtk_widget_set_sensitive (widget, FALSE);
-    g_timeout_add (10, on_bibprogressbar_update, NULL);
+    g_timeout_add (10, on_bibprogressbar_update, widget);
 
     if (biblio_compile_bibliography (gummi->biblio, g_active_editor,
                 gummi->latex)) {
@@ -668,7 +668,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
     gint number = 0;
 
     gummi->biblio->progressval = 0.0;
-    g_timeout_add (2, on_bibprogressbar_update, NULL);
+    g_timeout_add (2, on_bibprogressbar_update, widget);
     gtk_list_store_clear (gummi->biblio->list_biblios);
 
     if (biblio_detect_bibliography (gummi->biblio, g_active_editor)) {
@@ -780,14 +780,14 @@ void typesetter_setup (void) {
     slog (L_INFO, "Typesetter %s configured.\n",config_get_value("typesetter"));
 }
 
-gboolean on_bibprogressbar_update (void* user) {
+gboolean on_bibprogressbar_update (void* data) {
     gummi->biblio->progressval += 0.01;
 
     gtk_progress_bar_set_fraction(gummi->biblio->progressbar,
                                   gummi->biblio->progressval);
 
     if (gummi->biblio->progressval >= 1) {
-        gtk_widget_set_sensitive (gui->bibcompile, TRUE);
+        gtk_widget_set_sensitive (data, TRUE);
         return FALSE;
     }
     return TRUE;
