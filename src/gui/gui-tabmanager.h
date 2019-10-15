@@ -67,6 +67,9 @@ struct _GuTabContext {
 
     enum GuPreviewFitModes fit_mode;
     gint zoom_mode;
+
+    gdouble scroll_x;
+    gdouble scroll_y;
 };
 
 #define GU_TABMANAGER_GUI(x) ((GuTabmanagerGui*)x)

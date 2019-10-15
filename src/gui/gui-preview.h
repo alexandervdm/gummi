@@ -128,8 +128,6 @@ struct _GuPreviewGui {
     GtkAdjustment* vadj;
     gdouble prev_x;
     gdouble prev_y;
-    gdouble restore_x;
-    gdouble restore_y;
 
     gint n_pages;
     gint current_page;

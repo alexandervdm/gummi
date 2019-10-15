@@ -928,13 +928,13 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
         return;
     }
 
-    pc->restore_x = -1;
-    pc->restore_y = -1;
-
     load_document(pc, FALSE);
 
     // This is mainly for debugging - to make sure the boxes in the preview disappear.
     synctex_clear_sync_nodes(pc);
+
+    // Restore scrollbar positions:
+    previewgui_restore_position (pc);
 
     // Restore scale and fit mode
     if (!g_active_tab->fit_mode) {
@@ -1363,7 +1363,7 @@ void previewgui_goto_page (GuPreviewGui* pc, int page) {
     //                       page_offset_y(pc, page, y));
     // We do not want to scroll horizontally.
     previewgui_goto_xy(pc, gtk_adjustment_get_value(pc->hadj),
-                           page_offset_y(pc, page, y));
+                           gtk_adjustment_get_value(pc->vadj));
 
     if (!is_continuous(pc)) {
         gtk_widget_queue_draw (pc->drawarea);
@@ -1413,6 +1413,7 @@ void previewgui_goto_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
     gtk_adjustment_set_value(pc->hadj, x);
     gtk_adjustment_set_value(pc->vadj, y);
+    previewgui_save_position (pc);
 
     unblock_handlers_current_page(pc);
 }
@@ -1443,20 +1444,21 @@ void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
 void previewgui_save_position (GuPreviewGui* pc) {
     //L_F_DEBUG;
-    /* update last scroll position to restore it after error mode */
-    pc->restore_y = gtk_adjustment_get_value(pc->vadj);
-    pc->restore_x = gtk_adjustment_get_value(pc->hadj);
+    g_active_tab->scroll_x = gtk_adjustment_get_value (pc->hadj);
+    g_active_tab->scroll_y = gtk_adjustment_get_value (pc->vadj);
     block_handlers_current_page(pc);
-
-    slog(L_DEBUG, "Position SAVED\n\n\n");
+    slog(L_DEBUG, "Preview scrollbar positions saved at x/y = %.2f/%.2f\n",
+                   g_active_tab->scroll_x, g_active_tab->scroll_y);
 }
 
 void previewgui_restore_position (GuPreviewGui* pc) {
     //L_F_DEBUG;
-
     // Restore scroll window position to value before error mode
     // TODO: might want to merge this with synctex funcs in future
-    previewgui_goto_xy(pc, pc->restore_x, pc->restore_y);
+    previewgui_goto_xy (pc, g_active_tab->scroll_x,
+                            g_active_tab->scroll_y);
+    slog(L_DEBUG, "Preview scrollbar positions restored at x/y = %.2f/%.2f\n",
+                   g_active_tab->scroll_x, g_active_tab->scroll_y);
     unblock_handlers_current_page(pc);
 }
 
