@@ -110,9 +110,6 @@ int main (int argc, char *argv[]) {
     gummi_signals_register ();
 
     /* Initialize Classes */
-    gchar* snippetsname = g_build_filename (g_get_user_config_dir (), "gummi",
-            "snippets.cfg", NULL);
-
     // why do we not load this from environment, like gui-main does? -A
     GuMotion* motion = motion_init ();
     GuIOFunc* io = iofunctions_init();
@@ -121,11 +118,10 @@ int main (int argc, char *argv[]) {
     GuTemplate* templ = template_init (builder);
     GuTabmanager* tabm = tabmanager_init ();
     GuProject* proj = project_init ();
+    GuSnippets* snippets = snippets_init ();
 
-    GuSnippets* snippets = snippets_init (snippetsname);
     gummi = gummi_init (motion, io, latex, biblio, templ, snippets, tabm, proj);
     slog (L_DEBUG, "Gummi created!\n");
-    g_free (snippetsname);
 
     /* Initialize GUI */
     gui = gui_init (builder);

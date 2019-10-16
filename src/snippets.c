@@ -37,17 +37,21 @@
 
 #include <glib.h>
 
+#include "constants.h"
 #include "editor.h"
 #include "environment.h"
 #include "utils.h"
 
-GuSnippets* snippets_init (const gchar* filename) {
+GuSnippets* snippets_init () {
     GuSnippets* s = g_new0 (GuSnippets, 1);
+
+    gchar* filename = g_build_filename (C_GUMMI_CONFDIR, "snippets.cfg", NULL);
     gchar* dirname = g_path_get_dirname (filename);
+
     g_mkdir_with_parents (dirname, DIR_PERMS);
     g_free (dirname);
 
-    slog (L_INFO, "snippets : %s\n", filename);
+    slog (L_INFO, "Snippets : %s\n", filename);
 
     s->filename = g_strdup (filename);
     s->accel_group = gtk_accel_group_new ();

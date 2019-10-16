@@ -84,7 +84,7 @@ struct _GuSnippets {
     GList* closure_data; /* data: Tuple2 (key, closure) */
 };
 
-GuSnippets* snippets_init (const gchar* filename);
+GuSnippets* snippets_init ();
 void snippets_set_default (GuSnippets* sc);
 void snippets_load (GuSnippets* sc);
 void snippets_save (GuSnippets* sc);
