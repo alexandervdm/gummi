@@ -198,8 +198,9 @@ gboolean iofunctions_has_swapfile (const gchar* filename) {
 }
 
 void iofunctions_start_autosave (void) {
-    sid = g_timeout_add_seconds (atoi(config_get_value ("autosave_timer")) * 60,
-            iofunctions_autosave_cb, NULL);
+    sid = g_timeout_add_seconds (config_get_integer ("File", "autosave_timer") * 60,
+                                 iofunctions_autosave_cb,
+                                 NULL);
     slog (L_DEBUG, "Autosaving function started..\n");
 }
 
@@ -216,8 +217,9 @@ void iofunctions_stop_autosave (void) {
 
 void iofunctions_reset_autosave (const gchar* name) {
     iofunctions_stop_autosave ();
-    if (config_get_value ("autosaving"))
+    if (config_get_boolean ("File", "autosaving")) {
         iofunctions_start_autosave ();
+    }
 }
 
 char* iofunctions_decode_text (gchar* text) {

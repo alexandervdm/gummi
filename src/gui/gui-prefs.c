@@ -219,42 +219,41 @@ static void set_all_tab_settings (GuPrefsGui* prefs) {
 }
 
 static void set_tab_view_settings (GuPrefsGui* prefs) {
-    gboolean value = FALSE;
+    gboolean textwrap_enabled = config_get_boolean ("Editor", "textwrapping");
 
-    value = TO_BOOL (config_get_value ("textwrapping"));
-    if (value) {
+    if (textwrap_enabled) {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->textwrap_button),
-                value);
+                                      textwrap_enabled);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(prefs->wordwrap_button),
-                TO_BOOL (config_get_value ("wordwrapping")));
+                                      config_get_boolean ("Editor", "wordwrapping"));
     } else
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->wordwrap_button), FALSE);
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->line_numbers),
-            TO_BOOL (config_get_value ("line_numbers")));
+                                  config_get_boolean ("Editor", "line_numbers"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->highlighting),
-            TO_BOOL (config_get_value ("highlighting")));
+                                  config_get_boolean ("Editor", "highlighting"));
 
 }
 
 static void set_tab_editor_settings (GuPrefsGui* prefs) {
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoindentation),
-            TO_BOOL (config_get_value ("autoindentation")));
+                                  config_get_boolean ("Editor", "autoindentation"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->spaces_instof_tabs),
-            TO_BOOL (config_get_value ("spaces_instof_tabs")));
+                                  config_get_boolean ("Editor", "spaces_instof_tabs"));
     gtk_spin_button_set_value (prefs->tabwidth,
-                               atoi (config_get_value ("tabwidth")));
+                               config_get_integer ("Editor", "tabwidth"));
     gtk_spin_button_set_value (prefs->autosave_timer,
-                               atoi (config_get_value ("autosave_timer")));
+                               config_get_integer ("File", "autosave_timer"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autosaving),
-            TO_BOOL (config_get_value ("autosaving")));
-    if (!config_get_value ("autosaving"))
+                                  config_get_boolean ("File", "autosaving"));
+    if (!config_get_boolean ("File", "autosaving"))
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->autosave_timer), FALSE);
 }
 
 static void set_tab_fontcolor_settings (GuPrefsGui* prefs) {
     gtk_font_chooser_set_font (GTK_FONT_CHOOSER (prefs->editor_font),
-                               config_get_value ("font"));
+                               config_get_string ("Editor", "font"));
     prefsgui_apply_style_scheme(prefs);
 }
 
@@ -322,7 +321,7 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
     }
 
     if (latex_can_synctex()) {
-        if (config_get_value ("synctex")) {
+        if (config_get_boolean ("Compile", "synctex")) {
             gtk_toggle_button_set_active (prefs->opt_synctex, TRUE);
         }
         else {
@@ -334,15 +333,15 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
 static void set_tab_preview_settings (GuPrefsGui* prefs) {
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
-            TO_BOOL (config_get_value ("compile_status")));
+                                  config_get_boolean ("Compile", "status"));
 
-    if (!config_get_value ("compile_status"))
+    if (!config_get_boolean ("Compile", "status"))
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
 
     gtk_spin_button_set_value (prefs->compile_timer,
-                               atoi (config_get_value ("compile_timer")));
-    /* compile scheme */
-    if (STR_EQU (config_get_value ("compile_scheme"), "real_time"))
+                               config_get_integer ("Compile", "timer"));
+    // compile scheme:
+    if (config_value_as_str_equals ("Compile", "scheme", "real_time"))
         gtk_combo_box_set_active (prefs->compile_scheme, 1);
 
     // default zoom mode:
@@ -351,7 +350,7 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
     gboolean valid = FALSE;
     gint count = 0;
 
-    const gchar *conf_str = config_get_value("zoom_mode");
+    const gchar *conf_str = config_get_string("Preview", "zoom_mode");
 
     model = gtk_combo_box_get_model (GTK_COMBO_BOX (prefs->combo_zoom_modes));
     valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -368,16 +367,16 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
     }
 
     // animated scroll:
-    if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
+    if (config_value_as_str_equals ("Preview", "animated_scroll", "always")) {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 0);
-    } else if (STR_EQU (config_get_value ("animated_scroll"), "never")) {
+    } else if (config_value_as_str_equals ("Preview", "animated_scroll", "never")) {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 2);
     } else {
         gtk_combo_box_set_active (prefs->combo_animated_scroll, 1);
     }
 
     gtk_spin_button_set_value (prefs->spin_cache_size,
-                               atoi (config_get_value ("cache_size")));
+                               config_get_integer ("Preview", "cache_size"));
 }
 
 static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
@@ -389,7 +388,7 @@ static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
 
     combo_lang = gtk_combo_box_get_model (GTK_COMBO_BOX (prefs->combo_languages));
 
-    lang = config_get_value ("spell_language");
+    lang = config_get_string ("Editor", "spelling_lang");
 
     valid = gtk_tree_model_get_iter_first (combo_lang, &iter);
     while (valid) {
@@ -404,12 +403,11 @@ static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
     }
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->autoexport),
-            TO_BOOL (config_get_value ("autoexport")));
-
+                                  config_get_boolean ("File", "autoexport"));
 }
 
 void prefsgui_apply_style_scheme(GuPrefsGui* prefs) {
-    const gchar* scheme = config_get_value ("style_scheme");
+    const gchar* scheme = config_get_string ("Editor", "style_scheme");
     GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
     GList* tab = gummi->tabmanager->tabs;
@@ -450,7 +448,8 @@ void toggle_linenumbers (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gummi->tabmanager->tabs;
 
-    config_set_value ("line_numbers", newval? "True": "False");
+    config_set_boolean ("Editor", "line_numbers", newval);
+
     while (tab) {
         gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW
                 (GU_TAB_CONTEXT (tab->data)->editor->view), newval);
@@ -463,7 +462,7 @@ void toggle_highlighting (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gummi->tabmanager->tabs;
 
-    config_set_value ("highlighting", newval? "True": "False");
+    config_set_boolean ("Editor", "highlighting", newval);
 
     while (tab) {
         gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
@@ -477,7 +476,8 @@ void toggle_textwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gummi->tabmanager->tabs;
 
-    config_set_value ("textwrapping", newval? "True": "False");
+    config_set_boolean ("Editor", "textwrapping", newval);
+
     if (newval) {
         while (tab) {
             gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
@@ -508,7 +508,8 @@ void toggle_wordwrapping (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
     GList* tab = gummi->tabmanager->tabs;
 
-    config_set_value ("wordwrapping", newval? "True": "False");
+    config_set_boolean ("Editor", "wordwrapping", newval);
+
     while (tab) {
         if (newval)
             gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW
@@ -523,7 +524,8 @@ void toggle_wordwrapping (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_compilestatus (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    config_set_value ("compile_status", newval? "True": "False");
+    config_set_boolean ("Compile", "status", newval);
+
     gtk_widget_set_sensitive (GTK_WIDGET(gui->prefsgui->compile_timer), newval);
     gtk_toggle_tool_button_set_active (gui->previewoff, !newval);
 }
@@ -531,9 +533,9 @@ void toggle_compilestatus (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gummi->tabmanager->tabs;
+    config_set_boolean ("Editor", "spaces_instof_tabs", newval);
 
-    config_set_value ("spaces_instof_tabs", newval? "True": "False");
+    GList* tab = gummi->tabmanager->tabs;
     while (tab) {
         gtk_source_view_set_insert_spaces_instead_of_tabs
             (GU_TAB_CONTEXT (tab->data)->editor->view, newval);
@@ -544,9 +546,9 @@ void toggle_spaces_instof_tabs (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_autoindentation (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    GList* tab = gummi->tabmanager->tabs;
+    config_set_boolean ("Editor", "autoindentation", newval);
 
-    config_set_value ("autoindentation", newval? "True": "False");
+    GList* tab = gummi->tabmanager->tabs;
     while (tab) {
         gtk_source_view_set_auto_indent
             (GU_TAB_CONTEXT (tab->data)->editor->view, newval);
@@ -557,13 +559,13 @@ void toggle_autoindentation (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_autosaving (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    config_set_boolean ("File", "autosaving", newval);
 
-    config_set_value ("autosaving", newval? "True": "False");
     if (newval) {
         gtk_widget_set_sensitive (
                 GTK_WIDGET (gui->prefsgui->autosave_timer), TRUE);
-        gint time = atoi (config_get_value ("autosave_timer"));
-        gtk_spin_button_set_value (gui->prefsgui->autosave_timer, time);
+        gtk_spin_button_set_value (gui->prefsgui->autosave_timer,
+                                   config_get_integer ("File", "autosave_timer"));
         iofunctions_reset_autosave (g_active_editor->filename);
     } else {
         gtk_widget_set_sensitive (
@@ -575,7 +577,7 @@ void toggle_autosaving (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_autoexport (GtkWidget* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    config_set_value ("autoexport", newval? "True": "False");
+    config_set_boolean ("File", "autoexport", newval);
 }
 
 G_MODULE_EXPORT
@@ -598,7 +600,7 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
-    config_set_default ();
+    config_load_defaults ();
     utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, NULL);
 
     set_all_tab_settings (gui->prefsgui);
@@ -607,10 +609,9 @@ void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_tabwidth_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-    gchar buf[16];
+    config_set_integer ("Editor", "tabwidth", newval);
+    
     GList* tab = gummi->tabmanager->tabs;
-
-    config_set_value ("tabwidth", g_ascii_dtostr (buf, 16, (double)newval));
     while (tab) {
         gtk_source_view_set_tab_width (GU_TAB_CONTEXT (tab->data)->editor->view,
                                       newval);
@@ -626,39 +627,34 @@ void on_configure_snippets_clicked (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_autosave_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-    gchar buf[16];
+    config_set_integer("File", "autosave_timer", newval);
 
-    config_set_value("autosave_timer", g_ascii_dtostr(buf, 16, (double)newval));
     iofunctions_reset_autosave (g_active_editor->filename);
 }
 
 G_MODULE_EXPORT
 void on_compile_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-    gchar buf[16];
+    config_set_integer("Compile", "timer", newval);
 
-    config_set_value("compile_timer", g_ascii_dtostr (buf, 16, (double)newval));
     previewgui_reset (gui->previewgui);
 }
 
 G_MODULE_EXPORT
-void on_cache_size_value_changed(GtkWidget* widget, void* user) {
+void on_cache_size_value_changed (GtkWidget* widget, void* user) {
     gint newval = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-    gchar buf[16];
-
-    config_set_value("cache_size", g_ascii_dtostr (buf, 16, (double)newval));
-
+    config_set_integer ("Preview", "cache_size", newval);
 
     g_idle_add((GSourceFunc) run_garbage_collector, gui->previewgui);
 }
 
 G_MODULE_EXPORT
 void on_editor_font_set (GtkWidget* widget, void* user) {
-    const gchar* font = gtk_font_chooser_get_font ( GTK_FONT_CHOOSER (widget));
+    gchar* font = gtk_font_chooser_get_font ( GTK_FONT_CHOOSER (widget));
     GList* tab = gummi->tabmanager->tabs;
 
     slog (L_INFO, "setting font to %s\n", font);
-    config_set_value ("font", font);
+    config_set_string ("Editor", "font", font);
 
     while (tab) {
         editor_set_font (GU_TAB_CONTEXT (tab->data)->editor, font);
@@ -670,7 +666,7 @@ void on_editor_font_set (GtkWidget* widget, void* user) {
 G_MODULE_EXPORT
 void on_typ_pdflatex_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("typesetter", "pdflatex");
+        config_set_string ("Compile", "typesetter", "pdflatex");
         typesetter_setup ();
     }
 }
@@ -678,16 +674,15 @@ void on_typ_pdflatex_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_typ_xelatex_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("typesetter", "xelatex");
+        config_set_string ("Compile", "typesetter", "xelatex");
         typesetter_setup ();
     }
-
 }
 
 G_MODULE_EXPORT
 void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("typesetter", "rubber");
+        config_set_string ("Compile", "typesetter", "rubber");
         typesetter_setup ();
     }
 }
@@ -695,7 +690,7 @@ void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("typesetter", "latexmk");
+        config_set_string ("Compile", "typesetter", "latexmk");
         typesetter_setup ();
     }
 }
@@ -703,7 +698,7 @@ void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_steps", "texpdf");
+        config_set_string ("Compile", "steps", "texpdf");
         slog (L_INFO, "Changed compile method to \"tex->pdf\"\n");
     }
 
@@ -712,7 +707,7 @@ void on_method_texpdf_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_steps", "texdvipdf");
+        config_set_string ("Compile", "steps", "texdvipdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->pdf\"\n");
     }
 }
@@ -720,7 +715,7 @@ void on_method_texdvipdf_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
-        config_set_value ("compile_steps", "texdvipspdf");
+        config_set_string ("Compile", "steps", "texdvipspdf");
         slog (L_INFO, "Changed compile method to \"tex->dvi->ps->pdf\"\n");
     }
 }
@@ -728,13 +723,13 @@ void on_method_texdvipspdf_toggled (GtkToggleButton* widget, void* user) {
 G_MODULE_EXPORT
 void toggle_shellescape (GtkToggleButton* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    config_set_value ("shellescape", newval? "True": "False");
+    config_set_boolean ("Compile", "shellescape", newval);
 }
 
 G_MODULE_EXPORT
 void on_synctex_toggled (GtkToggleButton* widget, void* user) {
     gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    config_set_value ("synctex", newval? "True": "False");
+    config_set_boolean ("Compile", "synctex", newval);
     gtk_widget_set_sensitive (GTK_WIDGET (gui->menu_autosync), newval);
 }
 
@@ -743,9 +738,9 @@ void on_combo_language_changed (GtkComboBoxText* widget, void* user) {
 #ifdef USE_GTKSPELL
     gchar* selected = gtk_combo_box_text_get_active_text (widget);
     GList* tab = gummi->tabmanager->tabs;
-    config_set_value ("spell_language", selected);
+    config_set_string ("Editor", "spelling_lang", selected);
 
-    if (config_get_value ("spelling")) {
+    if (config_get_boolean ("Editor", "spelling")) {
         while (tab) {
             editor_activate_spellchecking (GU_TAB_CONTEXT (tab->data)->editor,
                                            FALSE);
@@ -761,9 +756,9 @@ void on_combo_language_changed (GtkComboBoxText* widget, void* user) {
 G_MODULE_EXPORT
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user) {
     gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-    const gchar scheme[][16] = { "on_idle", "real_time" };
+    gchar scheme[][16] = { "on_idle", "real_time" };
     slog (L_INFO, "compile scheme set to %s\n", scheme[selected]);
-    config_set_value ("compile_scheme", scheme[selected]);
+    config_set_string ("Compile", "scheme", scheme[selected]);
     previewgui_reset (gui->previewgui);
 }
 
@@ -773,14 +768,14 @@ void on_combo_zoom_modes_changed (GtkWidget* widget, void* user) {
     // lazily duplicating this again for now (TODO fix in 0.8.1)
     gchar scheme[][16] = {"Best Fit", "Fit Page Width", "50%", "70%", "85%",
                           "100%", "125%", "150%", "200%", "300%", "400%"};
-    config_set_value ("zoom_mode", scheme[selected]);
+    config_set_string ("Preview", "zoom_mode", scheme[selected]);
 }
 
 G_MODULE_EXPORT
 void on_combo_animated_scroll_changed (GtkWidget* widget, void* user) {
     gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-    const gchar scheme[][16] = { "always", "autosync", "never" };
-    config_set_value ("animated_scroll", scheme[selected]);
+    gchar scheme[][16] = { "always", "autosync", "never" };
+    config_set_string ("Preview", "animated_scroll", scheme[selected]);
 }
 
 G_MODULE_EXPORT
@@ -799,5 +794,5 @@ void on_styleschemes_treeview_cursor_changed (GtkTreeView* treeview, void* user)
         editor_set_style_scheme_by_id (GU_TAB_CONTEXT (tab->data)->editor, id);
         tab = g_list_next (tab);
     }
-    config_set_value ("style_scheme", id);
+    config_set_string ("Editor", "style_scheme", id);
 }

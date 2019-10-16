@@ -47,7 +47,7 @@ void rubber_init (void) {
 }
 
 gboolean rubber_active (void) {
-    if (STR_EQU (config_get_value("typesetter"), C_RUBBER)) {
+    if (config_value_as_str_equals ("Compile", "typesetter", C_RUBBER)) {
         return TRUE;
     }
     return FALSE;

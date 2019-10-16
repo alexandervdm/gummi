@@ -250,7 +250,7 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         list_sizes[i] *= poppler_scale;
     }
 
-    if (STR_EQU (config_get_value ("pagelayout"), "single_page")) {
+    if (config_value_as_str_equals ("Preview", "pagelayout", "single_page")) {
         gtk_check_menu_item_set_active(
                 GTK_CHECK_MENU_ITEM(p->page_layout_single_page), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_SINGLE_PAGE;
@@ -320,10 +320,10 @@ void previewgui_page_layout_radio_changed(GtkMenuItem *radioitem, gpointer data)
     if (gtk_check_menu_item_get_active(
                 GTK_CHECK_MENU_ITEM(pc->page_layout_single_page))) {
         pageLayout = POPPLER_PAGE_LAYOUT_SINGLE_PAGE;
-        config_set_value("pagelayout", "single_page");
+        config_set_string ("Preview", "pagelayout", "single_page");
     } else {
         pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
-        config_set_value("pagelayout", "one_column");
+        config_set_string ("Preview", "pagelayout", "one_column");
     }
 
     previewgui_set_page_layout(gui->previewgui, pageLayout);
@@ -938,7 +938,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
 
     // Restore scale and fit mode
     if (!g_active_tab->fit_mode) {
-        const gchar* conf_zoom = config_get_value ("zoom_mode");
+        const gchar* conf_zoom = config_get_string ("Preview", "zoom_mode");
         gint new_fit, new_zoom;
 
         // TODO: build a dict like structure combining zoom fit strs with
@@ -1015,9 +1015,9 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
     load_document(pc, TRUE);
     update_page_positions(pc);
 
-    if (config_get_value ("synctex") && config_get_value ("autosync") &&
-            synctex_run_parser(pc, sync_to, tex_file)) {
-
+    if (config_get_boolean ("Compile", "synctex") &&
+        config_get_boolean ("Preview", "autosync") &&
+        synctex_run_parser(pc, sync_to, tex_file)) {
 
         SyncNode *node;
         if ((node = synctex_one_node_found(pc)) == NULL) {
@@ -1330,8 +1330,8 @@ static void synctex_scroll_to_node (GuPreviewGui* pc, SyncNode* node) {
         previewgui_goto_xy(pc, to_x, to_y);
 
     } else {
-        if (STR_EQU (config_get_value ("animated_scroll"), "always") ||
-            STR_EQU (config_get_value ("animated_scroll"), "autosync")) {
+        if (config_value_as_str_equals ("Preview", "animated_scroll", "always") ||
+            config_value_as_str_equals ("Preview", "animated_scroll", "autosync")) {
             previewgui_scroll_to_xy(pc, to_x, to_y);
         } else {
             previewgui_goto_xy(pc, to_x, to_y);
@@ -1510,8 +1510,9 @@ void previewgui_reset (GuPreviewGui* pc) {
     previewgui_stop_preview (pc);
     motion_do_compile (gummi->motion);
 
-    if (config_get_value ("compile_status"))
+    if (config_get_boolean ("Compile", "status")) {
         previewgui_start_preview (pc);
+    }
 }
 
 
@@ -1525,12 +1526,12 @@ void previewgui_cleanup_fds (GuPreviewGui* pc) {
 }
 
 void previewgui_start_preview (GuPreviewGui* pc) {
-    if (STR_EQU (config_get_value ("compile_scheme"), "on_idle")) {
+    if (config_value_as_str_equals ("Compile", "scheme", "on_idle")) {
         pc->preview_on_idle = TRUE;
     } else {
         pc->update_timer = g_timeout_add_seconds (
-                atoi (config_get_value ("compile_timer")),
-                motion_do_compile, gummi->motion);
+                                config_get_integer ("Compile", "timer"),
+                                motion_do_compile, gummi->motion);
     }
 }
 
@@ -1550,7 +1551,7 @@ void on_page_input_changed (GtkEntry* entry, void* user) {
     newpage = MAX(newpage, 0);
     newpage = MIN(newpage, gui->previewgui->n_pages);
 
-    if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
+    if (config_value_as_str_equals ("Preview", "animated_scroll", "always")) {
         previewgui_scroll_to_page (gui->previewgui, newpage);
     } else {
         previewgui_goto_page (gui->previewgui, newpage);
@@ -1563,7 +1564,7 @@ void on_next_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
+    if (config_value_as_str_equals ("Preview", "animated_scroll", "always")) {
         previewgui_scroll_to_page (pc, pc->next_page);
     } else {
         previewgui_goto_page (pc, pc->next_page);
@@ -1575,9 +1576,10 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
     //L_F_DEBUG;
     GuPreviewGui *pc = gui->previewgui;
 
-    if (STR_EQU (config_get_value ("animated_scroll"), "always")) {
+    if (config_value_as_str_equals ("Preview", "animated_scroll", "always")) {
         previewgui_scroll_to_page (pc, pc->prev_page);
-    } else {
+    } 
+    else {
         previewgui_goto_page (pc, pc->prev_page);
     }
 }
@@ -1736,7 +1738,7 @@ static gboolean layered_rectangle_intersect (const LayeredRectangle *src1,
 
 gboolean run_garbage_collector (GuPreviewGui* pc) {
 
-    gint max_cache_size = atoi (config_get_value ("cache_size")) * 1024 * 1024;
+    gint max_cache_size = config_get_integer ("Preview", "cache_size") * 1024 * 1024;
 
     if (pc->cache_size < max_cache_size) {
         return FALSE;

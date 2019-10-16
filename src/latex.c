@@ -60,23 +60,13 @@ GuLatex* latex_init (void) {
     l->tex_version = texlive_init ();
     rubber_init ();
     latexmk_init ();
-
-    /* TODO: Temp hard set of compilation options for migrating configs */
-    if (strlen(config_get_value("typesetter")) == 0)
-        config_set_value("typesetter", "pdflatex");
-    if (strlen(config_get_value("compile_steps")) == 0)
-        config_set_value("compile_steps", "texpdf");
-
     return l;
 }
 
 
 
 gboolean latex_method_active (gchar* method) {
-    if (STR_EQU (config_get_value ("compile_steps"), method)) {
-        return TRUE;
-    }
-    return FALSE;
+    return config_value_as_str_equals ("Compile", "steps", method);
 }
 
 gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
@@ -95,7 +85,7 @@ gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
 
 gchar* latex_set_compile_cmd (GuEditor* ec) {
 
-    const gchar* method = config_get_value ("compile_steps");
+    const gchar* method = config_get_string ("Compile", "steps");
     gchar* combined = NULL;
     gchar* texcmd = NULL;
 
@@ -172,10 +162,10 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
 
     if (!lc->modified_since_compile) return cerrors == 0;
 
-    const gchar* typesetter = config_get_value ("typesetter");
+    const gchar* typesetter = config_get_string ("Compile", "typesetter");
     if (!external_exists (typesetter)) {
-        /* Set to default first detected typesetter */
-        config_set_value ("typesetter", "pdflatex");
+        // Set to default first detected typesetter
+        config_set_string ("Compile", "typesetter", "pdflatex");
     }
 
     /* create compile command */
@@ -210,7 +200,7 @@ void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
                                       "-interaction=nonstopmode "
                                       "--output-directory=\"%s\" \"%s\"",
                                       C_TEXSEC,
-                                      config_get_value ("typesetter"),
+                                      config_get_string ("Compile", "typesetter"),
                                       C_TMPDIR,
                                       ec->workfile);
     Tuple2 res = utils_popen_r (command, dirname);
@@ -310,13 +300,10 @@ gboolean latex_can_synctex (void) {
 
 
 gboolean latex_use_synctex (void) {
-    return (config_get_value("synctex") && config_get_value("autosync"));
+    return (config_get_boolean ("Compile", "synctex") &&
+            config_get_boolean ("Preview", "autosync"));
 }
 
 gboolean latex_use_shellescaping (void) {
-    if (config_get_value ("shellescape")) return TRUE;
-    return FALSE;
+    return config_get_boolean ("Compile", "shellescape");
 }
-
-
-

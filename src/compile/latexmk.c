@@ -47,7 +47,7 @@ void latexmk_init (void) {
 }
 
 gboolean latexmk_active (void) {
-    if (STR_EQU (config_get_value("typesetter"), C_LATEXMK)) {
+    if (config_value_as_str_equals ("Compile", "typesetter", C_LATEXMK)) {
         return TRUE;
     }
     return FALSE;
@@ -79,7 +79,7 @@ gchar* latexmk_get_flags (const gchar *method) {
     gchar* lmkwithoutput;
     gchar* lmkflags;
 
-    if (config_get_value("synctex")) {
+    if (config_get_boolean ("Compile", "synctex")) {
         if (STR_EQU (method, "texpdf")) {
             lmkflags = g_strdup_printf("-e \"\\$pdflatex = 'pdflatex -synctex=1'\" -silent");
         }

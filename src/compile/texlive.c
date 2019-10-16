@@ -72,14 +72,14 @@ gboolean texlive_active (void) {
 }
 
 gboolean pdflatex_active (void) {
-    if (STR_EQU (config_get_value("typesetter"), "pdflatex")) {
+    if (config_value_as_str_equals ("Compile", "typesetter", "pdflatex")) {
         return TRUE;
     }
     return FALSE;
 }
 
 gboolean xelatex_active (void) {
-    if (STR_EQU (config_get_value("typesetter"), "xelatex")) {
+    if (config_value_as_str_equals ("Compile", "typesetter", "xelatex")) {
         return TRUE;
     }
     return FALSE;
@@ -154,7 +154,7 @@ gchar* texlive_get_flags (const gchar* method) {
         flags = tmp;
     }
 
-    if (config_get_value("synctex")) {
+    if (config_get_boolean ("Compile", "synctex")) {
         gchar* tmp = g_strconcat(flags, " -synctex=1", NULL);
         g_free(flags);
         flags = tmp;

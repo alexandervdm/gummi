@@ -103,12 +103,8 @@ int main (int argc, char *argv[]) {
     slog_init (debug);
     slog (L_INFO, C_PACKAGE_NAME" version: "C_PACKAGE_VERSION"\n");
 
-    /* Initialize configuration */
-    gchar* configname = g_build_filename (g_get_user_config_dir (), "gummi",
-                                  "gummi.cfg", NULL);
-    config_init (configname);
-    config_load ();
-    g_free (configname);
+    // Initialize configuration
+    config_init ();
 
     /* Initialize signals */
     gummi_signals_register ();
@@ -138,7 +134,7 @@ int main (int argc, char *argv[]) {
     slog (L_DEBUG, "GummiGui created!\n");
 
     /* Start compile thread */
-    if (external_exists (config_get_value("typesetter"))) {
+    if (external_exists (config_get_string ("Compile", "typesetter"))) {
         typesetter_setup ();
         motion_start_compile_thread (motion);
     }
@@ -166,10 +162,11 @@ int main (int argc, char *argv[]) {
         }
     }
 
-    if (config_get_value ("autosaving")) iofunctions_start_autosave ();
+    if (config_get_boolean ("File", "autosaving")) {
+        iofunctions_start_autosave ();
+    }
 
     gui_main (builder);
     config_save ();
-    config_clean_up ();
     return 0;
 }

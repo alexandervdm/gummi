@@ -246,25 +246,20 @@ gboolean on_menu_quit_activate (void) {
     if (length > 0) motion_stop_compile_thread (gummi->motion);
 
     // save current window size/position to persistent config
-    config_begin();
     if (gtk_window_is_maximized (gui->mainwindow)) {
-        config_set_value ("mainwindow_max", "True");
+        config_set_boolean ("Interface", "mainwindow_max", TRUE);
     }
     else { // unmaximized mainwindow:
         gint wx = 0, wy = 0, width = 0, height = 0;
-        gchar buf[16];
-
         gtk_window_get_size (gui->mainwindow, &width, &height);
         gtk_window_get_position (gui->mainwindow, &wx, &wy);
 
-        config_set_value ("mainwindow_max", "False");
-        config_set_value ("mainwindow_x", g_ascii_dtostr (buf, 16, (double)wx));
-        config_set_value ("mainwindow_y", g_ascii_dtostr (buf, 16, (double)wy));
-        config_set_value ("mainwindow_w", g_ascii_dtostr (buf, 16, (double)width));
-        config_set_value ("mainwindow_h", g_ascii_dtostr (buf, 16, (double)height));
+        config_set_boolean ("Interface", "mainwindow_max", FALSE);
+        config_set_integer ("Interface", "mainwindow_x", wx);
+        config_set_integer ("Interface", "mainwindow_y", wy);
+        config_set_integer ("Interface", "mainwindow_w", width);
+        config_set_integer ("Interface", "mainwindow_h", height);
     }
-    config_commit();
-
 
     gtk_main_quit ();
 
@@ -359,10 +354,10 @@ G_MODULE_EXPORT
 void on_menu_statusbar_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->statusbar));
-        config_set_value ("statusbar", "True");
+        config_set_boolean ("Interface", "statusbar", TRUE);
     } else {
         gtk_widget_hide (GTK_WIDGET (gui->statusbar));
-        config_set_value ("statusbar", "False");
+        config_set_boolean ("Interface", "statusbar", FALSE);
     }
 }
 
@@ -370,10 +365,10 @@ G_MODULE_EXPORT
 void on_menu_toolbar_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (gui->toolbar);
-        config_set_value ("toolbar", "True");
+        config_set_boolean ("Interface", "toolbar", TRUE);
     } else {
         gtk_widget_hide (gui->toolbar);
-        config_set_value ("toolbar", "False");
+        config_set_boolean ("Interface", "toolbar", FALSE);
     }
 }
 
@@ -381,11 +376,11 @@ G_MODULE_EXPORT
 void on_menu_rightpane_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
         gtk_widget_show (GTK_WIDGET (gui->rightpane));
-        config_set_value ("rightpane", "True");
+        config_set_boolean ("Interface", "rightpane", TRUE);
         gtk_toggle_tool_button_set_active (gui->previewoff, FALSE);
     } else {
         gtk_widget_hide (GTK_WIDGET (gui->rightpane));
-        config_set_value ("rightpane", "False");
+        config_set_boolean ("Interface", "rightpane", FALSE);
         gtk_toggle_tool_button_set_active (gui->previewoff, TRUE);
     }
 }
@@ -572,35 +567,33 @@ void on_menu_spelling_toggled (GtkWidget *widget, void *user) {
     GuEditor* ec;
     int ectotal, i;
 
-    gboolean activate = gtk_check_menu_item_get_active
-                        (GTK_CHECK_MENU_ITEM (widget));
+    gboolean active_status = gtk_check_menu_item_get_active
+                             (GTK_CHECK_MENU_ITEM (widget));
 
     editors = gummi_get_all_editors ();
     ectotal = g_list_length (editors);
 
     for (i=0; i<ectotal; i++) {
         ec = g_list_nth_data (editors, i);
-        if (activate) {
+        if (active_status) {
             editor_activate_spellchecking (ec, TRUE);
         }
         else {
             editor_activate_spellchecking (ec, FALSE);
         }
     }
-    if (activate) config_set_value ("spelling", "True");
-    else { config_set_value ("spelling", "False"); }
-
+    config_set_boolean ("Editor", "spelling", active_status);
 #endif
 }
 
 G_MODULE_EXPORT
 void on_menu_snippets_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
-        slog(L_INFO, "snippets activated\n");
-        config_set_value ("snippets", "True");
+        slog(L_INFO, "Snippets activated\n");
+        config_set_boolean ("Interface", "snippets", TRUE);
     } else {
-        slog(L_INFO, "snippets deactivated\n");
-        config_set_value ("snippets", "False");
+        slog(L_INFO, "Snippets deactivated\n");
+        config_set_boolean ("Interface", "snippets", FALSE);
     }
 }
 

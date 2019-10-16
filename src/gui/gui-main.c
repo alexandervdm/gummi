@@ -157,16 +157,16 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g_free (icon_file);
 
     // set main window size and positioning:
-    if (TO_BOOL (config_get_value ("mainwindow_max"))) {
+    if (config_get_boolean ("Interface", "mainwindow_max")) {
         gtk_window_maximize (g->mainwindow);
     }
     else {
         gtk_window_resize (g->mainwindow,
-                          atoi (config_get_value ("mainwindow_w")),
-                          atoi (config_get_value ("mainwindow_h")));
+                           config_get_integer ("Interface", "mainwindow_w"),
+                           config_get_integer ("Interface", "mainwindow_h"));
 
-        wx = atoi (config_get_value ("mainwindow_x"));
-        wy = atoi (config_get_value ("mainwindow_y"));
+        wx = config_get_integer ("Interface", "mainwindow_x");
+        wy = config_get_integer ("Interface", "mainwindow_y");
         if (wx && wy) {
             gtk_window_move (g->mainwindow, wx, wy);
         }
@@ -208,36 +208,36 @@ GummiGui* gui_init (GtkBuilder* builder) {
 #ifndef USE_GTKSPELL
     gtk_widget_set_sensitive (GTK_WIDGET (g->menu_spelling), FALSE);
 #else
-    if (config_get_value ("spelling"))
+    if (config_get_boolean ("Editor", "spelling"))
         gtk_check_menu_item_set_active (g->menu_spelling, TRUE);
 #endif
-    if (config_get_value ("snippets")) {
+    if (config_get_boolean ("Interface", "snippets")) {
         gtk_check_menu_item_set_active (g->menu_snippets, TRUE);
         gtk_widget_show (GTK_WIDGET (g->menu_snippets));
     }
-    if (config_get_value ("toolbar")) {
+    if (config_get_boolean ("Interface", "toolbar")) {
         gtk_check_menu_item_set_active (g->menu_toolbar, TRUE);
         gtk_widget_show (g->toolbar);
     } else {
-        config_set_value ("toolbar", "False");
+        config_set_boolean ("Interface", "toolbar", FALSE);
         gtk_check_menu_item_set_active (g->menu_toolbar, FALSE);
         gtk_widget_hide (g->toolbar);
     }
 
-    if (config_get_value ("statusbar")) {
+    if (config_get_boolean ("Interface", "statusbar")) {
         gtk_check_menu_item_set_active (g->menu_statusbar, TRUE);
         gtk_widget_show (GTK_WIDGET (g->statusbar));
     } else {
-        config_set_value ("statusbar", "False");
+        config_set_boolean ("Interface", "statusbar", FALSE);
         gtk_check_menu_item_set_active (g->menu_statusbar, FALSE);
         gtk_widget_hide (GTK_WIDGET (g->statusbar));
     }
 
-    if (config_get_value ("rightpane")) {
+    if (config_get_boolean ("Interface", "rightpane")) {
         gtk_check_menu_item_set_active (g->menu_rightpane, TRUE);
         gtk_widget_show (GTK_WIDGET (g->rightpane));
     } else {
-        config_set_value ("compile_status", "False");
+        config_set_boolean ("Compile", "status", FALSE);
         gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
         gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
@@ -245,20 +245,20 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->menu_autosync =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_autosync"));
 
-    if (latex_can_synctex() && config_get_value ("synctex")) {
+    if (latex_can_synctex() && config_get_boolean ("Compile", "synctex")) {
         gtk_widget_set_sensitive (GTK_WIDGET (g->menu_autosync), TRUE);
         gboolean async = latex_use_synctex();
         gtk_check_menu_item_set_active (g->menu_autosync, (async? TRUE: FALSE));
     }
 
-    if (!config_get_value ("compile_status"))
+    if (!config_get_boolean ("Compile", "status"))
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
 
-    g->recent_list[0] = g_strdup (config_get_value ("recent1"));
-    g->recent_list[1] = g_strdup (config_get_value ("recent2"));
-    g->recent_list[2] = g_strdup (config_get_value ("recent3"));
-    g->recent_list[3] = g_strdup (config_get_value ("recent4"));
-    g->recent_list[4] = g_strdup (config_get_value ("recent5"));
+    g->recent_list[0] = g_strdup (config_get_string ("Misc", "recent1"));
+    g->recent_list[1] = g_strdup (config_get_string ("Misc", "recent2"));
+    g->recent_list[2] = g_strdup (config_get_string ("Misc", "recent3"));
+    g->recent_list[3] = g_strdup (config_get_string ("Misc", "recent4"));
+    g->recent_list[4] = g_strdup (config_get_string ("Misc", "recent5"));
 
     display_recent_files (g);
 
@@ -316,9 +316,9 @@ void gui_main (GtkBuilder* builder) {
 G_MODULE_EXPORT
 void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user) {
     if (gtk_check_menu_item_get_active(menu_autosync)) {
-        config_set_value("autosync", "True");
+        config_set_boolean ("Preview", "autosync", TRUE);
     } else {
-        config_set_value("autosync", "False");
+        config_set_boolean ("Preview", "autosync", FALSE);
     }
 }
 
@@ -482,7 +482,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
 
     iofunctions_save_file (gummi->io, filename, text);
 
-    if (config_get_value ("autoexport")) {
+    if (config_get_boolean ("File", "autoexport")) {
         pdfname = g_strdup (filename);
         pdfname[strlen (pdfname) -4] = 0;
         latex_export_pdffile (gummi->latex, tab->editor, pdfname, FALSE);
@@ -522,7 +522,9 @@ G_MODULE_EXPORT
 void on_tool_previewoff_toggled (GtkWidget *widget, void * user) {
     gboolean value =
         gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (widget));
-    config_set_value ("compile_status", (!value)? "True": "False");
+
+    config_set_boolean ("Compile", "status", value);
+
     if (value)
         previewgui_stop_preview (gui->previewgui);
     else
@@ -766,9 +768,7 @@ void typesetter_setup (void) {
 
     gboolean texormk = (texlive_active() || latexmk_active());
 
-
-
-    if (config_get_value("synctex") && texormk) {
+    if (config_get_boolean ("Compile", "synctex") && texormk) {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, TRUE);
     }
     else {
@@ -776,8 +776,8 @@ void typesetter_setup (void) {
     }
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), texormk);
 
-
-    slog (L_INFO, "Typesetter %s configured.\n",config_get_value("typesetter"));
+    slog (L_INFO, "Typesetter %s configured.\n",
+                   config_get_string ("Compile", "typesetter"));
 }
 
 gboolean on_bibprogressbar_update (void* data) {
@@ -1007,10 +1007,10 @@ void display_recent_files (GummiGui* gui) {
             ++count;
         }
     }
-    /* update recent files */
+    // update recent files
     for (i = 0; i < RECENT_FILES_NUM; ++i) {
         tstr = g_strdup_printf ("recent%d", i + 1);
-        config_set_value (tstr, gui->recent_list[i]);
+        config_set_string ("Misc", tstr, gui->recent_list[i]);
         g_free (tstr);
     }
 }

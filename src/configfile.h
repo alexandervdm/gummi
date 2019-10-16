@@ -30,43 +30,29 @@
 #ifndef __GUMMI_CONFIGFILE__
 #define __GUMMI_CONFIGFILE__
 
-#include <stdio.h>
-
 #include <glib.h>
 
-void config_init (const gchar* filename);
-void config_set_default (void);
 
-/**
- * @brief get value of a setting
- * @param term the name of the setting
- * @return a pointer that points to the static gchar* of the setting value. If
- * the value type is boolean, config_get_value will return NULL for False
- * and non-NULL for True
- */
-const gchar* config_get_value (const gchar* term);
+void config_init ();
+void config_load_defaults ();
+void config_save ();
 
-/**
- * @brief set value of a setting, the settings will be write back immediately
- * @param term the name of the setting
- * @param value the value of the setting
- */
-void config_set_value (const gchar* term, const gchar* value);
+// config get functions:
+const gchar*   config_get_string  (const gchar* group, const gchar* key);
+const gboolean config_get_boolean (const gchar* group, const gchar* key);
+const gint     config_get_integer (const gchar* group, const gchar* key);
 
-/**
- * @brief begin a series of config_set_value operation. The changes won't be
- * written back until config_commit() is called.
- */
-void config_begin (void);
+// config get default functions:
+const gchar*   config_get_default_string  (const gchar* group, const gchar* key);
+const gboolean config_get_default_boolean (const gchar* group, const gchar* key);
+const gint     config_get_default_integer (const gchar* group, const gchar* key);
 
-/**
- * @brief Terminate a series of config_set_value operation and write changes
- * back to the file.
- */
-void config_commit (void);
+// config set functions:
+void config_set_string  (const gchar *group, const gchar *key, gchar* value);
+void config_set_boolean (const gchar *group, const gchar *key, gboolean value);
+void config_set_integer (const gchar *group, const gchar *key, gint value);
 
-void config_load (void);
-void config_save (void);
-void config_clean_up (void);
+// comparison functions:
+gboolean config_value_as_str_equals (const gchar* group, const gchar* key, gchar* input);
 
 #endif /* __GUMMI_CONFIGFILE__ */

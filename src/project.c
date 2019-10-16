@@ -55,8 +55,8 @@ GuProject* project_init (void) {
 
 gboolean project_create_new (const gchar* filename) {
     const gchar* version = g_strdup ("0.6.0");
-    const gchar* csetter = config_get_value ("typesetter");
-    const gchar* csteps = config_get_value ("compile_steps");
+    const gchar* csetter = config_get_string ("Compile", "typesetter");
+    const gchar* csteps = config_get_string ("Compile", "steps");
     const gchar* rootfile = g_active_editor->filename;
     // TODO: do we need to encode this text?
     const gchar* content = g_strdup_printf("version=%s\n"

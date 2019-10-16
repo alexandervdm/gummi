@@ -94,15 +94,15 @@ GuEditor* editor_new (GuMotion* mc) {
                                    GTK_STYLE_PROVIDER(ec->css),
                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-    gtk_source_view_set_tab_width (ec->view,
-            atoi (config_get_value ("tabwidth")));
-    gtk_source_view_set_insert_spaces_instead_of_tabs (ec->view,
-            TO_BOOL (config_get_value ("spaces_instof_tabs")));
-    gtk_source_view_set_auto_indent (ec->view,
-            TO_BOOL (config_get_value ("autoindentation")));
+    gtk_source_view_set_tab_width
+        (ec->view, config_get_integer ("Editor", "tabwidth"));
+    gtk_source_view_set_insert_spaces_instead_of_tabs
+        (ec->view, config_get_boolean ("Editor", "spaces_instof_tabs"));
+    gtk_source_view_set_auto_indent
+        (ec->view, config_get_boolean ("Editor", "autoindentation"));
 
 #ifdef USE_GTKSPELL
-    if (config_get_value ("spelling"))
+    if (config_get_boolean ("Editor", "spelling"))
         editor_activate_spellchecking (ec, TRUE);
 #endif
 
@@ -314,20 +314,22 @@ void editor_sourceview_config (GuEditor* ec) {
 
     gtk_source_buffer_set_highlight_matching_brackets (ec->buffer, TRUE);
 
-    const gchar* style_scheme = config_get_value ("style_scheme");
+    const gchar* style_scheme = config_get_string ("Editor", "style_scheme");
     editor_set_style_scheme_by_id (ec, style_scheme);
 
-    editor_set_font (ec, config_get_value ("font"));
+    editor_set_font (ec, config_get_string ("Editor", "font"));
 
-    gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (ec->view),
-            TO_BOOL (config_get_value ("line_numbers")));
-    gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (ec->view),
-        TO_BOOL (config_get_value ("highlighting")));
+    gtk_source_view_set_show_line_numbers (
+                            GTK_SOURCE_VIEW (ec->view),
+                            config_get_boolean ("Editor", "line_numbers"));
+    gtk_source_view_set_highlight_current_line (
+                            GTK_SOURCE_VIEW (ec->view),
+                            config_get_boolean ("Editor", "highlighting"));
 
-    /* The condition 'textwrapping=False && wordwrapping=True' can't happen */
-    if (config_get_value ("textwrapping"))
+    // The condition 'textwrapping=False && wordwrapping=True' can't happen
+    if (config_get_boolean ("Editor", "textwrapping"))
         wrapmode += 1;
-    if (config_get_value ("wordwrapping"))
+    if (config_get_boolean ("Editor", "wordwrapping"))
         wrapmode += 1;
 
     gtk_text_view_set_wrap_mode (ec_view, wrapmode);
@@ -336,7 +338,7 @@ void editor_sourceview_config (GuEditor* ec) {
 
 #ifdef USE_GTKSPELL
 void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
-    const gchar* lang = config_get_value ("spell_language");
+    const gchar* lang = config_get_string ("Editor", "spelling_lang");
     GError* err = NULL;
     GtkSpellChecker* spell = 0;
     if (status) {

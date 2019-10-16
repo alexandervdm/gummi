@@ -147,7 +147,7 @@ gboolean motion_do_compile (gpointer user) {
     g_mutex_unlock (&mc->signal_mutex);
 
 ret:
-    return (STR_EQU (config_get_value ("compile_scheme"), "real_time"));
+    return (config_value_as_str_equals ("Compile", "scheme", "real_time"));
 }
 
 gpointer motion_compile_thread (gpointer data) {
@@ -221,8 +221,9 @@ gboolean motion_idle_cb (gpointer user) {
 
 void motion_start_timer (GuMotion* mc) {
     motion_stop_timer (mc);
-    mc->key_press_timer = g_timeout_add_seconds (atoi (
-                config_get_value ("compile_timer")), motion_idle_cb, mc);
+    mc->key_press_timer = g_timeout_add_seconds (
+                                config_get_integer ("Compile", "timer"),
+                                motion_idle_cb, mc);
 }
 
 void motion_stop_timer (GuMotion* mc) {
@@ -236,7 +237,7 @@ gboolean on_key_press_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     if (!event->is_modifier) {
         motion_stop_timer (GU_MOTION (user));
     }
-    if (config_get_value("snippets") &&
+    if (config_get_boolean ("Interface", "snippets") &&
         snippets_key_press_cb (gummi_get_snippets (),
                                gummi_get_active_editor (), event))
         return TRUE;
@@ -247,7 +248,7 @@ gboolean on_key_release_cb (GtkWidget* widget, GdkEventKey* event, void* user) {
     if (!event->is_modifier) {
         motion_start_timer (GU_MOTION (user));
     }
-    if (config_get_value("snippets") &&
+    if (config_get_boolean ("Interface", "snippets") &&
         snippets_key_release_cb (gummi_get_snippets (),
                                  gummi_get_active_editor (), event))
         return TRUE;
