@@ -122,6 +122,18 @@ void config_init () {
         config_load_defaults (key_file);
     }
 
+    // replace old welcome texts if still active:
+    gchar* text;
+    if (g_file_get_contents (C_WELCOMETEXT, &text, NULL, NULL)) {
+        guint hash = g_str_hash (text); // thank you mr daniel bernstein
+
+        if (hash == -676241409) { // 0.6.6 default text - or unhappy collision
+            slog (L_WARNING, "Replacing unchanged welcome text with new default\n");
+            utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, NULL);
+        }
+    }
+    g_free (text);
+
     slog (L_INFO, "Configuration file: %s\n", conf_filepath);
 }
 
