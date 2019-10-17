@@ -747,10 +747,10 @@ void editor_set_style_scheme_by_id (GuEditor* ec, const gchar* id) {
 
     GtkSourceStyleScheme* scheme =
         gtk_source_style_scheme_manager_get_scheme (ec->stylemanager, id);
-    slog (L_INFO, "setting styles scheme to %s\n", id);
+    slog (L_INFO, "Setting styles scheme to %s\n", id);
 
     if (!scheme) {
-        slog (L_ERROR, "no style scheme %s found, setting to classic\n", id);
+        slog (L_ERROR, "No style scheme %s found, setting to classic\n", id);
         scheme = gtk_source_style_scheme_manager_get_scheme (ec->stylemanager,
                 "classic");
     }
