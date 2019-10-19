@@ -270,7 +270,7 @@ gboolean on_menu_quit_activate (void) {
     printf ("   ___ \n"
             "  {o,o}    Thanks for using Gummi!\n"
             "  |)__)    I welcome your feedback at:\n"
-            "  -\"-\"-    https://gummi.app\n\n");
+            "  -\"-\"-    https://github.com/alexandervdm/gummi\n\n");
     return FALSE;
 }
 

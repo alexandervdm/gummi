@@ -47,7 +47,7 @@ int texlive_init (void) {
 
     if (external_exists (C_LATEX)) {
         texversion = external_version2 (EX_TEXLIVE);
-        slog (L_INFO, "Texlive %d was found installed..\n", texversion);
+        slog (L_INFO, "Texlive %d was found installed\n", texversion);
     }
 
     if (external_exists (C_PDFLATEX)) {

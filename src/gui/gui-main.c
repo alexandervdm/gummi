@@ -776,7 +776,7 @@ void typesetter_setup (void) {
     }
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), texormk);
 
-    slog (L_INFO, "Typesetter %s configured.\n",
+    slog (L_INFO, "Typesetter %s configured\n",
                    config_get_string ("Compile", "typesetter"));
 }
 
