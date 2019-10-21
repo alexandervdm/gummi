@@ -81,7 +81,7 @@ gchar* tabmanager_get_tabname (GuTabContext* tc) {
     return labeltext;
 }
 
-gboolean tabmanager_remove_tab (GuTabContext* tab) {
+gint tabmanager_remove_tab (GuTabContext* tab) {
     gint position = g_list_index (g_tabs, tab);
     gint total = tabmanagergui_get_n_pages ();
 
@@ -93,7 +93,7 @@ gboolean tabmanager_remove_tab (GuTabContext* tab) {
     editor_destroy (tab->editor);
     gtk_notebook_remove_page (g_tabnotebook, position);
     g_free (tab);
-    return (total != 1);
+    return (total - 1); // return number of remaining tabs
 }
 
 /*--------------------------------------------------------------------------*/

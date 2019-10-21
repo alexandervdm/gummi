@@ -215,13 +215,16 @@ void on_menu_close_activate (GtkWidget *widget, void* user) {
     else if (GTK_RESPONSE_CANCEL == ret || GTK_RESPONSE_DELETE_EVENT == ret)
         return;
 
-    /* Kill typesetter command */
+    // kill typesetter thread
     motion_kill_typesetter(gummi->motion);
 
-    if (!tabmanager_remove_tab (tab)) {
-        previewgui_start_errormode(gui->previewgui, "");
+    // remove tab:
+    gint remaining_tabs = tabmanager_remove_tab (tab);
+    if (remaining_tabs == 0) {
+        previewgui_start_errormode (gui->previewgui, "");
         gui_set_hastabs_sensitive (FALSE);
-    } else {
+    }
+    else {
         gui_set_filename_display (g_active_tab, TRUE, FALSE);
     }
 }
