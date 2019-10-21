@@ -1444,11 +1444,13 @@ void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
 void previewgui_save_position (GuPreviewGui* pc) {
     //L_F_DEBUG;
-    g_active_tab->scroll_x = gtk_adjustment_get_value (pc->hadj);
-    g_active_tab->scroll_y = gtk_adjustment_get_value (pc->vadj);
-    block_handlers_current_page(pc);
-    slog(L_DEBUG, "Preview scrollbar positions saved at x/y = %.2f/%.2f\n",
-                   g_active_tab->scroll_x, g_active_tab->scroll_y);
+    if (g_active_tab != NULL) {
+        g_active_tab->scroll_x = gtk_adjustment_get_value (pc->hadj);
+        g_active_tab->scroll_y = gtk_adjustment_get_value (pc->vadj);
+        block_handlers_current_page(pc);
+        slog(L_DEBUG, "Preview scrollbar positions saved at x/y = %.2f/%.2f\n",
+                       g_active_tab->scroll_x, g_active_tab->scroll_y);
+    }
 }
 
 void previewgui_restore_position (GuPreviewGui* pc) {
