@@ -920,6 +920,7 @@ gchar* get_save_filename (GuFilterType type) {
 
 void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
     GtkFileFilter* filter = gtk_file_filter_new ();
+    GtkFileFilter* filterAll = gtk_file_filter_new ();
 
     switch (type) {
         case TYPE_LATEX:
@@ -928,6 +929,9 @@ void file_dialog_set_filter (GtkFileChooser* dialog, GuFilterType type) {
             gtk_file_filter_add_pattern (filter, "*.tex");
             gtk_file_chooser_add_filter (dialog, filter);
             gtk_file_chooser_set_filter (dialog, filter);
+            gtk_file_filter_set_name (filterAll, _("Other files"));
+            gtk_file_filter_add_pattern (filterAll, "*.*");
+            gtk_file_chooser_add_filter (dialog, filterAll);
             break;
 
         case TYPE_PDF:
