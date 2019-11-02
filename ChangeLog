@@ -119,7 +119,7 @@ Gummi 0.5.8 (March 17th, 2011):
 	* PDF latency when document is scrolled fixed
 	* Fixed gui hanging issues in certain situations
 	* Fixed compatibility with Bibtex 0.99d (texlive 2010)
-	* Updated glade files for compability with new releases
+	* Updated glade files for compatibility with new releases
 	* Better detection for damaged or incomplete pdf files
 	* Replaced textit with emph for italic toolbar function
 	* Solved various pdf rendering problems
@@ -142,7 +142,7 @@ Gummi 0.5.4 (December 8th, 2010):
 	Bugs fixed:
 	* Fixed segfault on document statistics for filepaths with spaces
 	* Fixed segfault on accessing non-existing recent file
-	* Fixed a rare segfault that occured on opening file
+	* Fixed a rare segfault that occurred on opening file
 	* Set default search & replace options to clone gedit's
 	* Fixed cursor repeatedly jumping to error lines
 	* Fixed statusbar message when a document is loaded from template
@@ -255,7 +255,7 @@ Gummi 0.4.5 (January 27th, 2010):
     * Statusbar/Toolbar can be displayed/hidden
     * Correct active typesetter displayed in Preferences menu
     * Templates now set the correct filename
-    * Miscelaneous cosmetic & spelling updates
+    * Miscellaneous cosmetic & spelling updates
 
     Features added:
     * Gconf replaced with ConfigParser (gconf deps dropped)
@@ -292,14 +292,14 @@ Gummi 0.4.0 (October 12th, 2009):
     * Fixed cancel buttons in file chooser dialogs
     * Tempdir is now detected instead of a static value
     * Quick import minimalizes after succesfull import
-    * Quit proces is now stopped when cancel button on save is pressed
+    * Quit process is now stopped when cancel button on save is pressed
     * Fixed tooltips for style toolbar
     * Fixed a gtksourceview warning on text insertion
     * Text style tags can't be nested anymore
     * Numerous warnings fixed using pylint/pychecker
     * Replaced a duplicate keyboard shortcut
     * Added multiple missing tooltips
-    * Buttons in preferences and searchwindow now allign correctly
+    * Buttons in preferences and searchwindow now align correctly
     * And numerous other small usability fixes
 
     Features:

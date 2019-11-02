@@ -942,7 +942,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
         gint new_fit, new_zoom;
 
         // TODO: build a dict like structure combining zoom fit strs with
-        // id (combo) so we dont have to do this verbose stuff all over the place
+        // id (combo) so we don't have to do this verbose stuff all over the place
         if (STR_EQU (conf_zoom, "Best Fit")) new_fit = 0, new_zoom = 0;
         else
         if (STR_EQU (conf_zoom, "Fit Page Width")) new_fit = 1, new_zoom = 1;
@@ -992,7 +992,7 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
 
 void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file) {
     //L_F_DEBUG;
-    // We lock the mutex to prevent previewing imcomplete PDF file, i.e
+    // We lock the mutex to prevent previewing incomplete PDF file, i.e
     // compiling. Also prevent PDF from changing (compiling) when previewing */
     if (!g_mutex_trylock (&gummi->motion->compile_mutex)) return;
 
@@ -1076,7 +1076,7 @@ static gboolean synctex_run_parser(GuPreviewGui* pc, GtkTextIter *sync_to, gchar
         synctex_node_p node;
 
         // SyncTeX can return several nodes. It seems best to use the last one
-        // as this one rarely is below (usually slighly above) the edited line
+        // as this one rarely is below (usually slightly above) the edited line
         while ((node = synctex_scanner_next_result(sync_scanner))) {
 
             SyncNode *sn = g_new0(SyncNode, 1);
@@ -1933,7 +1933,7 @@ gboolean on_button_pressed (GtkWidget* w, GdkEventButton* e, void* user) {
             synctex_node_p node;
             /*
              * SyncTeX can return several nodes. It seems best to use the last one, as
-             * this one rarely is below (usually slighly above) the edited line.
+             * this one rarely is below (usually slightly above) the edited line.
              */
 
             if ((node = synctex_scanner_next_result(sync_scanner))) {

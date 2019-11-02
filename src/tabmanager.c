@@ -144,7 +144,7 @@ void tabmanager_create_tab (OpenAct act, const gchar* filename, gchar* opt) {
 }
 
 void tabmanager_set_content (OpenAct act, const gchar* filename, gchar* opt) {
-    // Loads the appropriate content in the editor. Seperated from
+    // Loads the appropriate content in the editor. Separated from
     // tab creation function to allow calling it from recovery mode
     switch (act) {
         case A_NONE:

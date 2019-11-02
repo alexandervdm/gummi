@@ -135,7 +135,7 @@ void projectgui_enable (GuProject* pr, GuProjectGui* prgui) {
     gtk_label_set_text (prgui->proj_nroffiles,
                         g_strdup_printf("%d", pr->nroffiles));
 
-    // for visible information when window is shrinked, see #439 -A
+    // for visible information when window is shrunk, see #439 -A
     gtk_widget_set_tooltip_text
                         (GTK_WIDGET (prgui->proj_name), projbasename);
     gtk_widget_set_tooltip_text

@@ -435,7 +435,7 @@ void on_menu_cleanup_activate (GtkWidget *widget, void *user) {
     int result = latex_remove_auxfile (g_active_editor);
 
     if (result == 0) {
-        statusbar_set_message (_("Succesfully removed build files.."));
+        statusbar_set_message (_("Successfully removed build files.."));
     }
     else {
         statusbar_set_message (_("Error removing build files.."));
@@ -670,7 +670,7 @@ void on_menu_projopen_activate (GtkWidget *widget, void *user) {
         projectgui_list_projfiles (gummi->project->projfile);
     }
     else {
-        statusbar_set_message (g_strdup_printf("An error ocurred while "
+        statusbar_set_message (g_strdup_printf("An error occurred while "
                                                "loading project %s", filename));
     }
     g_free (filename);

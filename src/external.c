@@ -1,6 +1,6 @@
 /**
  * @file   external.c
- * @brief  existence and compability checks for external tools
+ * @brief  existence and compatibility checks for external tools
  *
  * Copyright (C) 2009 Gummi Developers
  * All Rights reserved.

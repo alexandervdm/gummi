@@ -37,8 +37,8 @@
 #include "gui/gui-project.h"
 #include "utils.h"
 
-// XXX: needs refactor, non gui classes should no directly acces gui and gummi
-// structure
+// TODO needs refactor, non gui classes should not 
+// directly access gui and gummi structure
 extern GummiGui* gui;
 extern Gummi* gummi;
 

@@ -211,7 +211,7 @@ void iofunctions_stop_autosave (void) {
         return;
     }
     else {
-        slog (L_ERROR, "Error occured stopping autosaving..\n");
+        slog (L_ERROR, "Error occurred stopping autosaving..\n");
     }
 }
 

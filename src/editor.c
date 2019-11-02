@@ -369,7 +369,7 @@ void editor_fill_buffer (GuEditor* ec, const gchar* text) {
     gtk_source_buffer_end_not_undoable_action (ec->buffer);
     gtk_text_buffer_end_user_action (ec_buffer);
 
-    /* place cursor in the beggining of the document */
+    // place cursor in the beginning of the document
     GtkTextIter start;
     gtk_text_buffer_get_start_iter (ec_buffer, &start);
     gtk_text_buffer_place_cursor (ec_buffer, &start);
