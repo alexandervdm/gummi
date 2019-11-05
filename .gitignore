@@ -26,3 +26,6 @@ ltmain.sh
 
 # glade tmp files
 data/ui/*.glade~
+
+# VSCode workspace configurations
+.vscode
