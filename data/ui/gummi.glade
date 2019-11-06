@@ -660,6 +660,8 @@
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
                         <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="enter-notify-event" handler="on_menu_hover_activate" swapped="no"/>
+                        <signal name="leave-notify-event" handler="on_menu_leave_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -668,6 +670,8 @@
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
                         <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="enter-notify-event" handler="on_menu_hover_activate" swapped="no"/>
+                        <signal name="leave-notify-event" handler="on_menu_leave_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -676,6 +680,8 @@
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
                         <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="enter-notify-event" handler="on_menu_hover_activate" swapped="no"/>
+                        <signal name="leave-notify-event" handler="on_menu_leave_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -684,6 +690,8 @@
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
                         <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="enter-notify-event" handler="on_menu_hover_activate" swapped="no"/>
+                        <signal name="leave-notify-event" handler="on_menu_leave_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -692,6 +700,8 @@
                         <property name="no_show_all">True</property>
                         <property name="label" translatable="yes">shouldnotseeme</property>
                         <signal name="activate" handler="on_menu_recent_activate" swapped="no"/>
+                        <signal name="enter-notify-event" handler="on_menu_hover_activate" swapped="no"/>
+                        <signal name="leave-notify-event" handler="on_menu_leave_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
