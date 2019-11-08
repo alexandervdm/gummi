@@ -181,7 +181,7 @@ gpointer motion_compile_thread (gpointer data) {
         }
 
         gdk_threads_enter ();
-        editortext = latex_update_workfile (latex, editor);
+        editortext = latex_update_workfile (editor);
         precompile_ok = latex_precompile_check (editortext);
         g_free (editortext);
         gdk_threads_leave ();

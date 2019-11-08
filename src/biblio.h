@@ -32,7 +32,7 @@
 
 #include <gtk/gtk.h>
 
-#include "latex.h"
+#include "editor.h"
 
 #define GU_BIBLIO(x) ((GuBiblio*)x)
 typedef struct _GuBiblio GuBiblio;
@@ -49,8 +49,8 @@ struct _GuBiblio {
 };
 
 GuBiblio* biblio_init (GtkBuilder* builder);
-gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec);
-gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc);
+gboolean biblio_detect_bibliography (GuEditor* ec);
+gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec);
 int biblio_parse_entries (GuBiblio* bc, gchar *bib_content);
 
 

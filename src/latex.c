@@ -69,7 +69,7 @@ gboolean latex_method_active (gchar* method) {
     return config_value_as_str_equals ("Compile", "steps", method);
 }
 
-gchar* latex_update_workfile (GuLatex* lc, GuEditor* ec) {
+gchar* latex_update_workfile (GuEditor* ec) {
     gchar *text;
 
     text = editor_grab_buffer (ec);
@@ -193,7 +193,7 @@ gboolean latex_update_pdffile (GuLatex* lc, GuEditor* ec) {
     return cerrors == 0;
 }
 
-void latex_update_auxfile (GuLatex* lc, GuEditor* ec) {
+void latex_update_auxfile (GuEditor* ec) {
     gchar* dirname = g_path_get_dirname (ec->workfile);
     gchar* command = g_strdup_printf ("%s %s "
                                       "--draftmode "

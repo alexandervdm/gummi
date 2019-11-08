@@ -33,9 +33,10 @@
 
 #include "biblio.h"
 #include "constants.h"
-#include "utils.h"
-#include "latex.h"
 #include "environment.h"
+#include "latex.h"
+#include "utils.h"
+
 
 extern GuEditor* ec;
 
@@ -61,7 +62,7 @@ GuBiblio* biblio_init (GtkBuilder* builder) {
     return b;
 }
 
-gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec) {
+gboolean biblio_detect_bibliography (GuEditor* ec) {
     gchar* content = NULL;
     gchar* bibfn = NULL;
     gchar** result = NULL;
@@ -91,7 +92,7 @@ gboolean biblio_detect_bibliography (GuBiblio* bc, GuEditor* ec) {
     return state;
 }
 
-gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
+gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec) {
     gchar* dirname = g_path_get_dirname (ec->workfile);
     gchar* auxname = NULL;
 
@@ -107,8 +108,8 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec, GuLatex* lc) {
                                          C_TEXSEC, auxname);
 
         g_free (auxname);
-        latex_update_workfile (lc, ec);
-        latex_update_auxfile (lc, ec);
+        latex_update_workfile (ec);
+        latex_update_auxfile (ec);
         Tuple2 res = utils_popen_r (command, dirname);
         gtk_widget_set_tooltip_text (GTK_WIDGET (bc->progressbar),
                 (gchar*)res.second);

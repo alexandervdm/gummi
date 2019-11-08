@@ -470,7 +470,7 @@ void gui_set_hastabs_sensitive (gboolean enable) {
 
 G_MODULE_EXPORT
 void on_menu_bibupdate_activate (GtkWidget *widget, void * user) {
-    biblio_compile_bibliography (gummi->biblio, g_active_editor, gummi->latex);
+    biblio_compile_bibliography (gummi->biblio, g_active_editor);
 }
 
 G_MODULE_EXPORT
@@ -606,8 +606,7 @@ void on_button_biblio_compile_clicked (GtkWidget* widget, void* user) {
     gtk_widget_set_sensitive (widget, FALSE);
     g_timeout_add (10, on_bibprogressbar_update, widget);
 
-    if (biblio_compile_bibliography (gummi->biblio, g_active_editor,
-                gummi->latex)) {
+    if (biblio_compile_bibliography (gummi->biblio, g_active_editor)) {
         statusbar_set_message (_("Compiling bibliography file.."));
         // NOTE gtk3s bar doesn't place text inside the widget anymore :/
         //gtk_progress_bar_set_text (gummi->biblio->progressbar,
@@ -634,7 +633,7 @@ void on_button_biblio_detect_clicked (GtkWidget* widget, void* user) {
     g_timeout_add (2, on_bibprogressbar_update, widget);
     gtk_list_store_clear (gummi->biblio->list_biblios);
 
-    if (biblio_detect_bibliography (gummi->biblio, g_active_editor)) {
+    if (biblio_detect_bibliography (g_active_editor)) {
         editor_insert_bib (g_active_editor, g_active_editor->bibfile);
         if (!g_file_get_contents(g_active_editor->bibfile, &text, NULL, &err)) {
             slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
