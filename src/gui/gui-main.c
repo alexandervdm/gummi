@@ -96,8 +96,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_STATUSBAR (gtk_builder_get_object (builder, "statusbar"));
     g->rightpane =
         GTK_BOX (gtk_builder_get_object (builder, "box_rightpane"));
-    g->previewoff = GTK_TOGGLE_TOOL_BUTTON (
-            gtk_builder_get_object (builder, "tool_previewoff"));
     g->errorview =
         GTK_TEXT_VIEW (gtk_builder_get_object (builder, "errorview"));
     g->errorbuff =
@@ -238,13 +236,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_widget_set_sensitive (GTK_WIDGET (g->menu_autosync), TRUE);
         gboolean async = latex_use_synctex();
         gtk_check_menu_item_set_active (g->menu_autosync, (async? TRUE: FALSE));
-    }
-
-    if (config_get_boolean ("Compile", "status")) {
-        gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
-    }
-    else {
-        gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
     }
 
     g->recent_list[0] = g_strdup (config_get_string ("Misc", "recent1"));
@@ -470,19 +461,6 @@ G_MODULE_EXPORT
 gboolean on_docstats_close_clicked (GtkWidget* widget, void* user) {
     gtk_widget_hide (GTK_WIDGET (gui->docstatswindow));
     return TRUE;
-}
-
-G_MODULE_EXPORT
-void on_tool_previewoff_toggled (GtkWidget *widget, void * user) {
-    gboolean value =
-        gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (widget));
-
-    config_set_boolean ("Compile", "status", value);
-
-    if (value)
-        previewgui_stop_preview (gui->previewgui);
-    else
-        previewgui_start_preview (gui->previewgui);
 }
 
 G_MODULE_EXPORT

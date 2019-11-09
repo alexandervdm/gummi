@@ -77,7 +77,7 @@ const gchar default_config[] =
 "[Compile]\n"
 "typesetter = pdflatex\n"
 "steps = texpdf\n"
-"status = true\n"
+"pause = false\n"
 "scheme = on_idle\n"
 "timer = 1\n"
 "shellescape = true\n"

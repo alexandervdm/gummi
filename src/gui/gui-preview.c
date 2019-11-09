@@ -172,6 +172,8 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
     p->page_input = GTK_WIDGET (gtk_builder_get_object (builder, "page_input"));
+    p->preview_pause =
+        GTK_TOGGLE_TOOL_BUTTON (gtk_builder_get_object (builder, "preview_pause"));
 
     p->page_layout_single_page = GTK_RADIO_MENU_ITEM
         (gtk_builder_get_object (builder, "page_layout_single_page"));
@@ -258,6 +260,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(
                     p->page_layout_one_column), TRUE);
         p->pageLayout = POPPLER_PAGE_LAYOUT_ONE_COLUMN;
+    }
+
+    if (config_get_boolean ("Compile", "pause")) {
+        gtk_toggle_tool_button_set_active (p->preview_pause, TRUE);
     }
 
     slog (L_INFO, "Using libpoppler %s\n", poppler_get_version ());
@@ -1512,7 +1518,7 @@ void previewgui_reset (GuPreviewGui* pc) {
     previewgui_stop_preview (pc);
     motion_do_compile (gummi->motion);
 
-    if (config_get_boolean ("Compile", "status")) {
+    if (config_get_boolean ("Compile", "pause") == FALSE) {
         previewgui_start_preview (pc);
     }
 }
@@ -1584,6 +1590,19 @@ void on_prev_page_clicked (GtkWidget* widget, void* user) {
     else {
         previewgui_goto_page (pc, pc->prev_page);
     }
+}
+
+G_MODULE_EXPORT
+void on_preview_pause_toggled (GtkWidget *widget, void * user) {
+    gboolean value =
+        gtk_toggle_tool_button_get_active (GTK_TOGGLE_TOOL_BUTTON (widget));
+
+    config_set_boolean ("Compile", "pause", value);
+
+    if (value) // toggled --> PAUSE
+        previewgui_stop_preview (gui->previewgui);
+    else // untoggled --> RESUME
+        previewgui_start_preview (gui->previewgui);
 }
 
 G_MODULE_EXPORT

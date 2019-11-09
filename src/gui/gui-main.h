@@ -79,7 +79,6 @@ struct _GummiGui {
 
     GtkWidget* toolbar;
     GtkStatusbar* statusbar;
-    GtkToggleToolButton* previewoff;
     GtkCheckMenuItem* menu_spelling;
     GtkCheckMenuItem* menu_snippets;
     GtkCheckMenuItem* menu_toolbar;
@@ -124,7 +123,6 @@ void gui_save_file (GuTabContext* tab, gboolean saveas);
 void gui_set_hastabs_sensitive (gboolean enable);
 
 void on_tab_notebook_switch_page (GtkNotebook *notebook, GtkWidget* nbpage, int pagenr, void* data);
-void on_tool_previewoff_toggled (GtkWidget *widget, void * user);
 void on_tool_textstyle_bold_activate (GtkWidget* widget, void* user);
 void on_tool_textstyle_italic_activate (GtkWidget* widget, void* user);
 void on_tool_textstyle_underline_activate (GtkWidget* widget, void* user);

@@ -98,11 +98,11 @@ struct _GuPreviewGui {
     GtkWidget* drawarea;
     GtkWidget* toolbar;
 
-
     GtkWidget* page_next;
     GtkWidget* page_prev;
     GtkWidget* page_label;
     GtkWidget* page_input;
+    GtkToggleToolButton* preview_pause;
 
     GtkWidget* errorpanel;
     GtkComboBox* combo_sizes;
@@ -178,6 +178,7 @@ void previewgui_stop_preview (GuPreviewGui* pc);
 void on_page_input_changed (GtkEntry* entry, void* user);
 void on_next_page_clicked (GtkWidget* widget, void* user);
 void on_prev_page_clicked (GtkWidget* widget, void* user);
+void on_preview_pause_toggled (GtkWidget *widget, void * user);
 void on_combo_sizes_changed (GtkWidget* widget, void* user);
 gboolean on_draw (GtkWidget* w, cairo_t* cr, void* user);
 gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user);

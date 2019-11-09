@@ -331,12 +331,14 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
 }
 
 static void set_tab_preview_settings (GuPrefsGui* prefs) {
+    gboolean pause_status = config_get_boolean ("Compile", "pause");
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->compile_status),
-                                  config_get_boolean ("Compile", "status"));
+                                  !pause_status);
 
-    if (!config_get_boolean ("Compile", "status"))
+    if (pause_status) {
         gtk_widget_set_sensitive (GTK_WIDGET (prefs->compile_timer), FALSE);
+    }
 
     gtk_spin_button_set_value (prefs->compile_timer,
                                config_get_integer ("Compile", "timer"));
@@ -523,11 +525,12 @@ void toggle_wordwrapping (GtkWidget* widget, void* user) {
 
 G_MODULE_EXPORT
 void toggle_compilestatus (GtkWidget* widget, void* user) {
-    gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-    config_set_boolean ("Compile", "status", newval);
+    gboolean val = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-    gtk_widget_set_sensitive (GTK_WIDGET(gui->prefsgui->compile_timer), newval);
-    gtk_toggle_tool_button_set_active (gui->previewoff, !newval);
+    config_set_boolean ("Compile", "pause", !val);
+
+    gtk_widget_set_sensitive (GTK_WIDGET(gui->prefsgui->compile_timer), val);
+    gtk_toggle_tool_button_set_active (gui->previewgui->preview_pause, !val);
 }
 
 G_MODULE_EXPORT
