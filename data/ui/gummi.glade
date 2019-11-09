@@ -875,16 +875,6 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkCheckMenuItem" id="menu_rightpane">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">_Right Pane</property>
-                        <property name="use_underline">True</property>
-                        <signal name="toggled" handler="on_menu_rightpane_toggled" swapped="no"/>
-                        <accelerator key="F8" signal="activate"/>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>

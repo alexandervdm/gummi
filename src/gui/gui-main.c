@@ -110,8 +110,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_toolbar"));
     g->menu_statusbar =
         GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_statusbar"));
-    g->menu_rightpane =
-        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_rightpane"));
     g->statusid =
         gtk_statusbar_get_context_id (GTK_STATUSBAR (g->statusbar), "Gummi");
     g->recent[0] =
@@ -233,15 +231,6 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_widget_hide (GTK_WIDGET (g->statusbar));
     }
 
-    if (config_get_boolean ("Interface", "rightpane")) {
-        gtk_check_menu_item_set_active (g->menu_rightpane, TRUE);
-        gtk_widget_show (GTK_WIDGET (g->rightpane));
-    } else {
-        config_set_boolean ("Compile", "status", FALSE);
-        gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
-        gtk_widget_hide (GTK_WIDGET (g->rightpane));
-    }
-
     g->menu_autosync =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_autosync"));
 
@@ -251,8 +240,12 @@ GummiGui* gui_init (GtkBuilder* builder) {
         gtk_check_menu_item_set_active (g->menu_autosync, (async? TRUE: FALSE));
     }
 
-    if (!config_get_boolean ("Compile", "status"))
+    if (config_get_boolean ("Compile", "status")) {
+        gtk_toggle_tool_button_set_active (g->previewoff, FALSE);
+    }
+    else {
         gtk_toggle_tool_button_set_active (g->previewoff, TRUE);
+    }
 
     g->recent_list[0] = g_strdup (config_get_string ("Misc", "recent1"));
     g->recent_list[1] = g_strdup (config_get_string ("Misc", "recent2"));
