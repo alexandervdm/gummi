@@ -37,9 +37,11 @@ int texlive_init (void);
 gboolean texlive_active (void);
 gboolean pdflatex_active (void);
 gboolean xelatex_active (void);
+gboolean lualatex_active (void);
 
 gboolean pdflatex_detected (void);
 gboolean xelatex_detected (void);
+gboolean lualatex_detected (void);
 
 gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basename);
 gchar* texlive_get_flags (const gchar *method);

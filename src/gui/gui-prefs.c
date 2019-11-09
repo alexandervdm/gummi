@@ -117,6 +117,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_pdflatex"));
     p->typ_xelatex =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_xelatex"));
+    p->typ_lualatex =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_lualatex"));
     p->typ_rubber =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_rubber"));
     p->typ_latexmk =
@@ -288,6 +290,13 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
             gtk_toggle_button_set_active (prefs->typ_xelatex, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_xelatex), TRUE);
         gtk_widget_set_tooltip_text (GTK_WIDGET(prefs->typ_xelatex), "");
+    }
+
+    if (lualatex_detected()) {
+        if (lualatex_active())
+            gtk_toggle_button_set_active (prefs->typ_lualatex, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_lualatex), TRUE);
+        gtk_widget_set_tooltip_text (GTK_WIDGET(prefs->typ_lualatex), "");
     }
 
     if (rubber_detected()) {
@@ -678,6 +687,14 @@ G_MODULE_EXPORT
 void on_typ_xelatex_toggled (GtkToggleButton* widget, void* user) {
     if (gtk_toggle_button_get_active (widget)) {
         config_set_string ("Compile", "typesetter", "xelatex");
+        typesetter_setup ();
+    }
+}
+
+G_MODULE_EXPORT
+void on_typ_lualatex_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_string ("Compile", "typesetter", "lualatex");
         typesetter_setup ();
     }
 }

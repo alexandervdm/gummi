@@ -1168,6 +1168,50 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkHBox" id="hbox9">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkLabel" id="label7">
+                                <property name="width_request">12</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">   </property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRadioButton" id="typ_lualatex">
+                                <property name="label" translatable="yes">TeXLive with LuaTeX</property>
+                                <property name="visible">True</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="focus_on_click">False</property>
+                                <property name="receives_default">False</property>
+                                <property name="tooltip_text" translatable="yes">This program was not found on your system.</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                                <property name="group">typ_pdflatex</property>
+                                <signal name="toggled" handler="on_typ_lualatex_toggled" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkHBox" id="hbox11">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
@@ -1208,7 +1252,7 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -1252,7 +1296,7 @@
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">3</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </object>
@@ -1980,7 +2024,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="hbox9">
+                      <object class="GtkHBox" id="hbox10">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -2056,7 +2100,7 @@
                         <property name="can_focus">False</property>
                         <property name="spacing">3</property>
                         <child>
-                          <object class="GtkHBox" id="hbox10">
+                          <object class="GtkHBox" id="hbox27">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
@@ -2114,7 +2158,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label7">
+              <object class="GtkLabel" id="label55">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Miscellaneous</property>

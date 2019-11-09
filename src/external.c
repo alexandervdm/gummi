@@ -94,6 +94,8 @@ gchar* external_version (const gchar* program) {
     /* pdfTeX 3.1415926-1.40.10 (TeX Live 2009)
        pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
        pdfTeX 3.1415926-2.3-1.40.12 (TeX Live 2011)
+
+       This is LuaTeX, Version 1.10.0 (TeX Live 2019/Debian)
     */
     if (STR_EQU (program, C_RUBBER)) {
         result = version_rubber (result);

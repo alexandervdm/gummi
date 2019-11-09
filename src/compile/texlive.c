@@ -39,6 +39,7 @@
 
 gboolean pdf_detected = FALSE;
 gboolean xel_detected = FALSE;
+gboolean lua_detected = FALSE;
 
 /* All the functions for "pure" building with texlive only tools */
 
@@ -61,11 +62,17 @@ int texlive_init (void) {
               external_version (C_XELATEX));
         xel_detected = TRUE;
     }
+
+    if (external_exists (C_LUALATEX)) {
+        slog (L_INFO, "Typesetter detected: %s\n",
+              external_version (C_LUALATEX));
+        lua_detected = TRUE;
+    }
     return texversion;
 }
 
 gboolean texlive_active (void) {
-    if (pdflatex_active() || xelatex_active()) {
+    if (pdflatex_active() || xelatex_active() || lualatex_active()) {
         return TRUE;
     }
     return FALSE;
@@ -85,12 +92,23 @@ gboolean xelatex_active (void) {
     return FALSE;
 }
 
+gboolean lualatex_active (void) {
+    if (config_value_as_str_equals ("Compile", "typesetter", "lualatex")) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 gboolean pdflatex_detected (void) {
     return pdf_detected;
 }
 
 gboolean xelatex_detected (void) {
     return xel_detected;
+}
+
+gboolean lualatex_detected (void) {
+    return lua_detected;
 }
 
 gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basename) {
@@ -102,6 +120,7 @@ gchar* texlive_get_command (const gchar* method, gchar* workfile, gchar* basenam
     gchar *texcmd = NULL;
 
     if (pdflatex_active()) typesetter = C_PDFLATEX;
+    else if (lualatex_active()) typesetter = C_LUALATEX;
     else typesetter = C_XELATEX;
 
     gchar *flags = texlive_get_flags("texpdf");
