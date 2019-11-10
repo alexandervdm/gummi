@@ -841,6 +841,14 @@ gchar* get_save_filename (GuFilterType type) {
         g_free (dirname);
         g_free (basename);
     }
+    else {
+        gchar *unsaved = g_strdup_printf (_("Unsaved Document"));
+        if (type == TYPE_PDF)
+            unsaved = g_strconcat (unsaved, ".pdf", NULL);
+        if (type == TYPE_LATEX)
+            unsaved = g_strconcat (unsaved, ".tex", NULL);
+        gtk_file_chooser_set_current_name (chooser, unsaved);
+    }
 
     if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_OK)
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
