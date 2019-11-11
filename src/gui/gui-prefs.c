@@ -608,6 +608,7 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
     g_free (text);
 
     gtk_widget_hide (GTK_WIDGET (gui->prefsgui->prefwindow));
+    config_save ();
 }
 
 G_MODULE_EXPORT
