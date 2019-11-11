@@ -697,15 +697,13 @@ void typesetter_setup (void) {
     gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_shellescape),
                               status);
 
-    gboolean texormk = (texlive_active() || latexmk_active());
-
-    if (config_get_boolean ("Compile", "synctex") && texormk) {
+    if (config_get_boolean ("Compile", "synctex")) {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, TRUE);
     }
     else {
         gtk_toggle_button_set_active (gui->prefsgui->opt_synctex, FALSE);
     }
-    gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), texormk);
+    gtk_widget_set_sensitive (GTK_WIDGET (gui->prefsgui->opt_synctex), TRUE);
 
     slog (L_INFO, "Typesetter %s configured\n",
                    config_get_string ("Compile", "typesetter"));

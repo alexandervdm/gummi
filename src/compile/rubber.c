@@ -76,5 +76,10 @@ gchar* rubber_get_flags (const gchar *method) {
     else {
         rubflags = g_strdup_printf("-p -d -q");
     }
+
+    if (config_get_boolean ("Compile", "synctex")) {
+        rubflags = g_strconcat ("--synctex ", rubflags, NULL);
+    }
+
     return rubflags;
 }

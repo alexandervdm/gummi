@@ -291,9 +291,7 @@ gboolean latex_run_makeindex (GuEditor* ec) {
 
 gboolean latex_can_synctex (void) {
     if (gummi->latex->tex_version >= 2008) {
-        if (!rubber_active()) {
-            return TRUE;
-        }
+        return TRUE;
     }
     return FALSE;
 }
