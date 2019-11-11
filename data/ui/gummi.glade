@@ -885,7 +885,8 @@
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Use SyncTeX to scroll preview to the part of the document that was last edited.</property>
+                        <property name="tooltip_text" translatable="yes">Use SyncTeX to scroll preview to the part of the document that was last edited.
+			Requires that the document is compiled with the SyncTeX typesetting option.</property>
                         <property name="label" translatable="yes">Sync Preview with Editor</property>
                         <property name="use_underline">True</property>
                         <signal name="toggled" handler="on_menu_autosync_toggled" swapped="no"/>
