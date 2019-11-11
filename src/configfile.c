@@ -125,8 +125,9 @@ void config_init () {
     gchar* text;
     if (g_file_get_contents (C_WELCOMETEXT, &text, NULL, NULL)) {
         guint hash = g_str_hash (text); // thank you mr daniel bernstein
-
-        if (hash == -676241409) { // 0.6.6 default text - or unhappy collision
+        if (hash == -676241409 || // 0.6.6
+            hash == 1654921927 || // 0.7.999
+            hash == 66148856) {   // 0.8.0 dev
             slog (L_WARNING, "Replacing unchanged welcome text with new default\n");
             utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, NULL);
         }
