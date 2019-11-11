@@ -2,17 +2,44 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.8.0 "" ():
+
+    Features added:
+    * Migrated codebase GTK2->GTK3
+    * Open multiple files at once from command line
+    * Replaced use of old bundled synctex (for system synctex)
+    * Monitor document for external changes
+    * Automatically scroll build log to end
+    * Allow editor themes/styles from a custom filepath
+    * Visual improvements to file saving dialog
+    * Remember preview scroll position and zoom mode per tab
+
+    Bugs fixed:
+    * Replace all is now one action for sane undo/redo'ing
+    * Fix erroneous return code for makeindex
+    * Fix gtkspell init failure when EN language unavailable
+    * Fix inconsistent wholeword text searching
+    * Build script fixes for MacOSX
+    * Show statusbar message when PDF creation fails
+    * Fix rare hang on gummi exit
+    * Now suggests file extension on save window
+    * Run bibtex menu item no longer disabled after running
+    * Replaced multiple homebrew functions with glib
+    * Fix jumping editor caret on closing search
+    * Allow using synctex when using rubber
+    * A multitude of minor fixes
+
 Gummi 0.6.6 "We're still here" (January 27th, 2016):
 
 	Bugs fixed:
 	* Fix using predictable filenames in /tmp (CVE-2015-7758) 
 	* Fix source id warnings during motion runtime
 	* Fix open-project crash due to missing file chooser title
-    * Fix synctex for input files with relative paths
+	* Fix synctex for input files with relative paths
 	* Add descriptive keywords to our desktop entry file
 	* Improvements to the bibliography detection regex
 	* Only allow loading tex files through file->open
-    * Desensitize cut/copy tools when no text is selected
+	* Desensitize cut/copy tools when no text is selected
 	* Various improvements to build system
 	* Removed deprecated code
 
