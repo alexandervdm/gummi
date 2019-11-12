@@ -3330,7 +3330,6 @@ current active document.</property>
               <object class="GtkSpinButton" id="spinbutton3">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="primary_icon_activatable">False</property>
@@ -3348,7 +3347,6 @@ current active document.</property>
               <object class="GtkSpinButton" id="spinbutton4">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="primary_icon_activatable">False</property>
@@ -3498,7 +3496,6 @@ current active document.</property>
               <object class="GtkSpinButton" id="spinbutton1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="primary_icon_activatable">False</property>
@@ -3516,7 +3513,6 @@ current active document.</property>
               <object class="GtkSpinButton" id="spinbutton2">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="editable">False</property>
                 <property name="invisible_char">•</property>
                 <property name="xalign">0.5</property>
                 <property name="primary_icon_activatable">False</property>
