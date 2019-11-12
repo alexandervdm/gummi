@@ -5,23 +5,24 @@ The simple LaTeX editor
 [![Version](https://img.shields.io/github/release/alexandervdm/gummi.svg?maxAge=360)](https://github.com/alexandervdm/gummi/releases)
 [![License](https://img.shields.io/github/license/alexandervdm/gummi.svg?maxAge=360000)](https://github.com/alexandervdm/gummi/blob/master/COPYING)
 
-### Installing
-Gummi is available in the official repositories for most major platforms. Please check your package manager for availability or refer to our wiki for more details. 
-
 ### Screenshot
 
-![Alt text](/../screenshots/screenshots/gummi-065-main.png?raw=true "gummi 0.6.5 main")
+![alt text](https://gummi.app/gummi-080-main-small.png)
 
-### Building
+### Getting Gummi
 
-Building Gummi requires a working C compiler and some dependencies to be installed on beforehand. For detailed instructions and our list of dependencies, please refer to our documentation. 
+For end users we recommend using official stable releases. Gummi is available through the official channels for most Linux/BSD distributions. Please see [this wiki page](https://github.com/alexandervdm/gummi/wiki/Installing-Gummi#install-for-your-platform) for more information on availability for your specific platform.
 
-Once these prerequisities are completed, run
+Developers may also be interested in running the latest sourcecode. More information on building Gummi from source can be found [here.](https://github.com/alexandervdm/gummi/wiki/Installing-Gummi#compile-from-source).
 
-    ./autogen.sh    
-    ./configure
-    make
+### Packaging Gummi
+
+Thank you for helping to distribute this software. Feel free to contact me directly if you have any questions or comments about packaging Gummi. 
+
+### Contributing to Gummi
+
+Please check the Getting Involved section of our wiki for more information on contributing to Gummi.
 
 ### Contact
 
-If you wish to contact me, please use the contact details on my Github profile. I can also usually be found idling on the FreeNode IRC network as 'alexandervdm'. 
+If you wish to contact me, please use the details on my Github profile. I can also usually be found idling on the FreeNode IRC network as ``alexandervdm``.
