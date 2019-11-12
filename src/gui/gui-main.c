@@ -535,8 +535,8 @@ void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
     GtkTreeModel* model = NULL;
     GtkTreeSelection* selection = NULL;
     gchar* text = NULL;
-    gchar* filepath = g_build_filename (g_get_user_config_dir (),
-            "gummi", "templates", filenm, NULL);
+
+    gchar* filepath = g_build_filename (C_GUMMI_TEMPLATEDIR, filenm, NULL);
 
     model = gtk_tree_view_get_model (gummi->templ->templateview);
     selection = gtk_tree_view_get_selection (gummi->templ->templateview);

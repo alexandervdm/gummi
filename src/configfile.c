@@ -95,17 +95,13 @@ gchar *conf_filepath = 0;
 
 
 void config_init () {
-    gchar* template_path;
-
     conf_filepath = g_build_filename (C_GUMMI_CONFDIR, "gummi.ini", NULL);
-    template_path = g_build_path (G_DIR_SEPARATOR_S, C_GUMMI_CONFDIR, "templates", NULL);
 
     // create config & template dirs if not exists:
-    if (!g_file_test (template_path, G_FILE_TEST_IS_DIR)) {
+    if (!g_file_test (C_GUMMI_TEMPLATEDIR, G_FILE_TEST_IS_DIR)) {
         slog (L_WARNING, "Template directory does not exist, creating..\n");
-        g_mkdir_with_parents (template_path, DIR_PERMS);
+        g_mkdir_with_parents (C_GUMMI_TEMPLATEDIR, DIR_PERMS);
     }
-    g_free (template_path);
 
     // load config file:
     g_autoptr(GError) error = NULL;

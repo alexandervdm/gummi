@@ -36,6 +36,7 @@
 #include <string.h>
 
 #include "configfile.h"
+#include "constants.h"
 #include "environment.h"
 #include "utils.h"
 
@@ -159,14 +160,22 @@ void template_remove_entry (GuTemplate* t) {
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
         gtk_tree_model_get (model, &iter, 1, &filepath, -1);
         gtk_list_store_remove (t->list_templates, &iter);
-        g_remove (filepath);
+
+        if (!g_file_test (filepath, G_FILE_TEST_IS_DIR)) {
+            g_remove (filepath);
+        }
     }
     gtk_widget_set_sensitive (t->template_open, FALSE);
 }
 
 void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
-    const char* filepath = g_build_filename (g_get_user_config_dir (),
-            "gummi", "templates", filename, NULL);
+    gchar* filepath = g_build_filename (C_GUMMI_TEMPLATEDIR, filename, NULL);
+
+    if (STR_EQU (filename, "")) {
+        gtk_label_set_text (t->template_label, "filename cannot be empty");
+        template_remove_entry (t);
+        goto cleanup;
+    }
 
     if (g_file_test (filepath, G_FILE_TEST_EXISTS)) {
         gtk_label_set_text (t->template_label, "filename already exists");
@@ -175,6 +184,8 @@ void template_create_file (GuTemplate* t, gchar* filename, gchar* text) {
     else {
         g_file_set_contents (filepath, text, strlen (text), NULL);
     }
+
+cleanup:
     g_object_set (t->template_render, "editable", FALSE, NULL);
     gtk_widget_set_sensitive (t->template_add, TRUE);
     gtk_widget_set_sensitive (t->template_remove, TRUE);
