@@ -14,7 +14,6 @@ ALL_LINGUAS="ar ca cs da de el es fr hu it nl pl pt pt_BR ro ru sv zh_CN zh_TW"
 
 AC_CONFIG_SRCDIR([src/environment.h])
 AC_CONFIG_HEADERS([config.h])
-AH_VERBATIM([USE_GTKSPELL], [#undef USE_GTKSPELL])
 AH_VERBATIM([USE_SYNCTEX1], [#undef USE_SYNCTEX1])
 
 # Checks for programs.
@@ -24,15 +23,6 @@ IT_PROG_INTLTOOL
 AM_PROG_CC_C_O
 
 # Checks for libraries.
-AC_ARG_ENABLE([spellcheck],
-	AS_HELP_STRING([--disable-spellcheck],[disable spellcheck support]),
-	spellcheck=$enableval, spellcheck="yes")
-
-if test "$spellcheck" = yes; then
-    AC_DEFINE(USE_GTKSPELL)
-fi
-AC_SUBST(USE_GTKSPELL)
-
 AM_PATH_GLIB_2_0([2.20.0], [
 	 GUI_CFLAGS="$GUI_CFLAGS $GLIB_CFLAGS"
 	 GUI_LIBS="$GUI_LIBS $GLIB_LIBS"
@@ -58,12 +48,11 @@ PKG_CHECK_MODULES(poppler, [poppler-glib],,
 GUI_CFLAGS="$GUI_CFLAGS $poppler_CFLAGS"
 GUI_LIBS="$GUI_LIBS $poppler_LIBS"
 
-if test "$spellcheck" = yes; then
-    PKG_CHECK_MODULES(gtkspell3, [gtkspell3-3.0],,
-	    [AC_MSG_ERROR([You need GtkSpell3 to build $PACKAGE])])
-    GUI_CFLAGS="$GUI_CFLAGS $gtkspell3_CFLAGS"
-    GUI_LIBS="$GUI_LIBS $gtkspell3_LIBS"
-fi
+
+PKG_CHECK_MODULES(gtkspell3, [gtkspell3-3.0],,
+    [AC_MSG_ERROR([You need GtkSpell3 to build $PACKAGE])])
+GUI_CFLAGS="$GUI_CFLAGS $gtkspell3_CFLAGS"
+GUI_LIBS="$GUI_LIBS $gtkspell3_LIBS"
 
 PKG_CHECK_MODULES(synctex, [synctex >= 1.16],,
 	[AC_MSG_ERROR([You need synctex to build $PACKAGE])])
@@ -111,8 +100,6 @@ AC_OUTPUT
 
 echo
 echo gummi...................................... : Version $VERSION
-echo
-echo spellcheck support......................... : $spellcheck
 echo
 echo The binary will be installed in $prefix/bin
 echo 

@@ -552,7 +552,6 @@ cleanup:
 
 G_MODULE_EXPORT
 void on_menu_spelling_toggled (GtkWidget *widget, void *user) {
-#ifdef USE_GTKSPELL
     GList *editors;
     GuEditor* ec;
     int ectotal, i;
@@ -573,7 +572,6 @@ void on_menu_spelling_toggled (GtkWidget *widget, void *user) {
         }
     }
     config_set_boolean ("Editor", "spelling", active_status);
-#endif
 }
 
 G_MODULE_EXPORT

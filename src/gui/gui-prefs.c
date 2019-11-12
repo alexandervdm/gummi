@@ -147,10 +147,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
 
     gtk_window_set_transient_for (GTK_WINDOW (p->prefwindow), mainwindow);
 
-#ifdef USE_GTKSPELL
-    /* list available languages */
-
-
+    // list available languages
     if (g_file_test (
         g_find_program_in_path("enchant-lsmod"), G_FILE_TEST_EXISTS)) {
 
@@ -172,12 +169,7 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         gtk_combo_box_set_active (GTK_COMBO_BOX(p->combo_languages), 0);
         g_free ((gchar*)pret.second);
     }
-#else
-    /* desensitise gtkspell related GUI elements if not used */
-    GtkWidget* box = GTK_WIDGET (
-		gtk_builder_get_object (builder, "box_spellcheck"));
-    gtk_widget_set_sensitive (box, FALSE);
-#endif
+
     GList* schemes = editor_list_style_scheme_sorted ();
     GList* schemes_iter = schemes;
     gchar* desc = NULL;
@@ -756,7 +748,7 @@ void on_synctex_toggled (GtkToggleButton* widget, void* user) {
 
 G_MODULE_EXPORT
 void on_combo_language_changed (GtkComboBoxText* widget, void* user) {
-#ifdef USE_GTKSPELL
+
     gchar* selected = gtk_combo_box_text_get_active_text (widget);
     GList* tab = gummi->tabmanager->tabs;
     config_set_string ("Editor", "spelling_lang", selected);
@@ -771,7 +763,6 @@ void on_combo_language_changed (GtkComboBoxText* widget, void* user) {
         }
     }
     g_free(selected);
-#endif
 }
 
 G_MODULE_EXPORT

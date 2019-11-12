@@ -201,12 +201,9 @@ GummiGui* gui_init (GtkBuilder* builder) {
     hpaned= GTK_WIDGET (gtk_builder_get_object (builder, "hpaned"));
     gtk_paned_set_position (GTK_PANED (hpaned), (width/2));
 
-#ifndef USE_GTKSPELL
-    gtk_widget_set_sensitive (GTK_WIDGET (g->menu_spelling), FALSE);
-#else
     if (config_get_boolean ("Editor", "spelling"))
         gtk_check_menu_item_set_active (g->menu_spelling, TRUE);
-#endif
+
     if (config_get_boolean ("Interface", "snippets")) {
         gtk_check_menu_item_set_active (g->menu_snippets, TRUE);
         gtk_widget_show (GTK_WIDGET (g->menu_snippets));

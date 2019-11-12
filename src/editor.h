@@ -80,9 +80,7 @@ void editor_fileinfo_cleanup (GuEditor* ec);
 gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename);
 void editor_destroy (GuEditor* ec);
 void editor_sourceview_config (GuEditor* ec);
-#ifdef USE_GTKSPELL
 void editor_activate_spellchecking (GuEditor* ec, gboolean status);
-#endif
 void editor_fill_buffer (GuEditor* ec, const gchar* text);
 
 /* editor_grab_buffer will return a newly allocated string */

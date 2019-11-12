@@ -35,9 +35,7 @@
 #include <sys/stat.h>
 
 #include <gtksourceview/gtksource.h>
-#ifdef USE_GTKSPELL
-#   include <gtkspell/gtkspell.h>
-#endif
+#include <gtkspell/gtkspell.h>
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <unistd.h>
@@ -101,10 +99,8 @@ GuEditor* editor_new (GuMotion* mc) {
     gtk_source_view_set_auto_indent
         (ec->view, config_get_boolean ("Editor", "autoindentation"));
 
-#ifdef USE_GTKSPELL
     if (config_get_boolean ("Editor", "spelling"))
         editor_activate_spellchecking (ec, TRUE);
-#endif
 
     editor_sourceview_config (ec);
     gtk_text_buffer_set_modified (ec_buffer, FALSE);
@@ -335,8 +331,6 @@ void editor_sourceview_config (GuEditor* ec) {
     gtk_text_view_set_wrap_mode (ec_view, wrapmode);
 }
 
-
-#ifdef USE_GTKSPELL
 void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
     const gchar* lang = config_get_string ("Editor", "spelling_lang");
     GError* err = NULL;
@@ -358,7 +352,6 @@ void editor_activate_spellchecking (GuEditor* ec, gboolean status) {
     }
     // TODO g_object_unref (spell); ?
 }
-#endif
 
 void editor_fill_buffer (GuEditor* ec, const gchar* text) {
     gtk_text_buffer_begin_user_action (ec_buffer);
