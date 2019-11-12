@@ -312,7 +312,6 @@
               <object class="GtkButton" id="import_image_apply">
                 <property name="label">gtk-apply</property>
                 <property name="width_request">110</property>
-                <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
@@ -432,7 +431,6 @@
               <object class="GtkButton" id="import_biblio_apply">
                 <property name="label">gtk-apply</property>
                 <property name="width_request">110</property>
-                <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
@@ -3416,7 +3414,6 @@ current active document.</property>
               <object class="GtkButton" id="import_matrix_apply">
                 <property name="label">gtk-apply</property>
                 <property name="width_request">110</property>
-                <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
@@ -3593,7 +3590,6 @@ current active document.</property>
               <object class="GtkButton" id="import_table_apply">
                 <property name="label">gtk-apply</property>
                 <property name="width_request">110</property>
-                <property name="height_request">35</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
