@@ -14,7 +14,6 @@ ALL_LINGUAS="ar ca cs da de el es fr hu it nl pl pt pt_BR ro ru sv zh_CN zh_TW"
 
 AC_CONFIG_SRCDIR([src/environment.h])
 AC_CONFIG_HEADERS([config.h])
-AH_VERBATIM([USE_SYNCTEX1], [#undef USE_SYNCTEX1])
 
 # Checks for programs.
 AC_PROG_CC
@@ -48,22 +47,10 @@ PKG_CHECK_MODULES(poppler, [poppler-glib],,
 GUI_CFLAGS="$GUI_CFLAGS $poppler_CFLAGS"
 GUI_LIBS="$GUI_LIBS $poppler_LIBS"
 
-
 PKG_CHECK_MODULES(gtkspell3, [gtkspell3-3.0],,
     [AC_MSG_ERROR([You need GtkSpell3 to build $PACKAGE])])
 GUI_CFLAGS="$GUI_CFLAGS $gtkspell3_CFLAGS"
 GUI_LIBS="$GUI_LIBS $gtkspell3_LIBS"
-
-PKG_CHECK_MODULES(synctex, [synctex >= 1.16],,
-	[AC_MSG_ERROR([You need synctex to build $PACKAGE])])
-GUI_CFLAGS="$GUI_CFLAGS $synctex_CFLAGS"
-GUI_LIBS="$GUI_LIBS $synctex_LIBS"
-
-# Set USE_SYNCTEX1 for synctex (< 2.00) compatibility
-if $PKG_CONFIG --max-version 1.99 synctex; then
-  AC_DEFINE(USE_SYNCTEX1)
-fi
-AC_SUBST(USE_SYNCTEX1)
 
 # Add explicit linking flags
 GUI_LIBS="$GUI_LIBS -pthread -lm -lz"
