@@ -39,7 +39,12 @@
 #include <gtk/gtk.h>
 #include <math.h>
 #include <poppler.h>
-#include <synctex_parser.h>
+
+#ifdef WIN32
+  #include "syncTeX/synctex_parser.h"
+#else
+  #include <synctex_parser.h>
+#endif
 
 #include "configfile.h"
 #include "constants.h"

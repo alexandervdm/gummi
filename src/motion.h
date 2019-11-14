@@ -33,6 +33,10 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#ifdef WIN32
+    #include <sys/types.h>
+#endif
+
 #define GU_MOTION(x) ((GuMotion*)x)
 typedef struct _GuMotion GuMotion;
 

@@ -126,7 +126,7 @@ const gchar* importer_generate_image (const gchar* filepath, const gchar* captio
 
     // Filepath notation corrections for Windows systems:
     #ifdef WIN32
-    path = g_strjoinv("/", g_strsplit(filepath, "\\", -1));
+    gchar* path = g_strjoinv("/", g_strsplit(filepath, "\\", -1));
     if (utils_subinstr (" ", filepath, FALSE)) {
         editor_insert_package (g_active_editor, "grffile", "space");
     }

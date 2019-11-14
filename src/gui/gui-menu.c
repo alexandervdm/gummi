@@ -60,22 +60,6 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
     m->menu_cut = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_cut"));
     m->menu_copy = GTK_MENU_ITEM(gtk_builder_get_object (builder, "menu_copy"));
 
-    #ifdef WIN32
-    // Please do NOT enable for nix, it has no place on a free OS ;)
-    GtkWidget* donate =
-		gtk_image_menu_item_new_with_label ("Support this Project");
-    gtk_image_menu_item_set_image
-        (GTK_IMAGE_MENU_ITEM(donate),
-         GTK_WIDGET(gtk_image_new_from_stock(
-         GTK_STOCK_DIALOG_QUESTION, GTK_ICON_SIZE_MENU)));
-    GtkWidget* helpmenu =
-		GTK_WIDGET (gtk_builder_get_object (builder, "menu11"));
-    gtk_menu_prepend (GTK_MENU (helpmenu), donate);
-    gtk_signal_connect_object (GTK_OBJECT (donate), "activate",
-                               GTK_SIGNAL_FUNC (on_menu_donate_activate),
-                               NULL);
-    #endif
-
     /* TODO: There has to be a better way than this.. (bug 246)
     GtkSettings *settings = gtk_settings_get_default();
     gchar *iconsizes;
@@ -83,47 +67,8 @@ GuMenuGui* menugui_init (GtkBuilder* builder) {
     if (iconsizes != NULL) {
         printf("%s\n", iconsizes);
     }*/
-
-    #ifdef WIN32
-        // The 2 non-stock menu items have their pixel size values set
-        // to the default 16x16 in GLADE. The normal icon-size value is
-        // normally set by the GTK theme in gtkrc. For themes using
-        // non-default icon sizes or Windows, this 16x16 value will be
-        // wrong. This code sets it to match the gtkrc file that we
-        // supply with the Windows builds:
-        GtkWidget* export = gtk_image_menu_item_get_image (
-        GTK_IMAGE_MENU_ITEM (gtk_builder_get_object (builder, "menu_export")));
-        GtkWidget* update = gtk_image_menu_item_get_image (
-        GTK_IMAGE_MENU_ITEM (gtk_builder_get_object (builder, "menu_update")));
-        gtk_image_set_pixel_size (GTK_IMAGE(export), 13);
-        gtk_image_set_pixel_size (GTK_IMAGE(update), 13);
-    #endif
-
-
-
-
     return m;
 }
-
-#ifdef WIN32
-G_MODULE_EXPORT
-void on_menu_donate_activate (GtkWidget* widget, void* user) {
-	//TODO: enhance
-	GtkWidget* dialog;
-    dialog = gtk_message_dialog_new (gui->mainwindow,
-        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-        GTK_MESSAGE_INFO,
-        GTK_BUTTONS_OK,
-        "Gummi is released as free open-source software under the MIT "
-        "license. Development is carried out and continued as a spare "
-        "time activity. \nIf you are interested in supporting this "
-        "project with a donation, please visit our official website. "
-        "Thank you!");
-    gtk_window_set_title (GTK_WINDOW (dialog), "Support this project");
-    gtk_dialog_run (GTK_DIALOG (dialog));
-    gtk_widget_destroy (dialog);
-}
-#endif
 
 /*******************************************************************************
  * FILE MENU                                                                   *
@@ -143,7 +88,7 @@ void on_menu_template_activate (GtkWidget *widget, void *user) {
     gtk_widget_show_all (GTK_WIDGET (gummi->templ->templatewindow));
 }
 
- G_MODULE_EXPORT
+G_MODULE_EXPORT
 void on_menu_open_activate (GtkWidget *widget, void* user) {
     gchar *filename = NULL;
 
