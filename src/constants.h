@@ -35,7 +35,7 @@
 // Gummi defs:
 #define C_PACKAGE "gummi"
 #define C_PACKAGE_NAME "Gummi"
-#define C_PACKAGE_VERSION "0.8.0"
+#define C_PACKAGE_VERSION "0.8.1"
 #define C_PACKAGE_COMMENTS "Simple LaTeX Editor for GTK+"
 #define C_PACKAGE_COPYRIGHT "Copyright \xc2\xa9 2009\n\n"\
                             "Alexander van der Meij\n"\

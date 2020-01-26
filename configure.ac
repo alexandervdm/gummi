@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.65)
-AC_INIT([Gummi], [0.8.0], [alexander@localhost], [gummi], [https://alexandervdm.github.io/gummi])
+AC_INIT([Gummi], [0.8.1], [alexander@localhost], [gummi], [https://alexandervdm.github.io/gummi])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 GETTEXT_PACKAGE=gummi
