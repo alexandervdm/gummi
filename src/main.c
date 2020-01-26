@@ -80,13 +80,15 @@ int main (int argc, char *argv[]) {
         return 0;
     }
 
-    /* initialize GTK */
+    // Initialize GTK
+    gdk_threads_init ();
     gtk_init (&argc, &argv);
+
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
     gchar* ui = g_build_filename (GUMMI_DATA, "ui", "gummi.glade", NULL);
 
-    // exit program when gummi.glade can not be located:
+    // Exit program when gummi.glade can not be located:
     if (!g_file_test (ui, G_FILE_TEST_EXISTS)) {
         printf("Could not locate Glade interface file at:\n%s\n", ui);
         return 0;
@@ -141,7 +143,7 @@ int main (int argc, char *argv[]) {
 
     /* Install acceleration group to mainwindow */
     gtk_window_add_accel_group (gui->mainwindow, snippets->accel_group);
-    
+
     // tab/file loading:
     if (argc < 2) {
         tabmanager_create_tab (A_DEFAULT, NULL, NULL);
