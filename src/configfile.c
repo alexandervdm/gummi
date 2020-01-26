@@ -30,6 +30,7 @@
 #include "configfile.h"
 
 #include <glib.h>
+#include <string.h>
 #include <sys/stat.h>
 
 #include "constants.h"
