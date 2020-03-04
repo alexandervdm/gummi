@@ -56,14 +56,6 @@
 #   include "config.h"
 #endif
 
-// compatibility fixes for libsynctex (>=1.16 && <=2.00):
-#ifdef USE_SYNCTEX1
-  typedef synctex_scanner_t synctex_scanner_p;
-  typedef synctex_node_t synctex_node_p;
-  #define synctex_display_query(scanner, file, line, column, page) synctex_display_query(scanner, file, line, column)
-  #define synctex_scanner_next_result(scanner) synctex_next_result(scanner)
-#endif
-
 #define page_inner(pc,i) (((pc)->pages + (i))->inner)
 #define page_outer(pc,i) (((pc)->pages + (i))->outer)
 
