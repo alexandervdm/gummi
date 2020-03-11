@@ -1455,7 +1455,7 @@ void previewgui_scroll_to_xy (GuPreviewGui* pc, gdouble x, gdouble y) {
 
 void previewgui_save_position (GuPreviewGui* pc) {
     //L_F_DEBUG;
-    if (g_active_tab != NULL) {
+    if (g_active_tab != NULL && !pc->errormode) {
         g_active_tab->scroll_x = gtk_adjustment_get_value (pc->hadj);
         g_active_tab->scroll_y = gtk_adjustment_get_value (pc->vadj);
         block_handlers_current_page(pc);
