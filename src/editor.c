@@ -725,11 +725,9 @@ void editor_redo_change (GuEditor* ec) {
 }
 
 void editor_set_font (GuEditor* ec, const gchar* font) {
-    // surely there has to be a better solution to transform
-    // a string like 'Monospace 12' into css syntax right..?
-    gchar** font_elems = g_strsplit (font, " ", BUFSIZ);
-    gchar* style = g_strdup_printf ("* { font: %spx '%s'; }",
-                                    font_elems[1], font_elems[0]);
+    // TODO: look into pango to css transformation through
+    // functions like pango_font_description_to_css()
+    gchar* style = g_strconcat ("* { font: ",  font, "; }", NULL);
 
     gtk_css_provider_load_from_data (ec->css, style, -1, NULL);
     g_free (style);
