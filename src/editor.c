@@ -190,7 +190,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
 
     // directory should exist, but if not create ~/.cache/gummi:
     if (!g_file_test (C_TMPDIR, G_FILE_TEST_IS_DIR)) {
-            slog (L_WARNING, ".cache directory does not exist, creating..\n");
+            slog (L_WARNING, "gummi cache directory does not exist, creating..\n");
             g_mkdir_with_parents (C_TMPDIR, DIR_PERMS);
     }
 
