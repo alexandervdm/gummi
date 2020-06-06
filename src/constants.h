@@ -103,6 +103,7 @@
 "German: Thomas Niederprüm\n" \
 "Greek: Dimitris Leventeas\n" \
 "Hungarian: Balázs Meskó\n" \
+"Interlingue: OIS\n" \
 "Italian: Salvatore Vassallo\n" \
 "Polish: Hubert Kowalski\n" \
 "Portugese: Alexandre Guimarães\n" \
