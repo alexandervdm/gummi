@@ -410,7 +410,7 @@ void snippets_accel_connect (GuSnippets* sc, guint keyval, GdkModifierType mod,
 
     acc = gtk_accelerator_get_label (keyval,
             gtk_accelerator_get_default_mod_mask () & mod);
-    slog (L_DEBUG, "Accelerator `%s' connected\n", acc);
+    slog (L_DEBUG, "Accelerator '%s' connected\n", acc);
     g_free (acc);
 }
 
@@ -430,9 +430,9 @@ void snippets_accel_disconnect (GuSnippets* sc, const gchar* key) {
     if (current) {
         gtk_accel_group_disconnect (sc->accel_group, closure_data->second);
         sc->closure_data = g_list_remove (sc->closure_data, closure_data);
-        g_free (closure_data);
-        slog (L_DEBUG, "Accelerator for `%s' disconnected\n",
+        slog (L_DEBUG, "Accelerator for '%s' disconnected\n",
                 closure_data->first);
+        g_free (closure_data);
     }
 }
 
