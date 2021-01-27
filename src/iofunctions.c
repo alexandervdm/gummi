@@ -153,16 +153,12 @@ void iofunctions_real_save_file (GObject* hook, GObject* savecontext) {
 
     encoded = iofunctions_encode_text (text);
 
-    /* set the contents of the file to the text from the buffer */
+    // set the contents of the file to the text from the buffer
     if (filename != NULL) {
         if (! (result = g_file_set_contents (filename, encoded, -1, &err))) {
             slog (L_ERROR, "g_file_set_contents (): %s\n", err->message);
+            g_error_free (err);
         }
-    }
-
-    if (result == FALSE) {
-        slog (L_G_ERROR, _("%s\nPlease try again later."), err->message);
-        g_error_free (err);
     }
 
     g_free (encoded);
