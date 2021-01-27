@@ -101,22 +101,20 @@ void iofunctions_real_load_file (GObject* hook, const gchar* filename) {
     GError* err = NULL;
     gchar* text = NULL;
     gchar* decoded = NULL;
-    gboolean result;
     GuEditor* ec = NULL;
 
-    ec = gummi_get_active_editor();
-
-    /* get the file contents */
-    if (FALSE == (result = g_file_get_contents (filename, &text, NULL, &err))) {
+    if (FALSE == (g_file_get_contents (filename, &text, NULL, &err))) {
         slog (L_G_ERROR, "g_file_get_contents (): %s\n", err->message);
         g_error_free (err);
         iofunctions_load_default_text (FALSE);
         return;
     }
+
     if (NULL == (decoded = iofunctions_decode_text (text)))
         goto cleanup;
 
-    editor_fill_buffer (ec, decoded);
+    ec = gummi_get_active_editor();
+    editor_fill_buffer (gummi_get_active_editor(), decoded);
     gtk_text_buffer_set_modified (GTK_TEXT_BUFFER(ec->buffer), FALSE);
 
 cleanup:
