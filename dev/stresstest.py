@@ -11,7 +11,14 @@ import thread
 
 # TODO: write command line argument to enable/disable gummi debug mode
 # TODO: Options for stress test with limited time, typing speed
-# TODO: Start with question whether to proceed, else exit program
+
+
+# Ask user whether to proceed, else exit program
+confirmation = input("Do you wish to proceed? ")
+if confirmation.lower() == "yes" or confirmation.lower() == "y":
+	pass
+else:
+	sys.exit()
 
 # aliases for to be used X.org keysyms, see complete list at:
 # http://wiki.linuxquestions.org/wiki/List_of_Keysyms_Recognised_by_Xmodmap
