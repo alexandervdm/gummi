@@ -1,19 +1,23 @@
+# Gummi Simplified Chinese Translation.
+# mathlab <mathlab@sina.com>, 2012.
+# 玉堂白鹤 <yjwork@qq.com>,2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-11 08:38+0100\n"
-"PO-Revision-Date: 2012-03-14 22:17+0800\n"
-"Last-Translator: mathlab <mathlab@sina.com>\n"
+"PO-Revision-Date: 2021-01-11 10:23+0800\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../data/ui/gummi.glade.h:1
 msgid "PDF Preview could not initialise."
-msgstr "无法启动PDF预览"
+msgstr "无法初始化 PDF 预览。"
 
 #: ../data/ui/gummi.glade.h:2
 msgid "File:"
@@ -25,7 +29,7 @@ msgstr "标题:"
 
 #: ../data/ui/gummi.glade.h:4
 msgid "Label:"
-msgstr "标签"
+msgstr "标签："
 
 #: ../data/ui/gummi.glade.h:5
 msgid "Scale:"
@@ -157,13 +161,15 @@ msgid "_Toolbar"
 msgstr "工具栏(_T)"
 
 #: ../data/ui/gummi.glade.h:44
-#, fuzzy
 msgid ""
 "Use SyncTeX to scroll the preview to the part of the document that was last "
 "edited.\n"
 "\n"
 "Requires that the document is compiled with the SyncTeX typesetting option."
-msgstr "卷动预览到最近编辑的地方."
+msgstr ""
+"使用 SyncTeX 将预览滚动到文档的最后编辑部分。\n"
+"\n"
+"要求使用 SyncTeX 排版选项编译文档。"
 
 #: ../data/ui/gummi.glade.h:47
 msgid "Sync Preview with Editor"
@@ -203,13 +209,13 @@ msgstr "文档(_D)"
 
 #: ../data/ui/gummi.glade.h:56
 msgid "Compile _Document"
-msgstr "编译_PDF"
+msgstr "编译文档(_D)"
 
 #: ../data/ui/gummi.glade.h:57
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
-msgstr "编译LaTeX文档且更新预览"
+msgstr "编译 LaTeX 文档且更新预览。"
 
 #: ../data/ui/gummi.glade.h:59
 msgid "Set Compilation Options"
@@ -217,7 +223,7 @@ msgstr "设定编译选项"
 
 #: ../data/ui/gummi.glade.h:60
 msgid "_Cleanup Build Files"
-msgstr ""
+msgstr "清理编译文件(_C)"
 
 #: ../data/ui/gummi.glade.h:61
 msgid "Run _Makeindex"
@@ -232,13 +238,12 @@ msgid "Document _Statistics"
 msgstr "文档信息统计(_S)"
 
 #: ../data/ui/gummi.glade.h:64
-#, fuzzy
 msgid "Enable S_pell Checking"
-msgstr "启用拼字检查(_A)"
+msgstr "启用拼写检查(_P)"
 
 #: ../data/ui/gummi.glade.h:65
 msgid "Enable S_nippets"
-msgstr "启用代码片段"
+msgstr "启用代码片段(_N)"
 
 #: ../data/ui/gummi.glade.h:66
 msgid "_Project"
@@ -253,8 +258,8 @@ msgid ""
 "This function requires the current\n"
 "active document to be saved. "
 msgstr ""
-"当前文件保存后\n"
-"才能执行这项功能需要."
+"此功能需要保存\n"
+"当前活动文档。 "
 
 #: ../data/ui/gummi.glade.h:70
 msgid "Open Project"
@@ -270,7 +275,7 @@ msgstr "帮助(_H)"
 
 #: ../data/ui/gummi.glade.h:73
 msgid "User _Guide"
-msgstr ""
+msgstr "用户指南(_G)"
 
 #: ../data/ui/gummi.glade.h:74
 msgid "New"
@@ -380,7 +385,9 @@ msgstr "文件路径"
 msgid ""
 "Select a file to add it \n"
 "to the active project. "
-msgstr "请选择要加入项目的文件."
+msgstr ""
+"选择一个文件以将其\n"
+"添加到活动项目中。 "
 
 #: ../data/ui/gummi.glade.h:102
 msgid ""
@@ -581,7 +588,7 @@ msgstr "括弧:"
 
 #: ../data/ui/prefs.glade.h:1
 msgid "compile when idle for "
-msgstr "自动编译: 当空闲的时"
+msgstr "空闲时编译 "
 
 #: ../data/ui/prefs.glade.h:2
 msgid "compile every"
@@ -697,7 +704,7 @@ msgstr "缺省文字"
 
 #: ../data/ui/prefs.glade.h:51
 msgid "Typesetter command"
-msgstr "排版命令:"
+msgstr "排版命令"
 
 #: ../data/ui/prefs.glade.h:52
 msgid "TeXLive with PdfTeX"
@@ -705,16 +712,15 @@ msgstr "TeXLive: PdfTeX"
 
 #: ../data/ui/prefs.glade.h:53
 msgid "This program was not found on your system."
-msgstr "在您的系統中无法找到这个程序"
+msgstr "在您的系統中无法找到这个程序。"
 
 #: ../data/ui/prefs.glade.h:54
 msgid "TeXLive with XeTeX"
 msgstr "TeXLive: XeTeX"
 
 #: ../data/ui/prefs.glade.h:55
-#, fuzzy
 msgid "TeXLive with LuaTeX"
-msgstr "TeXLive: XeTeX"
+msgstr "LuaTeX: TeXLive"
 
 #: ../data/ui/prefs.glade.h:56
 msgid "Rubber"
@@ -757,7 +763,6 @@ msgid "Compilation"
 msgstr "编译"
 
 #: ../data/ui/prefs.glade.h:66
-#, fuzzy
 msgid "PDF compiling"
 msgstr "PDF 编译"
 
@@ -766,9 +771,8 @@ msgid "seconds"
 msgstr "秒"
 
 #: ../data/ui/prefs.glade.h:68
-#, fuzzy
 msgid "Default zoom mode"
-msgstr "缺省文字"
+msgstr "默认缩放模式"
 
 #: ../data/ui/prefs.glade.h:69
 msgid "Use animated scroll"
@@ -823,18 +827,16 @@ msgid "Snippets:"
 msgstr "代码片段:"
 
 #: ../data/ui/snippets.glade.h:5
-#, fuzzy
 msgid "Create a new snippet"
-msgstr "建立新文档"
+msgstr "创建一个新片段"
 
 #: ../data/ui/snippets.glade.h:6
-#, fuzzy
 msgid "Remove selected snippet"
-msgstr "重设所有代码片断"
+msgstr "删除选定的代码片段"
 
 #: ../data/ui/snippets.glade.h:7
 msgid "Edit:"
-msgstr "编辑: "
+msgstr "编辑："
 
 #: ../data/ui/snippets.glade.h:8
 msgid "Insert macro"
@@ -875,15 +877,15 @@ msgstr "%s: 找不到此文件或目录\n"
 
 #: ../src/gui/gui-infoscreen.c:117
 msgid "PDF preview could not initialise."
-msgstr "无法启动 PDF 预览"
+msgstr "无法初始化 PDF 预览。"
 
 #: ../src/gui/gui-infoscreen.c:118
 msgid "Document appears to be empty or invalid."
-msgstr "文档似乎是空白或无效的 LaTeX 文件"
+msgstr "文件似乎为空或无效。"
 
 #: ../src/gui/gui-infoscreen.c:119
 msgid "Compilation program is missing."
-msgstr "无法找到编译程序"
+msgstr "缺少编译程序。"
 
 #: ../src/gui/gui-infoscreen.c:128
 msgid ""
@@ -917,9 +919,9 @@ msgstr ""
 "选择其他的编译程序. PDF 预览将在 Gummi 重启后恢复.\n"
 
 #: ../src/gui/gui-main.c:340
-#, fuzzy, c-format
+#, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
-msgstr "找到 %s 的暂存文件, 您想要从暂存文件恢复吗?"
+msgstr "存在 %s 的暂存文件, 您要从中恢复吗？"
 
 #: ../src/gui/gui-main.c:392 ../src/latex.c:260
 msgid "The file already exists. Overwrite?"
@@ -929,7 +931,7 @@ msgstr "文件已存在, 要覆盖吗?"
 msgid ""
 "The content of the file has been changed externally. Saving will remove any "
 "external modifications."
-msgstr ""
+msgstr "文件的内容已在外部更改。保存将删除所有外部修改。"
 
 #. add Loading message to status bar
 #: ../src/gui/gui-main.c:513
@@ -938,47 +940,42 @@ msgid "Loading template ..."
 msgstr "载入模版中..."
 
 #: ../src/gui/gui-main.c:581
-#, fuzzy
 msgid "Compiling bibliography file.."
-msgstr "正在编译参考文献..."
+msgstr "编译参考文献.."
 
 #: ../src/gui/gui-main.c:588
-#, fuzzy
 msgid "Error compiling bibliography file or none detected.."
-msgstr "编译过程中发生错误或无法找到参考文献..."
+msgstr "编译参考文献时出错或未检测到.."
 
 #: ../src/gui/gui-main.c:632
-#, fuzzy
 msgid "No bibliography file detected in document.."
-msgstr "无法找到参考文献"
+msgstr "在文档中未检测到参考文献文件.."
 
 #: ../src/gui/gui-main.c:734
 msgid "This document has unsaved changes"
-msgstr ""
+msgstr "该文档有未保存的更改"
 
 #: ../src/gui/gui-main.c:737
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to save the changes to %s before closing?"
-msgstr "是否保存您所作的改变?"
+msgstr "您要在关闭之前将更改保存到 %s 吗？"
 
 #: ../src/gui/gui-main.c:738
-#, fuzzy
 msgid "this document"
-msgstr "輸入文件"
+msgstr "这个文档"
 
 #: ../src/gui/gui-main.c:741
 msgid "_Close without Saving"
-msgstr ""
+msgstr "关闭而不保存(_C)"
 
 #: ../src/gui/gui-main.c:742 ../src/gui/gui-main.c:780
 #: ../src/gui/gui-main.c:818
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #: ../src/gui/gui-main.c:743
-#, fuzzy
 msgid "_Save As"
-msgstr "另存为...(_A)"
+msgstr "另存为(_S)"
 
 #: ../src/gui/gui-main.c:768
 msgid "Open LaTeX document"
@@ -993,14 +990,12 @@ msgid "Select bibliography file"
 msgstr "选择参考文献"
 
 #: ../src/gui/gui-main.c:773
-#, fuzzy
 msgid "Select project file"
-msgstr "Gummi 项目文件"
+msgstr "选择项目文件"
 
 #: ../src/gui/gui-main.c:781
-#, fuzzy
 msgid "_Open"
-msgstr "打开"
+msgstr "打开(_O)"
 
 #: ../src/gui/gui-main.c:806
 msgid "Save LaTeX document"
@@ -1019,14 +1014,13 @@ msgid "Create project"
 msgstr "建立新项目"
 
 #: ../src/gui/gui-main.c:819
-#, fuzzy
 msgid "_Save"
-msgstr "保存"
+msgstr "保存(_S)"
 
 #: ../src/gui/gui-main.c:843
-#, fuzzy, c-format
+#, c-format
 msgid "Unsaved Document"
-msgstr "未保存文件 %d"
+msgstr "未保存的文档"
 
 #: ../src/gui/gui-main.c:864
 msgid "LaTeX files"
@@ -1036,9 +1030,8 @@ msgstr "LaTeX 文件"
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
 #: ../src/gui/gui-main.c:881
-#, fuzzy
 msgid "Supported Image files"
-msgstr "图像文件"
+msgstr "支持的图像文件"
 
 #: ../src/gui/gui-main.c:896
 msgid "Bibtex files"
@@ -1054,14 +1047,12 @@ msgid "Error loading recent file: %s"
 msgstr "载入最近使用的文件时产生错误: %s"
 
 #: ../src/gui/gui-menu.c:425
-#, fuzzy
 msgid "Successfully removed build files.."
-msgstr "运行 Makeindex 的过程中发生错误.."
+msgstr "成功删除了编译文件.."
 
 #: ../src/gui/gui-menu.c:428
-#, fuzzy
 msgid "Error removing build files.."
-msgstr "运行 Makeindex 的过程中发生错误.."
+msgstr "删除编译文件时出错.."
 
 #: ../src/gui/gui-menu.c:435
 msgid "Running Makeindex.."
@@ -1100,11 +1091,8 @@ msgid "Number of math displayed"
 msgstr "独立数学式总数"
 
 #: ../src/gui/gui-menu.c:601
-#, fuzzy
 msgid "This function requires an active document"
-msgstr ""
-"当前文件保存后\n"
-"才能执行这项功能需要."
+msgstr "此功能需要一个活动文档"
 
 #: ../src/gui/gui-preview.c:905
 #, c-format
@@ -1126,11 +1114,11 @@ msgstr "按新的快捷键, 或按退格键清除"
 
 #: ../src/gui/gui-tabmanager.c:99
 msgid "_Yes"
-msgstr ""
+msgstr "是(_Y)"
 
 #: ../src/gui/gui-tabmanager.c:101
 msgid "_No"
-msgstr ""
+msgstr "不(_N)"
 
 #: ../src/editor.c:609
 msgid "Top reached, search from bottom?"
@@ -1143,7 +1131,7 @@ msgstr "已查找到文末, 从文首开始查找?"
 #: ../src/iofunctions.c:130
 #, c-format
 msgid "Saving %s..."
-msgstr "保存%s中..."
+msgstr "保存 %s 中..."
 
 #: ../src/iofunctions.c:166
 #, c-format
@@ -1159,12 +1147,15 @@ msgid "Can not convert text to UTF-8!\n"
 msgstr "无法转换文字为 UTF-8 格式!\n"
 
 #: ../src/latex.c:267
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to export PDF file.\n"
 "\n"
 "%s"
-msgstr "文件包含错误, 无法输出为PDF.\n"
+msgstr ""
+"无法导出 PDF 文件。\n"
+"\n"
+"%s"
 
 #: ../src/tabmanager.c:73
 #, c-format
