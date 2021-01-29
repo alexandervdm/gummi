@@ -94,7 +94,7 @@
 "Arabic: Hamad Mohammad\n" \
 "Brazilian-Portugese: Fernando Cruz, Alexandre Guimarães\n" \
 "Catalan: Marc Vinyals\n" \
-"Chinese (Simplified): Mathlab pass\n" \
+"Chinese (Simplified): Mathlab pass, yjwork-cn\n" \
 "Chinese (Traditional): Wei-Ning Huang\n" \
 "Czech: Přemysl Janouch\n" \
 "Danish: Jack Olsen\n" \
