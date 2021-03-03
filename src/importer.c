@@ -121,12 +121,11 @@ const gchar* importer_generate_image (const gchar* filepath, const gchar* captio
     gchar scale_str[16] = { 0 };
     gchar* loc = NULL;
 
-    /* clear previous data */
+    // clear previous data
     result[0] = 0;
 
-    // Filepath notation corrections for Windows systems:
     #ifdef WIN32
-    gchar* path = g_strjoinv("/", g_strsplit(filepath, "\\", -1));
+    // filepath notation correction for win32 systems:
     if (utils_subinstr (" ", filepath, FALSE)) {
         editor_insert_package (g_active_editor, "grffile", "space");
     }
@@ -134,7 +133,7 @@ const gchar* importer_generate_image (const gchar* filepath, const gchar* captio
 
     snprintf (scale_str, 16, "%.2f", scale);
 
-    /* some locales use ',' as seperator, replace them as '.' */
+    // some locales use ',' as seperator, replace them as '.'
     if ( (loc = strstr (scale_str, ",")))
         *loc = '.';
 
