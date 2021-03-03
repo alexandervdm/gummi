@@ -162,6 +162,91 @@ gint utils_save_reload_dialog (const gchar* message) {
     return ret;
 }
 
+gchar* utils_pango_font_desc_to_css (PangoFontDescription* font_desc) {
+PangoFontMask font_mask;
+    gchar* result = NULL;
+    gchar* val = NULL;
+    
+    gchar* css_add (gchar* base, gchar* property, const gchar* value) {
+        return (g_strconcat (base, property, ": ", value, "; ", NULL));
+    }
+
+    // Generate css by analysing PangoFontDescription structure:
+    //
+    //     selector {
+    //         property1: value1;
+    //         property2: value2;
+    //         propertyN: valueN;
+    //     }
+
+    font_mask = pango_font_description_get_set_fields (font_desc);
+
+	// add selector:
+    result = "* { ";
+
+    // add font family:
+	if (font_mask & PANGO_FONT_MASK_FAMILY) {
+        result = css_add (result, "font-family",
+                          pango_font_description_get_family (font_desc));
+    }
+
+    // add font slant styling:
+    if (font_mask & PANGO_FONT_MASK_STYLE) {
+        switch (pango_font_description_get_style (font_desc)) {
+            case PANGO_STYLE_NORMAL:  val = "normal";  break;
+            case PANGO_STYLE_OBLIQUE: val = "oblique"; break;
+            case PANGO_STYLE_ITALIC:  val = "italic";  break;
+        }
+        result = css_add (result, "font-style", val);
+    }
+
+    // add font capitalization variant:
+    if (font_mask & PANGO_FONT_MASK_VARIANT) {
+        switch (pango_font_description_get_variant (font_desc)) {
+            case PANGO_VARIANT_NORMAL:     val = "normal";     break;
+            case PANGO_VARIANT_SMALL_CAPS: val = "small-caps"; break;
+        }
+        result = css_add (result, "font-variant", val);
+    }
+
+    // add font boldness / weight:
+    if (font_mask & PANGO_FONT_MASK_WEIGHT) {
+        gint weight = (gint) pango_font_description_get_weight (font_desc);
+        result = css_add (result, "font-weight", g_strdup_printf ("%d", weight));
+    }
+
+    // add font stretch:
+    if (font_mask & PANGO_FONT_MASK_STRETCH) {
+        switch (pango_font_description_get_stretch (font_desc)) {
+            case PANGO_STRETCH_ULTRA_CONDENSED: val = "ultra-condensed"; break;
+            case PANGO_STRETCH_EXTRA_CONDENSED: val = "extra-condensed"; break;
+            case PANGO_STRETCH_CONDENSED:       val = "condensed";       break;
+            case PANGO_STRETCH_SEMI_CONDENSED:  val = "semi-condensed";  break;
+            case PANGO_STRETCH_NORMAL:          val = "normal";          break;
+            case PANGO_STRETCH_SEMI_EXPANDED:   val = "semi-expanded";   break;
+            case PANGO_STRETCH_EXPANDED:        val = "expanded";        break;
+            case PANGO_STRETCH_EXTRA_EXPANDED:  val = "extra-expanded";  break;
+            case PANGO_STRETCH_ULTRA_EXPANDED:  val = "ultra-expanded";  break;
+        }
+        result = css_add (result, "font-stretch", val);
+    }
+
+    // add font size:
+    if (font_mask & PANGO_FONT_MASK_SIZE) {
+        gint size = pango_font_description_get_size (font_desc);
+
+        if (!pango_font_description_get_size_is_absolute (font_desc)) {
+            size = size / PANGO_SCALE;
+        }
+        result = css_add (result, "font-size", g_strdup_printf("%dpx", size));
+    }
+
+    // add closing bracket
+    result = g_strconcat (result, "}", NULL);
+
+	return result;
+}
+
 gint utils_yes_no_dialog (const gchar* message) {
     GtkWidget* dialog;
     gint ret = 0;

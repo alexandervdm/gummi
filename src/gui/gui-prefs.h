@@ -93,7 +93,7 @@ void on_tabwidth_value_changed (GtkWidget* widget, void* user);
 void on_configure_snippets_clicked (GtkWidget* widget, void* user);
 void on_autosave_value_changed (GtkWidget* widget, void* user);
 void on_compile_value_changed (GtkWidget* widget, void* user);
-void on_editor_font_set (GtkWidget* widget, void* user);
+void on_editor_font_change (GtkWidget* widget, void* user);
 void on_combo_typesetter_changed (GtkWidget* widget, void* user);
 void on_combo_language_changed (GtkComboBoxText* widget, void* user);
 void on_combo_compilescheme_changed (GtkWidget* widget, void* user);

@@ -313,7 +313,7 @@ void editor_sourceview_config (GuEditor* ec) {
     const gchar* style_scheme = config_get_string ("Editor", "style_scheme");
     editor_set_style_scheme_by_id (ec, style_scheme);
 
-    editor_set_font (ec, config_get_string ("Editor", "font"));
+    editor_set_font (ec, config_get_string ("Editor", "font_css"));
 
     gtk_source_view_set_show_line_numbers (
                             GTK_SOURCE_VIEW (ec->view),
@@ -724,13 +724,8 @@ void editor_redo_change (GuEditor* ec) {
     }
 }
 
-void editor_set_font (GuEditor* ec, const gchar* font) {
-    // TODO: look into pango to css transformation through
-    // functions like pango_font_description_to_css()
-    gchar* style = g_strconcat ("* { font: ",  font, "; }", NULL);
-
-    gtk_css_provider_load_from_data (ec->css, style, -1, NULL);
-    g_free (style);
+void editor_set_font (GuEditor* ec, const gchar* font_css) {
+    gtk_css_provider_load_from_data (ec->css, font_css, -1, NULL);
 }
 
 

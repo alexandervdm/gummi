@@ -869,7 +869,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="font">Sans 12</property>
-                            <signal name="font-set" handler="on_editor_font_set" swapped="no"/>
+                            <signal name="font-set" handler="on_editor_font_change" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">True</property>
