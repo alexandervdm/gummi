@@ -247,6 +247,11 @@ GummiGui* gui_init (GtkBuilder* builder) {
 }
 
 void gui_main (GtkBuilder* builder) {
+    #ifdef WIN32
+    // force win32 builds to use a native looking theme
+    g_object_set (gtk_settings_get_default(), "gtk-theme-name", "win32", NULL);
+    #endif
+
     gtk_builder_connect_signals (builder, NULL);
     gtk_widget_show_all (GTK_WIDGET (gui->mainwindow));
 
