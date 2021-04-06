@@ -548,7 +548,12 @@ gboolean on_document_compiled (gpointer data) {
         } else {
             if (!pc->uri) {
 
-                gchar* uri = g_filename_to_uri (editor->pdffile, NULL, NULL);
+
+				// NOTE: g_filename_{to|from}_uri functions (correctly) 
+				// encode special characters like space with % + hexvalue
+				// but we don't do that elsewhere so use custom concat for now
+				gchar* uri = g_strconcat ("file://", editor->pdffile, NULL);
+                //gchar* uri = g_filename_to_uri (editor->pdffile, NULL, NULL);
 
                 previewgui_set_pdffile (pc, uri);
                 g_free(uri);
