@@ -162,14 +162,15 @@ gint utils_save_reload_dialog (const gchar* message) {
     return ret;
 }
 
+static gchar* css_add (gchar* base, gchar* property, const gchar* value) {
+    // helper to create css pairs for utils_pango_font_desc_to_css()
+    return (g_strconcat (base, property, ": ", value, "; ", NULL));
+}
+
 gchar* utils_pango_font_desc_to_css (PangoFontDescription* font_desc) {
 PangoFontMask font_mask;
     gchar* result = NULL;
     gchar* val = NULL;
-    
-    gchar* css_add (gchar* base, gchar* property, const gchar* value) {
-        return (g_strconcat (base, property, ": ", value, "; ", NULL));
-    }
 
     // Generate css by analysing PangoFontDescription structure:
     //
