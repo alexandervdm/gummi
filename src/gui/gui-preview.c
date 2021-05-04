@@ -545,12 +545,10 @@ gboolean on_document_compiled (gpointer data) {
             previewgui_start_errormode (pc, "compile_error");
         } else {
             if (!pc->uri) {
-
-
-				// NOTE: g_filename_{to|from}_uri functions (correctly) 
-				// encode special characters like space with % + hexvalue
-				// but we don't do that elsewhere so use custom concat for now
-				gchar* uri = g_strconcat ("file://", editor->pdffile, NULL);
+                // NOTE: g_filename_{to|from}_uri functions (correctly)
+                // encode special characters like space with % + hexvalue
+                // but we don't do that elsewhere so use custom concat for now
+                gchar* uri = g_strconcat ("file://", editor->pdffile, NULL);
                 //gchar* uri = g_filename_to_uri (editor->pdffile, NULL, NULL);
 
                 previewgui_set_pdffile (pc, uri);
@@ -1047,7 +1045,7 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
         // Here we could try merging again - but only with nodes which
         // contained the searched text
 
-        // If we have only one node left/selected, scroll ot it.
+        // If we have only one node left/selected, scroll to it.
         if ((node = synctex_one_node_found(pc)) != NULL) {
            synctex_scroll_to_node(pc, node);
         }
