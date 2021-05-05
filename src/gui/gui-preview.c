@@ -1032,22 +1032,23 @@ void previewgui_refresh (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file
         synctex_run_parser(pc, sync_to, tex_file)) {
 
         SyncNode *node;
-        if ((node = synctex_one_node_found(pc)) == NULL) {
-            // See if the nodes are so close they all fit in the window
-            // in that case we just merge them
+        if (synctex_one_node_found(pc) == NULL) {
+            // See if the nodes are so close they all fit in
+            // the window - in that case we just merge them
             synctex_merge_nodes(pc);
         }
 
-        if ((node = synctex_one_node_found(pc)) == NULL) {
+        if (synctex_one_node_found(pc) == NULL) {
             // Search for words in the pdf
             synctex_filter_results(pc, sync_to);
         }
-        // Here we could try merging again - but only with nodes which
-        // contained the searched text
+
+        // Here we could try merging again - but only with
+        // nodes which contained the searched text
 
         // If we have only one node left/selected, scroll to it.
         if ((node = synctex_one_node_found(pc)) != NULL) {
-           synctex_scroll_to_node(pc, node);
+            synctex_scroll_to_node(pc, node);
         }
 
     } else {
