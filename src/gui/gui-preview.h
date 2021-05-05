@@ -105,7 +105,9 @@ struct _GuPreviewGui {
     GtkToggleToolButton* preview_pause;
 
     GtkWidget* errorpanel;
-    GtkComboBox* combo_sizes;
+
+    GtkComboBox*  combo_sizes;
+    GtkTreeModel* model_sizes;
 
     gulong page_input_changed_handler;
     gulong combo_sizes_changed_handler;

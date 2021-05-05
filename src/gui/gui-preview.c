@@ -170,7 +170,10 @@ GuPreviewGui* previewgui_init (GtkBuilder * builder) {
     p->toolbar = GTK_WIDGET (gtk_builder_get_object (builder, "preview_toolbar"));
 
     p->combo_sizes =
-        GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_sizes"));
+        GTK_COMBO_BOX  (gtk_builder_get_object (builder, "combo_preview_size"));
+    p->model_sizes =
+        GTK_TREE_MODEL (gtk_builder_get_object (builder, "model_preview_size"));
+
     p->page_next = GTK_WIDGET (gtk_builder_get_object (builder, "page_next"));
     p->page_prev = GTK_WIDGET (gtk_builder_get_object (builder, "page_prev"));
     p->page_label = GTK_WIDGET (gtk_builder_get_object (builder, "page_label"));
@@ -929,7 +932,7 @@ static void load_document(GuPreviewGui* pc, gboolean update) {
 void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
     //L_F_DEBUG;
     GError *error = NULL;
-    
+
     previewgui_cleanup_fds (pc);
 
     pc->uri = g_strdup(uri);
@@ -950,30 +953,47 @@ void previewgui_set_pdffile (GuPreviewGui* pc, const gchar *uri) {
 
     // Restore scale and fit mode
     if (!g_active_tab->fit_mode) {
-        const gchar* conf_zoom = config_get_string ("Preview", "zoom_mode");
-        gint new_fit, new_zoom;
 
-        // TODO: build a dict like structure combining zoom fit strs with
-        // id (combo) so we don't have to do this verbose stuff all over the place
-        if (STR_EQU (conf_zoom, "Best Fit")) new_fit = 0, new_zoom = 0;
-        else
-        if (STR_EQU (conf_zoom, "Fit Page Width")) new_fit = 1, new_zoom = 1;
-        else {
-            new_fit = 2;
-            if (STR_EQU (conf_zoom, "50%")) new_zoom = 2;
-            else if (STR_EQU (conf_zoom, "70%")) new_zoom = 3;
-            else if (STR_EQU (conf_zoom, "85%")) new_zoom = 4;
-            else if (STR_EQU (conf_zoom, "100%")) new_zoom = 5;
-            else if (STR_EQU (conf_zoom, "125%")) new_zoom = 6;
-            else if (STR_EQU (conf_zoom, "150%")) new_zoom = 7;
-            else if (STR_EQU (conf_zoom, "200%")) new_zoom = 8;
-            else if (STR_EQU (conf_zoom, "300%")) new_zoom = 9;
-            else if (STR_EQU (conf_zoom, "400%")) new_zoom = 10;
-            else slog (L_ERROR, "should not happen\n");
+        const gchar* conf_zoom = config_get_string ("Preview", "zoom_mode");
+
+        GtkTreeIter iter;
+        gboolean    iter_next;
+        gint        iter_count = 0;
+
+        iter_next = gtk_tree_model_get_iter_first (pc->model_sizes, &iter);
+
+        while (iter_next) {
+            gchar *str_data;
+            gtk_tree_model_get (pc->model_sizes, &iter, 0, &str_data, -1);
+
+            // match zoom/fit mode from configfile with mapping from glade:
+            if (STR_EQU (conf_zoom, str_data)) {
+
+                // set zoom_mode
+                g_active_tab->zoom_mode = iter_count;
+
+                // set fit_mode
+                switch (iter_count) {
+                    case FIT_BOTH:
+                        g_active_tab->fit_mode = FIT_BOTH;
+                        break;
+                    case FIT_WIDTH:
+                        g_active_tab->fit_mode = FIT_WIDTH;
+                        break;
+                    default:
+                        g_active_tab->fit_mode = FIT_NUMERIC;
+                        break;
+                }
+                g_free (str_data);
+                break;
+            }
+
+            iter_next   = gtk_tree_model_iter_next (pc->model_sizes, &iter);
+            iter_count += 1;
         }
-        g_active_tab->fit_mode = new_fit;
-        g_active_tab->zoom_mode = new_zoom;
     }
+
+    // TODO: further cleanup above and below please!
 
     g_signal_handler_block(pc->combo_sizes, pc->combo_sizes_changed_handler);
 

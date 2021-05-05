@@ -490,9 +490,235 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="list_previewsizes">
+  <object class="GtkListStore" id="list_projfiles">
     <columns>
-      <!-- column-name list_sizes -->
+      <!-- column-name status -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name docname -->
+      <column type="gchararray"/>
+      <!-- column-name docpath -->
+      <column type="gchararray"/>
+      <!-- column-name wholefilepath -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="list_tablealign">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Align left</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Align center</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Align right</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_tableborder">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">No borders</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Border outline</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Border all cells</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="list_tabs">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray2 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="list_templates">
+    <columns>
+      <!-- column-name ident -->
+      <column type="gchararray"/>
+      <!-- column-name location -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkAdjustment" id="matrix_cols">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="matrix_rows">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkViewport" id="imp_pane_matrix">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="no-show-all">True</property>
+    <property name="resize-mode">queue</property>
+    <child>
+      <object class="GtkHBox" id="hbox17">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkTable" id="table2">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="border-width">5</property>
+            <property name="n-rows">2</property>
+            <property name="n-columns">3</property>
+            <property name="column-spacing">5</property>
+            <property name="row-spacing">5</property>
+            <child>
+              <object class="GtkLabel" id="label8">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Rows:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="y-options">GTK_EXPAND</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label9">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Columns:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="top-attach">1</property>
+                <property name="bottom-attach">2</property>
+                <property name="y-options">GTK_EXPAND</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton3">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="invisible-char">•</property>
+                <property name="xalign">0.5</property>
+                <property name="primary-icon-activatable">False</property>
+                <property name="secondary-icon-activatable">False</property>
+                <property name="adjustment">matrix_rows</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="right-attach">2</property>
+                <property name="y-options">GTK_EXPAND</property>
+                <property name="x-padding">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton4">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="invisible-char">•</property>
+                <property name="xalign">0.5</property>
+                <property name="primary-icon-activatable">False</property>
+                <property name="secondary-icon-activatable">False</property>
+                <property name="adjustment">matrix_cols</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="right-attach">2</property>
+                <property name="top-attach">1</property>
+                <property name="bottom-attach">2</property>
+                <property name="y-options">GTK_EXPAND</property>
+                <property name="x-padding">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="matrix_combobracket">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="model">list_matrixbracket</property>
+                <property name="active">0</property>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="right-attach">3</property>
+                <property name="top-attach">1</property>
+                <property name="bottom-attach">2</property>
+                <property name="y-options">GTK_EXPAND</property>
+                <property name="x-padding">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label10">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Bracket:</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="right-attach">3</property>
+                <property name="y-options">GTK_EXPAND</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVBox" id="vbox14">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="border-width">5</property>
+            <child>
+              <object class="GtkButton" id="import_matrix_apply">
+                <property name="label">gtk-apply</property>
+                <property name="width-request">110</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="focus-on-click">False</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
+                <signal name="clicked" handler="on_import_matrix_apply_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="pack-type">end</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="model_preview_size">
+    <columns>
+      <!-- column-name size-strs -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -530,18 +756,6 @@
         <col id="0" translatable="yes">400%</col>
       </row>
     </data>
-  </object>
-  <object class="GtkListStore" id="list_projfiles">
-    <columns>
-      <!-- column-name status -->
-      <column type="GdkPixbuf"/>
-      <!-- column-name docname -->
-      <column type="gchararray"/>
-      <!-- column-name docpath -->
-      <column type="gchararray"/>
-      <!-- column-name wholefilepath -->
-      <column type="gchararray"/>
-    </columns>
   </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="can-focus">False</property>
@@ -1684,10 +1898,10 @@ active document to be saved. </property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkComboBox" id="combo_sizes">
+                                      <object class="GtkComboBox" id="combo_preview_size">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="model">list_previewsizes</property>
+                                        <property name="model">model_preview_size</property>
                                         <property name="active">1</property>
                                         <child>
                                           <object class="GtkCellRendererText" id="cellrenderertext3"/>
@@ -3027,56 +3241,6 @@ bibliography database</property>
     </child>
     <accelerator key="Escape" signal="activate-default"/>
   </object>
-  <object class="GtkListStore" id="list_tablealign">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Align left</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Align center</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Align right</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_tableborder">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">No borders</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Border outline</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Border all cells</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="list_tabs">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-      <!-- column-name gchararray2 -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="list_templates">
-    <columns>
-      <!-- column-name ident -->
-      <column type="gchararray"/>
-      <!-- column-name location -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="templatewindow">
     <property name="width-request">370</property>
     <property name="height-request">280</property>
@@ -3258,170 +3422,6 @@ current active document.</property>
       </object>
     </child>
     <accelerator key="Escape" signal="activate-default"/>
-  </object>
-  <object class="GtkAdjustment" id="matrix_cols">
-    <property name="lower">1</property>
-    <property name="upper">100</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="matrix_rows">
-    <property name="lower">1</property>
-    <property name="upper">100</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkViewport" id="imp_pane_matrix">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="no-show-all">True</property>
-    <property name="resize-mode">queue</property>
-    <child>
-      <object class="GtkHBox" id="hbox17">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <child>
-          <object class="GtkTable" id="table2">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="border-width">5</property>
-            <property name="n-rows">2</property>
-            <property name="n-columns">3</property>
-            <property name="column-spacing">5</property>
-            <property name="row-spacing">5</property>
-            <child>
-              <object class="GtkLabel" id="label8">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Rows:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="y-options">GTK_EXPAND</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label9">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Columns:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="top-attach">1</property>
-                <property name="bottom-attach">2</property>
-                <property name="y-options">GTK_EXPAND</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton3">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="invisible-char">•</property>
-                <property name="xalign">0.5</property>
-                <property name="primary-icon-activatable">False</property>
-                <property name="secondary-icon-activatable">False</property>
-                <property name="adjustment">matrix_rows</property>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="right-attach">2</property>
-                <property name="y-options">GTK_EXPAND</property>
-                <property name="x-padding">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="spinbutton4">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="invisible-char">•</property>
-                <property name="xalign">0.5</property>
-                <property name="primary-icon-activatable">False</property>
-                <property name="secondary-icon-activatable">False</property>
-                <property name="adjustment">matrix_cols</property>
-              </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="right-attach">2</property>
-                <property name="top-attach">1</property>
-                <property name="bottom-attach">2</property>
-                <property name="y-options">GTK_EXPAND</property>
-                <property name="x-padding">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="matrix_combobracket">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="model">list_matrixbracket</property>
-                <property name="active">0</property>
-                <child>
-                  <object class="GtkCellRendererText" id="cellrenderertext6"/>
-                  <attributes>
-                    <attribute name="text">0</attribute>
-                  </attributes>
-                </child>
-              </object>
-              <packing>
-                <property name="left-attach">2</property>
-                <property name="right-attach">3</property>
-                <property name="top-attach">1</property>
-                <property name="bottom-attach">2</property>
-                <property name="y-options">GTK_EXPAND</property>
-                <property name="x-padding">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label10">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Bracket:</property>
-              </object>
-              <packing>
-                <property name="left-attach">2</property>
-                <property name="right-attach">3</property>
-                <property name="y-options">GTK_EXPAND</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkVBox" id="vbox14">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="border-width">5</property>
-            <child>
-              <object class="GtkButton" id="import_matrix_apply">
-                <property name="label">gtk-apply</property>
-                <property name="width-request">110</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="focus-on-click">False</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_import_matrix_apply_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="pack-type">end</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
   <object class="GtkAdjustment" id="table_cols">
     <property name="lower">1</property>
