@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkImage" id="image_reset">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="stock">gtk-clear</property>
   </object>
   <object class="GtkListStore" id="list_snippets">
@@ -18,45 +18,42 @@
     </columns>
   </object>
   <object class="GtkDialog" id="snippetswindow">
-    <property name="can_focus">True</property>
-    <property name="border_width">5</property>
+    <property name="can-focus">True</property>
+    <property name="border-width">5</property>
     <property name="title" translatable="yes">Snippets Manager</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="default_width">750</property>
-    <property name="default_height">500</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">normal</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="default-width">750</property>
+    <property name="default-height">500</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="type-hint">normal</property>
     <signal name="delete-event" handler="on_snippetsgui_close_clicked" swapped="no"/>
-    <child>
-      <placeholder/>
-    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
             <child>
               <object class="GtkButton" id="snippetsgui_reset">
                 <property name="label" translatable="yes">_Reset</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Reset all snippets</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Reset all snippets</property>
                 <property name="image">image_reset</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
                 <signal name="clicked" handler="on_snippetsgui_reset_clicked" swapped="no"/>
                 <accelerator key="r" signal="clicked" modifiers="GDK_MOD1_MASK"/>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="pack_type">end</property>
+                <property name="pack-type">end</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -64,9 +61,9 @@
               <object class="GtkButton" id="snippetsgui_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
                 <signal name="clicked" handler="on_snippetsgui_close_clicked" swapped="no"/>
               </object>
               <packing>
@@ -79,24 +76,24 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkHPaned" id="hpaned1">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can-focus">True</property>
             <property name="position">275</property>
             <child>
               <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Snippets:</property>
                     <property name="justify">right</property>
                     <property name="xalign">0</property>
@@ -110,14 +107,14 @@
                 <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="shadow_type">in</property>
+                    <property name="can-focus">True</property>
+                    <property name="shadow-type">in</property>
                     <child>
                       <object class="GtkTreeView" id="snippets_tree_view">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="model">list_snippets</property>
-                        <property name="headers_visible">False</property>
+                        <property name="headers-visible">False</property>
                         <signal name="cursor-changed" handler="on_snippets_tree_view_cursor_changed" swapped="no"/>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection"/>
@@ -148,19 +145,19 @@
                 <child>
                   <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkButton" id="button_new_snippet">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Create a new snippet</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="tooltip-text" translatable="yes">Create a new snippet</property>
                         <signal name="clicked" handler="on_button_new_snippet_clicked" swapped="no"/>
                         <child>
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="stock">gtk-new</property>
                           </object>
                         </child>
@@ -174,14 +171,14 @@
                     <child>
                       <object class="GtkButton" id="button_remove_snippet">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
                         <signal name="clicked" handler="on_button_remove_snippet_clicked" swapped="no"/>
                         <child>
                           <object class="GtkImage" id="image2">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Remove selected snippet</property>
+                            <property name="can-focus">False</property>
+                            <property name="tooltip-text" translatable="yes">Remove selected snippet</property>
                             <property name="stock">gtk-delete</property>
                           </object>
                         </child>
@@ -208,18 +205,18 @@
             <child>
               <object class="GtkVBox" id="vbox2">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel" id="label2">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Edit:</property>
-                        <property name="use_underline">True</property>
+                        <property name="use-underline">True</property>
                         <property name="justify">right</property>
                         <property name="xalign">0</property>
                       </object>
@@ -232,8 +229,8 @@
                     <child>
                       <object class="GtkScrolledWindow" id="snippet_scroll">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="shadow_type">in</property>
+                        <property name="can-focus">True</property>
+                        <property name="shadow-type">in</property>
                         <child>
                           <placeholder/>
                         </child>
@@ -247,13 +244,13 @@
                     <child>
                       <object class="GtkHButtonBox" id="hbuttonbox1">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="spacing">3</property>
-                        <property name="layout_style">start</property>
+                        <property name="layout-style">start</property>
                         <child>
                           <object class="GtkLabel" id="label7">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">Insert macro</property>
                           </object>
                           <packing>
@@ -266,8 +263,8 @@
                           <object class="GtkButton" id="selected_text">
                             <property name="label" translatable="yes">selected text</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
                             <signal name="clicked" handler="on_snippetsgui_selected_text_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -280,8 +277,8 @@
                           <object class="GtkButton" id="filename">
                             <property name="label" translatable="yes">filename</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
                             <signal name="clicked" handler="on_snippetsgui_filename_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -294,8 +291,8 @@
                           <object class="GtkButton" id="basename">
                             <property name="label" translatable="yes">basename</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
                             <signal name="clicked" handler="on_snippetsgui_basename_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -322,14 +319,14 @@
                 <child>
                   <object class="GtkVBox" id="vbox4">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="label3">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Activation</property>
-                        <property name="use_underline">True</property>
+                        <property name="use-underline">True</property>
                         <property name="justify">right</property>
                         <property name="xalign">0</property>
                       </object>
@@ -342,11 +339,11 @@
                     <child>
                       <object class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <child>
                           <object class="GtkLabel" id="label4">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can-focus">False</property>
                             <property name="label" translatable="yes">    </property>
                           </object>
                           <packing>
@@ -358,68 +355,68 @@
                         <child>
                           <object class="GtkTable" id="table1">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="n_rows">2</property>
-                            <property name="n_columns">2</property>
-                            <property name="column_spacing">6</property>
-                            <property name="row_spacing">6</property>
+                            <property name="can-focus">False</property>
+                            <property name="n-rows">2</property>
+                            <property name="n-columns">2</property>
+                            <property name="column-spacing">6</property>
+                            <property name="row-spacing">6</property>
                             <child>
                               <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">Tab trigger:</property>
                                 <property name="xalign">0</property>
                               </object>
                               <packing>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="x-options">GTK_FILL</property>
+                                <property name="y-options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkLabel" id="label6">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">Shortcut key:</property>
                                 <property name="xalign">0</property>
                               </object>
                               <packing>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
-                                <property name="x_options">GTK_FILL</property>
-                                <property name="y_options">GTK_FILL</property>
+                                <property name="top-attach">1</property>
+                                <property name="bottom-attach">2</property>
+                                <property name="x-options">GTK_FILL</property>
+                                <property name="y-options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEntry" id="tab_trigger_entry">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
+                                <property name="can-focus">True</property>
+                                <property name="invisible-char">•</property>
+                                <property name="primary-icon-activatable">False</property>
+                                <property name="secondary-icon-activatable">False</property>
                                 <signal name="key-release-event" handler="on_tab_trigger_entry_key_release_event" swapped="no"/>
                               </object>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEntry" id="accelerator_entry">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="can-focus">True</property>
                                 <property name="editable">False</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
+                                <property name="invisible-char">•</property>
+                                <property name="primary-icon-activatable">False</property>
+                                <property name="secondary-icon-activatable">False</property>
                                 <signal name="focus-in-event" handler="on_accelerator_entry_focus_in_event" swapped="no"/>
                                 <signal name="focus-out-event" handler="on_accelerator_entry_focus_out_event" swapped="no"/>
                                 <signal name="key-press-event" handler="on_accelerator_entry_key_press_event" swapped="no"/>
                               </object>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="right_attach">2</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
+                                <property name="left-attach">1</property>
+                                <property name="right-attach">2</property>
+                                <property name="top-attach">1</property>
+                                <property name="bottom-attach">2</property>
                               </packing>
                             </child>
                           </object>
