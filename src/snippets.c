@@ -561,7 +561,7 @@ void snippet_info_initial_expand (GuSnippetInfo* info, GuEditor* ec) {
     GHashTable* map = NULL;
     GList* current = NULL;
     gchar* text = NULL;
-    gint key = 0;
+    glong key = 0;
 
     map = g_hash_table_new (NULL, NULL);
     current = g_list_first (info->einfo);
