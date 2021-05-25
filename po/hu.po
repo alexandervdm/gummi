@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-11 08:37+0100\n"
+"POT-Creation-Date: 2021-05-25 11:12+0200\n"
 "PO-Revision-Date: 2012-08-13 13:39+0200\n"
 "Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: magyar <>\n"
@@ -66,104 +66,145 @@ msgstr "Egy vonal"
 msgid "Double line"
 msgstr "Kettős vonal"
 
-#: ../data/ui/gummi.glade.h:13 ../data/ui/prefs.glade.h:3
+#: ../data/ui/gummi.glade.h:13
+msgid "Align left"
+msgstr "Balra igazítás"
+
+#: ../data/ui/gummi.glade.h:14
+msgid "Align center"
+msgstr "Középre igazítás"
+
+#: ../data/ui/gummi.glade.h:15
+msgid "Align right"
+msgstr "Jobbra igazítás"
+
+#: ../data/ui/gummi.glade.h:16
+msgid "No borders"
+msgstr "Nincs keret"
+
+#: ../data/ui/gummi.glade.h:17
+msgid "Border outline"
+msgstr "Csak külső keret"
+
+#: ../data/ui/gummi.glade.h:18
+msgid "Border all cells"
+msgstr "Keret minden cellában"
+
+#: ../data/ui/gummi.glade.h:19
+msgid "Rows:"
+msgstr "Sorok:"
+
+#: ../data/ui/gummi.glade.h:20
+msgid "Columns:"
+msgstr "Oszlopok:"
+
+#: ../data/ui/gummi.glade.h:21
+msgid "Bracket:"
+msgstr "Zárójel:"
+
+#: ../data/ui/gummi.glade.h:22 ../data/ui/prefs.glade.h:3
 msgid "Best Fit"
 msgstr "Legjobb illeszkedés"
 
-#: ../data/ui/gummi.glade.h:14 ../data/ui/prefs.glade.h:4
+#: ../data/ui/gummi.glade.h:23 ../data/ui/prefs.glade.h:4
 msgid "Fit Page Width"
 msgstr "Oldalszélesség"
 
-#: ../data/ui/gummi.glade.h:16 ../data/ui/prefs.glade.h:6
+#: ../data/ui/gummi.glade.h:25 ../data/ui/prefs.glade.h:6
 #, no-c-format
 msgid "50%"
 msgstr "50%"
 
-#: ../data/ui/gummi.glade.h:18 ../data/ui/prefs.glade.h:8
+#: ../data/ui/gummi.glade.h:27 ../data/ui/prefs.glade.h:8
 #, no-c-format
 msgid "70%"
 msgstr "70%"
 
-#: ../data/ui/gummi.glade.h:20 ../data/ui/prefs.glade.h:10
+#: ../data/ui/gummi.glade.h:29 ../data/ui/prefs.glade.h:10
 #, no-c-format
 msgid "85%"
 msgstr "85%"
 
-#: ../data/ui/gummi.glade.h:22 ../data/ui/prefs.glade.h:12
+#: ../data/ui/gummi.glade.h:31 ../data/ui/prefs.glade.h:12
 #, no-c-format
 msgid "100%"
 msgstr "100%"
 
-#: ../data/ui/gummi.glade.h:24 ../data/ui/prefs.glade.h:14
+#: ../data/ui/gummi.glade.h:33 ../data/ui/prefs.glade.h:14
 #, no-c-format
 msgid "125%"
 msgstr "125%"
 
-#: ../data/ui/gummi.glade.h:26 ../data/ui/prefs.glade.h:16
+#: ../data/ui/gummi.glade.h:35 ../data/ui/prefs.glade.h:16
 #, no-c-format
 msgid "150%"
 msgstr "150%"
 
-#: ../data/ui/gummi.glade.h:28 ../data/ui/prefs.glade.h:18
+#: ../data/ui/gummi.glade.h:37 ../data/ui/prefs.glade.h:18
 #, no-c-format
 msgid "200%"
 msgstr "200%"
 
-#: ../data/ui/gummi.glade.h:30 ../data/ui/prefs.glade.h:20
+#: ../data/ui/gummi.glade.h:39 ../data/ui/prefs.glade.h:20
 #, no-c-format
 msgid "300%"
 msgstr "300%"
 
-#: ../data/ui/gummi.glade.h:32 ../data/ui/prefs.glade.h:22
+#: ../data/ui/gummi.glade.h:41 ../data/ui/prefs.glade.h:22
 #, no-c-format
 msgid "400%"
 msgstr "400%"
 
-#: ../data/ui/gummi.glade.h:33
+#: ../data/ui/gummi.glade.h:42
 msgid "Gummi - LaTeX Editor"
 msgstr "Gummi - LaTeX szerkesztő"
 
-#: ../data/ui/gummi.glade.h:34
+#: ../data/ui/gummi.glade.h:43
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../data/ui/gummi.glade.h:35
+#: ../data/ui/gummi.glade.h:44
 msgid "New from _Template"
 msgstr "Új, _sablonból"
 
-#: ../data/ui/gummi.glade.h:36
+#: ../data/ui/gummi.glade.h:45
 msgid "_Open..."
 msgstr "_Megnyitás…"
 
-#: ../data/ui/gummi.glade.h:37
+#: ../data/ui/gummi.glade.h:46
 msgid "Save _As..."
 msgstr "M_entés másként…"
 
-#: ../data/ui/gummi.glade.h:38
+#: ../data/ui/gummi.glade.h:47
 msgid "_Export to PDF"
 msgstr "Exportálás _PDF-be"
 
-#: ../data/ui/gummi.glade.h:39
+#: ../data/ui/gummi.glade.h:48
 msgid "shouldnotseeme"
 msgstr "shouldnotseeme"
 
-#: ../data/ui/gummi.glade.h:40
+#: ../data/ui/gummi.glade.h:49
 msgid "_Edit"
 msgstr "Szer_kesztés"
 
-#: ../data/ui/gummi.glade.h:41
+#: ../data/ui/gummi.glade.h:50
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../data/ui/gummi.glade.h:42
+#: ../data/ui/gummi.glade.h:51
 msgid "_Statusbar"
 msgstr "_Állapotsor"
 
-#: ../data/ui/gummi.glade.h:43
+#: ../data/ui/gummi.glade.h:52
 msgid "_Toolbar"
 msgstr "Eszköz_tár"
 
-#: ../data/ui/gummi.glade.h:44
+#: ../data/ui/gummi.glade.h:53
+#, fuzzy
+msgid "_Right pane"
+msgstr "_Jobb panel"
+
+#: ../data/ui/gummi.glade.h:54
 #, fuzzy
 msgid ""
 "Use SyncTeX to scroll the preview to the part of the document that was last "
@@ -174,47 +215,47 @@ msgstr ""
 "Használja a SyncTeX-et, hogy azt a részét mutassa a dokumentumnak, amelyet "
 "utoljára szerkesztett."
 
-#: ../data/ui/gummi.glade.h:47
+#: ../data/ui/gummi.glade.h:57
 msgid "Sync Preview with Editor"
 msgstr "Előnézet egyeztetése a szerkesztővel"
 
-#: ../data/ui/gummi.glade.h:48
+#: ../data/ui/gummi.glade.h:58
 msgid "Page Layout in Preview"
 msgstr "Oldalak elrendezése az előnézetben"
 
-#: ../data/ui/gummi.glade.h:49
+#: ../data/ui/gummi.glade.h:59
 msgid "Single Page"
 msgstr "Egyetlen oldal"
 
-#: ../data/ui/gummi.glade.h:50
+#: ../data/ui/gummi.glade.h:60
 msgid "Continuous, One Column"
 msgstr "Folyamatos, egy oszlopban"
 
-#: ../data/ui/gummi.glade.h:51
+#: ../data/ui/gummi.glade.h:61
 msgid "_Fullscreen"
 msgstr "Tel_jes képernyő "
 
-#: ../data/ui/gummi.glade.h:52
+#: ../data/ui/gummi.glade.h:62
 msgid "_Search"
 msgstr "Ke_resés"
 
-#: ../data/ui/gummi.glade.h:53
+#: ../data/ui/gummi.glade.h:63
 msgid "Find Ne_xt"
 msgstr "Kö_vetkező"
 
-#: ../data/ui/gummi.glade.h:54
+#: ../data/ui/gummi.glade.h:64
 msgid "Find Pre_vious"
 msgstr "E_lőző"
 
-#: ../data/ui/gummi.glade.h:55
+#: ../data/ui/gummi.glade.h:65
 msgid "_Document"
 msgstr "_Dokumentum"
 
-#: ../data/ui/gummi.glade.h:56
+#: ../data/ui/gummi.glade.h:66
 msgid "Compile _Document"
 msgstr "_Fordítás"
 
-#: ../data/ui/gummi.glade.h:57
+#: ../data/ui/gummi.glade.h:67
 msgid ""
 "Compile LaTeX document\n"
 "and update preview."
@@ -222,43 +263,43 @@ msgstr ""
 "Dokumentum fordítása\n"
 "és előnézet frissítése."
 
-#: ../data/ui/gummi.glade.h:59
+#: ../data/ui/gummi.glade.h:69
 msgid "Set Compilation Options"
 msgstr "Fordítási _opciók"
 
-#: ../data/ui/gummi.glade.h:60
+#: ../data/ui/gummi.glade.h:70
 msgid "_Cleanup Build Files"
 msgstr "Fordítási fájlok _takarítása"
 
-#: ../data/ui/gummi.glade.h:61
+#: ../data/ui/gummi.glade.h:71
 msgid "Run _Makeindex"
 msgstr "_Makeindex futtatása"
 
-#: ../data/ui/gummi.glade.h:62
+#: ../data/ui/gummi.glade.h:72
 msgid "Run _BibTeX"
 msgstr "_BibTeX futtatása"
 
-#: ../data/ui/gummi.glade.h:63
+#: ../data/ui/gummi.glade.h:73
 msgid "Document _Statistics"
 msgstr "Dokumentum _statisztika"
 
-#: ../data/ui/gummi.glade.h:64
+#: ../data/ui/gummi.glade.h:74
 msgid "Enable S_pell Checking"
 msgstr "_Helyesírás ellenőrzés"
 
-#: ../data/ui/gummi.glade.h:65
+#: ../data/ui/gummi.glade.h:75
 msgid "Enable S_nippets"
 msgstr "Kódrészletek e_ngedélyezése"
 
-#: ../data/ui/gummi.glade.h:66
+#: ../data/ui/gummi.glade.h:76
 msgid "_Project"
 msgstr "_Projekt"
 
-#: ../data/ui/gummi.glade.h:67
+#: ../data/ui/gummi.glade.h:77
 msgid "Create new Project"
 msgstr "Új projekt létrehozása"
 
-#: ../data/ui/gummi.glade.h:68 ../src/gui/gui-menu.c:616
+#: ../data/ui/gummi.glade.h:78 ../src/gui/gui-menu.c:574
 msgid ""
 "This function requires the current\n"
 "active document to be saved. "
@@ -266,127 +307,127 @@ msgstr ""
 "A funkció használatához az\n"
 "aktív dokumentumot menteni kell. "
 
-#: ../data/ui/gummi.glade.h:70
+#: ../data/ui/gummi.glade.h:80
 msgid "Open Project"
 msgstr "Projekt megnyitása"
 
-#: ../data/ui/gummi.glade.h:71
+#: ../data/ui/gummi.glade.h:81
 msgid "Close Project"
 msgstr "Projekt bezárása"
 
-#: ../data/ui/gummi.glade.h:72
+#: ../data/ui/gummi.glade.h:82
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../data/ui/gummi.glade.h:73
+#: ../data/ui/gummi.glade.h:83
 msgid "User _Guide"
 msgstr "_Felhasználói kézikönyv"
 
-#: ../data/ui/gummi.glade.h:74
+#: ../data/ui/gummi.glade.h:84
 msgid "New"
 msgstr "Ú_j"
 
-#: ../data/ui/gummi.glade.h:75
+#: ../data/ui/gummi.glade.h:85
 msgid "Open"
 msgstr "_Megnyitás"
 
-#: ../data/ui/gummi.glade.h:76
+#: ../data/ui/gummi.glade.h:86
 msgid "Save"
 msgstr "M_entés"
 
-#: ../data/ui/gummi.glade.h:77
+#: ../data/ui/gummi.glade.h:87
 msgid "toolbutton5"
 msgstr "toolbutton5"
 
-#: ../data/ui/gummi.glade.h:78
+#: ../data/ui/gummi.glade.h:88
 msgid "toolbutton6"
 msgstr "toolbutton6"
 
-#: ../data/ui/gummi.glade.h:79
+#: ../data/ui/gummi.glade.h:89
 msgid "toolbutton7"
 msgstr "toolbutton7"
 
-#: ../data/ui/gummi.glade.h:80
+#: ../data/ui/gummi.glade.h:90
 msgid "toolbutton1"
 msgstr "toolbutton1"
 
-#: ../data/ui/gummi.glade.h:81
+#: ../data/ui/gummi.glade.h:91
 msgid "toolbutton2"
 msgstr "toolbutton2"
 
-#: ../data/ui/gummi.glade.h:82
+#: ../data/ui/gummi.glade.h:92
 msgid "toolbutton3"
 msgstr "toolbutton3"
 
-#: ../data/ui/gummi.glade.h:83
+#: ../data/ui/gummi.glade.h:93
 msgid "  "
 msgstr "  "
 
-#: ../data/ui/gummi.glade.h:84
+#: ../data/ui/gummi.glade.h:94
 msgid "Image"
 msgstr "Kép"
 
-#: ../data/ui/gummi.glade.h:85
+#: ../data/ui/gummi.glade.h:95
 msgid "Table"
 msgstr "Táblázat"
 
-#: ../data/ui/gummi.glade.h:86
+#: ../data/ui/gummi.glade.h:96
 msgid "Matrix"
 msgstr "Mátrix"
 
-#: ../data/ui/gummi.glade.h:87
+#: ../data/ui/gummi.glade.h:97
 msgid "Bibliography"
 msgstr "Bibliográfia"
 
-#: ../data/ui/gummi.glade.h:88
+#: ../data/ui/gummi.glade.h:98
 msgid "Previous"
 msgstr "Előző"
 
-#: ../data/ui/gummi.glade.h:89
+#: ../data/ui/gummi.glade.h:99
 msgid "Next"
 msgstr "Következő"
 
-#: ../data/ui/gummi.glade.h:90
+#: ../data/ui/gummi.glade.h:100
 msgid "0"
 msgstr "0"
 
-#: ../data/ui/gummi.glade.h:91
+#: ../data/ui/gummi.glade.h:101
 msgid "of 0"
 msgstr "/ 0"
 
-#: ../data/ui/gummi.glade.h:92
+#: ../data/ui/gummi.glade.h:102
 msgid "Preview Pane"
 msgstr "Előnézeti panel"
 
-#: ../data/ui/gummi.glade.h:93
+#: ../data/ui/gummi.glade.h:103
 msgid "Build Log"
 msgstr "Fordítási napló"
 
-#: ../data/ui/gummi.glade.h:94
+#: ../data/ui/gummi.glade.h:104
 msgid "Nr of files:"
 msgstr "Fájlok száma:"
 
-#: ../data/ui/gummi.glade.h:95
+#: ../data/ui/gummi.glade.h:105
 msgid "Root path:"
 msgstr "Gyökér útvonal:"
 
-#: ../data/ui/gummi.glade.h:96
+#: ../data/ui/gummi.glade.h:106
 msgid "Project name:"
 msgstr "Projektnév:"
 
-#: ../data/ui/gummi.glade.h:97 ../data/ui/prefs.glade.h:28
+#: ../data/ui/gummi.glade.h:107 ../data/ui/prefs.glade.h:28
 msgid "   "
 msgstr "   "
 
-#: ../data/ui/gummi.glade.h:98
+#: ../data/ui/gummi.glade.h:108
 msgid "Document"
 msgstr "Dokumentum"
 
-#: ../data/ui/gummi.glade.h:99
+#: ../data/ui/gummi.glade.h:109
 msgid "File path"
 msgstr "Fájl útvonal:"
 
-#: ../data/ui/gummi.glade.h:100
+#: ../data/ui/gummi.glade.h:110
 msgid ""
 "Select a file to add it \n"
 "to the active project. "
@@ -394,7 +435,7 @@ msgstr ""
 "Válasszon ki egy fájlt az \n"
 "aktív projekthez adáshoz. "
 
-#: ../data/ui/gummi.glade.h:102
+#: ../data/ui/gummi.glade.h:112
 msgid ""
 "Remove the selected\n"
 "file from the project."
@@ -402,34 +443,34 @@ msgstr ""
 "A kiválasztott fájl\n"
 "törlése a projektből."
 
-#: ../data/ui/gummi.glade.h:104
+#: ../data/ui/gummi.glade.h:114
 msgid "Project"
 msgstr "Projekt"
 
-#: ../data/ui/gummi.glade.h:105
+#: ../data/ui/gummi.glade.h:115
 msgid "Filename:"
 msgstr "Fájlnév:"
 
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:106 ../src/gui/gui-main.c:636
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
 msgid "none"
 msgstr "nincs"
 
-#: ../data/ui/gummi.glade.h:107
+#: ../data/ui/gummi.glade.h:117
 msgid "References:"
 msgstr "Referenciák:"
 
-#: ../data/ui/gummi.glade.h:108 ../src/gui/gui-main.c:637
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
 msgid "N/A"
 msgstr "N/A"
 
-#: ../data/ui/gummi.glade.h:109
+#: ../data/ui/gummi.glade.h:119
 msgid "Detect"
 msgstr "Keresés"
 
-#: ../data/ui/gummi.glade.h:110
+#: ../data/ui/gummi.glade.h:120
 msgid ""
 "Detect mention of a bibtex\n"
 "file in the current document"
@@ -437,11 +478,11 @@ msgstr ""
 "Bibtex fájlra hivatkozás\n"
 "keresése az aktuális dokumentumban"
 
-#: ../data/ui/gummi.glade.h:112
+#: ../data/ui/gummi.glade.h:122
 msgid "Compile"
 msgstr "Fordítás"
 
-#: ../data/ui/gummi.glade.h:113
+#: ../data/ui/gummi.glade.h:123
 msgid ""
 "Compile the active \n"
 "bibliography database"
@@ -449,127 +490,103 @@ msgstr ""
 "Fordítsa le az aktív \n"
 "bibliográfia adatbázist"
 
-#: ../data/ui/gummi.glade.h:115
+#: ../data/ui/gummi.glade.h:125
 msgid "no bibliography file detected"
 msgstr "bibliográfia fájl nem található"
 
-#: ../data/ui/gummi.glade.h:116
+#: ../data/ui/gummi.glade.h:126
 msgid "Title"
 msgstr "Cím"
 
-#: ../data/ui/gummi.glade.h:117
+#: ../data/ui/gummi.glade.h:127
 msgid "Author"
 msgstr "Szerző"
 
-#: ../data/ui/gummi.glade.h:118
+#: ../data/ui/gummi.glade.h:128
 msgid "Year"
 msgstr "Év"
 
-#: ../data/ui/gummi.glade.h:119
+#: ../data/ui/gummi.glade.h:129
 msgid "filter:"
 msgstr "szűrés:"
 
-#: ../data/ui/gummi.glade.h:120
+#: ../data/ui/gummi.glade.h:130
 msgid "Document statistics"
 msgstr "Dokumentum statisztika"
 
-#: ../data/ui/gummi.glade.h:121
+#: ../data/ui/gummi.glade.h:131
 msgid "Document name"
 msgstr "Dokumentum neve"
 
-#: ../data/ui/gummi.glade.h:122
+#: ../data/ui/gummi.glade.h:132
 msgid "Words in:"
 msgstr "Szavak"
 
-#: ../data/ui/gummi.glade.h:123
+#: ../data/ui/gummi.glade.h:133
 msgid "       "
 msgstr "       "
 
-#: ../data/ui/gummi.glade.h:124
+#: ../data/ui/gummi.glade.h:134
 msgid "text"
 msgstr "szövegben"
 
-#: ../data/ui/gummi.glade.h:125
+#: ../data/ui/gummi.glade.h:135
 msgid "headers"
 msgstr "fejlécekben"
 
-#: ../data/ui/gummi.glade.h:126
+#: ../data/ui/gummi.glade.h:136
 msgid "float captions"
 msgstr "feliratokban"
 
-#: ../data/ui/gummi.glade.h:127
+#: ../data/ui/gummi.glade.h:137
 msgid "Number of:"
 msgstr "Darabszám"
 
-#: ../data/ui/gummi.glade.h:128
+#: ../data/ui/gummi.glade.h:138
 msgid "floats"
 msgstr "úszó objektumok"
 
-#: ../data/ui/gummi.glade.h:129
+#: ../data/ui/gummi.glade.h:139
 msgid "math environments"
 msgstr "matematikai környezetek"
 
-#: ../data/ui/gummi.glade.h:130
+#: ../data/ui/gummi.glade.h:140
 msgid "Find"
 msgstr "Keresés"
 
-#: ../data/ui/gummi.glade.h:131
+#: ../data/ui/gummi.glade.h:141
 msgid "Search for:"
 msgstr "Keresett szöveg:"
 
-#: ../data/ui/gummi.glade.h:132
+#: ../data/ui/gummi.glade.h:142
 msgid "Replace with:"
 msgstr "Csere ezzel:"
 
-#: ../data/ui/gummi.glade.h:133
+#: ../data/ui/gummi.glade.h:143
 msgid "Match entire word only"
 msgstr "Csak teljes szavak"
 
-#: ../data/ui/gummi.glade.h:134
+#: ../data/ui/gummi.glade.h:144
 msgid "Search backwards"
 msgstr "Visszafelé"
 
-#: ../data/ui/gummi.glade.h:135
+#: ../data/ui/gummi.glade.h:145
 msgid "Match case"
 msgstr "Kis- és nagybetű különbözik"
 
-#: ../data/ui/gummi.glade.h:136
+#: ../data/ui/gummi.glade.h:146
 msgid "_Replace"
 msgstr "Cse_re"
 
-#: ../data/ui/gummi.glade.h:137
+#: ../data/ui/gummi.glade.h:147
 msgid "Replace _All"
 msgstr "Mi_ndet cseréli"
 
-#: ../data/ui/gummi.glade.h:138
-msgid "Align left"
-msgstr "Balra igazítás"
-
-#: ../data/ui/gummi.glade.h:139
-msgid "Align center"
-msgstr "Középre igazítás"
-
-#: ../data/ui/gummi.glade.h:140
-msgid "Align right"
-msgstr "Jobbra igazítás"
-
-#: ../data/ui/gummi.glade.h:141
-msgid "No borders"
-msgstr "Nincs keret"
-
-#: ../data/ui/gummi.glade.h:142
-msgid "Border outline"
-msgstr "Csak külső keret"
-
-#: ../data/ui/gummi.glade.h:143
-msgid "Border all cells"
-msgstr "Keret minden cellában"
-
-#: ../data/ui/gummi.glade.h:144
+#: ../data/ui/gummi.glade.h:148
 msgid "Create new document from template.."
 msgstr "Új dokumentum létrehozása sablonból…"
 
-#: ../data/ui/gummi.glade.h:145
+#: ../data/ui/gummi.glade.h:149
 msgid ""
 "Make a template from the \n"
 "current active document."
@@ -577,25 +594,13 @@ msgstr ""
 "Sablon készítése az \n"
 "aktuális dokumentumból."
 
-#: ../data/ui/gummi.glade.h:147
+#: ../data/ui/gummi.glade.h:151
 msgid "Deletes the selected template"
 msgstr "Törli a kiválasztott sablont"
 
-#: ../data/ui/gummi.glade.h:148
+#: ../data/ui/gummi.glade.h:152
 msgid "Open the selected template"
 msgstr "Kiválasztott sablon megnyitása"
-
-#: ../data/ui/gummi.glade.h:149
-msgid "Rows:"
-msgstr "Sorok:"
-
-#: ../data/ui/gummi.glade.h:150
-msgid "Columns:"
-msgstr "Oszlopok:"
-
-#: ../data/ui/gummi.glade.h:151
-msgid "Bracket:"
-msgstr "Zárójel:"
 
 #: ../data/ui/prefs.glade.h:1
 msgid "compile when idle for "
@@ -939,191 +944,191 @@ msgstr ""
 "előnézet funkció nem fog működni a Gummi következő\n"
 "indításáig.\n"
 
-#: ../src/gui/gui-main.c:340
+#: ../src/gui/gui-main.c:352
 #, c-format
 msgid "Swap file exists for %s, do you want to recover from it?"
 msgstr "Létezik cserefájl a %s fájlhoz, szeretné helyreállítani?"
 
-#: ../src/gui/gui-main.c:392 ../src/latex.c:260
+#: ../src/gui/gui-main.c:404 ../src/latex.c:260
 msgid "The file already exists. Overwrite?"
 msgstr "A fájl már létezik. Felülírja?"
 
-#: ../src/gui/gui-main.c:410
+#: ../src/gui/gui-main.c:422
 msgid ""
 "The content of the file has been changed externally. Saving will remove any "
 "external modifications."
 msgstr ""
 
 #. add Loading message to status bar
-#: ../src/gui/gui-main.c:513
+#: ../src/gui/gui-main.c:525
 #, c-format
 msgid "Loading template ..."
 msgstr "Sablon betöltése…"
 
-#: ../src/gui/gui-main.c:581
+#: ../src/gui/gui-main.c:593
 #, fuzzy
 msgid "Compiling bibliography file.."
 msgstr "Bibliográfia fájl fordításaválasztása"
 
-#: ../src/gui/gui-main.c:588
+#: ../src/gui/gui-main.c:600
 #, fuzzy
 msgid "Error compiling bibliography file or none detected.."
 msgstr "A bibliográfia fájl fordítása során hiba történt, vagy nem található…"
 
-#: ../src/gui/gui-main.c:632
+#: ../src/gui/gui-main.c:644
 #, fuzzy
 msgid "No bibliography file detected in document.."
 msgstr "bibliográfia fájl nem található"
 
-#: ../src/gui/gui-main.c:734
+#: ../src/gui/gui-main.c:746
 msgid "This document has unsaved changes"
 msgstr ""
 
-#: ../src/gui/gui-main.c:737
+#: ../src/gui/gui-main.c:749
 #, fuzzy, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "Szeretné menteni a változásokat ebben a fájlban: %s?"
 
-#: ../src/gui/gui-main.c:738
+#: ../src/gui/gui-main.c:750
 msgid "this document"
 msgstr "ez a dokumentum"
 
-#: ../src/gui/gui-main.c:741
+#: ../src/gui/gui-main.c:753
 msgid "_Close without Saving"
 msgstr ""
 
-#: ../src/gui/gui-main.c:742 ../src/gui/gui-main.c:780
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
+#: ../src/gui/gui-main.c:830
 msgid "_Cancel"
 msgstr ""
 
-#: ../src/gui/gui-main.c:743
+#: ../src/gui/gui-main.c:755
 #, fuzzy
 msgid "_Save As"
 msgstr "M_entés másként…"
 
-#: ../src/gui/gui-main.c:768
+#: ../src/gui/gui-main.c:780
 msgid "Open LaTeX document"
 msgstr "LaTeX dokumentum megnyitása"
 
-#: ../src/gui/gui-main.c:771
+#: ../src/gui/gui-main.c:783
 msgid "Select an image to insert"
 msgstr "Válassza ki a beillesztendő képet"
 
-#: ../src/gui/gui-main.c:772
+#: ../src/gui/gui-main.c:784
 msgid "Select bibliography file"
 msgstr "Válassza ki a bibliográfia fájlt"
 
-#: ../src/gui/gui-main.c:773
+#: ../src/gui/gui-main.c:785
 #, fuzzy
 msgid "Select project file"
 msgstr "Gummi projektfájlok"
 
-#: ../src/gui/gui-main.c:781
+#: ../src/gui/gui-main.c:793
 #, fuzzy
 msgid "_Open"
 msgstr "_Megnyitás"
 
-#: ../src/gui/gui-main.c:806
+#: ../src/gui/gui-main.c:818
 msgid "Save LaTeX document"
 msgstr "LaTeX dokumentum mentése"
 
-#: ../src/gui/gui-main.c:807
+#: ../src/gui/gui-main.c:819
 msgid "Save as LaTeX document"
 msgstr "Mentés mint LaTeX dokumentum"
 
-#: ../src/gui/gui-main.c:808
+#: ../src/gui/gui-main.c:820
 msgid "Export to PDF"
 msgstr "Exportálás PDF-be"
 
-#: ../src/gui/gui-main.c:811
+#: ../src/gui/gui-main.c:823
 msgid "Create project"
 msgstr "Projekt létrehozása"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:831
 #, fuzzy
 msgid "_Save"
 msgstr "M_entés"
 
-#: ../src/gui/gui-main.c:843
+#: ../src/gui/gui-main.c:855
 #, fuzzy, c-format
 msgid "Unsaved Document"
 msgstr "Mentetlen dokumentum %d"
 
-#: ../src/gui/gui-main.c:864
+#: ../src/gui/gui-main.c:876
 msgid "LaTeX files"
 msgstr "LaTeX fájlok"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:881
+#: ../src/gui/gui-main.c:893
 msgid "Supported Image files"
 msgstr "Támogatott képfájlok"
 
-#: ../src/gui/gui-main.c:896
+#: ../src/gui/gui-main.c:908
 msgid "Bibtex files"
 msgstr "Bibtex fájlok"
 
-#: ../src/gui/gui-main.c:902
+#: ../src/gui/gui-main.c:914
 msgid "Gummi project files"
 msgstr "Gummi projektfájlok"
 
-#: ../src/gui/gui-menu.c:187
+#: ../src/gui/gui-menu.c:132
 #, c-format
 msgid "Error loading recent file: %s"
 msgstr "Fájl betöltési hiba: %s"
 
-#: ../src/gui/gui-menu.c:425
+#: ../src/gui/gui-menu.c:385
 #, fuzzy
 msgid "Successfully removed build files.."
 msgstr "Fordítási fájlok sikeresen törölve…"
 
-#: ../src/gui/gui-menu.c:428
+#: ../src/gui/gui-menu.c:388
 msgid "Error removing build files.."
 msgstr "Hiba történt a fordítási fájlok törlése közben…"
 
-#: ../src/gui/gui-menu.c:435
+#: ../src/gui/gui-menu.c:395
 msgid "Running Makeindex.."
 msgstr "Makeindex futtatása…"
 
-#: ../src/gui/gui-menu.c:438
+#: ../src/gui/gui-menu.c:398
 msgid "Error running Makeindex.."
 msgstr "Hiba a Makeindex futtatásakor…"
 
-#: ../src/gui/gui-menu.c:462
+#: ../src/gui/gui-menu.c:422
 msgid "Words in text"
 msgstr "Szavak a szövegben"
 
-#: ../src/gui/gui-menu.c:463
+#: ../src/gui/gui-menu.c:423
 msgid "Words in headers"
 msgstr "Szavak a fejlécekben"
 
-#: ../src/gui/gui-menu.c:464
+#: ../src/gui/gui-menu.c:424
 msgid "Words in float captions"
 msgstr "Szavak az úszó objektumokban"
 
-#: ../src/gui/gui-menu.c:465
+#: ../src/gui/gui-menu.c:425
 msgid "Number of headers"
 msgstr "Fejlécek száma"
 
-#: ../src/gui/gui-menu.c:466
+#: ../src/gui/gui-menu.c:426
 msgid "Number of floats"
 msgstr "Úszó objektumok száma"
 
-#: ../src/gui/gui-menu.c:467
+#: ../src/gui/gui-menu.c:427
 msgid "Number of math inlines"
 msgstr "Sorközi matematikai mód darabszáma"
 
-#: ../src/gui/gui-menu.c:468
+#: ../src/gui/gui-menu.c:428
 msgid "Number of math displayed"
 msgstr "Kiemelt matematikai mód darabszáma"
 
-#: ../src/gui/gui-menu.c:601
+#: ../src/gui/gui-menu.c:559
 msgid "This function requires an active document"
 msgstr "A funkcióhoz szükséges egy aktív dokumentum"
 
-#: ../src/gui/gui-preview.c:905
+#: ../src/gui/gui-preview.c:914
 #, c-format
 msgid "of %d"
 msgstr "/ %d"
@@ -1149,38 +1154,26 @@ msgstr ""
 msgid "_No"
 msgstr ""
 
-#: ../src/editor.c:609
+#: ../src/editor.c:602
 msgid "Top reached, search from bottom?"
 msgstr "A dokumentum eleje elérve, keressen a végéről?"
 
-#: ../src/editor.c:616
+#: ../src/editor.c:609
 msgid "Bottom reached, search from top?"
 msgstr "A dokumentum vége elérve, keressen az elejéről?"
 
-#: ../src/iofunctions.c:130
+#: ../src/iofunctions.c:128
 #, c-format
 msgid "Saving %s..."
 msgstr "%s mentése…"
 
-#: ../src/iofunctions.c:166
-#, c-format
-msgid ""
-"%s\n"
-"Please try again later."
-msgstr ""
-"%s\n"
-"Kérem próbálja újra."
-
-#: ../src/iofunctions.c:241
+#: ../src/iofunctions.c:235
 msgid "Can not convert text to UTF-8!\n"
 msgstr "A szöveg nem konvertálható UTF-8 kódolásra!\n"
 
 #: ../src/latex.c:267
-#, c-format
-msgid ""
-"Unable to export PDF file.\n"
-"\n"
-"%s"
+#, fuzzy, c-format
+msgid "Unable to export PDF file: %s\n"
 msgstr ""
 "PDF fájl exportálása sikertelen.\n"
 "\n"
@@ -1191,12 +1184,17 @@ msgstr ""
 msgid "Unsaved Document %d"
 msgstr "Mentetlen dokumentum %d"
 
-#: ../src/utils.c:158 ../src/utils.c:177
+#: ../src/utils.c:158 ../src/utils.c:263
 msgid "Confirmation"
 msgstr "Megerősítés"
 
-#~ msgid "_Right Pane"
-#~ msgstr "_Jobb panel"
+#, c-format
+#~ msgid ""
+#~ "%s\n"
+#~ "Please try again later."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Kérem próbálja újra."
 
 #~ msgid "Save early.. save often!"
 #~ msgstr "Mentsen korán… mentsen gyakran!"
