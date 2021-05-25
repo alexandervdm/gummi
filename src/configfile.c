@@ -49,6 +49,7 @@ const gchar default_config[] =
 "mainwindow_max = false\n"
 "toolbar = true\n"
 "statusbar = true\n"
+"rightpane = true\n"
 "snippets = true\n"
 "[Editor]\n"
 "font_str = Monospace 14\n"

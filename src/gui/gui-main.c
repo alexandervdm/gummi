@@ -107,7 +107,9 @@ GummiGui* gui_init (GtkBuilder* builder) {
     g->menu_toolbar =
         GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_toolbar"));
     g->menu_statusbar =
-        GTK_CHECK_MENU_ITEM(gtk_builder_get_object (builder, "menu_statusbar"));
+        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_statusbar"));
+    g->menu_rightpane =
+        GTK_CHECK_MENU_ITEM (gtk_builder_get_object (builder, "menu_rightpane"));
     g->statusid =
         gtk_statusbar_get_context_id (GTK_STATUSBAR (g->statusbar), "Gummi");
     g->recent[0] =
@@ -224,6 +226,14 @@ GummiGui* gui_init (GtkBuilder* builder) {
         config_set_boolean ("Interface", "statusbar", FALSE);
         gtk_check_menu_item_set_active (g->menu_statusbar, FALSE);
         gtk_widget_hide (GTK_WIDGET (g->statusbar));
+    }
+
+    if (config_get_boolean ("Interface", "rightpane")) {
+        gtk_check_menu_item_set_active (g->menu_rightpane, TRUE);
+        gtk_widget_show (GTK_WIDGET (g->rightpane));
+    } else {
+        gtk_check_menu_item_set_active (g->menu_rightpane, FALSE);
+        gtk_widget_hide (GTK_WIDGET (g->rightpane));
     }
 
     g->menu_autosync =

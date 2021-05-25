@@ -323,6 +323,19 @@ void on_menu_toolbar_toggled (GtkWidget *widget, void *user) {
 }
 
 G_MODULE_EXPORT
+void on_menu_rightpane_toggled (GtkWidget *widget, void *user) {
+    if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget))) {
+        gtk_widget_show (GTK_WIDGET (gui->rightpane));
+        config_set_boolean ("Interface", "rightpane", TRUE);
+        gtk_toggle_tool_button_set_active (gui->previewgui->preview_pause, FALSE);
+    } else {
+        gtk_widget_hide (GTK_WIDGET (gui->rightpane));
+        config_set_boolean ("Interface", "rightpane", FALSE);
+        gtk_toggle_tool_button_set_active (gui->previewgui->preview_pause, TRUE);
+    }
+}
+
+G_MODULE_EXPORT
 void on_menu_fullscreen_toggled (GtkWidget *widget, void *user) {
     if (gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (widget)))
         gtk_window_fullscreen (gui->mainwindow);
