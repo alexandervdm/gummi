@@ -2,6 +2,22 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.8.2 (May 25th, 2021):
+
+    Bugs fixed:
+    * Prevent losing preview pane position on error
+    * Fix issues with certain font (styles) for editor 
+    * Fix spell checking using enchant version 2
+    * Fix regression exit crash in certain situations
+    * Synctex fix for filenames with special chars
+    * Re-implemented right panel toggling
+    * Several memory leaks plugged
+
+Gummi 0.8.1 (January 26th, 2020):
+
+    Bugs fixed:
+    * Fix racing bug causing random deadlocks
+
 Gummi 0.8.0 (December 19th, 2019):
 
 	Features added:
