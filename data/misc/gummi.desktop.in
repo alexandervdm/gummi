@@ -3,6 +3,7 @@ Version=1.0
 Name=@PACKAGE_NAME@
 GenericName=LaTeX Editor
 Comment=Simple LaTeX Editor
+Comment[de]=Einfacher LaTeX-Editor
 Exec=@PACKAGE@ %F
 Icon=@PACKAGE@
 Terminal=false
