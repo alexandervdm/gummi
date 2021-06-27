@@ -224,6 +224,17 @@ gboolean on_menu_quit_activate (void) {
     return FALSE;
 }
 
+G_MODULE_EXPORT
+gboolean on_menu_hover_activate (GtkWidget* widget, GdkEvent* event, gpointer data) {
+    gchar* filename = gtk_widget_get_tooltip_text (widget);
+    statusbar_set_permanent_message (filename);
+}
+
+G_MODULE_EXPORT
+gboolean on_menu_leave_activate (GtkWidget* widget, GdkEvent* event, gpointer data) {
+    statusbar_del_message (NULL);
+}
+
 /*******************************************************************************
  * EDIT MENU                                                                   *
  ******************************************************************************/
