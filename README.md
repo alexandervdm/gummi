@@ -25,4 +25,4 @@ Please check the Getting Involved section of our wiki for more information on co
 
 ### Contact
 
-If you wish to contact me, please use the details on my Github profile. I can also usually be found idling on the FreeNode IRC network as ``alexandervdm``.
+If you wish to contact me, please use the details on my Github profile.
