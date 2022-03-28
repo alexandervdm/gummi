@@ -305,6 +305,19 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     ec->basename = NULL;
 }
 
+void editor_modtime_update (GuEditor* ec) {
+    struct stat attr;
+    stat(ec->filename, &attr);
+    ec->last_modtime = attr.st_mtime;
+}
+
+gboolean editor_externally_modified (GuEditor* ec) {
+    struct stat attr;
+    stat(ec->filename, &attr);
+    double mismatch = difftime (ec->last_modtime, attr.st_mtime);
+    return mismatch != 0.0 && ec->last_modtime != 0.0;
+}
+
 void editor_sourceview_config (GuEditor* ec) {
     GtkWrapMode wrapmode = 0;
 

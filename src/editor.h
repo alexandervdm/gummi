@@ -76,8 +76,10 @@ struct _GuEditor {
 
 GuEditor* editor_new (GuMotion* mc);
 void editor_fileinfo_update (GuEditor* ec, const gchar* filename);
-void editor_fileinfo_cleanup (GuEditor* ec);
 gboolean editor_fileinfo_update_biblio (GuEditor* ec,  const gchar* filename);
+void editor_fileinfo_cleanup (GuEditor* ec);
+void editor_modtime_update (GuEditor* ec);
+gboolean editor_externally_modified (GuEditor* ec);
 void editor_destroy (GuEditor* ec);
 void editor_sourceview_config (GuEditor* ec);
 void editor_activate_spellchecking (GuEditor* ec, gboolean status);
