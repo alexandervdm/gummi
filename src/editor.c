@@ -227,6 +227,7 @@ void editor_fileinfo_update (GuEditor* ec, const gchar* filename) {
         struct stat attr;
         stat(fname, &attr);
         ec->last_modtime = attr.st_mtime;
+        ec->last_external_modtime = ec->last_modtime;
 
         g_free (fname);
         g_free (base);
@@ -305,17 +306,23 @@ void editor_fileinfo_cleanup (GuEditor* ec) {
     ec->basename = NULL;
 }
 
-void editor_modtime_update (GuEditor* ec) {
+void editor_modtime_update (GuEditor* ec, gboolean loaded) {
     struct stat attr;
     stat(ec->filename, &attr);
-    ec->last_modtime = attr.st_mtime;
+    if (loaded) ec->last_modtime = attr.st_mtime;
+    ec->last_external_modtime = attr.st_mtime;
 }
 
-gboolean editor_externally_modified (GuEditor* ec) {
+gboolean editor_externally_modified (GuEditor* ec, gboolean since_loaded) {
     struct stat attr;
     stat(ec->filename, &attr);
-    double mismatch = difftime (ec->last_modtime, attr.st_mtime);
-    return mismatch != 0.0 && ec->last_modtime != 0.0;
+    time_t ref_time;
+    if (since_loaded) {
+        ref_time = ec->last_modtime;
+    } else {
+        ref_time = ec->last_external_modtime;
+    }
+    return difftime (ref_time, attr.st_mtime) != 0.0 && ref_time != 0.0;
 }
 
 void editor_sourceview_config (GuEditor* ec) {

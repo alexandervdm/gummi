@@ -107,6 +107,9 @@ void tabmanager_set_active_tab (int position) {
         g_active_tab = GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position));
         g_active_editor =
             GU_TAB_CONTEXT (g_list_nth_data (g_tabs, position))->editor;
+        if (editor_externally_modified (g_active_editor, FALSE)) {
+            gui_external_changes_enable (g_active_tab);
+        }
     }
 }
 

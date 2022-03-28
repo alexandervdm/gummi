@@ -333,6 +333,37 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
     g_free (title);
 }
 
+void on_reload_infobar_response (GtkInfoBar* bar, gint res, gpointer data) {
+    GuEditor* ec = data;
+    gboolean reload = res == GTK_RESPONSE_YES;
+    if (reload) {
+        tabmanager_set_content (A_LOAD, ec->filename, NULL);
+    }
+    editor_modtime_update (ec, reload);
+    gui_recovery_mode_disable (bar);
+}
+
+// based on gedit's external changes infobar
+void gui_external_changes_enable (GuTabContext* tab) {
+    slog (L_WARNING, "The file '%s' changed on disk.\n", tab->editor->filename);
+    gchar* action_msg;
+    if (editor_buffer_changed (tab->editor)) {
+        action_msg = "Drop changes and reload?";
+    } else {
+        action_msg = "Reload?";
+    }
+    gchar* msg = g_strdup_printf ("The file %s changed on disk. %s", tab->editor->filename, action_msg);
+    gtk_label_set_text (GTK_LABEL (tab->page->barlabel), msg);
+    g_free (msg);
+
+    tab->page->infosignal =
+        g_signal_connect (g_active_tab->page->infobar, "response",
+        G_CALLBACK (on_reload_infobar_response), (gpointer)tab->editor);
+
+    gtk_widget_set_sensitive (GTK_WIDGET (tab->editor->view), FALSE);
+    gtk_widget_show (tab->page->infobar);
+}
+
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
 
@@ -348,9 +379,10 @@ void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename)
 void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename) {
     gchar* prev_workfile = iofunctions_get_swapfile (filename);
 
-    slog (L_WARNING, "Swap file `%s' found.\n", prev_workfile);
-    gchar* msg = g_strdup_printf (_("Swap file exists for %s, "
-				"do you want to recover from it?"), filename);
+    slog (L_WARNING, "Swap file '%s' found.\n", prev_workfile);
+    gchar* msg = g_strdup_printf (
+            _("Swap file exists for %s. "
+              "Do you want to recover from it?"), filename);
     gtk_label_set_text (GTK_LABEL (tab->page->barlabel), msg);
     g_free (msg);
 
@@ -363,6 +395,7 @@ void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename) {
     gtk_widget_show (tab->page->infobar);
 }
 
+// also used for external changes infobar. rename?
 void gui_recovery_mode_disable (GtkInfoBar *infobar) {
     gint id = g_active_tab->page->infosignal;
     g_signal_handler_disconnect (infobar, id);
@@ -410,7 +443,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     gchar *text;
     GtkWidget* focus = NULL;
 
-    if (!new && editor_externally_modified (tab->editor)) {
+    if (!new && editor_externally_modified (tab->editor, TRUE)) {
         // ask the user whether he want to save or reload
         ret = utils_save_reload_dialog (
                 _("The content of the file has been changed externally. "
@@ -419,7 +452,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
             // `!new` should guarantee that `filename` matches
             // `tab->editor->filename` here
             tabmanager_set_content (A_LOAD, tab->editor->filename, NULL);
-            editor_modtime_update (tab->editor);
+            editor_modtime_update (tab->editor, TRUE);
             goto cleanup;
         } else if (ret != GTK_RESPONSE_NO) {
             // cancel means: do nothing
@@ -441,7 +474,7 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
     if (new) tabmanager_update_tab (filename);
     gui_set_filename_display (tab, TRUE, TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (tab->editor->view));
-    editor_modtime_update (tab->editor);
+    editor_modtime_update (tab->editor, TRUE);
 
 cleanup:
     if (new) g_free (filename);
