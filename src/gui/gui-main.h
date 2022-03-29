@@ -146,6 +146,7 @@ void on_bibreference_clicked (GtkTreeView* view, GtkTreePath* Path,
 void on_biblio_filter_changed (GtkWidget* widget, void* user);
 gboolean on_bibprogressbar_update (void* data);
 
+gboolean on_focus_in_view (GtkWidget* widget, GdkEventFocus* event, GuTabContext* tab);
 void on_reload_infobar_response (GtkInfoBar* bar, gint res, gpointer filename);
 void gui_external_changes_enable (GuTabContext* tab);
 /* void gui_external_changes_disable (GtkInfoBar *infobar); */ // would currently be identical to gui_external_changes_disable

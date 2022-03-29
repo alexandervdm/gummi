@@ -333,6 +333,14 @@ void gui_set_window_title (const gchar* filename, const gchar* text) {
     g_free (title);
 }
 
+gboolean on_focus_in_view (GtkWidget* widget, GdkEventFocus* event, GuTabContext* tab) {
+    slog (L_WARNING, "Focused in '%s' view.\n", tab->editor->filename);
+    if (editor_externally_modified (tab->editor, FALSE)) {
+        gui_external_changes_enable (tab);
+    }
+    return GDK_EVENT_PROPAGATE;
+}
+
 void on_reload_infobar_response (GtkInfoBar* bar, gint res, gpointer data) {
     GuEditor* ec = data;
     gboolean reload = res == GTK_RESPONSE_YES;
