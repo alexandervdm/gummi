@@ -453,19 +453,15 @@ void gui_save_file (GuTabContext* tab, gboolean saveas) {
 
     if (!new && editor_externally_modified (tab->editor, TRUE)) {
         // ask the user whether he want to save or reload
-        ret = utils_save_reload_dialog (
+        ret = utils_save_confirmation_dialog (
                 _("The content of the file has been changed externally. "
                   "Saving will remove any external modifications."));
-        if (ret == GTK_RESPONSE_YES) {
-            // `!new` should guarantee that `filename` matches
-            // `tab->editor->filename` here
-            tabmanager_set_content (A_LOAD, tab->editor->filename, NULL);
-            editor_modtime_update (tab->editor, TRUE);
-            goto cleanup;
-        } else if (ret != GTK_RESPONSE_NO) {
-            // cancel means: do nothing
-            goto cleanup;
-        }
+        // clicking "Cancel" (which returns GTK_RESPONSE_NO) and pressing escape
+        // (which treturns something else) should both cancel the save. no
+        // cleanup is required, becaue `pdfname` hasn't had a chance to be
+        // allocated yet, and `!new` should guarantee that `filename` wasn't
+        // allocated earlier
+        if (ret != GTK_RESPONSE_YES) return;
     }
 
     focus = gtk_window_get_focus (gummi_get_gui ()->mainwindow);
