@@ -34,8 +34,8 @@
 
 /* local functions */
 static gchar* get_version_output (const gchar* command, int linenr);
-static gchar* version_latexmk (const gchar* output);
-static gchar* version_rubber (const gchar* output);
+static gchar* version_latexmk (gchar* output);
+static gchar* version_rubber (gchar* output);
 
 
 static gdouble get_texlive_version (void);
@@ -80,16 +80,19 @@ gdouble external_version2 (ExternalProg program) {
 }
 
 gchar* external_version (const gchar* program) {
-    const gchar* getversion = g_strdup_printf("%s --version", program);
-    Tuple2 cmdgetv = utils_popen_r (getversion, NULL);
-    gchar* output = (gchar*)cmdgetv.second;
+    gchar* version_output;
+    gchar* result;
 
-    gchar* result = g_strdup ("Unknown, please report a bug");
+    const gchar* version_cmd = g_strdup_printf("%s --version", program);
+    Tuple2 cmdgetv = utils_popen_r (version_cmd, NULL);
+    version_output = (gchar*)cmdgetv.second;
 
-    if (output == NULL) return result;
-
-    gchar** lines = g_strsplit(output, "\n", BUFSIZ);
-    result = lines[0];
+    if (version_output == NULL || g_str_equal (version_output, "")) {
+        return g_strdup_printf("Unknown, please report a bug");
+    }
+    else {
+        result = g_strstrip (version_output);
+    }
 
     /* pdfTeX 3.1415926-1.40.10 (TeX Live 2009)
        pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
@@ -101,7 +104,7 @@ gchar* external_version (const gchar* program) {
         result = version_rubber (result);
     }
     else if (STR_EQU (program, C_LATEXMK)) {
-        result = version_latexmk (lines[1]);
+        result = version_latexmk (result);
     }
 
     return result;
@@ -145,16 +148,20 @@ static gdouble get_texlive_version (void) {
     return version;
 }
 
-static gchar* version_rubber (const gchar* output) {
-    /* format: Rubber version: 1.1 */
-    gchar** version = g_strsplit (output, " ", BUFSIZ);
-    return version[2];
+static gchar* version_rubber (gchar* output) {
+    // format: Rubber version: 1.1
+    gchar** outarr = g_strsplit (output, " ", BUFSIZ);
+    gchar* version = g_strdup (outarr [g_strv_length(outarr) - 1]);
+
+    g_strfreev (outarr);
+    return version;
 }
 
-static gchar* version_latexmk (const gchar* output) {
-    /* latexmk --version seems to print the requested information after a \n
-       format: Latexmk, John Collins, 24 March 2011. Version 4.23a */
+static gchar* version_latexmk (gchar* output) {
+    // format: Latexmk, John Collins, 24 March 2011. Version 4.23a
+    gchar** outarr = g_strsplit (output, " ", BUFSIZ);
+    gchar* version = g_strdup (outarr [g_strv_length(outarr) - 1]);
 
-    gchar** version = g_strsplit (output, " ", BUFSIZ);
-    return version[7];
+    g_strfreev (outarr);
+    return version;
 }
