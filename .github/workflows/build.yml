@@ -14,8 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: install dependencies
-      run: |
-      sudo apt install intltool libglib2.0-dev libgtk-3-dev libgtksourceview-3.0-dev libpoppler-glib-dev libgtkspell3-3-dev libsynctex-dev -y
+      run: sudo apt install intltool libglib2.0-dev libgtk-3-dev libgtksourceview-3.0-dev libpoppler-glib-dev libgtkspell3-3-dev libsynctex-dev -y
     - name: autogen
       run: ./autogen.sh
     - name: configure
