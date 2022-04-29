@@ -951,6 +951,8 @@ void display_recent_files (GummiGui* gui) {
             gtk_menu_item_set_label (gui->recent[i], tstr);
             gtk_widget_set_tooltip_text (GTK_WIDGET (gui->recent[i]),
                                         gui->recent_list[i]);
+            gtk_widget_add_events( (GTK_WIDGET (gui->recent[i])), GDK_ENTER_NOTIFY_MASK );
+            gtk_widget_add_events( (GTK_WIDGET (gui->recent[i])), GDK_LEAVE_NOTIFY_MASK );
             gtk_widget_show (GTK_WIDGET (gui->recent[i]));
             g_free (tstr);
             g_free (basename);
@@ -987,6 +989,10 @@ void statusbar_set_message (const gchar *message) {
 gboolean statusbar_del_message (void* user) {
     gtk_statusbar_pop (GTK_STATUSBAR (gui->statusbar), gui->statusid);
     return FALSE;
+}
+
+void statusbar_set_permanent_message (const gchar* message) {
+    gtk_statusbar_push (GTK_STATUSBAR (gui->statusbar), gui->statusid, message);
 }
 
 /**
