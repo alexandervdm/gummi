@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 11:12+0200\n"
+"POT-Creation-Date: 2022-04-29 11:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander van der Meij <alexvandermey@gmail.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -458,7 +458,7 @@ msgstr "Bestandsnaam:"
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
 msgid "none"
 msgstr ""
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "References:"
 msgstr "Referenties:"
 
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
 msgid "N/A"
 msgstr ""
 
@@ -982,103 +982,103 @@ msgstr ""
 msgid "Loading template ..."
 msgstr "Template laden ..."
 
-#: ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:594
 #, fuzzy
 msgid "Compiling bibliography file.."
 msgstr "Compileer bibliografie"
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:601
 #, fuzzy
 msgid "Error compiling bibliography file or none detected.."
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui/gui-main.c:644
+#: ../src/gui/gui-main.c:645
 #, fuzzy
 msgid "No bibliography file detected in document.."
 msgstr "Geen bibliografie bestanden gedetecteerd"
 
-#: ../src/gui/gui-main.c:746
+#: ../src/gui/gui-main.c:747
 msgid "This document has unsaved changes"
 msgstr "Dit document heeft onopgeslagen wijzigingen"
 
-#: ../src/gui/gui-main.c:749
+#: ../src/gui/gui-main.c:750
 #, fuzzy, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "Wil je de wijzigingen opslaan naar %s?"
 
-#: ../src/gui/gui-main.c:750
+#: ../src/gui/gui-main.c:751
 #, fuzzy
 msgid "this document"
 msgstr "dit document"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:754
 msgid "_Close without Saving"
 msgstr "Sluiten zonder Opslaan"
 
-#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
-#: ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
 msgid "_Cancel"
 msgstr "Annuleren"
 
-#: ../src/gui/gui-main.c:755
+#: ../src/gui/gui-main.c:756
 #, fuzzy
 msgid "_Save As"
 msgstr "Opslaan als"
 
-#: ../src/gui/gui-main.c:780
+#: ../src/gui/gui-main.c:781
 #, fuzzy
 msgid "Open LaTeX document"
 msgstr "Open LaTeX document"
 
-#: ../src/gui/gui-main.c:783
+#: ../src/gui/gui-main.c:784
 msgid "Select an image to insert"
 msgstr "Selecteer een afbeelding om in te voegen"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:785
 #, fuzzy
 msgid "Select bibliography file"
 msgstr "Compileer bibliografie"
 
-#: ../src/gui/gui-main.c:785
+#: ../src/gui/gui-main.c:786
 #, fuzzy
 msgid "Select project file"
 msgstr "Gummi project bestanden"
 
-#: ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:794
 #, fuzzy
 msgid "_Open"
 msgstr "Openen"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:819
 #, fuzzy
 msgid "Save LaTeX document"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:820
 #, fuzzy
 msgid "Save as LaTeX document"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:821
 msgid "Export to PDF"
 msgstr "Exporteer naar PDF"
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:824
 #, fuzzy
 msgid "Create project"
 msgstr "Creer nieuw document"
 
-#: ../src/gui/gui-main.c:831
+#: ../src/gui/gui-main.c:832
 #, fuzzy
 msgid "_Save"
 msgstr "Opslaan"
 
-#: ../src/gui/gui-main.c:855
+#: ../src/gui/gui-main.c:856
 #, fuzzy, c-format
 msgid "Unsaved Document"
 msgstr "Niet-opgeslagen Document %d"
 
-#: ../src/gui/gui-main.c:876
+#: ../src/gui/gui-main.c:877
 #, fuzzy
 msgid "LaTeX files"
 msgstr "LaTeX bestanden"
@@ -1086,16 +1086,16 @@ msgstr "LaTeX bestanden"
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:893
+#: ../src/gui/gui-main.c:894
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Ondersteund afbeelding bestand"
 
-#: ../src/gui/gui-main.c:908
+#: ../src/gui/gui-main.c:909
 msgid "Bibtex files"
 msgstr "Bibtex bestanden"
 
-#: ../src/gui/gui-main.c:914
+#: ../src/gui/gui-main.c:915
 #, fuzzy
 msgid "Gummi project files"
 msgstr "Gummi project bestanden"

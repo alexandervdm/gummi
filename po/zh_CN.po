@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 11:12+0200\n"
+"POT-Creation-Date: 2022-04-29 11:37+0200\n"
 "PO-Revision-Date: 2021-01-11 10:23+0800\n"
 "Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
 "Language-Team: \n"
@@ -449,7 +449,7 @@ msgstr "文件名:"
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
 msgid "none"
 msgstr "无"
 
@@ -457,7 +457,7 @@ msgstr "无"
 msgid "References:"
 msgstr "参考:"
 
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
 msgid "N/A"
 msgstr "无"
 
@@ -944,105 +944,105 @@ msgstr "文件的内容已在外部更改。保存将删除所有外部修改。
 msgid "Loading template ..."
 msgstr "载入模版中..."
 
-#: ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:594
 msgid "Compiling bibliography file.."
 msgstr "编译参考文献.."
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:601
 msgid "Error compiling bibliography file or none detected.."
 msgstr "编译参考文献时出错或未检测到.."
 
-#: ../src/gui/gui-main.c:644
+#: ../src/gui/gui-main.c:645
 msgid "No bibliography file detected in document.."
 msgstr "在文档中未检测到参考文献文件.."
 
-#: ../src/gui/gui-main.c:746
+#: ../src/gui/gui-main.c:747
 msgid "This document has unsaved changes"
 msgstr "该文档有未保存的更改"
 
-#: ../src/gui/gui-main.c:749
+#: ../src/gui/gui-main.c:750
 #, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "您要在关闭之前将更改保存到 %s 吗？"
 
-#: ../src/gui/gui-main.c:750
+#: ../src/gui/gui-main.c:751
 msgid "this document"
 msgstr "这个文档"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:754
 msgid "_Close without Saving"
 msgstr "关闭而不保存(_C)"
 
-#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
-#: ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../src/gui/gui-main.c:755
+#: ../src/gui/gui-main.c:756
 msgid "_Save As"
 msgstr "另存为(_S)"
 
-#: ../src/gui/gui-main.c:780
+#: ../src/gui/gui-main.c:781
 msgid "Open LaTeX document"
 msgstr "打开 LaTeX 文件"
 
-#: ../src/gui/gui-main.c:783
+#: ../src/gui/gui-main.c:784
 msgid "Select an image to insert"
 msgstr "选择要插入的图像"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:785
 msgid "Select bibliography file"
 msgstr "选择参考文献"
 
-#: ../src/gui/gui-main.c:785
+#: ../src/gui/gui-main.c:786
 msgid "Select project file"
 msgstr "选择项目文件"
 
-#: ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:794
 msgid "_Open"
 msgstr "打开(_O)"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:819
 msgid "Save LaTeX document"
 msgstr "保存 LaTeX 文件"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:820
 msgid "Save as LaTeX document"
 msgstr "另存为 LaTeX 文件"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:821
 msgid "Export to PDF"
 msgstr "输出为 PDF"
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:824
 msgid "Create project"
 msgstr "建立新项目"
 
-#: ../src/gui/gui-main.c:831
+#: ../src/gui/gui-main.c:832
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: ../src/gui/gui-main.c:855
+#: ../src/gui/gui-main.c:856
 #, c-format
 msgid "Unsaved Document"
 msgstr "未保存的文档"
 
-#: ../src/gui/gui-main.c:876
+#: ../src/gui/gui-main.c:877
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:893
+#: ../src/gui/gui-main.c:894
 msgid "Supported Image files"
 msgstr "支持的图像文件"
 
-#: ../src/gui/gui-main.c:908
+#: ../src/gui/gui-main.c:909
 msgid "Bibtex files"
 msgstr "Bibtex 文件"
 
-#: ../src/gui/gui-main.c:914
+#: ../src/gui/gui-main.c:915
 msgid "Gummi project files"
 msgstr "Gummi 项目文件"
 

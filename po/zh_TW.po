@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 11:12+0200\n"
+"POT-Creation-Date: 2022-04-29 11:37+0200\n"
 "PO-Revision-Date: 2010-05-21 22:11+0800\n"
 "Last-Translator: AZ Huang <aitjcize@gmail.com>\n"
 "Language-Team: \n"
@@ -442,7 +442,7 @@ msgstr "檔名:"
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
 msgid "none"
 msgstr "無"
 
@@ -450,7 +450,7 @@ msgstr "無"
 msgid "References:"
 msgstr "參考:"
 
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
 msgid "N/A"
 msgstr "無"
 
@@ -942,114 +942,114 @@ msgstr ""
 msgid "Loading template ..."
 msgstr "載入模版中..."
 
-#: ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:594
 #, fuzzy
 msgid "Compiling bibliography file.."
 msgstr "正在編譯參考文獻..."
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:601
 #, fuzzy
 msgid "Error compiling bibliography file or none detected.."
 msgstr "編譯過程中發生錯誤或無法找到參考文獻..."
 
-#: ../src/gui/gui-main.c:644
+#: ../src/gui/gui-main.c:645
 #, fuzzy
 msgid "No bibliography file detected in document.."
 msgstr "無法找到參考文獻"
 
-#: ../src/gui/gui-main.c:746
+#: ../src/gui/gui-main.c:747
 msgid "This document has unsaved changes"
 msgstr ""
 
-#: ../src/gui/gui-main.c:749
+#: ../src/gui/gui-main.c:750
 #, fuzzy, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "是否儲存變更?"
 
-#: ../src/gui/gui-main.c:750
+#: ../src/gui/gui-main.c:751
 #, fuzzy
 msgid "this document"
 msgstr "輸入文件"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:754
 msgid "_Close without Saving"
 msgstr ""
 
-#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
-#: ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
 msgid "_Cancel"
 msgstr ""
 
-#: ../src/gui/gui-main.c:755
+#: ../src/gui/gui-main.c:756
 #, fuzzy
 msgid "_Save As"
 msgstr "另存新檔...(_A)"
 
-#: ../src/gui/gui-main.c:780
+#: ../src/gui/gui-main.c:781
 msgid "Open LaTeX document"
 msgstr "開啟LaTeX文件"
 
-#: ../src/gui/gui-main.c:783
+#: ../src/gui/gui-main.c:784
 msgid "Select an image to insert"
 msgstr "選擇要插入的影像"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:785
 msgid "Select bibliography file"
 msgstr "選擇參考文獻檔案"
 
-#: ../src/gui/gui-main.c:785
+#: ../src/gui/gui-main.c:786
 #, fuzzy
 msgid "Select project file"
 msgstr "Gummi 專案檔"
 
-#: ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:794
 #, fuzzy
 msgid "_Open"
 msgstr "開啟"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:819
 msgid "Save LaTeX document"
 msgstr "儲存LaTeX文件"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:820
 msgid "Save as LaTeX document"
 msgstr "另存為LaTeX文件"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:821
 msgid "Export to PDF"
 msgstr "匯出為PDF"
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:824
 msgid "Create project"
 msgstr "建立新專案"
 
-#: ../src/gui/gui-main.c:831
+#: ../src/gui/gui-main.c:832
 #, fuzzy
 msgid "_Save"
 msgstr "儲存"
 
-#: ../src/gui/gui-main.c:855
+#: ../src/gui/gui-main.c:856
 #, fuzzy, c-format
 msgid "Unsaved Document"
 msgstr "未儲存文件 %d"
 
-#: ../src/gui/gui-main.c:876
+#: ../src/gui/gui-main.c:877
 msgid "LaTeX files"
 msgstr "LaTeX 文件"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:893
+#: ../src/gui/gui-main.c:894
 #, fuzzy
 msgid "Supported Image files"
 msgstr "影像檔"
 
-#: ../src/gui/gui-main.c:908
+#: ../src/gui/gui-main.c:909
 msgid "Bibtex files"
 msgstr "參考文獻"
 
-#: ../src/gui/gui-main.c:914
+#: ../src/gui/gui-main.c:915
 msgid "Gummi project files"
 msgstr "Gummi 專案檔"
 

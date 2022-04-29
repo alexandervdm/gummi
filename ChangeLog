@@ -2,6 +2,12 @@
 Gummi CHANGELOG
 -----------------------------------------------------------------------------
 
+Gummi 0.8.3 (April 29th, 2022):
+
+    Bugs fixed:
+    * Multiple fixes to typesetter parsing
+    * Fixed some warnings
+
 Gummi 0.8.2 (May 25th, 2021):
 
     Bugs fixed:
@@ -20,410 +26,410 @@ Gummi 0.8.1 (January 26th, 2020):
 
 Gummi 0.8.0 (December 19th, 2019):
 
-	Features added:
-	* Migrated codebase GTK2->GTK3
-	* Open multiple files at once from command line
-	* Replaced use of old bundled synctex (for system synctex)
-	* Monitor document for external changes
-	* Automatically scroll build log to end
-	* Allow editor themes/styles from a custom filepath
-	* Visual improvements to file saving dialog
-	* Remember preview scroll position and zoom mode per tab
+    Features added:
+    * Migrated codebase GTK2->GTK3
+    * Open multiple files at once from command line
+    * Replaced use of old bundled synctex (for system synctex)
+    * Monitor document for external changes
+    * Automatically scroll build log to end
+    * Allow editor themes/styles from a custom filepath
+    * Visual improvements to file saving dialog
+    * Remember preview scroll position and zoom mode per tab
 
-	Bugs fixed:
-	* Replace all is now one action for sane undo/redo'ing
-	* Fix erroneous return code for makeindex
-	* Fix gtkspell init failure when EN language unavailable
-	* Fix inconsistent wholeword text searching
-	* Build script fixes for MacOSX
-	* Show statusbar message when PDF creation fails
-	* Fix rare hang on gummi exit
-	* Now suggests file extension on save window
-	* Run bibtex menu item no longer disabled after running
-	* Replaced multiple homebrew functions with glib
-	* Fix jumping editor caret on closing search
-	* Allow using synctex when using rubber
-	* A multitude of minor fixes
+    Bugs fixed:
+    * Replace all is now one action for sane undo/redo'ing
+    * Fix erroneous return code for makeindex
+    * Fix gtkspell init failure when EN language unavailable
+    * Fix inconsistent wholeword text searching
+    * Build script fixes for MacOSX
+    * Show statusbar message when PDF creation fails
+    * Fix rare hang on gummi exit
+    * Now suggests file extension on save window
+    * Run bibtex menu item no longer disabled after running
+    * Replaced multiple homebrew functions with glib
+    * Fix jumping editor caret on closing search
+    * Allow using synctex when using rubber
+    * A multitude of minor fixes
 
 Gummi 0.6.6 "We're still here" (January 27th, 2016):
 
-	Bugs fixed:
-	* Fix using predictable filenames in /tmp (CVE-2015-7758)
-	* Fix source id warnings during motion runtime
-	* Fix open-project crash due to missing file chooser title
-	* Fix synctex for input files with relative paths
-	* Add descriptive keywords to our desktop entry file
-	* Improvements to the bibliography detection regex
-	* Only allow loading tex files through file->open
-	* Desensitize cut/copy tools when no text is selected
-	* Various improvements to build system
-	* Removed deprecated code
+    Bugs fixed:
+    * Fix using predictable filenames in /tmp (CVE-2015-7758)
+    * Fix source id warnings during motion runtime
+    * Fix open-project crash due to missing file chooser title
+    * Fix synctex for input files with relative paths
+    * Add descriptive keywords to our desktop entry file
+    * Improvements to the bibliography detection regex
+    * Only allow loading tex files through file->open
+    * Desensitize cut/copy tools when no text is selected
+    * Various improvements to build system
+    * Removed deprecated code
 
 Gummi 0.6.5 (October 18th, 2012):
 
-	Bugs fixed:
-	* Fixed empty build logs when special characters were included
-	* Fixed a rare deadlock situation on program exit
-	* Fixed regression in spell-checking language listing
-	* Fixed regression in killing inresponsive compilation processes
-	* Correctly close file descriptors for child processes
-	* Implemented --version CLI argument
-	* Several translation updates
-	* Added Hungarian translation
+    Bugs fixed:
+    * Fixed empty build logs when special characters were included
+    * Fixed a rare deadlock situation on program exit
+    * Fixed regression in spell-checking language listing
+    * Fixed regression in killing inresponsive compilation processes
+    * Correctly close file descriptors for child processes
+    * Implemented --version CLI argument
+    * Several translation updates
+    * Added Hungarian translation
 
 Gummi 0.6.4 (June 24th, 2012):
 
-	Bugs fixed:
-	* Replaced faulty importer implementation with a toolbar variant
-	* Fixed an issue where the previewer would not display correctly
-	* dvi script uses exit status to signal compilation status
-	* Improved the reported messages for some errors.
-	* Better TeXLive version detection
-	* Fixed a reference problem that could lead to a crash
-	* Search window is correctly centered in GNOME 3
-	* Tab markup not enabled when project loading fails
-	* Minor UI tweaks to the project & bibliography panels
-	* Minor UI tweaks to the snippet configuration interface
+    Bugs fixed:
+    * Replaced faulty importer implementation with a toolbar variant
+    * Fixed an issue where the previewer would not display correctly
+    * dvi script uses exit status to signal compilation status
+    * Improved the reported messages for some errors.
+    * Better TeXLive version detection
+    * Fixed a reference problem that could lead to a crash
+    * Search window is correctly centered in GNOME 3
+    * Tab markup not enabled when project loading fails
+    * Minor UI tweaks to the project & bibliography panels
+    * Minor UI tweaks to the snippet configuration interface
 
 Gummi 0.6.3 (March 28th, 2012):
 
-	Bugs fixed:
-	* Fix bibtex regression since 0.6.2
-	* Fix for compiling through dvi/ps
-	* Correctly disable template open button when none exist
-	* Gummi toolbar can be hidden again
-	* Fix LaTeX error screen and error line output
-	* Menu item compatibility with Ubuntu's Unity fixed
-	* Added Chinese (simplified) translation
+    Bugs fixed:
+    * Fix bibtex regression since 0.6.2
+    * Fix for compiling through dvi/ps
+    * Correctly disable template open button when none exist
+    * Gummi toolbar can be hidden again
+    * Fix LaTeX error screen and error line output
+    * Menu item compatibility with Ubuntu's Unity fixed
+    * Added Chinese (simplified) translation
 
 Gummi 0.6.2 (March 18th, 2012):
 
-	Bugs fixed:
-	* Recovery mode is also triggered when gummi is run with file argv
-	* Incomplete compilation processes are killed on tab switch
-	* Fix template addition crash when zero tabs are opened
-	* PDF files can now be used by the image importer
-	* Fixed building/compilation scripts for explicit linking
-	* Default text only written to disk when changes are made
-	* SyncTeX auto-scrolling is now disabled by default
-	* Converted snippet offsets to utf8
-	* Bibliography items with all capital letters can be parsed
-	* Various minor spelling/phrasing errors
-	* Build files can now be removed from the menu
-	* Lots of Windows specific issues
-	* Addition of user guide link
+    Bugs fixed:
+    * Recovery mode is also triggered when gummi is run with file argv
+    * Incomplete compilation processes are killed on tab switch
+    * Fix template addition crash when zero tabs are opened
+    * PDF files can now be used by the image importer
+    * Fixed building/compilation scripts for explicit linking
+    * Default text only written to disk when changes are made
+    * SyncTeX auto-scrolling is now disabled by default
+    * Converted snippet offsets to utf8
+    * Bibliography items with all capital letters can be parsed
+    * Various minor spelling/phrasing errors
+    * Build files can now be removed from the menu
+    * Lots of Windows specific issues
+    * Addition of user guide link
 
 Gummi 0.6.1 (December 2th, 2011):
 
-	Bugs fixed:
-	* Selecting text no longer freezes during updates
-	* Shell escape option is now set/unset correctly
-	* Fixed crash when trying to open non-existing file from cli
-	* Popup windows no longer block gui in fullscreen mode
-	* Documents containing input commands can pass precompile check
-	* Opening snippet menu no longer blocks gui
-	* Several fixes to snippet insertion mechanism
-	* Minor tweaks to the build scripts for convenience
-	* Fixed some minor memory leaks
+    Bugs fixed:
+    * Selecting text no longer freezes during updates
+    * Shell escape option is now set/unset correctly
+    * Fixed crash when trying to open non-existing file from cli
+    * Popup windows no longer block gui in fullscreen mode
+    * Documents containing input commands can pass precompile check
+    * Opening snippet menu no longer blocks gui
+    * Several fixes to snippet insertion mechanism
+    * Minor tweaks to the build scripts for convenience
+    * Fixed some minor memory leaks
 
 Gummi 0.6.0 (November 14th, 2011):
 
-	Bugs fixed:
-	* Improved preview scaling performance
-	* Importer file choosers now default to CWD
-	* Fixed image import warning
-	* Fixed rare segfault on gummi start
-	* Search results colour depends on color theme
-	* Preview scroll position restored after error
-	* Replaced all win32 incompatible code
-	* Configuration I/O transaction fixes
-	* Modifier keys no longer trigger auto-compile
-	* Correct encoded text is written on file save
-	* Fixed a rare GUI hang when program is closed
-	* Several GUI and icon related problems
-	* Several memory leaks
+    Bugs fixed:
+    * Improved preview scaling performance
+    * Importer file choosers now default to CWD
+    * Fixed image import warning
+    * Fixed rare segfault on gummi start
+    * Search results colour depends on color theme
+    * Preview scroll position restored after error
+    * Replaced all win32 incompatible code
+    * Configuration I/O transaction fixes
+    * Modifier keys no longer trigger auto-compile
+    * Correct encoded text is written on file save
+    * Fixed a rare GUI hang when program is closed
+    * Several GUI and icon related problems
+    * Several memory leaks
 
-	Features added:
-	* Multi-tab/document support
-	* LaTeX build systems (rubber/latexmk)
-	* Compiling through DVI/Postscript
-	* Continuous PDF preview
-	* Filter function for bibliographies
-	* Improved document statistics
-	* Infoscreen panel with document status
-	* More configurable options
-	* Minimal project support
-	* SyncTeX support
-	* New & updated translations
+    Features added:
+    * Multi-tab/document support
+    * LaTeX build systems (rubber/latexmk)
+    * Compiling through DVI/Postscript
+    * Continuous PDF preview
+    * Filter function for bibliographies
+    * Improved document statistics
+    * Infoscreen panel with document status
+    * More configurable options
+    * Minimal project support
+    * SyncTeX support
+    * New & updated translations
 
 Gummi 0.5.8 (March 17th, 2011):
 
-	Bugs fixed:
-	* PDF latency when document is scrolled fixed
-	* Fixed gui hanging issues in certain situations
-	* Fixed compatibility with Bibtex 0.99d (texlive 2010)
-	* Updated glade files for compatibility with new releases
-	* Better detection for damaged or incomplete pdf files
-	* Replaced textit with emph for italic toolbar function
-	* Solved various pdf rendering problems
-	* High resolution gummi icon
+    Bugs fixed:
+    * PDF latency when document is scrolled fixed
+    * Fixed gui hanging issues in certain situations
+    * Fixed compatibility with Bibtex 0.99d (texlive 2010)
+    * Updated glade files for compatibility with new releases
+    * Better detection for damaged or incomplete pdf files
+    * Replaced textit with emph for italic toolbar function
+    * Solved various pdf rendering problems
+    * High resolution gummi icon
 
-	Features added:
-	* LaTeX compilation is now a threaded process
-	* Implemented Snippets interface
-	* Automatic export of the PDF file on document save
-	* Added German, Spanish, Polish and Czech translations
-	* Updated several other translation files
+    Features added:
+    * LaTeX compilation is now a threaded process
+    * Implemented Snippets interface
+    * Automatic export of the PDF file on document save
+    * Added German, Spanish, Polish and Czech translations
+    * Updated several other translation files
 
 Gummi 0.5.5 (December 10th, 2010):
 
-	Bugs fixed:
-	* Fixed critical search & replace regression.. :(
+    Bugs fixed:
+    * Fixed critical search & replace regression.. :(
 
 Gummi 0.5.4 (December 8th, 2010):
 
-	Bugs fixed:
-	* Fixed segfault on document statistics for filepaths with spaces
-	* Fixed segfault on accessing non-existing recent file
-	* Fixed a rare segfault that occurred on opening file
-	* Set default search & replace options to clone gedit's
-	* Fixed cursor repeatedly jumping to error lines
-	* Fixed statusbar message when a document is loaded from template
-	* Multiple lines will now be tagged when they contain errors
-	* Fixed PDF preview delay
-	* Misc small bugfixes here and there
-	* Updated translations
+    Bugs fixed:
+    * Fixed segfault on document statistics for filepaths with spaces
+    * Fixed segfault on accessing non-existing recent file
+    * Fixed a rare segfault that occurred on opening file
+    * Set default search & replace options to clone gedit's
+    * Fixed cursor repeatedly jumping to error lines
+    * Fixed statusbar message when a document is loaded from template
+    * Multiple lines will now be tagged when they contain errors
+    * Fixed PDF preview delay
+    * Misc small bugfixes here and there
+    * Updated translations
 
-	Features added:
-	* Added editor style scheme support
-	* Added manual preview compile function
-	* Document recovery mode in case of a crash
-	* Allow custom compilation scripts and flags
-	* Added polish & spanish translations
+    Features added:
+    * Added editor style scheme support
+    * Added manual preview compile function
+    * Document recovery mode in case of a crash
+    * Allow custom compilation scripts and flags
+    * Added polish & spanish translations
 
 Gummi 0.5.3 (October 24th, 2010):
 
-	Bugs fixed:
-	* Reduce number of I/O calls for configuration
-	* Fixed the center text latex command
-	* Document dimensions now update when document orientation changes
-	* Image and biblio imports now detect relative paths
-	* Fixed GUI lag when opening a new document
-	* Fixed titles for the file chooser windows
-	* Clicking no longer required to restore preview window on error
-	* Show tooltips with basepath for recent files
-	* Fixed issue with configuration reset on gummi update
-	* Multiple crash issues fixed
+    Bugs fixed:
+    * Reduce number of I/O calls for configuration
+    * Fixed the center text latex command
+    * Document dimensions now update when document orientation changes
+    * Image and biblio imports now detect relative paths
+    * Fixed GUI lag when opening a new document
+    * Fixed titles for the file chooser windows
+    * Clicking no longer required to restore preview window on error
+    * Show tooltips with basepath for recent files
+    * Fixed issue with configuration reset on gummi update
+    * Multiple crash issues fixed
 
 
 Gummi 0.5.2 (October 20th, 2010):
 
    Bugs fixed:
-	* Fixed an issue with including other tex documents
-	* Fixed an issue with relative file paths for to be included files
-	* Recent files with underscore now correctly displayed
-	* Current directory of document is now remembered
-	* Autosave document now no longer has editor panel lose focus
-	* Fixed issue with manual preview page number jumping
-	* Removed redundant function call in the preview-update function
-	* Minor fixes to the regex for bibtex detection
-	* Minor memory leak in texcount function fixed
-	* Fixed document statistics for document containing errors
-	* Fixed a segmentation fault on texcount for some configurations
-	* Minor GUI improvements
+    * Fixed an issue with including other tex documents
+    * Fixed an issue with relative file paths for to be included files
+    * Recent files with underscore now correctly displayed
+    * Current directory of document is now remembered
+    * Autosave document now no longer has editor panel lose focus
+    * Fixed issue with manual preview page number jumping
+    * Removed redundant function call in the preview-update function
+    * Minor fixes to the regex for bibtex detection
+    * Minor memory leak in texcount function fixed
+    * Fixed document statistics for document containing errors
+    * Fixed a segmentation fault on texcount for some configurations
+    * Minor GUI improvements
 
-	Translation:
-	* Updated Catalan translation
-	* Added romanian translation
+    Translation:
+    * Updated Catalan translation
+    * Added romanian translation
 
 
 Gummi 0.5.1 (September 27th, 2010):
 
-	Bugs fixed:
-	* Fixed preview error mode when a template contains errors
-	* Autosave function no longer runs continuously
-	* Tab stops now works correctly
-	* Command exist check for external commands (texcount/bibtex)
+    Bugs fixed:
+    * Fixed preview error mode when a template contains errors
+    * Autosave function no longer runs continuously
+    * Tab stops now works correctly
+    * Command exist check for external commands (texcount/bibtex)
 
-	Features addded:
-	* Remember window size & position from previous session
+    Features addded:
+    * Remember window size & position from previous session
 
 
 Gummi 0.5.0 (September 20th, 2010):
 
-	Bugs fixed:
-	* Too many to write up, see SVN revision log ;)
+    Bugs fixed:
+    * Too many to write up, see SVN revision log ;)
 
-	Features added:
-	* Complete rewrite of Gummi to the C programming language
-	* Internationalisation support
-	* Search & Replace function
-	* Custom document templates
-	* Document statistics (word count)
-	* Adjustable editor font
-	* Preview pane can now be hidden and paused
-	* New compilation interval schemes
-	* Export PDF function
-	* Tab width now configurable
+    Features added:
+    * Complete rewrite of Gummi to the C programming language
+    * Internationalisation support
+    * Search & Replace function
+    * Custom document templates
+    * Document statistics (word count)
+    * Adjustable editor font
+    * Preview pane can now be hidden and paused
+    * New compilation interval schemes
+    * Export PDF function
+    * Tab width now configurable
 
 
 Gummi 0.4.8 (May 16th, 2010):
 
-	Bugs fixed:
-	* Replaced widget.get_name() as it is broken in new pygtk
-	* Current path is now correctly updated on doc load/save
-	* TeX documents with errors no longer crash the preview on start
-	* Slightly cleaner detection method for libgobject hack
-	* Removed cite package inclusion on making a reference
-	* Fixed a number of not working cancel buttons
-	* Preferences warning messages are now hidden by default
+    Bugs fixed:
+    * Replaced widget.get_name() as it is broken in new pygtk
+    * Current path is now correctly updated on doc load/save
+    * TeX documents with errors no longer crash the preview on start
+    * Slightly cleaner detection method for libgobject hack
+    * Removed cite package inclusion on making a reference
+    * Fixed a number of not working cancel buttons
+    * Preferences warning messages are now hidden by default
 
-	Features added:
-	* Spell checking capabilities through gtkspell
-	* PDF update can be disabled by user
-	* PDF update interval can be set by user
+    Features added:
+    * Spell checking capabilities through gtkspell
+    * PDF update can be disabled by user
+    * PDF update interval can be set by user
 
 
 Gummi 0.4.5 (January 27th, 2010):
 
-	Bugs fixed:
-	* pdf compiling should no langer make gummi hang in certain cases
-	* Workaround/fix for the pdf render memory leak
-	* Xelatex should no longer leak file descriptors and crash
-	* Unavailable recent files are now removed from the menu
-	* Preview now shows correct page on file load with < pages
-	* Preview update event now in seconds (less cpu ticks)
-	* Removed /proc call for workfile generate (incompatible with bsd)
-	* Fixed empty lines in template documents
-	* Statusbar/Toolbar can be displayed/hidden
-	* Correct active typesetter displayed in Preferences menu
-	* Templates now set the correct filename
-	* Miscellaneous cosmetic & spelling updates
+    Bugs fixed:
+    * pdf compiling should no langer make gummi hang in certain cases
+    * Workaround/fix for the pdf render memory leak
+    * Xelatex should no longer leak file descriptors and crash
+    * Unavailable recent files are now removed from the menu
+    * Preview now shows correct page on file load with < pages
+    * Preview update event now in seconds (less cpu ticks)
+    * Removed /proc call for workfile generate (incompatible with bsd)
+    * Fixed empty lines in template documents
+    * Statusbar/Toolbar can be displayed/hidden
+    * Correct active typesetter displayed in Preferences menu
+    * Templates now set the correct filename
+    * Miscellaneous cosmetic & spelling updates
 
-	Features added:
-	* Gconf replaced with ConfigParser (gconf deps dropped)
-	* Better bibtex support including reference parser
-	* Autosaving function added
-	* Editor font now configurable
-	* Added man page for gummi executable
-	* More advanced search function
-	* Restyled interface for import tabs
+    Features added:
+    * Gconf replaced with ConfigParser (gconf deps dropped)
+    * Better bibtex support including reference parser
+    * Autosaving function added
+    * Editor font now configurable
+    * Added man page for gummi executable
+    * More advanced search function
+    * Restyled interface for import tabs
 
 
 Gummi 0.4.2 (November 2th, 2009):
 
-	Bugs fixed:
-	* Changed website address to new homepage in all instances of the code
+    Bugs fixed:
+    * Changed website address to new homepage in all instances of the code
 
-	Features added:
-	* Improved error-checking mode, with automatic error highlighting
+    Features added:
+    * Improved error-checking mode, with automatic error highlighting
 
 
 Gummi 0.4.1 (October 27th, 2009):
 
-	Bugs fixed:
-	* Replaced thread update model with glib interval event
-	* Python >2.6.3 compatible
+    Bugs fixed:
+    * Replaced thread update model with glib interval event
+    * Python >2.6.3 compatible
 
 
 Gummi 0.4.0 (October 12th, 2009):
 
-	Bugs fixed:
-	* Relative filepaths for external files now handled correctly
-	* Previewpane will attempt to re-setup if fail on first try
-	* Rewritten and improved preview pane
-	* Fixed cancel buttons in file chooser dialogs
-	* Tempdir is now detected instead of a static value
-	* Quick import minimalizes after succesfull import
-	* Quit process is now stopped when cancel button on save is pressed
-	* Fixed tooltips for style toolbar
-	* Fixed a gtksourceview warning on text insertion
-	* Text style tags can't be nested anymore
-	* Numerous warnings fixed using pylint/pychecker
-	* Replaced a duplicate keyboard shortcut
-	* Added multiple missing tooltips
-	* Buttons in preferences and searchwindow now align correctly
-	* And numerous other small usability fixes
+    Bugs fixed:
+    * Relative filepaths for external files now handled correctly
+    * Previewpane will attempt to re-setup if fail on first try
+    * Rewritten and improved preview pane
+    * Fixed cancel buttons in file chooser dialogs
+    * Tempdir is now detected instead of a static value
+    * Quick import minimalizes after succesfull import
+    * Quit process is now stopped when cancel button on save is pressed
+    * Fixed tooltips for style toolbar
+    * Fixed a gtksourceview warning on text insertion
+    * Text style tags can't be nested anymore
+    * Numerous warnings fixed using pylint/pychecker
+    * Replaced a duplicate keyboard shortcut
+    * Added multiple missing tooltips
+    * Buttons in preferences and searchwindow now align correctly
+    * And numerous other small usability fixes
 
-	Features:
-	* BibTeX files support
-	* XeTeX output support (see advanced options)
-	* Restyled preview toolbar features auto-scaling zoom modes
-	* Four preset templates for new documents
-	* Window title now shows active docment name
-	* Editor/Preview panes can now be scaled using a slider
-	* Added functions for quick importing Matrices
-	* Added indentation style buttons to the toolbar
-	* Gummi can now be used in fullscreen mode
+    Features:
+    * BibTeX files support
+    * XeTeX output support (see advanced options)
+    * Restyled preview toolbar features auto-scaling zoom modes
+    * Four preset templates for new documents
+    * Window title now shows active docment name
+    * Editor/Preview panes can now be scaled using a slider
+    * Added functions for quick importing Matrices
+    * Added indentation style buttons to the toolbar
+    * Gummi can now be used in fullscreen mode
 
 
 Gummi 0.3b (September 22th, 2009):
 
-	Bugs fixed:
-	* Preview pane no longer crashes after extended period of use
-	* Toolbar buttons now display a tooltip on mouseover
-	* Undo is no longer able to erase the original document content
-	* Statusbar messages will now correctly fade after a x interval
-	* More solid character decoding/encoding
-	* Preview pane will now temporarly disable itself when pdf invalid
+    Bugs fixed:
+    * Preview pane no longer crashes after extended period of use
+    * Toolbar buttons now display a tooltip on mouseover
+    * Undo is no longer able to erase the original document content
+    * Statusbar messages will now correctly fade after a x interval
+    * More solid character decoding/encoding
+    * Preview pane will now temporarly disable itself when pdf invalid
 
-	Features:
-	* New save behaviour no longer exports .aux and .log files
-	* Added a toolbar for quick insertion of images and tables
-	* Recent files are saved and displayed in the file-menu
+    Features:
+    * New save behaviour no longer exports .aux and .log files
+    * Added a toolbar for quick insertion of images and tables
+    * Recent files are saved and displayed in the file-menu
 
 
 Gummi 0.2f (September 15th, 2009):
 
-	Bugs fixed:
-	* Documents with non-ascii characters no longer crash editor pane
-	* Gummi will now correctly launch with filename argument
-	* Zoom normal button no longer sets wrong dimensions
-	* Preview pane will browse backwards if content is deleted
-	* Removed the redundant tempfile from the pdf update process
+    Bugs fixed:
+    * Documents with non-ascii characters no longer crash editor pane
+    * Gummi will now correctly launch with filename argument
+    * Zoom normal button no longer sets wrong dimensions
+    * Preview pane will browse backwards if content is deleted
+    * Removed the redundant tempfile from the pdf update process
 
-	Features:
-	* Added a window containing the pdflatex output for error tracking
-	* Added a status light to see current error status of document
-	* Added three text style buttons for quick bold/italic/underline
-	* Added mechanism to check whether new gummi version is available
+    Features:
+    * Added a window containing the pdflatex output for error tracking
+    * Added a status light to see current error status of document
+    * Added three text style buttons for quick bold/italic/underline
+    * Added mechanism to check whether new gummi version is available
 
 
 Gummi 0.2b (September 8th, 2009):
 
-	Bugs fixed:
-	* Rescaled icon to look nicer on a gnome panel
-	* Preferences window no longer triggers a GTKwarning
-	* New file environment is now correctly created on load/saveas
-	* Mainwindow no longer blinks on check_for_save/program exit
-	* Preview pane will no longer stop refreshing after a Save-as
-	* Tex extension is now forced upon documents when saved
-	* And several minor annoyances..
+    Bugs fixed:
+    * Rescaled icon to look nicer on a gnome panel
+    * Preferences window no longer triggers a GTKwarning
+    * New file environment is now correctly created on load/saveas
+    * Mainwindow no longer blinks on check_for_save/program exit
+    * Preview pane will no longer stop refreshing after a Save-as
+    * Tex extension is now forced upon documents when saved
+    * And several minor annoyances..
 
-	Features:
-	* Preferences can now be reset to defaults
-	* Default text shown in new documents can now be changed
-	* Added many improvements to the search function
-	* Added file filters to open & save dialogs
+    Features:
+    * Preferences can now be reset to defaults
+    * Default text shown in new documents can now be changed
+    * Added many improvements to the search function
+    * Added file filters to open & save dialogs
 
 
 Gummi 0.1f (August 26th, 2009):
 
-	Bugs fixed:
-	* Problems with opening and saving for non-gnome users fixed.
-	* Fixed problem that prevented preferences window from opening.
-	* Fixed several problems with the check_for_save routine.
-	* Mainwindow no longer hides when check_for_save prompts user on quit.
-	* Preferences window is now correctly centered on parent window
-	* Tex editor settings now correctly active on program init
+    Bugs fixed:
+    * Problems with opening and saving for non-gnome users fixed.
+    * Fixed problem that prevented preferences window from opening.
+    * Fixed several problems with the check_for_save routine.
+    * Mainwindow no longer hides when check_for_save prompts user on quit.
+    * Preferences window is now correctly centered on parent window
+    * Tex editor settings now correctly active on program init
 
-	Features:
-	* Added primitive search function (will extend it later)
-	* Added hotkeys and keyboard shortcuts to menu items
-	* Added toolbar to the main window for easy menuitems access
+    Features:
+    * Added primitive search function (will extend it later)
+    * Added hotkeys and keyboard shortcuts to menu items
+    * Added toolbar to the main window for easy menuitems access
 
 
 Gummi 0.1b (August 7th, 2009):
 
-	* initial version
+    * initial version
 

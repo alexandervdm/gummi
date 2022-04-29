@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 11:12+0200\n"
+"POT-Creation-Date: 2022-04-29 11:36+0200\n"
 "PO-Revision-Date: 2020-03-01 08:04+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
 "Language-Team: \n"
@@ -450,7 +450,7 @@ msgstr "Fil-nómine:"
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
 msgid "none"
 msgstr "null"
 
@@ -458,7 +458,7 @@ msgstr "null"
 msgid "References:"
 msgstr "Referenties:"
 
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
 msgid "N/A"
 msgstr "--"
 
@@ -955,105 +955,105 @@ msgstr ""
 msgid "Loading template ..."
 msgstr "Cargante li modelle..."
 
-#: ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:594
 msgid "Compiling bibliography file.."
 msgstr "Compilante li bibliografie..."
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:601
 msgid "Error compiling bibliography file or none detected.."
 msgstr "Un errore evenit compilante li bibliografie o it ne esset detectet."
 
-#: ../src/gui/gui-main.c:644
+#: ../src/gui/gui-main.c:645
 msgid "No bibliography file detected in document.."
 msgstr "Null file de biografie esset detecte in li document."
 
-#: ../src/gui/gui-main.c:746
+#: ../src/gui/gui-main.c:747
 msgid "This document has unsaved changes"
 msgstr "Li document have íngardat modificationes"
 
-#: ../src/gui/gui-main.c:749
+#: ../src/gui/gui-main.c:750
 #, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "Esque vu vole salvar li modificationes de %s ante que salir?"
 
-#: ../src/gui/gui-main.c:750
+#: ../src/gui/gui-main.c:751
 msgid "this document"
 msgstr "ti-ci document"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:754
 msgid "_Close without Saving"
 msgstr "_Cluder sin gardar"
 
-#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
-#: ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
 msgid "_Cancel"
 msgstr "A_nullar"
 
-#: ../src/gui/gui-main.c:755
+#: ../src/gui/gui-main.c:756
 msgid "_Save As"
 msgstr "_Gardar quam"
 
-#: ../src/gui/gui-main.c:780
+#: ../src/gui/gui-main.c:781
 msgid "Open LaTeX document"
 msgstr "Aperter un document LaTeX"
 
-#: ../src/gui/gui-main.c:783
+#: ../src/gui/gui-main.c:784
 msgid "Select an image to insert"
 msgstr "Selecter un image a inserter"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:785
 msgid "Select bibliography file"
 msgstr "Selecter un file de bibliografie"
 
-#: ../src/gui/gui-main.c:785
+#: ../src/gui/gui-main.c:786
 msgid "Select project file"
 msgstr "Gardar li file del projecte."
 
-#: ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:794
 msgid "_Open"
 msgstr "_Aperter"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:819
 msgid "Save LaTeX document"
 msgstr "Gardar li document LaTeX"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:820
 msgid "Save as LaTeX document"
 msgstr "Gardar quam document LaTeX"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:821
 msgid "Export to PDF"
 msgstr "Exportar a PDF"
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:824
 msgid "Create project"
 msgstr "Crear un projecte"
 
-#: ../src/gui/gui-main.c:831
+#: ../src/gui/gui-main.c:832
 msgid "_Save"
 msgstr "_Gardar"
 
-#: ../src/gui/gui-main.c:855
+#: ../src/gui/gui-main.c:856
 #, c-format
 msgid "Unsaved Document"
 msgstr "Document sin nómine"
 
-#: ../src/gui/gui-main.c:876
+#: ../src/gui/gui-main.c:877
 msgid "LaTeX files"
 msgstr "Files LaTeX"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:893
+#: ../src/gui/gui-main.c:894
 msgid "Supported Image files"
 msgstr "Files de images subtenet"
 
-#: ../src/gui/gui-main.c:908
+#: ../src/gui/gui-main.c:909
 msgid "Bibtex files"
 msgstr "Files Bibtex"
 
-#: ../src/gui/gui-main.c:914
+#: ../src/gui/gui-main.c:915
 msgid "Gummi project files"
 msgstr "Files de projectes de Gummi"
 

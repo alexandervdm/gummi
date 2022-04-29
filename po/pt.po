@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gummi 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 11:12+0200\n"
+"POT-Creation-Date: 2022-04-29 11:36+0200\n"
 "PO-Revision-Date: 2011-11-08 13:19-0300\n"
 "Last-Translator: Alexandre Guimarães <alexandre.guimaraes@campus.ul.pt>\n"
 "Language-Team: Portuguese\n"
@@ -453,7 +453,7 @@ msgstr "Nome do ficheiro"
 #. NOTE gtk3s bar doesn't place text inside the widget anymore :/
 #. gtk_progress_bar_set_text (gummi->biblio->progressbar,
 #. _("no bibliography file detected"));
-#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:648
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
 msgid "none"
 msgstr "nenhum"
 
@@ -461,7 +461,7 @@ msgstr "nenhum"
 msgid "References:"
 msgstr "Referências:"
 
-#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:649
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
 msgid "N/A"
 msgstr "N/A"
 
@@ -969,115 +969,115 @@ msgstr ""
 msgid "Loading template ..."
 msgstr "Iniciando o modelo ..."
 
-#: ../src/gui/gui-main.c:593
+#: ../src/gui/gui-main.c:594
 #, fuzzy
 msgid "Compiling bibliography file.."
 msgstr "A compilar o ficheiro de bibliografia"
 
-#: ../src/gui/gui-main.c:600
+#: ../src/gui/gui-main.c:601
 #, fuzzy
 msgid "Error compiling bibliography file or none detected.."
 msgstr "Erro ao compilar a bibliografia ou ficheiro não encontrado..."
 
-#: ../src/gui/gui-main.c:644
+#: ../src/gui/gui-main.c:645
 #, fuzzy
 msgid "No bibliography file detected in document.."
 msgstr "ficheiro de bibliografia não encontrado"
 
-#: ../src/gui/gui-main.c:746
+#: ../src/gui/gui-main.c:747
 msgid "This document has unsaved changes"
 msgstr ""
 
-#: ../src/gui/gui-main.c:749
+#: ../src/gui/gui-main.c:750
 #, fuzzy, c-format
 msgid "Do you want to save the changes to %s before closing?"
 msgstr "Guardar as mudanças que foram feitas?"
 
-#: ../src/gui/gui-main.c:750
+#: ../src/gui/gui-main.c:751
 #, fuzzy
 msgid "this document"
 msgstr "Abrir ficheiro LaTeX"
 
-#: ../src/gui/gui-main.c:753
+#: ../src/gui/gui-main.c:754
 msgid "_Close without Saving"
 msgstr ""
 
-#: ../src/gui/gui-main.c:754 ../src/gui/gui-main.c:792
-#: ../src/gui/gui-main.c:830
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
 msgid "_Cancel"
 msgstr ""
 
-#: ../src/gui/gui-main.c:755
+#: ../src/gui/gui-main.c:756
 #, fuzzy
 msgid "_Save As"
 msgstr "Guardar _Como"
 
-#: ../src/gui/gui-main.c:780
+#: ../src/gui/gui-main.c:781
 msgid "Open LaTeX document"
 msgstr "Abrir documento LaTeX"
 
-#: ../src/gui/gui-main.c:783
+#: ../src/gui/gui-main.c:784
 msgid "Select an image to insert"
 msgstr "Seleccione uma imagem para inserir"
 
-#: ../src/gui/gui-main.c:784
+#: ../src/gui/gui-main.c:785
 msgid "Select bibliography file"
 msgstr "Seleccione o arquivo de bibliografia"
 
-#: ../src/gui/gui-main.c:785
+#: ../src/gui/gui-main.c:786
 #, fuzzy
 msgid "Select project file"
 msgstr "Ficheiros de projecto Gummi"
 
-#: ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:794
 #, fuzzy
 msgid "_Open"
 msgstr "Abrir"
 
-#: ../src/gui/gui-main.c:818
+#: ../src/gui/gui-main.c:819
 msgid "Save LaTeX document"
 msgstr "Guardar documento LaTeX"
 
-#: ../src/gui/gui-main.c:819
+#: ../src/gui/gui-main.c:820
 msgid "Save as LaTeX document"
 msgstr "Guardar como documento LaTeX"
 
-#: ../src/gui/gui-main.c:820
+#: ../src/gui/gui-main.c:821
 msgid "Export to PDF"
 msgstr "Exportar para PDF"
 
-#: ../src/gui/gui-main.c:823
+#: ../src/gui/gui-main.c:824
 #, fuzzy
 msgid "Create project"
 msgstr "Criar novo Projecto"
 
-#: ../src/gui/gui-main.c:831
+#: ../src/gui/gui-main.c:832
 #, fuzzy
 msgid "_Save"
 msgstr "Guardar"
 
-#: ../src/gui/gui-main.c:855
+#: ../src/gui/gui-main.c:856
 #, fuzzy, c-format
 msgid "Unsaved Document"
 msgstr "Documento não guardado %d"
 
-#: ../src/gui/gui-main.c:876
+#: ../src/gui/gui-main.c:877
 msgid "LaTeX files"
 msgstr "Iniciar um arquivo"
 
 #. Only \insertgraphics uses this section now. Make sure
 #. * the patterns & mimes are correct before assigning it
 #. * for other functions
-#: ../src/gui/gui-main.c:893
+#: ../src/gui/gui-main.c:894
 #, fuzzy
 msgid "Supported Image files"
 msgstr "Imagem"
 
-#: ../src/gui/gui-main.c:908
+#: ../src/gui/gui-main.c:909
 msgid "Bibtex files"
 msgstr "Ficheiros Bibtex"
 
-#: ../src/gui/gui-main.c:914
+#: ../src/gui/gui-main.c:915
 msgid "Gummi project files"
 msgstr "Ficheiros de projecto Gummi"
 
