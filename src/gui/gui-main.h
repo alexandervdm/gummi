@@ -123,7 +123,8 @@ void gui_open_file (const gchar* filename);
 void gui_save_file (GuTabContext* tab, gboolean saveas);
 void gui_set_hastabs_sensitive (gboolean enable);
 
-void on_tab_notebook_switch_page (GtkNotebook *notebook, GtkWidget* nbpage, int pagenr, void* data);
+void on_tab_notebook_switch_page (GtkNotebook *notebook, GtkWidget* nbpage,
+        int pagenr, void* data);
 void on_tool_textstyle_bold_activate (GtkWidget* widget, void* user);
 void on_tool_textstyle_italic_activate (GtkWidget* widget, void* user);
 void on_tool_textstyle_underline_activate (GtkWidget* widget, void* user);
@@ -136,7 +137,6 @@ void on_button_template_open_clicked (GtkWidget* widget, void* user);
 void on_button_template_close_clicked (GtkWidget* widget, void* user);
 void on_template_rowitem_edited (GtkWidget* widget, gchar *path, gchar* filenm,
         void* user);
-void gui_recover_from_swapfile (const gchar* filename);
 void on_menu_autosync_toggled (GtkCheckMenuItem *menu_autosync, void* user);
 
 void on_button_biblio_compile_clicked (GtkWidget* widget, void* user);
@@ -145,6 +145,11 @@ void on_bibreference_clicked (GtkTreeView* view, GtkTreePath* Path,
         GtkTreeViewColumn* column, void* user);
 void on_biblio_filter_changed (GtkWidget* widget, void* user);
 gboolean on_bibprogressbar_update (void* data);
+
+gboolean on_focus_in_view (GtkWidget* widget, GdkEventFocus* event, GuTabContext* tab);
+void on_reload_infobar_response (GtkInfoBar* bar, gint res, gpointer filename);
+void gui_external_changes_enable (GuTabContext* tab);
+/* void gui_external_changes_disable (GtkInfoBar *infobar); */ // would currently be identical to gui_external_changes_disable
 
 void on_recovery_infobar_response (GtkInfoBar* bar, gint res, gpointer filename);
 void gui_recovery_mode_enable (GuTabContext* tab, const gchar* filename);

@@ -71,6 +71,8 @@ int tabmanagergui_create_page (GuTabContext* tc, GuEditor* editor) {
     gtk_box_pack_start (GTK_BOX (tp->editorbox), tp->infobar, FALSE, FALSE, 0);
     gtk_box_pack_end (GTK_BOX (tp->editorbox), tp->scrollw, TRUE, TRUE, 0);
 
+    g_signal_connect_after (editor->view, "focus-in-event", G_CALLBACK (on_focus_in_view), tc);
+
     pos = gtk_notebook_append_page (GTK_NOTEBOOK (g_tabnotebook),
                                     tp->editorbox, GTK_WIDGET (tp->labelbox));
 
@@ -156,6 +158,7 @@ gint tabmanagergui_replace_page (GuTabContext* tc, GuEditor* newec) {
     editor_destroy (g_active_editor);
     gtk_container_add (GTK_CONTAINER (tc->page->scrollw),
                        GTK_WIDGET (newec->view));
+    g_signal_connect_after (newec->view, "focus-in-event", G_CALLBACK (on_focus_in_view), tc);
     gtk_widget_show (GTK_WIDGET(newec->view));
 
     int pos = gtk_notebook_page_num (g_tabnotebook,
