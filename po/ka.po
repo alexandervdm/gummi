@@ -1,0 +1,1177 @@
+# Georgian translation for gummi.
+# Copyright (C) 2023 gummi's authors
+# This file is distributed under the same license as the gummi package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gummi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-29 11:37+0200\n"
+"PO-Revision-Date: 2023-02-24 05:23+0100\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: ../data/ui/gummi.glade.h:1
+msgid "PDF Preview could not initialise."
+msgstr "PDF-ის გადახედვის ინიციალიზაციის შეცდომა."
+
+#: ../data/ui/gummi.glade.h:2
+msgid "File:"
+msgstr "ფაილი:"
+
+#: ../data/ui/gummi.glade.h:3
+msgid "Caption:"
+msgstr "წარწერა:"
+
+#: ../data/ui/gummi.glade.h:4
+msgid "Label:"
+msgstr "ჭდე:"
+
+#: ../data/ui/gummi.glade.h:5
+msgid "Scale:"
+msgstr "მასშტაბი:"
+
+#: ../data/ui/gummi.glade.h:6
+msgid "Style:"
+msgstr "სტილი:"
+
+#: ../data/ui/gummi.glade.h:7
+msgid "Unbracketed"
+msgstr "ფრჩხილების გარეშე"
+
+#: ../data/ui/gummi.glade.h:8
+msgid "Parentheses"
+msgstr "მრგვალი ფრჩხილები"
+
+#: ../data/ui/gummi.glade.h:9
+msgid "Brackets"
+msgstr "ბრჭყალები"
+
+#: ../data/ui/gummi.glade.h:10
+msgid "Braces"
+msgstr "ფრჩხილები"
+
+#: ../data/ui/gummi.glade.h:11
+msgid "Single line"
+msgstr "ერთმაგი ხაზი"
+
+#: ../data/ui/gummi.glade.h:12
+msgid "Double line"
+msgstr "ორმაგი ხაზი"
+
+#: ../data/ui/gummi.glade.h:13
+msgid "Align left"
+msgstr "მარცხნვ სწორება"
+
+#: ../data/ui/gummi.glade.h:14
+msgid "Align center"
+msgstr "ცენტრზე სწორება"
+
+#: ../data/ui/gummi.glade.h:15
+msgid "Align right"
+msgstr "მარჯვნივ სწორება"
+
+#: ../data/ui/gummi.glade.h:16
+msgid "No borders"
+msgstr "საზღვრების გარეშე"
+
+#: ../data/ui/gummi.glade.h:17
+msgid "Border outline"
+msgstr "კონტურის ჩარჩო"
+
+#: ../data/ui/gummi.glade.h:18
+msgid "Border all cells"
+msgstr "ყველა უჯრედის ჩარჩო"
+
+#: ../data/ui/gummi.glade.h:19
+msgid "Rows:"
+msgstr "სტრიქონები:"
+
+#: ../data/ui/gummi.glade.h:20
+msgid "Columns:"
+msgstr "სვეტი:"
+
+#: ../data/ui/gummi.glade.h:21
+msgid "Bracket:"
+msgstr "ფრჩხილი:"
+
+#: ../data/ui/gummi.glade.h:22 ../data/ui/prefs.glade.h:3
+msgid "Best Fit"
+msgstr "საუკეთესოდ ჩატევა"
+
+#: ../data/ui/gummi.glade.h:23 ../data/ui/prefs.glade.h:4
+msgid "Fit Page Width"
+msgstr "გვერდის სიგანეში ჩატევა"
+
+#: ../data/ui/gummi.glade.h:25 ../data/ui/prefs.glade.h:6
+#, no-c-format
+msgid "50%"
+msgstr "50%"
+
+#: ../data/ui/gummi.glade.h:27 ../data/ui/prefs.glade.h:8
+#, no-c-format
+msgid "70%"
+msgstr "70%"
+
+#: ../data/ui/gummi.glade.h:29 ../data/ui/prefs.glade.h:10
+#, no-c-format
+msgid "85%"
+msgstr "85%"
+
+#: ../data/ui/gummi.glade.h:31 ../data/ui/prefs.glade.h:12
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../data/ui/gummi.glade.h:33 ../data/ui/prefs.glade.h:14
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../data/ui/gummi.glade.h:35 ../data/ui/prefs.glade.h:16
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../data/ui/gummi.glade.h:37 ../data/ui/prefs.glade.h:18
+#, no-c-format
+msgid "200%"
+msgstr "200%"
+
+#: ../data/ui/gummi.glade.h:39 ../data/ui/prefs.glade.h:20
+#, no-c-format
+msgid "300%"
+msgstr "300%"
+
+#: ../data/ui/gummi.glade.h:41 ../data/ui/prefs.glade.h:22
+#, no-c-format
+msgid "400%"
+msgstr "400%"
+
+#: ../data/ui/gummi.glade.h:42
+msgid "Gummi - LaTeX Editor"
+msgstr "Gummi - LaTeX-ის რედაქტორი"
+
+#: ../data/ui/gummi.glade.h:43
+msgid "_File"
+msgstr "_ფაილი"
+
+#: ../data/ui/gummi.glade.h:44
+msgid "New from _Template"
+msgstr "შაბლონიდან ახლის _შექმნა"
+
+#: ../data/ui/gummi.glade.h:45
+msgid "_Open..."
+msgstr "_გახსნა..."
+
+#: ../data/ui/gummi.glade.h:46
+msgid "Save _As..."
+msgstr "შეინახვა როგორ_ც..."
+
+#: ../data/ui/gummi.glade.h:47
+msgid "_Export to PDF"
+msgstr "_PDF-ად გატანა"
+
+#: ../data/ui/gummi.glade.h:48
+msgid "shouldnotseeme"
+msgstr "არუნდამხედავდე"
+
+#: ../data/ui/gummi.glade.h:49
+msgid "_Edit"
+msgstr "_ჩასწორება"
+
+#: ../data/ui/gummi.glade.h:50
+msgid "_View"
+msgstr "_ხედი"
+
+#: ../data/ui/gummi.glade.h:51
+msgid "_Statusbar"
+msgstr "_სტატუსის ზოლი"
+
+#: ../data/ui/gummi.glade.h:52
+msgid "_Toolbar"
+msgstr "ხელსაწყოთა _პანელი"
+
+#: ../data/ui/gummi.glade.h:53
+msgid "_Right pane"
+msgstr "_მარჯვენა პანელი"
+
+#: ../data/ui/gummi.glade.h:54
+msgid ""
+"Use SyncTeX to scroll the preview to the part of the document that was last "
+"edited.\n"
+"\n"
+"Requires that the document is compiled with the SyncTeX typesetting option."
+msgstr ""
+"დოკუმენტის ბოლოს ჩასწორებული ნაწილის მინიატურის შესაქმნელად SyncTeX-ის "
+"გამოყენება\n"
+"\n"
+"მოითხოვს, რომ დოკუმენტის კომპილაცია SyncTeX-ის typesetting-ის პარამეტრით "
+"იყოს შესრულებული."
+
+#: ../data/ui/gummi.glade.h:57
+msgid "Sync Preview with Editor"
+msgstr "მინიატურის სინქრონიზაცია რეაქტორთან"
+
+#: ../data/ui/gummi.glade.h:58
+msgid "Page Layout in Preview"
+msgstr "გვერდის განლაგება მინიატურაში"
+
+#: ../data/ui/gummi.glade.h:59
+msgid "Single Page"
+msgstr "ცალკეული გვერდი"
+
+#: ../data/ui/gummi.glade.h:60
+msgid "Continuous, One Column"
+msgstr "უწყვეტი, ერთი სვეტი"
+
+#: ../data/ui/gummi.glade.h:61
+msgid "_Fullscreen"
+msgstr "სრული ეკრანი"
+
+#: ../data/ui/gummi.glade.h:62
+msgid "_Search"
+msgstr "_ძებნა"
+
+#: ../data/ui/gummi.glade.h:63
+msgid "Find Ne_xt"
+msgstr "შემდეგის ძ_ებნა"
+
+#: ../data/ui/gummi.glade.h:64
+msgid "Find Pre_vious"
+msgstr "წ_ინას მოძებნა"
+
+#: ../data/ui/gummi.glade.h:65
+msgid "_Document"
+msgstr "_დოკუმენტი"
+
+#: ../data/ui/gummi.glade.h:66
+msgid "Compile _Document"
+msgstr "დოკუმენტის _კომპილაცია"
+
+#: ../data/ui/gummi.glade.h:67
+msgid ""
+"Compile LaTeX document\n"
+"and update preview."
+msgstr ""
+"LaTeX-ის დოკუმენტის კომპილაცია\n"
+"და მინიატურის განახლება."
+
+#: ../data/ui/gummi.glade.h:69
+msgid "Set Compilation Options"
+msgstr "კომპილაციის პარამეტრები"
+
+#: ../data/ui/gummi.glade.h:70
+msgid "_Cleanup Build Files"
+msgstr "აგების ფაილების _მოსუფთავება"
+
+#: ../data/ui/gummi.glade.h:71
+msgid "Run _Makeindex"
+msgstr "_Makeindex-ის გაშვება"
+
+#: ../data/ui/gummi.glade.h:72
+msgid "Run _BibTeX"
+msgstr "_BibTeX-ის გაშვება"
+
+#: ../data/ui/gummi.glade.h:73
+msgid "Document _Statistics"
+msgstr "დოკუმენტის _სტატისტიკა"
+
+#: ../data/ui/gummi.glade.h:74
+msgid "Enable S_pell Checking"
+msgstr "_მართლწერის შემოწმების ჩართვა"
+
+#: ../data/ui/gummi.glade.h:75
+msgid "Enable S_nippets"
+msgstr "ფრაგმენტების _ჩართვა"
+
+#: ../data/ui/gummi.glade.h:76
+msgid "_Project"
+msgstr "_პროექტი"
+
+#: ../data/ui/gummi.glade.h:77
+msgid "Create new Project"
+msgstr "ახალი პროექტის შექმნა"
+
+#: ../data/ui/gummi.glade.h:78 ../src/gui/gui-menu.c:574
+msgid ""
+"This function requires the current\n"
+"active document to be saved. "
+msgstr ""
+"ეს ფუნქცია მოითხოვს, რომ მიმდინარე\n"
+"აქტიური დოკუმენტი შენახული იყოს. "
+
+#: ../data/ui/gummi.glade.h:80
+msgid "Open Project"
+msgstr "პროექტის გახსნა"
+
+#: ../data/ui/gummi.glade.h:81
+msgid "Close Project"
+msgstr "პროექტის დახურვა"
+
+#: ../data/ui/gummi.glade.h:82
+msgid "_Help"
+msgstr "_დახმარება"
+
+#: ../data/ui/gummi.glade.h:83
+msgid "User _Guide"
+msgstr "მომხმარებლის _სახელმძღვანელო"
+
+#: ../data/ui/gummi.glade.h:84
+msgid "New"
+msgstr "ახალი"
+
+#: ../data/ui/gummi.glade.h:85
+msgid "Open"
+msgstr "გახსნა"
+
+#: ../data/ui/gummi.glade.h:86
+msgid "Save"
+msgstr "შენახვა"
+
+#: ../data/ui/gummi.glade.h:87
+msgid "toolbutton5"
+msgstr "ხელსაწყოსღილაკი5"
+
+#: ../data/ui/gummi.glade.h:88
+msgid "toolbutton6"
+msgstr "ხელსაწყოსღილაკი6"
+
+#: ../data/ui/gummi.glade.h:89
+msgid "toolbutton7"
+msgstr "ხელსაწყოსღილაკი7"
+
+#: ../data/ui/gummi.glade.h:90
+msgid "toolbutton1"
+msgstr "ხელსაწყოსღილაკი1"
+
+#: ../data/ui/gummi.glade.h:91
+msgid "toolbutton2"
+msgstr "ხელსაწყოსღილაკი2"
+
+#: ../data/ui/gummi.glade.h:92
+msgid "toolbutton3"
+msgstr "ხელსაწყოსღილაკი3"
+
+#: ../data/ui/gummi.glade.h:93
+msgid "  "
+msgstr "  "
+
+#: ../data/ui/gummi.glade.h:94
+msgid "Image"
+msgstr "გამოსახულება"
+
+#: ../data/ui/gummi.glade.h:95
+msgid "Table"
+msgstr "ცხრილი"
+
+#: ../data/ui/gummi.glade.h:96
+msgid "Matrix"
+msgstr "Matrix"
+
+#: ../data/ui/gummi.glade.h:97
+msgid "Bibliography"
+msgstr "ბიბლიოგრაფია"
+
+#: ../data/ui/gummi.glade.h:98
+msgid "Previous"
+msgstr "წინა"
+
+#: ../data/ui/gummi.glade.h:99
+msgid "Next"
+msgstr "შემდეგი"
+
+#: ../data/ui/gummi.glade.h:100
+msgid "0"
+msgstr "0"
+
+#: ../data/ui/gummi.glade.h:101
+msgid "of 0"
+msgstr "0-დან"
+
+#: ../data/ui/gummi.glade.h:102
+msgid "Preview Pane"
+msgstr "გადახედვის პანელი"
+
+#: ../data/ui/gummi.glade.h:103
+msgid "Build Log"
+msgstr "აგების ჟურნალი"
+
+#: ../data/ui/gummi.glade.h:104
+msgid "Nr of files:"
+msgstr "ფაილების რაოდენობა:"
+
+#: ../data/ui/gummi.glade.h:105
+msgid "Root path:"
+msgstr "Root ბილიკი:"
+
+#: ../data/ui/gummi.glade.h:106
+msgid "Project name:"
+msgstr "პროექტის სახელი:"
+
+#: ../data/ui/gummi.glade.h:107 ../data/ui/prefs.glade.h:28
+msgid "   "
+msgstr "   "
+
+#: ../data/ui/gummi.glade.h:108
+msgid "Document"
+msgstr "დოკუმენტი"
+
+#: ../data/ui/gummi.glade.h:109
+msgid "File path"
+msgstr "ფაილის ბილიკი"
+
+#: ../data/ui/gummi.glade.h:110
+msgid ""
+"Select a file to add it \n"
+"to the active project. "
+msgstr ""
+"ფაილის არჩევა და მისი\n"
+"აქტიურ პროექტში ჩამატება. "
+
+#: ../data/ui/gummi.glade.h:112
+msgid ""
+"Remove the selected\n"
+"file from the project."
+msgstr ""
+"მონიშნული ფაილის\n"
+"პროექტიდან წაშლა."
+
+#: ../data/ui/gummi.glade.h:114
+msgid "Project"
+msgstr "პროექტი"
+
+#: ../data/ui/gummi.glade.h:115
+msgid "Filename:"
+msgstr "ფაილის სახელი:"
+
+#. NOTE gtk3s bar doesn't place text inside the widget anymore :/
+#. gtk_progress_bar_set_text (gummi->biblio->progressbar,
+#. _("no bibliography file detected"));
+#: ../data/ui/gummi.glade.h:116 ../src/gui/gui-main.c:649
+msgid "none"
+msgstr "არა"
+
+#: ../data/ui/gummi.glade.h:117
+msgid "References:"
+msgstr "მიმართვები:"
+
+#: ../data/ui/gummi.glade.h:118 ../src/gui/gui-main.c:650
+msgid "N/A"
+msgstr "N/A"
+
+#: ../data/ui/gummi.glade.h:119
+msgid "Detect"
+msgstr "დადგენა"
+
+#: ../data/ui/gummi.glade.h:120
+msgid ""
+"Detect mention of a bibtex\n"
+"file in the current document"
+msgstr ""
+"მიმდინარე დოკუმენტში\n"
+"bibitex-ის ხსენების დადგენა"
+
+#: ../data/ui/gummi.glade.h:122
+msgid "Compile"
+msgstr "კომპილაცია"
+
+#: ../data/ui/gummi.glade.h:123
+msgid ""
+"Compile the active \n"
+"bibliography database"
+msgstr ""
+"აქტიურ ბიბლიოგრაფიის\n"
+"ბაზის კომპილაცია"
+
+#: ../data/ui/gummi.glade.h:125
+msgid "no bibliography file detected"
+msgstr "ბიბლიოგრაფიის ფაილი აღმოჩენილი არაა"
+
+#: ../data/ui/gummi.glade.h:126
+msgid "Title"
+msgstr "სათაური"
+
+#: ../data/ui/gummi.glade.h:127
+msgid "Author"
+msgstr "ავტორი"
+
+#: ../data/ui/gummi.glade.h:128
+msgid "Year"
+msgstr "წელი"
+
+#: ../data/ui/gummi.glade.h:129
+msgid "filter:"
+msgstr "ფილტრი:"
+
+#: ../data/ui/gummi.glade.h:130
+msgid "Document statistics"
+msgstr "დოკუმენტის სტატისტიკა"
+
+#: ../data/ui/gummi.glade.h:131
+msgid "Document name"
+msgstr "დოკუმენტის სახელი"
+
+#: ../data/ui/gummi.glade.h:132
+msgid "Words in:"
+msgstr "სიტყვები:"
+
+#: ../data/ui/gummi.glade.h:133
+msgid "       "
+msgstr "       "
+
+#: ../data/ui/gummi.glade.h:134
+msgid "text"
+msgstr "ტექსტი"
+
+#: ../data/ui/gummi.glade.h:135
+msgid "headers"
+msgstr "თავსართები"
+
+#: ../data/ui/gummi.glade.h:136
+msgid "float captions"
+msgstr "ლივლივა წარწერები"
+
+#: ../data/ui/gummi.glade.h:137
+msgid "Number of:"
+msgstr "რაოდენობა:"
+
+#: ../data/ui/gummi.glade.h:138
+msgid "floats"
+msgstr "ლივლივები"
+
+#: ../data/ui/gummi.glade.h:139
+msgid "math environments"
+msgstr "math-ის გარემოები"
+
+#: ../data/ui/gummi.glade.h:140
+msgid "Find"
+msgstr "მოძებნა"
+
+#: ../data/ui/gummi.glade.h:141
+msgid "Search for:"
+msgstr "ძებნა:"
+
+#: ../data/ui/gummi.glade.h:142
+msgid "Replace with:"
+msgstr "ჩანაცვლება:"
+
+#: ../data/ui/gummi.glade.h:143
+msgid "Match entire word only"
+msgstr "მხოლოდ მთლიანი სიტყვის დამთხვევა"
+
+#: ../data/ui/gummi.glade.h:144
+msgid "Search backwards"
+msgstr "უკან ძებნა"
+
+#: ../data/ui/gummi.glade.h:145
+msgid "Match case"
+msgstr "დიდი და პატარა ასოების სხვაობა"
+
+#: ../data/ui/gummi.glade.h:146
+msgid "_Replace"
+msgstr "_გამოცვალე"
+
+#: ../data/ui/gummi.glade.h:147
+msgid "Replace _All"
+msgstr "ყველ_აფრის ჩანაცვლება"
+
+#: ../data/ui/gummi.glade.h:148
+msgid "Create new document from template.."
+msgstr "შაბლონიდან ახალი დოკუმენტის შექმნა.."
+
+#: ../data/ui/gummi.glade.h:149
+msgid ""
+"Make a template from the \n"
+"current active document."
+msgstr ""
+"ამჟამად აქტიური დოკუმენტიდან\n"
+"შაბლონის შექმნა."
+
+#: ../data/ui/gummi.glade.h:151
+msgid "Deletes the selected template"
+msgstr "მონიშნული შაბლონის წაშლა"
+
+#: ../data/ui/gummi.glade.h:152
+msgid "Open the selected template"
+msgstr "მონიშნული შაბლონის გახსნა"
+
+#: ../data/ui/prefs.glade.h:1
+msgid "compile when idle for "
+msgstr "ავტომატური აგება, როცა უქმობის დროა "
+
+#: ../data/ui/prefs.glade.h:2
+msgid "compile every"
+msgstr "კომპილაციის ინტერვალი"
+
+#: ../data/ui/prefs.glade.h:23
+msgid "Always"
+msgstr "ყოველთვის"
+
+#: ../data/ui/prefs.glade.h:24
+msgid "Only when syncing preview with editor"
+msgstr "მხოლოდ მინიატურის რედაქტორთან სინქრონიზაციისას"
+
+#: ../data/ui/prefs.glade.h:25
+msgid "Never"
+msgstr "არასოდეს"
+
+#: ../data/ui/prefs.glade.h:26
+msgid "Gummi Preferences"
+msgstr "Gummi-ის მორგება"
+
+#: ../data/ui/prefs.glade.h:27
+msgid "Text wrapping"
+msgstr "ტექსტის გადატანა"
+
+#: ../data/ui/prefs.glade.h:29
+msgid "Enable text wrapping"
+msgstr "ტექსტის გადატანის ჩართვა"
+
+#: ../data/ui/prefs.glade.h:30
+msgid "Do not split words over two lines"
+msgstr "სიტყვები ორ ხაზს შორის გაყოფილი არ იქნება"
+
+#: ../data/ui/prefs.glade.h:31
+msgid "Line numbers"
+msgstr "ხაზის ნომრები"
+
+#: ../data/ui/prefs.glade.h:32
+msgid "Display line numbers"
+msgstr "ხაზების ნომრების ჩვენება"
+
+#: ../data/ui/prefs.glade.h:33
+msgid "Highlighting"
+msgstr "გამოკვეთა"
+
+#: ../data/ui/prefs.glade.h:34
+msgid "Highlight current line"
+msgstr "მიმდინარე ხაზის გამოკვეთა"
+
+#: ../data/ui/prefs.glade.h:35
+msgid "View"
+msgstr "ნახვა"
+
+#: ../data/ui/prefs.glade.h:36
+msgid "Tab stops"
+msgstr "აბზაცები"
+
+#: ../data/ui/prefs.glade.h:37
+msgid "Tab width:"
+msgstr "ტაბულაციის სიგანე:"
+
+#: ../data/ui/prefs.glade.h:38
+msgid "Insert _spaces instead of tabs"
+msgstr "ტაბულაციის მაგიერ _გამოტოვებების ჩასმა"
+
+#: ../data/ui/prefs.glade.h:39
+msgid "Automatic Indentation"
+msgstr "ავტომატური სწორება"
+
+#: ../data/ui/prefs.glade.h:40
+msgid "_Enable automatic indentation"
+msgstr "_ავტომატური სწორების ჩართვა"
+
+#: ../data/ui/prefs.glade.h:41
+msgid "Snippets"
+msgstr "ფრაგმენტები"
+
+#: ../data/ui/prefs.glade.h:42
+msgid "Configure snippets"
+msgstr "ფრაგმენტების მორგება"
+
+#: ../data/ui/prefs.glade.h:43
+msgid "File saving"
+msgstr "ფაილის შენახვა"
+
+#: ../data/ui/prefs.glade.h:44
+msgid "_Autosave files every"
+msgstr "ფაილების ავტომატური _შენახვა ყოველ"
+
+#: ../data/ui/prefs.glade.h:45
+msgid "minutes"
+msgstr "წუთი"
+
+#: ../data/ui/prefs.glade.h:46
+msgid "Editor"
+msgstr "რედაქტორი"
+
+#: ../data/ui/prefs.glade.h:47
+msgid "Editor font"
+msgstr "რედაქტორის ფონტი"
+
+#: ../data/ui/prefs.glade.h:48
+msgid "Color Scheme"
+msgstr "ფერების სქემა"
+
+#: ../data/ui/prefs.glade.h:49
+msgid "Font & Colors"
+msgstr "ფონტი & ფერები"
+
+#: ../data/ui/prefs.glade.h:50
+msgid "Default Text"
+msgstr "ნაგულისხმები ტექსტი"
+
+#: ../data/ui/prefs.glade.h:51
+msgid "Typesetter command"
+msgstr "Typesetter-ის ბრძანება"
+
+#: ../data/ui/prefs.glade.h:52
+msgid "TeXLive with PdfTeX"
+msgstr "TeXLive-ი PdfTeX-ით"
+
+#: ../data/ui/prefs.glade.h:53
+msgid "This program was not found on your system."
+msgstr "ეს პროგრამა თქვენს სისტემაში აღმოჩენილი არაა."
+
+#: ../data/ui/prefs.glade.h:54
+msgid "TeXLive with XeTeX"
+msgstr "TeXLive-ი XeTeX-ით"
+
+#: ../data/ui/prefs.glade.h:55
+msgid "TeXLive with LuaTeX"
+msgstr "TeXLive-ი LuaTeX-ით"
+
+#: ../data/ui/prefs.glade.h:56
+msgid "Rubber"
+msgstr "რეზინი"
+
+#: ../data/ui/prefs.glade.h:57
+msgid "Latexmk"
+msgstr "Latexmk"
+
+#: ../data/ui/prefs.glade.h:58
+msgid "Typesetter options"
+msgstr "Typesetter-ის მორგება"
+
+#: ../data/ui/prefs.glade.h:59
+msgid "Use shell-escape"
+msgstr "სპეციალური სიმბოლოების გამოყენება"
+
+#: ../data/ui/prefs.glade.h:60
+msgid "Enable SyncTeX"
+msgstr "SyncTeX-ის ჩართვა"
+
+#: ../data/ui/prefs.glade.h:61
+msgid "Compilation steps"
+msgstr "კომპილაციის ნაბიჯები"
+
+#: ../data/ui/prefs.glade.h:62
+msgid "TeX → PDF"
+msgstr "TeX → PDF"
+
+#: ../data/ui/prefs.glade.h:63
+msgid "TeX → DVI → PDF"
+msgstr "TeX → DVI → PDF"
+
+#: ../data/ui/prefs.glade.h:64
+msgid "TeX → DVI → PS → PDF"
+msgstr "TeX → DVI → PS → PDF"
+
+#: ../data/ui/prefs.glade.h:65
+msgid "Compilation"
+msgstr "ნაკრები"
+
+#: ../data/ui/prefs.glade.h:66
+msgid "PDF compiling"
+msgstr "PDF-ის კომპილაცია"
+
+#: ../data/ui/prefs.glade.h:67
+msgid "seconds"
+msgstr "წამი"
+
+#: ../data/ui/prefs.glade.h:68
+msgid "Default zoom mode"
+msgstr "მასშტაბირების ნაგულისხმები რეჟიმი"
+
+#: ../data/ui/prefs.glade.h:69
+msgid "Use animated scroll"
+msgstr "ანიმირებული ჩოჩიის გამოყნება"
+
+#: ../data/ui/prefs.glade.h:70
+msgid "Cache size"
+msgstr "ქეშის ზომა"
+
+#: ../data/ui/prefs.glade.h:71
+msgid "MB"
+msgstr "მბ"
+
+#: ../data/ui/prefs.glade.h:72
+msgid "Preview"
+msgstr "მინიატურა"
+
+#: ../data/ui/prefs.glade.h:73
+msgid "Spell check language"
+msgstr "მართლწერის შესამოწმებელი ენა"
+
+#: ../data/ui/prefs.glade.h:74
+msgid "PDF Exporting"
+msgstr "PDF-ში გატანა"
+
+#: ../data/ui/prefs.glade.h:75
+msgid "Automatically export PDF on document save"
+msgstr "დოკუმენტის შენახვისას დოკუმენტის ავტომატური გატანა PDF-ში"
+
+#: ../data/ui/prefs.glade.h:76
+msgid "Miscellaneous"
+msgstr "სხვადასხვა"
+
+#: ../data/ui/prefs.glade.h:77
+msgid "_Reset defaults"
+msgstr "ნაგულისხმები პარამეტრების დაყენება"
+
+#: ../data/ui/snippets.glade.h:1
+msgid "Snippets Manager"
+msgstr "ფრაგმენტების მმართველი"
+
+#: ../data/ui/snippets.glade.h:2
+msgid "_Reset"
+msgstr "_საწყის მნიშვნელობებზე დაბრუნება"
+
+#: ../data/ui/snippets.glade.h:3
+msgid "Reset all snippets"
+msgstr "ყველა ფრაგმენტის საწყის მნიშვნელობაზე დაბრუნება"
+
+#: ../data/ui/snippets.glade.h:4
+msgid "Snippets:"
+msgstr "ფრაგმენტები:"
+
+#: ../data/ui/snippets.glade.h:5
+msgid "Create a new snippet"
+msgstr "ახალი ფრაგმენტის შექმნა"
+
+#: ../data/ui/snippets.glade.h:6
+msgid "Remove selected snippet"
+msgstr "მონიშნული ფრაგმენტის წაშლა"
+
+#: ../data/ui/snippets.glade.h:7
+msgid "Edit:"
+msgstr "რედაქტირება:"
+
+#: ../data/ui/snippets.glade.h:8
+msgid "Insert macro"
+msgstr "მაკროს ჩასმა"
+
+#: ../data/ui/snippets.glade.h:9
+msgid "selected text"
+msgstr "მონიშნული ტექსტი"
+
+#: ../data/ui/snippets.glade.h:10
+msgid "filename"
+msgstr "filename"
+
+#: ../data/ui/snippets.glade.h:11
+msgid "basename"
+msgstr "საბაზისო სახელი"
+
+#: ../data/ui/snippets.glade.h:12
+msgid "Activation"
+msgstr "აქტივაცია"
+
+#: ../data/ui/snippets.glade.h:13
+msgid "    "
+msgstr "    "
+
+#: ../data/ui/snippets.glade.h:14
+msgid "Tab trigger:"
+msgstr "Tab-ის ტრიგერი:"
+
+#: ../data/ui/snippets.glade.h:15
+msgid "Shortcut key:"
+msgstr "მალმხმობის ღილაკი:"
+
+#: ../src/gui/gui-import.c:173
+#, c-format
+msgid "%s: No such file or directory\n"
+msgstr "%s: ასეთი ფაილი ან საქაღალდე არ არსებობს\n"
+
+#: ../src/gui/gui-infoscreen.c:117
+msgid "PDF preview could not initialise."
+msgstr "PDF-ის გადახედვის ინიციალიზაციის შეცდომა."
+
+#: ../src/gui/gui-infoscreen.c:118
+msgid "Document appears to be empty or invalid."
+msgstr "როგორც ჩანს, დოკუმენტი ცარიელი ან არასწორია."
+
+#: ../src/gui/gui-infoscreen.c:119
+msgid "Compilation program is missing."
+msgstr "კომპილაციის პროგრამა ვერ ვიპოვე."
+
+#: ../src/gui/gui-infoscreen.c:128
+msgid ""
+"The active document contains errors. The live preview\n"
+"function will resume automatically once these errors\n"
+"are resolved. Additional information is available on\n"
+"the Build log tab.\n"
+msgstr ""
+"აქტიური დოკუმენტი შეცდომებს შეიცავს. ცოცხალი გადახედვის ფუნქცია\n"
+"ავტომატურად გაგრძელდება, როცა ამ შეცდომებს\n"
+"ჩაასწორებთ. დამატებითი ინფორმაცია აგების\n"
+"ჩანართშია ხელმისაწვდომი.\n"
+
+#: ../src/gui/gui-infoscreen.c:133
+msgid ""
+"The document that is currently active appears to be an\n"
+"an invalid LaTeX file. You can continue working on it,\n"
+"load the default text or use the Project menu to add\n"
+"it to an active project.\n"
+msgstr ""
+"ამჯამად აქტიური დოკუმენტი, როგორც ჩანს,\n"
+"LaTeX-ის არასწორი ფაილია. შეგიძლიათ გააგრძელოთ\n"
+"ზედ მუშაობა, ჩატვირთოთ ნაგულისხმები ტექსტი ან გამოიყენოთ პროექტის მენიუ,\n"
+"რათა ის აქტიურ პროექტში ჩაამატოთ.\n"
+
+#: ../src/gui/gui-infoscreen.c:138
+msgid ""
+"The selected compilation program could not be located.\n"
+"Please restore the program or select an alternative\n"
+"typesetter command from the Preferences menu. The\n"
+"live preview function will not resume until Gummi\n"
+"is restarted.\n"
+msgstr ""
+"არჩეული კომპილაციის პროგრამა ვერ ვიპოვე.\n"
+"აღადგინეთ პროგრამა ან აირჩიეთ შემცლელი\n"
+"typesetter-ის ბრძანება მორგების მენიუდან.\n"
+"ცოცხალი მინიატურის ფუნქცია მუშაობას არ გააგრძელებს,\n"
+"სანამ Gummi-ის არ გადატვირთავთ.\n"
+
+#: ../src/gui/gui-main.c:352
+#, c-format
+msgid "Swap file exists for %s, do you want to recover from it?"
+msgstr "აღმოჩენილია %s-ის სვოპის ფაილი. გნებავთ, ფაილიდან აღდგენა?"
+
+#: ../src/gui/gui-main.c:404 ../src/latex.c:260
+msgid "The file already exists. Overwrite?"
+msgstr "ფაილი უკვე არსებობს. გადავაწერო?"
+
+#: ../src/gui/gui-main.c:422
+msgid ""
+"The content of the file has been changed externally. Saving will remove any "
+"external modifications."
+msgstr ""
+"ფაილის შემცველობა გარედან შეიცვალა. შენახვა ყველა გარე ცვლილებას მოაცილებს."
+
+#. add Loading message to status bar
+#: ../src/gui/gui-main.c:525
+#, c-format
+msgid "Loading template ..."
+msgstr "შაბლონის ჩატვირთვა ..."
+
+#: ../src/gui/gui-main.c:594
+msgid "Compiling bibliography file.."
+msgstr "ბიბლიოგრაფიის ფაილის კომპილაცია.."
+
+#: ../src/gui/gui-main.c:601
+msgid "Error compiling bibliography file or none detected.."
+msgstr "ბიბლიოგრაფიის ფაილი ვერ ვიპოვე ან მისი კომპილაციის შეცდომა .."
+
+#: ../src/gui/gui-main.c:645
+msgid "No bibliography file detected in document.."
+msgstr "დოკუმენტში ბიბლიოგრაფიის ფაილი აღმოჩენილი არაა.."
+
+#: ../src/gui/gui-main.c:747
+msgid "This document has unsaved changes"
+msgstr "დოკუმენტს შეუნახავი ცვლილებები გააჩნია"
+
+#: ../src/gui/gui-main.c:750
+#, c-format
+msgid "Do you want to save the changes to %s before closing?"
+msgstr "გნებავთ '%s' -ის ცვლილებების შენახვა დახურვამდე?"
+
+#: ../src/gui/gui-main.c:751
+msgid "this document"
+msgstr "ეს დოკუმენტი"
+
+#: ../src/gui/gui-main.c:754
+msgid "_Close without Saving"
+msgstr "დახურვა _შენახვის გარეშე"
+
+#: ../src/gui/gui-main.c:755 ../src/gui/gui-main.c:793
+#: ../src/gui/gui-main.c:831
+msgid "_Cancel"
+msgstr "&გაუქმება"
+
+#: ../src/gui/gui-main.c:756
+msgid "_Save As"
+msgstr "_შენახვა, როგორც"
+
+#: ../src/gui/gui-main.c:781
+msgid "Open LaTeX document"
+msgstr "LaTeX-ის დოკუმენტის გახსნა"
+
+#: ../src/gui/gui-main.c:784
+msgid "Select an image to insert"
+msgstr "აირჩიეთ ჩასასმელი გამოსახულება"
+
+#: ../src/gui/gui-main.c:785
+msgid "Select bibliography file"
+msgstr "აირჩიეთ ბიბლიოგრაფიის ფაილი"
+
+#: ../src/gui/gui-main.c:786
+msgid "Select project file"
+msgstr "აირჩიეთ პროექტის ფაილი"
+
+#: ../src/gui/gui-main.c:794
+msgid "_Open"
+msgstr "_გახსნა"
+
+#: ../src/gui/gui-main.c:819
+msgid "Save LaTeX document"
+msgstr "LaTeX-ის დოკუმენტის შენახვა"
+
+#: ../src/gui/gui-main.c:820
+msgid "Save as LaTeX document"
+msgstr "LaTeX-ის დოკუმენტის სახით შენახვა"
+
+#: ../src/gui/gui-main.c:821
+msgid "Export to PDF"
+msgstr "PDF-ად გატანა"
+
+#: ../src/gui/gui-main.c:824
+msgid "Create project"
+msgstr "პროექტის შექმნა"
+
+#: ../src/gui/gui-main.c:832
+msgid "_Save"
+msgstr "_შენახვა"
+
+#: ../src/gui/gui-main.c:856
+#, c-format
+msgid "Unsaved Document"
+msgstr "შეუნახავი დოკუმენტი"
+
+#: ../src/gui/gui-main.c:877
+msgid "LaTeX files"
+msgstr "LaTeX ფაილები"
+
+#. Only \insertgraphics uses this section now. Make sure
+#. * the patterns & mimes are correct before assigning it
+#. * for other functions
+#: ../src/gui/gui-main.c:894
+msgid "Supported Image files"
+msgstr "გამოსახულების მხარდაჭერილი ფაილები"
+
+#: ../src/gui/gui-main.c:909
+msgid "Bibtex files"
+msgstr "Bibtex ფაილები"
+
+#: ../src/gui/gui-main.c:915
+msgid "Gummi project files"
+msgstr "Gummi-ის პროექტის ფაილები"
+
+#: ../src/gui/gui-menu.c:132
+#, c-format
+msgid "Error loading recent file: %s"
+msgstr "უახლესი ფაილის ჩატვირთვის შეცდომა: %s"
+
+#: ../src/gui/gui-menu.c:385
+msgid "Successfully removed build files.."
+msgstr "აგების ფაილები წარმატებით წაიშალა..."
+
+#: ../src/gui/gui-menu.c:388
+msgid "Error removing build files.."
+msgstr "აგების ფაილების წაშლის შეცდომა.."
+
+#: ../src/gui/gui-menu.c:395
+msgid "Running Makeindex.."
+msgstr "Makeindex-ის გაშვება..."
+
+#: ../src/gui/gui-menu.c:398
+msgid "Error running Makeindex.."
+msgstr "Makeindex-ის გაშვების შეცდომა..."
+
+#: ../src/gui/gui-menu.c:422
+msgid "Words in text"
+msgstr "სიტყვები ტექსტში"
+
+#: ../src/gui/gui-menu.c:423
+msgid "Words in headers"
+msgstr "სიტყვები თავსართებში"
+
+#: ../src/gui/gui-menu.c:424
+msgid "Words in float captions"
+msgstr "სიტყვები ლივლივა წარწერებში"
+
+#: ../src/gui/gui-menu.c:425
+msgid "Number of headers"
+msgstr "თავსართების რაოდენობა"
+
+#: ../src/gui/gui-menu.c:426
+msgid "Number of floats"
+msgstr "ლივლივების რაოდენობა"
+
+#: ../src/gui/gui-menu.c:427
+msgid "Number of math inlines"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:428
+msgid "Number of math displayed"
+msgstr ""
+
+#: ../src/gui/gui-menu.c:559
+msgid "This function requires an active document"
+msgstr "ეს ფუნქცია აქტიურ დოკუმენტს მოითხოვს"
+
+#: ../src/gui/gui-preview.c:914
+#, c-format
+msgid "of %d"
+msgstr "%d-დან"
+
+#: ../src/gui/gui-snippets.c:325
+msgid ""
+"Duplicate activation tab trigger dectected! Please choose another one.\n"
+msgstr "აღმოჩენილია აქტივაციის ჩანართის დუბლირებული ტრიგერი! სხვა აირჩიეთ.\n"
+
+#: ../src/gui/gui-snippets.c:339
+msgid "Type a new shortcut"
+msgstr "შეიყვანეთ ახალი მალსახმობი"
+
+#: ../src/gui/gui-snippets.c:342
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "შეიყვანეთ ახალი მალსახმობი ან, გასასუფთავებლად Backspace-ს დააწექით"
+
+#: ../src/gui/gui-tabmanager.c:99
+msgid "_Yes"
+msgstr "დიახ"
+
+#: ../src/gui/gui-tabmanager.c:101
+msgid "_No"
+msgstr "_არა"
+
+#: ../src/editor.c:602
+msgid "Top reached, search from bottom?"
+msgstr "მიღწეულია თავი. მოვძებნო ბოლოდან?"
+
+#: ../src/editor.c:609
+msgid "Bottom reached, search from top?"
+msgstr "მიღწეულია ბოლო. მოვძებნო თავიდან?"
+
+#: ../src/iofunctions.c:128
+#, c-format
+msgid "Saving %s..."
+msgstr "'%s'-ის შენახვა..."
+
+#: ../src/iofunctions.c:235
+msgid "Can not convert text to UTF-8!\n"
+msgstr "UTF-8-ში გადაყვანის შეცდომა!\n"
+
+#: ../src/latex.c:267
+#, c-format
+msgid "Unable to export PDF file: %s\n"
+msgstr "PDF ფაილში გატანა შეუძლებელია: %s\n"
+
+#: ../src/tabmanager.c:73
+#, c-format
+msgid "Unsaved Document %d"
+msgstr "შეუნახავი დოკუმენტი %d"
+
+#: ../src/utils.c:158 ../src/utils.c:263
+msgid "Confirmation"
+msgstr "დასტური"
