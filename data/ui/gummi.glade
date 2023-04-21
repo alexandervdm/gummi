@@ -1033,7 +1033,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSeparatorMenuItem" id="&lt;seperator&gt;">
+                      <object class="GtkSeparatorMenuItem" id="&lt;separator&gt;">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                       </object>
@@ -1893,7 +1893,7 @@ active document to be saved. </property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkSeparatorToolItem" id="seperator">
+                                  <object class="GtkSeparatorToolItem" id="separator">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="margin-left">3</property>

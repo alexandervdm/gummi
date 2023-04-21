@@ -105,7 +105,7 @@ void motion_resume_compile_thread (GuMotion* m) {
 void motion_kill_typesetter (GuMotion* m) {
     if (*m->typesetter_pid) {
         /* Kill children spawned by typesetter command/script, don't know
-         * how to do this programatically yet(glib doesn't not provides any
+         * how to do this programmatically yet(glib doesn't not provides any
          * function for killing a process), so use pkill for now. For
          * win32 there's currently nothing we can do about it. */
 #ifndef WIN32

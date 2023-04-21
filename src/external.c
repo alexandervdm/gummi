@@ -66,8 +66,8 @@ static gchar* get_version_output (const gchar* command, int linenr) {
         return result;
     }
 
-    gchar** splitted = g_strsplit(output, "\n", BUFSIZ);
-    result = splitted[linenr];
+    gchar** split = g_strsplit(output, "\n", BUFSIZ);
+    result = split[linenr];
     return result;
 }
 
@@ -128,10 +128,10 @@ static gdouble get_texlive_version (void) {
         return version;
     }
 
-    gchar** splitted = g_strsplit (output, "(", BUFSIZ);
-    guint size = g_strv_length (splitted);
+    gchar** split = g_strsplit (output, "(", BUFSIZ);
+    guint size = g_strv_length (split);
 
-    gchar* segment = g_strdup (splitted[size-1]);
+    gchar* segment = g_strdup (split[size-1]);
     segment = g_strjoinv("", g_strsplit(segment, "Web2C", -1));
     gchar* resultstr = "";
 

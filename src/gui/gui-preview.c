@@ -139,7 +139,7 @@ static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y
 static cairo_surface_t* get_page_rendering (GuPreviewGui* pc, int page);
 static gboolean remove_page_rendering (GuPreviewGui* pc, gint page);
 
-// Functions for syncronizing editor and preview via SyncTeX
+// Functions for synchronizing editor and preview via SyncTeX
 static gboolean synctex_run_parser (GuPreviewGui* pc, GtkTextIter *sync_to, gchar* tex_file);
 static void synctex_filter_results (GuPreviewGui* pc, GtkTextIter *sync_to);
 static void synctex_scroll_to_node (GuPreviewGui* pc, SyncNode* node);
@@ -871,7 +871,7 @@ static void previewgui_set_scale(GuPreviewGui* pc, gdouble scale, gdouble x,
             (pc->height_scaled + 2*get_document_margin(pc));
 
     // We have to do this before changing the scale, as otherwise the cache
-    // size would be calcualted wrong!
+    // size would be calculated wrong!
     previewgui_invalidate_renderings(pc);
 
     pc->scale = scale;
@@ -1247,7 +1247,7 @@ static void synctex_merge_nodes(GuPreviewGui* pc) {
         if (page == -1) {
             page = sn->page;
         } else if (page != sn->page) {
-            return; // The Nodes are on different pages. We don't hande this for now...
+            return; // The Nodes are on different pages. We don't handle this for now...
         }
 
         x1 = MIN(x1, sn->x);
@@ -2048,7 +2048,7 @@ gboolean on_scroll (GtkWidget* w, GdkEventScroll* e, void* user) {
         gint    new_index = -1;
         int i;
 
-        // we only go through the percentage entrys - the fit entrys are not
+        // we only go through the percentage entries - the fit entries are not
         // always uo to date...
         for (i=0; i<N_ZOOM_SIZES; i++) {
             if (i == ZOOM_FIT_WIDTH || i == ZOOM_FIT_BOTH) {

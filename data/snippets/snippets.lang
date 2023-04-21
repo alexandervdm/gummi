@@ -33,7 +33,7 @@
     <style id="placeholder-def"    name="Placeholder Default" map-to="def:string"/>
     <style id="escape"             name="Escape" map-to="def:special-char"/>
     <style id="environmental-var"  name="Environmental Variable" map-to="def:string"/>
-    <style id="seperator"          name="Seperator" map-to="def:shebang"/>
+    <style id="separator"          name="Separator" map-to="def:shebang"/>
     <style id="regex-pattern"      name="Regular Expression Pattern" map-to="def:string"/>
     <style id="replace-pattern"    name="Regular Expression Replace Pattern" map-to="def:string"/>
     <style id="modifier"           name="Modifier" map-to="def:keyword"/>
@@ -59,7 +59,7 @@
         <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
         <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
         <context sub-pattern="2" where="start" style-ref="tabstop"/>
-        <context sub-pattern="3" where="start" style-ref="seperator"/>
+        <context sub-pattern="3" where="start" style-ref="separator"/>
         <context>
           <match>\\}</match>
         </context>
@@ -89,7 +89,7 @@
             <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
             <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
             <context sub-pattern="2" where="start" style-ref="tabstop"/>
-            <context sub-pattern="3" where="start" style-ref="seperator"/>
+            <context sub-pattern="3" where="start" style-ref="separator"/>
             <context ref="shell-placeholder-contents"/>
             <context>
               <match>\\\)</match>
@@ -103,7 +103,7 @@
               <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
               <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
               <context sub-pattern="2" where="start" style-ref="tabstop"/>
-              <context sub-pattern="3" where="start" style-ref="seperator"/>
+              <context sub-pattern="3" where="start" style-ref="separator"/>
               <context ref="shell-placeholder-contents"/>
               <context>
                 <match>\\`</match>
@@ -119,9 +119,9 @@
         <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
         <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
         <context sub-pattern="2" where="start" style-ref="tabstop"/>
-        <context sub-pattern="3" where="start" style-ref="seperator"/>
+        <context sub-pattern="3" where="start" style-ref="separator"/>
         <context sub-pattern="5" where="start" style-ref="tabstop"/>
-        <context sub-pattern="7" where="start" style-ref="seperator"/>
+        <context sub-pattern="7" where="start" style-ref="separator"/>
         <context>
           <match>\\&gt;</match>
         </context>
@@ -137,7 +137,7 @@
         <context sub-pattern="1" style-ref="placeholder-bounds"/>
         <context sub-pattern="10" style-ref="placeholder-bounds"/>
         <context sub-pattern="3" style-ref="tabstop"/>
-        <context sub-pattern="4" style-ref="seperator"/>
+        <context sub-pattern="4" style-ref="separator"/>
         <context sub-pattern="5" style-ref="tabstop"/>
         <context sub-pattern="6" style-ref="environmental-var"/>
         <context sub-pattern="7" style-ref="regex-pattern"/>

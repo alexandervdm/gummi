@@ -133,7 +133,7 @@ const gchar* importer_generate_image (const gchar* filepath, const gchar* captio
 
     snprintf (scale_str, 16, "%.2f", scale);
 
-    // some locales use ',' as seperator, replace them as '.'
+    // some locales use ',' as separator, replace them as '.'
     if ( (loc = strstr (scale_str, ",")))
         *loc = '.';
 

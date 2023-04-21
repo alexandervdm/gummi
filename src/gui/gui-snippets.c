@@ -181,7 +181,7 @@ void snippetsgui_update_snippet (GuSnippets* sc) {
     /* Disconnect old accelerator */
     snippets_accel_disconnect (sc, configs[0]);
 
-    /* Update acceleartor */
+    /* Update accelerator */
     if (strlen (new_accel)) {
         GClosure* new_closure = NULL;;
         GdkModifierType mod;
@@ -316,13 +316,13 @@ gboolean on_tab_trigger_entry_key_release_event (GtkEntry* entry, void* user) {
     gchar* search_key = NULL;
     slist* index = NULL;
 
-    /* Check dumplicate key */
+    /* Check duplicate key */
     search_key = g_strdup_printf ("%s,", new_key);
     index = slist_find (gummi->snippets->head, search_key, TRUE, FALSE);
 
     if (index && index != s->current) {
         gtk_entry_set_text (entry, "");
-        slog (L_G_ERROR, _("Duplicate activation tab trigger dectected! Please "
+        slog (L_G_ERROR, _("Duplicate activation tab trigger detected! Please "
                 "choose another one.\n"));
     } else {
         snippetsgui_update_snippet (gummi->snippets);

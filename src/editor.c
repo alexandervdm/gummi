@@ -503,7 +503,7 @@ cleanup:
 void editor_apply_errortags (GuEditor* ec, gint* lines) {
     GtkTextIter start, end;
     gint count = 0;
-    /* remove the tag from the table if it is in threre */
+    /* remove the tag from the table if it is in there */
     if (gtk_text_tag_table_lookup (ec->editortags, "error"))
         gtk_text_tag_table_remove (ec->editortags, ec->errortag);
 

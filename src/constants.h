@@ -92,7 +92,7 @@
 
 #define C_CREDITS_TRANSLATORS \
 "Arabic: Hamad Mohammad\n" \
-"Brazilian-Portugese: Fernando Cruz, Alexandre Guimarães\n" \
+"Brazilian-Portuguese: Fernando Cruz, Alexandre Guimarães\n" \
 "Catalan: Marc Vinyals\n" \
 "Chinese (Simplified): Mathlab pass, yjwork-cn\n" \
 "Chinese (Traditional): Wei-Ning Huang\n" \
@@ -103,10 +103,10 @@
 "German: Thomas Niederprüm\n" \
 "Greek: Dimitris Leventeas\n" \
 "Hungarian: Balázs Meskó\n" \
-"Interlingue: OIS\n" \
+"Interlingue: IS\n" \
 "Italian: Salvatore Vassallo\n" \
 "Polish: Hubert Kowalski\n" \
-"Portugese: Alexandre Guimarães\n" \
+"Portuguese: Alexandre Guimarães\n" \
 "Romanian: Alexandru-Eugen Ichim\n" \
 "Russian: Kruvalig, Max Musatov\n" \
 "Swedish: Kess Vargavind\n" \

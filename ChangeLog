@@ -71,7 +71,7 @@ Gummi 0.6.5 (October 18th, 2012):
     * Fixed empty build logs when special characters were included
     * Fixed a rare deadlock situation on program exit
     * Fixed regression in spell-checking language listing
-    * Fixed regression in killing inresponsive compilation processes
+    * Fixed regression in killing unresponsive compilation processes
     * Correctly close file descriptors for child processes
     * Implemented --version CLI argument
     * Several translation updates
@@ -251,7 +251,7 @@ Gummi 0.5.1 (September 27th, 2010):
     * Tab stops now works correctly
     * Command exist check for external commands (texcount/bibtex)
 
-    Features addded:
+    Features added:
     * Remember window size & position from previous session
 
 
@@ -340,7 +340,7 @@ Gummi 0.4.0 (October 12th, 2009):
     * Rewritten and improved preview pane
     * Fixed cancel buttons in file chooser dialogs
     * Tempdir is now detected instead of a static value
-    * Quick import minimalizes after succesfull import
+    * Quick import minimalizes after successful import
     * Quit process is now stopped when cancel button on save is pressed
     * Fixed tooltips for style toolbar
     * Fixed a gtksourceview warning on text insertion
@@ -371,7 +371,7 @@ Gummi 0.3b (September 22th, 2009):
     * Undo is no longer able to erase the original document content
     * Statusbar messages will now correctly fade after a x interval
     * More solid character decoding/encoding
-    * Preview pane will now temporarly disable itself when pdf invalid
+    * Preview pane will now temporarily disable itself when pdf invalid
 
     Features:
     * New save behaviour no longer exports .aux and .log files

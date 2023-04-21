@@ -99,7 +99,7 @@ void snippets_load (GuSnippets* sc) {
         snippets_clean_up (sc);
 
     if (! (fh = fopen (sc->filename, "r"))) {
-        slog (L_ERROR, "can't find snippets file, reseting to default\n");
+        slog (L_ERROR, "can't find snippets file, resetting to default\n");
         snippets_set_default (sc);
         return;
     }
