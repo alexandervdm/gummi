@@ -126,6 +126,7 @@
 #define C_XELATEX "xelatex"
 #define C_LUALATEX "lualatex"
 #define C_RUBBER "rubber"
+#define C_TECTONIC "tectonic"
 #define C_LATEXMK "latexmk"
 
 // Path definitions:
