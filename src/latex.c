@@ -47,6 +47,7 @@
 #include "utils.h"
 
 #include "compile/rubber.h"
+#include "compile/tectonic.h"
 #include "compile/latexmk.h"
 #include "compile/texlive.h"
 
@@ -59,6 +60,7 @@ GuLatex* latex_init (void) {
 
     l->tex_version = texlive_init ();
     rubber_init ();
+    tectonic_init ();
     latexmk_init ();
     return l;
 }
@@ -91,6 +93,9 @@ gchar* latex_set_compile_cmd (GuEditor* ec) {
 
     if (rubber_active()) {
         texcmd = rubber_get_command (method, ec->workfile);
+    }
+    else if (tectonic_active()) {
+        texcmd = tectonic_get_command (method, ec->workfile);
     }
     else if (latexmk_active()) {
         texcmd = latexmk_get_command (method, ec->workfile, ec->basename);

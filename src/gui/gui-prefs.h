@@ -66,6 +66,7 @@ struct _GuPrefsGui {
     GtkToggleButton* typ_xelatex;
     GtkToggleButton* typ_lualatex;
     GtkToggleButton* typ_rubber;
+    GtkToggleButton* typ_tectonic;
     GtkToggleButton* typ_latexmk;
 
     GtkToggleButton* method_texpdf;

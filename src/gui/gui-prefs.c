@@ -43,6 +43,7 @@
 #include "utils.h"
 
 #include "compile/rubber.h"
+#include "compile/tectonic.h"
 #include "compile/latexmk.h"
 #include "compile/texlive.h"
 
@@ -121,6 +122,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_lualatex"));
     p->typ_rubber =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_rubber"));
+    p->typ_tectonic =
+        GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_tectonic"));
     p->typ_latexmk =
         GTK_TOGGLE_BUTTON (gtk_builder_get_object (builder, "typ_latexmk"));
 
@@ -304,6 +307,13 @@ static void set_tab_compilation_settings (GuPrefsGui* prefs) {
             gtk_toggle_button_set_active (prefs->typ_rubber, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_rubber), TRUE);
         gtk_widget_set_tooltip_text (GTK_WIDGET(prefs->typ_rubber), "");
+    }
+
+    if (tectonic_detected()) {
+        if (tectonic_active())
+            gtk_toggle_button_set_active (prefs->typ_tectonic, TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET(prefs->typ_tectonic), TRUE);
+        gtk_widget_set_tooltip_text (GTK_WIDGET(prefs->typ_tectonic), "");
     }
 
     if (latexmk_detected()) {
@@ -716,6 +726,15 @@ void on_typ_rubber_toggled (GtkToggleButton* widget, void* user) {
         typesetter_setup ();
     }
 }
+
+G_MODULE_EXPORT
+void on_typ_tectonic_toggled (GtkToggleButton* widget, void* user) {
+    if (gtk_toggle_button_get_active (widget)) {
+        config_set_string ("Compile", "typesetter", "tectonic");
+        typesetter_setup ();
+    }
+}
+
 
 G_MODULE_EXPORT
 void on_typ_latexmk_toggled (GtkToggleButton* widget, void* user) {
