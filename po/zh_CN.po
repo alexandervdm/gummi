@@ -197,9 +197,8 @@ msgid "_Toolbar"
 msgstr "工具栏(_T)"
 
 #: ../data/ui/gummi.glade.h:53
-#, fuzzy
 msgid "_Right pane"
-msgstr "右侧面板(_R)"
+msgstr "右侧窗格(_R)"
 
 #: ../data/ui/gummi.glade.h:54
 msgid ""
@@ -1143,12 +1142,9 @@ msgid "Can not convert text to UTF-8!\n"
 msgstr "无法转换文字为 UTF-8 格式!\n"
 
 #: ../src/latex.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to export PDF file: %s\n"
-msgstr ""
-"无法导出 PDF 文件。\n"
-"\n"
-"%s"
+msgstr "无法导出 PDF 文件: %s\n"
 
 #: ../src/tabmanager.c:73
 #, c-format
