@@ -51,6 +51,7 @@
 #include "template.h"
 
 #include "compile/rubber.h"
+#include "compile/tectonic.h"
 #include "compile/latexmk.h"
 #include "compile/texlive.h"
 

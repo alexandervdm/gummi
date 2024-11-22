@@ -6,6 +6,8 @@ src/compile/latexmk.c
 src/compile/latexmk.h
 src/compile/rubber.c
 src/compile/rubber.h
+src/compile/tectonic.c
+src/compile/tectonic.h
 src/compile/texlive.c
 src/compile/texlive.h
 src/gui/gui-import.c
