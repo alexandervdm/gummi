@@ -142,7 +142,7 @@ void slog (gint level, const gchar *fmt, ...) {
         exit (1);
 }
 
-gint utils_save_reload_dialog (const gchar* message) {
+gint utils_save_confirmation_dialog (const gchar* message) {
     GtkWidget* dialog;
     gint ret = 0;
 
@@ -153,7 +153,7 @@ gint utils_save_reload_dialog (const gchar* message) {
                  GTK_MESSAGE_QUESTION,
                  GTK_BUTTONS_NONE,
                  "%s", message);
-    gtk_dialog_add_buttons(GTK_DIALOG (dialog), "Reload", GTK_RESPONSE_YES, "Save", GTK_RESPONSE_NO, NULL);
+    gtk_dialog_add_buttons(GTK_DIALOG (dialog), "Cancel", GTK_RESPONSE_NO, "Save Anyway", GTK_RESPONSE_YES, NULL);
 
     gtk_window_set_title (GTK_WINDOW (dialog), _("Confirmation"));
     ret = gtk_dialog_run (GTK_DIALOG (dialog));
