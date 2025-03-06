@@ -197,7 +197,6 @@ msgid "_Toolbar"
 msgstr "工具栏(_T)"
 
 #: ../data/ui/gummi.glade.h:53
-#, fuzzy
 msgid "_Right pane"
 msgstr "右侧面板(_R)"
 
