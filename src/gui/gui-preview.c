@@ -1503,10 +1503,18 @@ static cairo_surface_t* do_render (PopplerPage* ppage, gdouble scale,
     cairo_scale (c, scale, scale);
     poppler_page_render(ppage, c);
 
-    // TODO for what is this used?
+    // set the white background
     cairo_set_operator (c, CAIRO_OPERATOR_DEST_OVER);
     cairo_set_source_rgb (c, 1, 1, 1);
     cairo_paint (c);
+
+    // invert colour
+    if (config_get_boolean ("Preview", "invert_colour")) {
+        cairo_set_operator (c, CAIRO_OPERATOR_DIFFERENCE);
+        cairo_set_source_rgb (c, 1.0, 1.0, 1.0);
+        cairo_paint (c);
+    }
+
     cairo_destroy (c);
 
     return r;
@@ -1681,10 +1689,19 @@ static void paint_page (cairo_t *cr, GuPreviewGui* pc, gint page, gint x, gint y
 
     cairo_surface_t* rendering = get_page_rendering(pc, page);
 
+    /*
+    // Paint the background red.
+    cairo_set_operator(cr, CAIRO_OPERATOR_OVER);
+    cairo_set_source_rgb(cr, 1.0, 0.0, 0.0);
+    cairo_paint(cr);
+    */
+
     // Paint rendering
     cairo_set_source_surface (cr, rendering, x, y);
-    cairo_paint (cr);
+    cairo_paint(cr);
 
+
+    cairo_set_operator(cr, CAIRO_OPERATOR_OVER);
 
     GSList *nl = pc->sync_nodes;
     while (nl != NULL && in_debug_mode()) {

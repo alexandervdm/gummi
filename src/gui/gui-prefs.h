@@ -46,6 +46,7 @@ struct _GuPrefsGui {
     GtkCheckButton* autosaving;
     GtkCheckButton* autoexport;
     GtkCheckButton* compile_status;
+    GtkCheckButton* invert_colour;
     GtkToggleButton* opt_shellescape;
     GtkToggleButton* opt_synctex;
     GtkSpinButton* tabwidth;
@@ -87,6 +88,7 @@ void toggle_wordwrapping (GtkWidget* widget, void* user);
 void toggle_compilestatus (GtkWidget* widget, void* user);
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user);
 void toggle_autosaving (GtkWidget* widget, void* user);
+void toggle_invert_colour (GtkWidget* widget, void* user);
 void on_prefs_close_clicked (GtkWidget* widget, void* user);
 void on_prefs_reset_clicked (GtkWidget* widget, void* user);
 void on_tabwidth_value_changed (GtkWidget* widget, void* user);

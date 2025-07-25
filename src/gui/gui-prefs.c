@@ -144,6 +144,8 @@ GuPrefsGui* prefsgui_init (GtkWindow* mainwindow) {
         GTK_COMBO_BOX (gtk_builder_get_object (builder, "combo_animated_scroll"));
     p->spin_cache_size =
         GTK_SPIN_BUTTON (gtk_builder_get_object (builder, "spin_cache_size"));
+    p->invert_colour =
+        GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "invert_colour"));
 
     gtk_window_set_transient_for (GTK_WINDOW (p->prefwindow), mainwindow);
 
@@ -388,6 +390,9 @@ static void set_tab_preview_settings (GuPrefsGui* prefs) {
 
     gtk_spin_button_set_value (prefs->spin_cache_size,
                                config_get_integer ("Preview", "cache_size"));
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->invert_colour),
+                                  config_get_boolean ("Preview", "invert_colour"));
 }
 
 static void set_tab_miscellaneous_settings (GuPrefsGui* prefs) {
@@ -805,6 +810,13 @@ void on_combo_animated_scroll_changed (GtkWidget* widget, void* user) {
     gint selected = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
     gchar scheme[][16] = { "always", "autosync", "never" };
     config_set_string ("Preview", "animated_scroll", scheme[selected]);
+}
+
+G_MODULE_EXPORT
+void toggle_invert_colour (GtkWidget* widget, void* user) {
+    gboolean newval = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+    config_set_boolean ("Preview", "invert_colour", newval);
+    previewgui_reset (gui->previewgui);
 }
 
 G_MODULE_EXPORT
