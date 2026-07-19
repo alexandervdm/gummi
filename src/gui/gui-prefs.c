@@ -612,6 +612,14 @@ void on_prefs_close_clicked (GtkWidget* widget, void* user) {
 }
 
 G_MODULE_EXPORT
+gboolean
+on_prefs_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data)
+{
+    on_prefs_close_clicked (widget, user_data);
+    return TRUE;
+}
+
+G_MODULE_EXPORT
 void on_prefs_reset_clicked (GtkWidget* widget, void* user) {
     config_load_defaults ();
     utils_copy_file (C_DEFAULTTEXT, C_WELCOMETEXT, NULL);
