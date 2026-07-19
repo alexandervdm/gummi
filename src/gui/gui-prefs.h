@@ -88,6 +88,7 @@ void toggle_compilestatus (GtkWidget* widget, void* user);
 void toggle_spaces_instof_tabs (GtkWidget* widget, void* user);
 void toggle_autosaving (GtkWidget* widget, void* user);
 void on_prefs_close_clicked (GtkWidget* widget, void* user);
+gboolean on_prefs_delete_event (GtkWidget *widget, GdkEvent *event, gpointer user_data);
 void on_prefs_reset_clicked (GtkWidget* widget, void* user);
 void on_tabwidth_value_changed (GtkWidget* widget, void* user);
 void on_configure_snippets_clicked (GtkWidget* widget, void* user);
