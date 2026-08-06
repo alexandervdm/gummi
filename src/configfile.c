@@ -117,7 +117,7 @@ void config_init () {
         else {
             slog (L_ERROR, "%s\n", error->message);
         }
-        config_load_defaults (key_file);
+        config_load_defaults ();
     }
 
     // replace old welcome texts if still active:
