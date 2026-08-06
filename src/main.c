@@ -30,6 +30,7 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,6 +84,7 @@ int main (int argc, char *argv[]) {
     // Initialize GTK
     gdk_threads_init ();
     gtk_init (&argc, &argv);
+    gtk_source_init();
 
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
@@ -166,5 +168,6 @@ int main (int argc, char *argv[]) {
 
     gui_main (builder);
     config_save ();
+    gtk_source_finalize();
     return 0;
 }
