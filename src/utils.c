@@ -45,6 +45,11 @@
     #include <sys/wait.h>
 #endif
 
+#ifdef __APPLE__
+    #include <mach-o/dyld.h>
+    #include <sys/param.h>
+#endif
+
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
 #endif
@@ -52,6 +57,124 @@
 #include "constants.h"
 #include "environment.h"
 #include "utils.h"
+
+gchar* gummi_data_dir = NULL;
+gchar* gummi_libs_dir = NULL;
+gchar* gummi_locales_dir = NULL;
+
+/* Resolves the runtime locations of the program data, helper scripts and
+ * locale files, and on macOS also prepares the environment so a GUI launch
+ * (which lacks a login shell PATH) can find the TeX toolchain. Must be
+ * called once at program start, before anything reads these paths. */
+void utils_setup_paths (void) {
+    g_free (gummi_data_dir);
+    g_free (gummi_libs_dir);
+    g_free (gummi_locales_dir);
+    gummi_data_dir = g_strdup (GUMMI_DATA);
+    gummi_libs_dir = g_strdup (GUMMI_LIBS);
+    gummi_locales_dir = g_strdup (GUMMI_LOCALES);
+
+#ifdef __APPLE__
+    /* GUI apps launched via LaunchServices get a bare default PATH that
+     * contains neither the MacTeX binaries (/Library/TeX/texbin) nor the
+     * usual package manager locations; add them so typesetters, biber,
+     * latexmk etc. can be found. */
+    const gchar* extras[] = { "/Library/TeX/texbin", "/usr/texbin",
+                              "/opt/homebrew/bin", "/opt/homebrew/sbin",
+                              "/usr/local/bin", NULL };
+    gchar* path = g_strdup (g_getenv ("PATH") ? g_getenv ("PATH") :
+                            "/usr/bin:/bin:/usr/sbin:/sbin");
+    int i;
+    for (i = 0; extras[i]; ++i) {
+        if (g_file_test (extras[i], G_FILE_TEST_IS_DIR) &&
+            !strstr (path, extras[i])) {
+            gchar* tmp = g_strconcat (path, ":", extras[i], NULL);
+            g_free (path);
+            path = tmp;
+        }
+    }
+    g_setenv ("PATH", path, TRUE);
+    g_free (path);
+
+    /* When running from an .app bundle, relocate the search paths to the
+     * bundle resources so the app is fully self-contained. */
+    char exebuffer[MAXPATHLEN];
+    uint32_t exesize = sizeof (exebuffer);
+    if (0 == _NSGetExecutablePath (exebuffer, &exesize)) {
+        gchar* exepath = g_canonicalize_filename (exebuffer, NULL);
+        gchar* exedir = g_path_get_dirname (exepath);
+        gchar* resources = NULL;
+        gchar* macosdir = g_path_get_basename (exedir);
+
+        if (STR_EQU (macosdir, "MacOS")) {
+            gchar* contentsdir = g_path_get_dirname (exedir);
+            gchar* contentsname = g_path_get_basename (contentsdir);
+            if (STR_EQU (contentsname, "Contents"))
+                resources = g_build_filename (contentsdir, "Resources", NULL);
+            g_free (contentsdir);
+            g_free (contentsname);
+        }
+        g_free (macosdir);
+
+        if (resources) {
+            /* The bundle may carry thin-arm64 shims for TeX tools that are
+             * broken in the installed MacTeX (e.g. biber's universal PAR
+             * binary on macOS with Xcode 27 lipo); give them precedence. */
+            gchar* texshim = g_build_filename (resources, "texbin", NULL);
+            gchar* biberbin = g_build_filename (texshim, "biber", NULL);
+            if (g_file_test (biberbin, G_FILE_TEST_IS_EXECUTABLE)) {
+                gchar* newpath = g_strconcat (texshim, ":",
+                                              g_getenv ("PATH"), NULL);
+                g_setenv ("PATH", newpath, TRUE);
+                g_free (newpath);
+            }
+            g_free (biberbin);
+            g_free (texshim);
+
+            gchar* data = g_build_filename (resources, "share", "gummi", NULL);
+            gchar* uifile = g_build_filename (data, "ui", "gummi.glade", NULL);
+            if (g_file_test (uifile, G_FILE_TEST_EXISTS)) {
+                slog (L_INFO, "Using bundled application resources: %s\n",
+                      data);
+                g_free (gummi_data_dir);
+                g_free (gummi_libs_dir);
+                g_free (gummi_locales_dir);
+                gummi_data_dir = data;
+                gummi_libs_dir = g_build_filename (resources, "lib",
+                                                   "gummi", NULL);
+                gummi_locales_dir = g_build_filename (resources, "share",
+                                                      "locale", NULL);
+
+                /* Point GLib/GTK & friends at the bundled runtime data */
+                gchar* share = g_build_filename (resources, "share", NULL);
+                gchar* loaderscache = g_build_filename (resources, "lib",
+                    "gdk-pixbuf-2.0", "2.10.0", "loaders.cache", NULL);
+                const gchar* xdg = g_getenv ("XDG_DATA_DIRS");
+                gchar* xdgnew = g_strconcat (share, ":",
+                    (xdg && *xdg) ? xdg : "/usr/local/share:/usr/share", NULL);
+                g_setenv ("XDG_DATA_DIRS", xdgnew, TRUE);
+                if (g_file_test (loaderscache, G_FILE_TEST_EXISTS))
+                    g_setenv ("GDK_PIXBUF_MODULE_FILE", loaderscache, TRUE);
+                gchar* enchantdir = g_build_filename (resources, "lib",
+                    "enchant-2", NULL);
+                if (g_file_test (enchantdir, G_FILE_TEST_IS_DIR))
+                    g_setenv ("ENCHANT_MODULE_PATH", enchantdir, TRUE);
+                g_free (xdgnew);
+                g_free (share);
+                g_free (loaderscache);
+                g_free (enchantdir);
+            }
+            else {
+                g_free (data);
+            }
+            g_free (uifile);
+            g_free (resources);
+        }
+        g_free (exedir);
+        g_free (exepath);
+    }
+#endif
+}
 
 #ifdef WIN32
     static gchar *slogmsg_info = "[Info] ";

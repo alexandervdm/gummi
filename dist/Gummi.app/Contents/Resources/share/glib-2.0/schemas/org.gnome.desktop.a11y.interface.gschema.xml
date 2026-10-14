@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gsettings-desktop-schemas">
+  <schema id="org.gnome.desktop.a11y.interface" path="/org/gnome/desktop/a11y/interface/">
+    <key name="high-contrast" type="b">
+      <default>false</default>
+      <summary>High contrast</summary>
+      <description>
+        Whether to use the high contrast style.
+      </description>
+    </key>
+    <key name="show-status-shapes" type="b">
+      <default>false</default>
+      <summary>Show status shapes</summary>
+      <description>
+        Whether to use shapes to indicate status in addition or instead of color.
+      </description>
+    </key>
+    <key name="reduced-motion" enum="org.gnome.desktop.GDesktopReducedMotion">
+      <default>'no-preference'</default>
+      <summary>Reduced motion</summary>
+      <description>
+        The type of reduced motion.
+      </description>
+    </key>
+    <key name="keyboard-focus-visible-timeout" type="i">
+      <default>-1</default>
+      <summary>Keyboard navigation focus timeout</summary>
+      <description>
+        How many seconds should the navigation focus remains visible when navigating with the keyboard. 0 means "forever", and a negative value
+        means "use the default toolkit value".
+      </description>
+    </key>
+  </schema>
+</schemalist>

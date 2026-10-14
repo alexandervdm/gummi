@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=Gummi
+GenericName=LaTeX Editor
+Comment=Simple LaTeX Editor
+Comment[de]=Einfacher LaTeX-Editor
+Exec=gummi %F
+Icon=gummi
+Terminal=false
+Type=Application
+Categories=Office;
+Keywords=latex;editor;
+StartupNotify=true
+MimeType=text/x-tex;

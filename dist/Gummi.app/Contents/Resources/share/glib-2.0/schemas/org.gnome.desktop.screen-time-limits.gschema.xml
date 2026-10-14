@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LGPL-2.1-or-later
+  SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+-->
+<schemalist gettext-domain="gsettings-desktop-schemas">
+  <schema id="org.gnome.desktop.screen-time-limits" path="/org/gnome/desktop/screen-time-limits/">
+    <key name="history-enabled" type="b">
+      <summary>Enable screen time history</summary>
+      <description>
+        Enable basic screen time functionality, recording usage data for viewing history.
+      </description>
+      <default>true</default>
+    </key>
+
+    <key name="daily-limit-enabled" type="b">
+      <summary>Enable daily screen time limit</summary>
+      <description>Enable imposing a screen time limit on the user, as set in “daily-limit-seconds”.</description>
+      <default>false</default>
+    </key>
+
+    <key name="daily-limit-seconds" type="u">
+      <summary>Daily screen time limit</summary>
+      <description>The limit on the amount of daily screen time the user is allowed, in seconds.</description>
+      <default>28800</default>
+      <range min="10"/>
+    </key>
+
+    <key name="grayscale" type="b">
+      <summary>Grayscale once limit is reached</summary>
+      <description>Whether to make the screen grayscale once the user’s screen time limit is reached.</description>
+      <default>true</default>
+    </key>
+  </schema>
+</schemalist>

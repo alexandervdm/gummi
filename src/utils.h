@@ -163,6 +163,7 @@ gboolean utils_subinstr (const gchar* substr, const gchar* target,
         gboolean case_insens);
 
 gchar* utils_get_tmp_tmp_dir (void); /* TODO: remove when we can */
+void utils_setup_paths (void);
 
 
 gboolean utils_glist_is_member (GList *list, gchar* item);
