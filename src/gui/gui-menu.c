@@ -441,9 +441,12 @@ void on_menu_docstat_activate (GtkWidget *widget, void *user) {
 
     /* TODO: move to non gui class (latex perhaps) */
     if (external_exists ("texcount")) {
-        /* Copy workfile to /tmp to remove any spaces in filename to avoid
+        /* Copy workfile to tmp dir to remove any spaces in filename to avoid
          * segfaults */
-        gchar* tmpfile = g_strdup_printf ("%s.state", g_active_editor->fdname);
+        gchar* tmpbase = g_path_get_basename (g_active_editor->fdname);
+        gchar* tmpfile = g_strdup_printf ("%s%s%s.state", g_get_tmp_dir (),
+                                          G_DIR_SEPARATOR_S, tmpbase);
+        g_free (tmpbase);
         if (!utils_copy_file (g_active_editor->workfile, tmpfile, &err)) {
             slog (L_G_ERROR, "utils_copy_file (): %s\n", err->message);
             g_free (tmpfile);
@@ -652,7 +655,7 @@ void on_menu_guide_activate (GtkWidget *widget, void *user) {
 G_MODULE_EXPORT
 void on_menu_about_activate (GtkWidget *widget, void *user) {
     GError* err = NULL;
-    gchar* icon_file = g_build_filename (GUMMI_DATA, "icons", "gummi.png", NULL);
+    gchar* icon_file = g_build_filename (gummi_data_dir, "icons", "gummi.png", NULL);
     GdkPixbuf* icon = gdk_pixbuf_new_from_file_at_size (icon_file, 80, 80, &err);
     g_free (icon_file);
 

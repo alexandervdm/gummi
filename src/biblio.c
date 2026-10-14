@@ -31,6 +31,15 @@
 #include <string.h>
 #include <sys/stat.h>
 
+#ifndef WIN32
+    #include <sys/types.h>
+    #include <sys/wait.h>
+#endif
+
+#ifndef WEXITSTATUS
+#   define WEXITSTATUS(stat_val) ((unsigned int) (stat_val) >> 8)
+#endif
+
 #include "biblio.h"
 #include "constants.h"
 #include "environment.h"
@@ -102,27 +111,48 @@ gboolean biblio_compile_bibliography (GuBiblio* bc, GuEditor* ec) {
     } else
         auxname = g_strdup (ec->fdname);
 
-    if (g_find_program_in_path ("bibtex")) {
-        gboolean success = FALSE;
-        char* command = g_strdup_printf ("%s bibtex \"%s\"",
-                                         C_TEXSEC, auxname);
+    /* biblatex with the default biber backend leaves a <job>.bcf control
+     * file in the output directory; if it exists (and biber is available)
+     * that is the tool we must run instead of bibtex. */
+    gchar* bcfname = g_strdup_printf ("%s.bcf", auxname);
+    gboolean use_biber = g_file_test (bcfname, G_FILE_TEST_EXISTS) &&
+                         g_find_program_in_path ("biber") != NULL;
+    g_free (bcfname);
 
+    if (!use_biber && !g_find_program_in_path ("bibtex")) {
+        slog (L_WARNING, "biber/bibtex command is not present or executable.\n");
         g_free (auxname);
-        latex_update_workfile (ec);
-        latex_update_auxfile (ec);
-        Tuple2 res = utils_popen_r (command, dirname);
-        gtk_widget_set_tooltip_text (GTK_WIDGET (bc->progressbar),
-                (gchar*)res.second);
-        g_free (command);
         g_free (dirname);
-        success = ! (strstr ((gchar*)res.second, "Database file #1") == NULL);
-        g_free (res.second);
-        return success;
+        return FALSE;
     }
-    slog (L_WARNING, "bibtex command is not present or executable.\n");
+
+    gboolean success = FALSE;
+    char* command = g_strdup_printf ("%s %s \"%s\"",
+                                     C_TEXSEC,
+                                     use_biber ? "biber" : "bibtex",
+                                     auxname);
+
     g_free (auxname);
+    latex_update_workfile (ec);
+    latex_update_auxfile (ec);
+    Tuple2 res = utils_popen_r (command, dirname);
+    gtk_widget_set_tooltip_text (GTK_WIDGET (bc->progressbar),
+            (gchar*)res.second);
+    g_free (command);
     g_free (dirname);
-    return FALSE;
+    if (use_biber) {
+        /* biber logs to stderr (not captured); go by the process' exit
+         * status instead: 0 indicates no fatal errors were encountered. */
+        int status = (int)(glong)res.first;
+        success = WIFEXITED (status) && WEXITSTATUS (status) == 0;
+        if (!success)
+            slog (L_WARNING, "biber exited with a non-zero status.\n");
+    }
+    else {
+        success = ! (strstr ((gchar*)res.second ?: "", "Database file #1") == NULL);
+    }
+    g_free (res.second);
+    return success;
 }
 
 int biblio_parse_entries (GuBiblio* bc, gchar *bib_content) {

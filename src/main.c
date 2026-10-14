@@ -64,8 +64,11 @@ static GOptionEntry entries[] = {
 };
 
 int main (int argc, char *argv[]) {
+    /* resolve runtime paths (bundle relocation, TeX toolchain PATH fix) */
+    utils_setup_paths ();
+
     /* set up i18n */
-    bindtextdomain (C_PACKAGE, GUMMI_LOCALES);
+    bindtextdomain (C_PACKAGE, gummi_locales_dir);
     setlocale (LC_ALL, "");
     textdomain (C_PACKAGE);
 
@@ -86,7 +89,7 @@ int main (int argc, char *argv[]) {
 
     GError* ui_error = NULL;
     GtkBuilder* builder = gtk_builder_new ();
-    gchar* ui = g_build_filename (GUMMI_DATA, "ui", "gummi.glade", NULL);
+    gchar* ui = g_build_filename (gummi_data_dir, "ui", "gummi.glade", NULL);
 
     // Exit program when gummi.glade can not be located:
     if (!g_file_test (ui, G_FILE_TEST_EXISTS)) {

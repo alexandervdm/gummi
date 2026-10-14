@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+
+ Author: Jesse van den Kieboom <jesse@icecrew.nl>
+ Copyright (C) 2007-2008 Jesse van den Kieboom <jesse@icecrew.nl>
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ Boston, MA 02111-1307, USA.
+
+-->
+<language id="snippets" name="Snippets" hidden="true" version="2.0">
+  <styles>
+    <style id="placeholder-bounds" name="Placeholder begin and end" map-to="def:function"/>
+    <style id="default-value"      name="Default Value" map-to="def:string"/>
+    <style id="single-placeholder" name="Single Placeholder" map-to="def:decimal"/>
+    <style id="shell-placeholder"  name="Shell Placeholder" map-to="def:preprocessor"/>
+    <style id="python-placeholder" name="Python Placeholder" map-to="def:preprocessor"/>
+    <style id="regex-placeholder"  name="Regular Expression Placeholder" map-to="def:preprocessor"/>
+    <style id="tabstop"            name="Tabstop"  map-to="def:decimal"/>
+    <style id="placeholder-ref"    name="Placeholder Reference" map-to="def:decimal"/>
+    <style id="placeholder-def"    name="Placeholder Default" map-to="def:string"/>
+    <style id="escape"             name="Escape" map-to="def:special-char"/>
+    <style id="environmental-var"  name="Environmental Variable" map-to="def:string"/>
+    <style id="seperator"          name="Seperator" map-to="def:shebang"/>
+    <style id="regex-pattern"      name="Regular Expression Pattern" map-to="def:string"/>
+    <style id="replace-pattern"    name="Regular Expression Replace Pattern" map-to="def:string"/>
+    <style id="modifier"           name="Modifier" map-to="def:keyword"/>
+  </styles>
+
+  <definitions>
+    <define-regex id="number">[0-9]+</define-regex>
+    <define-regex id="tabstop">\s*((\%{number})(:))</define-regex>
+    <define-regex id="number-list" extended="true">\s*(\[(\%{number}(,\%{number})*)\](:))</define-regex>
+    <define-regex id="environment">\$[A-Z_]+</define-regex>
+    <define-regex id="regex-pattern">((?:\\[/]|\\}|[^/}])+)</define-regex>
+  
+    <context id="escape" style-ref="escape">
+      <match>\\\$</match>
+    </context>
+    <context id="single-placeholder" style-ref="single-placeholder">
+      <match>\$\%{number}|\${\%{number}}</match>
+    </context>
+    <context id="simple-placeholder-def" style-ref="default-value">
+      <start>\${\%{tabstop}</start>
+      <end>}</end>
+      <include>
+        <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
+        <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
+        <context sub-pattern="2" where="start" style-ref="tabstop"/>
+        <context sub-pattern="3" where="start" style-ref="seperator"/>
+        <context>
+          <match>\\}</match>
+        </context>
+        <context ref="escape"/>
+        <context ref="environmental-variable"/>
+      </include>
+    </context>
+    <context id="simple-placeholder">
+      <include>
+        <context ref="single-placeholder"/>
+        <context ref="simple-placeholder-def"/>
+      </include>
+    </context>
+    <context id="shell-placeholder-contents">
+      <include>
+        <context ref="escape"/>
+        <context ref="environmental-variable"/>
+        <context ref="single-placeholder"/>
+      </include>
+    </context>
+    <context id="shell-placeholder">
+      <include>
+        <context style-ref="shell-placeholder">
+          <start>\$\(\%{tabstop}?</start>
+          <end>\)</end>
+          <include>
+            <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
+            <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
+            <context sub-pattern="2" where="start" style-ref="tabstop"/>
+            <context sub-pattern="3" where="start" style-ref="seperator"/>
+            <context ref="shell-placeholder-contents"/>
+            <context>
+              <match>\\\)</match>
+            </context>
+          </include>
+        </context>
+        <context style-ref="shell-placeholder">
+          <start>`\%{tabstop}?</start>
+          <end>`</end>
+            <include>
+              <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
+              <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
+              <context sub-pattern="2" where="start" style-ref="tabstop"/>
+              <context sub-pattern="3" where="start" style-ref="seperator"/>
+              <context ref="shell-placeholder-contents"/>
+              <context>
+                <match>\\`</match>
+              </context>
+            </include>
+        </context>      
+      </include>
+    </context>
+    <context id="python-placeholder">
+      <start>\$&lt;\%{tabstop}?\%{number-list}?</start>
+      <end>&gt;</end>
+      <include>
+        <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
+        <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
+        <context sub-pattern="2" where="start" style-ref="tabstop"/>
+        <context sub-pattern="3" where="start" style-ref="seperator"/>
+        <context sub-pattern="5" where="start" style-ref="tabstop"/>
+        <context sub-pattern="7" where="start" style-ref="seperator"/>
+        <context>
+          <match>\\&gt;</match>
+        </context>
+        <context ref="escape"/>
+        <context ref="environmental-variable"/>
+        <context ref="single-placeholder"/>
+        <context ref="python:python"/>
+      </include>    
+    </context>
+    <context id="regex-placeholder" style-ref="regex-placeholder">
+      <match>(\${)\%{tabstop}?(?:\s*(?:(\%{number})|(\%{environment})))/\%{regex-pattern}/\%{regex-pattern}(?:[/]([a-zA-Z]*))?(})</match>
+      <include>
+        <context sub-pattern="1" style-ref="placeholder-bounds"/>
+        <context sub-pattern="10" style-ref="placeholder-bounds"/>
+        <context sub-pattern="3" style-ref="tabstop"/>
+        <context sub-pattern="4" style-ref="seperator"/>
+        <context sub-pattern="5" style-ref="tabstop"/>
+        <context sub-pattern="6" style-ref="environmental-var"/>
+        <context sub-pattern="7" style-ref="regex-pattern"/>
+        <context sub-pattern="8" style-ref="replace-pattern"/>
+        <context sub-pattern="9" style-ref="modifier"/>
+      </include>
+    </context>
+    <context id="environmental-variable" style-ref="environmental-var">
+      <match>\%{environment}</match>
+    </context>
+      <context id="snippets">
+        <include>
+          <context ref="escape"/>
+          <context ref="regex-placeholder"/>
+          <context ref="simple-placeholder"/>
+          <context ref="shell-placeholder"/>
+          <context ref="python-placeholder"/>
+          <context ref="environmental-variable"/>
+        </include>
+    </context>
+  </definitions>
+</language>

@@ -116,9 +116,28 @@
 #define C_GUMMI_CONFDIR g_build_path (G_DIR_SEPARATOR_S, g_get_user_config_dir(), "gummi", NULL)
 #define C_GUMMI_TEMPLATEDIR g_build_path (G_DIR_SEPARATOR_S, C_GUMMI_CONFDIR, "templates", NULL)
 
+/* Install paths: the build system passes GUMMI_DATA, GUMMI_LIBS and
+ * GUMMI_LOCALES as preprocessor defines with the compile-time install
+ * locations. The runtime-resolved paths (which differ when running from
+ * a relocatable application bundle) live in these variables, initialized
+ * by utils_setup_paths(); see utils.c. */
+#ifndef GUMMI_DATA
+#define GUMMI_DATA ""
+#endif
+#ifndef GUMMI_LIBS
+#define GUMMI_LIBS ""
+#endif
+#ifndef GUMMI_LOCALES
+#define GUMMI_LOCALES ""
+#endif
+
+extern gchar* gummi_data_dir;
+extern gchar* gummi_libs_dir;
+extern gchar* gummi_locales_dir;
+
 // Default documents:
 #define C_WELCOMETEXT g_build_filename (C_GUMMI_CONFDIR, "welcome.tex", NULL)
-#define C_DEFAULTTEXT g_build_filename (GUMMI_DATA, "misc", "default.tex", NULL)
+#define C_DEFAULTTEXT g_build_filename (gummi_data_dir, "misc", "default.tex", NULL)
 
 // LaTeX definitions
 #define C_LATEX "latex"
